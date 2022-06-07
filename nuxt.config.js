@@ -103,7 +103,7 @@ export default async () => {
         {
           hid: 'twitter:image',
           name: 'twitter:image',
-          content: 'https://maizzle.com/images/maizzle-og-card.png'
+          content: 'https://maizzle.com/images/maizzle-twitter-large.png'
         },
         // Open Graph
         {
