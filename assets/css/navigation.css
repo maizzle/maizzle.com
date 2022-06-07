@@ -1,0 +1,3 @@
+.navigation .nuxt-link-exact-active {
+  @apply text-slate-800 font-semibold pointer-events-none;
+}

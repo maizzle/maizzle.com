@@ -1,0 +1,96 @@
+@import '@docsearch/css/dist/_variables.css';
+@import '@docsearch/css/dist/modal.css';
+
+.DocSearch {
+  &.DocSearch-Container {
+    @apply bg-white/90 2xl:pl-[6.6rem];
+    @apply fixed;
+  }
+
+  .DocSearch-Modal {
+    @apply md:max-w-[65ch] 2xl:max-w-[68.5ch];
+    @apply bg-white shadow-2xl shadow-indigo-600/10 border;
+  }
+
+  .DocSearch-SearchBar {
+    @apply py-1 px-2 border-b;
+  }
+
+  .DocSearch-Form {
+    @apply shadow-none;
+    @apply h-11 w-full;
+  }
+
+  .DocSearch-Input {
+    @apply text-base sm:text-sm;
+    @apply pl-4 sm:pl-2;
+  }
+
+  .DocSearch-LoadingIndicator svg,
+  .DocSearch-MagnifierLabel svg {
+    @apply w-4 h-4 text-indigo-600;
+  }
+
+  .DocSearch-Reset:hover {
+    @apply text-indigo-600;
+  }
+
+  .DocSearch-Hit-source {
+    @apply text-slate-800;
+  }
+
+  .DocSearch-Dropdown ul {
+    @apply space-y-1;
+  }
+
+  .DocSearch-Hit-source {
+    @apply bg-transparent;
+  }
+
+  .DocSearch-Hit a,
+  .DocSearch-Hit[aria-selected=true] a {
+    @apply bg-white border shadow-none;
+  }
+
+  .DocSearch-Hit[aria-selected=true] a {
+    @apply border-indigo-600;
+  }
+
+  .DocSearch-Hit .DocSearch-Hit-path,
+  .DocSearch-Hit .DocSearch-Hit-icon {
+    @apply text-slate-400;
+  }
+
+  .DocSearch-Hit .DocSearch-Hit-title,
+  .DocSearch-Hit[aria-selected=true] .DocSearch-Hit-title,
+  .DocSearch-Hit[aria-selected=true] .DocSearch-Hit-icon,
+  .DocSearch-Hit[aria-selected=true] .DocSearch-Hit-path,
+  .DocSearch-Hit[aria-selected=true] .DocSearch-Hit-action {
+    @apply text-slate-600 !important;
+  }
+
+  .DocSearch-Hit mark,
+  .DocSearch-Hit[aria-selected=true] mark {
+    @apply text-indigo-600 underline !important;
+  }
+
+  .DocSearch-Footer {
+    @apply shadow-none border-t;
+  }
+
+  .DocSearch-Commands {
+    @apply hidden;
+  }
+
+  .DocSearch-Hit-action-button {
+    @apply p-1;
+
+    &:hover {
+      @apply bg-slate-100;
+    }
+
+    svg {
+      @apply text-slate-500;
+    }
+  }
+}

@@ -1,0 +1,9 @@
+node_modules
+.nuxt
+.env
+dist
+api
+*.local
+debug.log
+.DS_Store
+.vscode

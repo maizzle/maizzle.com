@@ -1,0 +1,4 @@
+.header-default,
+.header-background {
+  @apply bg-white;
+}

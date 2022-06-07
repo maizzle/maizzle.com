@@ -1,0 +1,15 @@
+@import "fonts";
+@import "tailwindcss/base";
+
+@import "tailwindcss/components";
+
+@import "prose";
+@import "docsearch";
+
+@import "header";
+@import "navigation";
+@import "lazyload";
+@import "grid";
+@import "form";
+
+@import "tailwindcss/utilities";
