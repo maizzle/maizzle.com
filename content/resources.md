@@ -18,13 +18,17 @@ Extensions that can enhance your Maizzle development workflow.
 - [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) - Intelligent Tailwind CSS tooling for VS Code.
 - [PostHTML Snippets](https://marketplace.visualstudio.com/items?itemName=cossssmin.posthtml) - Autocomplete for PostHTML tags.
 
+### Sublime Text
+
+- [Tailwind CSS Autocomplete](https://packagecontrol.io/packages/Tailwind%20CSS%20Autocomplete) - Tailwind CSS Autocomplete for Sublime Text.
+
 ### Atom
 
 - [autocomplete-tailwind](https://atom.io/packages/autocomplete-tailwind) - Tailwind CSS autocompletion provider for Atom.
 
-### Sublime Text
+### Nova
 
-- [Tailwind CSS Autocomplete](https://packagecontrol.io/packages/Tailwind%20CSS%20Autocomplete) - Tailwind CSS Autocomplete for Sublime Text.
+- [Tailwind CSS Extension](https://extensions.panic.com/extensions/jasonplatts/jasonplatts.tailwindcss/) - Tailwind CSS Extension for Panic's Nova Code Editor.
 
 ## Web Apps
 
