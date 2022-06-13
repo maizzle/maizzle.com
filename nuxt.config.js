@@ -59,6 +59,11 @@ export default async () => {
     css: [
       '@/assets/css/tailwind.css',
     ],
+    generate: {
+      routes: [
+        '/brand',
+      ],
+    },
     head: {
       htmlAttrs: {
         lang: 'en'
