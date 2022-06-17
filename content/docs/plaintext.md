@@ -9,13 +9,18 @@ Maizzle can automatically create plaintext versions of your HTML emails.
 
 ## Usage
 
-Generate a plaintext version for all your email templates by adding a `plaintext` key in your `config.js`:
+Generate a plaintext version for all your email templates by adding a `plaintext` key to your templates source in `config.js`:
 
 <code-sample title="config.js">
 
   ```js
   module.exports = {
-    plaintext: true,
+    build: {
+      templates: {
+        plaintext: true,
+        // ...
+      },
+    },
   }
   ```
 
@@ -29,12 +34,16 @@ You may configure where the plaintext files are output and what file extension t
 
   ```js
   module.exports = {
-    plaintext: {
-      destination: {
-        path: 'dist/brand/plaintext',
-        extension: 'rtxt',
-      }
-    }
+    build: {
+      templates: {
+        plaintext: {
+          destination: {
+            path: 'dist/brand/plaintext',
+            extension: 'rtxt',
+          }
+        },
+      },
+    },
   }
   ```
 
@@ -147,20 +156,24 @@ You may use a `plaintext` object in your `config.js` to overwrite any of the def
 
   ```js
   module.exports = {
-    plaintext: {
-      ignoreTags: [],
-      onlyStripTags: [],
-      stripTogetherWithTheirContents: ['script', 'style', 'xml'],
-      skipHtmlDecoding: false,
-      trimOnlySpaces: false,
-      dumpLinkHrefsNearby: {
-        enabled: false,
-        putOnNewLine: false,
-        wrapHeads: '',
-        wrapTails: ''
+    build: {
+      templates: {
+        plaintext: {
+          ignoreTags: [],
+          onlyStripTags: [],
+          stripTogetherWithTheirContents: ['script', 'style', 'xml'],
+          skipHtmlDecoding: false,
+          trimOnlySpaces: false,
+          dumpLinkHrefsNearby: {
+            enabled: false,
+            putOnNewLine: false,
+            wrapHeads: '',
+            wrapTails: ''
+          },
+          cb: null,
+        },
       },
-      cb: null
-    }
+    },
   }
   ```
 
