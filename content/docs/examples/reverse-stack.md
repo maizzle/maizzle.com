@@ -11,6 +11,8 @@ With responsive HTML emails, you sometimes need to reverse the order in which st
 
 Imagine a two column layout, with text on the left and an image on the right:
 
+<code-sample title="2-col.html">
+
 ```xml
 <table class="w-full">
   <tr>
@@ -25,9 +27,13 @@ Imagine a two column layout, with text on the left and an image on the right:
 </table>
 ```
 
+</code-sample>
+
 Naturally, the image will show under the text when viewed on a mobile device.
 
 However, using table responsive display utilities, we can reverse the columns:
+
+<code-sample title="2-col-reverse.html">
 
 ```xml
 <table class="w-full">
@@ -47,6 +53,8 @@ However, using table responsive display utilities, we can reverse the columns:
 </table>
 ```
 
+</code-sample>
+
 It's done in 2 simple steps:
 
 1. Use the responsive `table-{...}-group` utilities on each column, to reverse column order on small screens
@@ -57,6 +65,8 @@ See the [2 col reorder demo on CodePen](https://codepen.io/maizzle/pen/dgpxbB?ed
 ## Reorder 3+ cols
 
 In a similar fashion, we can reorder a 3+ column layout:
+
+<code-sample title="3-col-reverse.html">
 
 ```xml
 <table class="w-full">
@@ -79,6 +89,8 @@ In a similar fashion, we can reorder a 3+ column layout:
   </tr>
 </table>
 ```
+
+</code-sample>
 
 This only needed a couple of extra steps:
 
