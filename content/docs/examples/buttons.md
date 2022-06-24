@@ -30,7 +30,7 @@ Here's the Filled button, fully clickable in Outlook:
   ```xml
   <a
     href="https://maizzle.com/"
-    class="inline-block py-16 px-24 text-sm leading-none no-underline text-white font-semibold rounded bg-indigo-500 hover:bg-indigo-600">
+    class="inline-block py-4 px-6 text-sm leading-none [text-decoration:none] text-white font-semibold rounded bg-indigo-500 hover:bg-indigo-600">
     <!--[if mso]><i style="letter-spacing: 27px; mso-font-width: -100%; mso-text-raise: 26pt;">&nbsp;</i><![endif]-->
       <span style="mso-text-raise: 13pt;">Read more</span>
     <!--[if mso]><i style="letter-spacing: 27px; mso-font-width: -100%;">&nbsp;</i><![endif]-->
@@ -54,13 +54,13 @@ It's just a simple `<a>` tag, but with some nifty workarounds for Outlook's lack
   ```xml
   <a
     href="https://maizzle.com/"
-    class="inline-block py-16 px-24 text-sm leading-none no-underline text-white font-semibold rounded bg-indigo-500 hover:bg-indigo-600">
+    class="inline-block py-4 px-6 text-sm leading-none [text-decoration:none] text-white font-semibold rounded bg-indigo-500 hover:bg-indigo-600">
     <outlook>
-      <i class="tracking-24" style="mso-font-width: -100%; mso-text-raise: 26pt;">&nbsp;</i>
+      <i class="tracking-6" style="mso-font-width: -100%; mso-text-raise: 26pt;">&nbsp;</i>
     </outlook>
       <span style="mso-text-raise: 13pt;">Read more</span>
     <outlook>
-      <i class="tracking-24" style="mso-font-width: -100%;">&nbsp;</i>
+      <i class="tracking-6" style="mso-font-width: -100%;">&nbsp;</i>
     </outlook>
   </a>
   ```
@@ -98,7 +98,7 @@ For an extra touch, let's add rounded corners and a hover effect:
   <table>
     <tr>
       <th class="bg-indigo-500 hover:bg-indigo-600 rounded" style="mso-padding-alt: 12px 48px;">
-        <a href="https://maizzle.com" class="block text-white text-sm leading-full py-12 px-48 no-underline">Button</a>
+        <a href="https://maizzle.com" class="block text-white text-sm leading-full py-3 px-12 [text-decoration:none]">Button</a>
       </th>
     </tr>
   </table>
@@ -122,7 +122,7 @@ To make it more interesting, let's also change the background on hover:
   <table>
     <tr>
       <th class="border-2 border-indigo-500 hover:bg-indigo-500 block rounded" style="mso-padding-alt: 12px 48px;">
-        <a href="https://maizzle.com" class="block text-sm text-indigo-500 hover:text-white leading-full py-12 px-48 no-underline">Button</a>
+        <a href="https://maizzle.com" class="block text-sm text-indigo-500 hover:text-white leading-full py-3 px-12 [text-decoration:none]">Button</a>
       </th>
     </tr>
   </table>
@@ -142,7 +142,7 @@ Pill simply buttons use a larger border-radius value.
   <table>
     <tr>
       <th class="bg-indigo-500 hover:bg-indigo-600 shadow-md rounded-full" style="mso-padding-alt: 12px 48px;">
-        <a href="https://maizzle.com" class="block text-sm text-white leading-full py-12 px-48 no-underline">Button</a>
+        <a href="https://maizzle.com" class="block text-sm text-white leading-full py-3 px-12 [text-decoration:none]">Button</a>
       </th>
     </tr>
   </table>
