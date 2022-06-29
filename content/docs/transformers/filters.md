@@ -32,7 +32,7 @@ Example:
 
   ```js
   module.exports = {
-    transform: {
+    filters: {
       uppercase: str => str.toUpperCase()
     }
   }
