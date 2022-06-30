@@ -70,10 +70,6 @@ export default async () => {
       },
       title: 'Maizzle - Quickly build HTML emails with utility-first CSS',
       meta: [
-        {
-          name: 'robots',
-          content: 'noindex'
-        },
         { charset: 'utf-8' },
         {
           name: 'viewport',
