@@ -230,6 +230,62 @@ You can also manually provide data to the Component through attributes:
 
 </code-sample>
 
+### Undefined variables
+
+Sometimes you may need to use a Component without passing it the variables it uses. However, if you try to use an undefined variable in a Component, the build will fail.
+
+For example, if you have this Component:
+
+<code-sample title="src/components/example.html">
+
+  ```xml
+  <div>
+    Category: {{ category }}
+  </div>
+  ```
+
+</code-sample>
+
+... and try to use it like this:
+
+<code-sample title="src/templates/example.html">
+
+  ```xml
+  <component
+    src="src/components/example.html"
+  ></component>
+  ```
+
+</code-sample>
+
+... the build will fail.
+
+To work around it, you can do a type check when using the variable:
+
+<code-sample title="src/components/example.html">
+
+  ```xml
+  <div>
+    Category: {{ typeof category !== 'undefined' ? category : 'Uncategorized' }}
+  </div>
+  ```
+
+</code-sample>
+
+If you're using an `<if>` tag, you may check the type like this:
+
+<code-sample title="src/components/example.html">
+
+```xml
+<if condition="typeof category !== 'undefined'">
+  <div>
+    Category: {{ category }}
+  </div>
+</if>
+```
+
+</code-sample>
+
 ## Ignoring expressions
 
 Ignoring expressions inside a Component works as you'd expect:
