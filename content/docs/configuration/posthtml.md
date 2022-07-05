@@ -7,11 +7,15 @@ description: "Configuring PostHTML options in Maizzle"
 
 Maizzle uses PostHTML as its templating engine, and you can customize options or register plugins that can further transform your HTML emails.
 
-### options
+## options
 
-Configure PostHTML options.
+You may pass in options to configure PostHTML.
 
-For example, you may tell it to ignore `<?php ?>` tags:
+### directives
+
+You can configure the PostHTML parser to correctly process custom directives.
+
+For example, you may tell it to ignore `<?php ?>` tags instead of treating them as HTML:
 
 <code-sample title="config.js">
 
@@ -31,9 +35,39 @@ For example, you may tell it to ignore `<?php ?>` tags:
 
 </code-sample>
 
-Checkout the [PostHTML documentation](https://posthtml.org/) for all available options.
+### singleTags
 
-### plugins
+Use the `singleTags` option to tell PostHTML to treat custom tags as self-closing.
+
+<code-sample title="config.js">
+
+  ```js
+  module.exports = {
+    build: {
+      posthtml: {
+        options: {
+          singleTags: ['custom']
+        }
+      }
+    }
+  }
+  ```
+
+</code-sample>
+
+You may then use the `<custom />` tag as self-closing:
+
+<code-sample title="src/templates/example.html">
+
+  ```xml
+  <custom name="opencounter" type="tracking" />
+  ```
+
+</code-sample>
+
+Checkout the [PostHTML documentation](https://posthtml.org/) as well as the [posthtml-render documentation](https://github.com/posthtml/posthtml-render) for all available options.
+
+## plugins
 
 Register any PostHTML plugins you would like to use:
 
