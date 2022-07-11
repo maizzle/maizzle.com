@@ -33,6 +33,6 @@
         "postcss-import": "^14.1.0",
         "postcss-preset-env": "^7.7.2",
         "shiki": "^0.10.1",
-        "tailwindcss": "^3.1.4"
+        "tailwindcss": "^3.1.5"
     }
 }
