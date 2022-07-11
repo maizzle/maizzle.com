@@ -17,7 +17,7 @@
         "netlify-lambda": "^2.0.15",
         "nuxt": "^2.15.8",
         "scroll-to-element": "^2.0.3",
-        "typeit": "^8.6.0",
+        "typeit": "^8.6.3",
         "vue-clickaway": "^2.2.2"
     },
     "devDependencies": {
