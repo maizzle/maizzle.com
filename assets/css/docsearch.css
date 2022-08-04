@@ -3,7 +3,7 @@
 
 .DocSearch {
   &.DocSearch-Container {
-    @apply bg-white/90 2xl:pl-[6.6rem];
+    @apply bg-white/90;
     @apply fixed;
   }
 
