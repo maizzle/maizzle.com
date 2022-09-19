@@ -390,6 +390,26 @@ module.exports = {
 
 See all available [expressions options](https://github.com/posthtml/posthtml-expressions#options).
 
+## Current template
+
+Information about the Template file that is currently being processed is available under `build.current` in the config.
+
+It's an object containing a parsed path of the destination file name, for example:
+
+```js
+build: {
+  current: {
+    root: '',
+    dir: 'build_production',
+    base: 'transactional.html',
+    ext: '.html',
+    name: 'transactional'
+  }
+}
+```
+
+Can be used in Events like `beforeRender` if you need the current file name or extension.
+
 ## Archiving
 
 Maizzle will only compile templates found in path(s) that you have defined in `build.templates.source`, which have the same extension as the one defined in `build.templates.filetypes` (`html` by default).
