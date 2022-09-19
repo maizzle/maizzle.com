@@ -156,7 +156,7 @@
           <div class="lg:sticky top-28">
             <div class="relative">
               <syntax-highlight
-                title="tailwind.config.js"
+                title="config.production.js"
                 no-copy
               >
                 <snippet-environment />
