@@ -73,11 +73,10 @@ You may use CSS selectors to select only certain attributes. For example, this w
   ```js
   module.exports = {
     urlParameters: {
+      _options: {
+        tags: ['a[href*="example.com"]'],
+      },
       utm_source: 'maizzle',
-      utm_campaign: 'Campaign Name',
-      utm_medium: 'email',
-      custom_parameter: 'foo',
-      '1stOfApril': 'bar'
     }
   }
   ```

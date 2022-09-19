@@ -62,7 +62,7 @@ Apply the base URL only to `<img>` tags:
 
 </code-sample>
 
-That will apply the `url` to all known source attributes on all `<img` elements in your HTML, like `src=""` or `srcset="`.
+That will apply the `url` to all known source attributes on all `<img>` elements in your HTML, like `src=""` or `srcset="`.
 
 If you need greater control, you may specify which attributes of which tags should be prepended what URL, by passing in an object instead:
 
