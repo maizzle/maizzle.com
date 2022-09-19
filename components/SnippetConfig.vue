@@ -3,7 +3,7 @@
   <span class="line"><span style="color: rgb(36, 41, 47);">  theme: {</span></span>
   <span class="line"><span style="color: rgb(36, 41, 47);">    screens: {</span></span>
   <span class="line"><span style="color: rgb(36, 41, 47);">      sm: {max: </span><span style="color: rgb(10, 48, 105);">'600px'</span><span style="color: rgb(36, 41, 47);">},</span></span>
-  <span class="line"><span style="color: rgb(36, 41, 47);">      dark: {raw: </span><span style="color: rgb(10, 48, 105);">'(prefers-color-scheme: dark)'</span><span style="color: rgb(36, 41, 47);"> },</span></span>
+  <span class="line"><span style="color: rgb(36, 41, 47);">      md: {min: </span><span style="color: rgb(10, 48, 105);">'768px'</span><span style="color: rgb(36, 41, 47);">, max: </span><span style="color: rgb(10, 48, 105);">'1023px'</span><span style="color: rgb(36, 41, 47);">},</span></span>
   <span class="line"><span style="color: rgb(36, 41, 47);">    },</span></span>
   <span class="line"><span style="color: rgb(36, 41, 47);">    extend: {</span></span>
   <span class="line"><span style="color: rgb(36, 41, 47);">      colors: {</span></span>

@@ -80,10 +80,11 @@
               <syntax-highlight
                 title="tailwind.config.js"
                 no-copy
+                class="peer"
               >
                 <snippet-config />
               </syntax-highlight>
-              <!--<email-template class="hidden sm:block absolute bottom-0 md:-bottom-12 right-0 md:right-28 lg:-right-16 z-10" />-->
+              <email-template class="peer-hover:z-0 hidden sm:block absolute bottom-0 md:-bottom-12 right-0 md:right-28 lg:-right-16 z-10" />
             </div>
           </div>
         </div>
@@ -101,11 +102,13 @@
           </p>
           <h4 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">Utility-first CSS</h4>
           <p class="mb-8 text-md text-slate-500">
-            Tailwind provides low-level utility classes that help you style emails much faster than writing inline CSS.
+            Tailwind CSS provides low-level utility classes that help you style emails much faster than writing inline CSS.
           </p>
-          <h4 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">Component-friendly</h4>
+          <h4 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">Powerful modifiers</h4>
           <p class="mb-8 text-md text-slate-500">
-            Need to use custom CSS classes? Extract component classes from repeated utility patterns.
+            Use powerful variant classes like <code>hover:bg-blue-500</code> or <code>sm:w-full</code> to easily
+            add hover effects or style responsive emails.
+            <!-- Need to use custom CSS classes? Extract component classes from repeated utility patterns. -->
           </p>
           <h4 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">Make it your own</h4>
           <p class="text-md text-slate-500">
@@ -179,7 +182,7 @@
           </p>
           <h4 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">Opt-in Transformers</h4>
           <p class="mb-8 text-md text-slate-500">
-            Choose which post-processing transformations Maizzle applies to your HTML emails on a build environment-basis.
+            Choose which post-processing transformations Maizzle applies to your HTML emails, on a build environment-basis.
           </p>
           <h4 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">Override from Template</h4>
           <p class="text-md text-slate-500">

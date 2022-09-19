@@ -2,7 +2,7 @@ export default ([
   {
     title: 'Tailwind CSS',
     path: '/docs/tailwindcss',
-    description: 'Quickly build HTML emails with CSS utility classes. You won\'t need to write inline CSS for most of the time.'
+    description: 'Quickly style HTML emails with CSS utility classes. You won\'t need to write inline CSS for most of the time.'
   },
   {
     title: 'Starters',
@@ -25,7 +25,7 @@ export default ([
     description: 'HTML email-specific optimizations, customizable from your environment config or for each template in particular.'
   },
   {
-    title: 'Event Listeners',
+    title: 'Events',
     path: '/docs/events',
     description: 'Run your own JavaScript functions at key steps in the build process, for even greater customization and control.'
   },
