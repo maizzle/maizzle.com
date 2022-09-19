@@ -5,9 +5,25 @@ description: "Set a base URL and easily prepend absolute URLs to any source in y
 
 # Base URL
 
-Define a base URL that will be prepended to all sources and hrefs in your HTML.
+Define a string that will be prepended to all sources and hrefs in your HTML and CSS.
 
 Useful if you already host your images somewhere like a CDN, so you don't have to write the full URL every time when developing.
+
+Works with the following HTML attributes:
+
+- src
+- href
+- srcset
+- poster
+- background
+
+... and with the following CSS properties:
+
+- <span class="text-sm font-mono">background: url()</span>
+- <span class="text-sm font-mono">background-image: url()</span>
+- <span class="text-sm font-mono">@font-face { src: url() }</span>
+
+Both `<style>` tags and `style=""` attributes are supported. CSS property values with multiple `url()` sources (like @font-face declarations) are supported as well.
 
 ## Usage
 
@@ -23,13 +39,32 @@ Make it globally available by setting it in your environment config:
 
 </code-sample>
 
-<alert type="danger">Note that this will apply to _all_ sources and hrefs, including `<a>` tags, as long as the source's value is not an URL.</alert>
+<alert type="danger">Note that this will apply to _all_ sources and hrefs, including `<a>` tags, as long as the source's initial value is not an URL.</alert>
 
 ## Customization
 
-You'll most likely want to customize the transformer so that it applies only to certain elements.
+You'll most likely want to customize the transformer so that it applies only to certain elements, or even only to certain attributes of certain elements.
 
-For example, apply the base URL only to `<img>` elements:
+### tags
+
+Apply the base URL only to `<img>` tags:
+
+<code-sample title="config.js">
+
+  ```js
+  module.exports = {
+    baseURL: {
+      url: 'https://cdn.example.com/',
+      tags: ['img'],
+    },
+  }
+  ```
+
+</code-sample>
+
+That will apply the `url` to all known source attributes on all `<img` elements in your HTML, like `src=""` or `srcset="`.
+
+If you need greater control, you may specify which attributes of which tags should be prepended what URL, by passing in an object instead:
 
 <code-sample title="config.js">
 
@@ -39,10 +74,66 @@ For example, apply the base URL only to `<img>` elements:
       url: 'https://cdn.example.com/',
       tags: {
         img: {
-          src: 'https://foo.com/',
+          src: true, // use the value of `url` above
           srcset: 'https://bar.com/',
         },
       },
+    },
+  }
+  ```
+
+</code-sample>
+
+### attributes
+
+Key-value pairs of attributes and what to prepend to them.
+
+<code-sample title="config.js">
+
+  ```js
+  module.exports = {
+    baseURL: {
+      attributes: {
+        'data-url': 'https://example.com/',
+      },
+    },
+  }
+  ```
+
+</code-sample>
+
+### styleTag
+
+By default, the transformer will prepend your `url` to all `url()` sources in `<style>` tags.
+Set this option to `false` to prevent it from doing so:
+
+<code-sample title="config.js">
+
+  ```js
+  module.exports = {
+    baseURL: {
+      url: 'https://cdn.example.com/',
+      tags: ['img'],
+      styleTag: false,
+    },
+  }
+  ```
+
+</code-sample>
+
+### inlineCss
+
+Similarly, the transformer will prepend your `url` to all `url()` sources in `style=""` attributes.
+You may disable this if you need to:
+
+<code-sample title="config.js">
+
+  ```js
+  module.exports = {
+    baseURL: {
+      url: 'https://cdn.example.com/',
+      tags: ['img'],
+      inlineCss: false,
     },
   }
   ```
