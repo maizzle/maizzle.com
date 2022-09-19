@@ -80,11 +80,10 @@
               <syntax-highlight
                 title="tailwind.config.js"
                 no-copy
-                class="peer"
               >
                 <snippet-config />
               </syntax-highlight>
-              <email-template class="peer-hover:z-0 hidden sm:block absolute bottom-0 md:-bottom-12 right-0 md:right-28 lg:-right-16 z-10" />
+              <!-- <email-template class="peer-hover:z-0 hidden sm:block absolute bottom-0 md:-bottom-12 right-0 md:right-28 lg:-right-16 z-10" /> -->
             </div>
           </div>
         </div>
