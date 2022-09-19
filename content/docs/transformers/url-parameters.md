@@ -9,7 +9,7 @@ Maizzle can automatically append custom parameters to your URLs.
 
 ## Usage
 
-To add the same parameters to all URLs in all Templates, use your environment config:
+To add the same parameters to all URLs in all Templates, use the environment config:
 
 <code-sample title="config.js">
 
@@ -31,7 +31,7 @@ To add the same parameters to all URLs in all Templates, use your environment co
 
 </code-sample>
 
-## Local
+## Front Matter
 
 Of course, you may define URL parameters at a Template level, through Front Matter:
 
@@ -56,7 +56,7 @@ Of course, you may define URL parameters at a Template level, through Front Matt
 
 ## Options
 
-You may configure the tags to process, as well as the options for the library.
+Configure the tags to process and other transformer options.
 
 ### tags
 
@@ -65,6 +65,57 @@ Type: `array`
 Default: `['a']`
 
 Array of tag names to process. Only URLs inside `href=""` attributes of tags in this array will be processed.
+
+You may use CSS selectors to select only certain attributes. For example, this will apply parameters only to anchors that include example.com in their `href` value:
+
+<code-sample title="config.js">
+
+  ```js
+  module.exports = {
+    urlParameters: {
+      utm_source: 'maizzle',
+      utm_campaign: 'Campaign Name',
+      utm_medium: 'email',
+      custom_parameter: 'foo',
+      '1stOfApril': 'bar'
+    }
+  }
+  ```
+
+</code-sample>
+
+### strict
+
+By default, the transformer will append query parameters only to valid URLs.
+
+You may disable strict mode to append parameters to any string:
+
+<code-sample title="config.js">
+
+  ```js
+  module.exports = {
+    urlParameters: {
+      _options: {
+        strict: false,
+      },
+      foo: 'bar'
+    }
+  }
+  ```
+
+</code-sample>
+
+Input:
+
+```html
+<a href="example.com">test</a>
+```
+
+Result:
+
+```html
+<a href="example.com?foo=bar">test</a>
+```
 
 ### qs
 
