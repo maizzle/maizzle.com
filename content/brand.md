@@ -25,7 +25,7 @@ You may use the following assets when referring to Maizzle, for example in artic
 
 <div>
   <a href="/assets/brand/mark.svg" target="_blank">
-    <img src="/assets/brand/mark.svg" alt="Maizzle mark" width="250">
+    <img src="/assets/brand/mark.svg" alt="Maizzle mark" width="130">
   </a>
 
   <a href="/assets/brand/mark.svg" target="_blank">
@@ -33,11 +33,21 @@ You may use the following assets when referring to Maizzle, for example in artic
   </a>
 </div>
 
+<div>
+  <a href="/assets/brand/mark.svg" target="_blank">
+    <img src="/assets/brand/mark-gradient.svg" alt="Maizzle mark with gradient" width="130">
+  </a>
+
+  <a href="/assets/brand/mark-gradient.svg" target="_blank">
+    Download mark with gradient
+  </a>
+</div>
+
 ### Logotype
 
 <div>
   <a href="/assets/brand/logo.svg" target="_blank">
-    <img src="/assets/brand/logo.svg" alt="Maizzle logo" width="500">
+    <img src="/assets/brand/logo.svg" alt="Maizzle logo" width="400">
   </a>
 
   <a href="/assets/brand/logo.svg" target="_blank">
