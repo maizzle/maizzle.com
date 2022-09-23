@@ -131,3 +131,7 @@ abbr,
 .completed .ti-cursor {
   @apply hidden !important;
 }
+
+.prose .shiki code {
+  @apply bg-transparent;
+}

@@ -3,7 +3,14 @@
     <article class="col-span-9 2xl:col-span-7 px-4 sm:px-8 pb-12 mt-4 xl:mt-8 space-y-8">
       <nuxt-content
         :document="page"
-        class="prose max-w-[75ch] prose-slate prose-code:text-slate-700 prose-h2:mt-[1em] prose-headings:text-slate-800 prose-h1:font-bold prose-p:text-slate-600"
+        class="
+          max-w-[75ch]
+          prose prose-slate
+          prose-code:text-slate-600 prose-code:font-normal
+          prose-code:before:content-none  prose-code:after:content-none
+          prose-code:bg-slate-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded
+          prose-headings:text-slate-800 prose-h1:font-bold prose-h2:mt-[1em] prose-p:text-slate-600
+        "
       />
       <hr>
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 text-sm text-slate-500">
