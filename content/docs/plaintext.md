@@ -161,7 +161,7 @@ You may use a `plaintext` object in your `config.js` to overwrite any of the def
         plaintext: {
           ignoreTags: [],
           onlyStripTags: [],
-          stripTogetherWithTheirContents: ['script', 'style', 'xml'],
+          stripTogetherWithTheirContents: ['script', 'style', 'xml', 'not-plaintext'],
           skipHtmlDecoding: false,
           trimOnlySpaces: false,
           dumpLinkHrefsNearby: {
@@ -239,9 +239,33 @@ You can output content only in the plaintext version, with the `<plaintext>` tag
 
 </code-sample>
 
+## &lt;not-plaintext&gt; tag
+
+You may also discard content from the plaintext version while preserving it in the HTML, with the help of the `<not-plaintext>` tag:
+
+<code-sample title="src/templates/example.html">
+
+  ```xml
+  ---
+  plaintext: true
+  ---
+
+  <extends src="src/layouts/main.html">
+    <block name="template">
+      This text shows in both the HTML and the plaintext versions.
+      <not-plaintext>
+        <p>This paragraph will be output only in the HTML version</p>
+      </not-plaintext>
+    </block>
+  </extends>
+  ```
+
+</code-sample>
+
 ## API
 
 You may render an HTML string to plaintext in your application with the help of the `plaintext()` method.
+The custom tags, like `<plaintext>`, are also supported.
 
 <code-sample title="app.js">
 
