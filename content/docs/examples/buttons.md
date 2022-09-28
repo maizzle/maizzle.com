@@ -5,11 +5,11 @@ description: "Learn how to create simple buttons for your HTML email templates i
 
 # Buttons
 
-Buttons in HTML email can be created with simple table structures with an anchor inside, or advanced techniques involving <abbr title="Vector Markup Language">VML</abbr> or even `mso-` CSS, for fully-clickable buttons in Outlook and Windows 10 Mail 🤯
+Buttons in HTML emails can be created with simple table structures with an anchor inside, or through advanced techniques involving <abbr title="Vector Markup Language">VML</abbr> or even `mso-` CSS, for fully-clickable buttons in Outlook and Windows 10 Mail.
 
 ## Bulletproof
 
-Bulletproof buttons in HTML email traditionally refer to buttons that are _fully_ clickable in all email clients, including Outlook and Windows 10 Mail.
+Bulletproof buttons in HTML emails commonly refer to buttons that are _fully_ clickable in all email clients, including Outlook and Windows 10 Mail.
 
 ### Semantic (CSS)
 
@@ -47,7 +47,7 @@ It's just a simple `<a>` tag, but with some nifty workarounds for Outlook's lack
 
 <alert>Line breaks and spaces between tags in the example above might render the button larger (although barely noticeable). If you want your button to be absolutely pixel perfect, just remove them.</alert>
 
-**Tip**: use the [`<outlook>`](/docs/tags#outlook) tag for cleaner-looking, editor-friendly markup. As an added bonus, you can also use Tailwind utilities with it:
+**Tip**: use the [`<outlook>`](/docs/tags#outlook) tag for cleaner-looking, editor-friendly markup. As an added bonus, you can also use Tailwind CSS utilities with it:
 
 <code-sample title="button.html">
 
@@ -56,11 +56,11 @@ It's just a simple `<a>` tag, but with some nifty workarounds for Outlook's lack
     href="https://maizzle.com/"
     class="inline-block py-4 px-6 text-sm leading-none [text-decoration:none] text-white font-semibold rounded bg-indigo-500 hover:bg-indigo-600">
     <outlook>
-      <i class="tracking-6" style="mso-font-width: -100%; mso-text-raise: 26pt;">&nbsp;</i>
+      <i class="tracking-6 mso-font-width-[-100%] mso-text-raise-[26pt]">&nbsp;</i>
     </outlook>
-      <span style="mso-text-raise: 13pt;">Read more</span>
+      <span class="mso-text-raise-[13pt]">Read more</span>
     <outlook>
-      <i class="tracking-6" style="mso-font-width: -100%;">&nbsp;</i>
+      <i class="tracking-6 mso-font-width-[-100%]">&nbsp;</i>
     </outlook>
   </a>
   ```
@@ -77,11 +77,11 @@ However, VML buttons have a larger code footprint, are fixed in size and require
 
 A simple table structure, with background color set on the cell.
 
-For modern email clients, we use CSS padding on the `<a>` to make the entire button clickable. In Outlook and Windows 10 Mail, because CSS padding isn't supported on anchor tags, the MSO `mso-padding-alt` CSS property can be used on the table cell in order to _preserve the aspect_.
+For modern email clients, we use CSS padding on the `<a>` to make the entire button clickable. In Outlook and Windows 10 Mail, because CSS padding isn't supported on anchor tags, the MSO `mso-padding-alt` CSS property can be used on the table cell in order to preserve the _visual aspect_.
 
 This means that in Outlook/Windows 10 Mail only the text itself will be clickable.
 
-Table-based buttons are easier to code and maintain than bulletproof buttons, the main trade-off being accessibility: they provide smaller-than-suggested click/touch area in some email clients.
+Table-based buttons are easier to code and maintain than bulletproof buttons, the main trade-off being accessibility: they provide smaller-than-recommended click or touch area in some email clients.
 
 ### Filled
 
@@ -97,8 +97,13 @@ For an extra touch, let's add rounded corners and a hover effect:
   ```xml
   <table>
     <tr>
-      <th class="bg-indigo-500 hover:bg-indigo-600 rounded" style="mso-padding-alt: 12px 48px;">
-        <a href="https://maizzle.com" class="block text-white text-sm leading-full py-3 px-12 [text-decoration:none]">Button</a>
+      <th class="bg-indigo-500 hover:bg-indigo-600 rounded mso-padding-alt-[12px_48px]">
+        <a
+          href="https://maizzle.com"
+          class="block text-white text-sm leading-full py-3 px-12 [text-decoration:none]"
+        >
+          Button
+        </a>
       </th>
     </tr>
   </table>
@@ -109,7 +114,7 @@ For an extra touch, let's add rounded corners and a hover effect:
 
 ### Outlined
 
-No background color, so it inherits its container's background (white in our case). We add a colored border to the table cell to create the outline.
+No background color, so it inherits its container's background (gray in our case). We add a colored border to the table cell to create the outline.
 
 To make it more interesting, let's also change the background on hover:
 
@@ -121,8 +126,13 @@ To make it more interesting, let's also change the background on hover:
   ```xml
   <table>
     <tr>
-      <th class="border-2 border-indigo-500 hover:bg-indigo-500 block rounded" style="mso-padding-alt: 12px 48px;">
-        <a href="https://maizzle.com" class="block text-sm text-indigo-500 hover:text-white leading-full py-3 px-12 [text-decoration:none]">Button</a>
+      <th class="border-2 border-indigo-500 hover:bg-indigo-500 block rounded mso-padding-alt-[12px_48px]">
+        <a
+          href="https://maizzle.com"
+          class="block text-sm text-indigo-500 hover:text-white leading-full py-3 px-12 [text-decoration:none]"
+        >
+          Button
+        </a>
       </th>
     </tr>
   </table>
@@ -131,7 +141,7 @@ To make it more interesting, let's also change the background on hover:
 
 ### Pill
 
-Pill simply buttons use a larger border-radius value.
+Pill buttons simply use a larger border-radius value.
 
 <div class="example-preview">
   <div>
@@ -141,8 +151,13 @@ Pill simply buttons use a larger border-radius value.
   ```xml
   <table>
     <tr>
-      <th class="bg-indigo-500 hover:bg-indigo-600 shadow-md rounded-full" style="mso-padding-alt: 12px 48px;">
-        <a href="https://maizzle.com" class="block text-sm text-white leading-full py-3 px-12 [text-decoration:none]">Button</a>
+      <th class="bg-indigo-500 hover:bg-indigo-600 shadow-md rounded-full mso-padding-alt-[12px_48px]">
+        <a
+          href="https://maizzle.com"
+          class="block text-sm text-white leading-full py-3 px-12 [text-decoration:none]"
+        >
+          Button
+        </a>
       </th>
     </tr>
   </table>
