@@ -51,7 +51,7 @@ You may also customize the `<extends>` tag name:
   module.exports = {
     build: {
       layouts: {
-        tagName: 'extends'
+        tagName: 'layout'
       }
     }
   }
