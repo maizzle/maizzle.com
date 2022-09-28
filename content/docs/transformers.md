@@ -21,7 +21,7 @@ Because some operations need to happen before others, Transformers in Maizzle ru
 
 ## Disabling
 
-You may disable all Transformers by adding the `applyTransformers` key to your `config.js` file.
+You may disable all Transformers by setting the `applyTransformers` key to `false`.
 
 <code-sample title="config.js">
 

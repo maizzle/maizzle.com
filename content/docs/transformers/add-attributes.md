@@ -118,7 +118,7 @@ Add multiple attributes to multiple elements in one go:
 
 ## Tailwind CSS
 
-Any Tailwind CSS classes that you add with this Transformer need to be added to your `content` key:
+Any Tailwind CSS classes that you add with this Transformer need to be added to your `content` key. Simply add the config file to the `content` array:
 
 <code-sample title="tailwind.config.js">
 

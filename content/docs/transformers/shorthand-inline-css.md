@@ -72,9 +72,9 @@ Set it to `false` or simply omit it:
 <code-sample title="app.js">
 
   ```js
-  const {preventWidows} = require('@maizzle/framework')
+  const {shorthandInlineCSS} = require('@maizzle/framework')
 
-  const html = await Maizzle.shorthandInlineCSS('html string')
+  const html = await shorthandInlineCSS('html string')
   ```
 
 </code-sample>
