@@ -399,11 +399,13 @@ It's an object containing a parsed path of the destination file name, for exampl
 ```js
 build: {
   current: {
-    root: '',
-    dir: 'build_production',
-    base: 'transactional.html',
-    ext: '.html',
-    name: 'transactional'
+    path: {
+      root: '',
+      dir: 'build_production',
+      base: 'transactional.html',
+      ext: '.html',
+      name: 'transactional'
+    }
   }
 }
 ```
