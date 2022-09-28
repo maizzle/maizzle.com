@@ -321,7 +321,7 @@ The `lineHeight` utilities have been extended to include all `spacing` scale val
 So you can use `leading` utilities to easily create vertical spacing, like this:
 
 ```xml
-<div class="leading-64">&zwnj;</div>
+<div class="leading-16">&zwnj;</div>
 <!-- Result: <div style="line-height: 64px">&zwnj;</div> -->
 ```
 
@@ -356,9 +356,9 @@ So you can use `leading` utilities to easily create vertical spacing, like this:
 
 ### Colors
 
-Maizzle uses the [default colors](https://tailwindcss.com/docs/customizing-colors) in Tailwind.
+Maizzle uses the [default colors](https://tailwindcss.com/docs/customizing-colors) from Tailwind CSS.
 
-You may define your own colors, or even extend or change the default colors by adding a `colors` key in your Tailwind config:
+You may define your own colors, or even extend or change the default color palette by adding a `colors` key to your Tailwind config:
 
 <code-sample title="tailwind.config.js">
 
@@ -387,17 +387,18 @@ See the [Tailwind color palette reference](https://tailwindcss.com/docs/customiz
 
 ### !important
 
-Emails still need to use inline CSS, most notably for these reasons:
+HTML emails still need to use inline CSS, most notably for these reasons:
 
-- Outlook 2007-2019 only reads the first class in a `class=""` attribute, ignoring the rest.
+- Outlook/Office 365 for Windows only reads the first class in a `class=""` attribute, ignoring the rest.
   So it'll only use `a` from `class="a b"`
 - Some email clients don't support embedded CSS (i.e. in `<style>`)
+- Embedded styles are usually lost when an email is forwarded
 
-Because of this, the `important` option is set to `true` by default, so that responsive utilities can actually override inlined CSS.
+So because we need to write CSS inline, Tailwind's `important` option is set to `true` in Maizzle - this way responsive utilities can actually override the inlined CSS.
 
-<alert>This applies only to `<head>` CSS, inlined CSS will not contain `!important`</alert>
+<alert>This applies only to `<head>` CSS, inlined CSS declarations will not contain `!important`</alert>
 
-You may disable this by adding the `important` key to your Tailwind config:
+You may disable this behavior by adding the `important` key to your Tailwind config:
 
 <code-sample title="tailwind.config.js">
 
@@ -424,9 +425,9 @@ So you can safely use Tailwind's awesome default separator and write classes lik
     separator: ':',
     theme: {
       width: {
-        '2/5': '40%', // w-2-5
-        '50%': '50%', // w-50pc
-        '2.5': '0.625rem', // w-2_5
+        '2/5': '40%', // w-2/5 converted to w-2-5
+        '50%': '50%', // w-50\% => w-50pc
+        '2.5': '0.625rem', // w-2\.5 => w-2_5
       }
     }
   }
@@ -438,7 +439,7 @@ You can also [configure the replacement mappings](/docs/transformers/safe-class-
 
 ### Screens
 
-Maizzle uses a desktop-first approach with `max-width`, instead of Tailwind's default mobile-first with `min-width`.
+Maizzle uses a desktop-first approach with `max-width` instead of Tailwind's default mobile-first that uses `min-width`.
 
 Of course, you're free to adjust this as you like:
 
