@@ -127,17 +127,17 @@ The spacing above and below the Table Divider line is defined through the vertic
 
 How it works:
 
-- py-24 adds 24px top and bottom padding
+- `py-6` adds 24px top and bottom padding
 - the `<div>` is the horizontal line: we set its height and line-height to 1px, and give it a background color
 - we use a `&zwnj;` to add something inside the `<div>`, so it can take up height
 
-Feel free to use `&nbsp;` instead of `&zwnj;,` both work just fine 👌
+Feel free to use `&nbsp;` instead of `&zwnj;` - both work just fine 👌
 
 ### Outlook note
 
 The `<div>` element where we use `leading-px` needs some extra attention for Outlook. Otherwise, it will render thicker than intended.
 
-To make Outlook respect the line height you set on elements, you may use the `mso-leading-exactly` class that is available from the `tailwindcss-mso` plugin (included in the Starter).
+To make Outlook respect the line height you set on elements, you may use the `mso-line-height-rule-exactly` class that is available from the `tailwindcss-mso` plugin (included in the Starter).
 
 <code-sample title="src/templates/example.html">
 
@@ -145,7 +145,7 @@ To make Outlook respect the line height you set on elements, you may use the `ms
   <table class="w-full">
     <tr>
       <td class="py-6">
-        <div class="bg-slate-300 h-px leading-px mso-leading-exactly">&zwnj;</div>
+        <div class="bg-slate-300 h-px leading-px mso-line-height-rule-exactly">&zwnj;</div>
       </td>
     </tr>
   </table>
