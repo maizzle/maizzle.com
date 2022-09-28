@@ -408,3 +408,161 @@ To use transform utilities, you'll need to add the resets back yourself, in a `<
 </code-sample>
 
 The same applies to other utilities that rely on resets through `--tw-x` CSS variables, like `backdrop-blur` or CSS filters.
+
+## Email client targeting
+
+Maizzle comes with [tailwindcss-email-variants](https://github.com/maizzle/tailwindcss-email-variants), a Tailwind CSS plugin that makes it easy to style your HTML emails for certain email clients.
+
+It adds custom variants that you may use to style elements only for certain email clients.
+
+### Gmail
+
+Use the `gmail` variant to style elements in Gmail's webmail:
+
+```html
+<div class="gmail:hidden">...</div>
+```
+
+The compiled HTML will include this CSS rule:
+
+```css
+u + .body .gmail\:hidden {
+  display: none;
+}
+```
+
+### Gmail (Android)
+
+Gmail on Android requires a different selector, so there's a separate variant provided:
+
+```html
+<div class="gmail-android:hidden">...</div>
+```
+
+Result:
+
+```css
+div > u + .body .gmail-android\:hidden {
+  display: none;
+}
+```
+
+### Apple Mail (10+)
+
+The `apple-mail` variant will target Apple Mail 10 and up:
+
+```html
+<div class="apple-mail:hidden">...</div>
+```
+
+Result:
+
+```css
+.Singleton .apple-mail\:hidden {
+  display: none;
+}
+```
+
+### iOS Mail (10+)
+
+Use the `ios` variant to target iOS Mail 10 and up:
+
+```html
+<div class="ios:hidden">...</div>
+```
+
+Result:
+
+```css
+@supports (-webkit-overflow-scrolling:touch) and (color:#ffff) {
+  .ios\:hidden {
+    display: none;
+  }
+}
+```
+
+### iOS Mail (15)
+
+Use the `ios-15` variant if you need to target iOS Mail 15 specifically:
+
+```html
+<div class="ios-15:hidden">...</div>
+```
+
+Result:
+
+```css
+@supports (-webkit-overflow-scrolling:touch) and (aspect-ratio: 1 / 1) {
+  .ios-15\:hidden {
+    display: none;
+  }
+}
+```
+
+### Outlook.com dark mode
+
+Change `color` and `background-color` of elements in [Outlook.com dark mode](https://www.hteumeuleu.com/2021/emails-react-outlook-com-dark-mode/).
+
+```html
+<!-- Color -->
+<div class="ogsc:text-slate-200">...</div>
+
+<!-- Background color -->
+<div class="ogsb:bg-slate-900">...</div>
+```
+
+Result:
+
+```css
+[data-ogsc] .ogsc\:text-slate-200 {
+  color: #e2e8f0;
+}
+
+[data-ogsb] .ogsb\:bg-slate-900 {
+  background-color: #0f172a;
+}
+```
+
+### Open-Xchange
+
+Use the `ox` variant to target webmail clients that are powered by [Open-Xchange](https://www.open-xchange.com/).
+
+Some of these email clients include Comcast, Libero, 1&1 MailXchange, Network Solutions Secure Mail, Namecheap Email Hosting, Mailbox.org, 123-reg Email, acens Correo Professional, Home.pl Cloud Email Xchange, Virgin Media Mail, and Ziggo Mail.
+
+```html
+<div class="ox:hidden">...</div>
+```
+
+Result:
+
+```css
+.ox\:hidden[class^="ox-"] {
+  display: none;
+}
+```
+
+## Outlook CSS
+
+Outlook and Office 365 on Windows support proprietary `mso-` CSS properties.
+
+You can use [tailwindcss-mso](https://github.com/maizzle/tailwindcss-mso) in Maizzle to add Outlook-only CSS:
+
+```html
+<p class="mso-hide-all">...</p>
+```
+
+These are utility classes that work just as you'd expect - they support arbitrary values:
+
+```html
+<p class="mso-color-alt-[#ffcc00]">...</p>
+```
+
+... and, where it makes sense, negative values too:
+
+```html
+<p class="-mso-text-raise-4">...</p>
+```
+
+<alert type="info">
+  If you're looking show/hide content in/from Outlook, have a look at the available <a href="/docs/tags#outlook">Outlook tags</a>.
+</alert>
