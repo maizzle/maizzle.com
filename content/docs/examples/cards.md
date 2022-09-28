@@ -38,7 +38,7 @@ The traditional content block for showing article excerpts, like those from a bl
       </td>
     </tr>
     <tr>
-      <td class="p-20 bg-white rounded-b">
+      <td class="p-6 bg-white rounded-b">
         <span class="text-xs text-slate-500">April 7, 2020</span>
         <h2 class="mt-2 mb-3 text-2xl leading-full">
           <a href="https://example.com" class="text-black hover:text-slate-700 [text-decoration:none]">
