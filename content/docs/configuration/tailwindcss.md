@@ -439,9 +439,7 @@ You can also [configure the replacement mappings](/docs/transformers/safe-class-
 
 ### Screens
 
-Maizzle uses a desktop-first approach with `max-width` instead of Tailwind's default mobile-first that uses `min-width`.
-
-Of course, you're free to adjust this as you like:
+Maizzle uses a desktop-first approach with `max-width` media queries instead of Tailwind's default, mobile-first approach that uses `min-width`:
 
 <code-sample title="tailwind.config.js">
 
@@ -456,13 +454,55 @@ module.exports = {
 
 </code-sample>
 
+Of course, you're free to adjust this as you like. For example, you might add a breakpoint that targets tablet devices based on their viewport width:
+
+<code-sample title="tailwind.config.js">
+
+```js
+module.exports = {
+  screens: {
+    xs: {max: '425px'},
+    sm: {max: '600px'},
+    md: {min: '768px', max: '1023px'},
+  },
+}
+```
+
+</code-sample>
+
+That would enable you to write classes like `md:hidden` or `md:text-lg`, which will be wrapped in a `@media (min-width: 768px) and (max-width: 1023px)` media query.
+
 More on screens, in the [Tailwind CSS docs](https://tailwindcss.com/docs/responsive-design).
 
 ### Plugins
 
-You can of course use any Tailwind plugin, simply `require` it in your `tailwind.config.js`.
+You can of course use any Tailwind CSS plugin, all you have to do is to install it from NPM and then `require` it in your `tailwind.config.js`.
 
-See [their documentation](https://tailwindcss.com/docs/configuration#plugins) for more info.
+For example, let's use the [tailwindcss-email-variants](https://github.com/maizzle/tailwindcss-email-variants) plugin:
+
+<terminal show-copy>
+
+  ```
+  npm install tailwindcss-email-variants
+  ```
+
+</terminal>
+
+<code-sample title="tailwind.config.js">
+
+```js
+module.exports = {
+  plugins: [
+    require("tailwindcss-email-variants"),
+  ],
+}
+```
+
+</code-sample>
+
+<alert type="info">
+  <code>tailwindcss-email-variants</code> is already included in the Starter, no need to install it.
+</alert>
 
 ### Disabled plugins
 
