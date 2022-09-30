@@ -161,7 +161,6 @@ The variables that we are referencing in there are currently undefined, so let's
   image:
     url: 'https://example.com/image.jpg'
     width: '600px'
-    height: '400px'
   ---
 
   <extends src="src/layouts/main.html">
@@ -170,7 +169,6 @@ The variables that we are referencing in there are currently undefined, so let's
         src="src/components/v-fill.html"
         image="{{ image.url }}"
         width="{{ image.width }}"
-        height="{{ image.height }}"
       >
         <div>
           Overlayed HTML!
@@ -188,8 +186,8 @@ Result:
 
   ```xml
   <!--[if mso]>
-  <v:rect stroke="false" style="width: {{ width }}" xmlns:v="urn:schemas-microsoft-com:vml">
-  <v:fill type="frame" src="{{{ image }}}" />
+  <v:rect stroke="false" style="width: 600px" xmlns:v="urn:schemas-microsoft-com:vml">
+  <v:fill type="frame" src="https://example.com/image.jpg" />
   <v:textbox inset="0,0,0,0" style="mso-fit-shape-to-text: true"><div><![endif]-->
   <div>
     Overlayed HTML!
