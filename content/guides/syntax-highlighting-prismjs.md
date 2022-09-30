@@ -127,7 +127,7 @@ Choose one of the default themes, or see [prism-themes](https://github.com/Prism
 
 For this tutorial, we'll go with a Tailwind adaptation the [Synthwave '84 Theme](https://marketplace.visualstudio.com/items?itemName=RobbOwen.synthwave-vscode).
 
-Save [prism-synthwave84.css](https://raw.githubusercontent.com/maizzle/example-syntax-highlight/master/src/assets/css/custom/prism-synthwave84.css) to the `src/css` directory in your project,
+Save [prism-synthwave84.css](https://raw.githubusercontent.com/maizzle/starter-prismjs/master/src/css/prism-synthwave84.css) to the `src/css` directory in your project,
 and import it into your `src/css/tailwind.css`:
 
 ```postcss
