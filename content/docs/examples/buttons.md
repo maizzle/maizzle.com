@@ -5,17 +5,13 @@ description: "Learn how to create simple buttons for your HTML email templates i
 
 # Buttons
 
-Buttons in HTML emails can be created with simple table structures with an anchor inside, or through advanced techniques involving <abbr title="Vector Markup Language">VML</abbr> or even `mso-` CSS, for fully-clickable buttons in Outlook and Windows 10 Mail.
+Buttons in HTML emails can be created with simple table structures with an anchor inside, or through advanced techniques involving <abbr title="Vector Markup Language">VML</abbr> or `mso-` CSS, for fully-clickable buttons in Outlook for Windows.
 
-## Bulletproof
+## Link
 
-Bulletproof buttons in HTML emails commonly refer to buttons that are _fully_ clickable in all email clients, including Outlook and Windows 10 Mail.
+<alert>This is inspired by <a href="https://twitter.com/M_J_Robbins">@M_J_Robbins</a>' link button - see the original on <a href="https://www.goodemailcode.com/email-code/link-button">goodemailcode.com</a></alert>
 
-### Semantic (CSS)
-
-<alert>Credit goes to <a href="https://twitter.com/M_J_Robbins">@M_J_Robbins</a> for this technique.</alert>
-
-We can use a smart combination of basic and (Outlook) vendor CSS properties to get fully clickable buttons in HTML - no VML required!
+We can use a smart combination of basic and vendor CSS properties to get fully clickable buttons in HTML - no VML required!
 
 Here's the Filled button, fully clickable in Outlook:
 
@@ -30,7 +26,7 @@ Here's the Filled button, fully clickable in Outlook:
   ```xml
   <a
     href="https://maizzle.com/"
-    class="inline-block py-4 px-6 text-sm leading-none [text-decoration:none] text-white font-semibold rounded bg-indigo-500 hover:bg-indigo-600">
+    class="inline-block py-4 px-6 text-sm leading-none font-semibold rounded [text-decoration:none] text-white bg-indigo-500 hover:bg-indigo-600">
     <!--[if mso]><i style="letter-spacing: 27px; mso-font-width: -100%; mso-text-raise: 26pt;">&nbsp;</i><![endif]-->
       <span style="mso-text-raise: 13pt;">Read more</span>
     <!--[if mso]><i style="letter-spacing: 27px; mso-font-width: -100%;">&nbsp;</i><![endif]-->
@@ -38,16 +34,16 @@ Here's the Filled button, fully clickable in Outlook:
   ```
 </div>
 
-It's just a simple `<a>` tag, but with some nifty workarounds for Outlook's lack of support for `padding` on inline elements:
+As you can see it's just a simple `<a>` tag, but with some nifty workarounds for Outlook's lack of support for `padding` on inline elements:
 
 - left/right padding is faked with a `<i>` elements that use `letter-spacing` to grow in width; these elements are wrapped in conditional comments, so they only show in Outlook and Windows 10 Mail
-- text is wrapped in a `<span>` and `mso-text-raise` adjusts its vertical position
-- the first `<i>` uses double the `pt` that the `<span>` uses
-- finally, the width of the `&nbsp;` character is reset (as in, canceled) through the `mso-font-width` property
+- the text label is wrapped in a `<span>` and `mso-text-raise` adjusts its vertical position, allowing us to control the top padding
+- the first `<i>` adds bottom padding
+- the width of the `&nbsp;` character is reset through the `mso-font-width` property
 
 <alert>Line breaks and spaces between tags in the example above might render the button larger (although barely noticeable). If you want your button to be absolutely pixel perfect, just remove them.</alert>
 
-**Tip**: use the [`<outlook>`](/docs/tags#outlook) tag for cleaner-looking, editor-friendly markup. As an added bonus, you can also use Tailwind CSS utilities with it:
+**Tip**: use the [`<outlook>`](/docs/tags#outlook) tag for cleaner-looking, editor-friendly markup. As an added bonus, you can now also use Tailwind CSS utilities with it:
 
 <code-sample title="button.html">
 
@@ -67,11 +63,46 @@ It's just a simple `<a>` tag, but with some nifty workarounds for Outlook's lack
 
 </code-sample>
 
-### Traditional (VML)
+## VML
 
-The classic approach to bulletproof buttons is coding them with <abbr title="Vector Markup Language">VML</abbr>, and Campaign Monitor has a very useful [tool](https://buttons.cm/) for this.
+Another approach to buttons in HTML email is coding them with <abbr title="Vector Markup Language">VML</abbr>, Microsoft's obsolete and deprecated _Vector Markup Language_.
 
-However, VML buttons have a larger code footprint, are fixed in size and require you add the URL in two places, which makes them less flexible and harder to maintain.
+[buttons.cm](https://buttons.cm/), a tool by Campaign Monitor, makes it easy to generate a VML button.
+
+However, you should keep in mind that VML buttons:
+
+- have a larger code footprint
+- must have a fixed width and height
+- require that you add the URL in two places
+- are converted to an image, which can degrade accessibility for screen reader users
+- cannot be nested inside other VML elements (for example, background images for Outlook require VML, so you can't place a VML button on top of a background image for Outlook)
+
+These limitations make VML buttons inaccessible, less flexible, and harder to maintain.
+
+Probably the only reason you'd want to use a VML button is because it's the only way to achieve rounded button corners in Outlook for Windows.
+
+Here is a simplified VML button with rounded corners, styled with Tailwind CSS:
+
+<code-sample title="vml-rounded-button.html">
+
+  ```xml
+  <!--[if mso]>
+  <v:roundrect arcsize="50%" style="height: 48px; mso-wrap-style: none;" stroke="f" fillcolor="#1d4ed8">
+  <![endif]-->
+    <a
+      href="https://example.com/"
+      class="inline-block px-6 leading-10 text-base rounded-md [text-decoration:none] text-white bg-blue-700"
+    >
+      <!--[if mso]><i style="letter-spacing: 8px; mso-font-width: -100%;" hidden>&nbsp;</i><![endif]-->
+      <span>Link Text</span>
+      <!--[if mso]><i style="letter-spacing: 8px; mso-font-width: -100%;" hidden>&nbsp;</i><![endif]-->
+    </a>
+  <!--[if mso]>
+  </v:roundrect>
+  <![endif]-->
+  ```
+
+</code-sample>
 
 ## Table-based
 
@@ -81,7 +112,7 @@ For modern email clients, we use CSS padding on the `<a>` to make the entire but
 
 This means that in Outlook/Windows 10 Mail only the text itself will be clickable.
 
-Table-based buttons are easier to code and maintain than bulletproof buttons, the main trade-off being accessibility: they provide smaller-than-recommended click or touch area in some email clients.
+Table-based buttons are easier to code and maintain than VML buttons, the main trade-off being accessibility: the click area in Outlook is not ideal.
 
 ### Filled
 
@@ -100,7 +131,7 @@ For an extra touch, let's add rounded corners and a hover effect:
       <th class="bg-indigo-500 hover:bg-indigo-600 rounded mso-padding-alt-[12px_48px]">
         <a
           href="https://maizzle.com"
-          class="block text-white text-sm leading-full py-3 px-12 [text-decoration:none]"
+          class="block py-3 px-12 text-white text-sm leading-full [text-decoration:none]"
         >
           Button
         </a>
@@ -129,7 +160,7 @@ To make it more interesting, let's also change the background on hover:
       <th class="border-2 border-indigo-500 hover:bg-indigo-500 block rounded mso-padding-alt-[12px_48px]">
         <a
           href="https://maizzle.com"
-          class="block text-sm text-indigo-500 hover:text-white leading-full py-3 px-12 [text-decoration:none]"
+          class="block py-3 px-12 text-sm text-indigo-500 hover:text-white leading-full [text-decoration:none]"
         >
           Button
         </a>
@@ -154,7 +185,7 @@ Pill buttons simply use a larger border-radius value.
       <th class="bg-indigo-500 hover:bg-indigo-600 shadow-md rounded-full mso-padding-alt-[12px_48px]">
         <a
           href="https://maizzle.com"
-          class="block text-sm text-white leading-full py-3 px-12 [text-decoration:none]"
+          class="block py-3 px-12 text-sm text-white leading-full [text-decoration:none]"
         >
           Button
         </a>
