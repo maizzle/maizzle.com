@@ -222,22 +222,30 @@ Remember to import that file:
 
 </code-sample>
 
-When building with CSS inlining enabled, normally that would yield:
+When running the build command, normally that would yield:
 
 <code-sample title="src/templates/example.html">
 
-  ```xml
-  <div style="padding-top: 8px; padding-bottom: 8px; padding-left: 4px; padding-right: 4px;">test</div>
+  ```css
+  .col {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 4px;
+    padding-right: 4px
+  }
   ```
 
 </code-sample>
+
 However, Maizzle will merge those to shorthand-form, so we get this:
 
 <code-sample title="src/templates/example.html">
 
-```xml
-<div style="padding: 8px 4px;">test</div>
-```
+  ```css
+  .col {
+    padding: 8px 4px;
+  }
+  ```
 
 </code-sample>
 
