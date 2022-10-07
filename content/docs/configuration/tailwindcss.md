@@ -7,7 +7,7 @@ description: "Tailwind CSS configuration options for email development in Maizzl
 
 Options for Tailwind CSS in Maizzle, and how `tailwind.config.js` is configured.
 
-## config.js
+## Build configuration
 
 You may define Tailwind CSS paths in your Environment config.
 
@@ -83,6 +83,153 @@ This will skip Tailwind CSS compilation.
 Maizzle comes with an email-tailored `tailwind.config.js` that changes a few things for better email client compatibility.
 
 These are the differences from the original Tailwind config.
+
+### Content
+
+These are the default Tailwind CSS [content sources](https://tailwindcss.com/docs/content-configuration) that Maizzle uses:
+
+- the content of the template file currently being processed
+- `./src/components/**.html`
+- `./src/layouts/**.html`
+- all [template sources](/docs/configuration/templates)
+
+You may configure additional content sources by adding a `content` key to your `tailwind.config.js`:
+
+<code-sample title="tailwind.config.js">
+
+  ```js
+  module.exports = {
+    content: [
+      './src/components/**.html',
+      './src/layouts/**.html',
+      './some/other/path/**.{html,js}',
+    ],
+  }
+  ```
+
+</code-sample>
+
+<alert type="warning">When adding content paths to `tailwind.config.js` you need to also include the paths to Components and Layouts (like in the example above), as this overwrites the default config and otherwise classes from files in those locations will not be generated.</alert>
+
+### !important
+
+HTML emails still need to use inline CSS, most notably for these reasons:
+
+- Outlook/Office 365 for Windows only reads the first class in a `class=""` attribute, ignoring the rest.
+  So it'll only use `a` from `class="a b"`
+- Some email clients don't support embedded CSS (i.e. in `<style>`)
+- Embedded styles are usually lost when an email is forwarded
+
+So because we need to write CSS inline, Tailwind's `important` option is set to `true` in Maizzle - this way responsive utilities can actually override the inlined CSS.
+
+<alert>This applies only to `<head>` CSS, inlined CSS declarations will not contain `!important`</alert>
+
+You may disable this behavior by adding the `important` key to your Tailwind config:
+
+<code-sample title="tailwind.config.js">
+
+  ```js
+  module.exports = {
+    important: false,
+  }
+  ```
+
+</code-sample>
+
+### Separator
+
+Characters like `:` in `hover:bg-black` need to be \escaped in CSS.
+
+Because some email clients (Gmail 👀) fail to parse selectors with escaped characters, Maizzle normalizes all your CSS selectors and HTML classes, replacing any escaped characters it finds with email-safe alternatives.
+
+So you can safely use Tailwind's awesome default separator and write classes like `sm:w-1/2` - Maizzle will convert that to `sm-w-1-2` in your compiled template:
+
+<code-sample title="tailwind.config.js">
+
+  ```js
+  module.exports = {
+    separator: ':',
+    theme: {
+      width: {
+        '2/5': '40%', // w-2/5 converted to w-2-5
+        '50%': '50%', // w-50\% => w-50pc
+        '2.5': '0.625rem', // w-2\.5 => w-2_5
+      }
+    }
+  }
+  ```
+
+</code-sample>
+
+You can also [configure the replacement mappings](/docs/transformers/safe-class-names).
+
+### Screens
+
+Maizzle uses a desktop-first approach with `max-width` media queries instead of Tailwind's default, mobile-first approach that uses `min-width`:
+
+<code-sample title="tailwind.config.js">
+
+```js
+module.exports = {
+  screens: {
+    xs: {max: '425px'},
+    sm: {max: '600px'},
+  },
+}
+```
+
+</code-sample>
+
+Of course, you're free to adjust this as you like. For example, you might add a breakpoint that targets tablet devices based on their viewport width:
+
+<code-sample title="tailwind.config.js">
+
+```js
+module.exports = {
+  screens: {
+    xs: {max: '425px'},
+    sm: {max: '600px'},
+    md: {min: '768px', max: '1023px'},
+  },
+}
+```
+
+</code-sample>
+
+That would enable you to write classes like `md:hidden` or `md:text-lg`, which will be wrapped in a `@media (min-width: 768px) and (max-width: 1023px)` media query.
+
+More on screens, in the [Tailwind CSS docs](https://tailwindcss.com/docs/responsive-design).
+
+### Colors
+
+Maizzle uses the [default colors](https://tailwindcss.com/docs/customizing-colors) from Tailwind CSS.
+
+You may define your own colors, or even extend or change the default color palette by adding a `colors` key to your Tailwind config:
+
+<code-sample title="tailwind.config.js">
+
+  ```js
+  module.exports = {
+    theme: {
+      extend: {
+        colors: {
+          blue: {
+            // change 'blue-500'
+            500: '#03a9f4',
+            // add 'blue-1000'
+            1000: '#101e47',
+          },
+          // custom color
+          primary: '#FFCC00',
+        }
+      }
+    }
+  }
+  ```
+
+</code-sample>
+
+See the [Tailwind color palette reference](https://tailwindcss.com/docs/customizing-colors).
 
 ### Pixel units
 
@@ -353,126 +500,6 @@ So you can use `leading` utilities to easily create vertical spacing, like this:
   ```
 
 </code-sample>
-
-### Colors
-
-Maizzle uses the [default colors](https://tailwindcss.com/docs/customizing-colors) from Tailwind CSS.
-
-You may define your own colors, or even extend or change the default color palette by adding a `colors` key to your Tailwind config:
-
-<code-sample title="tailwind.config.js">
-
-  ```js
-  module.exports = {
-    theme: {
-      extend: {
-        colors: {
-          blue: {
-            // change 'blue-500'
-            500: '#03a9f4',
-            // add 'blue-1000'
-            1000: '#101e47',
-          },
-          // custom color
-          primary: '#FFCC00',
-        }
-      }
-    }
-  }
-  ```
-
-</code-sample>
-
-See the [Tailwind color palette reference](https://tailwindcss.com/docs/customizing-colors).
-
-### !important
-
-HTML emails still need to use inline CSS, most notably for these reasons:
-
-- Outlook/Office 365 for Windows only reads the first class in a `class=""` attribute, ignoring the rest.
-  So it'll only use `a` from `class="a b"`
-- Some email clients don't support embedded CSS (i.e. in `<style>`)
-- Embedded styles are usually lost when an email is forwarded
-
-So because we need to write CSS inline, Tailwind's `important` option is set to `true` in Maizzle - this way responsive utilities can actually override the inlined CSS.
-
-<alert>This applies only to `<head>` CSS, inlined CSS declarations will not contain `!important`</alert>
-
-You may disable this behavior by adding the `important` key to your Tailwind config:
-
-<code-sample title="tailwind.config.js">
-
-  ```js
-  module.exports = {
-    important: false,
-  }
-  ```
-
-</code-sample>
-
-### Separator
-
-Characters like `:` in `hover:bg-black` need to be \escaped in CSS.
-
-Because some email clients (Gmail 👀) fail to parse selectors with escaped characters, Maizzle normalizes all your CSS selectors and HTML classes, replacing any escaped characters it finds with email-safe alternatives.
-
-So you can safely use Tailwind's awesome default separator and write classes like `sm:w-1/2` - Maizzle will convert that to `sm-w-1-2` in your compiled template:
-
-<code-sample title="tailwind.config.js">
-
-  ```js
-  module.exports = {
-    separator: ':',
-    theme: {
-      width: {
-        '2/5': '40%', // w-2/5 converted to w-2-5
-        '50%': '50%', // w-50\% => w-50pc
-        '2.5': '0.625rem', // w-2\.5 => w-2_5
-      }
-    }
-  }
-  ```
-
-</code-sample>
-
-You can also [configure the replacement mappings](/docs/transformers/safe-class-names).
-
-### Screens
-
-Maizzle uses a desktop-first approach with `max-width` media queries instead of Tailwind's default, mobile-first approach that uses `min-width`:
-
-<code-sample title="tailwind.config.js">
-
-```js
-module.exports = {
-  screens: {
-    xs: {max: '425px'},
-    sm: {max: '600px'},
-  },
-}
-```
-
-</code-sample>
-
-Of course, you're free to adjust this as you like. For example, you might add a breakpoint that targets tablet devices based on their viewport width:
-
-<code-sample title="tailwind.config.js">
-
-```js
-module.exports = {
-  screens: {
-    xs: {max: '425px'},
-    sm: {max: '600px'},
-    md: {min: '768px', max: '1023px'},
-  },
-}
-```
-
-</code-sample>
-
-That would enable you to write classes like `md:hidden` or `md:text-lg`, which will be wrapped in a `@media (min-width: 768px) and (max-width: 1023px)` media query.
-
-More on screens, in the [Tailwind CSS docs](https://tailwindcss.com/docs/responsive-design).
 
 ### Plugins
 
