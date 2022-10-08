@@ -116,6 +116,7 @@
           </ul>
         </li>
       </ul>
+      <div class="h-10 w-56 fixed bottom-0 bg-gradient-to-b from-transparent to-slate-50"></div>
     </nav>
   </div>
 </template>
