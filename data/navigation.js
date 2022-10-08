@@ -23,7 +23,7 @@ export default [
         path: '/docs/compatibility'
       },
       {
-        title: 'CLI Tool',
+        title: 'CLI',
         path: '/docs/cli'
       },
     ]
@@ -36,57 +36,12 @@ export default [
         path: '/docs/environments'
       },
       {
-        title: 'Tailwind CSS',
+        title: 'Utility-first CSS',
         path: '/docs/tailwindcss'
       },
       {
         title: 'Build Process',
         path: '/docs/build-process'
-      },
-    ]
-  },
-  {
-    name: 'Development',
-    items: [
-      {
-        title: 'Layouts',
-        path: '/docs/layouts'
-      },
-      {
-        title: 'Templates',
-        path: '/docs/templates'
-      },
-      {
-        title: 'Components',
-        path: '/docs/components'
-      },
-      {
-        title: 'Tags',
-        path: '/docs/tags'
-      },
-      {
-        title: 'Assets',
-        path: '/docs/assets'
-      },
-      {
-        title: 'Events',
-        path: '/docs/events'
-      },
-      {
-        title: 'Functions',
-        path: '/docs/functions'
-      },
-      {
-        title: 'Markdown',
-        path: '/docs/markdown'
-      },
-      {
-        title: 'Plaintext',
-        path: '/docs/plaintext'
-      },
-      {
-        title: 'API',
-        path: '/docs/api'
       },
     ]
   },
@@ -124,6 +79,51 @@ export default [
       {
         title: 'Build Errors',
         path: '/docs/configuration/build-errors'
+      },
+    ]
+  },
+  {
+    name: 'Development',
+    items: [
+      {
+        title: 'Layouts',
+        path: '/docs/layouts'
+      },
+      {
+        title: 'Templates',
+        path: '/docs/templates'
+      },
+      {
+        title: 'Components',
+        path: '/docs/components'
+      },
+      {
+        title: 'Custom Tags',
+        path: '/docs/tags'
+      },
+      {
+        title: 'Assets',
+        path: '/docs/assets'
+      },
+      {
+        title: 'Events',
+        path: '/docs/events'
+      },
+      {
+        title: 'Functions',
+        path: '/docs/functions'
+      },
+      {
+        title: 'Markdown',
+        path: '/docs/markdown'
+      },
+      {
+        title: 'Plaintext',
+        path: '/docs/plaintext'
+      },
+      {
+        title: 'API',
+        path: '/docs/api'
       },
     ]
   },

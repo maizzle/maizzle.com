@@ -1,9 +1,9 @@
 ---
-title: "Tags"
+title: "Custom Tags"
 description: "Special tags for templating logic that you can use in Maizzle"
 ---
 
-# Tags
+# Custom Tags
 
 Maizzle includes some special tags designed to help you with templating logic.
 
