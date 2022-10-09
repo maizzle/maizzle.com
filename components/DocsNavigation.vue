@@ -109,7 +109,7 @@
               <nuxt-link
                 :to="item.path"
                 class="block leading-5 pl-2 text-sm text-slate-500 hover:text-slate-900"
-                :class="{ 'text-indigo-700 hover:text-indigo-700 font-medium': $route.path.startsWith(item.path) }"
+                :class="{ 'text-indigo-700 hover:text-indigo-700 font-medium': $route.path.endsWith(item.path) }"
                 v-text="item.title"
               />
             </li>
