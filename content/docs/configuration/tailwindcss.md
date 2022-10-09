@@ -9,7 +9,7 @@ Options for Tailwind CSS in Maizzle, and how `tailwind.config.js` is configured.
 
 ## Build configuration
 
-You may define Tailwind CSS paths in your Environment config.
+Tailwind CSS paths are configured with the `build.tailwind` key in your config:
 
 <code-sample title="config.js">
 
@@ -33,7 +33,7 @@ Default: `src/css/tailwind.css`
 
 Path to your main CSS file, that will be compiled with Tailwind CSS.
 
-This file is optional: Maizzle will compile Tailwind CSS with `@tailwind components; @tailwind utilities;` if the file cannot be found.
+This file is optional: if it doesn't exist Maizzle will compile Tailwind CSS with the `@tailwind components; @tailwind utilities;` directives.
 
 ### config
 
@@ -41,13 +41,13 @@ Default: `tailwind.config.js`
 
 Path to the Tailwind CSS config file to use.
 
-You can use this to specify a custom Tailwind config file for each build scenario.
+You can use this to specify a custom Tailwind config file for each Environment.
 
-For example, you might want to use a separate Tailwind config, where you:
+For example, you could have multiple Tailwind config files, where you:
 
-- define fewer theming options (faster CSS compilation)
+- keep a certain project's design system
 - disable `!important` (like in ⚡4email templates)
-- use different Tailwind plugins
+- use different Tailwind CSS plugins
 
 <alert>If the `config` key is missing, Maizzle will try to load `tailwind.config.js` from your project root. If that file is also missing, Tailwind CSS will be compiled using its default settings (which are not email-optimized).</alert>
 
@@ -76,13 +76,11 @@ Because Tailwind CSS is compiled only once, _before_ any Templates are processed
 
 Use the `compiled` key if you already have a CSS string that you want to use instead of compiling Tailwind CSS.
 
-This will skip Tailwind CSS compilation.
+This will skip Tailwind CSS compilation and no utilities will be generated.
 
 ## tailwind.config.js
 
-Maizzle comes with an email-tailored `tailwind.config.js` that changes a few things for better email client compatibility.
-
-These are the differences from the original Tailwind config.
+Maizzle comes with an email-tailored `tailwind.config.js`, customized for optimal email client compatibility.
 
 ### Content
 
@@ -100,9 +98,10 @@ You may configure additional content sources by adding a `content` key to your `
   ```js
   module.exports = {
     content: [
+      './some/other/path/**.{html,js}',
+      // Need to add these two back:
       './src/components/**.html',
       './src/layouts/**.html',
-      './some/other/path/**.{html,js}',
     ],
   }
   ```
@@ -120,7 +119,7 @@ HTML emails still need to use inline CSS, most notably for these reasons:
 - Some email clients don't support embedded CSS (i.e. in `<style>`)
 - Embedded styles are usually lost when an email is forwarded
 
-So because we need to write CSS inline, Tailwind's `important` option is set to `true` in Maizzle - this way responsive utilities can actually override the inlined CSS.
+So because we need to write inline CSS, Tailwind's `important` option is set to `true` in Maizzle - this way responsive utilities can actually override the inlined CSS.
 
 <alert>This applies only to `<head>` CSS, inlined CSS declarations will not contain `!important`</alert>
 
