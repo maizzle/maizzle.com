@@ -17,7 +17,7 @@ You may define the path where your Components are located:
   module.exports = {
     build: {
       components: {
-        root: 'src/components'
+        root: './src/components'
       }
     }
   }

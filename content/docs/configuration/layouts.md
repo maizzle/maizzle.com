@@ -17,7 +17,7 @@ You may define the path where your Layouts are located:
   module.exports = {
     build: {
       layouts: {
-        root: 'src/layouts'
+        root: './src/layouts'
       }
     }
   }

@@ -87,9 +87,9 @@ Maizzle comes with an email-tailored `tailwind.config.js`, customized for optima
 These are the default Tailwind CSS [content sources](https://tailwindcss.com/docs/content-configuration) that Maizzle uses:
 
 - the content of the template file currently being processed
-- `./src/components/**.html`
-- `./src/layouts/**.html`
-- all [template sources](/docs/configuration/templates)
+- your [Components root](/docs/configuration/components#root) or `./src/components/**/*.html`
+- your [Layouts root](/docs/configuration/layouts#root) or `./src/layouts/**/*.html`
+- all [Template sources](/docs/configuration/templates)
 
 You may configure additional content sources by adding a `content` key to your `tailwind.config.js`:
 
