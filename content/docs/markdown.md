@@ -92,6 +92,29 @@ Result:
 <h1>You'll see contents of README.md above this heading</h1>
 ```
 
+If you're including a file that will be used as an inline element and don't want the enclosing `<p>` tags, use the `inline` attribute:
+
+<code-sample title="src/templates/example.html">
+
+  ```xml
+  <p class="example">
+    <markdown src="./example.md" inline>
+      _Imported_
+    </markdown>
+  </p>
+  ```
+
+</code-sample>
+
+Result:
+
+```xml
+<p class="example">
+  <!-- Contents of ./example.md rendered to HTML -->
+  <em>Imported</em>
+</p>
+```
+
 ## GFM
 
 [GitHub Flavored Markdown](https://github.github.com/gfm/) is supported and the [Tables](https://help.github.com/articles/organizing-information-with-tables/) and [Strikethrough](https://help.github.com/articles/basic-writing-and-formatting-syntax/#styling-text) extensions are enabled by default.
