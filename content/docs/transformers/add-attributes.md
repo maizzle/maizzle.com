@@ -52,6 +52,8 @@ let attributes = {
 }
 ```
 
+<alert>Attributes will be added only if they're not already present on the element.</alert>
+
 ### Disabling
 
 You may turn this off by setting `extraAttributes` to `false` in your config:
@@ -65,8 +67,6 @@ You may turn this off by setting `extraAttributes` to `false` in your config:
   ```
 
 </code-sample>
-
-<alert>Attributes will be added only if they're not already present on the element.</alert>
 
 ## Selectors
 
@@ -118,13 +118,15 @@ Add multiple attributes to multiple elements in one go:
 
 ## Tailwind CSS
 
-Any Tailwind CSS classes that you add with this Transformer need to be added to your `content` key. Simply add the config file to the `content` array:
+Any Tailwind CSS classes that you add with this Transformer need to be added to your `content` key, otherwise they will not be generated.
+
+To do this, simply add the path to your `config.js` file to the `content` array:
 
 <code-sample title="tailwind.config.js">
 
   ```js
   module.exports = {
-    content: ['config.js'],
+    content: ['./config.js'],
   }
   ```
 
@@ -136,8 +138,13 @@ Any Tailwind CSS classes that you add with this Transformer need to be added to 
 
   ```js
   const {applyExtraAttributes} = require('@maizzle/framework')
+  const options = {
+    div: {
+      role: 'article'
+    }
+  }
 
-  const html = await applyExtraAttributes('<div></div>', {div: {role: 'article'}})
+  const html = await applyExtraAttributes('<div></div>', options)
   ```
 
 </code-sample>
