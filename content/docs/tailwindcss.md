@@ -427,8 +427,11 @@ It adds custom variants that you may use to style elements only for certain emai
 
 Use the `gmail` variant to style elements in Gmail's webmail:
 
+
 ```html
-<div class="gmail:hidden">...</div>
+<body class="body">
+  <div class="gmail:hidden">...</div>
+</body>
 ```
 
 The compiled HTML will include this CSS rule:
@@ -439,12 +442,14 @@ u + .body .gmail\:hidden {
 }
 ```
 
-### Gmail (Android)
+<alert>As you can see, this also requires that you add a `body` class on your `<body>` tag.</alert>
 
-Gmail on Android requires a different selector, so there's a separate variant provided:
+Gmail on older versions of Android requires a different selector, so there's a separate variant provided:
 
 ```html
-<div class="gmail-android:hidden">...</div>
+<body class="body">
+  <div class="gmail-android:hidden">...</div>
+</body>
 ```
 
 Result:
