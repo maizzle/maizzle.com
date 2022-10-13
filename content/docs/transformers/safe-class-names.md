@@ -25,8 +25,8 @@ This is the default replacement strategy:
 | ]         | (removed)   |
 | (         | (removed)   |
 | )         | (removed)   |
-| {         | (removed)   |
-| }         | (removed)   |
+| {         | {           |
+| }         | }           |
 | !         | important-  |
 | &         | and-        |
 | <         | lt-         |
