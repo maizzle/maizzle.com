@@ -27,7 +27,7 @@ Enable it in your Environment config:
 
 ## Customization
 
-You may configure the Transformer by passing an options object to `removeUnusedCSS`.
+You may configure this Transformer through the `removeUnusedCSS` key in your `config.js`.
 
 ### whitelist
 
@@ -45,13 +45,13 @@ Array of classes or id's that you don't want removed. You may use any [matcher](
 
 </code-sample>
 
-<alert>Resetting email client styles is often done through CSS selectors that do not exist in your email's code - <code>whitelist</code> ensures these selectors are preserved.</alert>
+<alert>Resetting email client styles is often done through CSS selectors that do not exist in your email's code - `whitelist` ensures these selectors are preserved.</alert>
 
 ### backend
 
-If you use computed class names, like for example `class="{{ computedRed }} text-sm"`, the library will normally treat `{{` and `}}` as class names.
+If you use computed class names, like for example `class="{{ computedRed }} text-sm"`, the library will normally treat `{{` and `}}` as class names and will remove them.
 
-To prevent this from happening, set `backend` to an array of objects that define the start and end delimiters:
+To prevent this from happening, use the `backend` option to define the delimiters:
 
 <code-sample title="config.js">
 
@@ -59,14 +59,15 @@ To prevent this from happening, set `backend` to an array of objects that define
   module.exports = {
     removeUnusedCSS: {
       backend: [
-        { heads: "{{", tails: "}}" },
-        { heads: "{%", tails: "%}" }
+        { heads: '[[', tails: ']]' },
       ]
     }
   }
   ```
 
 </code-sample>
+
+By default, Maizzle preserves `{{ }}` and `{% %}`, so there's no need to add them.
 
 ### removeHTMLComments
 
