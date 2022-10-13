@@ -2,7 +2,7 @@ export default ([
   {
     title: 'Tailwind CSS',
     path: '/docs/tailwindcss',
-    description: 'Quickly style HTML emails with CSS utility classes. You won\'t need to write inline CSS for most of the time.'
+    description: 'Quickly style HTML emails with CSS utility classes. Move faster by avoiding context switching and never leaving your HTML.'
   },
   {
     title: 'Starters',
@@ -12,7 +12,7 @@ export default ([
   {
     title: 'BYOHTML™',
     path: '/docs/introduction#byohtml',
-    description: 'No need to learn custom tags or attributes. Write your own HTML structure, then style it with Tailwind CSS.'
+    description: 'Write your own HTML markup and style it with Tailwind CSS. You don\'t have to learn custom tags or attributes.'
   },
   {
     title: 'Build Environments',
@@ -22,17 +22,17 @@ export default ([
   {
     title: 'Transformers',
     path: '/docs/transformers',
-    description: 'HTML email-specific optimizations, customizable from your environment config or for each template in particular.'
+    description: 'HTML email-specific optimizations, customizable globally or for each template through Front Matter.'
   },
   {
     title: 'Events',
     path: '/docs/events',
-    description: 'Run your own JavaScript functions at key steps in the build process, for even greater customization and control.'
+    description: 'Run your own JavaScript code at key steps in the build process, for even greater customization and control.'
   },
   {
-    title: 'Build System',
-    path: '/docs/introduction#build-system',
-    description: 'Simple and fast Node.js build system that takes care of all the transformations necessary for HTML emails.'
+    title: 'Browsersync',
+    path: '/docs/configuration/browsersync',
+    description: 'Start local development and see a live preview of your emails in a browser, that updates every time you make a change.',
   },
   {
     title: 'Configured in JavaScript',
@@ -52,7 +52,7 @@ export default ([
   {
     title: 'CLI Tool',
     path: '/docs/cli',
-    description: 'Scaffold a project from any Maizzle Starter, develop locally, then build your emails for production.'
+    description: 'Quickly scaffold a new project from any Maizzle Starter, develop locally, and then build your emails for production.'
   },
   {
     title: 'APIs',
@@ -77,27 +77,27 @@ export default ([
   {
     title: 'Prettify',
     path: '/docs/transformers/prettify',
-    description: 'Need to send an HTML email to a human? Maizzle can pretty print the code for you, so it\'s more readable.'
+    description: 'Need to send an HTML email to a human for review? Maizzle can pretty-print the markup, making it more readable.'
   },
   {
     title: 'Uglify Classes',
     path: '/docs/transformers/remove-unused-css#uglifyclassnames',
-    description: 'Rewrite CSS class names to be as short as possible, so your production emails are even lighter!'
+    description: 'Rewrite CSS class names to be as short as possible, so your production emails are even&nbsp;lighter!'
   },
   {
-    title: 'Image CDN friendly',
+    title: 'CDN friendly',
     path: '/docs/transformers/base-url',
-    description: 'Already using a <abbr title="Content Delivery Network">CDN</abbr> for images? Define a base image URL and Maizzle will prepend it to all image sources.'
+    description: 'Already using a <abbr title="Content Delivery Network">CDN</abbr>? Define a base path or URL and Maizzle will prepend it to your media sources.'
   },
   {
     title: 'URL Parameters',
     path: '/docs/transformers/url-parameters',
-    description: 'Use Front Matter to specify as many URL parameters as you need - they will all be appended to your links.'
+    description: 'Use Front Matter to add URL parameters to links in your templates - they will all be appended automatically.'
   },
   {
     title: 'Custom Fonts',
     path: '/docs/examples/google-fonts',
-    description: 'Easily pull in Google Fonts or any other custom webfonts, then use them through Tailwind utility classes.'
+    description: 'Easily pull in Google Fonts or any other custom web fonts, then use them through Tailwind CSS utility classes.'
   },
   {
     title: 'Plaintext Versions',
@@ -105,9 +105,9 @@ export default ([
     description: 'Optionally generate optimized plaintext versions from your HTML emails. Or have your <abbr title="Email Service Provider">ESP</abbr> do it. Your call.'
   },
   {
-    title: 'Browsersync',
-    path: '/docs/configuration/browsersync',
-    description: 'Develop emails locally and have the browser automatically refresh for you when you make changes.'
+    title: 'Build System',
+    path: '/docs/introduction#build-system',
+    description: 'Simple and fast Node.js build system that takes care of all the transformations necessary for HTML emails.'
   },
   {
     title: 'Localhost Tunneling',
