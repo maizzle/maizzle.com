@@ -186,6 +186,8 @@ You may pass an array of tag names that it should remove the `background-color` 
   }
   ```
 
+</code-sample>
+
 In the example above, `background-color` will be removed only from `<td>` elements.
 
 <alert>You most likely won't need to use this. CSS background-color is well-supported in HTML email.</alert>
