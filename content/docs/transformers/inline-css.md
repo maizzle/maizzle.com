@@ -93,7 +93,7 @@ Works together with `styleToAttribute`.
   ```js
   module.exports = {
     inlineCSS: {
-      applyWidthAttributes: ['TABLE', 'TD', 'TH']
+      applyWidthAttributes: ['table', 'td', 'th']
     }
   }
   ```
@@ -113,7 +113,7 @@ Works together with `styleToAttribute`.
   ```js
   module.exports = {
     inlineCSS: {
-      applyHeightAttributes: ['TABLE', 'TD', 'TH']
+      applyHeightAttributes: ['table', 'td', 'th']
     }
   }
   ```
@@ -143,16 +143,20 @@ It's set to empty arrays by default, so that no elements are affected:
 
 You can add HTML elements like this:
 
-```js
-module.exports = {
-  inlineCSS: {
-    keepOnlyAttributeSizes: {
-      width: ['TABLE', 'TD', 'TH', 'IMG', 'VIDEO'],
-      height: ['TABLE', 'TD', 'TH', 'IMG', 'VIDEO']
+<code-sample title="config.js">
+
+  ```js
+  module.exports = {
+    inlineCSS: {
+      keepOnlyAttributeSizes: {
+        width: ['table', 'td', 'th', 'img', 'video'],
+        height: ['table', 'td', 'th', 'img', 'video']
+      }
     }
   }
-}
-```
+  ```
+
+</code-sample>
 
 <alert>This will only work for elements defined in [styleToAttribute](#style-to-attribute)</alert>
 
