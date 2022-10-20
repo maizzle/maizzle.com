@@ -1,5 +1,5 @@
 <template>
-  <div class="backdrop-blur-sm">
+  <div>
     <div class="terminal-frame">
       <div class="flex gap-1.5">
         <div class="w-2.5 h-2.5 rounded-full bg-slate-200"></div>

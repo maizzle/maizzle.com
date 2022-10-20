@@ -1,5 +1,5 @@
 <template>
-  <div class="backdrop-blur-sm">
+  <div>
     <div class="code-frame">
       <span>{{ title }}</span>
       <button

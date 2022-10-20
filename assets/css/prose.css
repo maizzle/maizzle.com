@@ -49,7 +49,7 @@ abbr,
 
 .prose .shiki {
   @apply mb-8 pl-0;
-  @apply border !bg-white/5;
+  @apply border !bg-transparent backdrop-blur-[3px];
   @apply leading-6 font-mono;
   @apply selection:bg-blue-500 selection:text-white;
 }
@@ -71,7 +71,7 @@ abbr,
 
 .prose .code-frame {
   @apply flex justify-between items-center;
-  @apply border rounded-md rounded-b-none;
+  @apply border rounded-md rounded-b-none backdrop-blur-[3px];
   @apply px-6;
   @apply text-sm;
 
@@ -83,14 +83,14 @@ abbr,
 .prose .terminal-frame {
   @apply flex justify-between items-center;
   @apply px-6 py-3;
-  @apply border rounded-t-md;
+  @apply border rounded-t-md backdrop-blur-[3px];
   @apply text-sm;
 }
 
 .prose .code-frame + div .shiki,
 .prose .terminal-frame + div .shiki {
   @apply mt-0 py-4;
-  @apply border-t-0 rounded-t-none;
+  @apply border-t-0 rounded-t-none backdrop-blur-[3px];
 }
 
 .prose code {
