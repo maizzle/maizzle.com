@@ -2,7 +2,7 @@
   <div class="sticky top-28">
     <nav
       v-if="toc.length > 0"
-      class="max-w-[16rem] max-h-[calc(100vh-7rem)] overflow-y-auto pb-8"
+      class="custom-scrollbar max-w-[16rem] max-h-[calc(100vh-7rem)] overflow-y-auto pb-8  [scrollbar-gutter:stable]"
     >
       <div class="sticky top-0">
         <h4 class="text-xs uppercase text-slate-700 font-semibold bg-white">On this page:</h4>

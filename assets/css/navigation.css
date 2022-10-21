@@ -1,3 +1,17 @@
 .navigation .nuxt-link-exact-active {
   @apply text-slate-800 font-semibold pointer-events-none;
 }
+
+.custom-scrollbar::-webkit-scrollbar {
+  @apply w-4 p-0.5;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  @apply rounded-lg bg-slate-100;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  @apply rounded-lg ;
+  @apply bg-slate-300 hover:bg-slate-400;
+  @apply border-[3px] border-solid border-slate-100;
+}
