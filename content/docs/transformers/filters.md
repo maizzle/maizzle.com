@@ -63,6 +63,20 @@ Of course, this is just a dumb example - you could imagine more complex scenario
 - create various content filters
 - ...
 
+## Disabling
+
+You may disable all filters by setting the option to `false`:
+
+<code-sample title="config.js">
+
+  ```js
+  module.exports = {
+    filters: false
+  }
+  ```
+
+</code-sample>
+
 ## Default filters
 
 The following filters are included by default.
