@@ -66,7 +66,8 @@ export default async () => {
     },
     head: {
       htmlAttrs: {
-        lang: 'en'
+        lang: 'en',
+        style: 'scrollbar-gutter: stable'
       },
       title: 'Maizzle - Quickly build HTML emails with utility-first CSS',
       meta: [
