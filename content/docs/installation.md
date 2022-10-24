@@ -97,13 +97,13 @@ Maizzle is listed as a dependency in your project's `package.json` file:
 
 </code-sample>
 
-By default, the latest version will be installed. To use a specific release version, first change the value to the desired version:
+By default, the latest version will be installed. To use a specific version, first change the value to the desired release number:
 
 <code-sample title="package.json">
 
   ```json
   "dependencies": {
-    "@maizzle/framework": "v4.0.0"
+    "@maizzle/framework": "4.0.0"
   }
   ```
 
@@ -111,7 +111,7 @@ By default, the latest version will be installed. To use a specific release vers
 
 Then, re-install dependencies by running `npm install` in your project's root folder.
 
-<alert>Latest Maizzle release number is <latest-release as-link="true" /></alert>
+<alert>Latest Maizzle release is <latest-release as-link="true" /></alert>
 
 ### Clean update
 
