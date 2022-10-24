@@ -4,27 +4,12 @@
 }
 
 .checkbox:focus + label:before {
-  @apply border-2 border-teal-300 outline-none focus-visible:ring-2 focus-visible:ring-teal-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+  @apply border-2 border-teal-300 outline-none;
+  @apply focus-visible:ring-2 focus-visible:ring-teal-300 focus-visible:ring-offset-2 focus-visible:ring-offset-white;
 }
 
 .checkbox + label:before {
-    @apply w-5 h-5 mr-2 inline-flex items-center justify-center align-baseline border bg-slate-800 border-slate-600 rounded-md;
-    content: ".";
-    text-indent: -9999px;
+  @apply w-5 h-5 mr-2 inline-flex items-center justify-center align-baseline border bg-slate-800 border-slate-600 rounded-md;
+  content: ".";
+  text-indent: -9999px;
 }
-
-.masonry-with-columns {
-  columns: 6 200px;
-  column-gap: 1rem;
-
-}
-.masonry-with-columns > div {
-    width: 150px;
-    margin: 0 1rem 1rem 0;
-    display: inline-block;
-    width: 100%;
-    text-align: center;
-    font-family: system-ui;
-    font-weight: 900;
-    font-size: 2rem;
-  }
