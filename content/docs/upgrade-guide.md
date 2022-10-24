@@ -15,7 +15,7 @@ Migrating to Maizzle v4.0 should take less than 10 minutes for most users.
 
 <strong class="text-indigo-500">BREAKING CHANGE</strong>
 
-Maizzle v4.0 requires Node.js v14.0.0 or higher.
+Maizzle 4 requires Node.js v14.0.0 or higher.
 
 Check your current Node.js version:
 
@@ -47,7 +47,7 @@ Install the latest version of Maizzle:
 
 </terminal>
 
-## Update tailwind.config.js
+## Update `tailwind.config.js`
 
 Some configuration keys are deprecated in Tailwind CSS v3.0, and others have changed.
 
@@ -104,7 +104,7 @@ Replace your `corePlugins` key with the following:
 
 </code-sample>
 
-## Update config.js
+## Update `config.js`
 
 Some Maizzle config keys have been deprecated, and some have changed.
 

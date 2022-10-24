@@ -4,7 +4,7 @@
   @apply relative inline-flex font-bold;
 
   code {
-    @apply leading-8 pl-1;
+    @apply bg-transparent font-bold text-slate-800;
   }
 }
 
