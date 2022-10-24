@@ -7,7 +7,5 @@ export default () => {
    */
   const stickyheader = new stickyHeader('.header-transparent')
 
-  console.log('header')
-
   stickyheader.initialize()
 }
