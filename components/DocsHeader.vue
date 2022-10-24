@@ -55,21 +55,12 @@
       <div class="col-span-8 lg:col-span-9 xl:col-span-8 grid grid-cols-12 h-full bg-white border-b border-slate-100">
         <div class="grid col-span-12 xl:col-span-9 2xl:col-span-7 xl:py-4 px-8 items-center">
           <div class="hidden sm:block max-w-[75ch] whitespace-nowrap overflow-auto">
-            <nuxt-link
-              to="/docs/upgrade-guide"
-              role="banner"
-              class="hidden sm:table lg:block px-4 py-2 text-slate-600 text-sm group"
+            <a
+              href="https://github.com/maizzle/framework/releases"
+              class="hidden sm:table px-3 py-1 rounded-full text-indigo-500 hover:text-indigo-600 text-sm group bg-indigo-50 hover:bg-indigo-100"
             >
-              <div class="flex gap-2 items-center">
-                <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                </svg>
-                <span>
-                  Maizzle 4: now with Tailwind CSS 3, Filters,
-                  all-new <code class="border shadow px-1.5 py-0.5 rounded-full text-xs">baseURL</code> and lots of improvements!
-                </span>
-              </div>
-            </nuxt-link>
+              🚀 Maizzle v4.3: now with Tailwind CSS v3.2 support
+            </a>
           </div>
         </div>
         <div class="hidden xl:grid col-span-3 2xl:col-span-5 items-end h-full">
