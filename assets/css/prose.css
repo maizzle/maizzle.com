@@ -133,5 +133,5 @@ abbr,
 }
 
 .prose .shiki code {
-  @apply bg-transparent;
+  @apply p-0 bg-transparent;
 }
