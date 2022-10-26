@@ -39,23 +39,19 @@ The `render()` method returns an object containing the compiled HTML and the [en
 
 `options` is an object with the following structure:
 
-<code-sample>
-
-  ```js
-  {
-    tailwind: {
-      config: {},
-      css: '',
-      compiled: '',
-    },
-    maizzle: {},
-    beforeRender() {},
-    afterRender() {},
-    afterTransformers() {},
-  }
-  ```
-
-</code-sample>
+```js
+{
+  tailwind: {
+    config: {},
+    css: '',
+    compiled: '',
+  },
+  maizzle: {},
+  beforeRender() {},
+  afterRender() {},
+  afterTransformers() {},
+}
+```
 
 <alert>`options` is not required: when ommited, Maizzle will use the defaults below.</alert>
 
