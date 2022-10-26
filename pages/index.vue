@@ -333,7 +333,7 @@
       id="testimonials"
       class="max-w-7xl pt-0 pb-20 md:pb-44 px-6 mx-auto relative"
     >
-      <div class="w-full p-12 relative grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-12 rounded-xl bg-slate-900 z-0">
+      <div class="w-full p-6 sm:p-12 relative grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-12 rounded-xl bg-slate-900 z-0">
         <blockquote
           v-for="testimonial in testimonials"
           :key="testimonial.user.name"
