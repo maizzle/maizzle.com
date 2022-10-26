@@ -2,7 +2,7 @@
   <div class="flex-1 relative -mt-[88px]">
     <!-- Masthead -->
     <section class="max-w-7xl pt-16 pb-20 md:pt-[88px] md:pb-44 px-6 mx-auto relative overflow-hidden">
-      <pattern-masthead class="absolute top-0 right-10 z-0 text-slate-300" />
+      <pattern-masthead class="absolute scale-[1.2] sm:scale-100 top-32 sm:top-0 right-20 sm:right-10 z-0 text-slate-300" />
       <div class="mt-[88px] relative z-10">
 
         <h1 class="mb-9 mx-auto text-4xl lg:text-5xl text-center font-bold text-slate-800">
