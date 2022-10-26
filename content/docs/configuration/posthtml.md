@@ -5,11 +5,11 @@ description: "Configuring PostHTML options in Maizzle"
 
 # PostHTML configuration
 
-Maizzle uses PostHTML as its templating engine, and you can customize options or register plugins that can further transform your HTML emails.
+Maizzle uses PostHTML for templating and transformations, and you can configure it or even register plugins that can further transform your HTML emails.
 
 ## Options
 
-To configure PostHTML, you must add an `options` object under `build.posthtml` in your environment config.
+PostHTML is configured under `build.posthtml.options` in your `config.js`.
 
 ### directives
 
