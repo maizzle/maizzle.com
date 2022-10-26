@@ -111,7 +111,9 @@
         </button>
       </div>
       <div class="col-span-6 mx-auto flex gap-4 items-end justify-center">
-        <site-logo class="w-32" />
+        <nuxt-link to="/">
+          <site-logo class="w-32" />
+        </nuxt-link>
         <div class="relative hidden sm:inline-block">
           <div>
             <button
@@ -174,7 +176,9 @@
     >
       <div class="p-4 space-y-6">
         <div class="flex gap-2 justify-between items-center">
-          <insignia-svg class="w-10" />
+          <nuxt-link to="/">
+            <insignia-svg class="w-10" />
+          </nuxt-link>
           <button
             @click="closeMobileMenu"
           >
