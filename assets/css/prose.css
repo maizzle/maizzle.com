@@ -1,10 +1,11 @@
 .prose h2,
 .prose h3,
 .prose h4 {
-  @apply relative inline-flex font-bold;
+  @apply relative inline-flex items-baseline font-bold;
 
   code {
     @apply bg-transparent font-bold text-slate-800;
+    @apply before:[content:'`'] after:[content:'`'];
   }
 }
 
@@ -100,7 +101,7 @@ abbr,
 
 .prose code .line::before {
   @apply sticky left-0;
-  @apply inline-block w-4 pl-6 pr-6;
+  @apply inline-block w-4 pl-6 pr-7;
   @apply text-right text-slate-300 bg-white;
   content: counter(step);
   counter-increment: step;
