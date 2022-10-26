@@ -90,7 +90,8 @@
             Documentation
           </nuxt-link>
           <a
-            hre="https://mailviews.com"
+            href="https://mailviews.com"
+            target="_blank"
             role="menuitem"
             class="mobile-menu-item text-gray-700 hover:bg-slate-50 block px-4 py-2 text-sm"
             tabindex="-1"
