@@ -283,6 +283,18 @@ With Tailwind's `@apply`, that means you can do something like this:
 <div style="border: 1px solid #3f83f8;">Border example</div>
 ```
 
+Alternatively, you may use an arbitrary property:
+
+```xml
+<div class="[border:1px_solid_#3f83f8]">Border example</div>
+```
+
+This might look like inline styles with extra steps, but it's still Tailwind so you can do stuff that you can't with inline CSS, like pseudos or media queries:
+
+```xml
+<div class="hover:[border:1px_solid_#3f83f8]">Hover border example</div>
+```
+
 ## Plugins
 
 To use a Tailwind CSS plugin, simply `npm install` it and follow its instructions to add it to `plugins: []` in your `tailwind.config.js`.
