@@ -100,8 +100,8 @@ abbr,
 }
 
 .prose code .line::before {
-  @apply sticky left-0;
-  @apply inline-block w-4 pl-6 pr-7;
+  @apply sticky left-4;
+  @apply inline-block w-4;
   @apply text-right text-slate-300 bg-white;
   content: counter(step);
   counter-increment: step;
@@ -135,4 +135,8 @@ abbr,
 
 .prose .shiki code {
   @apply p-0 bg-transparent;
+}
+
+.prose .shiki code span {
+  @apply relative left-4;
 }
