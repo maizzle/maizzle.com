@@ -150,11 +150,8 @@ The `baseURL` Transformer can be customized to target only the tags/attributes t
   ```js
   module.exports = {
     baseURL: {
-      tags: {
-        img: {
-          src: 'https://example.com/images/',
-        },
-      },
+      url: 'https://example.com/images/',
+      tags: ['img'],
     },
   }
   ```
