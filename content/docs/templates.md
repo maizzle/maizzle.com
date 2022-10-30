@@ -211,7 +211,9 @@ Here's a very basic Template example:
   <block name="template">
     <table>
       <tr>
-        <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+        <td>
+          <p>...</p>
+        </td>
       </tr>
     </table>
   </block>
@@ -321,23 +323,6 @@ The compiled email will render `{{ }}` without the `@`.
 
 </code-sample>
 
-#### Ignore expressions using the &lt;raw&gt; tag
-
-This is useful if you have a block with multiple lines containing `{{ }}` and want to ignore them all in one go:
-
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <raw>
-    Nostrud laboris sunt Lorem {{ var1 }} cupidatat fugiat tempor ad tempor anim.
-    Veniam non sit {{ var2 }} ipsum ad qui.
-  </raw>
-  ```
-
-</code-sample>
-
-The `<raw>` tag will be removed in the final output, but the curly braces will be left untouched.
-
 #### Ignoring expressions inside Front Matter
 
 You may use `@{{ }}` to prevent expressions in Front Matter from being evaluated.
@@ -364,6 +349,43 @@ Result:
 
   ```
   Weekly newsletter no. {{ edition_count }}
+  ```
+
+</code-sample>
+
+If you're outputting the Front Matter variable in a custom tag like `<if>` or `<switch>`, you'll need to `@`-ignore it there as well.
+
+<code-sample title="src/layouts/main.html">
+
+  ```diff
+  <if condition="page.title">
+-    <title>{{ page.title }}</title>
++    <title>@{{ page.title }}</title>
+  </if>
+  ```
+
+</code-sample>
+
+#### Ignore expressions using the &lt;raw&gt; tag
+
+This is useful if you have a block with multiple lines containing `{{ }}` and want to ignore them all in one go:
+
+<code-sample title="src/templates/example.html">
+
+  ```xml
+  <raw>
+    <p>The quick brown {{ animals[0] }} jumps over the lazy {{ animals[1] }}.</p>
+  </raw>
+  ```
+
+</code-sample>
+
+`<raw>` will be removed in the final output, but the curly braces will be left untouched:
+
+<code-sample title="build_production/example.html">
+
+  ```
+  <p>The quick brown {{ animals[0] }} jumps over the lazy {{ animals[1] }}.</p>
   ```
 
 </code-sample>
