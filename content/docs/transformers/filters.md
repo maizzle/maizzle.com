@@ -88,8 +88,8 @@ Append text to the end of the string.
 <code-sample title="example.html">
 
   ```xml
-  <div append=" bar">foo</div>
-  <!-- <div>foo bar</div> -->
+  <p append=" bar">foo</p>
+  <!-- <p>foo bar</p> -->
   ```
 
 </code-sample>
@@ -101,8 +101,8 @@ Prepend text to the beginning of the string.
 <code-sample title="example.html">
 
   ```xml
-  <div prepend="foo ">bar</div>
-  <!-- <div>foo bar</div> -->
+  <p prepend="foo ">bar</p>
+  <!-- <p>foo bar</p> -->
   ```
 
 </code-sample>
@@ -114,8 +114,8 @@ Uppercase the string.
 <code-sample title="example.html">
 
   ```xml
-  <div uppercase>foo</div>
-  <!-- <div>FOO</div> -->
+  <p uppercase>foo</p>
+  <!-- <p>FOO</p> -->
   ```
 
 </code-sample>
@@ -127,8 +127,8 @@ Lowercase the string.
 <code-sample title="example.html">
 
   ```xml
-  <div lowercase>FOO</div>
-  <!-- <div>foo</div> -->
+  <p lowercase>FOO</p>
+  <!-- <p>foo</p> -->
   ```
 
 </code-sample>
@@ -140,8 +140,8 @@ Uppercase the first letter of the string.
 <code-sample title="example.html">
 
   ```xml
-  <div capitalize>foo</div>
-  <!-- <div>Foo</div> -->
+  <p capitalize>foo</p>
+  <!-- <p>Foo</p> -->
   ```
 
 </code-sample>
@@ -153,8 +153,8 @@ Round up to the nearest integer.
 <code-sample title="example.html">
 
   ```xml
-  <div ceil>1.2</div>
-  <!-- <div>2</div> -->
+  <p ceil>1.2</p>
+  <!-- <p>2</p> -->
   ```
 
 </code-sample>
@@ -166,8 +166,8 @@ Round down to the nearest integer.
 <code-sample title="example.html">
 
   ```xml
-  <div ceil>1.2</div>
-  <!-- <div>1</div> -->
+  <p ceil>1.2</p>
+  <!-- <p>1</p> -->
   ```
 
 </code-sample>
@@ -179,8 +179,8 @@ Round to the nearest integer.
 <code-sample title="example.html">
 
   ```xml
-  <div round>1234.567</div>
-  <!-- <div>1235</div> -->
+  <p round>1234.567</p>
+  <!-- <p>1235</p> -->
   ```
 
 </code-sample>
@@ -192,8 +192,8 @@ Escapes a string by replacing characters with escape sequences (so that the stri
 <code-sample title="example.html">
 
   ```xml
-  <div escape>"&'<></div>
-  <!-- <div>&#34;&amp;&#39;&lt;&gt;</div> -->
+  <p escape>"&'<></p>
+  <!-- <p>&#34;&amp;&#39;&lt;&gt;</p> -->
   ```
 
 </code-sample>
@@ -205,8 +205,8 @@ Escapes a string without changing existing escaped entities.
 <code-sample title="example.html">
 
   ```xml
-  <div escape-once>1 &lt; 2 &amp; 3</div>
-  <!-- <div>1 &lt; 2 &amp; 3</div> -->
+  <p escape-once>1 &lt; 2 &amp; 3</p>
+  <!-- <p>1 &lt; 2 &amp; 3</p> -->
   ```
 
 </code-sample>
@@ -218,8 +218,8 @@ Remove leading whitespace from the string.
 <code-sample title="example.html">
 
   ```xml
-  <div lstrip> test </div>
-  <!-- <div>test </div> -->
+  <p lstrip> test </p>
+  <!-- <p>test </p> -->
   ```
 
 </code-sample>
@@ -231,8 +231,8 @@ Remove trailing whitespace from the string.
 <code-sample title="example.html">
 
   ```xml
-  <div rstrip> test </div>
-  <!-- <div> test</div> -->
+  <p rstrip> test </p>
+  <!-- <p> test</p> -->
   ```
 
 </code-sample>
@@ -244,8 +244,8 @@ Remove leading and trailing whitespace from the string.
 <code-sample title="example.html">
 
   ```xml
-  <div trim> test </div>
-  <!-- <div>test</div> -->
+  <p trim> test </p>
+  <!-- <p>test</p> -->
   ```
 
 </code-sample>
@@ -257,8 +257,8 @@ Subtracts one number from another.
 <code-sample title="example.html">
 
   ```xml
-  <div minus="2">3</div>
-  <!-- <div>1</div> -->
+  <p minus="2">3</p>
+  <!-- <p>1</p> -->
   ```
 
 </code-sample>
@@ -270,8 +270,8 @@ Adds one number to another.
 <code-sample title="example.html">
 
   ```xml
-  <div plus="2">3</div>
-  <!-- <div>5</div> -->
+  <p plus="2">3</p>
+  <!-- <p>5</p> -->
   ```
 
 </code-sample>
@@ -283,8 +283,8 @@ Alias: `times`
 <code-sample title="example.html">
 
   ```xml
-  <div multiply="2">1.2</div>
-  <!-- 2.4 -->
+  <p multiply="2">1.2</p>
+  <!-- <p>2.4</p> -->
   ```
 
 </code-sample>
@@ -297,7 +297,7 @@ Alias: `divide`
 
   ```xml
   <div divide-by="2">1.2</div>
-  <!-- 0.6 -->
+  <!-- <p>0.6</p> -->
   ```
 
 </code-sample>
@@ -309,8 +309,8 @@ Returns the remainder of one number divided by another.
 <code-sample title="example.html">
 
   ```xml
-  <div modulo="2">3</div>
-  <!-- 1 -->
+  <p modulo="2">3</p>
+  <!-- <p>1</p> -->
   ```
 
 </code-sample>
@@ -322,11 +322,11 @@ Insert an HTML line break (`<br />`) in front of each newline (`\n`) in a string
 <code-sample title="example.html">
 
   ```xml
-  <div newline-to-br>
+  <p newline-to-br>
     test
     test
-  </div>
-  <!-- <div><br>  test<br>  test<br></div> -->
+  </p>
+  <!-- <p><br>  test<br>  test<br></p> -->
   ```
 
 </code-sample>
@@ -338,11 +338,11 @@ Remove any newline characters (line breaks) from the string.
 <code-sample title="example.html">
 
   ```xml
-  <div strip_newlines>
+  <p strip_newlines>
     test
     test
-  </div>
-  <!-- <div>  test  test</div> -->
+  </p>
+  <!-- <p>  test  test</p> -->
   ```
 
 </code-sample>
@@ -354,8 +354,8 @@ Remove every occurrence of `text` from the string.
 <code-sample title="example.html">
 
   ```xml
-  <div remove="rain">I strained to see the train through the rain</div>
-  <!-- <div>I sted to see the t through the </div> -->
+  <p remove="rain">I strained to see the train through the rain</p>
+  <!-- <p>I sted to see the t through the </p> -->
   ```
 
 </code-sample>
@@ -367,8 +367,8 @@ Remove the first occurrence of `text` from the string.
 <code-sample title="example.html">
 
   ```xml
-  <div remove-first="rain">I strained to see the train through the rain</div>
-  <!-- <div>I sted to see the train through the rain</div> -->
+  <p remove-first="rain">I strained to see the train through the rain</p>
+  <!-- <p>I sted to see the train through the rain</p> -->
   ```
 
 </code-sample>
@@ -382,8 +382,8 @@ You must separate arguments with a pipe character (`|`).
 <code-sample title="example.html">
 
   ```xml
-  <div replace="1|test">test</div>
-  <div>1es1</div>
+  <p replace="1|test">test</p>
+  <!-- <p>1es1</p> -->
   ```
 
 </code-sample>
@@ -397,8 +397,8 @@ You must separate arguments with a pipe character (`|`).
 <code-sample title="example.html">
 
   ```xml
-  <div replace-first="t|b">test</div>
-  <div>best</div>
+  <p replace-first="t|b">test</p>
+  <!-- <p>best</p> -->
   ```
 
 </code-sample>
@@ -410,8 +410,8 @@ Return the number of characters in the string.
 <code-sample title="example.html">
 
   ```xml
-  <div size>one</div>
-  <!-- <div>3</div> -->
+  <p size>one</p>
+  <!-- <p>3</p> -->
   ```
 
 </code-sample>
@@ -423,8 +423,8 @@ Return a slice of the string starting at the provided index.
 <code-sample title="example.html">
 
   ```xml
-  <div slice="1">test</div>
-  <!-- <div>est</div> -->
+  <p slice="1">test</p>
+  <!-- <p>est</p> -->
   ```
 
 </code-sample>
@@ -434,8 +434,8 @@ You may pass a startIndex and endIndex:
 <code-sample title="example.html">
 
   ```xml
-  <div slice="0,-1">test</div>
-  <!-- <div>tes</div> -->
+  <p slice="0,-1">test</p>
+  <!-- <p>tes</p> -->
   ```
 
 </code-sample>
@@ -447,8 +447,8 @@ Shorten a string down to the number of characters passed as the argument.
 <code-sample title="example.html">
 
   ```xml
-  <div truncate="17">Ground control to Major Tom.</div>
-  <!-- <div>Ground control to...</div> -->
+  <p truncate="17">Ground control to Major Tom.</p>
+  <!-- <p>Ground control to...</p> -->
   ```
 
 </code-sample>
@@ -460,8 +460,8 @@ Separate arguments with a comma:
 <code-sample title="example.html">
 
   ```xml
-  <div truncate="17, no one">Ground control to Major Tom.</div>
-  <!-- <div>Ground control to no one</div> -->
+  <p truncate="17, no one">Ground control to Major Tom.</p>
+  <!-- <p>Ground control to no one</p> -->
   ```
 
 </code-sample>
@@ -473,8 +473,8 @@ Shorten a string down to the number of words passed as the argument.
 <code-sample title="example.html">
 
   ```xml
-  <div truncate-words="2">Ground control to Major Tom.</div>
-  <!-- <div>Ground control...</div> -->
+  <p truncate-words="2">Ground control to Major Tom.</p>
+  <!-- <p>Ground control...</p> -->
   ```
 
 </code-sample>
@@ -486,8 +486,8 @@ Separate arguments with a comma:
 <code-sample title="example.html">
 
   ```xml
-  <div truncate-words="2, over and out">Ground control to Major Tom.</div>
-  <!-- <div>Ground control over and out</div> -->
+  <p truncate-words="2, over and out">Ground control to Major Tom.</p>
+  <!-- <p>Ground control over and out</p> -->
   ```
 
 </code-sample>
@@ -499,8 +499,8 @@ Decode a string that has been encoded as a URL.
 <code-sample title="example.html">
 
   ```xml
-  <div url-decode>%27Stop%21%27+said+Fred</div>
-  <!-- <div>'Stop!' said Fred</div> -->
+  <p url-decode>%27Stop%21%27+said+Fred</p>
+  <!-- <p>'Stop!' said Fred</p> -->
   ```
 
 </code-sample>
@@ -512,8 +512,8 @@ Convert any URL-unsafe characters in a string into percent-encoded characters.
 <code-sample title="example.html">
 
   ```xml
-  <div url-encode>user@example.com</div>
-  <!-- <div>user%40example.com</div> -->
+  <p url-encode>user@example.com</p>
+  <!-- <p>user%40example.com</p> -->
   ```
 
 </code-sample>
