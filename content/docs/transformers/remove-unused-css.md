@@ -112,7 +112,7 @@ For example, MailChimp uses CSS comments to define styles that are editable in t
 1. Set `removeCSSComments: false` in your config, as above
 2. Write your CSS with comments in a separate `<style>` tag:
 
-```xml
+```html
 <style data-embed>
   /*
     @tab Page
