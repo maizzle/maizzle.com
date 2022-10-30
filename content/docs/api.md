@@ -89,9 +89,7 @@ The Maizzle Environment configuration object.
   <!DOCTYPE html>
   <html>
     <head>
-      <if condition="page.css">
-        <style>{{{ page.css }}}</style>
-      </if>
+      <style>{{{ page.css }}}</style>
     </head>
     <body>
       <table>
@@ -177,11 +175,9 @@ The string to be compiled with `render()` must include `{{{ page.css }}}` in a `
 ```diff
   <!DOCTYPE html>
   <html>
-+    <head>
-+      <if condition="page.css">
-+        <style>{{{ page.css }}}</style>
-+      </if>
-+    </head>
+    <head>
++      <style>{{{ page.css }}}</style>
+    </head>
     <body>
       ...
     </body>
