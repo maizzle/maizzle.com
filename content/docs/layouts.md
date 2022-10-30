@@ -17,12 +17,10 @@ Create a `layout.html` file with the required tags to yield the CSS and the Temp
 <code-sample title="src/layouts/main.html">
 
   ```xml
-  <!DOCTYPE html>
+  <!doctype html>
   <html>
   <head>
-    <if condition="page.css">
-      <style>{{{ page.css }}}</style>
-    </if>
+    <style>{{{ page.css }}}</style>
   </head>
   <body>
     <block name="template"></block>
@@ -133,13 +131,11 @@ As you can see, inside curly braces you can write basic JavaScript expressions. 
 
 The compiled Tailwind CSS for the current Template is available under `page.css` :
 
-```xml
-<if condition="page.css">
-  <style>{{{ page.css }}}</style>
-</if>
+```html
+<style>{{{ page.css }}}</style>
 ```
 
-We use 3 curly braces so that we output the CSS without escaping it - this is required for quoted property values, so that we don't get `&quot;` instead of `"`.
+We use 3 curly braces so that we output the CSS without escaping it - this is required for quoted property values, so that we don't get `&quot;` instead of `"` in CSS property values like `url("")` or in multi-word font names like in `font-family: "Open Sans", sans-serif`.
 
 ### Environment
 
@@ -219,12 +215,10 @@ Now you can use `<slot>` tags in the Layout, and `<fill>` tags in your Template:
 <code-sample title="src/layouts/main.html">
 
   ```xml
-  <!DOCTYPE html>
+  <!doctype html>
   <html>
   <head>
-    <if condition="page.css">
-      <style>{{{ page.css }}}</style>
-    </if>
+    <style>{{{ page.css }}}</style>
   </head>
   <body>
     <slot name="template"></slot>
