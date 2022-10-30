@@ -114,7 +114,7 @@ The spacing above and below the Table Divider line is defined through the vertic
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <table class="w-full">
+  <table class="w-full" role="separator">
     <tr>
       <td class="py-6">
         <div class="bg-slate-300 h-px leading-px">&zwnj;</div>
@@ -142,7 +142,7 @@ To make Outlook respect the line height you set on elements, you may use the `ms
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <table class="w-full">
+  <table class="w-full" role="separator">
     <tr>
       <td class="py-6">
         <div class="bg-slate-300 h-px leading-px mso-line-height-rule-exactly">&zwnj;</div>
