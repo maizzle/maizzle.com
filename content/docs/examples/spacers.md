@@ -11,26 +11,26 @@ Here's how easy it is to create simple yet reliable spacers for your emails, usi
 
 ## Div
 
-The most reliable and versatile spacer for HTML emails.
+The simplest vertical spacer for HTML emails:
 
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <div class="leading-16" role="separator">&zwnj;</div>
+  <div class="leading-4" role="separator">&zwnj;</div>
   ```
 
 </code-sample>
 
 How it works:
 
-1. `leading-16` sets the spacer's height with `line-height: 64px;`
-2. `role="separator"` improves accessibility by telling screenreaders to treat this as a separator
-3. `&zwnj;` adds 'content' inside, so that the `<div>` can take up height reliably in all email clients
+1. `leading-4` sets the spacer's height with `line-height: 16px;`
+2. `role="separator"` indicates the element is a divider, improving accessibility
+3. `&zwnj;` adds 'content' inside, so that the `<div>` can take up height
 
-You may specify a different height for smaller devices, by using Tailwind's `sm:` breakpoint prefix:
+You may specify a different height for smaller devices by using the `sm:` screen variant:
 
 ```xml
-<div class="leading-16 sm:leading-8" role="separator">&zwnj;</div>
+<div class="leading-4 sm:leading-2" role="separator">&zwnj;</div>
 ```
 
 <alert>Responsive heights will only work in email clients that support `@media` queries.</alert>
@@ -48,7 +48,7 @@ If you need more control over the styling of your Spacer, use this one instead:
   ```xml
   <table class="w-full" role="separator">
     <tr>
-      <td class="leading-16">&zwnj;</td>
+      <td class="leading-4">&zwnj;</td>
     </tr>
   </table>
   ```
@@ -63,7 +63,7 @@ Need to add space between `<table>` rows?
 
   ```xml
   <tr role="separator">
-    <td class="leading-16">&zwnj;</td>
+    <td class="leading-4">&zwnj;</td>
   </tr>
   ```
 
@@ -78,7 +78,7 @@ We can use an `<hr>` to create a semantic Spacer.
 <code-sample title="src/templates/example.html">
 
 ```xml
-<hr class="border-0 text-white my-16 min-h-full">
+<hr class="border-0 text-white my-4 min-h-full">
 ```
 
 </code-sample>
