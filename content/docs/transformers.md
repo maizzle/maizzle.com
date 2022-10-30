@@ -13,7 +13,7 @@ Some of the Transformers help you automate tedious tasks that are required when 
 
 ## Opt-in by default
 
-Maizzle Transformers are opt-in by default, meaning that you need to explicitly enable them in your `config.js`.
+Transformers are opt-in by default, you need to explicitly enable them in your `config.js`.
 
 ## Execution order
 
@@ -21,7 +21,7 @@ Because some operations need to happen before others, Transformers in Maizzle ru
 
 ## Disabling
 
-You may disable all Transformers by setting the `applyTransformers` key to `false`.
+You may disable all Transformers by setting `applyTransformers` to `false`:
 
 <code-sample title="config.js">
 
