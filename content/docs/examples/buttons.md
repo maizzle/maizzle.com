@@ -79,6 +79,8 @@ However, you should keep in mind that VML buttons:
 
 These limitations make VML buttons inaccessible, less flexible, and harder to maintain.
 
+### Rounded corners in Outlook
+
 Probably the only reason you'd want to use a VML button is because it's the only way to achieve rounded button corners in Outlook for Windows.
 
 Here is a simplified VML button with rounded corners, styled with Tailwind CSS:
@@ -103,6 +105,8 @@ Here is a simplified VML button with rounded corners, styled with Tailwind CSS:
   ```
 
 </code-sample>
+
+<alert type="warning">Keep in mind that VML code cannot be nested, so you can't use such a button inside a `<v:rect>`, like when coding background images for Outlook on Windows.</alert>
 
 ## Table-based
 
