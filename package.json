@@ -23,7 +23,7 @@
     "devDependencies": {
         "@nuxt/postcss8": "^1.1.3",
         "@tailwindcss/typography": "^0.5.7",
-        "autoprefixer": "^10.4.12",
+        "autoprefixer": "^10.4.13",
         "axios": "^0.27.2",
         "eslint": "^8.26.0",
         "eslint-config-xo-space": "^0.33.0",
