@@ -70,12 +70,12 @@
                 <a href="https://mailviews.com" class="text-slate-400 hover:text-teal-500 -mr-1">
                   <svg class="w-8 h-4" viewBox="0 0 45 24" fill="none" aria-labelledby="mv-title" role="img">
                     <title id="mv-title">Mailviews</title>
-                    <g clip-path="url(#a)" stroke="currentColor" stroke-miterlimit="10" stroke-width="2">
+                    <g clip-path="url(#mv-path)" stroke="currentColor" stroke-miterlimit="10" stroke-width="2">
                       <path stroke="currentColor" d="M30.946 5.348a3 3 0 1 0-4.726-3.697L13.693 17.662a3 3 0 0 0 4.725 3.698L30.946 5.348Z" />
                       <path stroke="currentColor" d="M42.99 1.13a3.003 3.003 0 0 0-4.21.51l-7.19 9.2V3.5c0-1.65-1.35-3-3-3s-3 1.35-3 3v16c0 .74.29 1.42.74 1.95.12.14.24.26.38.38.02.02.03.04.05.05.01 0 .03.01.04.02.11.08.23.15.35.22.06.04.12.07.19.1.09.04.18.07.27.1.1.04.21.07.31.1l.18.03c.15.03.3.04.45.05h.08c.88 0 1.75-.39 2.34-1.13L43.5 5.35c1.02-1.3.79-3.19-.51-4.21v-.01ZM18.384 5.348a3 3 0 1 0-4.726-3.697L1.131 17.662a3 3 0 0 0 4.725 3.698L18.384 5.348Z" />
                     </g>
                     <defs>
-                      <clipPath id="a">
+                      <clipPath id="mv-path">
                         <path fill="#fff" d="M0 0h44.63v23.01H0z" />
                       </clipPath>
                     </defs>
