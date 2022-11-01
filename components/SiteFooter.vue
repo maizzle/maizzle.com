@@ -10,13 +10,8 @@
           stroke-width="0.05"
         />
       </div>
-
       <div class="relative z-20">
-
-        <!-- Footer top -->
         <div class="mb-36 flex">
-
-          <!-- Insignia -->
           <nuxt-link
             class="w-11 h-7 mr-10 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white transition-colors duration-300"
             to="/"
@@ -24,14 +19,11 @@
           >
             <site-insignia class="text-indigo-600" />
           </nuxt-link>
-
           <nav
             role="menu"
             aria-label="Footer Navigation"
             class="navigation text-base"
           >
-
-            <!-- Footer menu -->
             <ul role="none">
               <li class="mb-3">
                 <nuxt-link
@@ -60,35 +52,30 @@
             </ul>
           </nav>
         </div>
-
-        <!-- Footer bottom -->
         <div class="md:flex flex-col md:flex-row items-center justify-start md:justify-between">
-          <p class="mb-6 md:mb-0 text-sm text-slate-400">© 2022 All rights reserved.  Made with <span class="text-rose-400">❤</span> for email, open sourced under the MIT license.</p>
+          <p class="mb-6 md:mb-0 text-sm text-slate-400">
+            &copy; {{ year() }} All rights reserved.
+            Made with <span class="text-rose-400">❤</span> for email, open sourced under the MIT license.</p>
           <div class="flex items-center gap-5">
             <a
               href="https://mailviews.com/"
-              class="text-slate-400 hover:text-indigo-600 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+              class="text-slate-400 hover:text-teal-500 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
             >
               <span class="sr-only">Mailviews</span>
-              <svg
-                viewBox="0 0 45 24"
-                width="40"
-                height="20"
-                fill="none"
-              >
-                <g clip-path="url(#a)" stroke="#94A3B8" stroke-miterlimit="10">
+              <svg class="w-10 h-5" viewBox="0 0 45 24" fill="none">
+                <g clip-path="url(#mv-path)" stroke="currentColor" stroke-miterlimit="10" stroke-width="1.5">
                   <path stroke="currentColor" d="M30.946 5.348a3 3 0 1 0-4.726-3.697L13.693 17.662a3 3 0 0 0 4.725 3.698L30.946 5.348Z" />
                   <path stroke="currentColor" d="M42.99 1.13a3.003 3.003 0 0 0-4.21.51l-7.19 9.2V3.5c0-1.65-1.35-3-3-3s-3 1.35-3 3v16c0 .74.29 1.42.74 1.95.12.14.24.26.38.38.02.02.03.04.05.05.01 0 .03.01.04.02.11.08.23.15.35.22.06.04.12.07.19.1.09.04.18.07.27.1.1.04.21.07.31.1l.18.03c.15.03.3.04.45.05h.08c.88 0 1.75-.39 2.34-1.13L43.5 5.35c1.02-1.3.79-3.19-.51-4.21v-.01ZM18.384 5.348a3 3 0 1 0-4.726-3.697L1.131 17.662a3 3 0 0 0 4.725 3.698L18.384 5.348Z" />
                 </g>
                 <defs>
-                  <clipPath id="a">
+                  <clipPath id="mv-path">
                     <path fill="#fff" d="M0 0h44.63v23.01H0z" />
                   </clipPath>
                 </defs>
               </svg>
             </a>
             <a
-              href="https://twitter.com/maizzlejs/"
+              href="https://twitter.com/maizzlejs"
               rel="noopener noreferrer nofollow"
               class="text-slate-400 hover:text-indigo-600 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
             >
@@ -125,5 +112,10 @@
 <script>
 export default {
   name: 'SiteFooter',
+  methods: {
+    year() {
+      return new Date().getFullYear()
+    }
+  },
 }
 </script>
