@@ -67,7 +67,7 @@
           <div class="flex h-full items-center">
             <nav class="flex gap-8 font-medium text-sm text-slate-700">
               <div class="flex gap-6 items-center">
-                <a href="https://mailviews.com" class="text-slate-400 hover:text-slate-500 -mr-1">
+                <a href="https://mailviews.com" class="text-slate-400 hover:text-teal-500 -mr-1">
                   <svg class="w-8 h-4" viewBox="0 0 45 24" fill="none" aria-labelledby="mv-title" role="img">
                     <title id="mv-title">Mailviews</title>
                     <g clip-path="url(#a)" stroke="currentColor" stroke-miterlimit="10" stroke-width="2">
