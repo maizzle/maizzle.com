@@ -5,11 +5,11 @@ description: "Upgrading your Maizzle projects from v3 to v4"
 
 # Upgrade Guide
 
-Upgrading your Maizzle projects from v3.x to v4.0.
+Upgrading your Maizzle projects from v3.x to v4.x.
 
 Maizzle 4 is a major framework update that comes with awesome new features and improvements, but also includes a few breaking changes.
 
-Migrating to Maizzle v4.0 should take less than 10 minutes for most users.
+Migrating to Maizzle 4 should take less than 10 minutes for most users.
 
 ## Node.js
 
@@ -49,13 +49,13 @@ Install the latest version of Maizzle:
 
 ## Update `tailwind.config.js`
 
-Some configuration keys are deprecated in Tailwind CSS v3.0, and others have changed.
+Some configuration keys are deprecated in Tailwind CSS 3, and others have changed.
 
 ### Remove deprecated keys
 
 The following keys are now configured by default or deprecated, so you can safely remove them from your `tailwind.config.js`:
 
-- remove `mode` - the JIT engine is now default in Tailwind CSS v3.0
+- remove `mode` - the JIT engine is the default starting with Tailwind CSS v3.0
 - remove `inset` - no longer needed
 - remove `maxHeight` - no longer needed
 
@@ -81,7 +81,7 @@ The following keys are now configured by default or deprecated, so you can safel
 
 ### Update `corePlugins`
 
-Tailwind CSS v3.0 has moved to using CSS variables for color utilities, which are not widely supported by email clients.
+Tailwind CSS 3 has moved to using CSS variables for color utilities, which are not widely supported by email clients.
 
 Replace your `corePlugins` key with the following:
 
