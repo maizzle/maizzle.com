@@ -15,7 +15,7 @@
         "@nuxt/content": "^1.15.1",
         "@nuxtjs/proxy": "^2.1.0",
         "netlify-lambda": "^2.0.15",
-        "nuxt": "^2.15.8",
+        "nuxt": "^3.0.0",
         "scroll-to-element": "^2.0.3",
         "typeit": "^8.7.0",
         "vue-clickaway": "^2.2.2"
