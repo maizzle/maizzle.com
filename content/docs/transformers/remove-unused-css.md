@@ -141,19 +141,18 @@ HTML email code often includes Outlook or IE conditional comments, which you pro
 
 </code-sample>
 
-### uglifyClassNames
+### uglify
 
 Enable this to rename all classes and id's in both your `<style>` tags and your body HTML elements, to be as few characters as possible.
 
 Used in production, it will help trim down your HTML size.
-
 
 <code-sample title="config.js">
 
   ```js
   module.exports = {
     removeUnusedCSS: {
-      uglifyClassNames: true
+      uglify: true
     }
   }
   ```
