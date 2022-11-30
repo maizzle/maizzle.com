@@ -59,7 +59,8 @@
               href="https://github.com/maizzle/framework/releases"
               class="hidden sm:table px-3 py-1 rounded-full text-indigo-500 hover:text-indigo-600 text-sm group bg-indigo-50 hover:bg-indigo-100"
             >
-              🚀 Maizzle v4.3: now with Tailwind CSS v3.2 support
+              🧩 Maizzle 4.4.0 Beta: try out the new Laravel Blade-like components system &rarr;
+              <!-- 🚀 Maizzle v4.3: now with Tailwind CSS v3.2 support -->
             </a>
           </div>
         </div>
