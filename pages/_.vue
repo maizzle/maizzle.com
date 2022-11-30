@@ -7,12 +7,51 @@
           max-w-[75ch]
           prose prose-slate
           prose-code:text-slate-600 prose-code:font-normal
-          prose-code:before:content-none  prose-code:after:content-none
+          prose-code:before:content-none prose-code:after:content-none
           prose-code:bg-slate-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded
           prose-headings:text-slate-800 prose-h1:font-bold prose-h2:mt-[1em] prose-p:text-slate-600
         "
       />
+
+      <div class="flex justify-between pt-8 pb-4">
+        <div>
+          <nuxt-link
+            v-if="prev"
+            :to="prev.path"
+            class="group flex items-center gap-1 text-sm text-slate-800 font-medium"
+          >
+            <svg
+              class="h-3 w-3 transition-colors text-slate-400 group-hover:text-slate-800"
+              fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            <span>
+              {{ prev.title }}
+            </span>
+          </nuxt-link>
+        </div>
+        <div class="text-right">
+          <nuxt-link
+            v-if="next"
+            :to="next.path"
+            class="group flex items-center gap-1 text-sm text-slate-800 font-medium"
+          >
+            <span>
+              {{ next.title }}
+            </span>
+            <svg
+              class="h-3 w-3 transition-colors text-slate-400 group-hover:text-slate-800"
+              fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </nuxt-link>
+        </div>
+      </div>
+
       <hr>
+
       <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between text-sm text-slate-500">
         <div class="flex gap-2">
           <span>Copyright &copy; {{ year }} Maizzle SRL</span>
@@ -40,6 +79,7 @@
 
 <script>
 import scrollToElement from 'scroll-to-element'
+import navigation from '~/data/navigation.js'
 
 export default {
   layout: 'docs',
@@ -52,8 +92,17 @@ export default {
       return error({ statusCode: 404, message: 'page not found' })
     }
 
+    const navigationItems = navigation.reduce((acc, item) => {
+      if (item.items) {
+        return [...acc, ...item.items]
+      }
+
+      return [...acc, item]
+    }, [])
+
     return {
-      page
+      page,
+      navigationItems,
     }
   },
   head() {
@@ -97,6 +146,27 @@ export default {
     year() {
       return new Date().getFullYear()
     },
+    current() {
+      return this.navigationItems.find(item => item.path === this.$route.path)
+    },
+    next() {
+      if (!this.current) {
+        return null
+      }
+
+      const index = this.navigationItems.indexOf(this.current)
+
+      return this.navigationItems[index + 1]
+    },
+    prev() {
+      if (!this.current) {
+        return null
+      }
+
+      const index = this.navigationItems.indexOf(this.current)
+
+      return this.navigationItems[index - 1]
+    }
   },
   watch: {
     '$route.hash'(newHash) {
