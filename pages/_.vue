@@ -13,8 +13,11 @@
         "
       />
       <hr>
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 text-sm text-slate-500">
-        <span class="">Copyright &copy; {{ year }} Maizzle</span>
+      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between text-sm text-slate-500">
+        <div class="flex gap-2">
+          <span>Copyright &copy; {{ year }} Maizzle SRL</span>
+          <nuxt-link to="/brand" class="border-l border-slate-200 pl-2 hover:text-slate-900">Brand policy</nuxt-link>
+        </div>
         <a
           :href="`https://github.com/maizzle/maizzle.com/edit/main/content${$route.path}.md`"
           class="flex gap-2 items-center hover:text-slate-900"
