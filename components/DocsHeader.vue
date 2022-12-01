@@ -2,7 +2,7 @@
   <header class="sticky top-0 sm:h-20 items-center z-50">
     <!-- Desktop Header -->
     <div class="hidden lg:grid grid-cols-12 h-full">
-      <div class="grid col-span-4 lg:col-span-3 xl:col-span-4 justify-end items-center space-y-2 bg-slate-50 h-full">
+      <div class="grid col-span-4 lg:col-span-3 xl:col-span-4 h-full justify-end items-center space-y-2 bg-slate-50">
         <div class="w-60 flex items-end gap-4">
           <nuxt-link to="/" @click.native.right.prevent="goToBrandPage">
             <site-logo class="w-32" />
@@ -52,15 +52,25 @@
           </div>
         </div>
       </div>
-      <div class="col-span-8 lg:col-span-9 xl:col-span-8 grid grid-cols-12 h-full bg-white border-b border-slate-100">
-        <div class="grid col-span-12 xl:col-span-9 2xl:col-span-7 xl:py-4 px-8 items-center">
+      <div
+        class="
+          grid grid-cols-12 col-span-8 lg:col-span-9 xl:col-span-8 h-full
+          border-b border-slate-100
+          backdrop-blur bg-white/90
+        "
+      >
+        <div
+          class="
+            grid col-span-12 xl:col-span-9 2xl:col-span-7 3xl:col-span-6
+            xl:py-4 px-8 3xl:pl-12 items-center
+          "
+        >
           <div class="hidden sm:block max-w-[75ch] whitespace-nowrap overflow-auto">
             <a
               href="https://github.com/maizzle/framework/releases"
               class="hidden sm:table px-3 py-1 rounded-full text-indigo-500 hover:text-indigo-600 text-sm group bg-indigo-50 hover:bg-indigo-100"
             >
               🧩 Maizzle 4.4.0 Beta: try out the new Laravel Blade-like components system &rarr;
-              <!-- 🚀 Maizzle v4.3: now with Tailwind CSS v3.2 support -->
             </a>
           </div>
         </div>

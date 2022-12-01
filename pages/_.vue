@@ -1,10 +1,10 @@
 <template>
   <div class="col-span-12 lg:col-span-8 grid grid-cols-1 lg:grid-cols-12 max-w-[65ch] lg:max-w-full mx-auto lg:m-0">
-    <article class="col-span-9 2xl:col-span-7 px-4 sm:px-8 pb-12 mt-4 xl:mt-8 space-y-8">
+    <article class="col-span-9 2xl:col-span-7 3xl:col-span-6 px-4 sm:px-8 pb-12 mt-4 xl:mt-8 space-y-8">
       <nuxt-content
         :document="page"
         class="
-          max-w-[75ch]
+          max-w-[75ch] 3xl:pl-4
           prose prose-slate
           prose-code:text-slate-600 prose-code:font-normal
           prose-code:before:content-none prose-code:after:content-none
@@ -13,60 +13,64 @@
         "
       />
 
-      <div class="flex justify-between pt-8 pb-4">
-        <div>
-          <nuxt-link
-            v-if="prev"
-            :to="prev.path"
-            class="group flex items-center gap-1 text-sm text-slate-800 font-medium"
-          >
-            <svg
-              class="h-3 w-3 transition-colors text-slate-400 group-hover:text-slate-800"
-              fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+      <nav class="max-w-[75ch] 3xl:pl-4 pt-8 space-y-10">
+        <div class="flex justify-between">
+          <div>
+            <nuxt-link
+              v-if="prev"
+              :to="prev.path"
+              class="group flex items-center gap-1 text-sm text-slate-800 font-medium"
             >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-            </svg>
-            <span>
-              {{ prev.title }}
-            </span>
-          </nuxt-link>
-        </div>
-        <div class="text-right">
-          <nuxt-link
-            v-if="next"
-            :to="next.path"
-            class="group flex items-center gap-1 text-sm text-slate-800 font-medium"
-          >
-            <span>
-              {{ next.title }}
-            </span>
-            <svg
-              class="h-3 w-3 transition-colors text-slate-400 group-hover:text-slate-800"
-              fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+              <svg
+                class="h-3 w-3 transition-colors text-slate-400 group-hover:text-slate-800"
+                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+              </svg>
+              <span>
+                {{ prev.title }}
+              </span>
+            </nuxt-link>
+          </div>
+          <div class="text-right">
+            <nuxt-link
+              v-if="next"
+              :to="next.path"
+              class="group flex items-center gap-1 text-sm text-slate-800 font-medium"
             >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              <span>
+                {{ next.title }}
+              </span>
+              <svg
+                class="h-3 w-3 transition-colors text-slate-400 group-hover:text-slate-800"
+                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </nuxt-link>
+          </div>
+        </div>
+        <hr>
+      </nav>
+
+
+      <div class="max-w-[75ch] 3xl:pl-4">
+        <div class="flex flex-wrap sm:items-center sm:justify-between space-y-6 sm:space-y-0 text-sm text-slate-500">
+          <div class="flex gap-2">
+            <span>Copyright &copy; {{ year }} Maizzle SRL</span>
+            <nuxt-link to="/brand" class="border-l border-slate-200 pl-2 hover:text-slate-900">Brand policy</nuxt-link>
+          </div>
+          <a
+            :href="`https://github.com/maizzle/maizzle.com/edit/main/content${$route.path}.md`"
+            class="flex gap-2 items-center hover:text-slate-900"
+            target="_blank"
+          >
+            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
             </svg>
-          </nuxt-link>
+            Edit this page on GitHub
+          </a>
         </div>
-      </div>
-
-      <hr>
-
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-6 sm:space-y-0 text-sm text-slate-500">
-        <div class="flex gap-2">
-          <span>Copyright &copy; {{ year }} Maizzle SRL</span>
-          <nuxt-link to="/brand" class="border-l border-slate-200 pl-2 hover:text-slate-900">Brand policy</nuxt-link>
-        </div>
-        <a
-          :href="`https://github.com/maizzle/maizzle.com/edit/main/content${$route.path}.md`"
-          class="flex gap-2 items-center hover:text-slate-900"
-          target="_blank"
-        >
-          <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-          </svg>
-          Edit this page on GitHub
-        </a>
       </div>
     </article>
     <aside class="hidden lg:block col-span-3 2xl:col-span-5 mt-4">
