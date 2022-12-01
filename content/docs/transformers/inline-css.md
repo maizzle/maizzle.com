@@ -9,7 +9,9 @@ Automatically inline CSS from `<style>` tags in your HTML emails.
 
 CSS inlining is still important in HTML email, mainly because of Outlook on Windows, which doesn't support multiple classes on elements.
 
-At the same time, CSS inlining can help preserve a decent layout in email clients that do not support embedded CSS (in `<style>` tags), or when an email is forwarded.
+It can also help preserve a decent layout in email clients that do not support embedded CSS (in `<style>` tags), or when an email is forwarded.
+
+Not to mention that the utility-first approach in Tailwind CSS works great with CSS inlining: utility classes are not 'global', so you won't end up with a `font-family` inlined on every element.
 
 ## Usage
 
