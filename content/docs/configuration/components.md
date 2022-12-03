@@ -7,6 +7,8 @@ description: "Configuring components in Maizzle"
 
 Control where your Components live and how you reference them.
 
+<alert class="lg:hidden">We're testing a new components system for v4.4.0 - [give it a try](https://github.com/maizzle/framework/releases/tag/v4.4.0-beta.1)!</alert>
+
 ### root
 
 You may define the path where your Components are located:
