@@ -5,7 +5,7 @@ description: "Email client compatibility and what Maizzle does to help improve y
 
 # Compatibility
 
-Maizzle gives you complete freedom to code your HTML emails however you like, there's no definitive compatibility chart. It really depends on your HTML.
+Maizzle gives you complete freedom to code your HTML emails however you like, there's no definitive compatibility chart. It really depends on your markup.
 
 Wherever possible, the framework tries to help through configuration and tools that you can use to code emails that render well.
 

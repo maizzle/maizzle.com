@@ -7,6 +7,8 @@ description: "Import components into your HTML email templates and render them w
 
 Components help you organize blocks of markup that you use often by extracting them to a file, so you can reuse them in multiple templates.
 
+<alert class="lg:hidden">We're testing a new components system for v4.4.0 - [give it a try](https://github.com/maizzle/framework/releases/tag/v4.4.0-beta.1)!</alert>
+
 ## Usage
 
 To create a Component, simply create an HTML file with a `<content>` tag:
