@@ -41,11 +41,13 @@ This <span class="font-mono text-sm">config.<strong>production</strong>.js</span
 
 <alert>Remember, the `maizzle` executable will only be available if you installed the [CLI tool](/docs/cli) globally. Otherwise, use the npm scripts provided by the Starter in `package.json`.</alert>
 
-### Merging
+### Data merging
 
 Any new Environment configuration file that you create will be merged _on top_ of the base `config.js` when you run the build command for that particular Environment.
 
-<alert>When creating a new Environment config file you only need to specify the config values that you are will be different from those in `config.js`.</alert>
+With the example above, when running the `maizzle build production` command, `config.production.js` will be merged on top of the base `config.js`: if the same key is present in both files, the value from `config.production.js` will be used.
+
+<alert>When creating a new Environment config file you only need to specify the config values that will be different from those in `config.js`.</alert>
 
 ## Environment builds
 
