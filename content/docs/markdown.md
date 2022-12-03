@@ -7,7 +7,7 @@ description: "Use Markdown in your HTML email templates. GitHub Flavored Markdow
 
 You can use Markdown in your Maizzle email templates.
 
-[markdown-it](https://github.com/markdown-it/markdown-it) is used and you can fully configure it, either globally from your Environment config, or through Front Matter for each Template.
+[markdown-it](https://github.com/markdown-it/markdown-it) is used and you can configure it either globally from your Environment config, or through Front Matter for each Template.
 
 ## Tags
 
@@ -17,7 +17,7 @@ There are two tags that you can use to add Markdown to your emails:
 
   ```xml
   <markdown>This Markdown will be **compiled** to HTML</markdown>
-  <md>There's also a _shorter_ version of the tag above.</md>
+  <md>A _shorter_ version of the `markdown` tag.</md>
   ```
 
 </code-sample>
@@ -26,7 +26,7 @@ Result:
 
 ```xml
 <p>This Markdown will be <strong>compiled</strong> to HTML</p>
-<p>There's also a <em>shorter</em> version of the tag above.</p>
+<p>A <em>shorter</em> version of the <code>markdown</code> tag.</p>
 ```
 
 ## Attributes
@@ -36,8 +36,8 @@ Use attributes if you need the element wrapping your Markdown to be preserved:
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <div markdown>This Markdown will be **compiled** to HTML</div>
-  <p md>There's also a _shorter_ version of the tag above.</p>
+  <div markdown>Using a `markdown` attribute</div>
+  <p md>You can also use the `md` attribute.</p>
   ```
 
 </code-sample>
@@ -46,19 +46,19 @@ Result:
 
 ```xml
 <div>
-  <p>This Markdown will be <strong>compiled</strong> to HTML</p>
+  <p>Using a <code>markdown</code> attribute</p>
 </div>
-<p>There's also a <em>shorter</em> version of the tag above.</p>
+<p>You can also use the <code>md</code> attribute.</p>
 ```
 
 ### Wrapping tag
 
-Use the `tag=""` attribute to specify a tag name to wrap your Markdown with:
+Use the `tag` attribute to specify a tag name to wrap your Markdown with:
 
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <md tag="section">This Markdown will be **compiled** to HTML</md>
+  <md tag="section">This Markdown will be _compiled_ to HTML</md>
   ```
 
 </code-sample>
@@ -67,13 +67,13 @@ Result:
 
 ```xml
 <section>
-  <p>This Markdown will be <strong>compiled</strong> to HTML</p>
+  <p>This Markdown will be <em>compiled</em> to HTML</p>
 </section>
 ```
 
 ## Importing files
 
-Already have Markdown somewhere in a file? Simply include it:
+Already have some Markdown in a file? Simply include it:
 
 <code-sample title="src/templates/example.html">
 
@@ -119,6 +119,28 @@ Result:
 
 [GitHub Flavored Markdown](https://github.github.com/gfm/) is supported and the [Tables](https://help.github.com/articles/organizing-information-with-tables/) and [Strikethrough](https://help.github.com/articles/basic-writing-and-formatting-syntax/#styling-text) extensions are enabled by default.
 
+### Tables
+
+Create tables with pipes `|` and hyphens `-`. Use hyphens to define each column's header, and pipes to separate each column.
+
+<code-sample title="src/templates/example.html">
+
+  ```xml
+  <markdown>
+    | Markdown      | tables are    | cool  |
+    | ------------- |:-------------:| -----:|
+    | col 3 is      | right-aligned | $1600 |
+    | col 2 is      | centered      |   $12 |
+    | zebra stripes | are neat      |    $1 |
+  </markdown>
+  ```
+
+</code-sample>
+
+### Strikethrough
+
+Use two tildes `~~` to ~~`~~strikethrough~~`~~ text.
+
 ## Configuration
 
 You may configure how Markdown is rendered through the `markdown` config object:
@@ -140,9 +162,39 @@ You may configure how Markdown is rendered through the `markdown` config object:
 
 Checkout the options for [markdown-it](https://github.com/markdown-it/markdown-it#init-with-presets-and-options) and  [posthtml-markdownit](https://github.com/posthtml/posthtml-markdownit#options).
 
-## Disabling
+### Front Matter
 
-You can disable the markdown Transformer by setting it to `false`:
+You may override the global Markdown config from your Template's Front Matter.
+
+<code-sample title="src/templates/example.html">
+
+  ```xml
+  ---
+  markdown:
+    markdownit:
+      linkify: true
+  ---
+
+  <extends src="src/layouts/base.html">
+    <block name="template">
+      <md>
+        https://example.com
+      </md>
+    </block>
+  </extends>
+  ```
+
+</code-sample>
+
+That will output:
+
+```xml
+<p><a href="https://example.com">https://example.com</a></p>
+```
+
+### Disabling
+
+Disable the markdown Transformer by setting it to `false`:
 
 <code-sample title="config.js">
 
@@ -195,71 +247,7 @@ Result:
 <p>You can use emojis 😃</p>
 ```
 
-## Front Matter
-
-You may override the global Markdown config from your Template's Front Matter.
-
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  ---
-  markdown:
-    markdownit:
-      linkify: true
-  ---
-
-  <extends src="src/layouts/base.html">
-    <block name="template">
-      <md>
-        https://example.com
-      </md>
-    </block>
-  </extends>
-  ```
-
-</code-sample>
-
-That will output:
-
-```xml
-<p><a href="https://example.com">https://example.com</a></p>
-```
-
-## Gotchas
-
-There are some situations where Markdown might not work as expected, or requires some additional work on your side.
-
-### Classes and IDs
-
-Classes and IDs generated by `markdown-it` or its plugins need to be [whitelisted with `removeUnusedCSS`](/docs/transformers/remove-unused-css#whitelist), otherwise they will be removed.
-
-For example, imagine your have fenced code blocks like this in your Markdown:
-
-<code-sample title="src/templates/example.html">
-
-    ```xml
-    <div>Lorem ipsum</div>
-    ```
-
-</code-sample>
-
-... then you will need to whitelist all classes starting with `lang` in the `removeUnusedCSS` configuration:
-
-<code-sample title="config.production.js">
-
-  ```js
-  module.exports = {
-    removeUnusedCSS: {
-      whitelist: ['.lang*']
-    }
-  }
-  ```
-
-</code-sample>
-
-<alert>This is assuming you're using the default markdown-it `langPrefix`, which is set to `'language-'`</alert>
-
-### Escaped variables
+## Escaping variables
 
 If you're using expressions to render markdown from a variable that you have defined in your config like this:
 
@@ -289,4 +277,4 @@ If you're using expressions to render markdown from a variable that you have def
 
 </code-sample>
 
-This is required for blockquotes to work - otherwise `>` will be output as `&gt;` and the blockquote will be rendered as a paragraph.
+This is required for things like blockquotes to work, otherwise `>` will be output as `&gt;` and the blockquote will be rendered as a paragraph.
