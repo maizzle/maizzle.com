@@ -43,7 +43,7 @@
               </svg>
             </div>
             <h2 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">Command</h2>
-            <p class="text-md text-slate-500">Use the <code class="py-1 px-2 rounded-md border border-slate-200 bg-slate-50">@maizzle/cli</code> tool to quickly scaffold a Maizzle project and start developing your email templates.</p>
+            <p class="text-md text-slate-500">Use the <code class="py-1 px-2 rounded-md border border-slate-200 bg-slate-50">@maizzle/cli</code> tool to quickly scaffold a Maizzle project and start developing your&nbsp;email&nbsp;templates.</p>
           </div>
           <div>
             <div class="w-12 h-12 mb-6 flex items-center rounded-md bg-slate-100 text-slate-800">
