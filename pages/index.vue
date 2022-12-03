@@ -42,8 +42,13 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
               </svg>
             </div>
-            <h2 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">Command</h2>
-            <p class="text-md text-slate-500">Use the <code class="py-1 px-2 rounded-md border border-slate-200 bg-slate-50">@maizzle/cli</code> tool to quickly scaffold a Maizzle project and start developing your&nbsp;email&nbsp;templates.</p>
+            <h2 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">
+              Command
+            </h2>
+            <p class="text-md text-slate-500">
+              Use the <code class="py-1 px-2 rounded-md border border-slate-200 bg-slate-50">@maizzle/cli</code> tool
+              to quickly scaffold a Maizzle project and start developing your&nbsp;email&nbsp;templates.
+            </p>
           </div>
           <div>
             <div class="w-12 h-12 mb-6 flex items-center rounded-md bg-slate-100 text-slate-800">
@@ -51,8 +56,13 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
               </svg>
             </div>
-            <h2 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">Code</h2>
-            <p class="text-md text-slate-500">Code emails in HTML and style them with Tailwind CSS. Maizzle takes care of all email optimizations, like CSS inlining.</p>
+            <h2 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">
+              Code
+            </h2>
+            <p class="text-md text-slate-500">
+              Code emails in HTML and style them with Tailwind CSS.
+              Maizzle takes care of all email optimizations, like CSS inlining.
+            </p>
           </div>
           <div>
             <div class="w-12 h-12 mb-6 flex items-center rounded-md bg-slate-100 text-slate-800">
@@ -60,8 +70,13 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
               </svg>
             </div>
-            <h2 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">Customize</h2>
-            <p class="text-md text-slate-500">Responsive or hybrid? Mobile first or desktop first? Stay in control and code your emails however you like.</p>
+            <h2 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">
+              Customize
+            </h2>
+            <p class="text-md text-slate-500">
+              Responsive or hybrid? Mobile first or desktop first?
+              Stay in control and code your emails however you like.
+            </p>
           </div>
         </div>
       </div>
@@ -101,13 +116,12 @@
           </p>
           <h4 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">Utility-first CSS</h4>
           <p class="mb-8 text-md text-slate-500">
-            Tailwind CSS provides low-level utility classes that help you style emails much faster than writing inline CSS.
+            Tailwind CSS provides low-level utility classes that help you style emails much faster than manually writing inline CSS.
           </p>
           <h4 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">Powerful modifiers</h4>
           <p class="mb-8 text-md text-slate-500">
             Use powerful variant classes like <code>hover:bg-blue-500</code> or <code>sm:w-full</code> to easily
             add hover effects or style responsive emails.
-            <!-- Need to use custom CSS classes? Extract component classes from repeated utility patterns. -->
           </p>
           <h4 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">Make it your own</h4>
           <p class="text-md text-slate-500">
@@ -139,11 +153,21 @@
           <h3 class="mb-7 text-3xl md:text-4xl font-bold text-indigo-600">
             BYOHTML&trade;
           </h3>
-          <p class="mb-12 text-lg md:text-xl text-slate-500">Code with markup you already know.</p>
-          <h4 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">Bring Your Own HTML</h4>
-          <p class="mb-8 text-md text-slate-500">No need to learn custom syntax or adapt your templates to it. Use your existing HTML, it'll just work.</p>
-          <h4 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">Supercharged by PostHTML</h4>
-          <p class="mb-8 text-md text-slate-500">PostHTML gives your HTML superpowers, enabling you to write complex logic with simple, text editor-friendly markup.</p>
+          <p class="mb-12 text-lg md:text-xl text-slate-500">
+            Code with markup you already know.
+          </p>
+          <h4 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">
+            Bring Your Own HTML
+          </h4>
+          <p class="mb-8 text-md text-slate-500">
+            No need to learn custom syntax or adapt your templates to it.
+            Use your existing HTML if you prefer, it'll just work.</p>
+          <h4 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">
+            Supercharged by PostHTML
+          </h4>
+          <p class="mb-8 text-md text-slate-500">
+            PostHTML gives your HTML superpowers, enabling components and complex logic through simple, text editor-friendly markup.
+          </p>
         </div>
       </div>
     </section>
@@ -171,19 +195,29 @@
             Build
             <span class="text-indigo-600">Environments</span>
           </h3>
-          <p class="mb-7 text-lg md:text-xl text-slate-500">Custom build scenarios, easily configured in JavaScript.</p>
+          <p class="mb-7 text-lg md:text-xl text-slate-500">
+            Custom build scenarios, easily configured in JavaScript.
+          </p>
           <p class="mb-12 text-slate-500">
-            Using fake data locally, but fetching from an API in production? Prettified email markup for your colleagues? All possible.
+            Using fake data locally, but need to fetch content from an API in production?
+            Prettified email markup for your colleagues? All possible.
           </p>
-          <h4 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">CLI Commands</h4>
+          <h4 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">
+            CLI Commands
+          </h4>
           <p class="mb-8 text-md text-slate-500">
-            Each environment config enables its own CLI build command, so you can build the same templates in as many ways as you need.
+            Each build environment config enables its own CLI build command,
+            so you can build the same templates in as many ways as you need.
           </p>
-          <h4 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">Opt-in Transformers</h4>
+          <h4 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">
+            Opt-in Transformers
+          </h4>
           <p class="mb-8 text-md text-slate-500">
             Choose which post-processing transformations Maizzle applies to your HTML emails, on a build environment-basis.
           </p>
-          <h4 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">Override from Template</h4>
+          <h4 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">
+            Override from Template
+          </h4>
           <p class="text-md text-slate-500">
             Define or override data for each template just before it's compiled, through YAML Front Matter variables.
           </p>
