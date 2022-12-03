@@ -111,7 +111,7 @@ By default, the latest version will be installed. To use a specific version, fir
 
 Then, re-install dependencies by running `npm install` in your project's root folder.
 
-<alert>Latest Maizzle release is <latest-release as-link="true" /></alert>
+<alert>Latest stable Maizzle release is <latest-release as-link="true" /></alert>
 
 ### Clean update
 
