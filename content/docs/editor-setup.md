@@ -9,7 +9,7 @@ Configuring your editor can help speed up your development workflow and ensures 
 
 ## Which editor to use?
 
-Although you may use any text editor or IDE with Maizzle, we recommend [VS Code](https://code.visualstudio.com/) for its flexibility and tooling available.
+Although you may use any text editor or IDE with Maizzle, we recommend [VS Code](https://code.visualstudio.com/) for its flexibility and available tooling.
 
 ## Tailwind CSS IntelliSense
 
