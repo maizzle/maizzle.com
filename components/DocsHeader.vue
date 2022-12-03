@@ -111,7 +111,7 @@
       </div>
     </div>
     <!-- Mobile Header -->
-    <div class="grid grid-cols-12 items-center lg:hidden bg-white border-b p-4 mb-4">
+    <div class="grid grid-cols-12 items-center lg:hidden bg-white/[0.85] backdrop-blur-sm p-4 mb-4">
       <div class="col-span-3 flex items-end">
         <button
           @click="openMobileMenu"
