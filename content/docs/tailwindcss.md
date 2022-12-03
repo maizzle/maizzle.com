@@ -27,7 +27,7 @@ For most of the time, you won't be writing CSS anymore 😎
 
 ## Workflow
 
-The compiled Tailwind CSS is available under `page.css`, so you should first add it inside a `<style>` tag in your Layout's `<head>`:
+The compiled Tailwind CSS is available under `page.css`, so you need to make sure it is added inside a `<style>` tag in your Layout's `<head>`:
 
 <code-sample title="src/layouts/main.html">
 
@@ -35,9 +35,9 @@ The compiled Tailwind CSS is available under `page.css`, so you should first add
   <!DOCTYPE html>
   <html>
     <head>
-      <if condition="page.css">
-        <style>{{{ page.css }}}</style>
-      </if>
+      <style>
+        {{{ page.css }}}
+      </style>
     </head>
     <body>
       <block name="template"></block>
@@ -47,17 +47,15 @@ The compiled Tailwind CSS is available under `page.css`, so you should first add
 
 </code-sample>
 
-In the example above, we used a [conditional tag](/docs/tags#conditionals) to output `<style>` only if `page.css` is truthy (i.e. not an empty string).
-
 You might have noticed that we used `{{{ }}}` instead of the usual `{{ }}`.
 
 We do this to avoid double-escaping the CSS, which can break the build process when quoted property values are encountered (for example quoted font family names, background image URLs, etc.).
 
-<alert type="warning">In order to use Tailwind CSS, the Layout that you're extending must output `page.css` inside a `<style>` tag.</alert>
+<alert type="warning">Tailwind CSS only works when `page.css` is added inside a `<style>` tag.</alert>
 
 ### Utility-first
 
-Simply write your HTML markup and use Tailwind utility classes to style elements.
+Simply write your HTML markup and use Tailwind CSS utility classes to style elements.
 
 Instead of writing something like this:
 
@@ -65,14 +63,18 @@ Instead of writing something like this:
 <table style="width: 100%;">
   <tr>
     <td style="padding: 24px 0; background-color: #e5e7eb;">
-      <h1 style="margin: 0; font-size: 36px; font-family: -apple-system, 'Segoe UI', sans-serif; color: #000000;">Some title</h1>
-      <p style="margin: 0; font-size: 16px; line-height: 24px; color: #374151;">Content here...</p>
+      <h1 style="margin: 0; font-size: 36px; font-family: -apple-system, 'Segoe UI', sans-serif; color: #000000;">
+        Some title
+      </h1>
+      <p style="margin: 0; font-size: 16px; line-height: 24px; color: #374151;">
+        Content here...
+      </p>
     </td>
   </tr>
 </table>
 ```
 
-You simply write:
+You can write:
 
 <code-sample title="src/templates/example.html">
 
@@ -80,8 +82,12 @@ You simply write:
   <table class="w-full">
     <tr>
       <td class="py-6 px-0 bg-gray-200">
-        <h1 class="m-0 text-4xl font-sans text-black">Some title</h1>
-        <p class="m-0 text-base leading-6 text-gray-700">Content here...</p>
+        <h1 class="m-0 text-4xl font-sans text-black">
+          Some title
+        </h1>
+        <p class="m-0 text-base leading-6 text-gray-700">
+          Content here...
+        </p>
       </td>
     </tr>
   </table>
@@ -163,7 +169,8 @@ If you need to use a custom file, you must define its path:
 
 </code-sample>
 
-Again, this is totally optional: you can use Tailwind CSS in Maizzle without creating any CSS file at all! In this case, Tailwind will only generate components and utilities, based on your `tailwind.config.js`.
+Again, this is totally optional: you can use Tailwind CSS in Maizzle without creating any CSS file at all!
+Doing so will only generate components and utilities based on your `tailwind.config.js`.
 
 ### Custom CSS
 
@@ -172,6 +179,8 @@ Add custom CSS files anywhere under `src/css`.
 Maizzle adds `utilities.css`, which contains a sample custom utility class that Tailwind CSS doesn't provide.
 
 <alert type="warning">Files that you `@import` in `tailwind.css` must be relative to `src/css`</alert>
+
+<alert type="danger">Any `@import` rules must come first in your `tailwind.css` file.</alert>
 
 ## Shorthand CSS
 
@@ -249,9 +258,9 @@ However, Maizzle will merge those to shorthand-form, so we get this:
 
 </code-sample>
 
-This results in smaller HTML size, helping to reduce the risk of [Gmail clipping your email](https://github.com/hteumeuleu/email-bugs/issues/41).
+This results in smaller HTML size, reducing the risk of [Gmail clipping your email](https://github.com/hteumeuleu/email-bugs/issues/41).
 
-Using shorthand CSS for these properties is well supported in email clients and will make your HTML lighter, but the shorthand border is particularly useful because it's the only way Outlook will render it properly.
+Using shorthand CSS for these properties is well supported in email clients and will make your HTML lighter, but the shorthand border (documented next) is particularly useful because it's the only way Outlook will render it properly.
 
 <alert>For shorthand CSS to work with `padding` or `margin`, you need to specify property values for all four sides. For borders, keep reading.</alert>
 
@@ -283,22 +292,50 @@ With Tailwind's `@apply`, that means you can do something like this:
 <div style="border: 1px solid #3f83f8;">Border example</div>
 ```
 
-Alternatively, you may use an arbitrary property:
+Alternatively, you may use an arbitrary values:
 
 ```xml
 <div class="[border:1px_solid_#3f83f8]">Border example</div>
 ```
 
-This might look like inline styles with extra steps, but it's still Tailwind so you can do stuff that you can't with inline CSS, like pseudos or media queries:
+Arbitrary values are actually really useful for Outlook, because something like `border-b border-solid border-black` will not be shorthanded and Outlook can only apply individual borders when you write them in shorthand.
+
+So you can do this:
 
 ```xml
-<div class="hover:[border:1px_solid_#3f83f8]">Hover border example</div>
+<div class="[border-bottom:1px_solid_#000]">Bottom border example</div>
+```
+
+Arbitrary values might look like inline styles with extra steps, but it's still Tailwind so you can do stuff that you can't with inline CSS, like pseudos or media queries:
+
+```xml
+<div class="hover:[border:1px_solid_#000] sm:[border:none]">
+  Border example
+</div>
 ```
 
 ## Plugins
 
 To use a Tailwind CSS plugin, simply `npm install` it and follow its instructions to add it to `plugins: []` in your `tailwind.config.js`.
-See the [Tailwind CSS docs](https://tailwindcss.com/docs/configuration#plugins).
+
+Here's an example from the Starter:
+
+<code-sample title="tailwind.config.js">
+
+  ```js
+  module.exports = {
+    // ...
+    plugins: [
+      require('tailwindcss-mso'),
+      require('tailwindcss-box-shadow'),
+      require('tailwindcss-email-variants'),
+    ],
+  }
+  ```
+
+</code-sample>
+
+See the [Tailwind CSS docs](https://tailwindcss.com/docs/configuration#plugins) for more information on plugins.
 
 ## Use in Template
 
@@ -313,9 +350,9 @@ First, add a `<block name="head">` inside your Layout's `<head>` tag:
   <!DOCTYPE html>
   <html>
   <head>
-    <if condition="page.css">
-      <style>{{{ page.css }}}</style>
-    </if>
+    <style>
+      {{{ page.css }}}
+    </style>
     <block name="head"></block>
   </head>
   <body>
@@ -353,15 +390,13 @@ Next, use that block in a Template:
 
 </code-sample>
 
-Maizzle will compile the contents of any `<style>` tag that has a `tailwindcss` attribute.
-
-<alert>The `tailwindcss` attribute is only required if you want the CSS to be compiled with Tailwind CSS. If you're just writing regular CSS syntax, you don't need to include this attribute.</alert>
+The `tailwindcss` attribute is only required if you want the CSS to be compiled with Tailwind CSS. If you're just writing regular CSS syntax, you don't need to include it.
 
 #### postcss attribute
 
 You may also use the `postcss` attribute instead of `tailwindcss`.
 
-This will compile the `<style postcss>` contents with PostCSS and any plugins you've enabled, including:
+This will compile the contents of `<style postcss>` tags with PostCSS and any plugins you've enabled, including:
 
 - postcss-import
 - postcss-nested
@@ -371,7 +406,7 @@ However, Tailwind CSS will not be enabled in this case.
 
 ### Prevent inlining
 
-When adding a `<style>` tag inside a Template, you can prevent all rules inside it from being inlined by using a `data-embed` attribute:
+When adding a `<style>` tag inside a Template, you can prevent all CSS rules inside it from being inlined by using a `data-embed` attribute:
 
 <code-sample title="src/templates/example.html">
 
@@ -393,13 +428,14 @@ When adding a `<style>` tag inside a Template, you can prevent all rules inside 
   ```
 
 </code-sample>
-<alert>Although it won't be inlined, unused CSS will still be purged by the <nuxt-link to="/docs/transformers/remove-unused-css">removeUnusedCSS</nuxt-link> Transformer.</alert>
+
+Although it will no longer be inlined, unused CSS will still be purged by the <nuxt-link to="/docs/transformers/remove-unused-css">removeUnusedCSS</nuxt-link> Transformer.
 
 ## Transforms
 
-Maizzle doesn't include Tailwind's base reset, as it would lead to many CSS properties being inlined all over the place.
+Maizzle doesn't include Tailwind's base reset, as it would lead to many unwanted CSS properties being inlined all over the place.
 
-To use transform utilities, you'll need to add the resets back yourself, in a `<style>` tag that won't be inlined:
+To use transform utilities, add the resets back in a `<style>` tag that won't be inlined:
 
 <code-sample title="src/templates/example.html">
 
