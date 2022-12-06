@@ -20,16 +20,12 @@ The following templates are included:
 - Accordion
 - Carousel
 
-## Customization
-
-A few notes on customizing this Starter.
-
-### Tailwind CSS
+## Tailwind CSS
 
 AMP templates don't allow inline CSS, so we've set `important: false` in `tailwind.config.js`.
 Because of this, this starter also uses an `md` screen and a mobile-first approach, instead of the usual desktop-first.
 
-### AMP Components
+## AMP Components
 
 For each component that you want to use in a template, you need to add its script to the `<head>`.
 We do this with a `head` block, right in the Template:
