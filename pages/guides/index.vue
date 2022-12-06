@@ -29,8 +29,10 @@
           </div>
 
           <hr>
-          <div class="text-sm text-slate-500">
-            Copyright &copy; {{ year }} Maizzle
+
+          <div class="flex gap-2 text-sm text-slate-500">
+            <span>Copyright &copy; {{ year }} Maizzle SRL</span>
+            <nuxt-link to="/brand" class="border-l border-slate-200 pl-2 hover:text-slate-900">Brand policy</nuxt-link>
           </div>
         </article>
       </div>

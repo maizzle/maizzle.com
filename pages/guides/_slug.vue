@@ -14,11 +14,15 @@
             class="prose max-w-[75ch] prose-slate prose-h2:mt-[1em] prose-headings:text-slate-800 prose-h1:font-bold prose-p:text-slate-600"
           />
           <hr>
-          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 text-sm text-slate-500">
-            <span class="">Copyright &copy; {{ year }} Maizzle</span>
+          <div class="flex flex-wrap sm:items-center sm:justify-between space-y-6 sm:space-y-0 text-sm text-slate-500">
+            <div class="flex gap-2">
+              <span>Copyright &copy; {{ year }} Maizzle SRL</span>
+              <nuxt-link to="/brand" class="border-l border-slate-200 pl-2 hover:text-slate-900">Brand policy</nuxt-link>
+            </div>
             <a
               :href="`https://github.com/maizzle/maizzle.com/edit/main/content${$route.path}.md`"
               class="flex gap-2 items-center hover:text-slate-900"
+              target="_blank"
             >
               <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />

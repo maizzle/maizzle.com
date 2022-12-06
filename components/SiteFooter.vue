@@ -16,6 +16,7 @@
             class="w-11 h-7 mr-10 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white transition-colors duration-300"
             to="/"
             aria-label="Homepage"
+            @click.native.right.prevent="goToBrandPage"
           >
             <site-insignia class="text-indigo-600" />
           </nuxt-link>
@@ -49,12 +50,20 @@
                   Guides
                 </nuxt-link>
               </li>
+              <li class="mb-3">
+                <nuxt-link
+                  to="/brand"
+                  class="text-slate-500 hover:text-slate-800 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                >
+                  Brand
+                </nuxt-link>
+              </li>
             </ul>
           </nav>
         </div>
         <div class="md:flex flex-col md:flex-row items-center justify-start md:justify-between">
           <p class="mb-6 md:mb-0 text-sm text-slate-400">
-            &copy; {{ year() }} All rights reserved.
+            &copy; {{ year }} Maizzle SRL. All rights reserved.
             Made with <span class="text-rose-400">❤</span> for email, open sourced under the MIT license.</p>
           <div class="flex items-center gap-5">
             <a
@@ -112,10 +121,15 @@
 <script>
 export default {
   name: 'SiteFooter',
-  methods: {
+  computed: {
     year() {
       return new Date().getFullYear()
     }
   },
+  methods: {
+    goToBrandPage() {
+      this.$router.push('/brand')
+    },
+  }
 }
 </script>
