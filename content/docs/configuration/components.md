@@ -9,9 +9,21 @@ Control where your Components live and how you reference them.
 
 <alert class="lg:hidden">We're testing a new components system for v4.4.0 - [give it a try](https://github.com/maizzle/framework/releases/tag/v4.4.0-beta.1)!</alert>
 
-### root
+## root
 
-You may define the path where your Components are located:
+By default, when using a Component you have to reference its path relative to your project root, like this:
+
+<code-sample title="src/templates/example.html">
+
+  ```xml
+  <component src="src/components/example.html">
+    Content to pass inside component...
+  </component>
+  ```
+
+</code-sample>
+
+However, you may set a base path for Components in your `config.js`:
 
 <code-sample title="config.js">
 
@@ -19,7 +31,7 @@ You may define the path where your Components are located:
   module.exports = {
     build: {
       components: {
-        root: './src/components'
+        root: 'src/components',
       }
     }
   }
@@ -27,19 +39,51 @@ You may define the path where your Components are located:
 
 </code-sample>
 
-This will allow you to reference components like so:
+This way, you can reference them relative to that `root` path and write less code:
 
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <component src="example.html"></component>
+  <component src="example.html">
+    Content to pass inside component...
+  </component>
   ```
 
 </code-sample>
 
-### tags
+## attribute
 
-Additionally, you may also customize the tag and attribute:
+Use a custom attribute name:
+
+<code-sample title="config.js">
+
+  ```js
+  module.exports = {
+    build: {
+      components: {
+        attribute: 'href',
+      }
+    }
+  }
+  ```
+
+</code-sample>
+
+You can now use `href` instead of `src`:
+
+<code-sample title="src/templates/example.html">
+
+  ```xml
+  <component href="src/components/example.html">
+    Content to pass inside component...
+  </component>
+  ```
+
+</code-sample>
+
+## tag
+
+Use a custom tag name:
 
 <code-sample title="config.js">
 
@@ -48,7 +92,6 @@ Additionally, you may also customize the tag and attribute:
     build: {
       components: {
         tag: 'module',
-        attribute: 'href'
       }
     }
   }
@@ -56,12 +99,14 @@ Additionally, you may also customize the tag and attribute:
 
 </code-sample>
 
-The above would allow you to pull in Components using the following markup:
+Example:
 
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <module href="src/components/example.html"></module>
+  <module src="src/components/example.html">
+    Content to pass inside component...
+  </module>
   ```
 
 </code-sample>

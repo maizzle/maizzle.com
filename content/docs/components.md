@@ -37,167 +37,57 @@ You may use the `<component>` tag to insert a Component in a Template:
 
 </code-sample>
 
-## Configuration
-
-You may define where you keep your Components and what markup they use.
-
-### Attribute
-
-Use a custom attribute name:
-
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      components: {
-        attribute: 'href',
-      }
-    }
-  }
-  ```
-
-</code-sample>
-
-You can now use it like this:
-
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <component href="src/components/example.html">
-    Content to pass inside component...
-  </component>
-  ```
-
-</code-sample>
-
-### Tag
-
-Use a custom tag name:
-
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      components: {
-        tag: 'module',
-      }
-    }
-  }
-  ```
-
-</code-sample>
-
-You can now use it like this:
-
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <module src="src/components/example.html">
-    Content to pass inside component...
-  </module>
-  ```
-
-</code-sample>
-
-### Root
-
-By default, when using a Component you have to reference its path relative to your project root (like we did above).
-
-However, you may customize this path:
-
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      components: {
-        root: 'src/components',
-      }
-    }
-  }
-  ```
-
-</code-sample>
-
-Now you can reference them relative to that `root` path, and write less code:
-
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <component src="example.html">
-    Content to pass inside component...
-  </component>
-  ```
-
-</code-sample>
-
 ## Example
 
-Let's create a VML background image Component to which we pass data about the image and the HTML to be overlayed on top of it.
+Let's create a basic alert Component.
 
-We might imagine something like this:
-
-<code-sample title="src/components/v-fill.html">
+<code-sample title="src/components/alert.html">
 
   ```xml
-  <!--[if mso]>
-  <v:rect stroke="false" style="width: {{ width }}" xmlns:v="urn:schemas-microsoft-com:vml">
-  <v:fill type="frame" src="{{{ image }}}" />
-  <v:textbox inset="0,0,0,0" style="mso-fit-shape-to-text: true"><div><![endif]-->
-  <content></content>
-  <!--[if mso]></div></v:textbox></v:rect><![endif]-->
+  <table class="w-full">
+    <tr>
+      <td class="px-4 py-2">
+        <content></content>
+      </td>
+    </tr>
+  </table>
   ```
 
 </code-sample>
 
-The content of the component or, in our case, the HTML to be placed over the image, will be output in place of the `<content>` tag.
-
-The variables that we are referencing in there are currently undefined, so let's create them in Front Matter and pass them to the component:
+We could use it like this:
 
 <code-sample title="src/templates/example.html">
 
   ```xml
-  ---
-  image:
-    url: 'https://example.com/image.jpg'
-    width: '600px'
-  ---
-
-  <extends src="src/layouts/main.html">
-    <block name="template">
-      <component
-        src="src/components/v-fill.html"
-        image="{{ image.url }}"
-        width="{{ image.width }}"
-      >
-        <div>
-          Overlayed HTML!
-        </div>
-      </component>
-    </block>
-  </extends>
+  <component
+    src="src/components/alert.html"
+    class="bg-red-100 text-red-700 rounded"
+    role="alert"
+  >
+    This is an alert!
+  </component>
   ```
 
 </code-sample>
 
 Result:
 
-<code-sample title="build_production/example.html">
+<code-sample title="src/templates/example.html">
 
   ```xml
-  <!--[if mso]>
-  <v:rect stroke="false" style="width: 600px" xmlns:v="urn:schemas-microsoft-com:vml">
-  <v:fill type="frame" src="https://example.com/image.jpg" />
-  <v:textbox inset="0,0,0,0" style="mso-fit-shape-to-text: true"><div><![endif]-->
-  <div>
-    Overlayed HTML!
-  </div>
-  <!--[if mso]></div></v:textbox></v:rect><![endif]-->
+  <table class="w-full bg-red-100 text-red-700 rounded" role="alert">
+    <tr>
+      <td class="px-4 py-2">
+        This is an alert!
+      </td>
+    </tr>
+  </table>
   ```
 
 </code-sample>
+
+As you can see, the Component's attributes are passed to the root tag (in our case the `<table>` tag), and the `<content>` tag is replaced with our content.
 
 ## Variables
 
@@ -310,10 +200,6 @@ Of course, you can ignore expressions when passing data or content to the Compon
     role="@{{ user.role }}"
   >
     Hello @{{ name | fallback: 'friend' }}!
-
-    <raw>
-      @{{ foo }}
-    </raw>
   </component>
   ```
 
@@ -321,16 +207,6 @@ Of course, you can ignore expressions when passing data or content to the Compon
 
 #### Ignoring raw blocks
 
-There's just one caveat: ignoring expressions inside `<raw>` blocks that you pass inside a component will only work like this:
+Ignoring expressions inside `<raw>` blocks that you pass inside a Component currently doesn't work, you'd still need to use the `@{{ }}` syntax.
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <component src="src/components/example.html">
-    <raw>
-      @{{ foo }}
-    </raw>
-  </component>
-  ```
-
-</code-sample>
+This will be fixed with the new Components system in v4.4.0.
