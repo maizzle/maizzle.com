@@ -17,7 +17,7 @@ For example, install [Autoprefixer](https://github.com/postcss/autoprefixer):
 
 </terminal>
 
-You can then add it to your `config.js`:
+Register it in `config.js`:
 
 <code-sample title="config.js">
 
@@ -35,4 +35,4 @@ You can then add it to your `config.js`:
 
 </code-sample>
 
-Any plugins added here will be registered at the end of the stack, _after_ Tailwind CSS.
+Any plugins that you register here will be added at the end of the PostCSS plugins stack, which means they'll run _after_ Tailwind CSS.
