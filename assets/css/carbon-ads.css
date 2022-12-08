@@ -1,0 +1,44 @@
+#carbonads {
+  display: block;
+  line-height: 1.5;
+  overflow: hidden;
+  max-width: 130px;
+}
+
+#carbonads a {
+  color: inherit;
+}
+
+#carbonads a:hover {
+  color: inherit;
+}
+
+#carbonads span {
+  display: block;
+  overflow: hidden;
+}
+
+.carbon-img {
+  display: block;
+  margin: 0 auto 8px;
+  line-height: 1;
+}
+
+.carbon-img img {
+  border-radius: 8px;
+}
+
+.carbon-text {
+  display: block;
+  margin-bottom: 8px;
+  font-size: .875rem;
+}
+
+.carbon-poweredby {
+  display: block;
+  font-size: .625rem;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}

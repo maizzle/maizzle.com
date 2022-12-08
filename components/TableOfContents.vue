@@ -2,7 +2,7 @@
   <div class="sticky top-28">
     <nav
       v-if="toc.length > 0"
-      class="custom-scrollbar max-w-[16rem] max-h-[calc(100vh-7rem)] overflow-y-auto pb-8  [scrollbar-gutter:stable]"
+      class="custom-scrollbar max-w-[16rem] max-h-[calc(100vh-7rem)] overflow-y-auto pb-8 [scrollbar-gutter:stable]"
     >
       <div class="sticky top-0">
         <h4 class="text-xs uppercase text-slate-700 font-semibold bg-white">On this page:</h4>
@@ -23,6 +23,14 @@
           >{{ link.text }}</a>
         </li>
       </ul>
+      <div class="mt-8">
+        <component
+          is="script"
+          src="//cdn.carbonads.com/carbon.js?serve=CE7IK2QM&placement=maizzlecom"
+          async
+          id="_carbonads_js"
+        />
+      </div>
     </nav>
   </div>
 </template>
