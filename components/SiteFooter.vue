@@ -11,7 +11,7 @@
         />
       </div>
       <div class="relative z-20">
-        <div class="mb-36 flex">
+        <div class="mb-16 sm:mb-36 flex">
           <nuxt-link
             class="w-11 h-7 mr-10 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white transition-colors duration-300"
             to="/"
@@ -20,46 +20,78 @@
           >
             <site-insignia class="text-indigo-600" />
           </nuxt-link>
-          <nav
-            role="menu"
-            aria-label="Footer Navigation"
-            class="navigation text-base"
-          >
-            <ul role="none">
-              <li class="mb-3">
-                <nuxt-link
-                  to="/docs/introduction"
-                  class="text-slate-500 hover:text-slate-800 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-                >
-                  Documentation
-                </nuxt-link>
-              </li>
-              <li class="mb-3">
-                <a
-                  href="https://mailviews.com"
-                  class="text-slate-500 hover:text-slate-800 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-                >
-                  Components
-                </a>
-              </li>
-              <li class="mb-3">
-                <nuxt-link
-                  to="/guides"
-                  class="text-slate-500 hover:text-slate-800 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-                >
-                  Guides
-                </nuxt-link>
-              </li>
-              <li class="mb-3">
-                <nuxt-link
-                  to="/brand"
-                  class="text-slate-500 hover:text-slate-800 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-                >
-                  Brand
-                </nuxt-link>
-              </li>
-            </ul>
-          </nav>
+          <div class="flex flex-wrap gap-8 sm:gap-16">
+            <nav
+              role="menu"
+              aria-label="Footer Navigation"
+              class="navigation text-base space-y-4"
+            >
+              <h4 class="text-sm uppercase text-slate-600 font-semibold">
+                Documentation
+              </h4>
+              <ul role="none">
+                <li class="mb-3">
+                  <nuxt-link
+                    to="/docs/introduction"
+                    class="text-slate-500 hover:text-slate-800 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                  >
+                    Get Started
+                  </nuxt-link>
+                </li>
+                <li class="mb-3">
+                  <nuxt-link
+                    to="/guides"
+                    class="text-slate-500 hover:text-slate-800 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                  >
+                    Guides
+                  </nuxt-link>
+                </li>
+                <li class="mb-3">
+                  <nuxt-link
+                    to="/brand"
+                    class="text-slate-500 hover:text-slate-800 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                  >
+                    Brand
+                  </nuxt-link>
+                </li>
+              </ul>
+            </nav>
+            <nav
+              role="menu"
+              aria-label="Footer Navigation (Community)"
+              class="navigation text-base space-y-4"
+            >
+              <h4 class="text-sm uppercase text-slate-600 font-semibold">
+                Community
+              </h4>
+              <ul role="none">
+                <li class="mb-3">
+                  <a
+                    href="https://github.com/maizzle/framework/discussions"
+                    class="text-slate-500 hover:text-slate-800 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                  >
+                    GitHub
+                  </a>
+                </li>
+                <li class="mb-3">
+                  <a
+                    href="https://twitter.com/maizzlejs"
+                    class="text-slate-500 hover:text-slate-800 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                  >
+                    Twitter
+                  </a>
+                </li>
+                <li class="mb-3">
+                  <a
+                    href="https://maizzle.com/discord"
+                    class="text-slate-500 hover:text-slate-800 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                  >
+                    Discord
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
         <div class="md:flex flex-col md:flex-row items-center justify-start md:justify-between">
           <p class="mb-6 md:mb-0 text-sm text-slate-400">
