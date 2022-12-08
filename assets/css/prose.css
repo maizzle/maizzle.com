@@ -14,6 +14,10 @@
   @apply mt-4 break-words;
 }
 
+.prose h4 {
+  @apply mb-4;
+}
+
 .prose h2 a,
 .prose h3 a,
 .prose h4 a {

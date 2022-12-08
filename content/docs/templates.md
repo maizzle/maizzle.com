@@ -14,7 +14,7 @@ They're made up of two distinct sections:
 
 ## Front Matter
 
-Templates can define new variables and even override existing ones in your config through an optional YAML-style Front Matter block:
+Templates can define new variables and even override existing ones from your config, through an optional YAML-style Front Matter block:
 
 <code-sample title="template.html">
 
@@ -26,7 +26,9 @@ title: "Please confirm your email address"
 
 </code-sample>
 
-Any Front Matter variables that you define in a Template are available under the `page` object, which means you can render them like this:
+Front Matter variables are accessible through the `page` object.
+
+To output them in your Template, use the `{{ }}` [expression](#expressions) syntax:
 
 <code-sample title="template.html">
 
@@ -44,31 +46,31 @@ title: "Please confirm your email address"
 
 ## Extending Layouts
 
-A Template can extend a Layout using the `<extends>` tag:
+Your emails will generally use the same 'boilerplate', like the `<!doctype>`, the `<head>` with all the `<meta>` tags, or the `<body>` tag.
 
-<code-sample title="template.html">
+Although you're free to do it, it would be very inefficient to always have to write this boilerplate every time you create a new Template.
+
+In Maizzle, you can re-use a [Layout](/docs/layouts) by having a Template extend it:
+
+<code-sample title="src/templates/example.html">
 
 ```xml
----
-preheader: The Weekly Newsletter
----
-
 <extends src="src/layouts/main.html">
-  <!-- Add <block> tags here -->
+  <block name="template">
+    <!-- ... -->
+  </block>
 </extends>
 ```
 
 </code-sample>
 
-The path provided in the `src=""` attribute must be relative to the path in `build.layouts.root` from your config.
-
-<alert type="warning">If there is no file at that path, the build will fail with a `Template render error`</alert>
+<alert type="warning">The path provided in the `src=""` attribute must be relative to the path in [`build.layouts.root`](/docs/configuration/layouts#root) from your config. If there is no file at that path, the build will fail with a `Template render error`.</alert>
 
 ### How Extending Works
 
-When a Template `<extends>` a Layout, a `<block>` tag with an identical `name=""` attribute is searched for in the Layout that is being extended.
+When a Template `<extends>` a Layout, Maizzle will look for matching `<block>` tags in both the Template and the Layout. The matching is done via the `name=""` attribute.
 
-Each matching tag will be replaced with the contents of its corresponding `<block>` tag from the Template.
+Each matching `<block>` in the Layout will be replaced with the contents of its corresponding `<block>` tag from the Template.
 
 ### Extending Templates
 
@@ -229,9 +231,15 @@ Handlebars-like curly brace expression syntax is supported, allowing you to acce
 <code-sample title="src/templates/example.html">
 
   ```xml
+  ---
+  title: Example
+  ---
+
   <extends src="src/layouts/main.html">
     <block name="template">
-      You ran the `maizzle build {{ page.env }}` command
+      The title is: {{ page.title }}
+
+      You ran the `maizzle build {{ page.env }}` command.
     </block>
   </extends>
   ```
@@ -241,7 +249,9 @@ Handlebars-like curly brace expression syntax is supported, allowing you to acce
 Running `maizzle build production` would render this:
 
 ```xml
-You ran the `maizzle build production` command
+The title is: Example
+
+You ran the `maizzle build production` command.
 ```
 
 You may use basic JavaScript expressions within curly braces:
@@ -259,9 +269,16 @@ You may use basic JavaScript expressions within curly braces:
 
 </code-sample>
 
+Running `maizzle build`, we would get:
+
+```xml
+doctype is not set
+this email isn't production ready!
+```
+
 ### Unescaping variables
 
-Special characters are escaped when using two curly braces:
+By default, special characters are escaped when using two curly braces:
 
 <code-sample title="src/templates/example.html">
 
@@ -301,7 +318,7 @@ If you need to render values exactly as they are, use triple curly braces:
 
 ### Ignoring expressions
 
-Other templating engines, as well as many <abbr title="Email Service Provider">ESP</abbr>s  also use the `{{ }}` syntax.
+Other templating engines, as well as many <abbr title="Email Service Provider">ESP</abbr>s, also use the `{{ }}` syntax.
 
 If you want to prevent expression compilation and render the curly braces so you can evaluate them at a later stage, you have two options:
 
@@ -323,9 +340,9 @@ The compiled email will render `{{ }}` without the `@`.
 
 </code-sample>
 
-#### Ignoring expressions inside Front Matter
+#### Ignoring expressions in Front Matter
 
-You may use `@{{ }}` to prevent expressions in Front Matter from being evaluated.
+You may also use `@{{ }}` to prevent expressions in Front Matter from being evaluated.
 
 <code-sample title="src/templates/example.html">
 
@@ -349,19 +366,6 @@ Result:
 
   ```
   Weekly newsletter no. {{ edition_count }}
-  ```
-
-</code-sample>
-
-If you're outputting the Front Matter variable in a custom tag like `<if>` or `<switch>`, you'll need to `@`-ignore it there as well.
-
-<code-sample title="src/layouts/main.html">
-
-  ```diff
-  <if condition="page.title">
--    <title>{{ page.title }}</title>
-+    <title>@{{ page.title }}</title>
-  </if>
   ```
 
 </code-sample>
@@ -411,6 +415,8 @@ module.exports = {
 </code-sample>
 
 See all available [expressions options](https://github.com/posthtml/posthtml-expressions#options).
+
+By default, Maizzle only sets `{strictMode: false}` - this way, if you have an error inside an expression, it's result will be output as `undefined` and the email will still be compiled, instead of the build failing.
 
 ## Current template
 
