@@ -87,9 +87,11 @@ Maizzle comes with an email-tailored `tailwind.config.js`, customized for optima
 These are the default Tailwind CSS [content sources](https://tailwindcss.com/docs/content-configuration) that Maizzle uses:
 
 - the content of the template file currently being processed
-- your [Components root](/docs/configuration/components#root) or `./src/components/**/*.html`
-- your [Layouts root](/docs/configuration/layouts#root) or `./src/layouts/**/*.html`
-- all [Template sources](/docs/configuration/templates)
+- your [Components root](/docs/configuration/components#root) (default: `./src/components/**/*.html`)
+- your [Layouts root](/docs/configuration/layouts#root) (default: `./src/layouts/**/*.html`)
+- all your [Template sources](/docs/configuration/templates#source)
+
+These paths are scanned by Tailwind CSS for class names, so that it can generate the corresponding CSS.
 
 You may configure additional content sources by adding a `content` key to your `tailwind.config.js`:
 
@@ -100,15 +102,15 @@ You may configure additional content sources by adding a `content` key to your `
     content: [
       './some/other/path/**.{html,js}',
       // Need to add these two back:
-      './src/components/**.html',
-      './src/layouts/**.html',
+      './src/components/**/*.html',
+      './src/layouts/**/*.html',
     ],
   }
   ```
 
 </code-sample>
 
-<alert type="warning">When adding content paths to `tailwind.config.js` you need to also include the paths to Components and Layouts (like in the example above), as this overwrites the default config and otherwise classes from files in those locations will not be generated.</alert>
+Adding paths to `tailwind.config.js` will overwrite the default content paths, so you need to add back the paths for Components and Layouts, like in the example above.
 
 ### !important
 
@@ -117,11 +119,11 @@ HTML emails still need to use inline CSS, most notably for these reasons:
 - Outlook/Office 365 for Windows only reads the first class in a `class=""` attribute, ignoring the rest.
   So it'll only use `a` from `class="a b"`
 - Some email clients don't support embedded CSS (i.e. in `<style>`)
-- Embedded styles are usually lost when an email is forwarded
+- Embedded styles are often discarded when an email is forwarded
 
-So because we need to write inline CSS, Tailwind's `important` option is set to `true` in Maizzle - this way responsive utilities can actually override the inlined CSS.
+Because of this, Tailwind's `important` option is set to `true` in Maizzle - this way responsive utilities can actually override the inlined CSS.
 
-<alert>This applies only to `<head>` CSS, inlined CSS declarations will not contain `!important`</alert>
+<alert>Only CSS in `<style>` tags will use `!important`, inlined CSS in `style=""` attributes will not.</alert>
 
 You may disable this behavior by adding the `important` key to your Tailwind config:
 
