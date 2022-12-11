@@ -74,9 +74,9 @@ Because Tailwind CSS is compiled only once, _before_ any Templates are processed
 
 ### compiled
 
-Use the `compiled` key if you already have a CSS string that you want to use instead of compiling Tailwind CSS.
+Use the `compiled` key if you already have a CSS string - this will skip Tailwind CSS compilation and no utilities will be generated.
 
-This will skip Tailwind CSS compilation and no utilities will be generated.
+You shouldn't need this in real life, it's there for internal use mostly.
 
 ## tailwind.config.js
 
