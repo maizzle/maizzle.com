@@ -29,7 +29,7 @@
         "eslint-config-xo-space": "^0.34.0",
         "eslint-plugin-vue": "^9.8.0",
         "nuxt-vite": "0.2.4",
-        "postcss": "^8.4.20",
+        "postcss": "^8.4.21",
         "postcss-import": "^15.1.0",
         "postcss-preset-env": "^7.8.3",
         "shiki": "^0.10.1",
