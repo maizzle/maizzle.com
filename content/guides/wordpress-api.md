@@ -104,14 +104,14 @@ Our code becomes:
         <v:image src="{{ response[0]._embedded['wp:featuredmedia'][0]['source_url'] || 'https://via.placeholder.com/600x400' }}" xmlns:v="urn:schemas-microsoft-com:vml" style="width:600px;height:400px;" />
         <v:rect fill="false" stroke="false" style="position:absolute;width:600px;height:400px;">
         <v:textbox inset="0,0,0,0"><div><![endif]-->
-        <div class="leading-8">&zwnj;</div>
+        <div class="leading-8">&zwj;</div>
         <table class="w-full">
           <tr>
             <td class="w-12 sm:w-4"></td>
             <td>
               <h1 class="m-0 mb-4 text-4xl text-white sm:leading-10">{{ response[0].title.rendered }}</h1>
               <div class="m-0 text-white text-lg leading-6">{{ response[0].excerpt.rendered }}</div>
-              <div class="leading-8">&zwnj;</div>
+              <div class="leading-8">&zwj;</div>
               <table>
                 <tr>
                   <th class="bg-indigo-800 hover:bg-indigo-700 rounded" style="mso-padding-alt: 16px 24px;">
@@ -123,7 +123,7 @@ Our code becomes:
             <td class="w-12 sm:w-4"></td>
           </tr>
         </table>
-        <div class="leading-8">&zwnj;</div>
+        <div class="leading-8">&zwj;</div>
         <!--[if mso]></div></v:textbox></v:rect><![endif]-->
       </td>
     </tr>
@@ -178,7 +178,7 @@ For example, let's show the last 2 posts in a list format at the end of the temp
   ```xml
   <fetch url="https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=6&_embed=1">
     <h3 class="m-0 text-base font-semibold text-gray-500 uppercase">From the archives</h3>
-    <div class="leading-6">&zwnj;</div>
+    <div class="leading-6">&zwj;</div>
     <table class="w-full">
       <each loop="post in response.slice(-2)">
         <tr>
@@ -194,7 +194,7 @@ For example, let's show the last 2 posts in a list format at the end of the temp
               <table class="w-full">
                 <tr>
                   <td class="py-6">
-                    <div class="bg-gray-300 h-px leading-px">&zwnj;</div>
+                    <div class="bg-gray-300 h-px leading-px">&zwj;</div>
                   </td>
                 </tr>
               </table>
