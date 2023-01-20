@@ -117,7 +117,7 @@ The spacing above and below the Table Divider line is defined through the vertic
   <table class="w-full" role="separator">
     <tr>
       <td class="py-6">
-        <div class="bg-slate-300 h-px leading-px">&zwnj;</div>
+        <div class="bg-slate-300 h-px leading-px">&zwj;</div>
       </td>
     </tr>
   </table>
@@ -129,9 +129,9 @@ How it works:
 
 - `py-6` adds 24px top and bottom padding
 - the `<div>` is the horizontal line: we set its height and line-height to 1px, and give it a background color
-- we use a `&zwnj;` to add something inside the `<div>`, so it can take up height
+- we use a `&zwj;` to add something inside the `<div>`, so it can take up height
 
-Feel free to use `&nbsp;` instead of `&zwnj;` - both work just fine 👌
+Feel free to use `&nbsp;` instead of `&zwj;` - both work just fine 👌
 
 ### Outlook note
 
@@ -145,7 +145,7 @@ To make Outlook respect the line height you set on elements, you may use the `ms
   <table class="w-full" role="separator">
     <tr>
       <td class="py-6">
-        <div class="bg-slate-300 h-px leading-px mso-line-height-rule-exactly">&zwnj;</div>
+        <div class="bg-slate-300 h-px leading-px mso-line-height-rule-exactly">&zwj;</div>
       </td>
     </tr>
   </table>
