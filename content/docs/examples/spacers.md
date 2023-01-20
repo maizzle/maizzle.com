@@ -16,7 +16,7 @@ The simplest vertical spacer for HTML emails:
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <div class="leading-4" role="separator">&zwnj;</div>
+  <div class="leading-4" role="separator">&zwj;</div>
   ```
 
 </code-sample>
@@ -25,17 +25,15 @@ How it works:
 
 1. `leading-4` sets the spacer's height with `line-height: 16px;`
 2. `role="separator"` indicates the element is a divider, improving accessibility
-3. `&zwnj;` adds 'content' inside, so that the `<div>` can take up height
+3. `&zwj;` adds 'content' inside, so that the `<div>` can take up height
 
 You may specify a different height for smaller devices by using the `sm:` screen variant:
 
 ```xml
-<div class="leading-4 sm:leading-2" role="separator">&zwnj;</div>
+<div class="leading-4 sm:leading-2" role="separator">&zwj;</div>
 ```
 
 <alert>Responsive heights will only work in email clients that support `@media` queries.</alert>
-
-<alert>Feel free to use `&nbsp;` instead of `&zwnj;`, both work just fine.</alert>
 
 ## Table
 
@@ -48,7 +46,7 @@ If you need more control over the styling of your Spacer, use this one instead:
   ```xml
   <table class="w-full" role="separator">
     <tr>
-      <td class="leading-4">&zwnj;</td>
+      <td class="leading-4">&zwj;</td>
     </tr>
   </table>
   ```
@@ -63,7 +61,7 @@ Need to add space between `<table>` rows?
 
   ```xml
   <tr role="separator">
-    <td class="leading-4">&zwnj;</td>
+    <td class="leading-4">&zwj;</td>
   </tr>
   ```
 
