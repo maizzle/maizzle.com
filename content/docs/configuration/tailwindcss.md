@@ -469,8 +469,8 @@ The `lineHeight` utilities have been extended to include all `spacing` scale val
 So you can use `leading` utilities to easily create vertical spacing, like this:
 
 ```xml
-<div class="leading-16">&zwnj;</div>
-<!-- Result: <div style="line-height: 64px">&zwnj;</div> -->
+<div class="leading-16">&zwj;</div>
+<!-- Result: <div style="line-height: 64px">&zwj;</div> -->
 ```
 
 ### maxWidth
