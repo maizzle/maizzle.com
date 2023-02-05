@@ -199,11 +199,15 @@ Of course, you can ignore expressions when passing data or content to the Compon
     src="src/components/example.html"
     role="@{{ user.role }}"
   >
-    Hello @{{ name | fallback: 'friend' }}!
+    Hello @@{{ name | fallback: 'friend' }}!
   </component>
   ```
 
 </code-sample>
+
+Due to the way content passed to a Component is rendered, ignoring expressions needs to be done with `@@{{ }}` instead of `@{{ }}`.
+
+This will be fixed with the new Components system in v4.4.0.
 
 #### Ignoring raw blocks
 
