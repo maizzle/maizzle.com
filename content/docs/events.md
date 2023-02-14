@@ -82,9 +82,16 @@ For example, let's use a custom highlight function for Markdown fenced code bloc
   module.exports = {
     events: {
       async beforeCreate(config) {
-        config.markdown.highlight = (code, lang, callback) => {
-          return Prism.highlight(code, Prism.languages[lang], lang)
-        }
+        config = Object.assign(config, {
+          markdown: {
+            markdownit: {
+              highlight: (code, lang) => {
+                lang = lang || 'html'
+                return Prism.highlight(code, Prism.languages[lang], lang)
+              }
+            }
+          }
+        })
       }
     }
   }
@@ -92,7 +99,7 @@ For example, let's use a custom highlight function for Markdown fenced code bloc
 
 </code-sample>
 
-<alert>Use `beforeCreate` if you need to manipulate your config only once.</alert>
+<alert>Use `beforeCreate` if you need to update the config only once.</alert>
 
 ### beforeRender
 
@@ -113,7 +120,7 @@ For (a silly) example, let's fetch data from an API and set it as the preheader 
 
         config.preheader = await axios(url).then(result => result.data).catch(error => 'Could not fetch preheader, using default one.')
 
-        // must always return the `html`
+        // must return `html`
         return html
       }
     }
@@ -134,7 +141,7 @@ Then, you'd render it in your HTML, like so:
 
 </code-sample>
 
-<alert>`beforeRender` runs for each template that is going to be compiled. For performance reasons, you should use it only if you need access to the config of the Template currently being processed (which includes variables from the Template's Front Matter).</alert>
+`beforeRender` runs for each template that is going to be compiled. For performance reasons, you should only use it if you need access to the config of the Template that is about to be compiled (which includes variables from the Template's Front Matter).
 
 <alert type="warning">You must always return the `html` when using `beforeRender()`.</alert>
 
@@ -155,7 +162,7 @@ For example, let's disable CSS inlining:
       afterRender(html, config) {
         config.inlineCSS = false
 
-        // must always return the `html`
+        // must return `html`
         return html
       }
     }
@@ -163,6 +170,8 @@ For example, let's disable CSS inlining:
   ```
 
 </code-sample>
+
+`afterRender` runs for each template, right after it has been compiled. Use it only if you need access to the config of the Template that was just compiled.
 
 <alert type="warning">You must always return the `html` when using `afterRender()`.</alert>
 
@@ -187,6 +196,7 @@ For example, maybe you don't like the minifier that Maizzle includes, and you di
           return Minifier.minify(html)
         }
 
+        // must return `html`
         return html
       }
     }
@@ -226,4 +236,4 @@ Using it with the Starter, `maizzle build production` will output:
 ]
 ```
 
-<alert type="warning">The `afterBuild` event is available only when using the `maizzle build` CLI command, so it will only work if added to the `events` object in your environment config and not with the API.</alert>
+<alert type="warning">The `afterBuild` event is available only when using the `maizzle build` CLI command, so it will only work if added to the `events` object in your `config.js` and not with the API.</alert>
