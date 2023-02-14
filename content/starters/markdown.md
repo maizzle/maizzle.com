@@ -66,12 +66,14 @@ The default layout is `src/layouts/main.html`, but if you want to use a differen
 
 <code-sample title="src/content/example.md">
 
-  ```yaml
+  ```md
   ---
   layout: secondary
   ---
 
-  Markdown content...
+  ## Custom layout
+
+  This email uses a custom layout, defined in `src/layouts/secondary.html`.
   ```
 
 </code-sample>
