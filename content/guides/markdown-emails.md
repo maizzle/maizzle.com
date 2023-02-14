@@ -14,7 +14,7 @@ If you want to dive right in, check out the [Markdown Starter](https://github.co
 
 ## Project setup
 
-For this project, we'll be using the new components system in Maizzle, which at the time of writing is still in beta ([4.4.0-beta2](https://github.com/maizzle/framework/releases/tag/v4.4.0-beta.2)).
+For this project, we'll be using the new components system in Maizzle, which at the time of writing is still in beta ([4.4.0-beta10](https://github.com/maizzle/framework/releases)).
 
 Scaffold a new project using the `next` branch of the Starter:
 
@@ -68,9 +68,9 @@ Next, create `src/content/newsletter-1.md` and add some content to it:
 
 ### Layout
 
-Since we just want to write Markdown in our `content` files and not have to deal with any tables and such, we need to update `src/layouts/main.html` to contain the entire HTML skeleton. This will contain our entire HTML email template boilerplate.
+Since we just want to write Markdown and not have to deal with any tables and such, we need to update `src/layouts/main.html` to contain the entire HTML boilerplate.
 
-Replace the contents of `src/layouts/main.html` with the following:
+Replace its contents with the following:
 
 <code-sample title="src/layouts/main.html">
 
@@ -326,6 +326,56 @@ The plugin is great for the web, but it contains complex CSS selectors that are 
 
 Feel free to experiment with it, but consider yourself warned.
 
+## Syntax highlighting
+
+You can use syntax highlighters like [Shiki](https://shiki.matsu.io/) or [Prism](https://prismjs.com/) to add syntax highlighting to fenced code blocks in your markdown.
+
+For example, here's how you'd use Shiki.
+
+First, install the library:
+
+<terminal show-copy>
+
+  ```bash
+  npm install shiki
+  ```
+
+</terminal>
+
+Next, define a custom `highlight` method for `markdown-it`. Add it in the `beforeCreate` event so that the highlighter is retrieved once, before templates are compiled:
+
+<code-sample title="config.js">
+
+  ```js
+  const shiki = require('shiki')
+
+  module.exports = {
+    // ...
+    events: {
+      async beforeCreate(config) {
+        const highlighter = await shiki.getHighlighter({
+          theme: 'nord',
+        })
+
+        config = Object.assign(config, {
+          markdown: {
+            markdownit: {
+              highlight: (code, lang) => {
+                lang = lang || 'html'
+                return highlighter.codeToHtml(code, { lang })
+              }
+            }
+          }
+        })
+      },
+    },
+  }
+  ```
+
+</code-sample>
+
+Now all your markdown code blocks will be highlighted with the Nord theme.
+
 ## Expressions
 
 You can use [expressions](/docs/templates#expressions) in Markdown files just as you would in any Maizzle template:
@@ -426,6 +476,26 @@ To prevent an issue with code indentation in `markdown-it` that would result in 
   </td>
   </tr>
   </table>
+  ```
+
+</code-sample>
+
+Alternatively, you may use the `prettify` transformer to remove the indentation:
+
+<code-sample title="config.js">
+
+  ```js
+  const {prettify} = require('@maizzle/framework')
+
+  module.exports = {
+    events: {
+      afterRender(html) {
+        return prettify(html, {
+          indent_size: 0,
+        })
+      }
+    },
+  }
   ```
 
 </code-sample>
