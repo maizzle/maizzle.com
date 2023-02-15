@@ -98,6 +98,10 @@ export default [
         path: '/docs/components'
       },
       {
+        title: 'Expressions',
+        path: '/docs/expressions'
+      },
+      {
         title: 'Custom Tags',
         path: '/docs/tags'
       },
