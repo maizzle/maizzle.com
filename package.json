@@ -25,7 +25,7 @@
         "@tailwindcss/typography": "^0.5.9",
         "autoprefixer": "^10.4.13",
         "axios": "^0.27.2",
-        "eslint": "^8.30.0",
+        "eslint": "^8.34.0",
         "eslint-config-xo-space": "^0.34.0",
         "eslint-plugin-vue": "^9.9.0",
         "nuxt-vite": "0.2.4",
