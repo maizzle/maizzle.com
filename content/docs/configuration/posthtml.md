@@ -444,7 +444,6 @@ Specify the attribute value quotes style.
 
 Register any PostHTML plugins that you would like to use, in the `plugins` array:
 
-
 <code-sample title="config.js">
 
   ```js
@@ -463,7 +462,43 @@ Register any PostHTML plugins that you would like to use, in the `plugins` array
 
 </code-sample>
 
-Maizzle already uses the following plugins, no need to add them:
+### Custom plugins
+
+Here's how you can write a PostHTML plugin right in your Maizzle `config.js` file:
+
+<code-sample title="config.js">
+
+  ```js
+  module.exports = {
+    build: {
+      posthtml: {
+        plugins: [
+          // Inline plugin that adds a random number to all img src URLs
+          (() => tree => {
+            const process = node => {
+              if (node.tag === 'img' && node.attrs?.src) {
+                const randomNumber = Math.floor(Math.random() * 10 ** 16).toString().padStart(16, '0')
+                node.attrs.src = node.attrs.src + `?v=${randomNumber}`
+              }
+
+              return node
+            }
+
+            return tree.walk(process)
+          })()
+        ]
+      }
+    }
+  }
+  ```
+
+</code-sample>
+
+<alert>Note that this is a naive example that doesn't take existing query strings into account.</alert>
+
+### Built-in plugins
+
+Maizzle already uses the following plugins, no need to add them to your config:
 
 - [posthtml-extend](https://github.com/posthtml/posthtml-extend)
 - [posthtml-modules](https://github.com/posthtml/posthtml-modules)
