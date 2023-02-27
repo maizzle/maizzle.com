@@ -21,11 +21,7 @@
             <site-insignia class="text-indigo-600" />
           </nuxt-link>
           <div class="flex flex-wrap gap-8 sm:gap-16">
-            <nav
-              role="menu"
-              aria-label="Footer Navigation"
-              class="navigation text-base space-y-4"
-            >
+            <nav class="navigation text-base space-y-4">
               <h4 class="text-sm uppercase text-slate-600 font-semibold">
                 Documentation
               </h4>
@@ -56,11 +52,7 @@
                 </li>
               </ul>
             </nav>
-            <nav
-              role="menu"
-              aria-label="Footer Navigation (Community)"
-              class="navigation text-base space-y-4"
-            >
+            <nav class="navigation text-base space-y-4">
               <h4 class="text-sm uppercase text-slate-600 font-semibold">
                 Community
               </h4>
