@@ -255,10 +255,10 @@
               v-for="feature in features"
               :key="feature.path"
               :to="feature.path"
-              class="grid-item relative rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white transition-colors duration-300"
+              class="group relative rounded-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white transition-colors duration-300"
             >
-              <div class="frame w-full h-full p-[1px] rounded-[9px] absolute z-0 bg-slate-300 transition-all duration-300">
-                <div class="frame-inner w-full h-full rounded-lg absolute bg-white"></div>
+              <div class="w-full h-full p-[1px] rounded-[9px] absolute z-0 bg-slate-300 transition-all duration-300 group-hover:bg-indigo-600 group-hover:shadow-lg group-hover:scale-x-[1.04] group-hover:scale-y-[1.05]">
+                <div class="w-[calc(100%-2px)] h-[calc(100%-2px)] rounded-lg absolute bg-white"></div>
               </div>
               <div class="px-6 py-5 rounded-lg relative z-1">
                 <h4 class="mb-5 font-bold text-xl text-slate-700">{{ feature.title }}</h4>
@@ -325,38 +325,32 @@
           <div
             v-for="guide in guides"
             :key="guide.title"
-            class="grid-item relative"
+            class="group relative"
           >
-            <div class="frame w-full h-full p-[1px] rounded-[9px] absolute z-0 bg-slate-300 transition-all duration-300">
-              <div class="frame-inner w-full h-full rounded-lg absolute bg-white"></div>
-            </div>
-            <div class="h-full px-6 py-5 rounded-lg flex flex-col md:flex-row md:flex-wrap flex-1 content-between relative z-1">
-              <div>
-                <span class="mb-5 block text-sm text-slate-400">
-                  {{ formatDate(guide.date) }}
-                </span>
-                <h4 class="mb-5 font-bold text-xl">
-                  <nuxt-link
-                    class="grid-item relative text-slate-700 hover:text-indigo-600  rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white transition-colors duration-300"
-                    :to="guide.path"
-                  >
-                    {{ guide.title }}
-                  </nuxt-link>
-                </h4>
-                <p class="mb-5 text-base text-slate-500">{{ guide.description }}</p>
+            <nuxt-link
+              class="relative text-slate-700 hover:text-indigo-600 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white transition-colors duration-300"
+              :to="guide.path"
+            >
+              <div class="w-full h-full p-[1px] rounded-[9px] absolute z-0 bg-slate-300 transition-all duration-300 group-hover:bg-indigo-600 group-hover:shadow-lg group-hover:scale-x-[1.04] group-hover:scale-y-[1.05]">
+                <div class="w-[calc(100%-2px)] h-[calc(100%-2px)] rounded-lg absolute bg-white"></div>
               </div>
-              <div class="w-full">
-                <div class="mb-5 border-b border-slate-300"></div>
-                <div class="text-right">
-                  <nuxt-link
-                    class="grid-item relative text-indigo-600 hover:underline  rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-                    :to="guide.path"
+              <div class="h-full px-6 py-6 rounded-lg flex flex-col md:flex-row md:flex-wrap flex-1 content-between relative z-1">
+                <div>
+                  <time
+                    class="mb-5 block text-sm text-slate-400"
+                    :datetime="formatDateToISO(guide.date)"
                   >
-                    Read more
-                  </nuxt-link>
+                    {{ formatDate(guide.date) }}
+                  </time>
+                  <h4 class="mb-5 font-bold text-xl text-slate-700">
+                    {{ guide.title }}
+                  </h4>
+                  <p class="text-base text-slate-500">
+                    {{ guide.description }}
+                  </p>
                 </div>
               </div>
-            </div>
+            </nuxt-link>
           </div>
         </div>
       </div>
@@ -524,6 +518,11 @@ export default {
         day: 'numeric',
         year: 'numeric'
       })
+    },
+    // date to YYYY-MM-DD
+    formatDateToISO(string) {
+      const date = new Date(string)
+      return date.toISOString().split('T')[0]
     },
   },
 }

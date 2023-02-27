@@ -1,7 +1,0 @@
-.grid-item .frame-inner {
-  @apply w-[calc(100%-2px)] h-[calc(100%-2px)];
-}
-
-.grid-item:hover .frame {
-  @apply bg-indigo-600 shadow-lg scale-x-[1.04] scale-y-[1.05];
-}

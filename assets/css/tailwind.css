@@ -10,7 +10,6 @@
 @import "header";
 @import "navigation";
 @import "lazyload";
-@import "grid";
 @import "form";
 
 @import "tailwindcss/utilities";
