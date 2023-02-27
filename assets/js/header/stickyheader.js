@@ -1,5 +1,5 @@
 // Copyright © UnlimitDesign 2019
-// Plugin: Sticky Header 
+// Plugin: Sticky Header
 // Version: 1.0.0
 // URL: @UnlimitDesign
 // Author: UnlimitDesign, Christian Lundgren, Shu Miyao
@@ -18,13 +18,13 @@ const tmStickyHeader = (function () {
   // Set the plugin defaults
   const defaults = {
     stickyClass: 'sticky',
-    backgrounClass: 'header-background',
+    backgroundClass: 'header-background',
     compactClass: 'header-compact',
     headerInClass: 'header-in',
     headerOutClass: 'header-out',
     initialPosClass: 'header-positioned',
     initialized: function () { },              // Callback - header initialized
-    sticky: function () { },                   // Callack - header stickyy
+    sticky: function () { },                   // Callback - header sticky
     destroyed: function () { }                  // Callback - header destroyed
   }
 
@@ -35,10 +35,10 @@ const tmStickyHeader = (function () {
   */
   function StickyHeader(element, options) {
 
-    // Deounce events if window on scroll event is used
+    // Debounce events if window on scroll event is used
     let debounceTimeout
 
-    // Variables for monotoring last and current header position
+    // Variables for monitoring last and current header position
     let lastPos = 0
     let currentPos
 
@@ -78,7 +78,7 @@ const tmStickyHeader = (function () {
     */
     const toggleClasses = (header) => {
 
-      // Get data attriute values
+      // Get data attribute values
       let winH = window.innerHeight
       let headerH = Math.ceil(header.offsetHeight)
       let thresholdBkg = header.dataset.bkgThreshold == 'window-height' ? winH - headerH : header.dataset.bkgThreshold
@@ -108,9 +108,9 @@ const tmStickyHeader = (function () {
 
       // Background
       if (thresholdBkg && window.pageYOffset >= thresholdBkg) {
-        classList(header).addClass(plugin.settings.backgrounClass)
+        classList(header).addClass(plugin.settings.backgroundClass)
       } else {
-        classList(header).removeClass(plugin.settings.backgrounClass)
+        classList(header).removeClass(plugin.settings.backgroundClass)
       }
 
       // Compact
