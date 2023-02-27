@@ -5,7 +5,9 @@
       class="custom-scrollbar max-w-[16rem] max-h-[calc(100vh-7rem)] overflow-y-auto pb-8 [scrollbar-gutter:stable]"
     >
       <div class="sticky top-0">
-        <h4 class="text-xs uppercase text-slate-700 font-semibold bg-white">On this page:</h4>
+        <h4 class="text-xs uppercase text-slate-700 font-semibold bg-white">
+          On this page:
+        </h4>
         <div class="bg-gradient-to-b from-white h-6 w-full"></div>
       </div>
       <ul class="space-y-2.5 text-sm">
@@ -18,7 +20,7 @@
           <a
             :href="`#${link.id}`"
             class="text-slate-600 hover:text-slate-900"
-            :class="{'text-indigo-600 hover:text-indigo-600': $route.hash === `#${link.id}`}"
+            :class="{'!text-indigo-600 hover:!text-indigo-600': $route.hash === `#${link.id}`}"
             @click="scrollTo(`#${link.id}`)"
           >{{ link.text }}</a>
         </li>
