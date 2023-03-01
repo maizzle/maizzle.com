@@ -73,7 +73,7 @@ For example, let's register a Tailwind utility for Open Sans:
   ```js
   module.exports = {
     theme: {
-      extends: {
+      extend: {
         fontFamily: {
           'open-sans': ['"Open Sans"', 'ui-sans-serif', 'system-ui', '-apple-system', '"Segoe UI"', 'sans-serif'],
           merriweather: ["'Merriweather'", 'ui-serif', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
