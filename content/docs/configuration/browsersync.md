@@ -5,11 +5,29 @@ description: "Configuring Browsersync to watch files when developing locally in 
 
 # Browsersync configuration
 
-When you run the `maizzle serve` command, Maizzle uses Browsersync to start a local development server and open a directory listing of your emails in your default browser.
+When you run the `maizzle serve` command, Maizzle uses [Browsersync](https://browsersync.io) to start a local development server and open a directory listing of your emails in your default browser.
 
 You can then make changes to your emails, save them, and watch the browser automatically refresh the tab for you.
 
-You can use any of the [Browsersync options](https://browsersync.io/docs/options) in your config, and Maizzle comes with a few defaults that you may customize.
+Maizzle sets some defaults for Browsersync, but you can customize them in your `config.js` file.
+
+For example, here's how you'd use a custom port number:
+
+<code-sample title="config.js">
+
+  ```js
+  module.exports = {
+    build: {
+      browsersync: {
+        port: 8080,
+      }
+    }
+  }
+  ```
+
+</code-sample>
+
+These are the defaults that Maizzle uses:
 
 ### directory
 
@@ -17,9 +35,9 @@ Type: `boolean`
 <br>
 Default: `true`
 
-When running `maizzle serve` with this setting enabled, Browsersync will open a file explorer in your default browser, showing root of the `build_local` directory.
+When running `maizzle serve` with `directory: true`, Browsersync will open a file explorer in your default browser, showing root of the `build_local` directory.
 
-If you set this to `false`, the page opened by Browsersync will be blank, and you'll need to manually navigate to your emails directory.
+If you set `directory: false`, the page opened by Browsersync will be blank, and you'll need to manually navigate to your emails directory.
 
 <alert>Use `directory: false` together with the `tunnel` option for a client demo, so they can't freely browse all of your emails by going to the root directory URL.</alert>
 
@@ -101,4 +119,4 @@ You may define additional file and folder paths to watch when developing locally
 
 </code-sample>
 
-When a file in any of these watch paths is updated, Browsersync will trigger a rebuild and changes will be reflected in the browser.
+When a file in any of these watch paths is updated, Browsersync will trigger a full rebuild and changes will be reflected in the browser.
