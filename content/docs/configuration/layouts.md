@@ -5,7 +5,7 @@ description: "Configuring layout options in Maizzle"
 
 # Layouts configuration
 
-Control where your Layouts are located, and how you reference them.
+Configure where your Layouts are located, and how you reference them.
 
 ### root
 
