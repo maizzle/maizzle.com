@@ -94,7 +94,7 @@ In a similar fashion, we can reorder a 3+ column layout:
 
 This only needed a couple of extra steps:
 
-- Make the `<tr>` full width on mobile, by adding `sm-w-full` and `sm-table`
-- Use `sm-table-caption` and `sm-w-full` on the column that you want to display first on mobile
+- Make the `<tr>` full width on mobile, by adding `sm:w-full` and `sm:table`
+- Use `sm:table-caption` and `sm:w-full` on the column that you want to display first on mobile
 
 See the [3+ col reorder demo on CodePen](https://codepen.io/maizzle/pen/dgpxLp?editors=1000).
