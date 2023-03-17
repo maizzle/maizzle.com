@@ -153,7 +153,7 @@ Since the `config` you can pass to the `render()` method is optional, there are 
 
 If you don't specify a [Tailwind config object](#tailwind), Maizzle will try to compile Tailwind using `tailwind.config.js` at your current path.
 
-_If the file is not found, Tailwind will be compiled with its [default config](https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js)._
+_If the file is not found, Tailwind will be compiled with its [default config](https://github.com/tailwindlabs/tailwindcss/blob/master/stubs/config.full.js)._
 
 The default config is not optimized for HTML email: it uses units like `rem` and CSS properties that are used for _web_ design and which have little to no support in the majority of email clients.
 
