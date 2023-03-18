@@ -6,7 +6,7 @@ date: 2021-03-03
 
 # How to create an AMP for Email template
 
-<p class="text-sm">Last updated: May 30, 2022</p>
+<p class="text-sm">Last updated: March 18, 2023</p>
 
 In this tutorial, you'll learn how to make use of custom config files in Maizzle to create interactive AMP for Email templates.
 
@@ -27,13 +27,11 @@ AMP for Email requires some special markup, so let's create an `amp.html` Layout
     <meta charset="utf-8">
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <style amp4email-boilerplate>body{visibility:hidden}</style>
-    <if condition="page.css">
-      <style amp-custom>{{{ page.css }}}</style>
-    </if>
-    <block name="head"></block>
+    <style amp-custom>{{{ page.css }}}</style>
+    <stack name="head" />
   </head>
   <body>
-    <block name="template"></block>
+    <slot:template />
   </body>
   </html>
   ```
@@ -49,30 +47,30 @@ Create `src/templates/amp/carousel.html` and add a basic AMP carousel:
 <code-sample title="src/templates/amp/carousel.html">
 
   ```xml
-  <extends src="src/layouts/amp.html">
-    <block name="head">
-      <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"></script>
-    </block>
+  <push name="head">
+    <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"></script>
+  </push>
 
-    <block name="template">
+  <x-amp>
+    <fill:template>
       <div class="p-4">
         <div class="max-w-full">
           <amp-carousel width="600" height="400" layout="responsive" type="slides">
-            <amp-img src="https://ampbyexample.com/img/image1.jpg" width="600" height="400" alt="a sample image"></amp-img>
-            <amp-img src="https://ampbyexample.com/img/image2.jpg" width="600" height="400" alt="another sample image"></amp-img>
-            <amp-img src="https://ampbyexample.com/img/image3.jpg" width="600" height="400" alt="and another sample image"></amp-img>
+            <amp-img src="https://ampbyexample.com/img/image1.jpg" width="600" height="400" alt="a sample image" />
+            <amp-img src="https://ampbyexample.com/img/image2.jpg" width="600" height="400" alt="another sample image" />
+            <amp-img src="https://ampbyexample.com/img/image3.jpg" width="600" height="400" alt="and another sample image" />
           </amp-carousel>
         </div>
       </div>
-    </block>
-  </extends>
+    </fill:template>
+  </x-amp>
   ```
 
 </code-sample>
 
-[AMP components](https://amp.dev/documentation/guides-and-tutorials/learn/email-spec/amp-email-components/?format=email) are initialized by adding their `<script>` tag inside the `<block name="head">` element, as shown above.
+You initialize [AMP components](https://amp.dev/documentation/guides-and-tutorials/learn/email-spec/amp-email-components/?format=email) by pushing their `<script>` tag to the `<stack name="head" />` from the layout, as shown above.
 
-You can then use the component's markup inside `<block name="template">`.
+You can then use the component's markup inside `<fill:template></fill:template>`.
 
 ## CSS inlining
 

@@ -47,12 +47,12 @@ We'll use `@font-face` to register our custom font family - we can do this in th
 
 ### Add in Template
 
-Open `src/templates/transactional.html` and add this before the `<block name="template">` tag:
+Open `src/templates/transactional.html` and add this before the `<x-main>` tag:
 
 <code-sample title="src/templates/transactional.html">
 
   ```xml
-  <block name="head">
+  <push name="head">
     <style>
       @font-face {
         font-family: 'Barosan';
@@ -61,7 +61,7 @@ Open `src/templates/transactional.html` and add this before the `<block name="te
         src: local('Barosan Regular'), local('Barosan-Regular'), url(https://example.com/fonts/barosan.woff2) format('woff2');
       }
     </style>
-  </block>
+  </sta>
   ```
 
 </code-sample>
@@ -150,16 +150,18 @@ With [CSS inlining](/docs/transformers/inline-css) enabled, that would result in
 Repeatedly writing that `font-barosan` class on all elements isn't just impractical,
 it also increases HTML file size (especially when inlining), which then leads to [Gmail clipping](https://github.com/hteumeuleu/email-bugs/issues/41).
 
-Normally, font family is inherited, which means you can just add the utility on the top parent element:
+`font-family` is inherited, which means you can just add the utility to the top element:
 
 <code-sample title="src/templates/transactional.html">
 
   ```xml
-  <block name="template">
-    <table class="font-barosan">
-      <!-- ... -->
-    </table>
-  </block>
+  <x-main>
+    <fill:template>
+      <table class="font-barosan">
+        <!-- your email HTML... -->
+      </table>
+    </fill:template>
+  </x-main>
   ```
 
 </code-sample>
@@ -190,16 +192,18 @@ We can now use it on the outermost<sup>1</sup> element:
 <code-sample title="src/templates/transactional.html">
 
   ```xml
-  <block name="template">
-    <table class="screen:font-barosan">
-      <!-- ... -->
-    </table>
-  </block>
+  <x-main>
+    <fill:template>
+      <table class="screen:font-barosan">
+        <!-- your email HTML... -->
+      </table>
+    </fill:template>
+  </x-main>
   ```
 
 </code-sample>
 
-<alert><sup>1</sup> Don't add it to the <code>&lt;body&gt;</code> - some email clients remove or replace this tag.</alert>
+<alert><sup>1</sup> Don't add it to the `<body>` - some email clients remove or replace this tag.</alert>
 
 This will tuck the `font-family` away in an `@media` query:
 
@@ -212,7 +216,7 @@ This will tuck the `font-family` away in an `@media` query:
 }
 ```
 
-Since Outlook doesn't read `@media` queries, define a fallback<sup>2</sup> for it in the `<head>` of your Layout:
+Since Outlook on Windows doesn't read `@media` queries, define a fallback<sup>2</sup> for it in the `<head>` of your Layout:
 
 <code-sample title="src/layouts/main.html">
 
@@ -226,11 +230,12 @@ Since Outlook doesn't read `@media` queries, define a fallback<sup>2</sup> for i
 
 </code-sample>
 
-<alert><sup>2</sup> Maizzle includes this fallback in the <code>main.html</code> Layout.</alert>
+<alert><sup>2</sup> The Maizzle Starter includes this fallback in the <code>main.html</code> Layout by default.</alert>
 
 ## Outlook bugs
 
-Custom fonts aren't supported in Outlook 2007-2016 - these email clients will fallback to Times New Roman.
+Custom fonts aren't supported in Outlook 2007-2019 on Windows - most of these email clients will fallback to Times New Roman if you try to use one.
+
 To avoid this, you can wrap the `@font-face` declaration in a `@media` query, so that Outlook will ignore it:
 
 ```postcss
