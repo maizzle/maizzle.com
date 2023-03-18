@@ -22,7 +22,12 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
       </svg>
     </div>
-    <div ref="code">
+    <div
+      ref="code"
+      :class="{
+        'no-root': !root,
+      }"
+    >
       <slot />
     </div>
   </div>
@@ -35,6 +40,10 @@ export default {
     showCopy: {
       type: Boolean,
       default: false,
+    },
+    root: {
+      type: Boolean,
+      default: true,
     },
   },
   data() {

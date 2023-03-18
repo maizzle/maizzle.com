@@ -120,6 +120,11 @@ abbr,
   @apply text-base;
 }
 
+.prose .terminal-frame + div.no-root code .line:not(:empty)::before {
+  content: '';
+  @apply w-6;
+}
+
 .animate-spin-fast {
   animation: spin .5s linear infinite;
 }
