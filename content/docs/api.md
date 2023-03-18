@@ -134,11 +134,11 @@ Of course, templating tags are available when using Maizzle programmatically.
   title: Using Maizzle programmatically
   ---
 
-  <extends src="src/layouts/main.html">
-    <block name="template">
-      <!-- your HTML -->
-    </block>
-  </extends>`
+  <x-main>
+    <fill:template>
+      <!-- your email HTML... -->
+    </fill:template>
+  </x-main>`
   ```
 
 </code-sample>
