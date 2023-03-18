@@ -65,9 +65,11 @@ Because Tailwind CSS is compiled only once, _before_ any Templates are processed
         important: false
   ---
 
-  <extends src="src/layouts/main.html">
-    <!-- ... -->
-  </extends>
+  <x-main>
+    <fill:template>
+      <!-- your email HTML... -->
+    </fill:template>
+  </x-main>
   ```
 
 </code-sample>

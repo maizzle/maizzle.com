@@ -15,16 +15,7 @@ Template configuration is done under the `build.templates` key of your Maizzle c
   module.exports = {
     build: {
       templates: {
-        source: 'src/templates',
-        destination: {
-          path: 'build_local',
-          extension: 'html'
-        },
-        filetypes: 'html',
-        assets: {
-          source: './src/images',
-          destination: 'images'
-        }
+        // ...
       }
     }
   }
@@ -33,6 +24,9 @@ Template configuration is done under the `build.templates` key of your Maizzle c
 </code-sample>
 
 ## source
+
+Type: `String|Array|Function`\
+Default: `src/templates`
 
 Define the source directory where Maizzle should look for Templates to compile.
 
@@ -108,13 +102,44 @@ Remember, Maizzle will copy these folders and their entire contents to the `temp
 
 <alert>Maizzle automatically configures paths in `templates.source` as Tailwind CSS [`content` paths](/docs/configuration/tailwindcss#content), no need to manually add them yourself.</alert>
 
+### Multiple sources
+
+You may define multiple `templates` sources as an array of objects.
+Each source will be processed and templates will be output based on its own configuration.
+
+<code-sample title="config.js">
+
+  ```js
+  module.exports = {
+    build: {
+      templates: [
+        {
+          source: 'src/templates',
+          destination: {
+            path: 'build_local'
+          }
+        },
+        {
+          source: 'src/amp-templates',
+          destination: {
+            path: 'build_amp'
+          }
+        }
+      ]
+    }
+  }
+  ```
+
+</code-sample>
+
 ## filetypes
 
-Default: `html`
+Type: `String|Array`\
+Default: `'html'`
 
 Define what file extensions your Templates use.
 
-`filetypes` can be a string, but it can also be an array or a pipe|delimited list:
+`filetypes` can be a string that defines a single file extension:
 
 <code-sample title="config.js">
 
@@ -122,7 +147,39 @@ Define what file extensions your Templates use.
   module.exports = {
     build: {
       templates: {
-        filetypes: ['html', 'blade.php'] // or 'html|blade.php'
+        filetypes: 'html'
+      }
+    }
+  }
+  ```
+
+</code-sample>
+
+You may use an array of strings to define multiple file extensions:
+
+<code-sample title="config.js">
+
+  ```js
+  module.exports = {
+    build: {
+      templates: {
+        filetypes: ['html', 'blade.php']
+      }
+    }
+  }
+  ```
+
+</code-sample>
+
+You may also define multiple file extensions by separating them with pipe in a string:
+
+<code-sample title="config.js">
+
+  ```js
+  module.exports = {
+    build: {
+      templates: {
+        filetypes: 'html|blade.php'
       }
     }
   }
@@ -136,9 +193,15 @@ This means you can keep other files alongside your Templates, and Maizzle will n
 
 ## destination
 
+Type: `Object`\
+Default: `{ path: 'build_[env]', extension: 'html' }`
+
 Define the output path for compiled Templates, and what file extension they should use.
 
 ### path
+
+Type: `String`\
+Default: `build_[env]`
 
 Directory path where Maizzle should output the compiled emails.
 
@@ -166,6 +229,9 @@ Using [multiple `templates`](#multiple-templates) config blocks? Make sure to ha
 
 ### extension
 
+Type: `String`\
+Default: `'html'`
+
 Define the file extension - without the leading dot - to be used for the compiled templates.
 For example, let's output [Laravel Blade](https://laravel.com/docs/8.x/blade) files:
 
@@ -188,7 +254,10 @@ For example, let's output [Laravel Blade](https://laravel.com/docs/8.x/blade) fi
 
 The compiled templates will be output as `build_laravel/*.blade.php`.
 
-### permalink
+## permalink
+
+Type: `String`\
+Default: `undefined`
 
 Use the `permalink` Front Matter key to define a custom output path right in a Template:
 
@@ -199,11 +268,11 @@ Use the `permalink` Front Matter key to define a custom output path right in a T
   permalink: output/this/template/here.html
   ---
 
-  <extends src="src/layouts/main.html">
-    <block name="template">
-      <!-- ... -->
-    </block>
-  </extends>
+  <x-main>
+    <fill:template>
+      <!-- your email HTML... -->
+    </fill:template>
+  </x-main>
   ```
 
 </code-sample>
@@ -221,11 +290,11 @@ For example, output one level above project directory:
   permalink: ../newsletter.html
   ---
 
-  <extends src="src/layouts/main.html">
-    <block name="template">
-      <!-- ... -->
-    </block>
-  </extends>
+  <x-main>
+    <fill:template>
+      <!-- your email HTML... -->
+    </fill:template>
+  </x-main>
   ```
 
 </code-sample>
@@ -239,18 +308,21 @@ Output at a specific system location:
   permalink: C:/Users/Cosmin/Newsletter/2022/12/index.html
   ---
 
-  <extends src="src/layouts/main.html">
-    <block name="template">
-      <!-- ... -->
-    </block>
-  </extends>
+  <x-main>
+    <fill:template>
+      <!-- your email HTML... -->
+    </fill:template>
+  </x-main>
   ```
 
 </code-sample>
 
-<alert type="warning">`permalink` must be a <em>file</em> path, and can be used only in the Template's Front Matter. Using a directory path will result in a build error.</alert>
+<alert type="warning">`permalink` must be a <em>file</em> path, and can only be used in the Template's Front Matter. Using a directory path will result in a build error.</alert>
 
-### assets
+## assets
+
+Type: `Object`\
+Default: `{ source: '', destination: 'assets' }`
 
 Source and destination directories for your asset files.
 
@@ -310,33 +382,112 @@ Of course, if using multiple `templates` blocks, you can have different asset co
 
 </code-sample>
 
-## Multiple templates
+## omit
 
-You may define multiple `templates` sections.
-Each section will be processed and templates will be output based on the section's configuration.
+Type: `Array`\
+Default: `['']`
+
+This option can be used to define paths to files or directories from your `source` that should not be copied over to the build destination.
+
+For example, imagine this project structure:
+
+<terminal show-copy="true" :root="false">
+
+  ```
+  src/templates
+  ├── 1.html
+  ├── 2.html
+  └── archive
+      ├── 3.html
+      └── 4.html
+  ```
+
+</terminal>
+
+
+You can prevent `1.html` and `4.html` from being copied to the build destination like this:
 
 <code-sample title="config.js">
 
-  ```js
-  module.exports = {
-    build: {
-      // Multiple `templates` as array of objects
-      templates: [
-        {
-          source: 'src/templates',
-          destination: {
-            path: 'build_local'
-          }
-        },
-        {
-          source: 'src/amp-templates',
-          destination: {
-            path: 'build_amp'
-          }
-        }
-      ]
+```js
+module.exports = {
+  build: {
+    templates: {
+      source: 'src/templates',
+      omit: ['1.html', 'archive/4.html'],
+      // ...
     }
   }
-  ```
+}
+```
 
 </code-sample>
+
+Now, running `maizzle build production` would create a `build_production` folder with these files inside:
+
+<terminal show-copy="true" :root="false">
+
+```
+build_production
+├── 2.html
+└── archive
+    ├── 3.html
+```
+
+</terminal>
+
+It supports directory paths, so you can omit the entire `archive` folder:
+
+<code-sample title="config.js">
+
+```js
+module.exports = {
+  build: {
+    templates: {
+      source: 'src/templates',
+      omit: ['1.html', 'archive'],
+      // ...
+    }
+  }
+}
+```
+
+</code-sample>
+
+The result would be:
+
+<terminal show-copy="true" :root="false">
+
+```
+build_production
+├── 2.html
+```
+
+</terminal>
+
+## skip
+
+Type: `String|Array`\
+Default: `['']`
+
+Use `skip` if you want to skip the compilation of a template. The file will only be copied as-is to the build destination, it will not be parsed in any way by Maizzle.
+
+<code-sample title="config.js">
+
+```js
+module.exports = {
+  build: {
+    templates: {
+      source: 'src/templates',
+      skip: ['1.html', 'archive/3.html'],
+      // ...
+    }
+  }
+}
+```
+
+</code-sample>
+
+`skip` can be a string (skip a single file) or an array of strings like in the example above.
+
+Each string must be a file path that is relative to your `templates.source` directory.
