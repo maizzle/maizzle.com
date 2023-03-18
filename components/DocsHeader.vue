@@ -38,6 +38,9 @@
                 >
                   {{ $config.latestRelease }}
                 </span>
+                <a href="https://v43x.maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
+                  v4.3.1
+                </a>
                 <a href="https://v3.maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
                   v3.7.3
                 </a>
@@ -68,9 +71,9 @@
           <div class="hidden sm:block max-w-[75ch] whitespace-nowrap overflow-auto">
             <a
               href="https://github.com/maizzle/framework/releases"
-              class="hidden sm:table px-3 py-1 rounded-full text-indigo-500 hover:text-indigo-600 text-sm group bg-indigo-50 hover:bg-indigo-100"
+              class="hidden sm:table px-3 py-1 rounded-full text-indigo-500 border border-indigo-300 hover:text-indigo-600 text-sm group"
             >
-              🧩 Maizzle 4.4.0 Beta: try out the new Laravel Blade-like components system &rarr;
+              Maizzle v4.4.0: Blade-like components, omit/skip, and a ton of bugfixes &rarr;
             </a>
           </div>
         </div>
