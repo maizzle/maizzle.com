@@ -104,11 +104,11 @@ Generate a plaintext version for a single Template by enabling it in its Front M
   plaintext: true
   ---
 
-  <extends src="src/layouts/main.html">
-    <block name="template">
-      <!-- ... -->
-    </block>
-  </extends>
+  <x-main>
+    <fill:template>
+      <!-- your email HTML... -->
+    </fill:template>
+  </x-main>
   ```
 
 </code-sample>
@@ -127,11 +127,11 @@ If you're using the [`permalink`](/docs/configuration/templates#permalink) Front
   plaintext: true
   ---
 
-  <extends src="src/layouts/main.html">
-    <block name="template">
-      <!-- ... -->
-    </block>
-  </extends>
+  <x-main>
+    <fill:template>
+      <!-- your email HTML... -->
+    </fill:template>
+  </x-main>
   ```
 
 </code-sample>
@@ -201,11 +201,11 @@ You basically add the options object as shown above, but in Front Matter syntax:
       wrapTails: ']'
   ---
 
-  <extends src="src/layouts/main.html">
-    <block name="template">
+  <x-main>
+    <fill:template>
       <a href="https://example.com">Click here</a>
-    </block>
-  </extends>
+    </fill:template>
+  </x-main>
   ```
 
 </code-sample>
@@ -229,12 +229,12 @@ You can output content only in the plaintext version, with the `<plaintext>` tag
   plaintext: true
   ---
 
-  <extends src="src/layouts/main.html">
-    <block name="template">
+  <x-main>
+    <fill:template>
       This text shows in both the HTML and the plaintext versions.
       <plaintext>This will be output only in the plaintext version</plaintext>
-    </block>
-  </extends>
+    </fill:template>
+  </x-main>
   ```
 
 </code-sample>
@@ -250,14 +250,14 @@ You may also discard content from the plaintext version while preserving it in t
   plaintext: true
   ---
 
-  <extends src="src/layouts/main.html">
-    <block name="template">
+  <x-main>
+    <fill:template>
       This text shows in both the HTML and the plaintext versions.
       <not-plaintext>
         <p>This paragraph will be output only in the HTML version</p>
       </not-plaintext>
-    </block>
-  </extends>
+    </fill:template>
+  </x-main>
   ```
 
 </code-sample>

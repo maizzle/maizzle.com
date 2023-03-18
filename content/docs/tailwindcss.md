@@ -40,7 +40,7 @@ The compiled Tailwind CSS is available under `page.css`, so you need to make sur
       </style>
     </head>
     <body>
-      <block name="template"></block>
+      <slot:template />
     </body>
   </html>
   ```
@@ -51,7 +51,7 @@ You might have noticed that we used `{{{ }}}` instead of the usual `{{ }}`.
 
 We do this to avoid double-escaping the CSS, which can break the build process when quoted property values are encountered (for example quoted font family names, background image URLs, etc.).
 
-<alert type="warning">Tailwind CSS only works when `page.css` is added inside a `<style>` tag.</alert>
+<alert type="warning">Tailwind CSS only works when `page.css` is added inside a `<style>` tag in the `<head>` of your HTML.</alert>
 
 ### Utility-first
 
@@ -95,13 +95,13 @@ You can write:
 
 </code-sample>
 
-Read more about the concept of utility-first CSS and familiarize yourself with the syntax in the [Tailwind CSS docs](https://tailwindcss.com/docs/utility-first).
+Read more about the concept of utility-first CSS and familiarize yourself with the syntax in the [Tailwind CSS docs](https://tailwindcss.com/docs/utility-first). And if you're using VSCode, make sure to install the [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) extension.
 
 ### Components
 
 If you find yourself repeating common utility combinations to apply the same styling in many different places (buttons maybe?), you can extract those to a component.
 
-Tailwind includes an [@apply directive](https://tailwindcss.com/docs/extracting-components#extracting-css-components-with-apply) that can be used to compose custom CSS classes by "applying" Tailwind utilities to it.
+Tailwind CSS includes an [@apply directive](https://tailwindcss.com/docs/extracting-components#extracting-css-components-with-apply) that can be used to compose custom CSS classes by "applying" utilities to them.
 
 Here's a quick example:
 
@@ -195,11 +195,11 @@ Consider this template:
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <extends src="src/layouts/main.html">
-    <block name="template">
+  <x-main>
+    <fill:template>
       <div class="col">test</div>
-    </block>
-  </extends>
+    </fill:template>
+  </x-main>
   ```
 
 </code-sample>
@@ -340,9 +340,9 @@ See the [Tailwind CSS docs](https://tailwindcss.com/docs/configuration#plugins) 
 ## Use in Template
 
 You can use Tailwind CSS, including directives like `@apply`, `@responsive`, and even nested syntax, right inside a Template.
-You simply need to use a `<block>` to push a `<style tailwindcss>` tag to the Layout being extended.
+You simply need to use a `<stack>` to push a `<style tailwindcss>` tag to the Layout being extended.
 
-First, add a `<block name="head">` inside your Layout's `<head>` tag:
+First, add a `<stack name="head" />` inside your Layout's `<head>` tag:
 
 <code-sample title="src/layouts/main.html">
 
@@ -353,22 +353,22 @@ First, add a `<block name="head">` inside your Layout's `<head>` tag:
     <style>
       {{{ page.css }}}
     </style>
-    <block name="head"></block>
+    <stack name="head" />
   </head>
   <body>
-    <block name="template"></block>
+    <slot:template />
   </body>
   ```
 
 </code-sample>
 
-Next, use that block in a Template:
+Next, `push` to that `stack` from a Template:
 
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <extends src="src/layouts/main.html">
-    <block name="head">
+  <x-main>
+    <push name="head">
       <style tailwindcss>
         a {
           @apply text-blue-500;
@@ -380,12 +380,12 @@ Next, use that block in a Template:
           }
         }
       </style>
-    </block>
+    </push>
 
-    <block name="template">
-      <!-- ... -->
-    </block>
-  </extends>
+    <fill:template>
+      <!-- your email HTML... -->
+    </fill:template>
+  </x-main>
   ```
 
 </code-sample>
@@ -411,20 +411,20 @@ When adding a `<style>` tag inside a Template, you can prevent all CSS rules ins
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <extends src="src/layouts/main.html">
-    <block name="head">
+  <x-main>
+    <push name="head">
       <style tailwindcss data-embed>
         img {
           border: 0;
           @apply leading-full align-middle;
         }
       </style>
-    </block>
+    </push>
 
-    <block name="template">
-      <!-- ... -->
-    </block>
-  </extends>
+    <fill:template>
+      <!-- your email HTML... -->
+    </fill:template>
+  </x-main>
   ```
 
 </code-sample>
@@ -433,15 +433,15 @@ Although it will no longer be inlined, unused CSS will still be purged by the <n
 
 ## Transforms
 
-Maizzle doesn't include Tailwind's base reset, as it would lead to many unwanted CSS properties being inlined all over the place.
+Maizzle doesn't include Tailwind's base reset, as that would lead to many unwanted CSS properties being inlined all over the place.
 
 To use transform utilities, add the resets back in a `<style>` tag that won't be inlined:
 
 <code-sample title="src/templates/example.html">
 
   ```xml
-   <extends src="src/layouts/main.html">
-    <block name="head">
+   <x-main>
+    <push name="head">
       <style data-embed>
         *, ::before, ::after {
          --tw-translate-x: 0;
@@ -453,12 +453,12 @@ To use transform utilities, add the resets back in a `<style>` tag that won't be
          --tw-scale-y: 1;
         }
       </style>
-    </block>
+    </push>
 
-    <block name="template">
+    <fill:template>
       <div class="translate-x-10 rotate-45 bg-rose-600 w-4 h-4"></div>
-    </block>
-  </extends>
+    </fill:template>
+  </x-main>
   ```
 
 </code-sample>

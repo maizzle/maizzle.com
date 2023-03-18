@@ -15,8 +15,20 @@ Tailwind CSS itself is [configured](/docs/configuration/tailwindcss#tailwindconf
 
 However, when it comes to markup, it's really up to you how well your emails will render.
 
+## Components
+
+The Maizzle Starter includes a few components, such as Spacer, Divider, or Button.
+
+These have been render-tested to work well in the most popular email clients, including iOS/Mail, Gmail, Outlook, and Yahoo!.
+
+## Can I Email
+
 The [caniemail.com](https://www.caniemail.com/) website is a great resource if you need to check which email clients will support your HTML or CSS.
 
-When coding HTML emails, you should always run render tests in the most popular email clients - tools like [Email on Acid](https://www.emailonacid.com/) or [Litmus](https://www.litmus.com/) can help with that.
+## Testing
 
-Finally, another common (and good) practice is to send yourself a test email before using the email in production. Simulating a send from the same system you're going to use (be it your ESP or your application) is a very good way of catching any missed errors or edge-cases.
+When coding HTML emails, you should always run render tests in the most popular email clients - tools like [Email on Acid](https://www.emailonacid.com/), [Litmus](https://www.litmus.com/) or [Testi@](https://testi.at/) can help with that.
+
+Finally, another common (and good) practice is to send yourself a test email before sending to your subscribers.
+
+Simulating a send from the same system you're going to use (be it your ESP or your application) is a very good way of catching any missed errors or edge-cases.
