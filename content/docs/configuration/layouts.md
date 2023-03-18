@@ -5,11 +5,17 @@ description: "Configuring layout options in Maizzle"
 
 # Layouts configuration
 
-Configure where your Layouts are located, and how you reference them.
+**⚠️ Deprecation notice**
 
-### root
+The docs on this page apply only if you're using the legacy `<extends>` / `<block>` syntax. If you're using the new x-tags Components syntax (recommended), you don't need it.
 
-You may define the path where your Layouts are located:
+This is now deprecated and will be removed in the next major release.
+
+Looking for the [legacy syntax docs](https://v43x.maizzle.com/docs/configuration/layouts)?
+
+---
+
+You may use the `layouts` key in `config.js` to customize the way you use Layouts:
 
 <code-sample title="config.js">
 
@@ -17,7 +23,50 @@ You may define the path where your Layouts are located:
   module.exports = {
     build: {
       layouts: {
-        root: './src/layouts'
+        // ... options
+      }
+    }
+  }
+  ```
+</code-sample>
+
+Let's take a look at the available options:
+
+### Encoding
+
+You may specify the encoding used by your Layout files through the `encoding` option:
+
+<code-sample title="config.js">
+
+  ```js
+  module.exports = {
+    build: {
+      layouts: {
+        encoding: 'windows-1250',
+      }
+    }
+  }
+  ```
+</code-sample>
+
+By default, this is set to `utf8`.
+
+<alert>This encoding is only used when reading a Layout file from disk, it does not automatically set the `<meta charset>` tag in your compiled Template.</alert>
+
+### Blocks
+
+Normally, Template Blocks are defined through the `<block>` tag.
+
+However, you may customize this tag name:
+
+<code-sample title="config.js">
+
+  ```js
+  module.exports = {
+    build: {
+      layouts: {
+        slotTagName: 'slot', // default: 'block'
+        fillTagName: 'fill' // default: 'block'
       }
     }
   }
@@ -25,25 +74,74 @@ You may define the path where your Layouts are located:
 
 </code-sample>
 
-You will then be able to extend Layouts by referencing them relative to that path - no need to write out the full path relative to your project root:
+Now you can use `<slot>` tags in the Layout, and `<fill>` tags in your Template:
+
+<code-sample title="src/layouts/main.html">
+
+  ```xml
+  <!doctype html>
+  <html>
+  <head>
+    <style>{{{ page.css }}}</style>
+  </head>
+  <body>
+    <slot name="template"></slot>
+  </body>
+  ```
+
+</code-sample>
+
+<code-sample title="src/templates/example.html">
+
+  ```xml
+  ---
+  title: "A template with a <fill> tag"
+  ---
+
+  <extends src="src/layouts/main.html">
+    <fill name="template"></fill>
+  </extends>
+  ```
+
+</code-sample>
+
+### Root
+
+You may define a path to the directory where your Layouts live:
+
+<code-sample title="config.js">
+
+  ```js
+  module.exports = {
+    build: {
+      layouts: {
+        root: 'src/layouts',
+      }
+    }
+  }
+  ```
+
+</code-sample>
+
+This allows you to specify a `src=""` relative to the path in that `root` key:
 
 <code-sample title="src/templates/example.html">
 
   ```xml
   <extends src="main.html">
     <block name="template">
-      <!-- ... -->
+      <!--  -->
     </block>
   </extends>
   ```
 
 </code-sample>
 
-<alert type="danger">If you're extending a file that also extends a file (i.e. when extending a Template), this will not work. Instead, don't define the `root` key and only use project root-relative paths (i.e. `<extends src="/templates/template.html">`)</alert>
+<alert type="danger">If you're extending a file that also extends a file (i.e. when extending a Template), this will not work. Instead, don't define the `root` key and only use project root-relative paths (i.e. `src/templates/template.html`)</alert>
 
-### tagName
+### Tag
 
-You may also customize the `<extends>` tag name:
+You may use a tag name other than `extends`:
 
 <code-sample title="config.js">
 
@@ -51,15 +149,13 @@ You may also customize the `<extends>` tag name:
   module.exports = {
     build: {
       layouts: {
-        tagName: 'layout'
+        tagName: 'layout',
       }
     }
   }
   ```
 
 </code-sample>
-
-Usage:
 
 <code-sample title="src/templates/example.html">
 

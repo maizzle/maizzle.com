@@ -5,16 +5,32 @@ description: "See how to use layouts with templating inheritance to build your H
 
 # Layouts
 
-Layouts are the foundation of any email template in Maizzle.
+**👋 New syntax**
 
-Besides the standard parent-child templating relation, you can use Layouts to define markup that doesn't need to change often, like `doctype`, and `<head>` or `<body>` tags, with all the necessary child tags, like `<meta>`.
+You are viewing the documentation for Layouts built with the new Components syntax introduced in `v4.4.0`.
+Not ready to switch yet? We still support `<extends>` and `<block>`, see the [legacy Layouts docs](https://v43x.maizzle.com/docs/layouts).
 
-## Creating Layouts
+---
+
+The workflow in Maizzle is structured around the concept of Layouts and Templates.
+
+A Layout is basically a Component that contains the `doctype`, `<head>` and `<body>` tags of your HTML - the kind of code that changes rarely and can be reused.
+
+A Layout may include `slot` tags that can be filled by Templates. This allows us to create a parent-child relationship between Layouts and Templates.
+
+In Maizzle, we use the `<slot:template />` tag in the `<body>` of the `main.html` Layout to define where a Template's HTML should be injected.
+
+## Getting started
 
 Layouts are typically stored in the `src/layouts` directory.
-Create a `layout.html` file with the required tags to yield the CSS and the Template body:
 
-<code-sample title="src/layouts/main.html">
+<alert>Need to store them elsewhere? Make sure to [update the config](/docs/configuration/components#folders).</alert>
+
+They must contain the `page.css` variable inside a `<style>` tag (for Tailwind CSS to work), and at least one `slot` where to inject the Template's HTML.
+
+Here's a very basic `layout.html`:
+
+<code-sample title="src/layouts/layout.html">
 
   ```xml
   <!doctype html>
@@ -23,103 +39,33 @@ Create a `layout.html` file with the required tags to yield the CSS and the Temp
     <style>{{{ page.css }}}</style>
   </head>
   <body>
-    <block name="template"></block>
+    <slot:template />
   </body>
   ```
 
 </code-sample>
 
-You can use this as a Layout that your Templates [extend](/docs/templates#extending-layouts).
-
-## Template Blocks
-
-The Layout in the example above uses a `<block>` tag that acts like a 'marker'.
-
-For each Template that [extends](/docs/templates#extends) this Layout, that marker is replaced with the contents of the Template's own `<block name="template">`.
-
-Of course, you can use custom names for blocks, like `<block name="content">`.
-
-### Gotchas
-
-Common pitfalls when using blocks.
-
-#### Blocks don't work in Components
-
-This won't work:
-
-<code-sample title="src/components/example.html">
-
-  ```xml
-  <block name="template">
-    <content></content>
-  </block>
-  ```
-
-</code-sample>
-
-#### Extending from Components doesn't work
-
-Blocks only work in a parent-child relationship, where the `<block>` in the child is added inside an `<extends>` tag.
-
-One exception to this is inside Components, where something like this will not work:
-
-<code-sample title="src/components/example.html">
-
-  ```xml
-  <extends name="src/components/another-component.html">
-    <block name="template">
-      <content></content>
-    </block>
-  </extends>
-  ```
-
-</code-sample>
-
-That will only render what was passed to the `example.html` Component, leaving the rest of the markup untouched:
+From a Template, you can then `fill` that `slot` with your markup:
 
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <component src="src/components/example.html">
-    content passed to component
-  </component>
+  <x-layout>
+    <fill:template>
+      <!-- your email HTML... -->
+    </fill:template>
+  </x-layout>
   ```
 
 </code-sample>
 
-Result:
-
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <extends name="src/components/another-component.html">
-    <block name="template">
-      content passed to component
-    </block>
-  </extends>
-  ```
-
-</code-sample>
-
-#### Block tags are not self-closing
-
-`<block>` tags must always be closed:
-
-<code-sample title="src/layouts/main.html">
-
-  ```xml
-  <block name="template"></block>
-  ```
-
-</code-sample>
-
-If you write them as `<block name="template" />`, everything after the tag will be ignored.
+Of course, you're free to name the slot whatever you want, like `<slot:body />`, in which case you'd use `<fill:body>` in the Template.
 
 ## Variables
 
 Variables from your [Environment config](/docs/environments) or from the Template's own Front Matter are available in a Layout under the `page` object.
 
-You can use curly braces to output variables:
+You can use the curly braces [expression syntax](/docs/expressions) to output variables in a Layout:
 
 ```xml
 <meta charset="{{ page.charset || 'utf8' }}">
@@ -129,7 +75,7 @@ As you can see, inside curly braces you can write basic JavaScript expressions. 
 
 ### Compiled CSS
 
-The compiled Tailwind CSS for the current Template is available under `page.css` :
+The compiled Tailwind CSS for the current Template is available under `page.css` - you need to output it in a `<style>` tag in your Layout in order for Tailwind CSS to work:
 
 ```html
 <style>{{{ page.css }}}</style>
@@ -148,159 +94,3 @@ For example, we could use `page.env` to output some content only when running th
   <p>This text will show when running `maizzle build production`</p>
 </if>
 ```
-
-## Configuration
-
-You may use the `layouts` key in `config.js` to customize the way you use Layouts:
-
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      layouts: {
-        // ... options
-      }
-    }
-  }
-  ```
-</code-sample>
-
-Let's take a look at the available options:
-
-### Encoding
-
-You may specify the encoding used by your Layout files through the `encoding` option:
-
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      layouts: {
-        encoding: 'windows-1250',
-      }
-    }
-  }
-  ```
-</code-sample>
-
-By default, this is set to `utf8`.
-
-<alert>This encoding is only used when reading a Layout file from disk, it does not automatically set the `<meta charset>` tag in your compiled Template.</alert>
-
-### Blocks
-
-Normally, Template Blocks are defined through the `<block>` tag.
-
-However, you may customize this tag name:
-
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      layouts: {
-        slotTagName: 'slot', // default: 'block'
-        fillTagName: 'fill' // default: 'block'
-      }
-    }
-  }
-  ```
-
-</code-sample>
-
-Now you can use `<slot>` tags in the Layout, and `<fill>` tags in your Template:
-
-<code-sample title="src/layouts/main.html">
-
-  ```xml
-  <!doctype html>
-  <html>
-  <head>
-    <style>{{{ page.css }}}</style>
-  </head>
-  <body>
-    <slot name="template"></slot>
-  </body>
-  ```
-
-</code-sample>
-
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  ---
-  title: "A template with a <fill> tag"
-  ---
-
-  <extends src="src/layouts/main.html">
-    <fill name="template"></fill>
-  </extends>
-  ```
-
-</code-sample>
-
-### Root
-
-You may define a path to the directory where your Layouts live:
-
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      layouts: {
-        root: 'src/layouts',
-      }
-    }
-  }
-  ```
-
-</code-sample>
-
-This allows you to specify a `src=""` relative to the path in that `root` key:
-
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <extends src="main.html">
-    <block name="template">
-      <!--  -->
-    </block>
-  </extends>
-  ```
-
-</code-sample>
-
-<alert type="danger">If you're extending a file that also extends a file (i.e. when extending a Template), this will not work. Instead, don't define the `root` key and only use project root-relative paths (i.e. `src/templates/template.html`)</alert>
-
-### Tag
-
-You may use a tag name other than `extends`:
-
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      layouts: {
-        tagName: 'layout',
-      }
-    }
-  }
-  ```
-
-</code-sample>
-
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <layout src="src/layouts/main.html">
-    <block name="template">
-      <!-- ... -->
-    </block>
-  </layout>
-  ```
-
-</code-sample>
