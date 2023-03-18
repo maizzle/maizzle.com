@@ -1,11 +1,11 @@
 ---
-title: "Shorthand inline CSS"
+title: "Shorthand CSS"
 description: "Group CSS properties of the same type into shorthand inline CSS in your HTML email"
 ---
 
-# Shorthand inline CSS
+# Shorthand CSS
 
-Rewrite longhand CSS with shorthand syntax. Only works with `margin`, `padding` and `border`, and only when all sides are specified.
+Rewrite longhand CSS inside `style` attributes with shorthand syntax. Only works with `margin`, `padding` and `border`, and only when all sides are specified.
 
 Something like this:
 
@@ -25,7 +25,7 @@ Something like this:
 <p style="margin: 4px 2px;">Example</p>
 ```
 
-By default, `shorthandInlineCSS` is disabled.
+By default, `shorthandCSS` is disabled.
 
 ## Usage
 
@@ -35,7 +35,7 @@ Enable it for all tags:
 
   ```js
   module.exports = {
-    shorthandInlineCSS: true
+    shorthandCSS: true
   }
   ```
 
@@ -47,7 +47,7 @@ Enable it only for a selection of tags:
 
   ```js
   module.exports = {
-    shorthandInlineCSS: ['td', 'div']
+    shorthandCSS: ['td', 'div']
   }
   ```
 
@@ -61,7 +61,7 @@ Set it to `false` or simply omit it:
 
   ```js
   module.exports = {
-    shorthandInlineCSS: false
+    shorthandCSS: false
   }
   ```
 
@@ -72,9 +72,9 @@ Set it to `false` or simply omit it:
 <code-sample title="app.js">
 
   ```js
-  const {shorthandInlineCSS} = require('@maizzle/framework')
+  const {shorthandCSS} = require('@maizzle/framework')
 
-  const html = await shorthandInlineCSS('html string')
+  const html = await shorthandCSS('html string')
   ```
 
 </code-sample>

@@ -148,14 +148,14 @@ You may override it for a single Template, through Front Matter:
 
   ```xml
   ---
-  baseURL: 'https://res.cloudinary.com/user/image/upload/v.../'
+  baseURL: 'https://res.cloudinary.com/user/image/upload/'
   ---
 
-  <extends src="src/layouts/base.html">
-    <block name="template">
+  <x-main>
+    <fill:template>
       <img src="example.jpg">
-    </block>
-  </extends>
+    </fill:template>
+  </x-main>
   ```
 
 </code-sample>

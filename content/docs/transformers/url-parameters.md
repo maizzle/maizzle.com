@@ -45,11 +45,11 @@ Of course, you may define URL parameters at a Template level, through Front Matt
     utm_campaign: "Pre-launch August"
   ---
 
-  <extends src="src/layouts/main.html">
-    <block name="template">
-      <!-- ... -->
-    </block>
-  </extends>
+  <x-main>
+    <fill:template>
+      <!-- your email HTML... -->
+    </fill:template>
+  </x-main>
   ```
 
 </code-sample>

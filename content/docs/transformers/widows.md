@@ -10,13 +10,13 @@ Add a `prevent-widows` attribute on any HTML tag to prevent widow words by addin
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <extends src="src/layouts/main.html">
-    <block name="template">
+  <x-main>
+    <fill:template>
       <div prevent-widows>
         <p>The quick brown fox jumped over the lazy dog.</p>
       </div>
-    </block>
-  </extends>
+    </fill:template>
+  </x-main>
   ```
 
 </code-sample>
@@ -164,13 +164,13 @@ Input:
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <extends src="src/layouts/main.html">
-    <block name="template">
+  <x-main>
+    <slot:template>
       <div create-widows>
         <p>The quick brown fox jumped over the lazy&nbsp;dog.</p>
       </div>
-    </block>
-  </extends>
+    </slot:template>
+  </x-main>
   ```
 
 </code-sample>
@@ -180,13 +180,9 @@ Output:
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <extends src="src/layouts/main.html">
-    <block name="template">
-      <div>
-        <p>The quick brown fox jumped over the lazy dog.</p>
-      </div>
-    </block>
-  </extends>
+  <div>
+    <p>The quick brown fox jumped over the lazy dog.</p>
+  </div>
   ```
 
 </code-sample>

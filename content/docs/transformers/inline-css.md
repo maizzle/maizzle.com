@@ -27,7 +27,7 @@ To enable CSS inlining, simply set `inlineCSS` to `true` in your config:
 
 </code-sample>
 
-<alert>You will want to turn CSS inlining off when developing ⚡[AMP4EMAIL templates](/guides/amp-email)</alert>
+<alert>You will want to keep CSS inlining off when developing ⚡[AMP4EMAIL templates](/guides/amp-email)</alert>
 
 ## Customization
 

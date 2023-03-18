@@ -7,7 +7,8 @@ description: "Optimize your HTML email file size by removing unused CSS and rewr
 
 Cleaning up your HTML email results in smaller file sizes, which translates to faster email sendouts, faster opens (think slow 3G), and snappier paint times.
 
-Also, Gmail will clip your email [around 102KB](https://github.com/hteumeuleu/email-bugs/issues/41), so anything past that mark won't even be in the DOM (which can lead to unexpected results like tracking pixel not loaded or, worse, hidden unsubscribe links).
+Gmail will clip your email [around 102KB](https://github.com/hteumeuleu/email-bugs/issues/41), so anything past that mark won't even be in the DOM (which can lead to unexpected results like tracking pixel not loaded or, worse, hidden unsubscribe links).
+You might also want to consider the [environmental impact](https://github.com/email-markup-consortium/email-markup-consortium/discussions/39) of sending large, unoptimized emails.
 
 This Transformer will remove any unused CSS styles and corresponding classes in your HTML, helping you reduce your file size.
 
