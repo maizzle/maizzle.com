@@ -49,14 +49,6 @@ export default [
     name: 'Configuration',
     items: [
       {
-        title: 'Browsersync',
-        path: '/docs/configuration/browsersync'
-      },
-      {
-        title: 'Components',
-        path: '/docs/configuration/components'
-      },
-      {
         title: 'Layouts',
         path: '/docs/configuration/layouts'
       },
@@ -65,8 +57,20 @@ export default [
         path: '/docs/configuration/templates'
       },
       {
+        title: 'Components',
+        path: '/docs/configuration/components'
+      },
+      {
+        title: 'Expressions',
+        path: '/docs/configuration/expressions'
+      },
+      {
         title: 'Tailwind CSS',
         path: '/docs/configuration/tailwindcss'
+      },
+      {
+        title: 'Browsersync',
+        path: '/docs/configuration/browsersync'
       },
       {
         title: 'PostHTML',
@@ -159,8 +163,8 @@ export default [
         path: '/docs/transformers/inline-css'
       },
       {
-        title: 'Shorthand Inline CSS',
-        path: '/docs/transformers/shorthand-inline-css'
+        title: 'Shorthand CSS',
+        path: '/docs/transformers/shorthand-css'
       },
       {
         title: 'Remove Unused CSS',
@@ -201,6 +205,23 @@ export default [
     ]
   },
   {
+    name: 'Starter Components',
+    items: [
+      {
+        title: 'Spacer',
+        path: '/docs/components/spacer'
+      },
+      {
+        title: 'Divider',
+        path: '/docs/components/divider'
+      },
+      {
+        title: 'Button',
+        path: '/docs/components/button'
+      },
+    ]
+  },
+  {
     name: 'Examples',
     items: [
       {
@@ -208,8 +229,8 @@ export default [
         path: '/docs/examples/spacers'
       },
       {
-        title: 'Divider',
-        path: '/docs/examples/divider'
+        title: 'Dividers',
+        path: '/docs/examples/dividers'
       },
       {
         title: 'Buttons',
@@ -232,5 +253,5 @@ export default [
         path: '/docs/examples/reverse-stack'
       }
     ]
-  }
+  },
 ]
