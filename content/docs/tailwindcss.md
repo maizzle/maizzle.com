@@ -184,7 +184,7 @@ Maizzle adds `utilities.css`, which contains a sample custom utility class that 
 
 ## Shorthand CSS
 
-<alert>This section refers to writing shorthand CSS inside `<style>` tags. For <em>inline</em> CSS shorthand, see the <nuxt-link to="/docs/transformers/shorthand-inline-css">Shorthand Inline CSS docs</nuxt-link>.</alert>
+<alert>This section refers to writing shorthand CSS inside `<style>` tags. For _inline_ CSS shorthand, see the [Shorthand CSS Transformer docs](/docs/transformers/shorthand-css).</alert>
 
 Maizzle can rewrite your `padding`, `margin`, and `border` CSS properties in shorthand-form, when possible.
 
@@ -367,21 +367,21 @@ Next, `push` to that `stack` from a Template:
 <code-sample title="src/templates/example.html">
 
   ```xml
+  <push name="head">
+    <style tailwindcss>
+      a {
+        @apply text-blue-500;
+      }
+
+      @screen sm {
+        table {
+          @apply w-full;
+        }
+      }
+    </style>
+  </push>
+
   <x-main>
-    <push name="head">
-      <style tailwindcss>
-        a {
-          @apply text-blue-500;
-        }
-
-        @screen sm {
-          table {
-            @apply w-full;
-          }
-        }
-      </style>
-    </push>
-
     <fill:template>
       <!-- your email HTML... -->
     </fill:template>
@@ -411,16 +411,16 @@ When adding a `<style>` tag inside a Template, you can prevent all CSS rules ins
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <x-main>
-    <push name="head">
-      <style tailwindcss data-embed>
-        img {
-          border: 0;
-          @apply leading-full align-middle;
-        }
-      </style>
-    </push>
+  <push name="head">
+    <style tailwindcss data-embed>
+      img {
+        border: 0;
+        @apply leading-full align-middle;
+      }
+    </style>
+  </push>
 
+  <x-main>
     <fill:template>
       <!-- your email HTML... -->
     </fill:template>
@@ -440,21 +440,21 @@ To use transform utilities, add the resets back in a `<style>` tag that won't be
 <code-sample title="src/templates/example.html">
 
   ```xml
-   <x-main>
-    <push name="head">
-      <style data-embed>
-        *, ::before, ::after {
-         --tw-translate-x: 0;
-         --tw-translate-y: 0;
-         --tw-rotate: 0;
-         --tw-skew-x: 0;
-         --tw-skew-y: 0;
-         --tw-scale-x: 1;
-         --tw-scale-y: 1;
-        }
-      </style>
-    </push>
+  <push name="head">
+    <style data-embed>
+      *, ::before, ::after {
+        --tw-translate-x: 0;
+        --tw-translate-y: 0;
+        --tw-rotate: 0;
+        --tw-skew-x: 0;
+        --tw-skew-y: 0;
+        --tw-scale-x: 1;
+        --tw-scale-y: 1;
+      }
+    </style>
+  </push>
 
+   <x-main>
     <fill:template>
       <div class="translate-x-10 rotate-45 bg-rose-600 w-4 h-4"></div>
     </fill:template>

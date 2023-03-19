@@ -98,7 +98,7 @@ Whitespace in front of:
 
 ### minWordCount
 
-Type: Integer\
+Type: Number\
 Default: `3`
 
 The minimum amount of words in a target string, in order to trigger the transformer.
@@ -107,7 +107,7 @@ You may set it to `0` or `false` to disable it.
 
 ### minCharCount
 
-Type: Integer\
+Type: Number\
 Default: `20`
 
 The minimum amount non-whitespace characters in a target string, in order to trigger the transformer.
@@ -165,11 +165,11 @@ Input:
 
   ```xml
   <x-main>
-    <slot:template>
+    <fill:template>
       <div create-widows>
         <p>The quick brown fox jumped over the lazy&nbsp;dog.</p>
       </div>
-    </slot:template>
+    </fill:template>
   </x-main>
   ```
 

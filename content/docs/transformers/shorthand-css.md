@@ -35,7 +35,7 @@ Enable it for all tags:
 
   ```js
   module.exports = {
-    shorthandCSS: true
+    shorthandCSS: true,
   }
   ```
 
@@ -47,7 +47,7 @@ Enable it only for a selection of tags:
 
   ```js
   module.exports = {
-    shorthandCSS: ['td', 'div']
+    shorthandCSS: ['td', 'div'],
   }
   ```
 
@@ -61,7 +61,7 @@ Set it to `false` or simply omit it:
 
   ```js
   module.exports = {
-    shorthandCSS: false
+    shorthandCSS: false,
   }
   ```
 

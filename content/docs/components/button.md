@@ -7,8 +7,6 @@ description: "A Maizzle component that makes it easy to add a styled link button
 
 The Button component makes it easy to add a styled link button to your HTML emails.
 
-<alert>This component is included in the default [Maizzle Starter project](https://github.com/maizzle/maizzle). It uses the new components system available starting with Maizzle `v4.4`.</alert>
-
 ## Usage
 
 The Button component is defined in `src/components/button.html`.

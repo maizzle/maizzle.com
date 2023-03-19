@@ -5,28 +5,25 @@ description: "Configuring components in Maizzle"
 
 # Components configuration
 
-**👋 New components**
+**👋 New components config**
 
-You are viewing the documentation for the new Components, introduced in `v4.4.0`.
-
+You are viewing the configuration documentation for the new Components system, that was introduced in `v4.4.0`.
 Not ready to switch yet? See the [legacy Components configuration docs](https://v43x.maizzle.com/docs/configuration/components).
 
 ---
 
 Control where your Components live and how you reference them.
 
-<alert class="lg:hidden">We're testing a new components system for v4.4.0 - [give it a try](https://github.com/maizzle/framework/releases/tag/v4.4.0-beta.1)!</alert>
-
 ## root
 
-Type: `String`\
+Type: String\
 Default: `'./'`
 
 Root path where to look for folders containing component files.
 
 ## folders
 
-Type: `Array`\
+Type: Array\
 Default: `['src/components', 'src/layouts', 'src/templates']`
 
 Folder paths where to look for component files. Relative to `root`.
@@ -51,7 +48,7 @@ The paths you defined will be added to the default folders.
 
 ## tagPrefix
 
-Type: `String`\
+Type: String\
 Default: `'x-'`
 
 Prefix string to use for component tags.
@@ -74,7 +71,7 @@ module.exports = {
 
 ## tag
 
-Type: `String|Boolean`\
+Type: String|Boolean\
 Default: `'component'`
 
 You may alternatively reference any component using this tag name and passing in the component file path in the `src` prop.
@@ -101,7 +98,7 @@ Set it to `false` to disable this feature and only use `x-` tags.
 
 ## attribute
 
-Type: `String`\
+Type: String\
 Default: `'src'`
 
 You may define a custom attribute name to use for the `tag`.
@@ -124,7 +121,7 @@ You can now use `<component href="button.html" />` in your templates.
 
 ## fileExtension
 
-Type: `String`\
+Type: String\
 Default: `'html'`
 
 Define the file extension that component files must use.
@@ -133,7 +130,7 @@ Any other files will be ignored and not be made available as components.
 
 ## yield
 
-Type: `String`\
+Type: String\
 Default: `'content'`
 
 Name of the tag that will be replaced with the content that is passed to the component.
@@ -170,7 +167,7 @@ You'd then define a component like this:
 
 ## slot
 
-Type: `String`\
+Type: String\
 Default: `'slot'`
 
 Name for the [`slot` tag](/docs/components#slots).
@@ -247,7 +244,7 @@ Result:
 
 ## fill
 
-Type: `String`\
+Type: String\
 Default: `'fill'`
 
 Name for the [`fill` tag](/docs/components#slots).
@@ -286,7 +283,7 @@ Given the previous example, you'd now use `inject` instead of `fill` when defini
 
 ## slotSeparator
 
-Type: `String`\
+Type: String\
 Default: `':'`
 
 String to use as a separator between the `slot` tag and its name.
@@ -311,21 +308,21 @@ You'd then use `<slot@footer-logo />` or `<fill@footer-logo></fill@footer-logo>`
 
 ## push
 
-Type: `String`\
+Type: String\
 Default: `'push'`
 
 Name for the [`push` tag](/docs/components#stacks).
 
 ## stack
 
-Type: `String`\
+Type: String\
 Default: `'stack'`
 
 Name for the [`stack` tag](/docs/components#stacks).
 
 ## propsScriptAttribute
 
-Type: `String`\
+Type: String\
 Default: `'props'`
 
 Name of the props attribute to use in the `<script>` tag of a component.
@@ -366,7 +363,7 @@ module.exports = {
 
 ## propsContext
 
-Type: `String`\
+Type: String\
 Default: `'props'`
 
 Name of the object that will be used to store the props of a component.
@@ -407,7 +404,7 @@ module.exports = {
 
 ## propsAttribute
 
-Type: `String`\
+Type: String\
 Default: `'locals'`
 
 Name of the attribute that will be used to pass props to a component as JSON.
@@ -444,7 +441,7 @@ You'd then use `data` instead of `locals` when passing props as JSON to a compon
 
 ## propsSlot
 
-Type: `String`\
+Type: String\
 Default: `'props'`
 
 String value used to retrieve the props passed to slot via `$slots.slotName.props`.
@@ -453,7 +450,7 @@ For example, if you change it to `data` and have a component with a `header` slo
 
 ## parserOptions
 
-Type: `Object`\
+Type: Object\
 Default: `{ recognizeSelfClosing: true }`
 
 Object to configure the underlying `posthtml-parser` library.
@@ -462,7 +459,7 @@ By default, it enables support for self-closing component tags.
 
 ## expressions
 
-Type: `Object`\
+Type: Object\
 Default: `{/*custom object*/}`
 
 Object to configure `posthtml-expressions`.
@@ -471,28 +468,28 @@ By default, Maizzle passes your config variables and the contents of your `build
 
 ## plugins
 
-Type: `Array`\
+Type: Array\
 Default: `[]`
 
 Array of PostHTML plugins to apply to each parsed component.
 
 ## attrsParserRules
 
-Type: `Object`\
+Type: Object\
 Default: `{}`
 
 Extra rules for the PostHTML plugin that is used by components to parse attributes.
 
 ## strict
 
-Type: `Boolean`\
+Type: Boolean\
 Default: `true`
 
 In `strict` mode, an error will be thrown if a component cannot be rendered.
 
 ## utilities
 
-Type: `Object`\
+Type: Object\
 Default: `{ merge: _.mergeWith, template: _.template }`
 
 Utility methods to be passed to `<script props>`.
@@ -501,7 +498,7 @@ By default you can use `mergeWith` and `template` from `lodash`.
 
 ## elementAttributes
 
-Type: `Object`\
+Type: Object\
 Default: `{}`
 
 Define additional attributes that should be preserved for specific HTML elements.
@@ -547,7 +544,7 @@ module.exports = {
 
 ## safelistAttributes
 
-Type: `Array`\
+Type: Array\
 Default: `['data-*']`
 
 Array of attributes that should be preserved in components (on all elements).
@@ -570,7 +567,7 @@ module.exports = {
 
 ## blacklistAttributes
 
-Type: `Array`\
+Type: Array\
 Default: `[]`
 
 Array of attributes that should be removed from components (on all elements).

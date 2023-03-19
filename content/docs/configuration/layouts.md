@@ -7,11 +7,9 @@ description: "Configuring layout options in Maizzle"
 
 **⚠️ Deprecation notice**
 
-The docs on this page apply only if you're using the legacy `<extends>` / `<block>` syntax. If you're using the new x-tags Components syntax (recommended), you don't need it.
+The docs on this page apply only to the [legacy Layouts syntax](https://v43x.maizzle.com/docs/layouts), that used `<extends>` / `<block>` tags. If you're using the new, x-tags Components syntax (which we recommended), you don't need it.
 
-This is now deprecated and will be removed in the next major release.
-
-Looking for the [legacy syntax docs](https://v43x.maizzle.com/docs/configuration/layouts)?
+This configuration is now deprecated and will be removed in the next major release.
 
 ---
 

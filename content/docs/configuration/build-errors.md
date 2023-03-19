@@ -23,10 +23,15 @@ You may configure how build errors are handled when developing with the CLI comm
 
 <alert>Omitting it or using any other value will throw an error (log stack trace and exit script).</alert>
 
-## silent
+## Fail
+
+Type: String\
+Default: `undefined`
+
+### silent
 
 `silent` will just log the paths to the files it failed build.
 
-## verbose
+### verbose
 
 `verbose` will additionally log the error stack trace.

@@ -31,8 +31,7 @@ These are the defaults that Maizzle uses:
 
 ### directory
 
-Type: `boolean`
-<br>
+Type: Boolean\
 Default: `true`
 
 When running `maizzle serve` with `directory: true`, Browsersync will open a file explorer in your default browser, showing root of the `build_local` directory.
@@ -43,16 +42,14 @@ If you set `directory: false`, the page opened by Browsersync will be blank, and
 
 ### notify
 
-Type: `boolean`
-<br>
+Type: Boolean\
 Default: `false`
 
 Toggle Browsersync's annoying pop-over notifications. Off by default ✌
 
 ### open
 
-Type: `boolean`
-<br>
+Type: Boolean\
 Default: `false`
 
 Decide which URL to open automatically when Browsersync starts.
@@ -63,16 +60,14 @@ See [Browsersync docs](https://browsersync.io/docs/options#option-open) for deta
 
 ### port
 
-Type: `integer`
-<br>
+Type: Number\
 Default: `3000`
 
 Set a custom server port number - by default, your local development server will be available at http://localhost:3000
 
 ### tunnel
 
-Type: `boolean|string`
-<br>
+Type: Boolean|String\
 Default: `false`
 
 When set to `true`, Maizzle will enable localhost tunneling in Browsersync, so you can live-share a URL to an email that you're working on right now, with a colleague or a client. Under the hood, [localtunnel.me](https://localtunnel.me) will be used.
@@ -84,8 +79,7 @@ If that subdomain is unavailable, you will be allocated a random name as usual.
 
 ### ui
 
-Type: `object|boolean`
-<br>
+Type: Object|Boolean\
 Default: `{port: 3001}`
 
 Browsersync includes a user interface that is accessed via a separate port, and which allows control over all devices, push sync updates and much more.
@@ -94,7 +88,11 @@ You can disable it by setting it to `false`.
 
 ### watch
 
-Array of additional paths for Browsersync to watch. By default, the following paths are watched for file changes:
+Type: Array
+
+Array of additional paths for Browsersync to watch.
+
+By default, the following paths are watched for file changes:
 
 - all files in your project's `src` folder
 - `tailwind.config.js`

@@ -29,6 +29,7 @@ Tailwind CSS paths are configured with the `build.tailwind` key in your config:
 
 ### css
 
+Type: String\
 Default: `src/css/tailwind.css`
 
 Path to your main CSS file, that will be compiled with Tailwind CSS.
@@ -37,6 +38,7 @@ This file is optional: if it doesn't exist Maizzle will compile Tailwind CSS wit
 
 ### config
 
+Type: String\
 Default: `tailwind.config.js`
 
 Path to the Tailwind CSS config file to use.
@@ -75,6 +77,9 @@ Because Tailwind CSS is compiled only once, _before_ any Templates are processed
 </code-sample>
 
 ### compiled
+
+Type: String\
+Default: `''`
 
 Use the `compiled` key if you already have a CSS string - this will skip Tailwind CSS compilation and no utilities will be generated.
 
@@ -205,7 +210,7 @@ More on screens, in the [Tailwind CSS docs](https://tailwindcss.com/docs/respons
 
 ### Colors
 
-Maizzle uses the [default colors](https://tailwindcss.com/docs/customizing-colors) from Tailwind CSS.
+Maizzle uses the [default color palette](https://tailwindcss.com/docs/customizing-colors) from Tailwind CSS.
 
 You may define your own colors, or even extend or change the default color palette by adding a `colors` key to your Tailwind config:
 
@@ -231,8 +236,6 @@ You may define your own colors, or even extend or change the default color palet
   ```
 
 </code-sample>
-
-See the [Tailwind color palette reference](https://tailwindcss.com/docs/customizing-colors).
 
 ### Pixel units
 

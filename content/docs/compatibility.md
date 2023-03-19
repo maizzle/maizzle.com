@@ -9,7 +9,7 @@ Maizzle gives you complete freedom to code your HTML emails however you like, th
 
 Wherever possible, the framework tries to help through configuration and tools that you can use to code emails that render well.
 
-For example, the [Starter](https://github.com/maizzle/maizzle) includes custom Tailwind CSS plugins that output more email client-friendly CSS or help you target specific email clients.
+For example, the [official Starter](https://github.com/maizzle/maizzle) includes custom Tailwind CSS plugins that output more email client-friendly CSS or help you target specific email clients.
 
 Tailwind CSS itself is [configured](/docs/configuration/tailwindcss#tailwindconfigjs) to use values that are better supported by email clients, like `px` instead of `rem`.
 

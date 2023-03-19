@@ -61,7 +61,7 @@ Open `src/templates/transactional.html` and add this before the `<x-main>` tag:
         src: local('Barosan Regular'), local('Barosan-Regular'), url(https://example.com/fonts/barosan.woff2) format('woff2');
       }
     </style>
-  </sta>
+  </push>
   ```
 
 </code-sample>

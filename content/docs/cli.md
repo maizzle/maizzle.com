@@ -10,7 +10,7 @@ You can use the Maizzle CLI to:
 - create new projects
 - generate config files
 - build your HTML emails
-- scaffold templates or layouts
+- scaffold Templates or Layouts
 
 Before continuing, make sure that you have [Git](https://help.github.com/en/articles/set-up-git#setting-up-git) installed:
 
@@ -89,7 +89,7 @@ If you prefer to install dependencies manually, you can do so by running:
 
 With `maizzle new` you may clone any repo into any system path, which means you can use any starter project - not just ours - as long as you can clone it with Git.
 
-Use one of the [original Starters](/starters):
+Use one of the [official Starters](/starters):
 
 <terminal show-copy>
 

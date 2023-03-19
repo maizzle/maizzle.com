@@ -39,7 +39,7 @@ There are two ways to use Components:
 
 ### x-tag
 
-Component names are automatically registered and can be used without having to specify their file path, by using a Blade-like syntax: start with the string `x-` followed by the kebab-case name of the component file.
+Component names are automatically registered and can be used without having to specify their file path, by using a Blade-like syntax: start with the string `x-` followed by the `kebab-case` name of the component file.
 
 For example, let's use the `alert.html` Component we created earlier:
 
@@ -47,11 +47,21 @@ For example, let's use the `alert.html` Component we created earlier:
 
   ```xml
   <x-alert>
-    This text will replace the `&lt;content /&gt;` tag in the Component.
+    This text will replace the `content` tag in the Component.
   </x-alert>
   ```
 
 </code-sample>
+
+The following mappings are used:
+
+| Component file | x-tag |
+| -------------- | ----- |
+| `alert.html` | `<x-alert>` |
+| `alert_info.html` | `<x-alert_info>` |
+| `AlertInfo.html` | `<x-alertinfo>` |
+
+As you can see, the second and last examples are not very readable, which is why we recommend using a [nested file structure](#nested-file-structure) instead.
 
 ### `<component>` tag
 
@@ -61,17 +71,17 @@ Alternatively, you may use the `<component>` tag to insert a Component:
 
   ```xml
   <component src="src/components/alert.html">
-    This text will replace the `<content>` tag in the Component.
+    This text will replace the `content` tag in the Component.
   </component>
   ```
 
 </code-sample>
 
-The `src` attribute is mandatory, and it should point to the Component's file path relative to the project root.
+The `src` attribute is mandatory and it needs to point to the Component's file path, relative to the project root.
 
 ## Nested file structure
 
-If a Component is nested deeper in your `src/components` directory, you can reference it through dot notation.
+If a Component is nested deeper within your `src/components` directory, you can reference it through dot notation.
 
 For example, consider the following Component:
 
@@ -300,7 +310,7 @@ You may then push content to that stack from a Template:
 
 </code-sample>
 
-<alert type="danger">The `<push>` tag must be used outside of the `<x-layout>` Component.</alert>
+<alert>You may also use the `<push>` tag inside the `<fill:template>` tag.</alert>
 
 Result:
 
@@ -408,6 +418,7 @@ Consider the following two Components:
       title: props.title || 'Default child title'
     }
   </script>
+
   <div>
     Title in child: {{ title }}
   </div>
@@ -423,6 +434,7 @@ Consider the following two Components:
       title: props.title || 'Default parent title'
     }
   </script>
+
   <div>
     Title in parent: {{ title }}
     <x-child></x-child>
@@ -491,7 +503,7 @@ If you want to change the element to which the attributes are added, you can use
 
 <code-sample title="src/components/example.html">
 
-  ```xml
+  ```jsx
   <table>
     <tr>
       <td attributes>
@@ -505,7 +517,7 @@ If you want to change the element to which the attributes are added, you can use
 
 ### Expressions in attributes
 
-You may use an expression in a Component's attribute:
+[Expressions](/docs/expressions) may be used in a Component's attribute:
 
 <code-sample title="src/templates/example.html">
 
@@ -523,14 +535,12 @@ You may use an expression in a Component's attribute:
 
 The following attributes will be removed from the target element:
 
-- invalid / unknown HTML attributes (see [valid-attributes.js](https://github.com/thewebartisan7/posthtml-components/blob/main/src/valid-attributes.js))
+- unknown HTML attributes (see [valid-attributes.js](https://github.com/thewebartisan7/posthtml-components/blob/main/src/valid-attributes.js))
 - attributes that are defined as props in the Component
 
 ### Attribute merging
 
-`class` and `style` will be merged with existing ones from the target element.
-
-<alert type="warning">All other attributes will be overwritten.</alert>
+`class` and `style` attribute values will be merged with existing ones from the target element. All other attributes will be overwritten.
 
 ### Safelist attributes
 
@@ -550,15 +560,7 @@ When creating a Component, you have access to global `page` variables:
 
 </code-sample>
 
-<code-sample title="src/templates/example.html">
-
-  ```html
-  <x-example />
-  ```
-
-</code-sample>
-
-Result:
+Using this `<x-example />` Component in a Template will render:
 
 <code-sample title="build_production/example.html">
 

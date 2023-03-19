@@ -87,7 +87,7 @@ The build command for it would be:
 
 ## Config variables
 
-Maizzle exposes a `page` object that you can access through [expressions](/docs/templates#expressions) in your HTML.
+Maizzle exposes a `page` object that you can access through [expressions](/docs/expressions) in your HTML.
 
 This object contains:
 

@@ -13,6 +13,9 @@ PostHTML is configured under `build.posthtml.options` in your `config.js`.
 
 ### directives
 
+Type: Array\
+Default: `[]`
+
 You can configure the PostHTML parser to correctly process custom directives.
 
 For example, you may tell it to ignore `<?php ?>` tags instead of treating them as HTML:
@@ -446,6 +449,9 @@ Specify the attribute value quotes style.
 </code-sample>
 
 ## Plugins
+
+Type: Array\
+Default: `[]`
 
 Register any PostHTML plugins that you would like to use, in the `plugins` array:
 

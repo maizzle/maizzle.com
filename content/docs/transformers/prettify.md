@@ -54,6 +54,7 @@ Checkout the full [list of HTML & CSS beautifier options](https://www.npmjs.com/
 
 ## OCD
 
+Type: Boolean\
 Default: `false`
 
 This option applies several code indentation strategies:

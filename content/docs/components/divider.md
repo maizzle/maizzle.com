@@ -7,8 +7,6 @@ description: "A Maizzle component for easily creating horizontal visual dividers
 
 Quickly add horizontal visual dividers to your HTML emails.
 
-<alert>This component is included in the default [Maizzle Starter project](https://github.com/maizzle/maizzle). It uses the new components system available starting with Maizzle `v4.4`.</alert>
-
 ## Usage
 
 The Divider component is defined in `src/components/divider.html`.

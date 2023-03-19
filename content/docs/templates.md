@@ -21,7 +21,7 @@ It's made up of two distinct sections:
 
 Unlike other Components, a Template may include a Front Matter block, which is a YAML-style block of variables that you may define at the top of the file.
 
-Maizzle knows to parse this block's variables and makes them available to all other Components - including Layouts - so you can use them throughout your project.
+Maizzle knows to parse this block's variables and makes them available to all other Components that you add to this Template, as well as to the Layout it uses.
 
 ## Front Matter
 
@@ -39,7 +39,7 @@ title: "Please confirm your email address"
 
 Front Matter variables are accessible through the `page` object.
 
-To output them in a Template, use the `{{ }}` [expression](#expressions) syntax:
+To output them in a Template, use the `{{ }}` [expression](/docs/expressions) syntax:
 
 <code-sample title="src/templates/example.html">
 
@@ -57,11 +57,11 @@ title: "Please confirm your email address"
 
 ## Using Layouts
 
-Your emails will generally use the same 'boilerplate', like the `<!doctype>`, the `<head>` with all the `<meta>` tags, the `<body>` tag - stuff that rarely needs to change.
+Your emails will likely share the same boilerplate, like the `<!doctype>`, the `<head>` with all the `<meta>` tags, or the `<body>` tag - code that rarely needs to change.
 
 Although you're free to do it, it would be very inefficient to always have to write this boilerplate every time you create a new Template.
 
-In Maizzle, you can define a [Layout](/docs/layouts) that has a slot:
+To reuse this code in Maizzle, you may create a [Layout](/docs/layouts):
 
 <code-sample title="src/layouts/main.html">
 
@@ -78,7 +78,7 @@ In Maizzle, you can define a [Layout](/docs/layouts) that has a slot:
 
 </code-sample>
 
-.. and then fill that slot with your Template's HTML:
+Then, in a Template, you can fill that `<slot:template />` with your Template's HTML:
 
 <code-sample title="src/templates/example.html">
 
@@ -92,11 +92,11 @@ In Maizzle, you can define a [Layout](/docs/layouts) that has a slot:
 
 </code-sample>
 
-In the example above, we use the `<x-main>` Component tag to say we want to use the `main.html` Layout, replacing its `<slot:template />` tag with our Template's HTML.
+In the example above, we use the `<x-main>` Component tag to say that we want to use the `main.html` Layout. We then fill (replace) its `<slot:template />` tag with the HTML inside our Template's `<fill:template>` tag.
 
 ## Current template
 
-Information about the Template file that is currently being processed is available under `build.current` in the config.
+When developing locally, information about the Template file that is currently being processed is available under `page.build.current`.
 
 It's an object containing a parsed path of the destination file name:
 
@@ -120,11 +120,13 @@ build: {
 
 It can be used in Events like `beforeRender` if you need the file name or extension of the Template file currently being processed.
 
+<alert>Current template file information is not available when using the [API](/docs/api).</alert>
+
 ## Archiving
 
 Maizzle will only compile templates found in path(s) that you have defined in `build.templates.source`, which have the same extension as the one defined in `build.templates.filetypes` (`html` by default).
 
-If your project has _a lot_ of emails, your builds may start to slow down since all templates are rebuilt every time you initially run the `build <env>` command or when developing locally and making changes to a Layout or Component.
+If your project has _a lot_ of emails, your builds may start to slow down since all Templates are rebuilt on cold start (every time you run the `maizzle build <env>` command) or when developing locally and making changes to a Layout, a Component, or a config file (this needs to trigger a full rebuild to reflect changes across all Templates).
 
 You can archive Templates in a few ways:
 

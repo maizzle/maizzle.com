@@ -5,9 +5,7 @@ description: "A component for creating vertical spacing in HTML emails built wit
 
 # Spacer Component
 
-The Spacer component makes it super simple to add consistent, accessible vertical spacing to your HTML emails in Maizzle.
-
-<alert>This component is included in the default [Maizzle Starter project](https://github.com/maizzle/maizzle). It uses the new components system available starting with Maizzle `v4.4`.</alert>
+The Spacer component in Maizzle makes it super simple to add consistent, accessible vertical spacing to your HTML emails.
 
 ## Usage
 
@@ -70,6 +68,8 @@ That will render the following HTML:
 If `height` is omitted, the Spacer will render as `<div role="separator">&zwj;</div>`, which will render as an empty space that is as high as its parent element's `line-height`.
 
 ### mso-height
+
+Default: `undefined`
 
 Override the height of the Spacer in Outlook for Windows.
 
