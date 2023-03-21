@@ -7,7 +7,8 @@ description: "Optimize your HTML email file size by removing unused CSS and rewr
 
 Cleaning up your HTML email results in smaller file sizes, which translates to faster email sendouts, faster opens (think slow 3G), and snappier paint times.
 
-Also, Gmail will clip your email [around 102KB](https://github.com/hteumeuleu/email-bugs/issues/41), so anything past that mark won't even be in the DOM (which can lead to unexpected results like tracking pixel not loaded or, worse, hidden unsubscribe links).
+Gmail will clip your email [around 102KB](https://github.com/hteumeuleu/email-bugs/issues/41), so anything past that mark won't even be in the DOM (which can lead to unexpected results like tracking pixel not loaded or, worse, hidden unsubscribe links).
+You might also want to consider the [environmental impact](https://github.com/email-markup-consortium/email-markup-consortium/discussions/39) of sending large, unoptimized emails.
 
 This Transformer will remove any unused CSS styles and corresponding classes in your HTML, helping you reduce your file size.
 
@@ -31,25 +32,57 @@ You may configure this Transformer through the `removeUnusedCSS` key in your `co
 
 ### whitelist
 
-Array of classes or id's that you don't want removed. You may use any [matcher](https://www.npmjs.com/package/matcher) patterns.
+Type: Array\
+Default: `[]`
+
+Array of classes or id's that you don't want removed.
+
+You may use any [matcher](https://www.npmjs.com/package/matcher) patterns, for example:
 
 <code-sample title="config.js">
 
   ```js
   module.exports = {
     removeUnusedCSS: {
-      whitelist: ['.External*', '.ReadMsgBody', '.yshortcuts', '.Mso*', '#*']
+      whitelist: ['.External*', '.ReadMsgBody', '.yshortcuts', '.Mso*', '#*'],
     }
   }
   ```
 
 </code-sample>
 
-<alert>Resetting email client styles is often done through CSS selectors that do not exist in your email's code - `whitelist` ensures these selectors are preserved.</alert>
+Resetting email client styles is often done through CSS selectors that do not exist in your email's code. Maizzle uses the `tailwindcss-email-variants` plugin to do this, so to ensure works as expected `whitelist` automatically preserves the following selectors:
+
+<code-sample title="@maizzle/framework/transformers/removeUnusedCss.js">
+
+  ```js
+  [
+    '*body*', // Gmail
+    '.gmail*', // Gmail
+    '.apple*', // Apple Mail
+    '.ios*', // Mail on iOS
+    '.ox-*', // Open-Xchange
+    '.outlook*', // Outlook.com
+    '[data-ogs*', // Outlook.com
+    '.bloop_container', // Airmail
+    '.Singleton', // Apple Mail 10
+    '.unused', // Notes 8
+    '.moz-text-html', // Thunderbird
+    '.mail-detail-content', // Comcast, Libero webmail
+    '*edo*', // Edison (all)
+    '#*', // Freenet uses #msgBody
+    '.lang*' // Fenced code blocks
+  ]
+  ```
+
+</code-sample>
 
 ### backend
 
-If you use computed class names, like for example `class="{{ computedRed }} text-sm"`, the library will normally treat `{{` and `}}` as class names and will remove them.
+Type: Array\
+Default: `[{heads: '{{', tails: '}}'}, {heads: '{%', tails: '%}'}]`
+
+If you use computed class names, like for example `class="{{ computedRed }} text-sm"`, the library will normally treat `{{` and `}}` as class names and will remove them, since there will be no corresponding CSS selectors defined.
 
 To prevent this from happening, use the `backend` option to define the delimiters:
 
@@ -67,9 +100,12 @@ To prevent this from happening, use the `backend` option to define the delimiter
 
 </code-sample>
 
-By default, Maizzle preserves `{{ }}` and `{% %}`, so there's no need to add them.
+By default, Maizzle preserves `{{ }}` and `{% %}`.
 
 ### removeHTMLComments
+
+Type: Boolean\
+Default: `true`
 
 Set to `false` to prevent `email-comb` from removing `<!-- HTML comments -->`.
 
@@ -86,6 +122,9 @@ Set to `false` to prevent `email-comb` from removing `<!-- HTML comments -->`.
 </code-sample>
 
 ### removeCSSComments
+
+Type: Boolean\
+Default: `true`
 
 Set to `false` to prevent `email-comb` from removing `/* CSS comments */`.
 
@@ -127,6 +166,9 @@ For example, MailChimp uses CSS comments to define styles that are editable in t
 
 ### doNotRemoveHTMLCommentsWhoseOpeningTagContains
 
+Type: Array\
+Default: `['[if', '[endif']`
+
 HTML email code often includes Outlook or IE conditional comments, which you probably want to preserve. If the opening tag of a conditional includes any of the strings you list here, the Transformer will not remove that comment.
 
 <code-sample title="config.js">
@@ -142,6 +184,9 @@ HTML email code often includes Outlook or IE conditional comments, which you pro
 </code-sample>
 
 ### uglify
+
+Type: Boolean\
+Default: `false`
 
 Enable this to rename all classes and id's in both your `<style>` tags and your body HTML elements, to be as few characters as possible.
 

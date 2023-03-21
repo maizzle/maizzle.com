@@ -51,7 +51,7 @@ Output:
 
 ### By name and value
 
-If you know the exact name and value of the attribute, you may pass them as an object:
+If you know the exact name and value, you may pass them to the array as an object:
 
 <code-sample title="config.js">
 

@@ -14,14 +14,12 @@ If you want to dive right in, check out the [Markdown Starter](https://github.co
 
 ## Project setup
 
-For this project, we'll be using the new components system in Maizzle, which at the time of writing is still in beta ([4.4.0-beta10](https://github.com/maizzle/framework/releases)).
-
-Scaffold a new project using the `next` branch of the Starter:
+Scaffold a new project using the Starter:
 
 <terminal show-copy>
 
   ```bash
-  npx degit maizzle/maizzle#next markdown-project
+  npx degit maizzle/maizzle markdown-project
   ```
 
 </terminal>
@@ -44,6 +42,8 @@ Once it finishes installing dependencies, open the project in your favorite edit
 
 We'll be using the `src/content` folder to store our Markdown files:
 
+<code-sample>
+
 ```
 src
 └── content
@@ -51,6 +51,8 @@ src
     └── newsletter-2.md
     └── ...
 ```
+
+</code-sample>
 
 <alert>You can remove the `src/templates` directory, we won't need it.</alert>
 
@@ -74,7 +76,7 @@ Replace its contents with the following:
 
 <code-sample title="src/layouts/main.html">
 
-  ```html
+  ```xml
   <!DOCTYPE {{{ page.doctype || 'html' }}}>
   <html lang="{{ page.language || 'en' }}" xmlns:v="urn:schemas-microsoft-com:vml">
   <head>
@@ -100,7 +102,7 @@ Replace its contents with the following:
     <style>
       {{{ page.css }}}
     </style>
-    <stack name="head"></stack>
+    <stack name="head" />
   </head>
   <body class="m-0 p-0 w-full [word-break:break-word] [-webkit-font-smoothing:antialiased] {{ page.bodyClass || 'bg-slate-100' }}">
     <if condition="page.preheader">
@@ -124,7 +126,7 @@ Replace its contents with the following:
             <table class="w-full">
               <tr>
                 <td class="px-8 sm:px-4 text-base leading-6 text-slate-700">
-                  <slot:template></slot:template>
+                  <slot:template />
                 </td>
               </tr>
             </table>
@@ -402,14 +404,14 @@ For example, let's create an `<x-alert>` component:
 
 <code-sample title="src/components/alert.html">
 
-  ```html
+  ```xml
   <table class="w-full mb-8">
     <tr>
       <td
         attributes
         class="py-2 px-4 bg-blue-100 text-blue-600 rounded"
       >
-        <content></content>
+        <content />
       </td>
     </tr>
   </table>
@@ -465,14 +467,14 @@ To prevent an issue with code indentation in `markdown-it` that would result in 
 
 <code-sample title="src/components/alert.html">
 
-  ```html
+  ```xml
   <table class="w-full mb-8">
     <tr>
       <td
         attributes
         class="py-2 px-4 bg-blue-100 text-blue-600 rounded"
       >
-        <content></content>
+        <content />
   </td>
   </tr>
   </table>

@@ -35,23 +35,7 @@ You may specify a different height for smaller devices by using the `sm:` screen
 
 <alert>Responsive heights will only work in email clients that support `@media` queries.</alert>
 
-## Table
-
-Styling `<table>` and `<td>` is better supported than `<div>` in HTML emails, particularly in Outlook for Windows.
-
-If you need more control over the styling of your Spacer, use this one instead:
-
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <table class="w-full" role="separator">
-    <tr>
-      <td class="leading-4">&zwj;</td>
-    </tr>
-  </table>
-  ```
-
-</code-sample>
+The `div` spacer is also available as a [component](/docs/components/spacer).
 
 ## Row
 

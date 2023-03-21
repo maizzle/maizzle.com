@@ -13,6 +13,9 @@ PostHTML is configured under `build.posthtml.options` in your `config.js`.
 
 ### directives
 
+Type: Array\
+Default: `[]`
+
 You can configure the PostHTML parser to correctly process custom directives.
 
 For example, you may tell it to ignore `<?php ?>` tags instead of treating them as HTML:
@@ -157,11 +160,13 @@ Recognize CDATA sections as text even if the `xmlMode` option is disabled.
 ### recognizeSelfClosing
 
 Type: Boolean\
-Default: `false`
+Default: `true`
 
 If enabled, self-closing tags will trigger the `onclosetag` event even if `xmlMode` is disabled.
 
 <alert>When `xmlMode` is enabled self-closing tags will always be recognized.</alert>
+
+Maizzle sets this to `true` to ensure self-closing tags like those of Components are rendered correctly.
 
 <code-sample title="config.js">
 
@@ -232,6 +237,8 @@ Default: `[]`
 
 Use the `singleTags` option to tell PostHTML to treat custom tags as self-closing.
 
+<alert type="warning">This needs to be used in conjunction with `closingSingleTag` to tell PostHTML how to close the tag, otherwise you will end up with an unclosed tag.</alert>
+
 <code-sample title="config.js">
 
   ```js
@@ -239,7 +246,8 @@ Use the `singleTags` option to tell PostHTML to treat custom tags as self-closin
     build: {
       posthtml: {
         options: {
-          singleTags: ['custom']
+          singleTags: ['custom'],
+          closingSingleTag: 'slash', // see docs below
         }
       }
     }
@@ -442,6 +450,9 @@ Specify the attribute value quotes style.
 
 ## Plugins
 
+Type: Array\
+Default: `[]`
+
 Register any PostHTML plugins that you would like to use, in the `plugins` array:
 
 <code-sample title="config.js">
@@ -498,15 +509,14 @@ Here's how you can write a PostHTML plugin right in your Maizzle `config.js` fil
 
 ### Built-in plugins
 
-Maizzle already uses the following plugins, no need to add them to your config:
+Maizzle already uses the following PostHTML plugins internally:
 
 - [posthtml-extend](https://github.com/posthtml/posthtml-extend)
-- [posthtml-modules](https://github.com/posthtml/posthtml-modules)
-- [posthtml-expressions](https://github.com/posthtml/posthtml-expressions)
 - [posthtml-fetch](https://github.com/posthtml/posthtml-fetch)
 - [posthtml-mso](https://github.com/posthtml/posthtml-mso)
 - [posthtml-base-url](https://github.com/posthtml/posthtml-base-url)
 - [posthtml-content](https://github.com/posthtml/posthtml-content)
+- [posthtml-component](https://github.com/thewebartisan7/posthtml-components)
 - [posthtml-extra-attributes](https://github.com/posthtml/posthtml-extra-attributes)
 - [posthtml-markdownit](https://github.com/posthtml/posthtml-markdownit)
 - [posthtml-postcss-merge-longhand](https://github.com/posthtml/posthtml-postcss-merge-longhand)

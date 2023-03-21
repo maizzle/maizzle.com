@@ -49,7 +49,7 @@ These are the options that can be passed inside `minify`:
 
 ### lineLengthLimit
 
-Type: `number`\
+Type: Number\
 Default: `500`
 
 Maximum line length. Works only when `removeLineBreaks` is `true`.
@@ -58,21 +58,21 @@ Lines should be no longer than 998 characters, as per [RFC 2822](https://www.rfc
 
 ### removeIndentations
 
-Type: `boolean`\
+Type: Boolean\
 Default: `true`
 
 By default, code indentation is removed.
 
 ### removeLineBreaks
 
-Type: `boolean`\
+Type: Boolean\
 Default: `true`
 
 Should line breaks be removed? Maizzle defaults this option to `true`.
 
 ### removeHTMLComments
 
-Type: `boolean` or `Number`\
+Type: Boolean|Number\
 Default: `false`
 
 When set to a number, these are the available options:
@@ -83,14 +83,14 @@ When set to a number, these are the available options:
 
 ### removeCSSComments
 
-Type: `boolean`\
+Type: Boolean\
 Default: `true`
 
 CSS comments are removed by default, both in `<style>` tags and in `style=""` attributes.
 
 ### breakToTheLeftOf
 
-Type: `array`\
+Type: Array\
 Default: `['</td', '<html', '</html', '<head', '</head', '<meta', '<link', '<table', '<script', '</script', '<!DOCTYPE', '<style', '</style', '<title', '<body', '@media', '</body', '<!--[if', '<!--<![endif', '<![endif]']`
 
 When any of given strings are encountered and `removeLineBreaks` is `true`, current line will be terminated.
@@ -99,12 +99,12 @@ Set to `false` or `null` or an empty array to disable.
 
 ### mindTheInlineTags
 
-Type: `array`\
+Type: Array\
 Default: `['a', 'abbr', 'acronym', 'audio', 'b', 'bdi', 'bdo', 'big', 'br', 'button', 'canvas', 'cite', 'code', 'data', 'datalist', 'del', 'dfn', 'em', 'embed', 'i', 'iframe', 'img', 'input', 'ins', 'kbd', 'label', 'map', 'mark', 'meter', 'noscript', 'object', 'output', 'picture', 'progress', 'q', 'ruby', 's', 'samp', 'script', 'select', 'slot', 'small', 'span', 'strong', 'sub', 'sup', 'svg', 'template', 'textarea', 'time', 'u', 'tt', 'var', 'video', 'wbr']`
 
 Some inline tags can accidentally introduce extra text. The minifier will take extra precaution when minifying around these tags.
 
-Set to `false` or `null` or an empty array to disable.
+Set to `false`, `null`, or an empty array `[]` to disable.
 
 ## API
 

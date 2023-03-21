@@ -5,39 +5,26 @@ description: "Define distinct build scenarios for your HTML email workflow, each
 
 # Environments
 
-You might want to use different settings when developing locally versus when building production-ready emails.
+> When I run `maizzle build [environment]`, should CSS be inlined? Should my HTML be minified? Do I need to make some data available to the templates?
 
-For example, you don't need CSS inlining or code indentation when developing on your computer, but you'll most likely want both enabled for the final, production-ready emails.
+You might want to use different settings when developing locally versus when building the production-ready emails.
 
-Maizzle makes it easy to have as many build targets as you need by using distinct configuration files that enable their own build command.
+For example, you don't need CSS inlining or code indentation when developing on your computer, but you'll want both enabled for the final, production-ready emails.
+
+Maizzle makes it easy to define as many build scenarios as you need, by using distinct configuration files that enable their own build command.
 
 We call these Environments.
 
-## Creating Environments
+## Default Environments
 
-Think of Environments as 'build scenarios':
+Maizzle comes with two config files, each enabling its own build command:
 
-> When I run `maizzle build [environment]`, should X happen? Should CSS be inlined? Should my HTML be minified? Do I need some data to be available for the templates?
+| File | Command |
+| --- | --- |
+| `config.js` | `maizzle build` |
+| `config.production.js` | `maizzle build production` |
 
-For example, let's define a _production_ environment, by creating a new file named `config.production.js`, in the project root:
-
-<code-sample title="config.production.js">
-
-  ```js
-  module.exports = {
-    build: {
-      templates: {
-        destination: {
-          path: 'build_production'
-        }
-      }
-    }
-  }
-  ```
-
-</code-sample>
-
-This <span class="font-mono text-sm">config.<strong>production</strong>.js</span> file will be used when running <span class="font-mono text-sm">maizzle build <strong>production</strong></span>.
+You probably noticed the link between <span class="font-mono text-sm">config.<strong>production</strong>.js</span> and <span class="font-mono text-sm">maizzle build <strong>production</strong></span> - the keyword in the config file name enables its own build command.
 
 <alert>Remember, the `maizzle` executable will only be available if you installed the [CLI tool](/docs/cli) globally. Otherwise, use the npm scripts provided by the Starter in `package.json`.</alert>
 
@@ -47,7 +34,7 @@ Any new Environment configuration file that you create will be merged _on top_ o
 
 With the example above, when running the `maizzle build production` command, `config.production.js` will be merged on top of the base `config.js`: if the same key is present in both files, the value from `config.production.js` will be used.
 
-<alert>When creating a new Environment config file you only need to specify the config values that will be different from those in `config.js`.</alert>
+<alert>When creating a new Environment config file you only need to specify the config values that will be different from those (or don't exist) in `config.js`.</alert>
 
 ## Environment builds
 
@@ -61,9 +48,9 @@ To build your emails for a specific Environment, pass its name as an argument to
 
 </terminal>
 
-<alert type="warning">In this example, if a `config.production.js` file is not found at the current location, the build will fail.</alert>
-
 The Starter's `config.production.js` is configured to output production-ready emails in a `build_production` folder at the root of the project.
+
+<alert type="warning">In this example, if a `config.production.js` file is not found at the current location, the build will fail.</alert>
 
 ## Custom Environments
 
@@ -100,11 +87,11 @@ The build command for it would be:
 
 ## Config variables
 
-Maizzle exposes a `page` object that you can access through [expressions](/docs/templates#expressions) in your HTML.
+Maizzle exposes a `page` object that you can access through [expressions](/docs/expressions) in your HTML.
 
 This object contains:
 
-- your Template config (`config.[env].js` merged with Front Matter)
+- your Template config (`config.[env].js` merged with Front Matter variables)
 - the compiled Tailwind CSS (`page.css`)
 
 This makes it possible to define variables in `config.js`:
@@ -124,20 +111,20 @@ This makes it possible to define variables in `config.js`:
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <extends src="src/layouts/main.html">
-    <block name="template">
+  <x-main>
+    <fill:template>
       <p>doctype is: {{ page.doctype }}</p>
-    </block>
-  </extends>
+    </fill:template>
+  </x-main>
   ```
 
 </code-sample>
 
-### Template variable
+### Current Environment
 
-The Environment name is globally available under the `page.env` variable.
+The current Environment name is globally available under the `page.env` variable.
 
-You can output content in your emails based on the Environment you're building for:
+You can output content in your emails based on the Environment that you're building for:
 
 <code-sample title="src/templates/example.html">
 

@@ -5,7 +5,7 @@ description: "Replace strings in your HTML email content"
 
 # Replace strings
 
-Maizzle can batch-replace strings in your HTML email template, and it even works with regular expressions!
+Maizzle can batch-replace strings in your HTML email template, and you can even use regular expressions!
 
 ## Usage
 

@@ -7,10 +7,9 @@ description: "Getting started with the Maizzle Email Framework"
 
 Maizzle is a framework for HTML email development.
 
-It's powered by [Tailwind CSS](https://tailwindcss.com/) and comes with features such as templating, components, and various transformations that are necessary for HTML emails.
+It's powered by [Tailwind CSS](https://tailwindcss.com/) and comes with features such as components, expressions, and various transformations that are necessary for HTML emails.
 
-Maizzle doesn't rely on custom tags that expand into predefined, `<table>`-based HTML markup.
-Instead, you write your own HTML that you style with Tailwind CSS.
+Maizzle doesn't rely on custom tags that expand into predefined, `<table>`-based HTML markup. We do provide some abstractions for things like components or templating tags, but you don't _have_ to use them if you don't want to.
 
 This means that you're in complete control over your email code: no need to worry about things like component markup being locked into the framework core or not having full control over styling or accessibility.
 
@@ -18,7 +17,9 @@ This means that you're in complete control over your email code: no need to worr
 
 Maizzle uses the Tailwind CSS framework, enabling you to quickly style HTML emails.
 
-Using utility classes to style your emails makes you faster and more productive by eliminating the constant context switching present in a traditional approach where you write CSS separately from your HTML markup.
+Using utility classes to style your emails makes you faster and more productive by eliminating the constant context switching present in a traditional email coding approach where you write responsive CSS separately from your HTML markup.
+
+And since you no longer need to come up with names for your CSS classes, you can focus on coding your emails at warp speed.
 
 An email-tailored `tailwind.config.js` is provided in the [official Starter](https://github.com/maizzle/maizzle) - this configures Tailwind CSS for optimal email client support.
 
@@ -77,4 +78,4 @@ Besides things like "_should inlining be enabled?_" or "_do we need to minify th
 
 You can do even more advanced things, like pulling data from an API to use in a template, or `require()` some NPM package to further transform your emails.
 
-Each config file represents a distinct [build environment](/docs/environments) that can be triggered with its own `maizzle build [environment]` command, so you can define settings for as many build scenarios as you need!
+Each config file represents a distinct [build Environment](/docs/environments) that can be triggered with its own `maizzle build [environment]` command, so you can create as many build scenarios as you need, each with their own settings!

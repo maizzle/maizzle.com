@@ -103,7 +103,7 @@ By default, the latest version will be installed. To use a specific version, fir
 
   ```json
   "dependencies": {
-    "@maizzle/framework": "4.0.0"
+    "@maizzle/framework": "4.3.1"
   }
   ```
 

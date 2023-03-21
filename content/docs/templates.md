@@ -5,18 +5,29 @@ description: "Learn how to create HTML emails with template inheritance in Maizz
 
 # Templates
 
-Templates in Maizzle typically contain the body of your email templates.
+**👋 New syntax**
 
-They're made up of two distinct sections:
+You are viewing the documentation for Templates using the new Components syntax introduced in `v4.4.0`.
+Not ready to switch yet? See the [legacy Templates docs](https://v43x.maizzle.com/docs/templates).
+
+---
+
+A Template in Maizzle is a special kind of Component that typically contains the body of your email: the HTML that defines the design and content.
+
+It's made up of two distinct sections:
 
 1. Front Matter
 2. Your HTML
 
+Unlike other Components, a Template may include a Front Matter block, which is a YAML-style block of variables that you may define at the top of the file.
+
+Maizzle knows to parse this block's variables and makes them available to all other Components that you add to this Template, as well as to the Layout it uses.
+
 ## Front Matter
 
-Templates can define new variables and even override existing ones from your config, through an optional YAML-style Front Matter block:
+Templates can define new variables and even override existing ones from your config, through the optional YAML-style Front Matter block:
 
-<code-sample title="template.html">
+<code-sample title="src/templates/example.html">
 
 ```xml
 ---
@@ -28,9 +39,9 @@ title: "Please confirm your email address"
 
 Front Matter variables are accessible through the `page` object.
 
-To output them in your Template, use the `{{ }}` [expression](#expressions) syntax:
+To output them in a Template, use the `{{ }}` [expression](/docs/expressions) syntax:
 
-<code-sample title="template.html">
+<code-sample title="src/templates/example.html">
 
 ```xml
 ---
@@ -42,193 +53,54 @@ title: "Please confirm your email address"
 
 </code-sample>
 
-<alert type="warning">Front Matter must be defined at the very top of your Template, starting on the first line.</alert>
+<alert type="warning">Front Matter must be defined at the very top of a Template, starting on the first line.</alert>
 
-## Extending Layouts
+## Using Layouts
 
-Your emails will generally use the same 'boilerplate', like the `<!doctype>`, the `<head>` with all the `<meta>` tags, or the `<body>` tag.
+Your emails will likely share the same boilerplate, like the `<!doctype>`, the `<head>` with all the `<meta>` tags, or the `<body>` tag - code that rarely needs to change.
 
 Although you're free to do it, it would be very inefficient to always have to write this boilerplate every time you create a new Template.
 
-In Maizzle, you can re-use a [Layout](/docs/layouts) by having a Template extend it:
+To reuse this code in Maizzle, you may create a [Layout](/docs/layouts):
 
-<code-sample title="src/templates/example.html">
-
-```xml
-<extends src="src/layouts/main.html">
-  <block name="template">
-    <!-- ... -->
-  </block>
-</extends>
-```
-
-</code-sample>
-
-<alert type="warning">The path provided in the `src=""` attribute must be relative to the path in [`build.layouts.root`](/docs/configuration/layouts#root) from your config. If there is no file at that path, the build will fail with a `Template render error`.</alert>
-
-### How Extending Works
-
-When a Template `<extends>` a Layout, Maizzle will look for matching `<block>` tags in both the Template and the Layout. The matching is done via the `name=""` attribute.
-
-Each matching `<block>` in the Layout will be replaced with the contents of its corresponding `<block>` tag from the Template.
-
-### Extending Templates
-
-A Template can also extend another Template.
-
-For example, imagine `src/templates/first.html` :
-
-<code-sample title="first.html">
-
-```xml
-<extends src="src/layouts/main.html">
-  <block name="template">
-    Parent
-    <block name="button">Child in first.html</block>
-  </block>
-</extends>
-```
-
-</code-sample>
-
-We could then extend it in `src/templates/second.html` :
-
-<code-sample title="second.html">
-
-```xml
-<extends src="src/templates/first.html">
-  <block name="button">Child in second.html</block>
-</extends>
-```
-
-</code-sample>
-
-After compilation, the body of `second.html` would be:
-
-<code-sample title="second.html" no-copy>
-
-```xml
-Parent
-Child in second.html
-```
-
-</code-sample>
-
-Of course, if we use a `template` block in `second.html`, then we overwrite everything in `first.html`:
-
-<code-sample title="second.html">
-
-```xml
-<extends src="src/templates/first.html">
-  <block name="template">
-    Second
-    <block name="button">Child in second.html</block>
-  </block>
-</extends>
-```
-
-</code-sample>
-
-Result:
-
-<code-sample title="second.html" no-copy>
-
-```xml
-Second
-Child in second.html
-```
-
-</code-sample>
-
-### Multiple Extends
-
-Multiple `<extends>` tags in a Template are not supported.
-
-Only blocks from the last `<extends>` tag will be parsed.
-
-<code-sample title="src/templates/example.html">
+<code-sample title="src/layouts/main.html">
 
   ```xml
-  <extends src="src/layouts/header.html">
-    <block name="template">
-      stuff to put in header.html
-    </block>
-  </extends>
-
-  <extends src="src/layouts/footer.html">
-    <block name="template">
-      stuff to put in footer.html
-    </block>
-  </extends>
+  <!doctype html>
+  <html>
+  <head>
+    <style>{{{ page.css }}}</style>
+  </head>
+  <body>
+    <slot:template />
+  </body>
   ```
 
 </code-sample>
 
-Result:
+Then, in a Template, you can fill that `<slot:template />` with your Template's HTML:
 
-<code-sample title="build_production/example.html">
-
-  ```xml
-  <block name="template">
-    stuff to put in header.html
-  </block>
-
-  stuff to put in footer.html
-  ```
-
-</code-sample>
-
-## Blocks
-
-For a Layout to render a Template's body, that body must be wrapped in a `<block>` that has the same `name=""` attribute in both the Template and the Layout.
-
-In the Starter, we named it `template`:
-
-<code-sample title="src/templates/promotional.html">
+<code-sample title="src/templates/example.html">
 
 ```xml
-<block name="template">
-  <!-- email body -->
-</block>
+<x-main>
+  <fill:template>
+    <!-- your email HTML... -->
+  </fill:template>
+</x-main>
 ```
 
 </code-sample>
 
-Everything inside that `<block>` will be output into the Layout that the Template extends, wherever a `<block name="template"></block>` is found.
-
-### Multiple Blocks
-
-Your Templates can use as many blocks as you need.
-
-For example, the [Starter](https://github.com/maizzle/maizzle) uses a `head` block in its main Layout, allowing you to inject additional code into the `<head>` of you HTML email, right from the Template.
-
-## Basic Example
-
-Here's a very basic Template example:
-
-<code-sample title="example.html">
-
-```xml
-<extends src="src/layouts/main.html">
-  <block name="template">
-    <table>
-      <tr>
-        <td>
-          <p>...</p>
-        </td>
-      </tr>
-    </table>
-  </block>
-</extends>
-```
-
-</code-sample>
+In the example above, we use the `<x-main>` Component tag to say that we want to use the `main.html` Layout. We then fill (replace) its `<slot:template />` tag with the HTML inside our Template's `<fill:template>` tag.
 
 ## Current template
 
-Information about the Template file that is currently being processed is available under `build.current` in the config.
+When developing locally, information about the Template file that is currently being processed is available under `page.build.current`.
 
-It's an object containing a parsed path of the destination file name, for example:
+It's an object containing a parsed path of the destination file name:
+
+<code-sample>
 
 ```js
 build: {
@@ -244,15 +116,20 @@ build: {
 }
 ```
 
-Can be used in Events like `beforeRender` if you need the current file name or extension.
+</code-sample>
+
+It can be used in Events like `beforeRender` if you need the file name or extension of the Template file currently being processed.
+
+<alert>Current template file information is not available when using the [API](/docs/api).</alert>
 
 ## Archiving
 
 Maizzle will only compile templates found in path(s) that you have defined in `build.templates.source`, which have the same extension as the one defined in `build.templates.filetypes` (`html` by default).
 
-If you create a lot of emails, your builds may start to slow down, since all templates are rebuilt every time you initially run the `build <env>` command or when developing locally and making changes to a Layout or Component.
+If your project has _a lot_ of emails, your builds may start to slow down since all Templates are rebuilt on cold start (every time you run the `maizzle build <env>` command) or when developing locally and making changes to a Layout, a Component, or a config file (this needs to trigger a full rebuild to reflect changes across all Templates).
 
-You can archive Templates in two ways:
+You can archive Templates in a few ways:
 
 1. Move them to a directory outside the one defined in `build.templates.source`, so they don't get copied over to the destination directory (recommended).
 2. Change their file extension to something that is not defined in `build.templates.filetypes`. They'll just be copied over to the destination, Maizzle will not try to compile them.
+3. Use the [`omit` option](/docs/configuration/templates#omit)

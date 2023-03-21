@@ -151,7 +151,9 @@ Let's update the existing header row:
       <a href="https://laracasts.com">
         <img src="laracasts-logo.png" width="157" alt="{{ page.feed.title }}">
       </a>
-      <p class="m-0 mt-2 text-sm text-slate-600">{{ page.feed.subtitle }}</p>
+      <p class="m-0 mt-2 text-sm text-slate-600">
+        {{ page.feed.subtitle }}
+      </p>
     </td>
   </tr>
   ```
@@ -171,11 +173,13 @@ Let's use a full width card from the [promotional template](https://github.com/m
         <p class="m-0 mb-1 text-sm text-slate-500">
           {{ page.formattedDate(post.pubDate) }}
         </p>
+
         <h2 class="m-0 mb-4 text-2xl leading-6">
           <a href="{{ post.link }}" class="text-slate-800 hover:text-slate-700 [text-decoration:none]">
             {{ post.title }}
           </a>
         </h2>
+
         <p class="m-0 text-base">
           <a href="{{ post.link }}" class="text-slate-500 hover:text-slate-700 [text-decoration:none]">
             {{ post.summary }}

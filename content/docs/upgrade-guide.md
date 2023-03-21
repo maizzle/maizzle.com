@@ -185,9 +185,9 @@ The `inlineCSS.mergeLonghand` key has been moved up one level and renamed to `sh
 
   ```diff
   module.exports = {
--  inlineCSS: {
--    mergeLonghand: true
--  }
+   inlineCSS: {
+-  mergeLonghand: true
+   }
 +  shorthandInlineCSS: true
   }
   ```

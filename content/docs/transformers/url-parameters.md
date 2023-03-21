@@ -45,11 +45,11 @@ Of course, you may define URL parameters at a Template level, through Front Matt
     utm_campaign: "Pre-launch August"
   ---
 
-  <extends src="src/layouts/main.html">
-    <block name="template">
-      <!-- ... -->
-    </block>
-  </extends>
+  <x-main>
+    <fill:template>
+      <!-- your email HTML... -->
+    </fill:template>
+  </x-main>
   ```
 
 </code-sample>
@@ -60,8 +60,7 @@ Configure the tags to process and other transformer options.
 
 ### tags
 
-Type: `array`
-<br>
+Type: Array\
 Default: `['a']`
 
 Array of tag names to process. Only URLs inside `href=""` attributes of tags in this array will be processed.
@@ -85,9 +84,12 @@ You may use CSS selectors to select only certain attributes. For example, this w
 
 ### strict
 
-By default, the transformer will append query parameters only to valid URLs.
+Type: Boolean\
+Default: `true`
 
-You may disable strict mode to append parameters to any string:
+By default, query parameters are appended only to valid URLs.
+
+Disable strict mode to append parameters to any string:
 
 <code-sample title="config.js">
 
@@ -117,6 +119,9 @@ Result:
 ```
 
 ### qs
+
+Type: Object\
+Default: `undefined`
 
 Options to pass to the [query-string](https://github.com/sindresorhus/query-string#stringifyobject-options) library.
 

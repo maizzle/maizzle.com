@@ -39,6 +39,8 @@ By default, Maizzle makes any `<table>` accessible, resets its spacing, and ensu
 
 This is the default configuration:
 
+<code-sample>
+
 ```js
 let attributes = {
   table: {
@@ -52,6 +54,8 @@ let attributes = {
 }
 ```
 
+</code-sample>
+
 <alert>Attributes will be added only if they're not already present on the element.</alert>
 
 ### Disabling
@@ -62,7 +66,7 @@ You may turn this off by setting `extraAttributes` to `false` in your config:
 
   ```js
   module.exports = {
-    extraAttributes: false
+    extraAttributes: false,
   }
   ```
 

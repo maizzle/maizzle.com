@@ -27,18 +27,19 @@ To enable CSS inlining, simply set `inlineCSS` to `true` in your config:
 
 </code-sample>
 
-<alert>You will want to turn CSS inlining off when developing ⚡[AMP4EMAIL templates](/guides/amp-email)</alert>
+<alert>You will want to keep CSS inlining off when developing ⚡[AMP4EMAIL templates](/guides/amp-email)</alert>
 
 ## Customization
 
 If you need control over how your CSS is inlined, you may pass a configuration object to `inlineCSS`.
 Doing this in your Environment `config.js` will enable CSS inlining for all Templates when building for that Environment.
 
-### Style to attribute
+### styleToAttribute
+
+Type: Object\
+Default: `{}`
 
 Defines which CSS properties should be duplicated as what HTML attributes.
-
-It runs by default as part of the CSS inlining process and it duplicates `vertical-align` as `valign`, but you may customize the property-attribute mapping.
 
 For example, this property-attribute assignment:
 
@@ -76,13 +77,25 @@ For example, this property-attribute assignment:
 </table>
 ```
 
-### Attribute to style
+The available mappings are:
+
+CSS Property | HTML Attribute
+--- | ---
+`background-color` | `bgcolor`
+`background-image` | `background`
+`text-align` | `align`
+`vertical-align` | `valign`
+
+### attributeToStyle
 
 Duplicates specified HTML attributes as inline CSS.
 
 See the documentation [here](/docs/transformers/attribute-to-style).
 
-### Width attributes
+### applyWidthAttributes
+
+Type: Array\
+Default: `[]`
 
 Array of HTML elements that will receive `width` attributes based on inline CSS width.
 
@@ -102,7 +115,10 @@ Works together with `styleToAttribute`.
 
 </code-sample>
 
-### Height attributes
+### applyHeightAttributes
+
+Type: Array\
+Default: `[]`
 
 Array of HTML elements that will receive `height` attributes based on inline CSS height.
 
@@ -122,7 +138,7 @@ Works together with `styleToAttribute`.
 
 </code-sample>
 
-### Keep only attribute sizes
+### keepOnlyAttributeSizes
 
 Define for which elements should Maizzle keep _only_ attribute sizes, like `width=""` and `height=""`. Elements in these arrays will have their inline CSS widths and heights removed.
 
@@ -164,9 +180,12 @@ You can add HTML elements like this:
 
 <alert type="warning">Using only attribute sizes is known to cause <a href="https://www.courtneyfantinato.com/correcting-outlook-dpi-scaling-issues/">scaling issues in Outlook</a></alert>
 
-### Prefer bgcolor attribute
+### preferBgColorAttribute
 
-Enable this option to remove any inlined `background-color` CSS properties, but keep any corresponding `bgcolor` attributes.
+Type: Boolean|Array\
+Default: `false`
+
+Enable this option to remove any inlined `background-color` CSS properties but keep any corresponding `bgcolor` attributes.
 
 <code-sample title="config.js">
 
@@ -198,7 +217,10 @@ In the example above, `background-color` will be removed only from `<td>` elemen
 
 <alert>You most likely won't need to use this. CSS background-color is well-supported in HTML email.</alert>
 
-### Excluded properties
+### excludedProperties
+
+Type: Array\
+Default: `[]`
 
 Array of CSS property names that should be excluded from the CSS inlining process.
 
@@ -220,18 +242,38 @@ For example:
 
 <alert>`--tw-shadow` is automatically excluded from the properties that can be inlined.</alert>
 
+### codeBlocks
+
+Type: Object\
+Default: `{ EJS: {}, HBS: {} }`
+
+An object where each value has a start and end to specify fenced code blocks that should be ignored during CSS inlining.
+
+By default, <abbr title="Embedded JavaScript Templates">EJS</abbr> and <abbr title="Handlebars">HBS</abbr> code blocks are ignored:
+
+<code-sample>
+
+  ```js
+  {
+    EJS: { start: '<%', end: '%>' },
+    HBS: { start: '{{', end: '}}' },
+  }
+  ```
+
+</code-sample>
+
 ## Prevent inlining
 
 Use the `data-embed` attribute on a `<style>` tag to prevent Juice from inlining the CSS inside it.
 Useful for writing email client CSS hacks, or for preserving CSS comments in tandem with the [`removeCSSComments: false`](/docs/transformers/remove-unused-css#removecsscomments) Cleanup option.
 
-<alert>CSS selectors that don't appear in your markup, like for email client targeting, will still need to be [whitelisted](/docs/transformers/remove-unused-css#whitelist) so that they do not get purged.</alert>
+<alert>CSS selectors that don't appear in your markup will still need to be [whitelisted](/docs/transformers/remove-unused-css#whitelist).</alert>
 
 ## API
 
-You may pass your own CSS through the `customCSS` option.
+You may pass your own CSS to inline through the `customCSS` option.
 
-If you don't specify `customCSS`, your HTML string will need to have a `<style>` with CSS tag in the `<head>`.
+If you don't specify `customCSS`, your HTML string will need to have a `<style>` with CSS tag in the `<head>`, so it can be inlined instead.
 
 Additionally, you may configure the [Juice](https://www.npmjs.com/package/juice) library by passing options in the same object.
 

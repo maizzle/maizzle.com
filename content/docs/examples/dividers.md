@@ -1,15 +1,41 @@
 ---
-title: "Divider"
+title: "Dividers"
 description: "Create dividers or horizontal rules for your HTML email template in Maizzle"
 ---
 
-# Divider
+# Dividers
 
-A Divider is basically a thin horizontal line that separates content areas.
+A Divider is a visible horizontal line that separates content areas.
 
 Similar to Spacers, Dividers provide consistent vertical spacing while also offering visual separation of your content.
 
-To create a Divider, we can use a regular `<hr>` element:
+## Div
+
+The simplest, most reliable way to create a visual, horizontal divider line in HTML emails is to use a `<div>` element:
+
+<code-sample title="src/templates/example.html">
+
+  ```xml
+  <div class="h-px leading-px bg-slate-300" role="separator">&zwj;</div>
+  ```
+
+</code-sample>
+
+The `separator` role indicates that this is a divider that separates and distinguishes sections of content.
+
+You may adjust the top and bottom spacing around the divider with margin utilities:
+
+<code-sample title="src/templates/example.html">
+
+  ```xml
+  <div class="h-px leading-px bg-slate-300 my-8" role="separator">&zwj;</div>
+  ```
+
+</code-sample>
+
+## Semantic
+
+To create a semantic Divider, we can use a regular `<hr>` element:
 
 <code-sample title="src/templates/example.html">
 
@@ -19,7 +45,7 @@ To create a Divider, we can use a regular `<hr>` element:
 
 </code-sample>
 
-## How it works
+### How it works
 
 1. We first reset the `border-width`, so we can apply our own colors
 2. We use a combination of `background-color` and `color` - the latter is for Outlook (Windows)
@@ -27,11 +53,11 @@ To create a Divider, we can use a regular `<hr>` element:
 
 The `<hr>` Divider is based on Mark Robbins' excellent work, available at [goodemailcode.com](https://www.goodemailcode.com/email-code/hr).
 
-## Customization
+### Customization
 
 You can customize the divider and give it a custom width or height, change its color, the top/bottom space around it, and even its alignment.
 
-### Width
+#### Width
 
 An `<hr>` goes full width by default, but we can set a custom width.
 
@@ -55,7 +81,7 @@ Need a custom width for mobile devices? Use the `sm` breakpoint:
 
 </code-sample>
 
-### Margin
+#### Margin
 
 You may customize top and bottom spacing with CSS margins.
 
@@ -81,7 +107,7 @@ Need uneven spacing?
 
 <alert>Note that <code>&lt;hr&gt;</code> elements come with margins by default, so you might want to set a custom one or reset it with <code>m-0</code>. For example, Chrome resets to <code>8px</code>.</alert>
 
-### Alignment
+#### Alignment
 
 You can use the `align` attribute to align a Divider.
 
@@ -95,7 +121,7 @@ You can use the `align` attribute to align a Divider.
 
 By default, it will be centered.
 
-### Vertical
+#### Vertical
 
 For a vertical Divider, simply use a narrow width and a bigger height:
 
@@ -106,6 +132,26 @@ For a vertical Divider, simply use a narrow width and a bigger height:
   ```
 
 </code-sample>
+
+### Outlook note
+
+The `<hr>` divider is harder to control in Outlook on Windows - it usually renders wider than intended and you can't use left/right CSS margins.
+
+A proposed solution, as seen in Mark's example, is to wrap it in a `<div>` and add margins to that instead:
+
+<code-sample title="src/templates/example.html">
+
+  ```xml
+  <div class="mx-6">
+    <hr class="border-0 bg-slate-500 text-gray-500 h-px">
+  </div>
+  ```
+
+</code-sample>
+
+In our tests, the semantic `<hr>` divider has been hard to control in Outlook on Windows, so we recommend using the Div or Table Divider.
+
+The Maizzle Starter includes a [Divider component](/docs/components/divider) that uses the `<div>` technique.
 
 ## Table divider
 

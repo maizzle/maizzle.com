@@ -16,7 +16,7 @@ This Transformer is part of the CSS inlining process, you may enable it in your 
   ```js
   module.exports = {
     inlineCSS: {
-      attributeToStyle: true
+      attributeToStyle: true,
     }
   }
   ```

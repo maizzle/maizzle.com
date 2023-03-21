@@ -29,6 +29,7 @@ Tailwind CSS paths are configured with the `build.tailwind` key in your config:
 
 ### css
 
+Type: String\
 Default: `src/css/tailwind.css`
 
 Path to your main CSS file, that will be compiled with Tailwind CSS.
@@ -37,6 +38,7 @@ This file is optional: if it doesn't exist Maizzle will compile Tailwind CSS wit
 
 ### config
 
+Type: String\
 Default: `tailwind.config.js`
 
 Path to the Tailwind CSS config file to use.
@@ -65,14 +67,19 @@ Because Tailwind CSS is compiled only once, _before_ any Templates are processed
         important: false
   ---
 
-  <extends src="src/layouts/main.html">
-    <!-- ... -->
-  </extends>
+  <x-main>
+    <fill:template>
+      <!-- your email HTML... -->
+    </fill:template>
+  </x-main>
   ```
 
 </code-sample>
 
 ### compiled
+
+Type: String\
+Default: `''`
 
 Use the `compiled` key if you already have a CSS string - this will skip Tailwind CSS compilation and no utilities will be generated.
 
@@ -121,7 +128,7 @@ HTML emails still need to use inline CSS, most notably for these reasons:
 - Some email clients don't support embedded CSS (i.e. in `<style>`)
 - Embedded styles are often discarded when an email is forwarded
 
-Because of this, Tailwind's `important` option is set to `true` in Maizzle - this way responsive utilities can actually override the inlined CSS.
+Maizzle adds `!important` by default to all variant, screen or modifier classes - basically all CSS that could not be inlined. This way, things like responsive utilities can actually override the inlined CSS.
 
 <alert>Only CSS in `<style>` tags will use `!important`, inlined CSS in `style=""` attributes will not.</alert>
 
@@ -203,7 +210,7 @@ More on screens, in the [Tailwind CSS docs](https://tailwindcss.com/docs/respons
 
 ### Colors
 
-Maizzle uses the [default colors](https://tailwindcss.com/docs/customizing-colors) from Tailwind CSS.
+Maizzle uses the [default color palette](https://tailwindcss.com/docs/customizing-colors) from Tailwind CSS.
 
 You may define your own colors, or even extend or change the default color palette by adding a `colors` key to your Tailwind config:
 
@@ -229,8 +236,6 @@ You may define your own colors, or even extend or change the default color palet
   ```
 
 </code-sample>
-
-See the [Tailwind color palette reference](https://tailwindcss.com/docs/customizing-colors).
 
 ### Pixel units
 

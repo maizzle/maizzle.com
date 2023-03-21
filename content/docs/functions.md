@@ -7,7 +7,9 @@ description: "Programmatically configure Maizzle or use the output of other Node
 
 Maizzle is fully configured in JavaScript, so you can programmatically set config options or process and make data available to your Templates.
 
-When using a function, you need to make sure that:
+## Defining functions
+
+When defining a function, you need to make sure that:
 
 1. it returns something
 2. you invoke it

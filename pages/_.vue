@@ -175,13 +175,17 @@ export default {
   watch: {
     '$route.hash'(newHash) {
       if (newHash) {
-        this.scrollTo(newHash)
+        try {
+          this.scrollTo(newHash)
+        } catch {} // eslint-disable-line no-empty
       }
     }
   },
   mounted () {
     if (this.$route.hash) {
-      this.scrollTo(this.$route.hash)
+      try {
+        this.scrollTo(this.$route.hash)
+      } catch {} // eslint-disable-line no-empty
     }
   },
   methods: {
