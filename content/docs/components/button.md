@@ -69,20 +69,24 @@ This will add the `text-center` class to the button's wrapper `<div>`, which wil
 
 You may style the Button as needed with Tailwind CSS utilities.
 
-For example, let's make the button blue and the text a light blue shade:
+The button includes a background and text color by default, so you'll need to override them with the `!` important modifier.
+
+For example, let's make the button blue-themed:
 
 <code-sample title="src/templates/example.html">
 
   ```xml
   <x-button
     href="https://example.com"
-    class="bg-blue-500 text-blue-100"
+    class="!bg-blue-600 !text-blue-100"
   >
     Book now
   </x-button>
   ```
 
 </code-sample>
+
+Of course, you may change the colors directly in `src/components/button.html`.
 
 ### MSO Padding
 
