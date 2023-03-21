@@ -128,7 +128,7 @@ HTML emails still need to use inline CSS, most notably for these reasons:
 - Some email clients don't support embedded CSS (i.e. in `<style>`)
 - Embedded styles are often discarded when an email is forwarded
 
-Because of this, Tailwind's `important` option is set to `true` in Maizzle - this way responsive utilities can actually override the inlined CSS.
+Maizzle adds `!important` by default to all variant, screen or modifier classes - basically all CSS that could not be inlined. This way, things like responsive utilities can actually override the inlined CSS.
 
 <alert>Only CSS in `<style>` tags will use `!important`, inlined CSS in `style=""` attributes will not.</alert>
 
