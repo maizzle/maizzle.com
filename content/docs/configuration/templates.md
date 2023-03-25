@@ -25,7 +25,7 @@ Template configuration is done under the `build.templates` key of your Maizzle c
 
 ## source
 
-Type: `String|Array|Function`\
+Type: String|Array|Function\
 Default: `src/templates`
 
 Define the source directory where Maizzle should look for Templates to compile.
@@ -134,7 +134,7 @@ Each source will be processed and templates will be output based on its own conf
 
 ## filetypes
 
-Type: `String|Array`\
+Type: String|Array\
 Default: `'html'`
 
 Define what file extensions your Templates use.
@@ -193,14 +193,14 @@ This means you can keep other files alongside your Templates, and Maizzle will n
 
 ## destination
 
-Type: `Object`\
+Type: Object\
 Default: `{ path: 'build_[env]', extension: 'html' }`
 
 Define the output path for compiled Templates, and what file extension they should use.
 
 ### path
 
-Type: `String`\
+Type: String\
 Default: `build_[env]`
 
 Directory path where Maizzle should output the compiled emails.
@@ -229,7 +229,7 @@ Using [multiple `templates`](#multiple-templates) config blocks? Make sure to ha
 
 ### extension
 
-Type: `String`\
+Type: String\
 Default: `'html'`
 
 Define the file extension - without the leading dot - to be used for the compiled templates.
@@ -256,7 +256,7 @@ The compiled templates will be output as `build_laravel/*.blade.php`.
 
 ## permalink
 
-Type: `String`\
+Type: String\
 Default: `undefined`
 
 Use the `permalink` Front Matter key to define a custom output path right in a Template:
@@ -321,7 +321,7 @@ Output at a specific system location:
 
 ## assets
 
-Type: `Object`\
+Type: Object\
 Default: `{ source: '', destination: 'assets' }`
 
 Source and destination directories for your asset files.
@@ -384,7 +384,7 @@ Of course, if using multiple `templates` blocks, you can have different asset co
 
 ## omit
 
-Type: `Array`\
+Type: Array\
 Default: `['']`
 
 This option can be used to define paths to files or directories from your `source` that should not be copied over to the build destination.
@@ -467,7 +467,7 @@ build_production
 
 ## skip
 
-Type: `String|Array`\
+Type: String|Array\
 Default: `['']`
 
 Use `skip` if you want to skip the compilation of a template. The file will only be copied as-is to the build destination, it will not be parsed in any way by Maizzle.
