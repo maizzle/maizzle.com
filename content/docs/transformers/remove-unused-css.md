@@ -171,7 +171,19 @@ Default: `undefined`
 
 By default, classes are removed from the `class` attribute of a tag, after they have been successfully inlined.
 
-Set this option to `false` to prevent that from happening.
+Set this option to `false` to prevent that from happening:
+
+<code-sample title="config.production.js">
+
+  ```js
+  module.exports = {
+    removeUnusedCSS: {
+      removeInlinedSelectors: false,
+    }
+  }
+  ```
+
+</code-sample>
 
 <alert>This has no effect if [inlineCss](/docs/transformers/inline-css) is not enabled.</alert>
 
