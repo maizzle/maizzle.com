@@ -164,6 +164,18 @@ For example, MailChimp uses CSS comments to define styles that are editable in t
 </style>
 ```
 
+### removeInlinedSelectors
+
+Type: Boolean\
+Default: `undefined`
+
+By default, classes are removed from the `class` attribute of a tag, after they have been successfully inlined.
+
+Set this option to `false` to prevent that from happening.
+
+<alert>This has no effect if [inlineCss](/docs/transformers/inline-css) is not enabled.</alert>
+
+
 ### doNotRemoveHTMLCommentsWhoseOpeningTagContains
 
 Type: Array\
