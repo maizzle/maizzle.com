@@ -265,6 +265,8 @@ With our default `slot:title` example, that would result in:
 
 </code-sample>
 
+<!-- WRITE DOCS FOR $slots.filled.... -->
+
 ## Stacks
 
 You may push content to named stacks that can be rendered in other Components.
