@@ -265,7 +265,26 @@ With our default `slot:title` example, that would result in:
 
 </code-sample>
 
-<!-- WRITE DOCS FOR $slots.filled.... -->
+### Check if a slot is filled
+
+You may check if a slot has been filled by using the `$slots` variable in a Component.
+
+For example, let's create a `<x-footer>` Component that will pull in another Component based on whether a `copyright` slot has been filled or not:
+
+<code-sample title="src/components/footer.html">
+
+  ```xml
+  <div>
+    <content />
+
+    <if condition="$slots.copyright?.filled">
+      <!-- src/components/copyright.html -->
+      <x-copyright />
+    </if>
+  </div>
+  ```
+
+</code-sample>
 
 ## Stacks
 
