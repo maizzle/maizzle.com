@@ -40,25 +40,21 @@ You would access those variables under the `page` object:
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <extends src="src/layouts/main.html">
-    <block name="template">
-      <p>{{ page.foo }}</p>
-      <p>{{ page.bar }}</p>
-      <p>{{ page.wha }}</p>
-    </block>
-  </extends>
+  <x-main>
+    {{ page.foo }}
+    {{ page.bar }}
+    {{ page.wha }}
+  </x-main>
   ```
 
 </code-sample>
 
 Result:
 
-<code-sample title="src/templates/example.html">
+<code-sample title="build_production/example.html">
 
   ```xml
-  <p>manchu</p>
-  <p>baz</p>
-  <p>implicit return 👌</p>
+  manchu baz implicit return 👌
   ```
 
 </code-sample>

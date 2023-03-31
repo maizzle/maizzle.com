@@ -88,15 +88,17 @@ Add a block of code in your template, like so:
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <pre>
-    <code class="language-javascript">
-    function foo(bar) {
-      var a = 42,
-        b = 'Prism';
-      return a + bar(b);
-    }
-    </code>
-  </pre>
+  <x-main>
+    <pre>
+      <code class="language-javascript">
+      function foo(bar) {
+        var a = 42,
+          b = 'Prism';
+        return a + bar(b);
+      }
+      </code>
+    </pre>
+  </x-main>
   ```
 
 </code-sample>
@@ -204,19 +206,17 @@ We can now write code inside a fenced code block in our Template:
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <extends src="src/layouts/main.html">
-    <block name="template">
-      <md>
-        ```js
-        function foo(bar) {
-          var a = 42,
-            b = 'Prism';
-          return a + bar(b);
-        }
-        ```
-      </md>
-    </block>
-  </extends>
+  <x-main>
+    <md>
+      ```js
+      function foo(bar) {
+        var a = 42,
+          b = 'Prism';
+        return a + bar(b);
+      }
+      ```
+    </md>
+  </x-main>
   ```
 
 </code-sample>
@@ -251,21 +251,23 @@ We can fix this by wrapping `<pre>` inside a table that we only show in Outlook.
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <!--[if mso]>
-  <table style="width:100%;">
-    <tr>
-      <td style="background: #2a2139; padding: 24px;">
-  <![endif]-->
-  <pre>
-    <code class="language-javascript">
-    function foo(bar) {
-      var a = 42,
-        b = 'Prism';
-      return a + bar(b);
-    }
-    </code>
-  </pre>
-  <!--[if mso]></td></tr></table><![endif]-->
+  <x-main>
+    <!--[if mso]>
+    <table style="width:100%;">
+      <tr>
+        <td style="background: #2a2139; padding: 24px;">
+    <![endif]-->
+    <pre>
+      <code class="language-javascript">
+      function foo(bar) {
+        var a = 42,
+          b = 'Prism';
+        return a + bar(b);
+      }
+      </code>
+    </pre>
+    <!--[if mso]></td></tr></table><![endif]-->
+  </x-main>
   ```
 
 </code-sample>

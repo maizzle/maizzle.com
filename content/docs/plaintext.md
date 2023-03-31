@@ -105,9 +105,7 @@ Generate a plaintext version for a single Template by enabling it in its Front M
   ---
 
   <x-main>
-    <fill:template>
-      <!-- your email HTML... -->
-    </fill:template>
+    <!-- your email HTML... -->
   </x-main>
   ```
 
@@ -128,9 +126,7 @@ If you're using the [`permalink`](/docs/configuration/templates#permalink) Front
   ---
 
   <x-main>
-    <fill:template>
-      <!-- your email HTML... -->
-    </fill:template>
+    <!-- your email HTML... -->
   </x-main>
   ```
 
@@ -202,9 +198,7 @@ You basically add the options object as shown above, but in Front Matter syntax:
   ---
 
   <x-main>
-    <fill:template>
-      <a href="https://example.com">Click here</a>
-    </fill:template>
+    <a href="https://example.com">Click here</a>
   </x-main>
   ```
 
@@ -230,10 +224,9 @@ You can output content only in the plaintext version, with the `<plaintext>` tag
   ---
 
   <x-main>
-    <fill:template>
-      This text shows in both the HTML and the plaintext versions.
-      <plaintext>This will be output only in the plaintext version</plaintext>
-    </fill:template>
+    This text shows in both the HTML and the plaintext versions.
+
+    <plaintext>This will be output only in the plaintext version</plaintext>
   </x-main>
   ```
 
@@ -251,12 +244,11 @@ You may also discard content from the plaintext version while preserving it in t
   ---
 
   <x-main>
-    <fill:template>
-      This text shows in both the HTML and the plaintext versions.
-      <not-plaintext>
-        <p>This paragraph will be output only in the HTML version</p>
-      </not-plaintext>
-    </fill:template>
+    This text shows in both the HTML and the plaintext versions.
+
+    <not-plaintext>
+      <p>This paragraph will be output only in the HTML version</p>
+    </not-plaintext>
   </x-main>
   ```
 

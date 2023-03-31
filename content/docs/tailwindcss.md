@@ -32,7 +32,7 @@ The compiled Tailwind CSS is available under `page.css`, so you need to make sur
 <code-sample title="src/layouts/main.html">
 
   ```xml
-  <!DOCTYPE html>
+  <!doctype html>
   <html>
     <head>
       <style>
@@ -40,7 +40,7 @@ The compiled Tailwind CSS is available under `page.css`, so you need to make sur
       </style>
     </head>
     <body>
-      <slot:template />
+      <content />
     </body>
   </html>
   ```
@@ -51,7 +51,7 @@ You might have noticed that we used `{{{ }}}` instead of the usual `{{ }}`.
 
 We do this to avoid double-escaping the CSS, which can break the build process when quoted property values are encountered (for example quoted font family names, background image URLs, etc.).
 
-<alert type="warning">Tailwind CSS only works when `page.css` is added inside a `<style>` tag in the `<head>` of your HTML.</alert>
+<alert type="warning">Tailwind CSS only works when `page.css` is added inside a `<style>` tag in the `<head>`.</alert>
 
 ### Utility-first
 
@@ -196,9 +196,7 @@ Consider this template:
 
   ```xml
   <x-main>
-    <fill:template>
-      <div class="col">test</div>
-    </fill:template>
+    <div class="col">test</div>
   </x-main>
   ```
 
@@ -347,7 +345,7 @@ First, add a `<stack name="head" />` inside your Layout's `<head>` tag:
 <code-sample title="src/layouts/main.html">
 
   ```xml
-  <!DOCTYPE html>
+  <!doctype html>
   <html>
   <head>
     <style>
@@ -356,7 +354,7 @@ First, add a `<stack name="head" />` inside your Layout's `<head>` tag:
     <stack name="head" />
   </head>
   <body>
-    <slot:template />
+    <content />
   </body>
   ```
 
@@ -367,30 +365,28 @@ Next, `push` to that `stack` from a Template:
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <push name="head">
-    <style tailwindcss>
-      a {
-        @apply text-blue-500;
-      }
-
-      @screen sm {
-        table {
-          @apply w-full;
-        }
-      }
-    </style>
-  </push>
-
   <x-main>
-    <fill:template>
-      <!-- your email HTML... -->
-    </fill:template>
+    <push name="head">
+      <style tailwindcss>
+        a {
+          @apply text-blue-500;
+        }
+
+        @screen sm {
+          table {
+            @apply w-full;
+          }
+        }
+      </style>
+    </push>
+
+    <!-- your email HTML... -->
   </x-main>
   ```
 
 </code-sample>
 
-The `tailwindcss` attribute is only required if you want the CSS to be compiled with Tailwind CSS. If you're just writing regular CSS syntax, you don't need to include it.
+The `tailwindcss` attribute is only required if you want the CSS to be compiled with Tailwind CSS. There's no need to include it if you're just writing plain CSS.
 
 #### postcss attribute
 
@@ -411,19 +407,17 @@ When adding a `<style>` tag inside a Template, you can prevent all CSS rules ins
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <push name="head">
-    <style tailwindcss data-embed>
-      img {
-        border: 0;
-        @apply leading-full align-middle;
-      }
-    </style>
-  </push>
-
   <x-main>
-    <fill:template>
-      <!-- your email HTML... -->
-    </fill:template>
+    <push name="head">
+      <style tailwindcss data-embed>
+        img {
+          border: 0;
+          @apply leading-full align-middle;
+        }
+      </style>
+    </push>
+
+    <!-- your email HTML... -->
   </x-main>
   ```
 
@@ -440,24 +434,22 @@ To use transform utilities, add the resets back in a `<style>` tag that won't be
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <push name="head">
-    <style data-embed>
-      *, ::before, ::after {
-        --tw-translate-x: 0;
-        --tw-translate-y: 0;
-        --tw-rotate: 0;
-        --tw-skew-x: 0;
-        --tw-skew-y: 0;
-        --tw-scale-x: 1;
-        --tw-scale-y: 1;
-      }
-    </style>
-  </push>
-
    <x-main>
-    <fill:template>
-      <div class="translate-x-10 rotate-45 bg-rose-600 w-4 h-4"></div>
-    </fill:template>
+    <push name="head">
+      <style data-embed>
+        *, ::before, ::after {
+          --tw-translate-x: 0;
+          --tw-translate-y: 0;
+          --tw-rotate: 0;
+          --tw-skew-x: 0;
+          --tw-skew-y: 0;
+          --tw-scale-x: 1;
+          --tw-scale-y: 1;
+        }
+      </style>
+    </push>
+
+    <div class="translate-x-10 rotate-45 bg-rose-600 w-4 h-4"></div>
   </x-main>
   ```
 

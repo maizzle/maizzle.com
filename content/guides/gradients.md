@@ -98,13 +98,15 @@ We also specify a background color first, so that email clients that don't suppo
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <table class="w-full">
-    <tr>
-      <td class="bg-gray-200 bg-gradient-b-black">
-        <!-- ... -->
-      </td>
-    </tr>
-  </table>
+  <x-main>
+    <table class="w-full">
+      <tr>
+        <td class="bg-gray-200 bg-gradient-b-black">
+          <!-- ... -->
+        </td>
+      </tr>
+    </table>
+  </x-main>
   ```
 
 </code-sample>
@@ -118,19 +120,21 @@ You need to add it right after the element with the CSS gradient class:
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <table class="w-full">
-    <tr>
-      <td class="bg-blue-500 bg-gradient-b-black-transparent">
-        <!--[if gte mso 9]>
-        <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:600px;">
-        <v:fill type="gradient" color="#0072FF" color2="#00C6FF" angle="90" />
-        <v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0">
-        <div><![endif]-->
-        [your overlayed HTML here]
-        <!--[if gte mso 9]></div></v:textbox></v:rect><![endif]-->
-      </td>
-    </tr>
-  </table>
+  <x-main>
+    <table class="w-full">
+      <tr>
+        <td class="bg-blue-500 bg-gradient-b-black-transparent">
+          <!--[if gte mso 9]>
+          <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:600px;">
+          <v:fill type="gradient" color="#0072FF" color2="#00C6FF" angle="90" />
+          <v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0">
+          <div><![endif]-->
+          [your overlayed HTML here]
+          <!--[if gte mso 9]></div></v:textbox></v:rect><![endif]-->
+        </td>
+      </tr>
+    </table>
+  </x-main>
   ```
 
 </code-sample>
@@ -154,21 +158,23 @@ Here's an example:
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <div class="bg-gray-200">
-    <!--[if gte mso 9]>
-    <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="mso-width-percent:1000;">
-    <v:fill type="gradient" color="#edf2f7" color2="#cbd5e0" />
-    <v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0">
-    <div><![endif]-->
-    <table class="w-full font-sans">
-      <tr>
-        <td align="center" class="bg-gradient-t-gray-400">
-          <!-- your content here... -->
-        </td>
-      </tr>
-    </table>
-    <!--[if gte mso 9]></div></v:textbox></v:rect><![endif]-->
-  </div>
+  <x-main>
+    <div class="bg-gray-200">
+      <!--[if gte mso 9]>
+      <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="mso-width-percent:1000;">
+      <v:fill type="gradient" color="#edf2f7" color2="#cbd5e0" />
+      <v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0">
+      <div><![endif]-->
+      <table class="w-full font-sans">
+        <tr>
+          <td align="center" class="bg-gradient-t-gray-400">
+            <!-- your content here... -->
+          </td>
+        </tr>
+      </table>
+      <!--[if gte mso 9]></div></v:textbox></v:rect><![endif]-->
+    </div>
+  </x-main>
   ```
 
 </code-sample>
@@ -201,13 +207,15 @@ We can then write the utility class like this:
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <table class="w-full">
-    <tr>
-      <td class="bg-gray-200 screen:bg-gradient-b-black">
-        <!-- ... -->
-      </td>
-    </tr>
-  </table>
+  <x-main>
+    <table class="w-full">
+      <tr>
+        <td class="bg-gray-200 screen:bg-gradient-b-black">
+          <!-- ... -->
+        </td>
+      </tr>
+    </table>
+  </x-main>
   ```
 
 </code-sample>

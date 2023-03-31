@@ -112,9 +112,7 @@ This makes it possible to define variables in `config.js`:
 
   ```xml
   <x-main>
-    <fill:template>
-      <p>doctype is: {{ page.doctype }}</p>
-    </fill:template>
+    <p>doctype is: {{ page.doctype }}</p>
   </x-main>
   ```
 

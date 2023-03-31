@@ -146,6 +146,7 @@ Let's update the existing header row:
 <code-sample title="src/templates/promotional.html">
 
   ```xml
+  <!-- ... -->
   <tr>
     <td class="p-12 sm:py-8 sm:px-6 text-center">
       <a href="https://laracasts.com">
@@ -167,6 +168,7 @@ Let's use a full width card from the [promotional template](https://github.com/m
 <code-sample title="src/templates/promotional.html">
 
   ```xml
+  <!-- ... -->
   <each loop="post in page.feed.posts">
     <tr>
       <td class="p-6 bg-white hover:shadow-xl rounded transition-shadow duration-300">

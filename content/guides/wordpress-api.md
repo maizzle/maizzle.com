@@ -67,12 +67,14 @@ https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=3&_embed=1
 
 Let's use the `<fetch>` tag to fetch posts from the CSS-Tricks WordPress API.
 
-<code-sample title="src/templates/promotional.html">
+<code-sample title="src/templates/example.html">
 
   ```xml
-  <fetch url="https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=6&_embed=1">
-    <!-- Posts are now available in {{ response }} -->
-  </fetch>
+  <x-main>
+    <fetch url="https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=6&_embed=1">
+      <!-- Posts are now available in {{ response }} -->
+    </fetch>
+  </x-main>
   ```
 
 </code-sample>
@@ -87,7 +89,7 @@ Let's update the Hero with background image to show the first post.
 
 Our code becomes:
 
-<code-sample title="src/templates/promotional.html">
+<code-sample title="src/templates/example.html">
 
   ```xml
   ---
@@ -96,38 +98,40 @@ Our code becomes:
   preheader: "👀 Lorem, ipsum, and much dolor in this week's edition"
   ---
 
-  <fetch url="https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=6&_embed=1">
-    <!-- ... existing template markup before the HERO <tr> -->
-    <tr>
-      <td class="bg-top bg-no-repeat bg-cover rounded text-left" style="background-image: url('{{ response[0]._embedded['wp:featuredmedia'][0]['source_url'] || 'https://via.placeholder.com/600x400' }}');">
-        <!--[if mso]>
-        <v:image src="{{ response[0]._embedded['wp:featuredmedia'][0]['source_url'] || 'https://via.placeholder.com/600x400' }}" xmlns:v="urn:schemas-microsoft-com:vml" style="width:600px;height:400px;" />
-        <v:rect fill="false" stroke="false" style="position:absolute;width:600px;height:400px;">
-        <v:textbox inset="0,0,0,0"><div><![endif]-->
-        <div class="leading-8">&zwj;</div>
-        <table class="w-full">
-          <tr>
-            <td class="w-12 sm:w-4"></td>
-            <td>
-              <h1 class="m-0 mb-4 text-4xl text-white sm:leading-10">{{ response[0].title.rendered }}</h1>
-              <div class="m-0 text-white text-lg leading-6">{{ response[0].excerpt.rendered }}</div>
-              <div class="leading-8">&zwj;</div>
-              <table>
-                <tr>
-                  <th class="bg-indigo-800 hover:bg-indigo-700 rounded" style="mso-padding-alt: 16px 24px;">
-                    <a href="{{ response[0].link }}" class="block font-semibold text-white text-base leading-full py-4 px-6 [text-decoration:none]">Read more &rarr;</a>
-                  </th>
-                </tr>
-              </table>
-            </td>
-            <td class="w-12 sm:w-4"></td>
-          </tr>
-        </table>
-        <div class="leading-8">&zwj;</div>
-        <!--[if mso]></div></v:textbox></v:rect><![endif]-->
-      </td>
-    </tr>
-  </fetch>
+  <x-main>
+    <fetch url="https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=6&_embed=1">
+      <!-- ... existing template markup before the HERO <tr> -->
+      <tr>
+        <td class="bg-top bg-no-repeat bg-cover rounded text-left" style="background-image: url('{{ response[0]._embedded['wp:featuredmedia'][0]['source_url'] || 'https://via.placeholder.com/600x400' }}');">
+          <!--[if mso]>
+          <v:image src="{{ response[0]._embedded['wp:featuredmedia'][0]['source_url'] || 'https://via.placeholder.com/600x400' }}" xmlns:v="urn:schemas-microsoft-com:vml" style="width:600px;height:400px;" />
+          <v:rect fill="false" stroke="false" style="position:absolute;width:600px;height:400px;">
+          <v:textbox inset="0,0,0,0"><div><![endif]-->
+          <div class="leading-8">&zwj;</div>
+          <table class="w-full">
+            <tr>
+              <td class="w-12 sm:w-4"></td>
+              <td>
+                <h1 class="m-0 mb-4 text-4xl text-white sm:leading-10">{{ response[0].title.rendered }}</h1>
+                <div class="m-0 text-white text-lg leading-6">{{ response[0].excerpt.rendered }}</div>
+                <div class="leading-8">&zwj;</div>
+                <table>
+                  <tr>
+                    <th class="bg-indigo-800 hover:bg-indigo-700 rounded" style="mso-padding-alt: 16px 24px;">
+                      <a href="{{ response[0].link }}" class="block font-semibold text-white text-base leading-full py-4 px-6 [text-decoration:none]">Read more &rarr;</a>
+                    </th>
+                  </tr>
+                </table>
+              </td>
+              <td class="w-12 sm:w-4"></td>
+            </tr>
+          </table>
+          <div class="leading-8">&zwj;</div>
+          <!--[if mso]></div></v:textbox></v:rect><![endif]-->
+        </td>
+      </tr>
+    </fetch>
+  </x-main>
   ```
 
 </code-sample>
@@ -173,37 +177,39 @@ Want to loop over a specific subset only? You can use [expressions](/docs/templa
 
 For example, let's show the last 2 posts in a list format at the end of the template:
 
-<code-sample title="src/templates/promotional.html">
+<code-sample title="src/templates/example.html">
 
   ```xml
-  <fetch url="https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=6&_embed=1">
-    <h3 class="m-0 text-base font-semibold text-gray-500 uppercase">From the archives</h3>
-    <div class="leading-6">&zwj;</div>
-    <table class="w-full">
-      <each loop="post in response.slice(-2)">
-        <tr>
-          <td>
-            <p class="text-xs text-gray-500 mb-0.5">{{ page.formattedDate(post.date) }}</p>
-            <h4 class="m-0 mb-1 text-xl font-semibold">
-              <a href="{{ post.link }}" class="text-blue-500 hover:text-blue-400 [text-decoration:none]">
-                {{ post.title.rendered }}
-              </a>
-            </h4>
-            <div class="m-0 text-gray-500">{{ post.excerpt.rendered }}</div>
-            <if condition="loop.last">
-              <table class="w-full">
-                <tr>
-                  <td class="py-6">
-                    <div class="bg-gray-300 h-px leading-px">&zwj;</div>
-                  </td>
-                </tr>
-              </table>
-            </if>
-          </td>
-        </tr>
-      </each>
-    </table>
-  </fetch>
+  <x-main>
+    <fetch url="https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=6&_embed=1">
+      <h3 class="m-0 text-base font-semibold text-gray-500 uppercase">From the archives</h3>
+      <div class="leading-6">&zwj;</div>
+      <table class="w-full">
+        <each loop="post in response.slice(-2)">
+          <tr>
+            <td>
+              <p class="text-xs text-gray-500 mb-0.5">{{ page.formattedDate(post.date) }}</p>
+              <h4 class="m-0 mb-1 text-xl font-semibold">
+                <a href="{{ post.link }}" class="text-blue-500 hover:text-blue-400 [text-decoration:none]">
+                  {{ post.title.rendered }}
+                </a>
+              </h4>
+              <div class="m-0 text-gray-500">{{ post.excerpt.rendered }}</div>
+              <if condition="loop.last">
+                <table class="w-full">
+                  <tr>
+                    <td class="py-6">
+                      <div class="bg-gray-300 h-px leading-px">&zwj;</div>
+                    </td>
+                  </tr>
+                </table>
+              </if>
+            </td>
+          </tr>
+        </each>
+      </table>
+    </fetch>
+  </x-main>
   ```
 
 </code-sample>

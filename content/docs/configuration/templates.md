@@ -269,9 +269,7 @@ Use the `permalink` Front Matter key to define a custom output path right in a T
   ---
 
   <x-main>
-    <fill:template>
-      <!-- your email HTML... -->
-    </fill:template>
+    <!-- your email HTML... -->
   </x-main>
   ```
 
@@ -291,9 +289,7 @@ For example, output one level above project directory:
   ---
 
   <x-main>
-    <fill:template>
-      <!-- your email HTML... -->
-    </fill:template>
+    <!-- your email HTML... -->
   </x-main>
   ```
 
@@ -309,9 +305,7 @@ Output at a specific system location:
   ---
 
   <x-main>
-    <fill:template>
-      <!-- your email HTML... -->
-    </fill:template>
+    <!-- your email HTML... -->
   </x-main>
   ```
 

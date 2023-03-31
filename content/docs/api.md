@@ -135,9 +135,7 @@ Of course, templating tags are available when using Maizzle programmatically.
   ---
 
   <x-main>
-    <fill:template>
-      <!-- your email HTML... -->
-    </fill:template>
+    <!-- your email HTML... -->
   </x-main>`
   ```
 

@@ -141,7 +141,7 @@
         <div class="lg:order-2">
           <div class="relative">
             <syntax-highlight
-              title="template.html"
+              title="src/templates/example.html"
               bkg-frame-class="top-4 sm:top-8 right-4 sm:right-8"
               no-copy
             >

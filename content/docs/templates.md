@@ -72,27 +72,27 @@ To reuse this code in Maizzle, you may create a [Layout](/docs/layouts):
     <style>{{{ page.css }}}</style>
   </head>
   <body>
-    <slot:template />
+    <content />
   </body>
   ```
 
 </code-sample>
 
-Then, in a Template, you can fill that `<slot:template />` with your Template's HTML:
+When creating a Template, you can use this Layout:
 
 <code-sample title="src/templates/example.html">
 
 ```xml
 <x-main>
-  <fill:template>
-    <!-- your email HTML... -->
-  </fill:template>
+  <!-- your email HTML... -->
 </x-main>
 ```
 
 </code-sample>
 
-In the example above, we use the `<x-main>` Component tag to say that we want to use the `main.html` Layout. We then fill (replace) its `<slot:template />` tag with the HTML inside our Template's `<fill:template>` tag.
+In the example above, we use the `<x-main>` Component tag to say that we want to use the `main.html` Layout. At build time, the `<content />` tag in the Layout file is replaced with what's inside the `<x-main>` tag in our Template.
+
+Learn more about how these x-tags work, in the [Components docs](/docs/components#x-tag).
 
 ## Current template
 

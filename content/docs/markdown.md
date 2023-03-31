@@ -175,13 +175,11 @@ You may override the global Markdown config from your Template's Front Matter.
       linkify: true
   ---
 
-  <extends src="src/layouts/base.html">
-    <block name="template">
-      <md>
-        https://example.com
-      </md>
-    </block>
-  </extends>
+  <x-main>
+    <md>
+      https://example.com
+    </md>
+  </x-main>
   ```
 
 </code-sample>
@@ -268,11 +266,9 @@ If you're using expressions to render markdown from a variable that you have def
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <extends src="src/layouts/main.html">
-    <block name="template">
-      {{{ page.data.content }}}
-    </block>
-  </extends>
+  <x-main>
+    {{{ page.data.content }}}
+  </x-main>
   ```
 
 </code-sample>
