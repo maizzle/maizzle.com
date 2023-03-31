@@ -164,9 +164,7 @@ You may override it for a single Template, through Front Matter:
   ---
 
   <x-main>
-    <fill:template>
-      <img src="example.jpg">
-    </fill:template>
+    <img src="example.jpg">
   </x-main>
   ```
 

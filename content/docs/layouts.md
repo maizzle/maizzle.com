@@ -16,9 +16,9 @@ The workflow in Maizzle is structured around the concept of Layouts and Template
 
 A Layout is basically a Component that contains the `doctype`, `<head>` and `<body>` tags of your HTML - the kind of code that changes rarely and can be reused.
 
-A Layout may include `slot` tags that can be filled by Templates. This allows us to create a parent-child relationship between Layouts and Templates.
+A Layout may include a `<content />` tag, which will be used to render a Template. This allows us to create a parent-child relationship between Layouts and Templates.
 
-In Maizzle, we use the `<slot:template />` tag in the `<body>` of the `main.html` Layout to define where a Template's HTML should be injected.
+In Maizzle, we add this `<content />` tag in the `<body>` of the `main.html` Layout to define where a Template's HTML should be injected.
 
 ## Getting started
 
@@ -26,8 +26,7 @@ Layouts are typically stored in the `src/layouts` directory.
 
 <alert>Need to store them elsewhere? Make sure to [update the config](/docs/configuration/components#folders).</alert>
 
-They must contain the `page.css` variable inside a `<style>` tag (for Tailwind CSS to work), and at least one `slot` where to inject the Template's HTML.
-
+Layouts must include a `<content />` tag, which is where the Template's HTML will be rendered.
 Here's a very basic `layout.html`:
 
 <code-sample title="src/layouts/layout.html">
@@ -39,27 +38,27 @@ Here's a very basic `layout.html`:
     <style>{{{ page.css }}}</style>
   </head>
   <body>
-    <slot:template />
+    <content />
   </body>
   ```
 
 </code-sample>
 
-From a Template, you can then `fill` that `slot` with your markup:
+<alert>For Tailwind CSS to work, Layouts must also include the `page.css` variable inside a `<style>` tag.</alert>
+
+When creating a Template, you may use that Layout like this:
 
 <code-sample title="src/templates/example.html">
 
   ```xml
   <x-layout>
-    <fill:template>
-      <!-- your email HTML... -->
-    </fill:template>
+    <!-- your email HTML... -->
   </x-layout>
   ```
 
 </code-sample>
 
-Of course, you're free to name the slot whatever you want, like `<slot:body />`, in which case you'd use `<fill:body>` in the Template.
+As you can see, the `<x-layout>` tag name is based on the Layout's filename, with the `.html` extension removed. Read more about this in the [Components docs](/docs/components#x-tag).
 
 ## Variables
 
@@ -71,15 +70,26 @@ You can use the curly braces [expression syntax](/docs/expressions) to output va
 <meta charset="{{ page.charset || 'utf8' }}">
 ```
 
-As you can see, inside curly braces you can write basic JavaScript expressions. These will be evaluated and the result will be output in your HTML.
+You can write basic JavaScript expressions inside curly braces. These expressions will be evaluated and the result will be rendered in your HTML.
 
 ### Compiled CSS
 
-The compiled Tailwind CSS for the current Template is available under `page.css` - you need to output it in a `<style>` tag in your Layout in order for Tailwind CSS to work:
+The compiled Tailwind CSS is available under `page.css` - you need to output it in a `<style>` tag in your Layout's `<head>` in order for Tailwind CSS to work:
 
-```html
-<style>{{{ page.css }}}</style>
-```
+<code-sample title="src/layouts/layout.html">
+
+  ```diff
+  <!doctype html>
+  <html>
+  <head>
++   <style>{{{ page.css }}}</style>
+  </head>
+  <body>
+    <content />
+  </body>
+  ```
+
+</code-sample>
 
 We use 3 curly braces so that we output the CSS without escaping it - this is required for quoted property values, so that we don't get `&quot;` instead of `"` in CSS property values like `url("")` or in multi-word font names like in `font-family: "Open Sans", sans-serif`.
 

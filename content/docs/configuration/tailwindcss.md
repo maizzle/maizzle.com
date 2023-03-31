@@ -68,9 +68,7 @@ Because Tailwind CSS is compiled only once, _before_ any Templates are processed
   ---
 
   <x-main>
-    <fill:template>
-      <!-- your email HTML... -->
-    </fill:template>
+    <!-- your email HTML... -->
   </x-main>
   ```
 

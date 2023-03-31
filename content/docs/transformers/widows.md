@@ -11,11 +11,9 @@ Add a `prevent-widows` attribute on any HTML tag to prevent widow words by addin
 
   ```xml
   <x-main>
-    <fill:template>
-      <div prevent-widows>
-        <p>The quick brown fox jumped over the lazy dog.</p>
-      </div>
-    </fill:template>
+    <div prevent-widows>
+      <p>The quick brown fox jumped over the lazy dog.</p>
+    </div>
   </x-main>
   ```
 
@@ -165,11 +163,9 @@ Input:
 
   ```xml
   <x-main>
-    <fill:template>
-      <div create-widows>
-        <p>The quick brown fox jumped over the lazy&nbsp;dog.</p>
-      </div>
-    </fill:template>
+    <div create-widows>
+      <p>The quick brown fox jumped over the lazy&nbsp;dog.</p>
+    </div>
   </x-main>
   ```
 

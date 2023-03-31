@@ -156,11 +156,9 @@ it also increases HTML file size (especially when inlining), which then leads to
 
   ```xml
   <x-main>
-    <fill:template>
-      <table class="font-barosan">
-        <!-- your email HTML... -->
-      </table>
-    </fill:template>
+    <table class="font-barosan">
+      <!-- your email HTML... -->
+    </table>
   </x-main>
   ```
 
@@ -193,11 +191,9 @@ We can now use it on the outermost<sup>1</sup> element:
 
   ```xml
   <x-main>
-    <fill:template>
-      <table class="screen:font-barosan">
-        <!-- your email HTML... -->
-      </table>
-    </fill:template>
+    <table class="screen:font-barosan">
+      <!-- your email HTML... -->
+    </table>
   </x-main>
   ```
 

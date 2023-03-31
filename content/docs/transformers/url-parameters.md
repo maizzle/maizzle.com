@@ -46,9 +46,7 @@ Of course, you may define URL parameters at a Template level, through Front Matt
   ---
 
   <x-main>
-    <fill:template>
-      <!-- your email HTML... -->
-    </fill:template>
+    <!-- your email HTML... -->
   </x-main>
   ```
 

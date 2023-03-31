@@ -15,11 +15,9 @@ Handlebars-like, curly brace expression syntax is supported, allowing you to acc
   ---
 
   <x-main>
-    <fill:template>
-      The title is: {{ page.title }}
+    The title is: {{ page.title }}
 
-      You ran the `maizzle build {{ page.env }}` command.
-    </fill:template>
+    You ran the `maizzle build {{ page.env }}` command.
   </x-main>
   ```
 
@@ -39,10 +37,8 @@ You may use basic JavaScript expressions within curly braces:
 
   ```xml
   <x-main>
-    <fill:template>
-      doctype is {{ page.doctype || 'not set' }}
-      this email {{ page.env === 'production' ? "is" : "isn't" }} production ready!
-    </fill:template>
+    doctype is {{ page.doctype || 'not set' }}
+    this email {{ page.env === 'production' ? "is" : "isn't" }} production ready!
   </x-main>
   ```
 
@@ -67,10 +63,8 @@ By default, special characters are escaped when using two curly braces:
   ---
 
   <x-main>
-    <fill:template>
-      {{ page.markup }}
-      <!-- &lt;strong&gt;Bold&lt;strong&gt; -->
-    </fill:template>
+    {{ page.markup }}
+    <!-- Result: &lt;strong&gt;Bold&lt;strong&gt; -->
   </x-main>
   ```
 
@@ -86,10 +80,8 @@ If you need to render values exactly as they are, use triple curly braces:
   ---
 
   <x-main>
-    <fill:template>
-      {{{ page.markup }}}
-      <!-- <strong>Bold</strong> -->
-    </fill:template>
+    {{{ page.markup }}}
+    <!-- Result: <strong>Bold</strong> -->
   </x-main>
   ```
 
@@ -110,10 +102,8 @@ The compiled email will render `{{ }}` without the `@`.
 
   ```xml
   <x-main>
-    <fill:template>
-      @{{ page.markup }}
-      <!-- {{ page.markup }} -->
-    </fill:template>
+    @{{ page.markup }}
+    <!-- Result: {{ page.markup }} -->
   </x-main>
   ```
 
@@ -131,9 +121,7 @@ You may also use `@{{ }}` to prevent expressions in Front Matter from being eval
   ---
 
   <x-main>
-    <fill:template>
-      {{ page.title }}
-    </fill:template>
+    {{ page.title }}
   </x-main>
   ```
 
@@ -200,13 +188,11 @@ Then you can safely use `{{ }}` and its contents will not be evaluated:
 
   ```xml
   <x-main>
-    <fill:template>
-      <!-- This will be evaluated -->
-      [[ page.title ]]
+    <!-- This will be evaluated -->
+    [[ page.title ]]
 
-      <!-- But this won't be -->
-      Hi, {{ user.name }}.
-    </fill:template>
+    <!-- But this won't be -->
+    Hi, {{ user.name }}.
   </x-main>
   ```
 

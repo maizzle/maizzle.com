@@ -16,17 +16,17 @@ This enables the `<x-divider>` syntax, which you can use like this:
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <table>
-    <tr>
-      <td>
-        [...]
-
-        <x-divider />
-
-        [...]
-      </td>
-    </tr>
-  </table>
+  <x-main>
+    <table>
+      <tr>
+        <td>
+          <!-- ... -->
+          <x-divider />
+          <!-- ... -->
+        </td>
+      </tr>
+    </table>
+  </x-main>
   ```
 
 </code-sample>

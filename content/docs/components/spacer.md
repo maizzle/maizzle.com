@@ -16,17 +16,17 @@ This enables the `<x-spacer>` syntax, which you can use like this:
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <table>
-    <tr>
-      <td>
-        [...]
-
-        <x-spacer height="32px" />
-
-        [...]
-      </td>
-    </tr>
-  </table>
+  <x-main>
+    <table>
+      <tr>
+        <td>
+          <!-- ... -->
+          <x-spacer height="32px" />
+          <!-- ... -->
+        </td>
+      </tr>
+    </table>
+  </x-main>
   ```
 
 </code-sample>

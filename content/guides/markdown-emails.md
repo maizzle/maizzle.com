@@ -126,7 +126,7 @@ Replace its contents with the following:
             <table class="w-full">
               <tr>
                 <td class="px-8 sm:px-4 text-base leading-6 text-slate-700">
-                  <slot:template />
+                  <content />
                 </td>
               </tr>
             </table>
@@ -200,9 +200,7 @@ We can use the [`beforeRender` event](/docs/events#beforerender) for this:
 
         return `
           <x-main>
-            <fill:template>
-              <md>${body}</md>
-            </fill:template>
+            <md>${body}</md>
           </x-main>`
       }
     },
@@ -527,9 +525,7 @@ module.exports = {
 
         return `
           <x-${layout}>
-            <fill:template>
-              <md>${body}</md>
-            </fill:template>
+            <md>${body}</md>
           </x-${layout}>`
       }
     },

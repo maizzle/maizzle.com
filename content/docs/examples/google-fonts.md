@@ -18,14 +18,14 @@ For example, add it before Tailwind CSS:
 <code-sample title="src/layouts/main.html">
 
   ```xml
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&display=swap" rel="stylesheet" media="screen">
+  <head>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&display=swap" rel="stylesheet" media="screen">
 
-  <if condition="page.css">
     <style>{{{ page.css }}}</style>
-  </if>
+  </head>
   ```
 
 </code-sample>
@@ -37,22 +37,20 @@ If you only need Google Fonts in a certain Template, push to the `head` stack:
 <code-sample title="src/templates/example.html">
 
   ```xml
-  <push name="head">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-      rel="stylesheet"
-      media="screen"
-      href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&display=swap"
-    >
-  </push>
-
   <x-main>
-    <fill:template>
-      <table class="font-merriweather">
-        <!-- ... -->
-      </table>
-    </fill:template>
+    <push name="head">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link
+        rel="stylesheet"
+        media="screen"
+        href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&display=swap"
+      >
+    </push>
+
+    <table class="font-merriweather">
+      <!-- ... -->
+    </table>
   </x-main>
   ```
 
