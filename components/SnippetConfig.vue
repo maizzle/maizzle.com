@@ -1,5 +1,5 @@
 <template>
-  <pre class="shiki" style="background-color: rgb(255, 255, 255);"><code><span class="line"><span style="color: rgb(5, 80, 174);">module</span><span style="color: rgb(36, 41, 47);">.</span><span style="color: rgb(5, 80, 174);">exports</span><span style="color: rgb(36, 41, 47);"> </span><span style="color: rgb(207, 34, 46);">=</span><span style="color: rgb(36, 41, 47);"> {</span></span>
+  <pre class="shiki" style="background-color: rgb(255, 255, 255);"><code><span class="line"><span style="color: rgb(5, 80, 174);">module</span><span style="color: rgb(36, 41, 47);">.</span><span style="color: rgb(5, 80, 174);">exports</span><span style="color: rgb(36, 41, 47);"> </span><span style="color: rgb(36, 41, 47);">=</span><span style="color: rgb(36, 41, 47);"> {</span></span>
   <span class="line"><span style="color: rgb(36, 41, 47);">  theme: {</span></span>
   <span class="line"><span style="color: rgb(36, 41, 47);">    screens: {</span></span>
   <span class="line"><span style="color: rgb(36, 41, 47);">      sm: {max: </span><span style="color: rgb(10, 48, 105);">'600px'</span><span style="color: rgb(36, 41, 47);">},</span></span>
