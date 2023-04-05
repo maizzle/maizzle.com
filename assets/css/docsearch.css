@@ -44,7 +44,7 @@
   }
 
   .DocSearch-Hit-source {
-    @apply bg-transparent;
+    @apply bg-white pb-2;
   }
 
   .DocSearch-Hit a,
