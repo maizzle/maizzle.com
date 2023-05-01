@@ -10,7 +10,7 @@
         "lambda:build": "netlify-lambda install lambda && netlify-lambda build lambda"
     },
     "dependencies": {
-        "@docsearch/js": "^3.3.3",
+        "@docsearch/js": "^3.3.4",
         "@nuxt/components": "^2.2.1",
         "@nuxt/content": "^1.15.1",
         "@nuxtjs/proxy": "^2.1.0",
