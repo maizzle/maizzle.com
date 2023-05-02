@@ -81,7 +81,7 @@ abbr,
   @apply text-sm;
 
   span {
-    @apply border-b border-indigo-600 inline-block h-full py-3 text-xs -mb-px;
+    @apply max-h-10 inline-block h-full py-3 text-xs border-b border-indigo-600;
   }
 }
 
