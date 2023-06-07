@@ -424,6 +424,32 @@ To pass the `title` prop to the Component, you would use the `title` attribute:
 
 </code-sample>
 
+#### Encoding props data
+
+When passing a props object to a Component, you need to encode the values.
+
+For example, these won't work:
+
+<code-sample title="src/templates/example.html">
+
+  ```xml
+  <x-alert props='{ "title": "Component's Title" }' />
+
+  <x-alert props='{ "title": "Component\'s Title" }' />
+  ```
+
+</code-sample>
+
+But this will:
+
+<code-sample title="src/templates/example.html">
+
+  ```xml
+  <x-alert props='{ "title": "Component&#39;s Title" }' />
+  ```
+
+</code-sample>
+
 ### Aware props
 
 By default, props are scoped to the Component and are not available to nested Components.
