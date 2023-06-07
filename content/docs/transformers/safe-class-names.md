@@ -9,6 +9,8 @@ Some email clients don't support class names with escaped characters. Gmail in p
 
 Maizzle normalizes escaped character class names like `\:` or `\/` by replacing them with email-safe alternatives, so you can keep using those fancy Tailwind CSS class names and not have to worry about it.
 
+By default, it runs only when not developing locally. This means that it's disabled when you run `maizzle serve`, but it's enabled when running `maizzle build production`.
+
 ## Replacements
 
 This is the default replacement strategy:
