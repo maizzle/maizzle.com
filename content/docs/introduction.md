@@ -53,17 +53,17 @@ Because of the lack of standards and the wildly varying [CSS support in email cl
 
 Maizzle doesn't have an opinion on how you should code your emails: from _spongy_ to _fluid_ and _responsive_ to _hybrid_, everything is supported, so you're free to use whatever technique you like (or need).
 
-Tailwind CSS screens are configured for a _desktop-first responsive_ approach, which is the opposite of what you might be used to in web development.
+Tailwind CSS screens in Maizzle are configured for a _desktop-first responsive_ approach by default, which is the opposite of what you might be used to in web development. We currently do this because of Outlook/Office 365 on Windows and a few other email clients that don't support media queries.
 
-Utility classes will target desktop viewports by default and the [responsive variants](https://tailwindcss.com/docs/responsive-design) will override them for small screen sizes:
+Utility classes will target desktop viewports and the [responsive variants](https://tailwindcss.com/docs/responsive-design) will override them for small screen sizes:
 
 <code-sample title="tailwind.config.js">
 
 ```js
 module.exports = {
   screens: {
-    xs: {max: '425px'},
     sm: {max: '600px'},
+    xs: {max: '425px'},
   },
 }
 ```
