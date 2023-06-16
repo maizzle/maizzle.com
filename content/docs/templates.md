@@ -55,6 +55,56 @@ title: "Please confirm your email address"
 
 <alert type="warning">Front Matter must be defined at the very top of a Template, starting on the first line.</alert>
 
+### Escaping expressions
+
+Expressions in Front Matter can be escaped with a single `@` symbol when they're used in the Template they're defined in:
+
+<code-sample title="src/templates/example.html">
+
+  ```xml
+  ---
+  greeting: "Hello @{{ user.name }}, please confirm your email address"
+  ---
+
+  <h1>{{ page.greeting }}</h1>
+  ```
+
+</code-sample>
+
+That will render as:
+
+<code-sample title="build_production/example.html">
+
+  ```xml
+  <h1>Hello {{ user.name }}, please confirm your email address</h1>
+  ```
+
+</code-sample>
+
+If you need to use an escaped Front Matter expression in Layout, like in a preheader variable, you need to double-escape it:
+
+<code-sample title="src/templates/example.html">
+
+  ```xml
+  ---
+  preheader: "Hello @@{{ user.name }}, please confirm your email address"
+  ---
+  ```
+
+</code-sample>
+
+<code-sample title="src/layouts/main.html">
+
+  ```xml
+  <if condition="page.preheader">
+    <div class="hidden">
+      {{{ page.preheader }}}
+    </div>
+  </if>
+  ```
+
+</code-sample>
+
 ## Using Layouts
 
 Your emails will likely share the same boilerplate, like the `<!doctype>`, the `<head>` with all the `<meta>` tags, or the `<body>` tag - code that rarely needs to change.
