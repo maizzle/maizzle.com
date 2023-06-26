@@ -188,4 +188,4 @@ Of course, you can also modify `src/components/divider.html` and add the `mso-li
 
 ## Alternatives
 
-There are other ways to create horizontal visual dividers in your HTML emails, such as using a `<table>` or an `<hr>`. Check out our [Divider examples](/docs/examples/divider) for more ideas.
+There are other ways to create horizontal visual dividers in your HTML emails, such as using a `<table>` or an `<hr>`. Check out our [Divider examples](/docs/examples/dividers) for more ideas.
