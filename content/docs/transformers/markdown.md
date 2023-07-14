@@ -11,14 +11,9 @@ The same Transformer that enables Markdown in Maizzle can be used on its own to 
 
 You may use the Markdown Transformer in your application
 
+```js [app.js]
+const {markdown} = require('@maizzle/framework')
+const options = {/* markdown-it options */}
 
-<code-sample title="app.js">
-
-  ```js
-  const {markdown} = require('@maizzle/framework')
-  const options = {/* markdown-it options */}
-
-  const html = await markdown('<md>### Heading 3</md>', options)
-  ```
-
-</code-sample>
+const html = await markdown('<md>### Heading 3</md>', options)
+```

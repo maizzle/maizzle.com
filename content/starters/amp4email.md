@@ -22,22 +22,18 @@ The following templates are included:
 
 ## Tailwind CSS
 
-AMP templates don't allow inline CSS, so we've set `important: false` in `tailwind.config.js`.
-Because of this, this starter also uses an `md` screen and a mobile-first approach, instead of the usual desktop-first.
+AMP templates don't allow inline CSS, so `important` is set to `false`  in `tailwind.config.js`. Because of that, this Starter also uses an `md` screen and a mobile-first strategy instead of the default desktop-first approach from Maizzle.
 
 ## AMP Components
 
-For each component that you want to use in a template, you need to add its script to the `<head>`.
-We do this with a `head` block, right in the Template:
+For each component that you want to use in a template, you need to add its script to the `<head>`. We can push to the `head` stack from the Template:
 
-<code-sample title="src/templates/accordion.html">
+```xml [src/templates/accordion.html]
+<x-main>
+  <push name="head">
+    <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
+  </push>
 
-  ```xml
-  <extends src="src/layouts/main.html">
-    <block name="head">
-      <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
-    </block>
-  </extends>
-  ```
-
-</code-sample>
+  <!-- ...  -->
+</x-main>
+```

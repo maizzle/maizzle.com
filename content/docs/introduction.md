@@ -7,7 +7,7 @@ description: "Getting started with the Maizzle Email Framework"
 
 Maizzle is a framework for HTML email development.
 
-It's powered by [Tailwind CSS](https://tailwindcss.com/) and comes with features such as components, expressions, and various transformations that are necessary for HTML emails.
+It's powered by [Tailwind CSS](https://tailwindcss.com/) and comes with features such as components, expressions, and various automations that make coding HTML emails easier.
 
 Maizzle doesn't rely on custom tags that expand into predefined, `<table>`-based HTML markup. We do provide some abstractions for things like components or templating tags, but you don't _have_ to use them if you don't want to.
 
@@ -17,7 +17,7 @@ This means that you're in complete control over your email code: no need to worr
 
 Maizzle uses the Tailwind CSS framework, enabling you to quickly style HTML emails.
 
-Using utility classes to style your emails makes you faster and more productive by eliminating the constant context switching present in a traditional email coding approach where you write responsive CSS separately from your HTML markup.
+Using utility classes to style your emails makes you more productive by eliminating the tiring context switching present in a traditional email coding approach, where you keep moving back and forward between your responsive CSS and your HTML markup.
 
 And since you no longer need to come up with names for your CSS classes, you can focus on coding your emails at warp speed.
 
@@ -33,7 +33,7 @@ These allow you to define distinct build scenarios for your email workflow.
 
 Each environment is customized through a JavaScript config file, so you can even `require()` packages or programmatically set options.
 
-[PostHTML](https://posthtml.org/) plugins are used for the templating logic, and you can use loops, partials, and even fetch remote content in your emails. Markdown with <abbr title="GitHub Flavored Markdown">GFM</abbr> is supported, too.
+[PostHTML](https://posthtml.org/) plugins are used for the templating logic, and you can use components, loops, if statements - even fetch remote content. Markdown with <abbr title="GitHub Flavored Markdown">GFM</abbr> is supported, too.
 
 ## BYOHTML
 
@@ -55,11 +55,9 @@ Maizzle doesn't have an opinion on how you should code your emails: from _spongy
 
 Tailwind CSS screens in Maizzle are configured for a _desktop-first responsive_ approach by default, which is the opposite of what you might be used to in web development. We currently do this because of Outlook/Office 365 on Windows and a few other email clients that don't support media queries.
 
-Utility classes will target desktop viewports and the [responsive variants](https://tailwindcss.com/docs/responsive-design) will override them for small screen sizes:
+Utility classes will target desktop viewports by default, and the [responsive variants](https://tailwindcss.com/docs/responsive-design) will override them for small screen sizes:
 
-<code-sample title="tailwind.config.js">
-
-```js
+```js [tailwind.config.js] no-copy
 module.exports = {
   screens: {
     sm: {max: '600px'},
@@ -67,8 +65,6 @@ module.exports = {
   },
 }
 ```
-
-</code-sample>
 
 ## Configure It Out!
 

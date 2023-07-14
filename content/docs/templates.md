@@ -7,19 +7,18 @@ description: "Learn how to create HTML emails with template inheritance in Maizz
 
 **👋 New syntax**
 
-You are viewing the documentation for Templates using the new Components syntax introduced in `v4.4.0`.
-Not ready to switch yet? See the [legacy Templates docs](https://v43x.maizzle.com/docs/templates).
+You are viewing the documentation for Templates using the new Components syntax introduced in `v4.4.0`. Not ready to switch yet? See the [legacy Templates docs](https://v43x.maizzle.com/docs/templates).
 
 ---
 
-A Template in Maizzle is a special kind of Component that typically contains the body of your email: the HTML that defines the design and content.
+A Template in Maizzle is an HTML file that typically contains the body of your email: the HTML that defines the design and content.
 
 It's made up of two distinct sections:
 
 1. Front Matter
 2. Your HTML
 
-Unlike other Components, a Template may include a Front Matter block, which is a YAML-style block of variables that you may define at the top of the file.
+Templates may include a Front Matter block, which is a YAML-style block of variables that you may define at the top of the file.
 
 Maizzle knows to parse this block's variables and makes them available to all other Components that you add to this Template, as well as to the Layout it uses.
 
@@ -27,23 +26,17 @@ Maizzle knows to parse this block's variables and makes them available to all ot
 
 Templates can define new variables and even override existing ones from your config, through the optional YAML-style Front Matter block:
 
-<code-sample title="src/templates/example.html">
-
-```xml
+```hbs [src/templates/example.html]
 ---
 title: "Please confirm your email address"
 ---
 ```
 
-</code-sample>
-
 Front Matter variables are accessible through the `page` object.
 
 To output them in a Template, use the `{{ }}` [expression](/docs/expressions) syntax:
 
-<code-sample title="src/templates/example.html">
-
-```xml
+```hbs [src/templates/example.html]
 ---
 title: "Please confirm your email address"
 ---
@@ -51,59 +44,41 @@ title: "Please confirm your email address"
 <p>{{ page.title }}</p>
 ```
 
-</code-sample>
-
-<alert type="warning">Front Matter must be defined at the very top of a Template, starting on the first line.</alert>
+<Alert type="warning">Front Matter must be defined at the very top of a Template, starting on the first line.</Alert>
 
 ### Escaping expressions
 
 Expressions in Front Matter can be escaped with a single `@` symbol when they're used in the Template they're defined in:
 
-<code-sample title="src/templates/example.html">
+```hbs [src/templates/example.html]
+---
+greeting: "Hello @{{ user.name }}, please confirm your email address"
+---
 
-  ```xml
-  ---
-  greeting: "Hello @{{ user.name }}, please confirm your email address"
-  ---
-
-  <h1>{{ page.greeting }}</h1>
-  ```
-
-</code-sample>
+<h1>{{ page.greeting }}</h1>
+```
 
 That will render as:
 
-<code-sample title="build_production/example.html">
-
-  ```xml
-  <h1>Hello {{ user.name }}, please confirm your email address</h1>
-  ```
-
-</code-sample>
+```hbs [build_production/example.html]
+<h1>Hello {{ user.name }}, please confirm your email address</h1>
+```
 
 If you need to use an escaped Front Matter expression in Layout, like in a preheader variable, you need to double-escape it:
 
-<code-sample title="src/templates/example.html">
+```hbs [src/templates/example.html]
+---
+preheader: "Hello @@{{ user.name }}, please confirm your email address"
+---
+```
 
-  ```xml
-  ---
-  preheader: "Hello @@{{ user.name }}, please confirm your email address"
-  ---
-  ```
-
-</code-sample>
-
-<code-sample title="src/layouts/main.html">
-
-  ```xml
-  <if condition="page.preheader">
-    <div class="hidden">
-      {{{ page.preheader }}}
-    </div>
-  </if>
-  ```
-
-</code-sample>
+```hbs [src/layouts/main.html]
+<if condition="page.preheader">
+  <div class="hidden">
+    {{{ page.preheader }}}
+  </div>
+</if>
+```
 
 ## Using Layouts
 
@@ -113,32 +88,24 @@ Although you're free to do it, it would be very inefficient to always have to wr
 
 To reuse this code in Maizzle, you may create a [Layout](/docs/layouts):
 
-<code-sample title="src/layouts/main.html">
+```hbs [src/layouts/main.html]
+<!doctype html>
+<html>
+<head>
+  <style>{{{ page.css }}}</style>
+</head>
+<body>
+  <content />
+</body>
+```
 
-  ```xml
-  <!doctype html>
-  <html>
-  <head>
-    <style>{{{ page.css }}}</style>
-  </head>
-  <body>
-    <content />
-  </body>
-  ```
+When creating a Template, you can wrap it with this Layout:
 
-</code-sample>
-
-When creating a Template, you can use this Layout:
-
-<code-sample title="src/templates/example.html">
-
-```xml
+```xml [src/templates/example.html]
 <x-main>
   <!-- your email HTML... -->
 </x-main>
 ```
-
-</code-sample>
 
 In the example above, we use the `<x-main>` Component tag to say that we want to use the `main.html` Layout. At build time, the `<content />` tag in the Layout file is replaced with what's inside the `<x-main>` tag in our Template.
 
@@ -149,8 +116,6 @@ Learn more about how these x-tags work, in the [Components docs](/docs/component
 When developing locally, information about the Template file that is currently being processed is available under `page.build.current`.
 
 It's an object containing a parsed path of the destination file name:
-
-<code-sample>
 
 ```js
 build: {
@@ -166,11 +131,9 @@ build: {
 }
 ```
 
-</code-sample>
-
 It can be used in Events like `beforeRender` if you need the file name or extension of the Template file currently being processed.
 
-<alert>Current template file information is not available when using the [API](/docs/api).</alert>
+<Alert>Current template file information is not available when using the [API](/docs/api).</Alert>
 
 ## Archiving
 

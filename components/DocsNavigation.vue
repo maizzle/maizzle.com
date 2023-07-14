@@ -1,8 +1,10 @@
 <template>
-  <div class="hidden lg:flex justify-end col-span-4 lg:col-span-3 xl:col-span-4 bg-slate-50">
+  <div class="hidden lg:flex justify-end items-start col-span-4 lg:col-span-3 xl:col-span-4 bg-slate-50">
     <nav class="custom-scrollbar grid w-60 sticky top-24 overflow-y-auto max-h-[calc(100vh-6rem)] [scrollbar-gutter:stable]">
       <div class="sticky top-0">
         <div class="pt-4 bg-slate-50">
+          <DocSearch class="hidden" />
+
           <button
             class="flex items-center justify-between w-48 px-4 h-9 border hover:border-slate-300 rounded-md bg-white cursor-pointer text-xs"
             tabindex="0"
@@ -21,7 +23,7 @@
       </div>
       <ul class="mb-8 -ml-4">
         <li>
-          <nuxt-link
+          <NuxtLink
             to="/docs/introduction"
             class="flex gap-2 items-center px-4 py-2 text-sm text-slate-600 group hover:text-slate-900"
           >
@@ -29,7 +31,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
             </svg>
             Documentation
-          </nuxt-link>
+          </NuxtLink>
         </li>
         <li>
           <a
@@ -44,7 +46,7 @@
           </a>
         </li>
         <li>
-          <nuxt-link
+          <NuxtLink
             to="/guides"
             class="flex gap-2 items-center px-4 py-2 text-sm text-slate-500 group hover:text-slate-900"
             :class="{ 'text-indigo-700 hover:text-indigo-700 font-medium': $route.path.startsWith('/guides') }"
@@ -57,10 +59,10 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
             </svg>
             Guides
-          </nuxt-link>
+          </NuxtLink>
         </li>
         <li>
-          <nuxt-link
+          <NuxtLink
             to="/starters"
             class="flex gap-2 items-center px-4 py-2 text-sm text-slate-500 group hover:text-slate-900"
             :class="{ 'text-indigo-700 hover:text-indigo-700 font-medium': $route.path.startsWith('/starters') }"
@@ -73,10 +75,10 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
             Starters
-          </nuxt-link>
+          </NuxtLink>
         </li>
         <li>
-          <nuxt-link
+          <NuxtLink
             to="/resources"
             class="flex gap-2 items-center px-4 py-2 text-sm text-slate-500 hover:text-slate-900 group"
             :class="{ 'text-indigo-700 hover:text-indigo-700 font-medium': $route.path.startsWith('/resources') }"
@@ -89,7 +91,7 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
             </svg>
             Resources
-          </nuxt-link>
+          </NuxtLink>
         </li>
         <li>
           <a
@@ -106,49 +108,41 @@
           </a>
         </li>
       </ul>
-      <ul class="space-y-8 pb-8">
-        <li
-          v-for="(group, index) in navigation"
-          :key="`nav-group-${index}`"
-          class="space-y-4"
-        >
-          <p class="text-sm uppercase text-slate-800 font-semibold">
-            {{ group.name }}
-          </p>
-          <ul class="space-y-2 mb-4 mr-4 ml-2">
-            <li
-              v-for="(item, i) in group.items"
-              :key="`nav-item-${i}`"
-            >
-              <nuxt-link
-                :to="item.path"
-                class="block leading-5 pl-2 text-sm text-slate-500 hover:text-slate-900"
-                :class="{ '!text-indigo-500 hover:!text-indigo-500': $route.path.endsWith(item.path) }"
-                v-text="item.title"
-              />
-            </li>
-          </ul>
-        </li>
-      </ul>
+      <ContentRenderer :value="navigation">
+        <ul class="space-y-8 pb-8">
+          <li
+            v-for="(group, index) in navigation"
+            :key="`nav-group-${index}`"
+            class="space-y-4"
+          >
+            <p class="text-sm uppercase text-slate-800 font-semibold">
+              {{ group.name }}
+            </p>
+            <ul class="space-y-2 mb-4 mr-4 ml-2">
+              <li
+                v-for="(item, i) in group.items"
+                :key="`nav-item-${i}`"
+              >
+                <NuxtLink
+                  :to="item.path"
+                  class="block leading-5 pl-2 text-sm text-slate-500 hover:text-slate-900"
+                  :class="{ '!text-indigo-500 hover:!text-indigo-500': $route.path.endsWith(item.path) }"
+                  v-text="item.title"
+                />
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </ContentRenderer>
       <div class="h-10 w-56 fixed bottom-0 bg-gradient-to-b from-transparent to-slate-50"></div>
     </nav>
   </div>
 </template>
 
-<script>
-import navigation from '~/data/navigation.js'
+<script setup>
+  const {public: {navigation}} = useRuntimeConfig()
 
-export default {
-  name: 'SidebarNavigation',
-  data() {
-    return {
-      navigation,
-    }
-  },
-  methods: {
-    openDocsearch() {
-      this.$emit('open-docsearch')
-    }
-  },
-}
+  const openDocsearch = () => {
+    document.querySelector('#docsearch button').click()
+  }
 </script>

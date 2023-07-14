@@ -9,7 +9,7 @@ Buttons in HTML emails can be created with simple table structures with an ancho
 
 ## Link
 
-<alert>This is inspired by <a href="https://twitter.com/M_J_Robbins">@M_J_Robbins</a>' link button - see the original on <a href="https://www.goodemailcode.com/email-code/link-button">goodemailcode.com</a></alert>
+<Alert>This is inspired by <a href="https://twitter.com/M_J_Robbins">@M_J_Robbins</a>' link button - see the original on <a href="https://www.goodemailcode.com/email-code/link-button">goodemailcode.com</a></Alert>
 
 We can use a smart combination of basic and vendor CSS properties to get fully clickable buttons in HTML - no VML required!
 
@@ -41,27 +41,23 @@ As you can see it's just a simple `<a>` tag, but with some nifty workarounds for
 - the first `<i>` adds bottom padding
 - the width of the `&nbsp;` character is reset through the `mso-font-width` property
 
-<alert>Line breaks and spaces between tags in the example above might render the button larger (although barely noticeable). If you want your button to be absolutely pixel perfect, just remove them.</alert>
+<Alert>Line breaks and spaces between tags in the example above might render the button larger (although barely noticeable). If you want your button to be absolutely pixel perfect, just remove them.</Alert>
 
 **Tip**: use the [`<outlook>`](/docs/tags#outlook) tag for cleaner-looking, editor-friendly markup. As an added bonus, you can now also use Tailwind CSS utilities with it:
 
-<code-sample title="button.html">
-
-  ```xml
-  <a
-    href="https://maizzle.com/"
-    class="inline-block py-4 px-6 text-sm leading-none [text-decoration:none] text-white font-semibold rounded bg-indigo-500 hover:bg-indigo-600">
-    <outlook>
-      <i class="tracking-6 mso-font-width-[-100%] mso-text-raise-[26pt]">&nbsp;</i>
-    </outlook>
-      <span class="mso-text-raise-[13pt]">Read more</span>
-    <outlook>
-      <i class="tracking-6 mso-font-width-[-100%]">&nbsp;</i>
-    </outlook>
-  </a>
-  ```
-
-</code-sample>
+```xml [button.html]
+<a
+  href="https://maizzle.com/"
+  class="inline-block py-4 px-6 text-sm leading-none [text-decoration:none] text-white font-semibold rounded bg-indigo-500 hover:bg-indigo-600">
+  <outlook>
+    <i class="tracking-6 mso-font-width-[-100%] mso-text-raise-[26pt]">&nbsp;</i>
+  </outlook>
+    <span class="mso-text-raise-[13pt]">Read more</span>
+  <outlook>
+    <i class="tracking-6 mso-font-width-[-100%]">&nbsp;</i>
+  </outlook>
+</a>
+```
 
 ## VML
 
@@ -85,28 +81,24 @@ Probably the only reason you'd want to use a VML button is because it's the only
 
 Here is a simplified VML button with rounded corners, styled with Tailwind CSS:
 
-<code-sample title="vml-rounded-button.html">
+```xml [vml-rounded-button.html]
+<!--[if mso]>
+<v:roundrect arcsize="50%" style="height: 48px; mso-wrap-style: none;" stroke="f" fillcolor="#1d4ed8">
+<![endif]-->
+  <a
+    href="https://example.com/"
+    class="inline-block px-6 leading-10 text-base rounded-md [text-decoration:none] text-white bg-blue-700"
+  >
+    <!--[if mso]><i style="letter-spacing: 8px; mso-font-width: -100%;" hidden>&nbsp;</i><![endif]-->
+    <span>Link Text</span>
+    <!--[if mso]><i style="letter-spacing: 8px; mso-font-width: -100%;" hidden>&nbsp;</i><![endif]-->
+  </a>
+<!--[if mso]>
+</v:roundrect>
+<![endif]-->
+```
 
-  ```xml
-  <!--[if mso]>
-  <v:roundrect arcsize="50%" style="height: 48px; mso-wrap-style: none;" stroke="f" fillcolor="#1d4ed8">
-  <![endif]-->
-    <a
-      href="https://example.com/"
-      class="inline-block px-6 leading-10 text-base rounded-md [text-decoration:none] text-white bg-blue-700"
-    >
-      <!--[if mso]><i style="letter-spacing: 8px; mso-font-width: -100%;" hidden>&nbsp;</i><![endif]-->
-      <span>Link Text</span>
-      <!--[if mso]><i style="letter-spacing: 8px; mso-font-width: -100%;" hidden>&nbsp;</i><![endif]-->
-    </a>
-  <!--[if mso]>
-  </v:roundrect>
-  <![endif]-->
-  ```
-
-</code-sample>
-
-<alert type="warning">Keep in mind that VML code cannot be nested, so you can't use such a button inside a `<v:rect>`, like when coding background images for Outlook on Windows.</alert>
+<Alert type="warning">Keep in mind that VML code cannot be nested, so you can't use such a button inside a `<v:rect>`, like when coding background images for Outlook on Windows.</Alert>
 
 ## Table-based
 
@@ -126,16 +118,19 @@ For an extra touch, let's add rounded corners and a hover effect:
 
 <div class="example-preview">
   <div>
-    <button class="mt-4 sm:mt-0 rounded bg-indigo-500 hover:bg-indigo-600 text-sm text-white font-bold leading-full py-3 px-12 focus:outline-none">Button</button>
+    <button
+      class="py-4 px-6 text-sm leading-none no-underline text-white font-semibold rounded bg-indigo-500 hover:bg-indigo-600 focus:outline-none">
+        Read more
+    </button>
   </div>
 
   ```xml
   <table>
     <tr>
-      <th class="bg-indigo-500 hover:bg-indigo-600 rounded mso-padding-alt-[12px_48px]">
+      <th class="bg-indigo-500 hover:bg-indigo-600 rounded mso-padding-alt-[12px_24px]">
         <a
           href="https://maizzle.com"
-          class="block py-3 px-12 text-white text-sm leading-full [text-decoration:none]"
+          class="block py-4 px-6 text-white text-sm leading-full [text-decoration:none]"
         >
           Button
         </a>
@@ -145,7 +140,7 @@ For an extra touch, let's add rounded corners and a hover effect:
   ```
 </div>
 
-<alert>Outlook doesn't support <code>border-radius</code>, it will render square corners.</alert>
+<Alert>Outlook doesn't support <code>border-radius</code>, it will render square corners.</Alert>
 
 ### Outlined
 
@@ -155,16 +150,19 @@ To make it more interesting, let's also change the background on hover:
 
 <div class="example-preview">
   <div>
-    <button class="rounded border-2 border-indigo-500 hover:border-indigo-600 hover:bg-indigo-600 text-sm text-indigo-500 hover:text-white font-bold leading-full py-3 px-12 focus:outline-none">Button</button>
+    <button
+      class="py-3 px-6 rounded border-2 border-indigo-500 hover:border-indigo-600 hover:bg-indigo-600 text-sm text-indigo-500 hover:text-white font-bold leading-full focus:outline-none">
+        Read more
+    </button>
   </div>
 
   ```xml
   <table>
     <tr>
-      <th class="border-2 border-indigo-500 hover:bg-indigo-500 block rounded mso-padding-alt-[12px_48px]">
+      <th class="border-2 border-indigo-500 hover:bg-indigo-500 block rounded mso-padding-alt-[12px_24px]">
         <a
           href="https://maizzle.com"
-          class="block py-3 px-12 text-sm text-indigo-500 hover:text-white leading-full [text-decoration:none]"
+          class="block py-3 px-6 text-sm text-indigo-500 hover:text-white leading-full [text-decoration:none]"
         >
           Button
         </a>
@@ -180,16 +178,16 @@ Pill buttons simply use a larger border-radius value.
 
 <div class="example-preview">
   <div>
-    <button class="rounded-full shadow-md bg-indigo-500 hover:bg-indigo-600 text-sm text-white font-bold leading-full py-3 px-12 focus:outline-none">Button</button>
+    <button class="py-3 px-6 rounded-full shadow-md bg-indigo-500 hover:bg-indigo-600 text-sm text-white font-bold leading-full focus:outline-none">Read more</button>
   </div>
 
   ```xml
   <table>
     <tr>
-      <th class="bg-indigo-500 hover:bg-indigo-600 shadow-md rounded-full mso-padding-alt-[12px_48px]">
+      <th class="bg-indigo-500 hover:bg-indigo-600 shadow-md rounded-full mso-padding-alt-[16px_24px]">
         <a
           href="https://maizzle.com"
-          class="block py-3 px-12 text-sm text-white leading-full [text-decoration:none]"
+          class="block py-3 px-6 text-sm text-white leading-full [text-decoration:none]"
         >
           Button
         </a>

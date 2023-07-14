@@ -29,17 +29,13 @@ Both `<style>` tags and `style=""` attributes are supported. CSS property values
 
 Make it globally available by setting it in your environment config:
 
-<code-sample title="config.js">
+```js [config.js]
+module.exports = {
+  baseURL: 'https://cdn.example.com/'
+}
+```
 
-  ```js
-  module.exports = {
-    baseURL: 'https://cdn.example.com/'
-  }
-  ```
-
-</code-sample>
-
-<alert type="danger">Note that this will apply to _all_ sources and hrefs, including `<a>` tags, as long as the source's initial value is not an URL.</alert>
+<Alert type="danger">Note that this will apply to _all_ sources and hrefs, including `<a>` tags, as long as the source's initial value is not an URL.</Alert>
 
 ## Customization
 
@@ -52,40 +48,32 @@ Default: [see default tags](https://github.com/posthtml/posthtml-base-url/blob/m
 
 Apply the base URL only to `<img>` tags:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    baseURL: {
-      url: 'https://cdn.example.com/',
-      tags: ['img'],
-    },
-  }
-  ```
-
-</code-sample>
+```js [config.js]
+module.exports = {
+  baseURL: {
+    url: 'https://cdn.example.com/',
+    tags: ['img'],
+  },
+}
+```
 
 That will apply the `url` to all known source attributes on all `<img>` elements in your HTML, like `src=""` or `srcset="`.
 
 If you need greater control, you may specify which attributes of which tags should be prepended what URL, by passing in an object instead:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    baseURL: {
-      url: 'https://cdn.example.com/',
-      tags: {
-        img: {
-          src: true, // use the value of `url` above
-          srcset: 'https://bar.com/',
-        },
+```js [config.js]
+module.exports = {
+  baseURL: {
+    url: 'https://cdn.example.com/',
+    tags: {
+      img: {
+        src: true, // use the value of `url` above
+        srcset: 'https://bar.com/',
       },
     },
-  }
-  ```
-
-</code-sample>
+  },
+}
+```
 
 ### attributes
 
@@ -94,136 +82,102 @@ Default: `{}`
 
 Key-value pairs of attributes and what to prepend to them.
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    baseURL: {
-      attributes: {
-        'data-url': 'https://example.com/',
-      },
+```js [config.js]
+module.exports = {
+  baseURL: {
+    attributes: {
+      'data-url': 'https://example.com/',
     },
-  }
-  ```
-
-</code-sample>
+  },
+}
+```
 
 ### styleTag
 
 Type: Boolean\
 Default: `true`
 
-By default, the transformer will prepend your `url` to all `url()` sources in `<style>` tags.
-Set this option to `false` to prevent it from doing so:
+By default, the transformer will prepend your `url` to all `url()` sources in `<style>` tags. Set this option to `false` to prevent it from doing so:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    baseURL: {
-      url: 'https://cdn.example.com/',
-      tags: ['img'],
-      styleTag: false,
-    },
-  }
-  ```
-
-</code-sample>
+```js [config.js]
+module.exports = {
+  baseURL: {
+    url: 'https://cdn.example.com/',
+    tags: ['img'],
+    styleTag: false,
+  },
+}
+```
 
 ### inlineCss
 
 Type: Boolean\
 Default: `true`
 
-Similarly, the transformer will prepend your `url` to all `url()` sources in `style=""` attributes.
-You may disable this if you need to:
+Similarly, the transformer will prepend your `url` to all `url()` sources in `style=""` attributes. You may disable this if you need to:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    baseURL: {
-      url: 'https://cdn.example.com/',
-      tags: ['img'],
-      inlineCss: false,
-    },
-  }
-  ```
-
-</code-sample>
+```js [config.js]
+module.exports = {
+  baseURL: {
+    url: 'https://cdn.example.com/',
+    tags: ['img'],
+    inlineCss: false,
+  },
+}
+```
 
 ## Front Matter
 
 You may override it for a single Template, through Front Matter:
 
-<code-sample title="src/templates/example.html">
+```hbs [src/templates/example.html]
+---
+baseURL: 'https://res.cloudinary.com/user/image/upload/'
+---
 
-  ```xml
-  ---
-  baseURL: 'https://res.cloudinary.com/user/image/upload/'
-  ---
-
-  <x-main>
-    <img src="example.jpg">
-  </x-main>
-  ```
-
-</code-sample>
+<x-main>
+  <img src="example.jpg">
+</x-main>
+```
 
 ## Trailing slash
 
 Mind the trailing slash on your URL, this influences how you reference images:
 
-<code-sample title="src/templates/example.html">
+```xml
+<!-- baseURL: 'https://cdn.example.com/img' -->
+<img src="/folder/product-1.png">
 
-  ```xml
-  <!-- baseURL: 'https://cdn.example.com/img' -->
-  <img src="/folder/product-1.png">
-
-  <!-- baseURL: 'https://cdn.example.com/img/' -->
-  <img src="folder/product-1.png">
-  ```
-
-</code-sample>
+<!-- baseURL: 'https://cdn.example.com/img/' -->
+<img src="folder/product-1.png">
+```
 
 
 ## Disabling
 
 If you have `baseURL` set globally (in your config), you may disable it for a Template by setting its value to an empty string or a falsy value in Front Matter:
 
-<code-sample title="src/templates/example.html">
-
-  ```yaml
-  ---
-  baseURL: ''
-  ---
-  ```
-
-</code-sample>
+```yaml
+---
+baseURL: ''
+---
+```
 
 or
 
-<code-sample title="src/templates/example.html">
-
-  ```yaml
-  ---
-  baseURL: false
-  ---
-  ```
-
-</code-sample>
+```yaml
+---
+baseURL: false
+---
+```
 
 ## API
 
-<code-sample title="app.js">
+```js [app.js]
+const {applyBaseUrl} = require('@maizzle/framework')
+const config = {
+  url: 'https://cdn.example.com/img/',
+}
 
-  ```js
-  const {applyBaseUrl} = require('@maizzle/framework')
-  const config = {
-    url: 'https://cdn.example.com/img/',
-  }
-
-  const html = await applyBaseUrl('<img src="image.jpg">', config)
-  ```
-
-</code-sample>
+const html = await applyBaseUrl('<img src="image.jpg">', config)
+```

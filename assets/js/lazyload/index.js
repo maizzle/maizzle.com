@@ -7,6 +7,7 @@ export default () => {
   const loadmedia = new loadMedia('[data-src]', {
     onLoaded: function (loadedItem) {
       loadedItem.closest('.lazyload').classList.add('loaded')
+      loadedItem.closest('.lazyload:not(.video)').classList.remove('print:hidden')
     },
   })
 

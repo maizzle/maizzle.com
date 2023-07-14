@@ -7,8 +7,7 @@ description: "Configuring components in Maizzle"
 
 **👋 New components config**
 
-You are viewing the configuration documentation for the new Components system, that was introduced in `v4.4.0`.
-Not ready to switch yet? See the [legacy Components configuration docs](https://v43x.maizzle.com/docs/configuration/components).
+You are viewing the configuration documentation for the new Components system, that was introduced in `v4.4.0`. Not ready to switch yet? See the [legacy Components configuration docs](https://v43x.maizzle.com/docs/configuration/components).
 
 ---
 
@@ -30,9 +29,7 @@ Folder paths where to look for component files. Relative to `root`.
 
 If you keep your components in a different folder, you can add it here:
 
-<code-sample title="config.js">
-
-```js
+```js [config.js]
 module.exports = {
   build: {
     components: {
@@ -41,8 +38,6 @@ module.exports = {
   }
 }
 ```
-
-</code-sample>
 
 The paths you defined will be added to the default folders.
 
@@ -55,9 +50,7 @@ Prefix string to use for component tags.
 
 If you prefer to write `<a-button>` instead of `<x-button>`, do this:
 
-<code-sample title="config.js">
-
-```js
+```js [config.js]
 module.exports = {
   build: {
     components: {
@@ -66,8 +59,6 @@ module.exports = {
   }
 }
 ```
-
-</code-sample>
 
 ## tag
 
@@ -80,9 +71,7 @@ By default, this ensures backwards compatibility with the old components system 
 
 For example, if you prefer to write `<module src="button.html" />`, do this:
 
-<code-sample title="config.js">
-
-```js
+```js [config.js]
 module.exports = {
   build: {
     components: {
@@ -91,8 +80,6 @@ module.exports = {
   }
 }
 ```
-
-</code-sample>
 
 Set it to `false` to disable this feature and only use `x-` tags.
 
@@ -103,9 +90,7 @@ Default: `'src'`
 
 You may define a custom attribute name to use for the `tag`.
 
-<code-sample title="config.js">
-
-```js
+```js [config.js]
 module.exports = {
   build: {
     components: {
@@ -114,8 +99,6 @@ module.exports = {
   }
 }
 ```
-
-</code-sample>
 
 You can now use `<component href="button.html" />` in your templates.
 
@@ -139,9 +122,7 @@ Maizzle uses `content` by default, to ensure backwards compatibility with the ol
 
 If you want to change this to be `yield`:
 
-<code-sample title="config.js">
-
-```js
+```js [config.js]
 module.exports = {
   build: {
     components: {
@@ -151,19 +132,13 @@ module.exports = {
 }
 ```
 
-</code-sample>
-
 You'd then define a component like this:
 
-<code-sample title="src/components/button.html">
-
-```xml
+```xml [src/components/button.html]
 <a href="...">
   <yield />
 </a>
 ```
-
-</code-sample>
 
 ## slot
 
@@ -174,9 +149,7 @@ Name for the [`slot` tag](/docs/components#slots).
 
 For example, maybe you want to change this to be `provide`:
 
-<code-sample title="config.js">
-
-```js
+```js [config.js]
 module.exports = {
   build: {
     components: {
@@ -186,13 +159,9 @@ module.exports = {
 }
 ```
 
-</code-sample>
-
 You could then use `provide` instead of `slot` when defining a component:
 
-<code-sample title="src/components/footer.html">
-
-```jsx
+```jsx [src/components/footer.html]
 <script props>
   module.exports = {
     year: new Date().getFullYear(),
@@ -208,13 +177,9 @@ You could then use `provide` instead of `slot` when defining a component:
 </footer>
 ```
 
-</code-sample>
-
 You'd fill `provide` as usual:
 
-<code-sample title="src/templates/example.html">
-
-```xml
+```xml [src/templates/example.html]
 <x-footer>
   <fill:footer-logo>
     <img src="logo.png">
@@ -224,13 +189,9 @@ You'd fill `provide` as usual:
 </x-footer>
 ```
 
-</code-sample>
-
 Result:
 
-<code-sample title="build_production/example.html">
-
-```html
+```html [build_production/example.html]
 <footer>
   <img src="logo.png">
 
@@ -239,8 +200,6 @@ Result:
   <p>Some content</p>
 </footer>
 ```
-
-</code-sample>
 
 ## fill
 
@@ -251,9 +210,7 @@ Name for the [`fill` tag](/docs/components#slots).
 
 For example, maybe you want to change this to be `inject`:
 
-<code-sample title="config.js">
-
-```js
+```js [config.js]
 module.exports = {
   build: {
     components: {
@@ -263,13 +220,9 @@ module.exports = {
 }
 ```
 
-</code-sample>
-
 Given the previous example, you'd now use `inject` instead of `fill` when defining a component:
 
-<code-sample title="src/templates/example.html">
-
-```xml
+```xml [src/templates/example.html]
 <x-footer>
   <inject:footer-logo>
     <img src="logo.png">
@@ -278,8 +231,6 @@ Given the previous example, you'd now use `inject` instead of `fill` when defini
   <p>Some content</p>
 </x-footer>
 ```
-
-</code-sample>
 
 ## slotSeparator
 
@@ -290,9 +241,7 @@ String to use as a separator between the `slot` tag and its name.
 
 For example, changing it to `@`:
 
-<code-sample title="config.js">
-
-```js
+```js [config.js]
 module.exports = {
   build: {
     components: {
@@ -302,9 +251,15 @@ module.exports = {
 }
 ```
 
-</code-sample>
+You'd then use `<slot@footer-logo />` and `<fill@footer-logo>`:
 
-You'd then use `<slot@footer-logo />` or `<fill@footer-logo></fill@footer-logo>`.
+```xml [src/templates/example.html]
+<x-footer>
+  <fill@footer-logo>
+    <img src="logo.png">
+  </fill@footer-logo>
+</x-footer>
+```
 
 ## push
 
@@ -329,9 +284,7 @@ Name of the props attribute to use in the `<script>` tag of a component.
 
 If you change it to `locals`:
 
-<code-sample title="config.js">
-
-```js
+```js [config.js]
 module.exports = {
   build: {
     components: {
@@ -341,13 +294,9 @@ module.exports = {
 }
 ```
 
-</code-sample>
-
 ... you'd then use `locals` instead of `props` when defining the script in a component:
 
-<code-sample title="src/components/button.html">
-
-```jsx
+```hbs [src/components/button.html]
 <script locals>
   module.exports = {
     href: props.href || '#',
@@ -359,8 +308,6 @@ module.exports = {
 </a>
 ```
 
-</code-sample>
-
 ## propsContext
 
 Type: String\
@@ -370,9 +317,7 @@ Name of the object that will be used to store the props of a component.
 
 For example, if you change it to `data` like this:
 
-<code-sample title="config.js">
-
-```js
+```js [config.js]
 module.exports = {
   build: {
     components: {
@@ -382,13 +327,9 @@ module.exports = {
 }
 ```
 
-</code-sample>
-
 ... you'd then use `data` instead of `props` when defining the props of a component:
 
-<code-sample title="src/components/button.html">
-
-```jsx
+```hbs [src/components/button.html]
 <script props>
   module.exports = {
     href: data.href || '#', // using data.href instead of props.href
@@ -399,8 +340,6 @@ module.exports = {
   <content />
 </a>
 ```
-
-</code-sample>
 
 ## propsAttribute
 
@@ -413,9 +352,7 @@ Set to `locals` by default, for backwards compatibility with the old components 
 
 Again, let's change it to `data`:
 
-<code-sample title="config.js">
-
-```js
+```js [config.js]
 module.exports = {
   build: {
     components: {
@@ -425,19 +362,13 @@ module.exports = {
 }
 ```
 
-</code-sample>
-
 You'd then use `data` instead of `locals` when passing props as JSON to a component:
 
-<code-sample title="src/templates/example.html">
-
-```xml
+```xml [src/templates/example.html]
 <x-button data='{"href": "https://example.com"}'>
   Click me
 </x-button>
 ```
-
-</code-sample>
 
 ## propsSlot
 
@@ -505,24 +436,17 @@ Define additional attributes that should be preserved for specific HTML elements
 
 It's an object with the following structure:
 
-<code-sample>
-
 ```js
 TAG_NAME: (defaultAttributes) => {
   // return defaultAttributes
 }
 ```
 
-</code-sample>
-
-For example, say you have an attribute called `tracking-id` that you only use on `<div>` elements.
-By default, it would be stripped out in a component, because it's not a standard HTML attribute.
+For example, say you have an attribute called `tracking-id` that you only use on `<div>` elements. By default, it would be stripped out in a component, because it's not a standard HTML attribute.
 
 But you can add it to the 'valid' attributes list for `<div>` elements like this:
 
-<code-sample title="config.js">
-
-```js
+```js [config.js] {5-8}
 module.exports = {
   build: {
     components: {
@@ -538,9 +462,7 @@ module.exports = {
 }
 ```
 
-</code-sample>
-
-<alert>This is only useful to control which elements can use what attributes. If you'd like to have all elements use an non-standard attribute, use `safelistAttributes` instead.</alert>
+<Alert>This is only useful to control which elements can use what attributes. If you'd like to have all elements use an non-standard attribute, use `safelistAttributes` instead.</Alert>
 
 ## safelistAttributes
 
@@ -551,9 +473,7 @@ Array of attributes that should be preserved in components (on all elements).
 
 You can use a `*` wildcard to match the rest of the string:
 
-<code-sample title="config.js">
-
-```js
+```js [config.js]
 module.exports = {
   build: {
     components: {
@@ -563,8 +483,6 @@ module.exports = {
 }
 ```
 
-</code-sample>
-
 ## blacklistAttributes
 
 Type: Array\
@@ -572,9 +490,7 @@ Default: `[]`
 
 Array of attributes that should be removed from components (on all elements).
 
-<code-sample title="config.js">
-
-```js
+```js [config.js]
 module.exports = {
   build: {
     components: {
@@ -584,5 +500,3 @@ module.exports = {
   }
 }
 ```
-
-</code-sample>

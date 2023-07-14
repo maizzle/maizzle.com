@@ -25,7 +25,7 @@ Tailwind CSS is compiled, and various [PostCSS](https://postcss.org/) plugins ar
 
 The destination directories that you have defined under `destination.path` in your environment config are deleted.
 
-<alert type="warning">Be careful when customizing this path, so you don't end up deleting important directories and files on your machine.</alert>
+<Alert type="warning">Be careful when customizing this path, so you don't end up deleting important directories and files on your machine.</Alert>
 
 ## Copy sources
 

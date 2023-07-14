@@ -13,14 +13,10 @@ You can use Markdown in your Maizzle email templates.
 
 There are two tags that you can use to add Markdown to your emails:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <markdown>This Markdown will be **compiled** to HTML</markdown>
-  <md>A _shorter_ version of the `markdown` tag.</md>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<markdown>This Markdown will be **compiled** to HTML</markdown>
+<md>A _shorter_ version of the `markdown` tag.</md>
+```
 
 Result:
 
@@ -33,14 +29,10 @@ Result:
 
 Use attributes if you need the element wrapping your Markdown to be preserved:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <div markdown>Using a `markdown` attribute</div>
-  <p md>You can also use the `md` attribute.</p>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<div markdown>Using a `markdown` attribute</div>
+<p md>You can also use the `md` attribute.</p>
+```
 
 Result:
 
@@ -55,13 +47,9 @@ Result:
 
 Use the `tag` attribute to specify a tag name to wrap your Markdown with:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <md tag="section">This Markdown will be _compiled_ to HTML</md>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<md tag="section">This Markdown will be _compiled_ to HTML</md>
+```
 
 Result:
 
@@ -75,15 +63,11 @@ Result:
 
 Already have some Markdown in a file? Simply include it:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <md src="./README.md">
-    # You'll see contents of README.md above this heading
-  </md>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<md src="./README.md">
+  # You'll see contents of README.md above this heading
+</md>
+```
 
 Result:
 
@@ -94,17 +78,13 @@ Result:
 
 If you're including a file that will be used as an inline element and don't want the enclosing `<p>` tags, use the `inline` attribute:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <p class="example">
-    <markdown src="./example.md" inline>
-      _Imported_
-    </markdown>
-  </p>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<p class="example">
+  <markdown src="./example.md" inline>
+    _Imported_
+  </markdown>
+</p>
+```
 
 Result:
 
@@ -123,19 +103,15 @@ Result:
 
 Create tables with pipes `|` and hyphens `-`. Use hyphens to define each column's header, and pipes to separate each column.
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <markdown>
-    | Markdown      | tables are    | cool  |
-    | ------------- |:-------------:| -----:|
-    | col 3 is      | right-aligned | $1600 |
-    | col 2 is      | centered      |   $12 |
-    | zebra stripes | are neat      |    $1 |
-  </markdown>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<markdown>
+  | Markdown      | tables are    | cool  |
+  | ------------- |:-------------:| -----:|
+  | col 3 is      | right-aligned | $1600 |
+  | col 2 is      | centered      |   $12 |
+  | zebra stripes | are neat      |    $1 |
+</markdown>
+```
 
 ### Strikethrough
 
@@ -145,20 +121,16 @@ Use two tildes `~~` to ~~`~~strikethrough~~`~~ text.
 
 You may configure how Markdown is rendered through the `markdown` config object:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    markdown: {
-      root: './', // A path relative to which markdown files are imported
-      encoding: 'utf8', // Encoding for imported Markdown files
-      markdownit: {}, // Options passed to markdown-it
-      plugins: [], // Plugins for markdown-it
-    }
+```js [config.js]
+module.exports = {
+  markdown: {
+    root: './', // A path relative to which markdown files are imported
+    encoding: 'utf8', // Encoding for imported Markdown files
+    markdownit: {}, // Options passed to markdown-it
+    plugins: [], // Plugins for markdown-it
   }
-  ```
-
-</code-sample>
+}
+```
 
 Checkout the options for [markdown-it](https://github.com/markdown-it/markdown-it#init-with-presets-and-options) and  [posthtml-markdownit](https://github.com/posthtml/posthtml-markdownit#options).
 
@@ -166,23 +138,19 @@ Checkout the options for [markdown-it](https://github.com/markdown-it/markdown-i
 
 You may override the global Markdown config from your Template's Front Matter.
 
-<code-sample title="src/templates/example.html">
+```hbs [src/templates/example.html]
+---
+markdown:
+  markdownit:
+    linkify: true
+---
 
-  ```xml
-  ---
-  markdown:
-    markdownit:
-      linkify: true
-  ---
-
-  <x-main>
-    <md>
-      https://example.com
-    </md>
-  </x-main>
-  ```
-
-</code-sample>
+<x-main>
+  <md>
+    https://example.com
+  </md>
+</x-main>
+```
 
 That will output:
 
@@ -194,15 +162,11 @@ That will output:
 
 Disable the markdown Transformer by setting it to `false`:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    markdown: false
-  }
-  ```
-
-</code-sample>
+```js [config.js]
+module.exports = {
+  markdown: false
+}
+```
 
 ## Plugins
 
@@ -210,34 +174,26 @@ There are over 300 plugins for `markdown-it` available on NPM! To use a plugin, 
 
 For example, imagine we installed [markdown-it-emoji](https://www.npmjs.com/package/markdown-it-emoji):
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    markdown: {
-      plugins: [
-        {
-          plugin: require('markdown-it-emoji'),
-          options: {} // Options for markdown-it-emoji
-        }
-      ]
-    }
+```js [config.js]
+module.exports = {
+  markdown: {
+    plugins: [
+      {
+        plugin: require('markdown-it-emoji'),
+        options: {} // Options for markdown-it-emoji
+      }
+    ]
   }
-  ```
-
-</code-sample>
+}
+```
 
 We can now use emojis in markdown:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <md>
-    You can use emojis :)
-  </md>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<md>
+  You can use emojis :)
+</md>
+```
 
 Result:
 
@@ -249,28 +205,20 @@ Result:
 
 If you're using expressions to render markdown from a variable that you have defined in your config like this:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    data: {
-      content: '> a markdown string'
-    }
+```js [config.js]
+module.exports = {
+  data: {
+    content: '> a markdown string'
   }
-  ```
-
-</code-sample>
+}
+```
 
 ... you will need to use triple curly braces to output the unescaped content:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-main>
-    {{{ page.data.content }}}
-  </x-main>
-  ```
-
-</code-sample>
+```hbs [src/templates/example.html]
+<x-main>
+  {{{ page.data.content }}}
+</x-main>
+```
 
 This is required for things like blockquotes to work, otherwise `>` will be output as `&gt;` and the blockquote will be rendered as a paragraph.

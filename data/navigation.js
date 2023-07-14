@@ -36,7 +36,7 @@ export default [
         path: '/docs/environments'
       },
       {
-        title: 'Utility-first CSS',
+        title: 'Tailwind CSS',
         path: '/docs/tailwindcss'
       },
       {
@@ -149,6 +149,10 @@ export default [
       {
         title: 'Filters',
         path: '/docs/transformers/filters'
+      },
+      {
+        title: 'Markdown',
+        path: '/docs/transformers/markdown'
       },
       {
         title: 'Widow Words',

@@ -17,40 +17,32 @@ You may use Events both when developing locally with the CLI `build` or `serve` 
 
 To use events when developing locally with the CLI commands, add them inside an `events` object in your config:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    events: {
-      beforeCreate(config) {
-        // do stuff with config
-      },
-    }
+```js [config.js]
+module.exports = {
+  events: {
+    beforeCreate(config) {
+      // do stuff with config
+    },
   }
-  ```
-
-</code-sample>
+}
+```
 
 ### API Events
 
 When using the API, add events inside the object that you pass to the `render()` method:
 
-<code-sample title="app.js">
+```js [app.js]
+const Maizzle = require('@maizzle/framework')
 
-  ```js
-  const Maizzle = require('@maizzle/framework')
-
-  html = Maizzle.render(`some HTML string...`, {
-      tailwind: {},
-      maizzle: {},
-      beforeRender(config) {
-        // ...
-      }
+html = Maizzle.render(`some HTML string...`, {
+    tailwind: {},
+    maizzle: {},
+    beforeRender(config) {
+      // ...
     }
-  ).then(({html}) => console.log(html))
-  ```
-
-</code-sample>
+  }
+).then(({html}) => console.log(html))
+```
 
 ## Event types
 
@@ -69,111 +61,92 @@ These always run, every time a Template is compiled:
 
 ### beforeCreate
 
-Runs after the [Environment config](/docs/environments) has been computed, but before Templates are processed.
-Exposes the config object so you can further customize it.
+Runs after the [Environment config](/docs/environments) has been computed, but before Templates are processed. Exposes the config object so you can further customize it.
 
 For example, let's use a custom highlight function for Markdown fenced code blocks:
 
-<code-sample title="config.js">
+```js [config.js]
+const Prism = require('prismjs')
 
-  ```js
-  const Prism = require('prismjs')
-
-  module.exports = {
-    events: {
-      async beforeCreate(config) {
-        config = Object.assign(config, {
-          markdown: {
-            markdownit: {
-              highlight: (code, lang) => {
-                lang = lang || 'html'
-                return Prism.highlight(code, Prism.languages[lang], lang)
-              }
+module.exports = {
+  events: {
+    async beforeCreate(config) {
+      config = Object.assign(config, {
+        markdown: {
+          markdownit: {
+            highlight: (code, lang) => {
+              lang = lang || 'html'
+              return Prism.highlight(code, Prism.languages[lang], lang)
             }
           }
-        })
-      }
+        }
+      })
     }
   }
-  ```
+}
+```
 
-</code-sample>
-
-<alert>Use `beforeCreate` if you need to update the config only once.</alert>
+<Alert>Use `beforeCreate` if you need to update the config only once.</Alert>
 
 ### beforeRender
 
-Runs after the Template's config has been computed, but just before it is compiled.
-It exposes the Template's config, as well as the HTML.
+Runs after the Template's config has been computed, but just before it is compiled. It exposes the Template's config, as well as the HTML.
 
 For (a silly) example, let's fetch data from an API and set it as the preheader text:
 
-<code-sample title="config.js">
+```js [config.js]
+const axios = require('axios')
 
-  ```js
-  const axios = require('axios')
+module.exports = {
+  events: {
+    async beforeRender(html, config) {
+      const url = 'https://baconipsum.com/api/?type=all-meat&sentences=1&start-with-lorem=1'
 
-  module.exports = {
-    events: {
-      async beforeRender(html, config) {
-        const url = 'https://baconipsum.com/api/?type=all-meat&sentences=1&start-with-lorem=1'
+      config.preheader = await axios(url).then(result => result.data).catch(error => 'Could not fetch preheader, using default one.')
 
-        config.preheader = await axios(url).then(result => result.data).catch(error => 'Could not fetch preheader, using default one.')
-
-        // must return `html`
-        return html
-      }
+      // must return `html`
+      return html
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 Then, you'd render it in your HTML, like so:
 
-<code-sample title="src/layouts/main.html">
-
-  ```xml
-  <if condition="page.preheader">
-    <div class="hidden">{{ page.preheader }}</div>
-  </if>
-  ```
-
-</code-sample>
+```hbs [src/layouts/main.html]
+<if condition="page.preheader">
+  <div class="hidden">{{ page.preheader }}</div>
+</if>
+```
 
 `beforeRender` runs for each template that is going to be compiled. For performance reasons, you should only use it if you need access to the config of the Template that is about to be compiled (which includes variables from the Template's Front Matter).
 
-<alert type="warning">You must always return the `html` when using `beforeRender()`.</alert>
+<Alert type="warning">You must always return the `html` when using `beforeRender()`.</Alert>
 
 ### afterRender
 
-Runs after the Template has been compiled, but before any Transformers have been applied.
-Exposes the rendered `html` string and the `config`.
+Runs after the Template has been compiled, but before any Transformers have been applied. Exposes the rendered `html` string and the `config`.
 
 It's your last chance to alter the HTML or any settings in your config, before Transformers process your email template.
 
 For example, let's disable CSS inlining:
 
-<code-sample title="config.js">
+```js [config.js]
+module.exports = {
+  events: {
+    afterRender(html, config) {
+      config.inlineCSS = false
 
-  ```js
-  module.exports = {
-    events: {
-      afterRender(html, config) {
-        config.inlineCSS = false
-
-        // must return `html`
-        return html
-      }
+      // must return `html`
+      return html
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 `afterRender` runs for each template, right after it has been compiled. Use it only if you need access to the config of the Template that was just compiled.
 
-<alert type="warning">You must always return the `html` when using `afterRender()`.</alert>
+<Alert type="warning">You must always return the `html` when using `afterRender()`.</Alert>
 
 ### afterTransformers
 
@@ -183,48 +156,39 @@ Same as `afterRender()`, it exposes the `html` and the `config`, so you can do f
 
 For example, maybe you don't like the minifier that Maizzle includes, and you disabled it in your config so that you can use your own:
 
-<code-sample title="config.js">
+```js [config.js]
+const Minifier = require('imaginary-minifier')
 
-  ```js
-  const Minifier = require('imaginary-minifier')
-
-  module.exports = {
-    minify: false,
-    events: {
-      afterTransformers(html, config) {
-        if (!config.minify) {
-          return Minifier.minify(html)
-        }
-
-        // must return `html`
-        return html
+module.exports = {
+  minify: false,
+  events: {
+    afterTransformers(html, config) {
+      if (!config.minify) {
+        return Minifier.minify(html)
       }
+
+      // must return `html`
+      return html
     }
   }
-  ```
+}
+```
 
-</code-sample>
-
-<alert type="warning">You must always return the `html` when using `afterTransformers()`.</alert>
+<Alert type="warning">You must always return the `html` when using `afterTransformers()`.</Alert>
 
 ### afterBuild
 
-Runs after all Templates have been compiled and output to disk.
-Returns an array with the paths to all the files inside the [`destination.path`](/docs/configuration/templates#path) directory.
+Runs after all Templates have been compiled and output to disk. Returns an array with the paths to all the files inside the [`destination.path`](/docs/configuration/templates#path) directory.
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    events: {
-      afterBuild(files) {
-        console.log(files)
-      }
+```js [config.js]
+module.exports = {
+  events: {
+    afterBuild(files) {
+      console.log(files)
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 Using it with the Starter, `maizzle build production` will output:
 
@@ -236,4 +200,4 @@ Using it with the Starter, `maizzle build production` will output:
 ]
 ```
 
-<alert type="warning">The `afterBuild` event is available only when using the `maizzle build` CLI command, so it will only work if added to the `events` object in your `config.js` and not with the API.</alert>
+<Alert type="warning">The `afterBuild` event is available only when using the `maizzle build` CLI command, so it will only work if added to the `events` object in your `config.js` and not with the API.</Alert>

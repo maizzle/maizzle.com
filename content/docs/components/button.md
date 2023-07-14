@@ -13,15 +13,11 @@ The Button component is defined in `src/components/button.html`.
 
 This enables the `<x-button>` tag, which you can use like this:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-button href="https://example.com">
-    Book now
-  </x-button>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<x-button href="https://example.com">
+  Book now
+</x-button>
+```
 
 You can use it anywhere you'd use a `<div>`.
 
@@ -35,17 +31,13 @@ Default: `undefined`
 
 If you want the Button to link somewhere, you need to pass it the `href` prop:
 
-<code-sample title="src/templates/example.html">
+```xml [src/templates/example.html]
+<x-button href="https://example.com">
+  Book now
+</x-button>
+```
 
-  ```xml
-  <x-button href="https://example.com">
-    Book now
-  </x-button>
-  ```
-
-</code-sample>
-
-<alert>The Button still renders if you don't pass `href`, but it will not include the `href` attribute on the `<a>` tag and might look broken in some email clients because of this.</alert>
+<Alert>The Button still renders if you don't pass `href`, but it will not include the `href` attribute on the `<a>` tag and might look broken in some email clients because of this.</Alert>
 
 ### Align
 
@@ -53,15 +45,11 @@ Default: `undefined`
 
 You can align the Button to the left, center or right, through the `align` prop:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-button align="center">
-    Book now
-  </x-button>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<x-button align="center">
+  Book now
+</x-button>
+```
 
 This will add the `text-center` class to the button's wrapper `<div>`, which will align the `<a>` inside it to the center.
 
@@ -73,18 +61,14 @@ The button includes a background and text color by default, so you'll need to ov
 
 For example, let's make the button blue-themed:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-button
-    href="https://example.com"
-    class="!bg-blue-600 !text-blue-100"
-  >
-    Book now
-  </x-button>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<x-button
+  href="https://example.com"
+  class="!bg-blue-600 !text-blue-100"
+>
+  Book now
+</x-button>
+```
 
 Of course, you may change the colors directly in `src/components/button.html`.
 
@@ -100,15 +84,11 @@ Default: `16px`
 
 Adjust the top padding for Outlook on Windows with the `mso-pt` prop:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-button mso-pt="12px">
-    Book now
-  </x-button>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<x-button mso-pt="12px">
+  Book now
+</x-button>
+```
 
 #### MSO left padding
 
@@ -116,15 +96,11 @@ Default: `32px`
 
 Adjust the left padding for Outlook on Windows with the `mso-pl` prop:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-button mso-pl="24px">
-    Book now
-  </x-button>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<x-button mso-pl="24px">
+  Book now
+</x-button>
+```
 
 #### MSO right padding
 
@@ -132,15 +108,11 @@ Default: `32px`
 
 Adjust the right padding for Outlook on Windows with the `mso-pr` prop:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-button mso-pr="24px">
-    Book now
-  </x-button>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<x-button mso-pr="24px">
+  Book now
+</x-button>
+```
 
 #### MSO bottom padding
 
@@ -148,15 +120,11 @@ Default: `32px`
 
 Adjust the bottom padding for Outlook on Windows with the `mso-pb` prop:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-button mso-pb="24px">
-    Book now
-  </x-button>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<x-button mso-pb="24px">
+  Book now
+</x-button>
+```
 
 ### Other attributes
 
@@ -170,15 +138,11 @@ To override Button styling on small viewports, use Tailwind CSS utilities.
 
 For example, let's make the button full-width on small viewports:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-button class="sm:block">
-    Book now
-  </x-button>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<x-button class="sm:block">
+  Book now
+</x-button>
+```
 
 ## Alternatives
 

@@ -3,9 +3,9 @@
 
 .DocSearch {
   &.DocSearch-Container {
-    @apply bg-white/90;
-    @apply fixed;
+    @apply fixed font-inter bg-white/90;
   }
+
 
   .DocSearch-Modal {
     @apply md:max-w-[65ch] 2xl:max-w-[68.5ch];
@@ -93,4 +93,43 @@
       @apply text-slate-500;
     }
   }
+}
+
+/* DocSearch Button */
+
+.DocSearch-Button {
+  @apply !h-11 !w-72 !px-3 flex items-center justify-between !rounded-xl;
+  @apply !border !border-solid !border-slate-300 hover:!border-slate-400/75 hover:!shadow-none;
+  @apply !bg-white;
+  @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white;
+}
+
+.DocSearch-Button:hover {
+  @apply !text-slate-400;
+}
+
+.DocSearch-Search-Icon {
+  @apply w-4 h-4 !text-slate-400;
+}
+
+/* There's no option to set buton text :( */
+.DocSearch-Button-Placeholder {
+  @apply text-transparent;
+}
+.DocSearch-Button-Placeholder:before {
+  content: 'Search docs';
+  @apply text-base font-normal text-slate-400;
+}
+
+.DocSearch-Button-Keys {
+  @apply px-2 py-1 border border-slate-300 rounded-md;
+}
+
+.DocSearch-Button-Keys:before {
+  content: 'Ctrl K';
+  @apply text-xs;
+}
+
+.DocSearch-Button-Key {
+  @apply !hidden;
 }

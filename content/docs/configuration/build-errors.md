@@ -9,19 +9,15 @@ Maizzle will throw an error when a build error occurs.
 
 You may configure how build errors are handled when developing with the CLI commands, by adding a `build.fail` key to your config:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build : {
-      fail: 'silent' // or 'verbose'
-    }
+```js [config.js]
+module.exports = {
+  build : {
+    fail: 'silent' // or 'verbose'
   }
-  ```
+}
+```
 
-</code-sample>
-
-<alert>Omitting it or using any other value will throw an error (log stack trace and exit script).</alert>
+<Alert>Omitting it or using any other value will throw an error (log stack trace and exit script).</Alert>
 
 ## Fail
 

@@ -15,18 +15,15 @@ This configuration is now deprecated and will be removed in the next major relea
 
 You may use the `layouts` key in `config.js` to customize the way you use Layouts:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      layouts: {
-        // ... options
-      }
+```js [config.js]
+module.exports = {
+  build: {
+    layouts: {
+      // ... options
     }
   }
-  ```
-</code-sample>
+}
+```
 
 Let's take a look at the available options:
 
@@ -34,22 +31,19 @@ Let's take a look at the available options:
 
 You may specify the encoding used by your Layout files through the `encoding` option:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      layouts: {
-        encoding: 'windows-1250',
-      }
+```js [config.js]
+module.exports = {
+  build: {
+    layouts: {
+      encoding: 'windows-1250',
     }
   }
-  ```
-</code-sample>
+}
+```
 
 By default, this is set to `utf8`.
 
-<alert>This encoding is only used when reading a Layout file from disk, it does not automatically set the `<meta charset>` tag in your compiled Template.</alert>
+<Alert>This encoding is only used when reading a Layout file from disk, it does not automatically set the `<meta charset>` tag in your compiled Template.</Alert>
 
 ### Blocks
 
@@ -57,112 +51,84 @@ Normally, Template Blocks are defined through the `<block>` tag.
 
 However, you may customize this tag name:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      layouts: {
-        slotTagName: 'slot', // default: 'block'
-        fillTagName: 'fill' // default: 'block'
-      }
+```js [config.js]
+module.exports = {
+  build: {
+    layouts: {
+      slotTagName: 'slot', // default: 'block'
+      fillTagName: 'fill' // default: 'block'
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 Now you can use `<slot>` tags in the Layout, and `<fill>` tags in your Template:
 
-<code-sample title="src/layouts/main.html">
+```hbs [src/layouts/main.html] {7}
+<!doctype html>
+<html>
+<head>
+  <style>{{{ page.css }}}</style>
+</head>
+<body>
+  <slot name="template"></slot>
+</body>
+```
 
-  ```xml
-  <!doctype html>
-  <html>
-  <head>
-    <style>{{{ page.css }}}</style>
-  </head>
-  <body>
-    <slot name="template"></slot>
-  </body>
-  ```
+```hbs [src/templates/example.html] {6}
+---
+title: "A template with a <fill> tag"
+---
 
-</code-sample>
-
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  ---
-  title: "A template with a <fill> tag"
-  ---
-
-  <extends src="src/layouts/main.html">
-    <fill name="template"></fill>
-  </extends>
-  ```
-
-</code-sample>
+<extends src="src/layouts/main.html">
+  <fill name="template"></fill>
+</extends>
+```
 
 ### Root
 
 You may define a path to the directory where your Layouts live:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      layouts: {
-        root: 'src/layouts',
-      }
+```js [config.js]
+module.exports = {
+  build: {
+    layouts: {
+      root: 'src/layouts',
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 This allows you to specify a `src=""` relative to the path in that `root` key:
 
-<code-sample title="src/templates/example.html">
+```xml [src/templates/example.html]
+<extends src="main.html">
+  <block name="template">
+    <!--  -->
+  </block>
+</extends>
+```
 
-  ```xml
-  <extends src="main.html">
-    <block name="template">
-      <!--  -->
-    </block>
-  </extends>
-  ```
-
-</code-sample>
-
-<alert type="danger">If you're extending a file that also extends a file (i.e. when extending a Template), this will not work. Instead, don't define the `root` key and only use project root-relative paths (i.e. `src/templates/template.html`)</alert>
+<Alert type="danger">If you're extending a file that also extends a file (i.e. when extending a Template), this will not work. Instead, don't define the `root` key and only use project root-relative paths (i.e. `src/templates/template.html`)</Alert>
 
 ### Tag
 
 You may use a tag name other than `extends`:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      layouts: {
-        tagName: 'layout',
-      }
+```js [config.js]
+module.exports = {
+  build: {
+    layouts: {
+      tagName: 'layout',
     }
   }
-  ```
+}
+```
 
-</code-sample>
-
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <layout src="src/layouts/main.html">
-    <block name="template">
-      <!-- ... -->
-    </block>
-  </layout>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<layout src="src/layouts/main.html">
+  <block name="template">
+    <!-- ... -->
+  </block>
+</layout>
+```

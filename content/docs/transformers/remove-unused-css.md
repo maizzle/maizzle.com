@@ -7,8 +7,7 @@ description: "Optimize your HTML email file size by removing unused CSS and rewr
 
 Cleaning up your HTML email results in smaller file sizes, which translates to faster email sendouts, faster opens (think slow 3G), and snappier paint times.
 
-Gmail will clip your email [around 102KB](https://github.com/hteumeuleu/email-bugs/issues/41), so anything past that mark won't even be in the DOM (which can lead to unexpected results like tracking pixel not loaded or, worse, hidden unsubscribe links).
-You might also want to consider the [environmental impact](https://github.com/email-markup-consortium/email-markup-consortium/discussions/39) of sending large, unoptimized emails.
+Gmail will clip your email [around 102KB](https://github.com/hteumeuleu/email-bugs/issues/41), so anything past that mark won't even be in the DOM (which can lead to unexpected results like tracking pixel not loaded or, worse, hidden unsubscribe links). You might also want to consider the [environmental impact](https://github.com/email-markup-consortium/email-markup-consortium/discussions/39) of sending large, unoptimized emails.
 
 This Transformer will remove any unused CSS styles and corresponding classes in your HTML, helping you reduce your file size.
 
@@ -16,15 +15,11 @@ This Transformer will remove any unused CSS styles and corresponding classes in 
 
 Enable it in your Environment config:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    removeUnusedCSS: true,
-  }
-  ```
-
-</code-sample>
+```js [config.js]
+module.exports = {
+  removeUnusedCSS: true,
+}
+```
 
 ## Customization
 
@@ -39,43 +34,35 @@ Array of classes or id's that you don't want removed.
 
 You may use any [matcher](https://www.npmjs.com/package/matcher) patterns, for example:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    removeUnusedCSS: {
-      whitelist: ['.External*', '.ReadMsgBody', '.yshortcuts', '.Mso*', '#*'],
-    }
+```js [config.js]
+module.exports = {
+  removeUnusedCSS: {
+    whitelist: ['.External*', '.ReadMsgBody', '.yshortcuts', '.Mso*', '#*'],
   }
-  ```
-
-</code-sample>
+}
+```
 
 Resetting email client styles is often done through CSS selectors that do not exist in your email's code. Maizzle uses the `tailwindcss-email-variants` plugin to do this, so to ensure works as expected `whitelist` automatically preserves the following selectors:
 
-<code-sample title="@maizzle/framework/transformers/removeUnusedCss.js">
-
-  ```js
-  [
-    '*body*', // Gmail
-    '.gmail*', // Gmail
-    '.apple*', // Apple Mail
-    '.ios*', // Mail on iOS
-    '.ox-*', // Open-Xchange
-    '.outlook*', // Outlook.com
-    '[data-ogs*', // Outlook.com
-    '.bloop_container', // Airmail
-    '.Singleton', // Apple Mail 10
-    '.unused', // Notes 8
-    '.moz-text-html', // Thunderbird
-    '.mail-detail-content', // Comcast, Libero webmail
-    '*edo*', // Edison (all)
-    '#*', // Freenet uses #msgBody
-    '.lang*' // Fenced code blocks
-  ]
-  ```
-
-</code-sample>
+```js
+[
+  '*body*', // Gmail
+  '.gmail*', // Gmail
+  '.apple*', // Apple Mail
+  '.ios*', // Mail on iOS
+  '.ox-*', // Open-Xchange
+  '.outlook*', // Outlook.com
+  '[data-ogs*', // Outlook.com
+  '.bloop_container', // Airmail
+  '.Singleton', // Apple Mail 10
+  '.unused', // Notes 8
+  '.moz-text-html', // Thunderbird
+  '.mail-detail-content', // Comcast, Libero webmail
+  '*edo*', // Edison (all)
+  '#*', // Freenet uses #msgBody
+  '.lang*' // Fenced code blocks
+]
+```
 
 ### backend
 
@@ -86,19 +73,15 @@ If you use computed class names, like for example `class="{{ computedRed }} text
 
 To prevent this from happening, use the `backend` option to define the delimiters:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    removeUnusedCSS: {
-      backend: [
-        { heads: '[[', tails: ']]' },
-      ]
-    }
+```js [config.js]
+module.exports = {
+  removeUnusedCSS: {
+    backend: [
+      { heads: '[[', tails: ']]' },
+    ]
   }
-  ```
-
-</code-sample>
+}
+```
 
 By default, Maizzle preserves `{{ }}` and `{% %}`.
 
@@ -109,17 +92,13 @@ Default: `true`
 
 Set to `false` to prevent `email-comb` from removing `<!-- HTML comments -->`.
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    removeUnusedCSS: {
-      removeHTMLComments: false
-    }
+```js [config.js]
+module.exports = {
+  removeUnusedCSS: {
+    removeHTMLComments: false
   }
-  ```
-
-</code-sample>
+}
+```
 
 ### removeCSSComments
 
@@ -128,17 +107,13 @@ Default: `true`
 
 Set to `false` to prevent `email-comb` from removing `/* CSS comments */`.
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    removeUnusedCSS: {
-      removeCSSComments: false
-    }
+```js [config.js]
+module.exports = {
+  removeUnusedCSS: {
+    removeCSSComments: false
   }
-  ```
-
-</code-sample>
+}
+```
 
 #### Preserving CSS comments when inlining
 
@@ -173,19 +148,15 @@ By default, classes are removed from the `class` attribute of a tag, after they 
 
 Set this option to `false` to prevent that from happening:
 
-<code-sample title="config.production.js">
-
-  ```js
-  module.exports = {
-    removeUnusedCSS: {
-      removeInlinedSelectors: false,
-    }
+```js [config.production.js]
+module.exports = {
+  removeUnusedCSS: {
+    removeInlinedSelectors: false,
   }
-  ```
+}
+```
 
-</code-sample>
-
-<alert>This has no effect if [inlineCss](/docs/transformers/inline-css) is not enabled.</alert>
+<Alert>This has no effect if [inlineCss](/docs/transformers/inline-css) is not enabled.</Alert>
 
 
 ### doNotRemoveHTMLCommentsWhoseOpeningTagContains
@@ -195,17 +166,13 @@ Default: `['[if', '[endif']`
 
 HTML email code often includes Outlook or IE conditional comments, which you probably want to preserve. If the opening tag of a conditional includes any of the strings you list here, the Transformer will not remove that comment.
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    removeUnusedCSS: {
-      doNotRemoveHTMLCommentsWhoseOpeningTagContains: ['[if', '[endif']
-    }
+```js [config.js]
+module.exports = {
+  removeUnusedCSS: {
+    doNotRemoveHTMLCommentsWhoseOpeningTagContains: ['[if', '[endif']
   }
-  ```
-
-</code-sample>
+}
+```
 
 ### uglify
 
@@ -216,29 +183,21 @@ Enable this to rename all classes and id's in both your `<style>` tags and your 
 
 Used in production, it will help trim down your HTML size.
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    removeUnusedCSS: {
-      uglify: true
-    }
+```js [config.js]
+module.exports = {
+  removeUnusedCSS: {
+    uglify: true
   }
-  ```
-
-</code-sample>
+}
+```
 
 ## API
 
 The Transformer uses the email-comb library, see all available options [here](https://www.npmjs.com/package/email-comb).
 
-<code-sample title="app.js">
+```js [app.js]
+const {removeUnusedCSS} = require('@maizzle/framework')
+const config = {/* email-comb options */}
 
-  ```js
-  const {removeUnusedCSS} = require('@maizzle/framework')
-  const config = {/* email-comb options */}
-
-  const html = await removeUnusedCSS(`<div class="unused">test</div>`, config)
-  ```
-
-</code-sample>
+const html = await removeUnusedCSS(`<div class="unused">test</div>`, config)
+```

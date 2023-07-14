@@ -1,7 +1,7 @@
 <template>
   <div class="sticky top-28">
     <nav
-      v-if="toc.length > 0"
+      v-if="toc.links.length > 0"
       class="custom-scrollbar max-w-[16rem] max-h-[calc(100vh-7rem)] overflow-y-auto pb-8 [scrollbar-gutter:stable]"
     >
       <div class="sticky top-0">
@@ -12,50 +12,57 @@
       </div>
       <ul class="space-y-2.5 text-sm">
         <li
-          v-for="link of toc"
+          v-for="link of toc.links"
           :key="link.id"
           class="truncate"
-          :class="{ 'pl-2': link.depth === 2, 'pl-4': link.depth === 3 }"
+          :class="{ 'pl-4': [2,3].includes(link.depth) }"
         >
           <a
             :href="`#${link.id}`"
             class="text-slate-600 hover:text-slate-900"
             :class="{'!text-indigo-600 hover:!text-indigo-600': $route.hash === `#${link.id}`}"
-            @click="scrollTo(`#${link.id}`)"
           >{{ link.text }}</a>
+
+          <ul
+            v-if="link.children"
+            class="space-y-2.5 mt-2.5"
+          >
+            <li
+              v-for="child of link.children"
+              :key="child.id"
+              class="truncate"
+              :class="{ 'pl-4': [2,3].includes(child.depth) }"
+            >
+              <a
+                :href="`#${child.id}`"
+                class="text-slate-600 hover:text-slate-900"
+                :class="{'!text-indigo-600 hover:!text-indigo-600': $route.hash === `#${child.id}`}"
+              >{{ child.text }}</a>
+            </li>
+          </ul>
         </li>
       </ul>
       <div class="mt-8">
-        <component
-          is="script"
-          src="//cdn.carbonads.com/carbon.js?serve=CE7IK2QM&placement=maizzlecom"
-          async
-          id="_carbonads_js"
-        />
+        <ClientOnly>
+          <Component
+            is="script"
+            src="//cdn.carbonads.com/carbon.js?serve=CE7IK2QM&placement=maizzlecom"
+            async
+            id="_carbonads_js"
+          />
+        </ClientOnly>
       </div>
     </nav>
   </div>
 </template>
 
-<script>
-import scrollToElement from 'scroll-to-element'
-
-export default {
-  name: 'TableOfContents',
-  props: {
-    toc: {
-      type: Array,
-      default: () => [],
-    },
+<script setup>
+defineProps({
+  toc: {
+    type: Object,
+    default: () => ({
+      links: [],
+    }),
   },
-  methods: {
-    scrollTo(id) {
-      scrollToElement(id, {
-        offset: -100,
-        ease: 'out-expo',
-        duration: 400
-      })
-    },
-  },
-}
+})
 </script>

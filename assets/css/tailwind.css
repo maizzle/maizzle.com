@@ -9,7 +9,18 @@
 
 @import "header";
 @import "navigation";
-@import "lazyload";
 @import "form";
 
+@import "lazyload";
+@import "preloader";
+
 @import "tailwindcss/utilities";
+
+#__nuxt {
+  @apply h-full;
+}
+
+.home-code-sample pre {
+  @apply overflow-x-auto p-6 rounded-b-md;
+  @apply bg-gradient-to-br from-white/75 to-pink-50/20;
+}

@@ -15,50 +15,42 @@ Using the same Google Fonts in all your emails? Paste the code in your main Layo
 
 For example, add it before Tailwind CSS:
 
-<code-sample title="src/layouts/main.html">
+```hbs [src/layouts/main.html]
+<head>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&display=swap" rel="stylesheet" media="screen">
 
-  ```xml
-  <head>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&display=swap" rel="stylesheet" media="screen">
-
-    <style>{{{ page.css }}}</style>
-  </head>
-  ```
-
-</code-sample>
+  <style>{{{ page.css }}}</style>
+</head>
+```
 
 ## Template
 
 If you only need Google Fonts in a certain Template, push to the `head` stack:
 
-<code-sample title="src/templates/example.html">
+```xml [src/templates/example.html]
+<x-main>
+  <push name="head">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      rel="stylesheet"
+      media="screen"
+      href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&display=swap"
+    >
+  </push>
 
-  ```xml
-  <x-main>
-    <push name="head">
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link
-        rel="stylesheet"
-        media="screen"
-        href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&display=swap"
-      >
-    </push>
-
-    <table class="font-merriweather">
-      <!-- ... -->
-    </table>
-  </x-main>
-  ```
-
-</code-sample>
+  <table class="font-merriweather">
+    <!-- ... -->
+  </table>
+</x-main>
+```
 
 You'll see `<stack name="head" />` in `main.html` - that's where Google Fonts will be output!
 
-<alert>Notice the `media="screen"` attribute on the last `<link>` tag - that helps avoid the Times New Roman fallback font bug in older versions of Outlook.</alert>
+<Alert>Notice the `media="screen"` attribute on the last `<link>` tag - that helps avoid the Times New Roman fallback font bug in older versions of Outlook.</Alert>
 
 ## Tailwind CSS utility
 
@@ -66,22 +58,18 @@ After pasting in the code from Google Fonts, you have one more thing to do: regi
 
 For example, let's register a Tailwind utility for Open Sans:
 
-<code-sample title="tailwind.config.js">
-
-  ```js
-  module.exports = {
-    theme: {
-      extend: {
-        fontFamily: {
-          'open-sans': ['"Open Sans"', 'ui-sans-serif', 'system-ui', '-apple-system', '"Segoe UI"', 'sans-serif'],
-          merriweather: ["'Merriweather'", 'ui-serif', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
-        },
+```js [tailwind.config.js]
+module.exports = {
+  theme: {
+    extend: {
+      fontFamily: {
+        'open-sans': ['"Open Sans"', 'ui-sans-serif', 'system-ui', '-apple-system', '"Segoe UI"', 'sans-serif'],
+        merriweather: ["'Merriweather'", 'ui-serif', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
       },
-    }
+    },
   }
-  ```
-
-</code-sample>
+}
+```
 
 Now you can use the `font-open-sans` and `font-merriweather` utility classes.
 
@@ -89,45 +77,36 @@ Now you can use the `font-open-sans` and `font-merriweather` utility classes.
 
 Although having the font-family CSS inlined on the first element in your HTML should be enough, there might be situations where that isn't desirable.
 
-Email clients that support web fonts don't actually require the `font-family` CSS to be inlined in your HTML.
-Therefore, we can make use of Tailwind's breakpoints and tuck the class inside an `@media screen {}` query.
+Email clients that support web fonts don't actually require the `font-family` CSS to be inlined in your HTML. Therefore, we can make use of Tailwind's breakpoints and tuck the class inside an `@media screen {}` query.
 
 This way it doesn't get inlined and you can keep this CSS away from any email client that doesn't support `@media` queries.
 
 To do this, we first register a `screen` breakpoint:
 
-<code-sample title="tailwind.config.js">
-
-  ```js
-  module.exports = {
-    theme: {
-      screens: {
-        screen: {raw: 'screen'},
-        sm: {max: '600px'}
-      }
+```js [tailwind.config.js] {6} diff
+module.exports = {
+  theme: {
+    screens: {
+      sm: {max: '600px'},
+      xs: {max: '425px'},
++      screen: {raw: 'screen'},
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 We can use it like this:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <div class="screen:font-open-sans">
-    <h1>Lorem ipsum</h1>
-    <p>Labore exercitation consequat tempor quis eu nulla amet.</p>
-  </div>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<div class="screen:font-open-sans">
+  <h1>Lorem ipsum</h1>
+  <p>Labore exercitation consequat tempor quis eu nulla amet.</p>
+</div>
+```
 
 ## @font-face
 
-Some email clients or <abbr title="Email Service Provider">ESP</abbr>s don't support `<link>` tags or CSS `import()`, but do support web fonts.
-In such cases, you can use `@font-face` and add your Google Fonts right inside your `<style>` tag.
+Some email clients or <abbr title="Email Service Provider">ESP</abbr>s don't support `<link>` tags or CSS `import()`, but do support web fonts. In such cases, you can use `@font-face` and add your Google Fonts right inside your `<style>` tag.
 
 First, visit the URL that Google Fonts creates for you after you've selected your fonts.
 
@@ -139,7 +118,7 @@ https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+S
 
 You will see lots of `@font-face` declarations in there, for example
 
-```postcss
+```css
 /* latin */
 @font-face {
   font-family: 'Merriweather';

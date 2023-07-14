@@ -13,41 +13,31 @@ You can use if/elseif/else conditionals in your email templates.
 
 For example, the Starter uses it to output a preheader in its Layout:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <if condition="page.preheader">
-    <div class="hidden">{{ page.preheader }}</div>
-  </if>
-  ```
-
-</code-sample>
+```hbs [src/templates/example.html]
+<if condition="page.preheader">
+  <div class="hidden">{{ page.preheader }}</div>
+</if>
+```
 
 Of course, you can create more complex conditions:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <if condition="page.env === 'node'">
-    <p>Using Maizzle programmatically</p>
-  </if>
-  <elseif condition="page.env === 'production'">
-    <p>We are in production!</p>
-  </elseif>
-  <else>
-    <p>We are probably developing locally.</p>
-  </else>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<if condition="page.env === 'node'">
+  <p>Using Maizzle programmatically</p>
+</if>
+<elseif condition="page.env === 'production'">
+  <p>We are in production!</p>
+</elseif>
+<else>
+  <p>We are probably developing locally.</p>
+</else>
+```
 
 #### Custom conditionals tag
 
 You may customize the conditional tag names:
 
-<code-sample title="config.js">
-
-```js
+```js [config.js]
 module.exports = {
   build: {
     posthtml: {
@@ -59,39 +49,29 @@ module.exports = {
 }
 ```
 
-</code-sample>
-
 Example:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <when condition="page.env === 'node'">
-    <p>Using Maizzle programmatically</p>
-  </when>
-  <ifnotthen condition="page.env === 'production'">
-    <p>We are in production!</p>
-  </ifnotthen>
-  <otherwise>
-    <p>We are probably developing locally.</p>
-  </otherwise>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<when condition="page.env === 'node'">
+  <p>Using Maizzle programmatically</p>
+</when>
+<ifnotthen condition="page.env === 'production'">
+  <p>We are in production!</p>
+</ifnotthen>
+<otherwise>
+  <p>We are probably developing locally.</p>
+</otherwise>
+```
 
 ## Outlook
 
 Wrap content with MSO conditional comments so that it will only show up in Outlook 2007-2019 on Windows:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <outlook>
-    <div>Show this in all Outlook versions</div>
-  </outlook>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<outlook>
+  <div>Show this in all Outlook versions</div>
+</outlook>
+```
 
 That will output:
 
@@ -103,15 +83,11 @@ That will output:
 
 Of course, there's also a tag for showing content everywhere _except_ in Outlook:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <not-outlook>
-    <div>All Outlooks will ignore this</div>
-  </not-outlook>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<not-outlook>
+  <div>All Outlooks will ignore this</div>
+</not-outlook>
+```
 
 Result:
 
@@ -132,15 +108,11 @@ The `<outlook>` tag supports various combinations of attributes that will help w
 
 For example:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <outlook only="2013">
-    <div>Show only in Outlook 2013</div>
-  </outlook>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<outlook only="2013">
+  <div>Show only in Outlook 2013</div>
+</outlook>
+```
 
 Result:
 
@@ -152,15 +124,11 @@ Result:
 
 The `only` and `not` attributes support multiple values, separated with a comma:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <outlook only="2013,2016">
-    <div>Show only in Outlook 2013 and 2016</div>
-  </outlook>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<outlook only="2013,2016">
+  <div>Show only in Outlook 2013 and 2016</div>
+</outlook>
+```
 
 Result:
 
@@ -172,15 +140,11 @@ Result:
 
 You may also combine attributes:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <outlook gt="2003" lte="2013">
-    <div>Show in 2007, 2010, 2013</div>
-  </outlook>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<outlook gt="2003" lte="2013">
+  <div>Show in 2007, 2010, 2013</div>
+</outlook>
+```
 
 Result:
 
@@ -194,91 +158,71 @@ Result:
 
 Of course, you may customize the `<outlook>` tag name:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        outlook: {
-          tag: 'mso'
-        }
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      outlook: {
+        tag: 'mso'
       }
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 You'd then use it like this:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <mso only="2013">Show only in Outlook 2013</mso>
-  <not-mso>Hide from all Outlooks</not-mso>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<mso only="2013">Show only in Outlook 2013</mso>
+<not-mso>Hide from all Outlooks</not-mso>
+```
 
 ## Switch
 
 Need to use a [switch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement?
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <switch expression="page.user.subscription">
-    <case n="'monthly'">
-      <p>Your monthly subscription is about to renew.</p>
-    </case>
-    <case n="'yearly'">
-      <p>Heads up! Yearly renewal coming soon, make sure you have enough money in your account.</p>
-    </case>
-    <default>
-      <p>Your subscription will soon renew.</p>
-    </default>
-  </switch>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<switch expression="page.user.subscription">
+  <case n="'monthly'">
+    <p>Your monthly subscription is about to renew.</p>
+  </case>
+  <case n="'yearly'">
+    <p>Heads up! Yearly renewal coming soon, make sure you have enough money in your account.</p>
+  </case>
+  <default>
+    <p>Your subscription will soon renew.</p>
+  </default>
+</switch>
+```
 
 #### Custom switch tag
 
 You may define custom tags for the switch statement:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        expressions: {
-          switchTags: ['handle', 'when', 'fallback']
-        }
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      expressions: {
+        switchTags: ['handle', 'when', 'fallback']
       }
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 Example:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <handle expression="page.env">
-    <when n="'production'">
-      production
-    </when>
-    <fallback>
-      fallback content
-    </fallback>
-  </handle>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<handle expression="page.env">
+  <when n="'production'">
+    production
+  </when>
+  <fallback>
+    fallback content
+  </fallback>
+</handle>
+```
 
 ## Loops
 
@@ -286,27 +230,19 @@ You can iterate over arrays and objects with the `<each>` tag.
 
 For arrays:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <each loop="item, index in someArray">
-    <p>{{ index }}: {{ item }}</p>
-  </each>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<each loop="item, index in someArray">
+  <p>{{ index }}: {{ item }}</p>
+</each>
+```
 
 For objects:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <each loop="value, key in anObject">
-    <p>{{ key }}: {{ value }}</p>
-  </each>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<each loop="value, key in anObject">
+  <p>{{ key }}: {{ value }}</p>
+</each>
+```
 
 ### Loop meta
 
@@ -320,47 +256,35 @@ Inside a loop you will have access to a `{{ loop }}` object that contains inform
 
 Example:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <each loop="item, index in [1,2,3]">
-    <p>Number of iterations until the end: {{ loop.remaining }}</p>
-  </each>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<each loop="item, index in [1,2,3]">
+  <p>Number of iterations until the end: {{ loop.remaining }}</p>
+</each>
+```
 
 #### Custom loop tag
 
 You may customize the name of the loop tag:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        expressions: {
-          loopTags: ['for']
-        }
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      expressions: {
+        loopTags: ['for']
       }
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 You can now use a `<for>` tag instead:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <for loop="item, index in [1,2,3]">
-    <p>{{ item }}</p>
-  </for>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<for loop="item, index in [1,2,3]">
+  <p>{{ item }}</p>
+</for>
+```
 
 ## Scope
 
@@ -368,85 +292,65 @@ Use `<scope>` tags to provide a data context to the content inside.
 
 Imagine we had this data in our `config.js`:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    roles: {
-      author: { name: 'John' },
-      editor: { name: 'Jane' },
-    }
+```js [config.js]
+module.exports = {
+  roles: {
+    author: { name: 'John' },
+    editor: { name: 'Jane' },
   }
-  ```
-
-</code-sample>
+}
+```
 
 We could provide each object as a scope, so we can then access it from the context, instead of going up to the parent:
 
-<code-sample title="src/templates/example.html">
+```hbs [src/templates/example.html]
+<!-- Will output 'John', no need to write {{ page.roles.author.name }} -->
+<scope with="page.roles.author">
+  {{ name }}
+</scope>
 
-  ```xml
-  <!-- Will output 'John', no need to write {{ page.roles.author.name }} -->
-  <scope with="page.roles.author">
-    {{ name }}
-  </scope>
-
-  <!-- Will output 'Jane' -->
-  <scope with="page.roles.editor">
-    {{ name }}
-  </scope>
-  ```
-
-</code-sample>
+<!-- Will output 'Jane' -->
+<scope with="page.roles.editor">
+  {{ name }}
+</scope>
+```
 
 #### Custom scope tag
 
 You may customize the `<scope>` tag name:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        expressions: {
-          scopeTags: ['context']
-        }
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      expressions: {
+        scopeTags: ['context']
       }
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 Example:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <!-- Will output 'Jane' -->
-  <context with="page.roles.editor">
-    {{ name }}
-  </context>
-  ```
-
-</code-sample>
+```hbs [src/templates/example.html]
+<!-- Will output 'Jane' -->
+<context with="page.roles.editor">
+  {{ name }}
+</context>
+```
 
 ## Fetch
 
 You can fetch and display remote content in your email templates:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <fetch url="https://jsonplaceholder.typicode.com/users">
-    <each loop="user in response">
-      {{ user.name }}
-    </each>
-  </fetch>
-  ```
-
-</code-sample>
+```hbs [src/templates/example.html]
+<fetch url="https://jsonplaceholder.typicode.com/users">
+  <each loop="user in response">
+    {{ user.name }}
+  </each>
+</fetch>
+```
 
 Inside the `<fetch>` tag, you have access to a `{{ response }}` variable.
 
@@ -454,86 +358,66 @@ Inside the `<fetch>` tag, you have access to a `{{ response }}` variable.
 
 You may use the `fetch` key to customize options:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        fetch: {
-          tags: ['get'], // default ['fetch', 'remote']
-          attribute: 'resource', // default 'url'
-          got: {}, // pass options to the `got` package
-          preserveTag: true, // default false
-          expressions: {}, // configure expressions in fetch context
-        }
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      fetch: {
+        tags: ['get'], // default ['fetch', 'remote']
+        attribute: 'resource', // default 'url'
+        got: {}, // pass options to the `got` package
+        preserveTag: true, // default false
+        expressions: {}, // configure expressions in fetch context
       }
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 ## Raw
 
 Need to skip tag and expressions parsing in a whole block?
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <raw>
-    This will not be parsed:
-    <if condition="page.env">
-      {{ page.env }}
-    </if>
-    Neither will this expression: {{ page.env }}
-  </raw>
-  ```
-
-</code-sample>
-
-Result:
-
-<code-sample title="build_production/example.html">
-
-  ```xml
+```hbs [src/templates/example.html]
+<raw>
   This will not be parsed:
   <if condition="page.env">
     {{ page.env }}
   </if>
   Neither will this expression: {{ page.env }}
-  ```
+</raw>
+```
 
-</code-sample>
+Result:
+
+```hbs [build_production/example.html]
+This will not be parsed:
+<if condition="page.env">
+  {{ page.env }}
+</if>
+Neither will this expression: {{ page.env }}
+```
 
 #### Custom raw tag
 
 The `<raw>` tag name may be customized:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        expressions: {
-          ignoredTag: 'verbatim'
-        }
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      expressions: {
+        ignoredTag: 'verbatim'
       }
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 Example:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <verbatim>
-    This will not be parsed: {{ page.env }}
-  </verbatim>
-  ```
-
-</code-sample>
+```hbs [src/templates/example.html]
+<verbatim>
+  This will not be parsed: {{ page.env }}
+</verbatim>
+```

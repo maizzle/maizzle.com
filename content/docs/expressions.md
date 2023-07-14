@@ -7,23 +7,19 @@ description: "Learn how to create HTML emails with template inheritance in Maizz
 
 Handlebars-like, curly brace expression syntax is supported, allowing you to access variables from your [Environment config](/docs/environments) or from a Template's Front Matter:
 
-<code-sample title="src/templates/example.html">
+```hbs [src/templates/example.html]
+---
+title: Example
+---
 
-  ```xml
-  ---
-  title: Example
-  ---
+<x-main>
+  The title is: {{ page.title }}
 
-  <x-main>
-    The title is: {{ page.title }}
+  You ran the `maizzle build {{ page.env }}` command.
+</x-main>
+```
 
-    You ran the `maizzle build {{ page.env }}` command.
-  </x-main>
-  ```
-
-</code-sample>
-
-Running `maizzle build production` would render this:
+Running `maizzle build production` would render this HTML:
 
 ```xml
 The title is: Example
@@ -33,20 +29,16 @@ You ran the `maizzle build production` command.
 
 You may use basic JavaScript expressions within curly braces:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-main>
-    doctype is {{ page.doctype || 'not set' }}
-    this email {{ page.env === 'production' ? "is" : "isn't" }} production ready!
-  </x-main>
-  ```
-
-</code-sample>
+```hbs [src/templates/example.html]
+<x-main>
+  doctype is {{ page.doctype || 'not set' }}
+  this email {{ page.env === 'production' ? "is" : "isn't" }} production ready!
+</x-main>
+```
 
 Running `maizzle build`, we would get:
 
-```xml
+```
 doctype is not set
 this email isn't production ready!
 ```
@@ -55,37 +47,29 @@ this email isn't production ready!
 
 By default, special characters are escaped when using two curly braces:
 
-<code-sample title="src/templates/example.html">
+```hbs [src/templates/example.html]
+---
+markup: '<strong>Bold</strong>'
+---
 
-  ```xml
-  ---
-  markup: '<strong>Bold</strong>'
-  ---
-
-  <x-main>
-    {{ page.markup }}
-    <!-- Result: &lt;strong&gt;Bold&lt;strong&gt; -->
-  </x-main>
-  ```
-
-</code-sample>
+<x-main>
+  {{ page.markup }}
+  <!-- Result: &lt;strong&gt;Bold&lt;strong&gt; -->
+</x-main>
+```
 
 If you need to render values exactly as they are, use triple curly braces:
 
-<code-sample title="src/templates/example.html">
+```hbs [src/templates/example.html]
+---
+markup: '<strong>Bold</strong>'
+---
 
-  ```xml
-  ---
-  markup: '<strong>Bold</strong>'
-  ---
-
-  <x-main>
-    {{{ page.markup }}}
-    <!-- Result: <strong>Bold</strong> -->
-  </x-main>
-  ```
-
-</code-sample>
+<x-main>
+  {{{ page.markup }}}
+  <!-- Result: <strong>Bold</strong> -->
+</x-main>
+```
 
 ## Ignoring
 
@@ -95,79 +79,56 @@ If you want to prevent expression compilation and actually render the curly brac
 
 ### Ignore inline
 
-The [Blade](https://laravel.com/docs/blade)-inspired `@{{ }}` syntax is useful for one-offs, where you need to ignore a single expression.
-The compiled email will render `{{ }}` without the `@`.
+The [Blade](https://laravel.com/docs/blade)-inspired `@{{ }}` syntax is useful for one-offs, where you need to ignore a single expression. The compiled email will render `{{ }}` without the `@`.
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-main>
-    @{{ page.markup }}
-    <!-- Result: {{ page.markup }} -->
-  </x-main>
-  ```
-
-</code-sample>
+```hbs [src/templates/example.html]
+<x-main>
+  @{{ page.markup }}
+  <!-- Result: {{ page.markup }} -->
+</x-main>
+```
 
 ### Ignore in Front Matter
 
 You may also use `@{{ }}` to prevent expressions in Front Matter from being evaluated.
 
-<code-sample title="src/templates/example.html">
+```hbs [src/templates/example.html]
+---
+title: "Weekly newsletter no. @{{ edition_count }}"
+---
 
-  ```xml
-  ---
-  title: "Weekly newsletter no. @{{ edition_count }}"
-  ---
-
-  <x-main>
-    {{ page.title }}
-  </x-main>
-  ```
-
-</code-sample>
+<x-main>
+  {{ page.title }}
+</x-main>
+```
 
 Result:
 
-<code-sample title="build_production/example.html">
+```hbs [build_production/example.html]
+Weekly newsletter no. {{ edition_count }}
+```
 
-  ```
-  Weekly newsletter no. {{ edition_count }}
-  ```
-
-</code-sample>
-
-### Ignore with &lt;raw&gt;
+### Ignore with `<raw>`
 
 This is useful if you want to ignore multiple expressions in one go:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <raw>
-    <p>The quick brown {{ animals[0] }} jumps over the lazy {{ animals[1] }}.</p>
-  </raw>
-  ```
-
-</code-sample>
+```hbs [src/templates/example.html]
+<raw>
+  <p>The quick brown {{ animals[0] }} jumps over the lazy {{ animals[1] }}.</p>
+</raw>
+```
 
 `<raw>` will be removed in the final output, but the curly braces will be left untouched:
 
-<code-sample title="build_production/example.html">
-
-  ```
-  <p>The quick brown {{ animals[0] }} jumps over the lazy {{ animals[1] }}.</p>
-  ```
-
-</code-sample>
+```hbs [build_production/example.html]
+<p>The quick brown {{ animals[0] }} jumps over the lazy {{ animals[1] }}.</p>
+```
 
 ### Change delimiters
 
 You can change the delimiters to something else, like `[[ ]]`:
 
-<code-sample title="config.js">
-
-```js
+```js [config.js]
 module.exports = {
   build: {
     posthtml: {
@@ -180,20 +141,14 @@ module.exports = {
 }
 ```
 
-</code-sample>
-
 Then you can safely use `{{ }}` and its contents will not be evaluated:
 
-<code-sample title="src/templates/example.html">
+```hbs [src/templates/example.html]
+<x-main>
+  <!-- This will be evaluated -->
+  [[ page.title ]]
 
-  ```xml
-  <x-main>
-    <!-- This will be evaluated -->
-    [[ page.title ]]
-
-    <!-- But this won't be -->
-    Hi, {{ user.name }}.
-  </x-main>
-  ```
-
-</code-sample>
+  <!-- But this won't be -->
+  Hi, {{ user.name }}.
+</x-main>
+```

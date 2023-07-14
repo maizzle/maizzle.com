@@ -11,17 +11,13 @@ Duplicate HTML attributes to inline CSS.
 
 This Transformer is part of the CSS inlining process, you may enable it in your `config.js` under the `inlineCSS` key:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    inlineCSS: {
-      attributeToStyle: true,
-    }
+```js [config.js]
+module.exports = {
+  inlineCSS: {
+    attributeToStyle: true,
   }
-  ```
-
-</code-sample>
+}
+```
 
 Given this HTML:
 
@@ -51,17 +47,13 @@ It will transform it to:
 
 You may enable it only for some attributes:
 
-<code-sample title="config.sjs">
-
-  ```js
-  module.exports = {
-    inlineCSS: {
-      attributeToStyle: ['width', 'bgcolor', 'background']
-    }
+```js [config.js]
+module.exports = {
+  inlineCSS: {
+    attributeToStyle: ['width', 'bgcolor', 'background']
   }
-  ```
-
-</code-sample>
+}
+```
 
 ## Supported attributes
 
@@ -108,12 +100,8 @@ This Transformer runs right before CSS inlining, so you can still override it th
 
 The second argument must be an array of attribute names to handle:
 
-<code-sample title="app.js">
+```js [app.js]
+const {attributeToStyle} = require('@maizzle/framework')
 
-  ```js
-  const {attributeToStyle} = require('@maizzle/framework')
-
-  const html = await attributeToStyle('html string', ['width'])
-  ```
-
-</code-sample>
+const html = await attributeToStyle('html string', ['width'])
+```

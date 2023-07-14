@@ -13,24 +13,16 @@ For better email client compatibility, it is enabled by default.
 
 You may disable it by setting it to `false`:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    sixHex: false,
-  }
-  ```
-
-</code-sample>
+```js [config.js]
+module.exports = {
+  sixHex: false,
+}
+```
 
 ## API
 
-<code-sample title="app.js">
+```js [app.js]
+const {ensureSixHEX} = require('@maizzle/framework')
 
-  ```js
-  const {ensureSixHEX} = require('@maizzle/framework')
-
-  const html = await ensureSixHEX('<td bgcolor="#fff"><font color=""#000>test</font></td>')
-  ```
-
-</code-sample>
+const html = await ensureSixHEX('<td bgcolor="#fff"><font color=""#000>test</font></td>')
+```

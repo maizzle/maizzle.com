@@ -5,8 +5,7 @@ description: "Learn how to create a simple grid system for HTML email with Tailw
 
 # Grids
 
-You'll sometimes need to create multi-column HTML email layouts.
-Here's how to create a responsive email grid with Tailwind CSS in Maizzle.
+You'll sometimes need to create multi-column HTML email layouts. Here's how to create a responsive email grid with Tailwind CSS in Maizzle.
 
 ## Percentage
 
@@ -60,8 +59,7 @@ Of course, you can use fixed widths if you prefer.
 
 ## Stacking
 
-Responsive HTML emails usually reset the columns to stack on mobile.
-We can easily achieve this with a couple utility classes.
+Responsive HTML emails usually reset the columns to stack on mobile. We can easily achieve this with a couple utility classes.
 
 Using the [percentage](#percentage) example, we might do:
 

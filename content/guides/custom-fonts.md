@@ -10,8 +10,7 @@ date: 2020-01-31
 
 It's super easy to [use Google Fonts in your Maizzle email templates](/docs/examples/google-fonts), but what if you need to use a custom web font?
 
-Maybe your brand uses a custom font that isn't available through Google Fonts,
-or maybe you're just developing Shopify notification email templates (where the usual `@import` and `<link>` techniques aren't supported).
+Maybe your brand uses a custom font that isn't available through Google Fonts, or maybe you're just developing Shopify notification email templates (where the usual `@import` and `<link>` techniques aren't supported).
 
 In this tutorial, you'll learn how to add your own custom fonts to emails in Maizzle.
 
@@ -19,25 +18,17 @@ In this tutorial, you'll learn how to add your own custom fonts to emails in Mai
 
 First, let's scaffold a new project:
 
-<terminal show-copy>
-
-  ```
-  npx degit maizzle/maizzle example-font-face
-  ```
-
-</terminal>
+```sh
+npx degit maizzle/maizzle example-font-face
+```
 
 Install dependencies:
 
-<terminal show-copy>
+```sh
+cd example-font-face
 
-  ```
-  cd example-font-face
-
-  npm install
-  ```
-
-</terminal>
+npm install
+```
 
 ## Register @font-face
 
@@ -49,52 +40,42 @@ We'll use `@font-face` to register our custom font family - we can do this in th
 
 Open `src/templates/transactional.html` and add this before the `<x-main>` tag:
 
-<code-sample title="src/templates/transactional.html">
-
-  ```xml
-  <push name="head">
-    <style>
-      @font-face {
-        font-family: 'Barosan';
-        font-style: normal;
-        font-weight: 400;
-        src: local('Barosan Regular'), local('Barosan-Regular'), url(https://example.com/fonts/barosan.woff2) format('woff2');
-      }
-    </style>
-  </push>
-  ```
-
-</code-sample>
+```hbs [src/templates/transactional.html]
+<push name="head">
+  <style>
+    @font-face {
+      font-family: 'Barosan';
+      font-style: normal;
+      font-weight: 400;
+      src: local('Barosan Regular'), local('Barosan-Regular'), url(https://example.com/fonts/barosan.woff2) format('woff2');
+    }
+  </style>
+</push>
+```
 
 This adds a separate `<style>` tag in the compiled email HTML, right after the main one.
 
 ### Add in Layout
 
-If you prefer a single `<style>` tag in your email template, you can register the font in the Layout instead.
-Open `src/layouts/main.html` and update the `<style>` tag:
+If you prefer a single `<style>` tag in your email template, you can register the font in the Layout instead. Open `src/layouts/main.html` and update the `<style>` tag:
 
-<code-sample title="src/layouts/main.html" no-copy>
+```css [src/layouts/main.html] no-copy diff
+-   <style>{{{ page.css }}}</style>
++   <style>
++     @font-face {
++       font-family: 'Barosan';
++       font-style: normal;
++       font-weight: 400;
++       src: local('Barosan Regular'), local('Barosan-Regular'), url(https://example.com/fonts/barosan.woff2) format('woff2');
++     }
++
++     {{{ page.css }}}
++   </style>
+```
 
-  ```diff
-  -   <style>{{{ page.css }}}</style>
-  +   <style>
-  +     @font-face {
-  +       font-family: 'Barosan';
-  +       font-style: normal;
-  +       font-weight: 400;
-  +       src: local('Barosan Regular'), local('Barosan-Regular'), url(https://example.com/fonts/barosan.woff2) format('woff2');
-  +     }
-  +
-  +     {{{ page.css }}}
-  +   </style>
-  ```
-
-</code-sample>
-
-<alert>
-  <p>You can use the same technique to load font files from Google Fonts - it's currently the only way to get them working in Shopify notifications.</p>
-  <p>To find out the URL of a Google Font (and actually, its entire <code>@font-face</code> CSS) simply access the URL they give you, in a new browser tab.</p>
-</alert>
+<Alert>
+You can use the same technique to load font files from Google Fonts - it's currently the only way to get them working in Shopify notifications. To find out the URL of a Google Font (and actually, its entire `@font-face` CSS) simply access the URL they give you, in a new browser tab.
+</Alert>
 
 ## Tailwind CSS utility
 
@@ -102,28 +83,17 @@ Now that we're importing the font, we should register a Tailwind CSS utility for
 
 Open `tailwind.config.js`, scroll down to `fontFamily`, and add a new font:
 
-<code-sample title="tailwind.config.js">
-
-  ```js
-  module.exports = {
-    theme: {
-      extend: {
-        // ...
-        fontFamily: {
-          barosan: [
-            'Barosan',
-            '-apple-system',
-            '"Segoe UI"',
-            'sans-serif',
-          ],
-          // sans: {}, etc...
-        }
-      },
+```js [tailwind.config.js] {5} diff
+module.exports = {
+  theme: {
+    extend: {
+      fontFamily: {
++        barosan: ['Barosan', '-apple-system', '"Segoe UI"', 'sans-serif'],
+      }
     },
-  }
-  ```
-
-</code-sample>
+  },
+}
+```
 
 Of course, you can change the other fonts in the stack. For example, display fonts often fallback to `cursive`.
 
@@ -147,22 +117,17 @@ With [CSS inlining](/docs/transformers/inline-css) enabled, that would result in
 
 ## Advanced use
 
-Repeatedly writing that `font-barosan` class on all elements isn't just impractical,
-it also increases HTML file size (especially when inlining), which then leads to [Gmail clipping](https://github.com/hteumeuleu/email-bugs/issues/41).
+Repeatedly writing that `font-barosan` class on all elements isn't just impractical, it also increases HTML file size (especially when inlining), which then leads to [Gmail clipping](https://github.com/hteumeuleu/email-bugs/issues/41).
 
 `font-family` is inherited, which means you can just add the utility to the top element:
 
-<code-sample title="src/templates/transactional.html">
-
-  ```xml
-  <x-main>
-    <table class="font-barosan">
-      <!-- your email HTML... -->
-    </table>
-  </x-main>
-  ```
-
-</code-sample>
+```xml [src/templates/transactional.html]
+<x-main>
+  <table class="font-barosan">
+    <!-- your email HTML... -->
+  </table>
+</x-main>
+```
 
 However, that could trigger [Outlook's Times New Roman bug](https://www.caniemail.com/search/?s=font#font-face-cite-note-5).
 
@@ -170,40 +135,33 @@ We can work around that by making use of Tailwind's `screen` variants and an Out
 
 First, let's register a new `@media` query - we will call it `screen`:
 
-<code-sample title="tailwind.config.js">
-
-  ```js
-  module.exports = {
-    theme: {
-      screens: {
-        screen: {raw: 'screen'},
-        // ...
-      }
+```js [tailwind.config.js] {6} diff
+module.exports = {
+  theme: {
+    screens: {
+      sm: {max: '600px'},
+      xs: {max: '425px'},
++      screen: {raw: 'screen'},
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 We can now use it on the outermost<sup>1</sup> element:
 
-<code-sample title="src/templates/transactional.html">
+```xml [src/templates/transactional.html]
+<x-main>
+  <table class="screen:font-barosan">
+    <!-- your email HTML... -->
+  </table>
+</x-main>
+```
 
-  ```xml
-  <x-main>
-    <table class="screen:font-barosan">
-      <!-- your email HTML... -->
-    </table>
-  </x-main>
-  ```
-
-</code-sample>
-
-<alert><sup>1</sup> Don't add it to the `<body>` - some email clients remove or replace this tag.</alert>
+<Alert><sup>1</sup> Don't add it to the `<body>` - some email clients remove or replace this tag.</Alert>
 
 This will tuck the `font-family` away in an `@media` query:
 
-```postcss
+```css
 /* Compiled CSS. Maizzle replaces escaped \: with - */
 @media screen {
   .screen-font-barosan {
@@ -214,19 +172,15 @@ This will tuck the `font-family` away in an `@media` query:
 
 Since Outlook on Windows doesn't read `@media` queries, define a fallback<sup>2</sup> for it in the `<head>` of your Layout:
 
-<code-sample title="src/layouts/main.html">
+```xml [src/layouts/main.html]
+<!--[if mso]>
+<style>
+  td,th,div,p,a,h1,h2,h3,h4,h5,h6 {font-family: "Segoe UI", sans-serif;}
+</style>
+<![endif]-->
+```
 
-  ```xml
-  <!--[if mso]>
-  <style>
-    td,th,div,p,a,h1,h2,h3,h4,h5,h6 {font-family: "Segoe UI", sans-serif;}
-  </style>
-  <![endif]-->
-  ```
-
-</code-sample>
-
-<alert><sup>2</sup> The Maizzle Starter includes this fallback in the <code>main.html</code> Layout by default.</alert>
+<Alert><sup>2</sup> The Maizzle Starter includes this fallback in the `main.html` Layout by default.</Alert>
 
 ## Outlook bugs
 
@@ -234,7 +188,7 @@ Custom fonts aren't supported in Outlook 2007-2019 on Windows - most of these em
 
 To avoid this, you can wrap the `@font-face` declaration in a `@media` query, so that Outlook will ignore it:
 
-```postcss
+```css
 @media screen {
   @font-face {
     font-family: 'Barosan';
@@ -250,9 +204,10 @@ Also, note that `font-family` isn't inherited on child elements in Outlook.
 ## Extra weights
 
 If your font comes with dedicated files for other weights, don't just slap `font-bold` on an element.
+
 Instead, import both the regular and bold versions of your font:
 
-```postcss
+```css
 @font-face {
   font-family: 'Barosan';
   font-style: normal;

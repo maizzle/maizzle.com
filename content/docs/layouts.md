@@ -7,8 +7,7 @@ description: "See how to use layouts with templating inheritance to build your H
 
 **👋 New syntax**
 
-You are viewing the documentation for Layouts built with the new Components syntax introduced in `v4.4.0`.
-Not ready to switch yet? We still support `<extends>` and `<block>`, see the [legacy Layouts docs](https://v43x.maizzle.com/docs/layouts).
+You are viewing the documentation for Layouts built with the new Components syntax introduced in `v4.4.0`. Not ready to switch yet? We still support `<extends>` and `<block>`, see the [legacy Layouts docs](https://v43x.maizzle.com/docs/layouts).
 
 ---
 
@@ -24,39 +23,30 @@ In Maizzle, we add this `<content />` tag in the `<body>` of the `main.html` Lay
 
 Layouts are typically stored in the `src/layouts` directory.
 
-<alert>Need to store them elsewhere? Make sure to [update the config](/docs/configuration/components#folders).</alert>
+<Alert>Need to store them elsewhere? Make sure to [update the config](/docs/configuration/components#folders).</Alert>
 
-Layouts must include a `<content />` tag, which is where the Template's HTML will be rendered.
-Here's a very basic `layout.html`:
+Layouts must include a `<content />` tag, which is where the Template's HTML will be rendered. Here's a very basic `layout.html`:
 
-<code-sample title="src/layouts/layout.html">
+```hbs [src/layouts/layout.html] {7}
+<!doctype html>
+<html>
+<head>
+  <style>{{{ page.css }}}</style>
+</head>
+<body>
+  <content />
+</body>
+```
 
-  ```xml
-  <!doctype html>
-  <html>
-  <head>
-    <style>{{{ page.css }}}</style>
-  </head>
-  <body>
-    <content />
-  </body>
-  ```
-
-</code-sample>
-
-<alert>For Tailwind CSS to work, Layouts must also include the `page.css` variable inside a `<style>` tag.</alert>
+<Alert>For Tailwind CSS to work, Layouts must also include the `page.css` variable inside a `<style>` tag.</Alert>
 
 When creating a Template, you may use that Layout like this:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-layout>
-    <!-- your email HTML... -->
-  </x-layout>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<x-layout>
+  <!-- your email HTML... -->
+</x-layout>
+```
 
 As you can see, the `<x-layout>` tag name is based on the Layout's filename, with the `.html` extension removed. Read more about this in the [Components docs](/docs/components#x-tag).
 
@@ -76,20 +66,16 @@ You can write basic JavaScript expressions inside curly braces. These expression
 
 The compiled Tailwind CSS is available under `page.css` - you need to output it in a `<style>` tag in your Layout's `<head>` in order for Tailwind CSS to work:
 
-<code-sample title="src/layouts/layout.html">
-
-  ```diff
-  <!doctype html>
-  <html>
-  <head>
+```hbs [src/layouts/layout.html] {4} no-copy diff
+<!doctype html>
+<html>
+<head>
 +   <style>{{{ page.css }}}</style>
-  </head>
-  <body>
-    <content />
-  </body>
-  ```
-
-</code-sample>
+</head>
+<body>
+  <content />
+</body>
+```
 
 We use 3 curly braces so that we output the CSS without escaping it - this is required for quoted property values, so that we don't get `&quot;` instead of `"` in CSS property values like `url("")` or in multi-word font names like in `font-family: "Open Sans", sans-serif`.
 
@@ -99,7 +85,7 @@ The Environment name is available under `page.env`. You can use it to output stu
 
 For example, we could use `page.env` to output some content only when running the `maizzle build production` command:
 
-```xml
+```xml [src/layouts/layout.html]
 <if condition="page.env === 'production'">
   <p>This text will show when running `maizzle build production`</p>
 </if>

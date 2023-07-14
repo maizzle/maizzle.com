@@ -7,9 +7,7 @@ description: "Configuring expressions in Maizzle"
 
 Expressions may be configured in your project's `config.js`:
 
-<code-sample title="config.js">
-
-```js
+```js [config.js]
 module.exports = {
   build: {
     posthtml: {
@@ -20,8 +18,6 @@ module.exports = {
   }
 }
 ```
-
-</code-sample>
 
 ## delimiters
 

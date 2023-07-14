@@ -1,81 +1,37 @@
-/* Generic load-in animation for lazy load */
-.lazyload-wrapper {
-  @apply rounded-md;
-}
-
 .lazyload {
-  @apply bg-opacity-100;
-  border-radius: inherit;
+  @apply opacity-0 transition-opacity duration-700;
 }
 
-.lazyload.loaded {
-  @apply bg-opacity-0;
-}
-
-.lazyload span,
-.lazyload iframe {
-  @apply opacity-0 transition-all duration-500;
-}
-
-.lazyload span:not(.alt),
-.lazyload iframe {
-  @apply block;
-}
-
-.lazyload.loaded span:not(.alt),
-.lazyload.loaded iframe {
+.lazyload.loaded,
+.lazyload.loaded .overlay {
   @apply opacity-100;
 }
 
-/* Loading placeholder (takes up space) */
-.loader {
-  @apply w-full rounded-md;
-  background: linear-gradient(120deg, rgba(255,255,255,0) 33%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 66%) #EAEEF4;
-  background-size: 300% 100%;
-  animation: shine 1s infinite;
+/* Animated loader */
+.loader-wrapper {
+  @apply bg-zinc-50;
 }
 
-.loader-table {
-  @apply rounded-b-none;
-}
-
-.lazyload:before {
+.animated-loader .loader-wrapper:before {
   @apply absolute inset-0;
   border-radius: inherit;
   content: '';
-  background: linear-gradient(120deg, rgba(255,255,255,0) 33%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 66%) #EAEEF4;
+  background: linear-gradient(120deg, rgba(25,28,32,0) 33%, rgba(25,28,32,0.8) 50%, rgba(25,28,32,0) 66%) rgba(255,255,255,0.01);
   background-size: 300% 100%;
   animation: shine 1s infinite;
 }
 
-.dark .lazyload:before {
+.animated-loader.light .loader-wrapper {
+  @apply bg-zinc-100;
+}
+
+.animated-loader.light .loader-wrapper:before {
   @apply absolute inset-0;
   border-radius: inherit;
   content: '';
-  background: linear-gradient(120deg, rgba(30,41,59,0) 33%, rgba(30,41,59,0.5) 50%, rgba(30,41,59,0) 66%) #0F172A;
+  background: linear-gradient(120deg, rgba(255,255,255,0) 33%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 66%) rgba(255,255,255,0.01);
   background-size: 300% 100%;
   animation: shine 1s infinite;
-}
-
-.bg-transparent .lazyload:before {
-  background: none;
-}
-
-.lazyload-wrapper.circle .lazyload::before {
-  @apply rounded-full;
-}
-
-.lazyload.loaded::before,
-.lazyload.error::before {
-  @apply opacity-0;
-}
-
-.error span:first-child {
-  @apply hidden;
-}
-
-.error .alt {
-  @apply flex opacity-100;
 }
 
 @keyframes shine {
@@ -84,10 +40,14 @@
   }
 }
 
-.lazyload {
+.animated-loader .lazyload.error::before {
+  @apply opacity-0;
+}
+
+.animated-loader .lazyload {
   @apply print:hidden;
 }
 
-.lazyload.loaded {
+.animated-loader .lazyload.loaded {
   @apply print:block;
 }

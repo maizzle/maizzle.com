@@ -23,15 +23,11 @@ Because some operations need to happen before others, Transformers in Maizzle ru
 
 You may disable all Transformers by setting `applyTransformers` to `false`:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    applyTransformers: false,
-  }
-  ```
-
-</code-sample>
+```js [config.js] {2} diff
+module.exports = {
++  applyTransformers: false,
+}
+```
 
 ## API
 

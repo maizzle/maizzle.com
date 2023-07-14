@@ -1,4 +1,6 @@
-[build]
-  command = "npm run generate"
-  functions = "run"
-  publish = "dist"
+[functions]
+  directory = "functions"
+  node_bundler = "esbuild"
+
+[[plugins]]
+package = "@netlify/plugin-functions-install-core"

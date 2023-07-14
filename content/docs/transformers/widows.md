@@ -7,17 +7,13 @@ description: "Prevent widow words in your HTML email content"
 
 Add a `prevent-widows` attribute on any HTML tag to prevent widow words by adding a `&nbsp;` between the last two words inside it.
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-main>
-    <div prevent-widows>
-      <p>The quick brown fox jumped over the lazy dog.</p>
-    </div>
-  </x-main>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<x-main>
+  <div prevent-widows>
+    <p>The quick brown fox jumped over the lazy dog.</p>
+  </div>
+</x-main>
+```
 
 The `prevent-widows` attribute will be removed and the HTML will be transformed to:
 
@@ -31,18 +27,14 @@ The `prevent-widows` attribute will be removed and the HTML will be transformed 
 
 You may configure the transformer through the `widowWords` key in your `config.js`:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    widowWords: {
-      attrName: 'prevent-widows',
-      // ...options for string-remove-widows
-    },
-  }
-  ```
-
-</code-sample>
+```js [config.js]
+module.exports = {
+  widowWords: {
+    attrName: 'prevent-widows',
+    // ...options for string-remove-widows
+  },
+}
+```
 
 ### attrName
 
@@ -123,74 +115,54 @@ Maizzle defines common templating language start and end tags here, and also inc
 
 Any new pairs that you add will be merged on top of the default ones.
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    widowWords: {
-      ignore: [
-        {
-          heads: '{{',
-          tails: '}}'
-        },
-      ],
-    },
-  }
-  ```
-
-</code-sample>
+```js [config.js]
+module.exports = {
+  widowWords: {
+    ignore: [
+      {
+        heads: '{{',
+        tails: '}}'
+      },
+    ],
+  },
+}
+```
 
 ## Undo Widows
 
 You can use the transformer the other way around, too.
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    widowWords: {
-      attrName: 'create-widows',
-      removeWidowPreventionMeasures: true,
-    },
-  }
-  ```
-
-</code-sample>
+```js [config.js]
+module.exports = {
+  widowWords: {
+    attrName: 'create-widows',
+    removeWidowPreventionMeasures: true,
+  },
+}
+```
 
 Input:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-main>
-    <div create-widows>
-      <p>The quick brown fox jumped over the lazy&nbsp;dog.</p>
-    </div>
-  </x-main>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<x-main>
+  <div create-widows>
+    <p>The quick brown fox jumped over the lazy&nbsp;dog.</p>
+  </div>
+</x-main>
+```
 
 Output:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <div>
-    <p>The quick brown fox jumped over the lazy dog.</p>
-  </div>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<div>
+  <p>The quick brown fox jumped over the lazy dog.</p>
+</div>
+```
 
 ## API
 
-<code-sample title="app.js">
+```js [app.js]
+const {preventWidows} = require('@maizzle/framework')
 
-  ```js
-  const {preventWidows} = require('@maizzle/framework')
-
-  const html = await preventWidows('html string', options)
-  ```
-
-</code-sample>
+const html = await preventWidows('html string', options)
+```

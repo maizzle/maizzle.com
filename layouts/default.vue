@@ -1,12 +1,18 @@
 <template>
-  <div class="font-sans">
-    <Nuxt />
-    <doc-search hidden />
-  </div>
+  <main class="font-inter min-h-screen flex flex-col">
+    <SiteHeader
+      class="w-full max-w-7xl px-6 py-6 mx-auto rounded-br-2xl rounded-bl-2xl"
+      :class="$route.path && 'header-default'"
+    />
+
+    <NuxtPage />
+  </main>
 </template>
 
-<script>
-export default {
-  name: 'SiteLayout',
-}
+<script setup>
+useHead({
+  htmlAttrs: {
+    class: 'scroll-smooth',
+  },
+})
 </script>

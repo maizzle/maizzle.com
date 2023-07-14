@@ -17,73 +17,49 @@ You may configure which attributes to remove through the `removeAttributes` arra
 
 To remove attributes with no values, specify the attribute name as a string:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    removeAttributes: ['data-src']
-  }
-  ```
-
-</code-sample>
+```js [config.js]
+module.exports = {
+  removeAttributes: ['data-src']
+}
+```
 
 Input:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <img src="example.jpg" data-src alt="">
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<img src="example.jpg" data-src alt="">
+```
 
 Output:
 
-<code-sample title="src/templates/example.html">
+```xml
+<img src="example.jpg" alt="">
+```
 
-  ```xml
-  <img src="example.jpg" alt="">
-  ```
-
-</code-sample>
-
-<alert>Maizzle automatically removes empty `style` and `class` attributes, no need to add them yourself.</alert>
+<Alert>Maizzle automatically removes empty `style` and `class` attributes, no need to add them yourself.</Alert>
 
 ### By name and value
 
 If you know the exact name and value, you may pass them to the array as an object:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    removeAttributes: [
-      {name: 'id', value: 'test'}
-    ]
-  }
-  ```
-
-</code-sample>
+```js [config.js]
+module.exports = {
+  removeAttributes: [
+    {name: 'id', value: 'test'}
+  ]
+}
+```
 
 Input:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <div style="color: #000" id="test">Test</div>
-  ```
-
-</code-sample>
+```xml
+<div style="color: #000" id="test">Test</div>
+```
 
 Output:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <div style="color: #000">Test</div>
-  ```
-
-</code-sample>
+```xml
+<div style="color: #000">Test</div>
+```
 
 ### With a RegExp
 
@@ -91,52 +67,36 @@ You may also use a regular expression for the `value`.
 
 All attributes with a value matching the regex will be removed:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    removeAttributes: [
-      {name: 'data-id', value: /\d/}
-    ]
-  }
-  ```
-
-</code-sample>
+```js [config.js]
+module.exports = {
+  removeAttributes: [
+    {name: 'data-id', value: /\d/}
+  ]
+}
+```
 
 Input:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <div data-id="test"></div>
-  <div data-id="99"></div>
-  ```
-
-</code-sample>
+```xml
+<div data-id="test"></div>
+<div data-id="99"></div>
+```
 
 Output:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <div data-id="test"></div>
-  <div></div>
-  ```
-
-</code-sample>
+```xml
+<div data-id="test"></div>
+<div></div>
+```
 
 ## API
 
-<code-sample title="app.js">
+```js [app.js]
+const {removeAttributes} = require('@maizzle/framework')
+const options = [
+  'id',
+  {name: 'role', value: 'article'}
+]
 
-  ```js
-  const {removeAttributes} = require('@maizzle/framework')
-  const options = [
-    'id',
-    {name: 'role', value: 'article'}
-  ]
-
-  const html = await removeAttributes(`<div id="" style="" role="article"></div>`, options)
-  ```
-
-</code-sample>
+const html = await removeAttributes(`<div id="" style="" role="article"></div>`, options)
+```

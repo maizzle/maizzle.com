@@ -17,22 +17,17 @@ Not to mention that the utility-first approach in Tailwind CSS works great with 
 
 To enable CSS inlining, simply set `inlineCSS` to `true` in your config:
 
-<code-sample title="config.js">
+```js [config.js]
+module.exports = {
+  inlineCSS: true,
+}
+```
 
-  ```js
-  module.exports = {
-    inlineCSS: true,
-  }
-  ```
-
-</code-sample>
-
-<alert>You will want to keep CSS inlining off when developing ⚡[AMP4EMAIL templates](/guides/amp-email)</alert>
+<Alert>You will want to keep CSS inlining off when developing ⚡[AMP4EMAIL templates](/guides/amp-email)</Alert>
 
 ## Customization
 
-If you need control over how your CSS is inlined, you may pass a configuration object to `inlineCSS`.
-Doing this in your Environment `config.js` will enable CSS inlining for all Templates when building for that Environment.
+If you need control over how your CSS is inlined, you may pass a configuration object to `inlineCSS`. Doing this in your Environment `config.js` will enable CSS inlining for all Templates when building for that Environment.
 
 ### styleToAttribute
 
@@ -43,19 +38,15 @@ Defines which CSS properties should be duplicated as what HTML attributes.
 
 For example, this property-attribute assignment:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    inlineCSS: {
-      styleToAttribute: {
-        'background-color': 'bgcolor',
-      }
+```js [config.js]
+module.exports = {
+  inlineCSS: {
+    styleToAttribute: {
+      'background-color': 'bgcolor',
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 ... will transform this:
 
@@ -103,17 +94,13 @@ Defaults to an empty array `[]` so that no `width` attributes are added.
 
 Works together with `styleToAttribute`.
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    inlineCSS: {
-      applyWidthAttributes: ['table', 'td', 'th']
-    }
+```js [config.js]
+module.exports = {
+  inlineCSS: {
+    applyWidthAttributes: ['table', 'td', 'th']
   }
-  ```
-
-</code-sample>
+}
+```
 
 ### applyHeightAttributes
 
@@ -126,17 +113,13 @@ Defaults to an empty array `[]` so that no `height` attributes are added.
 
 Works together with `styleToAttribute`.
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    inlineCSS: {
-      applyHeightAttributes: ['table', 'td', 'th']
-    }
+```js [config.js]
+module.exports = {
+  inlineCSS: {
+    applyHeightAttributes: ['table', 'td', 'th']
   }
-  ```
-
-</code-sample>
+}
+```
 
 ### keepOnlyAttributeSizes
 
@@ -144,41 +127,33 @@ Define for which elements should Maizzle keep _only_ attribute sizes, like `widt
 
 It's set to empty arrays by default, so that no elements are affected:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    inlineCSS: {
-      keepOnlyAttributeSizes: {
-        width: [],
-        height: []
-      }
+```js [config.js]
+module.exports = {
+  inlineCSS: {
+    keepOnlyAttributeSizes: {
+      width: [],
+      height: []
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 You can add HTML elements like this:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    inlineCSS: {
-      keepOnlyAttributeSizes: {
-        width: ['table', 'td', 'th', 'img', 'video'],
-        height: ['table', 'td', 'th', 'img', 'video']
-      }
+```js [config.js]
+module.exports = {
+  inlineCSS: {
+    keepOnlyAttributeSizes: {
+      width: ['table', 'td', 'th', 'img', 'video'],
+      height: ['table', 'td', 'th', 'img', 'video']
     }
   }
-  ```
+}
+```
 
-</code-sample>
+<Alert>This will only work for elements defined in [styleToAttribute](#style-to-attribute)</Alert>
 
-<alert>This will only work for elements defined in [styleToAttribute](#style-to-attribute)</alert>
-
-<alert type="warning">Using only attribute sizes is known to cause <a href="https://www.courtneyfantinato.com/correcting-outlook-dpi-scaling-issues/">scaling issues in Outlook</a></alert>
+<Alert type="warning">Using only attribute sizes is known to cause <a href="https://www.courtneyfantinato.com/correcting-outlook-dpi-scaling-issues/">scaling issues in Outlook</a></Alert>
 
 ### preferBgColorAttribute
 
@@ -187,35 +162,27 @@ Default: `false`
 
 Enable this option to remove any inlined `background-color` CSS properties but keep any corresponding `bgcolor` attributes.
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    inlineCSS: {
-      preferBgColorAttribute: true
-    }
+```js [config.js]
+module.exports = {
+  inlineCSS: {
+    preferBgColorAttribute: true
   }
-  ```
-
-</code-sample>
+}
+```
 
 You may pass an array of tag names that it should remove the `background-color` from:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    inlineCSS: {
-      preferBgColorAttribute: ['td'] // default: ['body', 'marquee', 'table', 'tbody', 'td', 'tfoot', 'th', 'thead', 'tr']
-    }
+```js [config.js]
+module.exports = {
+  inlineCSS: {
+    preferBgColorAttribute: ['td'] // default: ['body', 'marquee', 'table', 'tbody', 'td', 'tfoot', 'th', 'thead', 'tr']
   }
-  ```
-
-</code-sample>
+}
+```
 
 In the example above, `background-color` will be removed only from `<td>` elements.
 
-<alert>You most likely won't need to use this. CSS background-color is well-supported in HTML email.</alert>
+<Alert>You most likely won't need to use this. CSS background-color is well-supported in HTML email.</Alert>
 
 ### excludedProperties
 
@@ -228,19 +195,15 @@ Names are considered unique, so you will need to specify each one you'd like to 
 
 For example:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    inlineCSS: {
-      excludedProperties: ['padding', 'padding-left']
-    }
+```js [config.js]
+module.exports = {
+  inlineCSS: {
+    excludedProperties: ['padding', 'padding-left']
   }
-  ```
+}
+```
 
-</code-sample>
-
-<alert>`--tw-shadow` is automatically excluded from the properties that can be inlined.</alert>
+<Alert>`--tw-shadow` is automatically excluded from the properties that can be inlined.</Alert>
 
 ### codeBlocks
 
@@ -251,23 +214,18 @@ An object where each value has a start and end to specify fenced code blocks tha
 
 By default, <abbr title="Embedded JavaScript Templates">EJS</abbr> and <abbr title="Handlebars">HBS</abbr> code blocks are ignored:
 
-<code-sample>
-
-  ```js
-  {
-    EJS: { start: '<%', end: '%>' },
-    HBS: { start: '{{', end: '}}' },
-  }
-  ```
-
-</code-sample>
+```js
+{
+  EJS: { start: '<%', end: '%>' },
+  HBS: { start: '{{', end: '}}' },
+}
+```
 
 ## Prevent inlining
 
-Use the `data-embed` attribute on a `<style>` tag to prevent Juice from inlining the CSS inside it.
-Useful for writing email client CSS hacks, or for preserving CSS comments in tandem with the [`removeCSSComments: false`](/docs/transformers/remove-unused-css#removecsscomments) Cleanup option.
+Use the `data-embed` attribute on a `<style>` tag to prevent Juice from inlining the CSS inside it. Useful for writing email client CSS hacks, or for preserving CSS comments when using the [`removeCSSComments: false`](/docs/transformers/remove-unused-css#removecsscomments) Cleanup option.
 
-<alert>CSS selectors that don't appear in your markup will still need to be [whitelisted](/docs/transformers/remove-unused-css#whitelist).</alert>
+<Alert>CSS selectors that don't appear in your markup will still need to be [whitelisted](/docs/transformers/remove-unused-css#whitelist).</Alert>
 
 ## API
 
@@ -277,16 +235,12 @@ If you don't specify `customCSS`, your HTML string will need to have a `<style>`
 
 Additionally, you may configure the [Juice](https://www.npmjs.com/package/juice) library by passing options in the same object.
 
-<code-sample title="app.js">
+```js [app.js]
+const {inlineCSS} = require('@maizzle/framework')
+const config = {
+  customCSS: '',
+  excludedProperties: ['padding', 'padding-left'] // Juice option
+}
 
-  ```js
-  const {inlineCSS} = require('@maizzle/framework')
-  const config = {
-    customCSS: '',
-    excludedProperties: ['padding', 'padding-left'] // Juice option
-  }
-
-  const html = await inlineCSS('html string', config)
-  ```
-
-</code-sample>
+const html = await inlineCSS('html string', config)
+```

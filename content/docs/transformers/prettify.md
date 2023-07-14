@@ -11,15 +11,11 @@ Need to send HTML to a human? Enable `prettify` in your config:
 
 ## Usage
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    prettify: true,
-  }
-  ```
-
-</code-sample>
+```js [config.js]
+module.exports = {
+  prettify: true,
+}
+```
 
 Enabling it will use this default configuration:
 
@@ -38,17 +34,13 @@ You may configure JS Beautify's CSS and HTML Beautifier options.
 
 Maybe you prefer tabs for indentation?
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    prettify: {
-      indent_with_tabs: true,
-    }
+```js [config.js]
+module.exports = {
+  prettify: {
+    indent_with_tabs: true,
   }
-  ```
-
-</code-sample>
+}
+```
 
 Checkout the full [list of HTML & CSS beautifier options](https://www.npmjs.com/package/js-beautify#css--html).
 
@@ -66,13 +58,9 @@ This option applies several code indentation strategies:
 
 ## API
 
-<code-sample title="app.js">
+```js [app.js]
+const {prettify} = require('@maizzle/framework')
+const options = {/* prettify options */}
 
-  ```js
-  const {prettify} = require('@maizzle/framework')
-  const options = {/* prettify options */}
-
-  const html = await prettify('html string', options)
-  ```
-
-</code-sample>
+const html = await prettify('html string', options)
+```

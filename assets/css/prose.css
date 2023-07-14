@@ -1,39 +1,7 @@
-.prose h2,
-.prose h3,
-.prose h4 {
-  @apply relative sm:inline-flex items-baseline font-bold;
-
-  code {
-    @apply bg-transparent font-bold text-slate-800;
-    @apply before:[content:'`'] after:[content:'`'];
-  }
-}
-
-.prose h3,
-.prose h4 {
-  @apply mt-4 break-words;
-}
-
-.prose h4 {
-  @apply mb-4;
-}
-
-.prose h2 a,
-.prose h3 a,
-.prose h4 a {
-  @apply absolute w-full h-full;
-
-  span::before {
-    @apply hidden sm:block;
-    @apply absolute -ml-5 w-full top-0.5;
-    @apply opacity-0 hover:opacity-100 transition-opacity;
-    @apply text-lg text-slate-800;
-    content: '#';
-  }
-
-  &:hover span::before {
-    @apply opacity-100;
-  }
+.prose h2 code,
+.prose h3 code,
+.prose h4 code {
+  @apply !bg-transparent;
 }
 
 abbr,
@@ -46,83 +14,119 @@ abbr,
   @apply mb-6;
 }
 
-.prose h4 a span::before {
-  @apply top-0 text-base;
+.prose h4 {
+  @apply mb-6;
 }
 
 /* Syntax highlighting */
-
-.prose .shiki {
-  @apply mb-8 pl-0;
-  @apply border !bg-transparent backdrop-blur-[3px];
-  @apply leading-6 font-mono;
+.prose .shiki pre {
+  @apply grid m-0 p-0 leading-relaxed bg-white;
   @apply selection:bg-blue-500 selection:text-white;
 }
 
-.prose .example-preview {
-  > div:first-child {
-    @apply flex justify-center py-10 bg-slate-100 rounded-t-md;
-
-    + div {
-      @apply bg-white;
-    }
-  }
-
-
-  .shiki {
-    @apply -mt-1 bg-white border-slate-100 rounded-t-none;
-  }
+.prose .shiki code {
+  @apply grid p-0 py-4 bg-transparent w-full;
 }
 
-.prose .code-frame {
-  @apply flex justify-between items-center;
-  @apply border rounded-md rounded-b-none backdrop-blur-[3px];
-  @apply px-6;
-  @apply text-sm;
+/* Inline <code> */
+.prose :not(pre) code {
+  @apply px-1 py-0.5 rounded;
+  @apply bg-slate-100 text-slate-700 font-normal;
+  @apply before:content-none after:content-none;
+}
+
+/* Diffs */
+.prose .shiki .line.ins,
+.prose .shiki .line.del {
+  @apply py-1;
+}
+
+.prose .shiki .line.ins:not(.highlight) {
+  @apply bg-teal-50;
 
   span {
-    @apply max-h-10 inline-block h-full py-3 text-xs border-b border-indigo-600;
+    @apply !text-teal-500;
+  }
+
+  &:before {
+    content: '+';
+    @apply w-4 h-4 absolute block -ml-3 text-teal-500;
   }
 }
 
-.prose .terminal-frame {
-  @apply flex justify-between items-center;
-  @apply px-6 py-3;
-  @apply border rounded-t-md backdrop-blur-[3px];
-  @apply text-sm;
+.prose .shiki .line.del:not(.highlight) {
+  @apply bg-rose-50/50;
+
+  span {
+    @apply !text-rose-500;
+  }
+
+  &:before {
+    content: '-';
+    @apply w-4 h-4 absolute block -ml-3 text-rose-500;
+  }
 }
 
-.prose .code-frame + div .shiki,
-.prose .terminal-frame + div .shiki {
-  @apply mt-0 py-4;
-  @apply border-t-0 rounded-t-none backdrop-blur-[3px];
+.prose .shiki .line.ins.highlight:after,
+.prose .shiki .line.del.highlight:after {
+  @apply absolute left-3 top-[3px] h-full text-indigo-500 font-semibold;
 }
 
-.prose code {
-  counter-reset: step;
-  counter-increment: step 0;
+.prose .shiki .line.ins.highlight:after {
+  content: '+';
 }
 
-.prose code .line::before {
-  @apply sticky left-0 z-10;
-  @apply inline-block w-12 pr-4;
-  @apply text-right text-slate-300 bg-white;
-  content: counter(step);
-  counter-increment: step;
+.prose .shiki .line.del.highlight:before {
+  content: '-';
 }
 
-.prose .terminal-frame + div code .line:empty::before {
-  @apply hidden;
+/* Terminal code samples */
+
+.prose .frame:not(.frame-none) + .shiki pre {
+  @apply rounded-t-none;
 }
 
-.prose .terminal-frame + div code .line:not(:empty)::before {
+.prose .frame-terminal + .shiki .line:not(.empty):before {
   content: '$';
-  @apply text-base;
+  @apply text-base pr-4 text-slate-400;
 }
 
-.prose .terminal-frame + div.no-root code .line:not(:empty)::before {
-  content: '';
-  @apply w-6;
+/* Line blurring */
+
+.prose .shiki.blur-lines pre:has(.line.highlight) .line:not(.highlight) {
+  @apply blur-[0.095rem];
+  transition: filter .35s,opacity .35s;
+}
+
+.prose .shiki.blur-lines pre:has(.line.highlight):hover .line:not(.highlight) {
+  @apply blur-0;
+}
+
+.prose .shiki .line {
+  @apply block px-6;
+}
+
+.prose .shiki .line.highlight {
+  @apply bg-slate-100/75 py-1 w-full relative;
+
+  &:before {
+    content: '';
+    @apply absolute w-[3px] h-full bg-indigo-500 left-0 top-0;
+  }
+}
+
+/* Example cards */
+
+.prose .example-preview > div:first-child {
+  @apply flex justify-center py-10 bg-slate-100 rounded-t-md;
+}
+
+.prose .example-preview .shiki {
+  @apply py-4 rounded-t-none border-slate-100;
+}
+
+.prose .example-preview code {
+  @apply w-full p-0 bg-transparent;
 }
 
 .animate-spin-fast {
@@ -140,8 +144,4 @@ abbr,
 
 .completed .ti-cursor {
   @apply hidden !important;
-}
-
-.prose .shiki code {
-  @apply p-0 bg-transparent;
 }

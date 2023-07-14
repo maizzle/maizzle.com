@@ -14,7 +14,11 @@ The traditional content block for showing article excerpts, like those from a bl
     <table class="w-full sm:max-w-[400px] xl:max-w-[340px] shadow-xl rounded m-0">
       <tr>
         <td>
-          <img class="rounded-tl rounded-tr m-0" src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&h=300&q=80" alt="">
+          <img
+            class="rounded-tl rounded-tr m-0"
+            src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&h=300&q=80"
+            alt
+          >
         </td>
       </tr>
       <tr>
@@ -30,11 +34,14 @@ The traditional content block for showing article excerpts, like those from a bl
     </table>
   </div>
 
-  ```xml
+  ```xml example
   <table class="sm:w-full font-sans shadow-xl rounded">
     <tr>
       <td>
-        <img class="rounded-t" src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&h=300&q=80" alt="">
+        <img
+          class="rounded-t"
+          src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&h=300&q=80"
+        >
       </td>
     </tr>
     <tr>

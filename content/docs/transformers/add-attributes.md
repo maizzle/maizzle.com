@@ -19,27 +19,21 @@ The `extraAttributes` key in your config defines which elements in your emails s
 
 Here is how you would add a `role="article"` attribute to a `<div>`:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    extraAttributes: {
-      div: {
-        role: 'article'
-      }
+```js [config.js]
+module.exports = {
+  extraAttributes: {
+    div: {
+      role: 'article'
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 ## Default attributes
 
 By default, Maizzle makes any `<table>` accessible, resets its spacing, and ensures that an empty `alt=""` attribute is added to images that don't have it.
 
 This is the default configuration:
-
-<code-sample>
 
 ```js
 let attributes = {
@@ -54,71 +48,57 @@ let attributes = {
 }
 ```
 
-</code-sample>
-
-<alert>Attributes will be added only if they're not already present on the element.</alert>
+<Alert>Attributes will be added only if they're not already present on the element.</Alert>
 
 ### Disabling
 
 You may turn this off by setting `extraAttributes` to `false` in your config:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    extraAttributes: false,
-  }
-  ```
-
-</code-sample>
+```js [config.js]
+module.exports = {
+  extraAttributes: false,
+}
+```
 
 ## Selectors
 
 Tag, class, id, and attribute selectors are supported:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    extraAttributes: {
-      div: {
-        id: 'new'
-      },
-      '.test': {
-        editable: true
-      },
-      '#test': {
-        'data-foo': 'bar'
-      },
-      '[role]': {
-        'aria-roledescription': 'slide'
-      }
+```js [config.js]
+module.exports = {
+  extraAttributes: {
+    div: {
+      id: 'new'
+    },
+    '.test': {
+      editable: true
+    },
+    '#test': {
+      'data-foo': 'bar'
+    },
+    '[role]': {
+      'aria-roledescription': 'slide'
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 ## Multiple selectors
 
 Add multiple attributes to multiple elements in one go:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    extraAttributes: {
-      'div, p': {
-        class: 'test'
-      },
-      'div[role=alert], section.alert': {
-        class: 'alert'
-      }
+```js [config.js]
+module.exports = {
+  extraAttributes: {
+    'div, p': {
+      class: 'test'
+    },
+    'div[role=alert], section.alert': {
+      class: 'alert'
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 ## Tailwind CSS
 
@@ -126,29 +106,21 @@ Any Tailwind CSS classes that you add with this Transformer need to be added to 
 
 To do this, simply add the path to your `config.js` file to the `content` array:
 
-<code-sample title="tailwind.config.js">
-
-  ```js
-  module.exports = {
-    content: ['./config.js'],
-  }
-  ```
-
-</code-sample>
+```js [tailwind.config.js]
+module.exports = {
+  content: ['./config.js'],
+}
+```
 
 ## API
 
-<code-sample title="app.js">
-
-  ```js
-  const {applyExtraAttributes} = require('@maizzle/framework')
-  const options = {
-    div: {
-      role: 'article'
-    }
+```js [app.js]
+const {applyExtraAttributes} = require('@maizzle/framework')
+const options = {
+  div: {
+    role: 'article'
   }
+}
 
-  const html = await applyExtraAttributes('<div></div>', options)
-  ```
-
-</code-sample>
+const html = await applyExtraAttributes('<div></div>', options)
+```

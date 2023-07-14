@@ -54,18 +54,14 @@ You may define new replacement mappings (or overwrite existing ones) by adding a
 
 For example:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    safeClassNames: {
-      ':': '__',
-      '!': 'i-',
-    }
+```js [config.js]
+module.exports = {
+  safeClassNames: {
+    ':': '__',
+    '!': 'i-',
   }
-  ```
-
-</code-sample>
+}
+```
 
 That would turn `sm:w-full` into `sm__w-full` and `sm:!text-xl` into `sm__i-text-xl`.
 
@@ -73,32 +69,24 @@ That would turn `sm:w-full` into `sm__w-full` and `sm:!text-xl` into `sm__i-text
 
 You can prevent Maizzle from rewriting your class names with safe characters, by setting this option to `false`:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    safeClassNames: false,
-  }
-  ```
-
-</code-sample>
+```js [config.js]
+module.exports = {
+  safeClassNames: false,
+}
+```
 
 ## API
 
 You may use the `safeClassNames` Transformer in your application.
 
-<code-sample title="app.js">
+```js [app.js]
+const {safeClassNames} = require('@maizzle/framework')
 
-  ```js
-  const {safeClassNames} = require('@maizzle/framework')
-
-  const html = await safeClassNames(
-    '<div class="sm:text-left w-1.5">foo</div>', // html string
-    {'.': 'dot'} // replacements object
-  )
-  ```
-
-</code-sample>
+const html = await safeClassNames(
+  '<div class="sm:text-left w-1.5">foo</div>', // html string
+  {'.': 'dot'} // replacements object
+)
+```
 
 Result:
 

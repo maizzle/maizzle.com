@@ -16,25 +16,17 @@ You may [preview the final result](https://codepen.io/maizzle/pen/wvaeOVM?editor
 
 As always, let's start by creating a new Maizzle project.
 
-<terminal show-copy>
-
-  ```
-  npx degit maizzle/maizzle example-wordpress
-  ```
-
-</terminal>
+```sh
+npx degit maizzle/maizzle example-wordpress
+```
 
 Install dependencies:
 
-<terminal show-copy>
+```sh
+cd example-wordpress
 
-  ```
-  cd example-wordpress
-
-  npm install
-  ```
-
-</terminal>
+npm install
+```
 
 Once it finishes installing dependencies, open the project in your favorite editor.
 
@@ -42,8 +34,7 @@ Once it finishes installing dependencies, open the project in your favorite edit
 
 Instead of imagining abstract APIs and how you'd interact with them, let's work with a real one so you can actually follow along and test things out yourself.
 
-Given its popularity, we'll be using the [WordPress REST API](https://developer.wordpress.org/rest-api/) in our example.
-We'll also need to fetch data from a real blog, so let's use the wonderful [CSS-Tricks](https://css-tricks.com).
+Given its popularity, we'll be using the [WordPress REST API](https://developer.wordpress.org/rest-api/) in our example. We'll also need to fetch data from a real blog, so let's use the wonderful [CSS-Tricks](https://css-tricks.com).
 
 The WordPress API on CSS-Tricks is available at https://css-tricks.com/wp-json/wp/v2/
 
@@ -61,23 +52,19 @@ For example, this only asks for the 3 latest posts:
 
 https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=3&_embed=1
 
-<alert>`_embed=1` is a request scope that adds a few more fields to the response. We use it to include `_embedded["wp:featuredmedia"]`.</alert>
+<Alert>`_embed=1` is a request scope that adds a few more fields to the response. We use it to include `_embedded["wp:featuredmedia"]`.</Alert>
 
 ## Fetch posts
 
 Let's use the `<fetch>` tag to fetch posts from the CSS-Tricks WordPress API.
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-main>
-    <fetch url="https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=6&_embed=1">
-      <!-- Posts are now available in {{ response }} -->
-    </fetch>
-  </x-main>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<x-main>
+  <fetch url="https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=6&_embed=1">
+    <!-- Posts are now available in {{ response }} -->
+  </fetch>
+</x-main>
+```
 
 ## Use in Template
 
@@ -89,52 +76,52 @@ Let's update the Hero with background image to show the first post.
 
 Our code becomes:
 
-<code-sample title="src/templates/example.html">
+```hbs [src/templates/example.html]
+---
+bodyClass: bg-gray-200
+title: "Latest posts on CSS-Tricks"
+preheader: "👀 Lorem, ipsum, and much dolor in this week's edition"
+---
 
-  ```xml
-  ---
-  bodyClass: bg-gray-200
-  title: "Latest posts on CSS-Tricks"
-  preheader: "👀 Lorem, ipsum, and much dolor in this week's edition"
-  ---
-
-  <x-main>
-    <fetch url="https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=6&_embed=1">
-      <!-- ... existing template markup before the HERO <tr> -->
-      <tr>
-        <td class="bg-top bg-no-repeat bg-cover rounded text-left" style="background-image: url('{{ response[0]._embedded['wp:featuredmedia'][0]['source_url'] || 'https://via.placeholder.com/600x400' }}');">
-          <!--[if mso]>
-          <v:image src="{{ response[0]._embedded['wp:featuredmedia'][0]['source_url'] || 'https://via.placeholder.com/600x400' }}" xmlns:v="urn:schemas-microsoft-com:vml" style="width:600px;height:400px;" />
-          <v:rect fill="false" stroke="false" style="position:absolute;width:600px;height:400px;">
-          <v:textbox inset="0,0,0,0"><div><![endif]-->
-          <div class="leading-8">&zwj;</div>
-          <table class="w-full">
-            <tr>
-              <td class="w-12 sm:w-4"></td>
-              <td>
-                <h1 class="m-0 mb-4 text-4xl text-white sm:leading-10">{{ response[0].title.rendered }}</h1>
-                <div class="m-0 text-white text-lg leading-6">{{ response[0].excerpt.rendered }}</div>
-                <div class="leading-8">&zwj;</div>
-                <table>
-                  <tr>
-                    <th class="bg-indigo-800 hover:bg-indigo-700 rounded" style="mso-padding-alt: 16px 24px;">
-                      <a href="{{ response[0].link }}" class="block font-semibold text-white text-base leading-full py-4 px-6 [text-decoration:none]">Read more &rarr;</a>
-                    </th>
-                  </tr>
-                </table>
-              </td>
-              <td class="w-12 sm:w-4"></td>
-            </tr>
-          </table>
-          <div class="leading-8">&zwj;</div>
-          <!--[if mso]></div></v:textbox></v:rect><![endif]-->
-        </td>
-      </tr>
-    </fetch>
-  </x-main>
-  ```
-
-</code-sample>
+<x-main>
+  <fetch url="https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=6&_embed=1">
+    <!-- ... existing template markup before the HERO <tr> -->
+    <tr>
+      <td class="bg-top bg-no-repeat bg-cover rounded text-left" style="background-image: url('{{ response[0]._embedded['wp:featuredmedia'][0]['source_url'] || 'https://via.placeholder.com/600x400' }}');">
+        <!--[if mso]>
+        <v:image src="{{ response[0]._embedded['wp:featuredmedia'][0]['source_url'] || 'https://via.placeholder.com/600x400' }}" xmlns:v="urn:schemas-microsoft-com:vml" style="width:600px;height:400px;" />
+        <v:rect fill="false" stroke="false" style="position:absolute;width:600px;height:400px;">
+        <v:textbox inset="0,0,0,0"><div><![endif]-->
+        <div class="leading-8">&zwj;</div>
+        <table class="w-full">
+          <tr>
+            <td class="w-12 sm:w-4"></td>
+            <td>
+              <h1 class="m-0 mb-4 text-4xl text-white sm:leading-10">
+                {{ response[0].title.rendered }}
+              </h1>
+              <div class="m-0 text-white text-lg leading-6">
+                {{ response[0].excerpt.rendered }}
+              </div>
+              <div class="leading-8">&zwj;</div>
+              <table>
+                <tr>
+                  <th class="bg-indigo-800 hover:bg-indigo-700 rounded" style="mso-padding-alt: 16px 24px;">
+                    <a href="{{ response[0].link }}" class="block font-semibold text-white text-base leading-full py-4 px-6 [text-decoration:none]">Read more &rarr;</a>
+                  </th>
+                </tr>
+              </table>
+            </td>
+            <td class="w-12 sm:w-4"></td>
+          </tr>
+        </table>
+        <div class="leading-8">&zwj;</div>
+        <!--[if mso]></div></v:textbox></v:rect><![endif]-->
+      </td>
+    </tr>
+  </fetch>
+</x-main>
+```
 
 We can use `response[index]` to output data for each post, manually. For example, we would use `response[1].title.rendered` to show the title of the second post.
 
@@ -142,22 +129,18 @@ We can use `response[index]` to output data for each post, manually. For example
 
 We can add a function to `config.js` and use it to format the post's date according to our audience's locale:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    formattedDate(str) {
-      const date = new Date(str)
-      return date.toLocaleDateString('en-US', {day: 'numeric', month: 'short', year: 'numeric'})
-    }
+```js [config.js]
+module.exports = {
+  formattedDate(str) {
+    const date = new Date(str)
+    return date.toLocaleDateString('en-US', {day: 'numeric', month: 'short', year: 'numeric'})
   }
-  ```
-
-</code-sample>
+}
+```
 
 We can then display it in the template with an expression like this:
 
-```js
+```hbs
 {{ page.formattedDate(response[1].date) }}
 ```
 
@@ -165,7 +148,7 @@ We can then display it in the template with an expression like this:
 
 We can use the `<each>` tag in Maizzle to loop over each item in the `response`:
 
-```xml
+```hbs
 <fetch url="https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=6&_embed=1">
   <each loop="post in response">
     {{ post.title.rendered }}
@@ -177,42 +160,42 @@ Want to loop over a specific subset only? You can use [expressions](/docs/templa
 
 For example, let's show the last 2 posts in a list format at the end of the template:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-main>
-    <fetch url="https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=6&_embed=1">
-      <h3 class="m-0 text-base font-semibold text-gray-500 uppercase">From the archives</h3>
-      <div class="leading-6">&zwj;</div>
-      <table class="w-full">
-        <each loop="post in response.slice(-2)">
-          <tr>
-            <td>
-              <p class="text-xs text-gray-500 mb-0.5">{{ page.formattedDate(post.date) }}</p>
-              <h4 class="m-0 mb-1 text-xl font-semibold">
-                <a href="{{ post.link }}" class="text-blue-500 hover:text-blue-400 [text-decoration:none]">
-                  {{ post.title.rendered }}
-                </a>
-              </h4>
-              <div class="m-0 text-gray-500">{{ post.excerpt.rendered }}</div>
-              <if condition="loop.last">
-                <table class="w-full">
-                  <tr>
-                    <td class="py-6">
-                      <div class="bg-gray-300 h-px leading-px">&zwj;</div>
-                    </td>
-                  </tr>
-                </table>
-              </if>
-            </td>
-          </tr>
-        </each>
-      </table>
-    </fetch>
-  </x-main>
-  ```
-
-</code-sample>
+```hbs [src/templates/example.html]
+<x-main>
+  <fetch url="https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=6&_embed=1">
+    <h3 class="m-0 text-base font-semibold text-gray-500 uppercase">From the archives</h3>
+    <div class="leading-6">&zwj;</div>
+    <table class="w-full">
+      <each loop="post in response.slice(-2)">
+        <tr>
+          <td>
+            <p class="text-xs text-gray-500 mb-0.5">
+              {{ page.formattedDate(post.date) }}
+            </p>
+            <h4 class="m-0 mb-1 text-xl font-semibold">
+              <a href="{{ post.link }}" class="text-blue-500 hover:text-blue-400 [text-decoration:none]">
+                {{ post.title.rendered }}
+              </a>
+            </h4>
+            <div class="m-0 text-gray-500">
+              {{ post.excerpt.rendered }}
+            </div>
+            <if condition="loop.last">
+              <table class="w-full">
+                <tr>
+                  <td class="py-6">
+                    <div class="bg-gray-300 h-px leading-px">&zwj;</div>
+                  </td>
+                </tr>
+              </table>
+            </if>
+          </td>
+        </tr>
+      </each>
+    </table>
+  </fetch>
+</x-main>
+```
 
 Notes:
 
