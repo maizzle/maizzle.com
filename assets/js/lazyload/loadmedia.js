@@ -7,8 +7,8 @@
 // License: MIT
 
 // Import classList utility
-import classList from './chaining.js'
-import tmInView from './inview.js'
+import classList from '../utilities/chaining.js'
+import tmInView from '../utilities/inview.js'
 
 const tmLoadMedia = (function () {
 

@@ -18,45 +18,29 @@ Simply add your markdown files to `src/content`, run the build command, and they
 
 Scaffold a new project based on this starter:
 
-<terminal show-copy>
-
-  ```
-  npx degit maizzle/starter-markdown my-project
-  ```
-
-</terminal>
+```sh
+npx degit maizzle/starter-markdown my-project
+```
 
 Install dependencies:
 
-<terminal show-copy>
+```sh no-copy
+cd my-project
 
-  ```
-  cd my-project
-
-  npm install
-  ```
-
-</terminal>
+npm install
+```
 
 Start local development:
 
-<terminal show-copy>
-
-  ```
-  npm run dev
-  ```
-
-</terminal>
+```sh
+npm run dev
+```
 
 Build emails for production:
 
-<terminal show-copy>
-
-  ```
-  npm run build
-  ```
-
-</terminal>
+```sh
+npm run build
+```
 
 ## Custom layouts
 
@@ -64,19 +48,15 @@ The starter supports custom layouts, which you can add to `src/layouts`.
 
 The default layout is `src/layouts/main.html`, but if you want to use a different layout for a specific markdown file, you can add a `layout` property to its front matter:
 
-<code-sample title="src/content/example.md">
+```md [src/content/example.md]
+---
+layout: secondary
+---
 
-  ```md
-  ---
-  layout: secondary
-  ---
+## Custom layout
 
-  ## Custom layout
-
-  This email uses a custom layout, defined in `src/layouts/secondary.html`.
-  ```
-
-</code-sample>
+This email uses a custom layout, defined in `src/layouts/secondary.html`.
+```
 
 ## Customization
 

@@ -1,23 +1,23 @@
 <template>
-  <div class="pl-8 md:pl-12 pr-8 relative rounded-xl overflow-hidden md:overflow-visible bg-slate-900">
-    <pattern-subscribe class="absolute top-0 left-0 z-0 scale-150 md:scale-100 origin-top-left" />
+  <div class="pl-8 md:pl-12 pr-8 relative rounded-2xl overflow-hidden md:overflow-visible bg-slate-900">
+    <PatternSubscribe class="absolute top-0 left-0 z-0 scale-150 md:scale-100 origin-top-left" />
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative z-10">
       <div
         class="grid min-h-[550px] py-8 md:py-12"
         :class="[subscribed ? 'content-none' : 'content-between']"
       >
         <div class="relative z-20">
-          <mailviews-logo />
+          <MailviewsLogo />
         </div>
         <div>
-          <h4
+          <p
             v-if="!subscribed"
             class="mb-7 text-3xl font-bold text-white"
-          >Get notified when we launch Mailviews.</h4>
-          <h4
+          >Get notified when we launch Mailviews.</p>
+          <p
             v-else
             class="text-3xl font-bold text-white"
-          >Thanks for subscribing, we'll notify you when Mailviews launches.</h4>
+          >Thanks for subscribing, we'll notify you when Mailviews launches.</p>
           <p
             v-if="!subscribed"
             class="mb-7 text-lg text-slate-400"
@@ -55,10 +55,10 @@
                 class="relative text-sm text-slate-500 cursor-pointer"
               >
                 By subscribing I agree to the
-                <nuxt-link
+                <NuxtLink
                   to="/privacy"
                   class="text-slate-500 underline rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
-                >privacy policy</nuxt-link>.
+                >privacy policy</NuxtLink>.
               </label>
             </div>
             <button
@@ -83,7 +83,7 @@
               Thanks for signing up, we will notify you when we launch Mailviews.
             </p>
             <div
-              v-show="error"
+              v-show="hasError"
               class="w-full mt-3 absolute text-sm text-rose-400"
             >
               {{ errorMessage }}
@@ -95,14 +95,14 @@
         <div class="-mb-4 lg:mb-0 grid grid-cols-2 lg:grid-cols-3 gap-4 xl:absolute right-0">
           <div class="flex items-center">
             <div>
-              <lazy-img
+              <Image
                 class="mb-4 lg:mb-0 rounded-lg bg-slate-100"
                 :width="217"
                 :height="355"
                 url="/images/mailviews/card-1.jpg"
                 alt="Mailviews component"
               />
-              <lazy-img
+              <Image
                 class="block lg:hidden mb-4 rounded-lg bg-slate-100"
                 :width="217"
                 :height="303"
@@ -113,21 +113,21 @@
           </div>
           <div class="flex items-center">
             <div>
-              <lazy-img
+              <Image
                 class="mb-4 rounded-lg bg-slate-100"
                 :width="217"
                 :height="181"
                 url="/images/mailviews/card-4.jpg"
                 alt="Mailviews component"
               />
-              <lazy-img
+              <Image
                 class="mb-4 lg:mb-0 hidden md:block rounded-lg bg-slate-100"
                 :width="217"
                 :height="292"
                 url="/images/mailviews/card-2.jpg"
                 alt="Mailviews component"
               />
-              <lazy-img
+              <Image
                 class="block lg:hidden rounded-lg bg-slate-100"
                 :width="217"
                 :height="329"
@@ -138,14 +138,14 @@
           </div>
           <div class="flex items-center">
             <div>
-              <lazy-img
+              <Image
                 class="mb-4 hidden lg:block rounded-lg bg-slate-100"
                 :width="217"
                 :height="303"
                 url="/images/mailviews/card-5.jpg"
                 alt="Mailviews component"
               />
-              <lazy-img
+              <Image
                 class="hidden lg:block rounded-lg bg-slate-100"
                 :width="217"
                 :height="329"
@@ -155,7 +155,7 @@
             </div>
           </div>
           <div class="flex md:hidden items-center">
-            <lazy-img
+            <Image
               class="mb-4 rounded-lg bg-slate-100"
               :width="217"
               :height="292"
@@ -164,7 +164,7 @@
             />
           </div>
           <div class="flex md:hidden items-center">
-            <lazy-img
+            <Image
               class="rounded-lg bg-slate-100"
               :width="217"
               :height="329"
@@ -178,47 +178,37 @@
   </div>
 </template>
 
-<script>
-import axios from 'axios'
-import { get } from '~/assets/js/utils'
+<script setup>
+  const email = ref('')
+  const loading = ref(false)
+  const subscribed = ref(false)
+  const hasError = ref(false)
+  const errorMessage = ref('')
+  const consent = ref(false)
 
-export default {
-  name: 'MailviewsSubscribe',
-  data() {
-    return {
-      email: '',
-      loading: false,
-      subscribed: false,
-      error: false,
-      errorMessage: '',
-      consent: false
-    }
-  },
-  computed: {
-    submitDisabled() {
-      return this.loading ? true : false
-    },
-  },
-  methods: {
-    async subscribe() {
-      this.loading = true
-      this.error = false
+  const submitDisabled = computed(() => {
+    return loading.value ? true : false
+  })
 
-      try {
-        await axios.post('/.netlify/functions/subscribe', {
-          email: this.email,
-          consent: this.consent,
-        })
+  const subscribe = async () => {
+    loading.value = true
+    hasError.value = false
 
-        this.subscribed = true
-        this.loading = false
-      } catch ({response}) {
-        console.log(response)
-        this.error = true
-        this.errorMessage = get(response, 'data.error.message', 'Something went wrong, please try again later.')
-        this.loading = false
+    const {data, error} = await useFetch('/.netlify/functions/subscribe', {
+      method: 'POST',
+      body: {
+        email: email.value,
+        consent: consent.value
       }
+    })
+
+    if (!error.value) {
+      loading.value = false
+      subscribed.value = true
+    } else {
+      hasError.value = true
+      loading.value = false
+      errorMessage.value = 'Something went wrong, please try again later.'
     }
-  },
-}
+  }
 </script>

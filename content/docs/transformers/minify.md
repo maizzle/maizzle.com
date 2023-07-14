@@ -13,35 +13,27 @@ Additionally, it reduces the risk of [Gmail clipping](https://github.com/hteumeu
 
 ## Usage
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    minify: true,
-  }
-  ```
-
-</code-sample>
+```js [config.js]
+module.exports = {
+  minify: true,
+}
+```
 
 ## Customization
 
 You may configure the underlying `html-crush` library:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    minify: {
-      lineLengthLimit: 500,
-    }
+```js [config.js]
+module.exports = {
+  minify: {
+    lineLengthLimit: 500,
   }
-  ```
-
-</code-sample>
+}
+```
 
 Checkout the full list of [html-crush options](https://codsen.com/os/html-crush/#optional-options-object).
 
-<alert type="warning">Minifying email code can lead to unexpected results if not done properly. Make sure you know what you're doing, and always test your emails!</alert>
+<Alert type="warning">Minifying email code can lead to unexpected results if not done properly. Make sure you know what you're doing, and always test your emails!</Alert>
 
 ## Options
 
@@ -108,13 +100,9 @@ Set to `false`, `null`, or an empty array `[]` to disable.
 
 ## API
 
-<code-sample title="app.js">
+```js [app.js]
+const {minify} = require('@maizzle/framework')
+const options = {/* html-crush options */}
 
-  ```js
-  const {minify} = require('@maizzle/framework')
-  const options = {/* html-crush options */}
-
-  const html = await minify('html string', options)
-  ```
-
-</code-sample>
+const html = await minify('html string', options)
+```

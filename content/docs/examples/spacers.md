@@ -13,13 +13,9 @@ Here's how easy it is to create simple yet reliable spacers for your emails, usi
 
 The simplest vertical spacer for HTML emails:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <div class="leading-4" role="separator">&zwj;</div>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<div class="leading-4" role="separator">&zwj;</div>
+```
 
 How it works:
 
@@ -29,11 +25,11 @@ How it works:
 
 You may specify a different height for smaller devices by using the `sm:` screen variant:
 
-```xml
+```xml [src/templates/example.html]
 <div class="leading-4 sm:leading-2" role="separator">&zwj;</div>
 ```
 
-<alert>Responsive heights will only work in email clients that support `@media` queries.</alert>
+<Alert>Responsive heights will only work in email clients that support `@media` queries.</Alert>
 
 The `div` spacer is also available as a [component](/docs/components/spacer).
 
@@ -41,15 +37,11 @@ The `div` spacer is also available as a [component](/docs/components/spacer).
 
 Need to add space between `<table>` rows?
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <tr role="separator">
-    <td class="leading-4">&zwj;</td>
-  </tr>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<tr role="separator">
+  <td class="leading-4">&zwj;</td>
+</tr>
+```
 
 The default ARIA role for a `<tr>` is `row`, so we use `role="separator"` to indicate that this is a separator, not a table row.
 
@@ -57,13 +49,9 @@ The default ARIA role for a `<tr>` is `row`, so we use `role="separator"` to ind
 
 We can use an `<hr>` to create a semantic Spacer.
 
-<code-sample title="src/templates/example.html">
-
-```xml
+```xml [src/templates/example.html]
 <hr class="border-0 text-white my-4 min-h-full">
 ```
-
-</code-sample>
 
 How it works:
 
@@ -73,4 +61,4 @@ How it works:
 
 The `min-h-full` class is used for compatibility with Apple email clients.
 
-<alert type="warning">Do not add `role="separator"` on the `<hr>` spacer, as it is implied.</alert>
+<Alert type="warning">Do not add `role="separator"` on the `<hr>` spacer, as it is implied.</Alert>

@@ -4,21 +4,24 @@
     <div class="hidden lg:grid grid-cols-12 h-full">
       <div class="grid col-span-4 lg:col-span-3 xl:col-span-4 h-full justify-end items-center space-y-2 bg-slate-50">
         <div class="w-60 flex items-end gap-4">
-          <nuxt-link to="/" @click.native.right.prevent="goToBrandPage">
-            <site-logo class="w-32" />
-          </nuxt-link>
+          <NuxtLink
+            to="/" @click.native.right.prevent="goToBrandPage"
+            aria-label="Maizzle"
+          >
+            <SiteLogo class="w-32" />
+          </NuxtLink>
           <div class="relative inline-block text-left text-xs text-slate-600">
             <div>
               <button
                 id="menu-button"
-                v-on-clickaway="closeVersionDropdown"
+                v-on-click-outside="closeVersionDropdown"
                 type="button"
                 class="inline-flex items-center justify-center w-full rounded-md focus:outline-none"
                 aria-expanded="true"
                 aria-haspopup="true"
                 @click="versionDropdownOpen = !versionDropdownOpen"
               >
-                {{ $config.latestRelease }}
+                {{ latestRelease }}
                 <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
@@ -36,7 +39,7 @@
                 <span
                   class="block px-4 py-2 text-indigo-600 font-medium cursor-default" role="menuitem" tabindex="-1"
                 >
-                  {{ $config.latestRelease }}
+                  {{ latestRelease }}
                 </span>
                 <a href="https://v43x.maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
                   v4.3.1
@@ -55,19 +58,8 @@
           </div>
         </div>
       </div>
-      <div
-        class="
-          grid grid-cols-12 col-span-8 lg:col-span-9 xl:col-span-8 h-full
-          border-b border-slate-100
-          backdrop-blur bg-white/90
-        "
-      >
-        <div
-          class="
-            grid col-span-12 xl:col-span-9 2xl:col-span-7 3xl:col-span-6
-            xl:py-4 px-8 3xl:pl-12 items-center
-          "
-        >
+      <div class="grid grid-cols-12 col-span-8 lg:col-span-9 xl:col-span-8 h-full border-b border-slate-100 backdrop-blur bg-white/90">
+        <div class="grid col-span-12 xl:col-span-9 2xl:col-span-7 3xl:col-span-6 xl:py-4 px-8 3xl:pl-12 items-center">
           <div class="hidden sm:block max-w-[75ch] whitespace-nowrap overflow-auto">
             <a
               href="https://github.com/maizzle/framework/releases"
@@ -118,6 +110,7 @@
       <div class="col-span-3 flex items-end">
         <button
           @click="openMobileMenu"
+          aria-label="Open menu"
         >
           <svg class="h-6 w-6 text-slate-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h7" />
@@ -125,21 +118,21 @@
         </button>
       </div>
       <div class="col-span-6 mx-auto flex gap-4 items-end justify-center">
-        <nuxt-link to="/">
-          <site-logo class="w-32" />
-        </nuxt-link>
+        <NuxtLink to="/" aria-label="Maizzle">
+          <SiteLogo class="w-32" />
+        </NuxtLink>
         <div class="relative hidden sm:inline-block">
           <div>
             <button
               id="mobile-menu-button"
-              v-on-clickaway="closeMobileVersionDropdown"
+              v-on-click-outside="closeMobileVersionDropdown"
               type="button"
               class="inline-flex items-center justify-center w-full rounded-md focus:outline-none text-sm"
               aria-expanded="true"
               aria-haspopup="true"
               @click="mobileVersionDropdownOpen = !mobileVersionDropdownOpen"
             >
-              {{ $config.latestRelease }}
+              {{ latestRelease }}
               <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
               </svg>
@@ -154,12 +147,15 @@
             tabindex="-1"
           >
             <div class="py-1" role="none">
-              <nuxt-link
+              <NuxtLink
                 to="/docs/installation"
                 class="block px-4 py-2 bg-slate-100" role="menuitem" tabindex="-1"
               >
-                {{ $config.latestRelease }}
-              </nuxt-link>
+                {{ latestRelease }}
+              </NuxtLink>
+              <a href="https://v43x.maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
+                v4.3.1
+              </a>
               <a href="https://v3.maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
                 v3.7.3
               </a>
@@ -176,6 +172,7 @@
       <div class="col-span-3 flex justify-end">
         <button
           @click="openDocsearch"
+          aria-label="Open search"
         >
           <svg class="h-6 w-6 text-slate-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
             <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -188,13 +185,14 @@
       class="fixed lg:hidden top-0 w-64 sm:w-96 h-full bg-white z-[60] overflow-auto transition-transform"
       :class="[showMobileMenu ? 'translate-x-0 shadow-2xl' : '-translate-x-full']"
     >
-      <div class="p-4 space-y-6">
+      <div class="p-4 sm:p-8 space-y-6">
         <div class="flex gap-2 justify-between items-center">
-          <nuxt-link to="/">
-            <insignia-svg class="w-10" />
-          </nuxt-link>
+          <NuxtLink to="/" aria-label="Maizzle">
+            <InsigniaSvg class="w-10" />
+          </NuxtLink>
           <button
             @click="closeMobileMenu"
+            aria-label="Close menu"
           >
             <svg class="h-5 w-5 text-slate-800" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -203,7 +201,7 @@
         </div>
         <ul class="mb-4 -ml-4 text-sm sm:text-base sm:leading-7">
           <li>
-            <nuxt-link
+            <NuxtLink
               to="/docs/introduction"
               class="flex gap-2 items-center px-4 py-2 text-slate-600"
             >
@@ -211,7 +209,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
               </svg>
               Documentation
-            </nuxt-link>
+            </NuxtLink>
           </li>
           <li>
             <a
@@ -226,78 +224,80 @@
             </a>
           </li>
           <li>
-            <nuxt-link
+            <NuxtLink
               to="/guides"
-              class="flex gap-2 items-center px-4 py-2 text-slate-500"
-              :class="{ 'text-indigo-700 font-medium': $route.path.startsWith('/guides') }"
+              class="flex gap-2 items-center px-4 py-2"
+              :class="[$route.path.startsWith('/guides') ? 'text-indigo-700 font-medium' : 'text-slate-500']"
             >
               <svg
-                class="h-6 w-6 text-slate-400"
-                :class="{ 'text-indigo-500': $route.path.startsWith('/guides') }"
+                class="h-6 w-6"
+                :class="[$route.path.startsWith('/guides') ? 'text-indigo-500' : 'text-slate-400']"
                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
               >
                 <path stroke-linecap="round" stroke-linejoin="round" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
               </svg>
               Guides
-            </nuxt-link>
+            </NuxtLink>
           </li>
           <li>
-            <nuxt-link
+            <NuxtLink
               to="/starters"
-              class="flex gap-2 items-center px-4 py-2 text-slate-500"
-              :class="{ 'text-indigo-700 font-medium': $route.path.startsWith('/starters') }"
+              class="flex gap-2 items-center px-4 py-2"
+              :class="[$route.path.startsWith('/starters') ? 'text-indigo-700 font-medium' : 'text-slate-500']"
             >
               <svg
-                class="h-6 w-6 text-slate-400"
-                :class="{ 'text-indigo-500': $route.path.startsWith('/starters') }"
+                class="h-6 w-6"
+                :class="[$route.path.startsWith('/starters') ? 'text-indigo-500' : 'text-slate-400']"
                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
               >
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
               Starters
-            </nuxt-link>
+            </NuxtLink>
           </li>
           <li>
-            <nuxt-link
+            <NuxtLink
               to="/resources"
-              class="flex gap-2 items-center px-4 py-2 text-slate-500"
-              :class="{ 'text-indigo-700 font-medium': $route.path.startsWith('/resources') }"
+              class="flex gap-2 items-center px-4 py-2"
+              :class="[$route.path.startsWith('/resources') ? 'text-indigo-700 font-medium' : 'text-slate-500']"
             >
               <svg
-                class="h-6 w-6 text-slate-400"
-                :class="{ 'text-indigo-500': $route.path.startsWith('/resources') }"
+                class="h-6 w-6"
+                :class="[$route.path.startsWith('/resources') ? 'text-indigo-500' : 'text-slate-400']"
                 fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
               >
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
               </svg>
               Resources
-            </nuxt-link>
+            </NuxtLink>
           </li>
         </ul>
-        <ul class="space-y-8 pb-8">
-          <li
-            v-for="(group, index) in navigation"
-            :key="`nav-group-${index}`"
-            class="space-y-4"
-          >
-            <p class="text-sm sm:text-base uppercase text-slate-800 font-semibold">
-              {{ group.name }}
-            </p>
-            <ul class="space-y-2 mb-4 mr-4 ml-2">
-              <li
-                v-for="(item, i) in group.items"
-                :key="`nav-item-${i}`"
-              >
-                <nuxt-link
-                  :to="item.path"
-                  class="block leading-5 sm:leading-7 pl-2 text-sm sm:text-base text-slate-500"
-                  :class="{ 'text-indigo-700 font-medium': $route.path.startsWith(item.path) }"
-                  v-text="item.title"
-                />
-              </li>
-            </ul>
-          </li>
-        </ul>
+        <ContentRenderer :value="navigation">
+          <ul class="space-y-8 pb-8">
+            <li
+              v-for="(group, index) in navigation"
+              :key="`nav-group-${index}`"
+              class="space-y-4"
+            >
+              <p class="text-sm sm:text-base uppercase text-slate-800 font-semibold">
+                {{ group.name }}
+              </p>
+              <ul class="space-y-2 mb-4 mr-4 ml-2">
+                <li
+                  v-for="(item, i) in group.items"
+                  :key="`nav-item-${i}`"
+                >
+                  <NuxtLink
+                    :to="item.path"
+                    class="block leading-5 sm:leading-7 pl-2 text-sm sm:text-base"
+                    :class="[$route.path.startsWith(item.path) ? 'text-indigo-700 font-medium' : 'text-slate-500']"
+                    v-text="item.title"
+                  />
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </ContentRenderer>
       </div>
     </div>
     <!-- Mobile menu: Gradient menu items fade -->
@@ -311,54 +311,57 @@
       :class="{'opacity-100 z-50 pointer-events-auto': showMobileMenu}"
       @click="closeMobileMenu"
     ></div>
+
+    <DocSearch class="hidden" />
   </header>
 </template>
 
-<script>
-import { mixin as clickaway } from 'vue-clickaway'
-import navigation from '~/data/navigation.js'
+<script setup>
+import { vOnClickOutside } from '@vueuse/components'
 
-export default {
-  name: 'DocsHeader',
-  mixins: [ clickaway ],
-  data() {
-    return {
-      navigation,
-      versionDropdownOpen: false,
-      mobileVersionDropdownOpen: false,
-      showMobileMenu: false,
-    }
-  },
-  watch: {
-    showMobileMenu(value) {
-      document.body.style.overflow = value ? 'hidden' : ''
-    },
-    '$route.path'() {
-      this.closeMobileMenu()
-    },
-  },
-  beforeDestroy() {
-    document.body.style.overflow = ''
-  },
-  methods: {
-    goToBrandPage() {
-      this.$router.push('/brand')
-    },
-    openDocsearch() {
-      this.$emit('open-docsearch')
-    },
-    closeVersionDropdown() {
-      this.versionDropdownOpen = false
-    },
-    openMobileMenu() {
-      this.showMobileMenu = true
-    },
-    closeMobileMenu() {
-      this.showMobileMenu = false
-    },
-    closeMobileVersionDropdown() {
-      this.mobileVersionDropdownOpen = false
-    },
-  },
+const nuxtApp = useNuxtApp()
+const {public: {navigation, latestRelease}} = useRuntimeConfig()
+
+const versionDropdownOpen = ref(false)
+const mobileVersionDropdownOpen = ref(false)
+const showMobileMenu = ref(false)
+
+const router = useRouter()
+const route = useRoute()
+
+const goToBrandPage = () => {
+  router.push('/brand')
 }
+
+const openDocsearch = () => {
+  document.querySelector('#docsearch button').click()
+}
+
+const closeVersionDropdown = () => {
+  versionDropdownOpen.value = false
+}
+
+const openMobileMenu = () => {
+  showMobileMenu.value = true
+}
+
+const closeMobileMenu = () => {
+  showMobileMenu.value = false
+}
+
+const closeMobileVersionDropdown = () => {
+  mobileVersionDropdownOpen.value = false
+}
+
+watch(showMobileMenu, value => {
+  document.body.style.overflow = value ? 'hidden' : ''
+})
+
+onBeforeUnmount(() => {
+  document.body.style.overflow = ''
+})
+
+nuxtApp.hook('page:finish', () => {
+  closeMobileMenu()
+})
 </script>

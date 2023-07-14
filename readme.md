@@ -2,7 +2,7 @@
 
 View the online documentation at https://maizzle.com
 
-Maizzle uses [Nuxt.js](https://nuxtjs.org/) for its documentation website, if you want to run it locally:
+Maizzle uses [Nuxt](https://nuxt.com/) for its documentation website, if you want to run it locally:
 
 1. Clone this repo
 

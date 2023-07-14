@@ -13,23 +13,17 @@ The Divider component is defined in `src/components/divider.html`.
 
 This enables the `<x-divider>` syntax, which you can use like this:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
+  ```xml [src/templates/example.html] {5}
   <x-main>
     <table>
       <tr>
         <td>
-          <!-- ... -->
           <x-divider />
-          <!-- ... -->
         </td>
       </tr>
     </table>
   </x-main>
   ```
-
-</code-sample>
 
 You can use it anywhere you'd use a `<div>`.
 
@@ -45,13 +39,9 @@ Default: `1px`
 
 The default height is `1px`, but you can change it with the `height` prop:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-divider height="2px" />
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<x-divider height="2px" />
+```
 
 ### Color
 
@@ -63,25 +53,17 @@ If you omit this prop, the Divider will use `bg-slate-300` from Tailwind CSS, wh
 
 Let's change the color to red:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-divider color="#e53e3e" />
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<x-divider color="#e53e3e" />
+```
 
 You can also use Tailwind CSS utilities if you prefer:
 
-<code-sample title="src/templates/example.html">
+```xml [src/templates/example.html]
+<x-divider class="bg-rose-500" />
+```
 
-  ```xml
-  <x-divider class="bg-rose-500" />
-  ```
-
-</code-sample>
-
-<alert>Tailwind CSS utilities must be passed inside the `class` attribute, not the `color` attribute.</alert>
+<Alert>Tailwind CSS utilities must be passed inside the `class` attribute, not the `color` attribute.</Alert>
 
 ### Margins
 
@@ -96,17 +78,13 @@ Add margins to any of the four sides of the Divider, through these props:
 
 For example, let's add `32px` to the top and `64px` to the bottom:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-divider top="32px" bottom="64px" />
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<x-divider top="32px" bottom="64px" />
+```
 
 Under the hood, the CSS `margin` property is used, so you can use any CSS unit that is supported in HTML emails.
 
-<alert>Margin props will override `space-y|x` props.</alert>
+<Alert>Margin props will override `space-y|x` props.</Alert>
 
 ### Spacing
 
@@ -119,25 +97,17 @@ You may add top/bottom or left/right spacing through a single prop:
 
 For example, let's add `32px` to the top and bottom:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-divider space-y="32px" />
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<x-divider space-y="32px" />
+```
 
 Similarly, let's add `24px` to the left and right:
 
-<code-sample title="src/templates/example.html">
+```xml [src/templates/example.html]
+<x-divider space-x="24px" />
+```
 
-  ```xml
-  <x-divider space-x="24px" />
-  ```
-
-</code-sample>
-
-<alert>`space-y|x` props will be overridden by individual margin props.</alert>
+<Alert>`space-y|x` props will be overridden by individual margin props.</Alert>
 
 ### Other attributes
 
@@ -149,40 +119,27 @@ Note that non-standard attributes will be ignored by default - you'll need to de
 
 To override Divider styling on small viewports, use Tailwind CSS utilities:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-divider space-y="32px" class="sm:my-4 sm:bg-black" />
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<x-divider space-y="32px" class="sm:my-4 sm:bg-black" />
+```
 
 ## Outlook note
 
 The root `<div>` element of the Divider component needs some extra attention for Outlook on Windows, otherwise it will render thicker than intended.
 
-For the Divider to render the visual line as expected in Outlook on Windows too, it should also be styled with `mso-line-height-rule: exactly`.
-In Maizzle, this is set globally in the `main.html` layout so you don't need to worry about it.
+For the Divider to render the visual line as expected in Outlook on Windows too, it should also be styled with `mso-line-height-rule: exactly`. In Maizzle, this is set globally in the `main.html` layout so you don't need to worry about it.
 
 However, if you can't use that layout for some reason or are worried that the Outlook-specific CSS in the `<head>` might be stripped in some situations, simply add it in a style attribute on the tag:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-divider style="mso-line-height-rule: exactly;" />
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<x-divider style="mso-line-height-rule: exactly;" />
+```
 
 Alternatively, you may also use the `mso-line-height-rule-exactly` class that is available from the `tailwindcss-mso` plugin (included in the Starter):
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <x-divider class="mso-line-height-rule-exactly" />
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<x-divider class="mso-line-height-rule-exactly" />
+```
 
 Of course, you can also modify `src/components/divider.html` and add the `mso-line-height-rule: exactly` CSS rule to the `<div>` element.
 

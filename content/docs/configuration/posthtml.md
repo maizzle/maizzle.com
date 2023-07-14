@@ -20,23 +20,19 @@ You can configure the PostHTML parser to correctly process custom directives.
 
 For example, you may tell it to ignore `<?php ?>` tags instead of treating them as HTML:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        options: {
-          directives: [
-            { name: '?php', start: '<', end: '>' }
-          ]
-        }
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      options: {
+        directives: [
+          { name: '?php', start: '<', end: '>' }
+        ]
       }
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 ### xmlMode
 
@@ -45,21 +41,17 @@ Default: `false`
 
 Enable `xmlMode` if you're using Maizzle to output XML content, and not actual HTML.
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        options: {
-          xmlMode: true
-        }
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      options: {
+        xmlMode: true
       }
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 ### decodeEntities
 
@@ -68,21 +60,17 @@ Default: `false`
 
 Set this to `true` to have entities within the document decoded.
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        options: {
-          decodeEntities: true
-        }
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      options: {
+        decodeEntities: true
       }
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 ### lowerCaseTags
 
@@ -91,21 +79,17 @@ Default: `false`
 
 Set this to `true` to output all tags in lowercase. Works only when `xmlMode` is disabled.
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        options: {
-          lowerCaseTags: true
-        }
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      options: {
+        lowerCaseTags: true
       }
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 ### lowerCaseAttributeNames
 
@@ -114,23 +98,20 @@ Default: `false`
 
 Output all attribute names in lowercase.
 
-<alert type="warning">This has a significant impact on speed.</alert>
+<Alert type="warning">This has a significant impact on speed.</Alert>
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        options: {
-          lowerCaseAttributeNames: true
-        }
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      options: {
+        lowerCaseAttributeNames: true
       }
     }
   }
-  ```
-
-</code-sample>
+}
+```
+</CodeSample>
 
 ### recognizeCDATA
 
@@ -139,23 +120,19 @@ Default: `false`
 
 Recognize CDATA sections as text even if the `xmlMode` option is disabled.
 
-<alert>If `xmlMode` is enabled, CDATA sections will always be recognized as text.</alert>
+<Alert>If `xmlMode` is enabled, CDATA sections will always be recognized as text.</Alert>
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        options: {
-          recognizeCDATA: true
-        }
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      options: {
+        recognizeCDATA: true
       }
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 ### recognizeSelfClosing
 
@@ -164,25 +141,21 @@ Default: `true`
 
 If enabled, self-closing tags will trigger the `onclosetag` event even if `xmlMode` is disabled.
 
-<alert>When `xmlMode` is enabled self-closing tags will always be recognized.</alert>
+<Alert>When `xmlMode` is enabled self-closing tags will always be recognized.</Alert>
 
 Maizzle sets this to `true` to ensure self-closing tags like those of Components are rendered correctly.
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        options: {
-          recognizeSelfClosing: true
-        }
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      options: {
+        recognizeSelfClosing: true
       }
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 ### sourceLocations
 
@@ -191,21 +164,17 @@ Default: `false`
 
 If set to `true`, AST nodes will have a `location` property containing the `start` and `end` line and column position of the node.
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        options: {
-          sourceLocations: true
-        }
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      options: {
+        sourceLocations: true
       }
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 ### recognizeNoValueAttribute
 
@@ -214,21 +183,17 @@ Default: `true`
 
 If set to `true`, PostHTML will render attributes with no values exactly as they were written and will not add `=""` to them.
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        options: {
-          recognizeNoValueAttribute: true
-        }
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      options: {
+        recognizeNoValueAttribute: true
       }
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 ### singleTags
 
@@ -237,34 +202,26 @@ Default: `[]`
 
 Use the `singleTags` option to tell PostHTML to treat custom tags as self-closing.
 
-<alert type="warning">This needs to be used in conjunction with `closingSingleTag` to tell PostHTML how to close the tag, otherwise you will end up with an unclosed tag.</alert>
+<Alert type="warning">This needs to be used in conjunction with `closingSingleTag` to tell PostHTML how to close the tag, otherwise you will end up with an unclosed tag.</Alert>
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        options: {
-          singleTags: ['custom'],
-          closingSingleTag: 'slash', // see docs below
-        }
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      options: {
+        singleTags: ['custom'],
+        closingSingleTag: 'slash', // see docs below
       }
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 You may then use the `<custom />` tag as self-closing:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <custom name="opencounter" type="tracking" />
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<custom name="opencounter" type="tracking" />
+```
 
 ### closingSingleTag
 
@@ -275,14 +232,10 @@ Define the closing format for single tags.
 
 By default it will not close self-closing tags that it knows about:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <img>
-  <p></p>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<img>
+<p></p>
+```
 
 Available options:
 
@@ -290,59 +243,43 @@ Available options:
 
 Will add a closing tag.
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        options: {
-          singleTags: ['custom'],
-          closingSingleTag: 'tag'
-        }
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      options: {
+        singleTags: ['custom'],
+        closingSingleTag: 'tag'
       }
     }
   }
-  ```
+}
+```
 
-</code-sample>
-
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <custom></custom>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<custom></custom>
+```
 
 ##### **slash**
 
 Will add a closing tag.
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        options: {
-          singleTags: ['custom'],
-          closingSingleTag: 'slash'
-        }
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      options: {
+        singleTags: ['custom'],
+        closingSingleTag: 'slash'
       }
     }
   }
-  ```
+}
+```
 
-</code-sample>
-
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <custom />
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<custom />
+```
 
 ### quoteAllAttributes
 
@@ -351,29 +288,21 @@ Default: `true`
 
 Disable if you want to remove quotes on all attributes
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        options: {
-          quoteAllAttributes: false
-        }
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      options: {
+        quoteAllAttributes: false
       }
     }
   }
-  ```
+}
+```
 
-</code-sample>
-
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <img src=example.jpg>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<img src=example.jpg>
+```
 
 ### replaceQuote
 
@@ -382,33 +311,25 @@ Default: `true`
 
 Disable if you want to remove quotes on all attributes.
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        options: {
-          replaceQuote: false
-        }
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      options: {
+        replaceQuote: false
       }
     }
   }
-  ```
+}
+```
 
-</code-sample>
+```xml [src/templates/example.html]
+<!-- `true` (default) -->
+<img src="<?php echo $foo[&quote;bar&quote;] ?>">
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <!-- `true` (default) -->
-  <img src="<?php echo $foo[&quote;bar&quote;] ?>">
-
-  <!-- `false` -->
-  <img src="<?php echo $foo["bar"] ?>">
-  ```
-
-</code-sample>
+<!-- `false` -->
+<img src="<?php echo $foo["bar"] ?>">
+```
 
 ### quoteStyle
 
@@ -417,36 +338,28 @@ Default: `2`
 
 Specify the attribute value quotes style.
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        options: {
-          quoteStyle: 1
-        }
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      options: {
+        quoteStyle: 1
       }
     }
   }
-  ```
+}
+```
 
-</code-sample>
+```xml [src/templates/example.html]
+<!-- `2` (double quotes, default) -->
+<img src="example.png" onload="testFunc("test")">
 
-<code-sample title="src/templates/example.html">
+<!-- `1` (single quotes) -->
+<img src='example.png' onload='testFunc("test")'>
 
-  ```xml
-  <!-- `2` (double quotes, default) -->
-  <img src="example.png" onload="testFunc("test")">
-
-  <!-- `1` (single quotes) -->
-  <img src='example.png' onload='testFunc("test")'>
-
-  <!-- `0` (based on attribute value) -->
-  <img src="example.png" onload='testFunc("test")'>
-  ```
-
-</code-sample>
+<!-- `0` (based on attribute value) -->
+<img src="example.png" onload='testFunc("test")'>
+```
 
 ## Plugins
 
@@ -455,57 +368,50 @@ Default: `[]`
 
 Register any PostHTML plugins that you would like to use, in the `plugins` array:
 
-<code-sample title="config.js">
+```js [config.js]
+const spaceless = require('posthtml-spaceless')
 
-  ```js
-  const spaceless = require('posthtml-spaceless')
-
-  module.exports = {
-    build: {
-      posthtml: {
-        plugins: [
-          spaceless()
-        ]
-      }
+module.exports = {
+  build: {
+    posthtml: {
+      plugins: [
+        spaceless()
+      ]
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 ### Custom plugins
 
-Here's how you can write a PostHTML plugin right in your Maizzle `config.js` file:
+You may write your own PostHTML plugins, right in your Maizzle `config.js` file.
 
-<code-sample title="config.js">
+For example, here's a plugin that adds a random number to all `<img>` src URLs:
 
-  ```js
-  module.exports = {
-    build: {
-      posthtml: {
-        plugins: [
-          // Inline plugin that adds a random number to all img src URLs
-          (() => tree => {
-            const process = node => {
-              if (node.tag === 'img' && node.attrs?.src) {
-                const randomNumber = Math.floor(Math.random() * 10 ** 16).toString().padStart(16, '0')
-                node.attrs.src = node.attrs.src + `?v=${randomNumber}`
-              }
-
-              return node
+```js [config.js]
+module.exports = {
+  build: {
+    posthtml: {
+      plugins: [
+        (() => tree => {
+          const process = node => {
+            if (node.tag === 'img' && node.attrs?.src) {
+              const randomNumber = Math.floor(Math.random() * 10 ** 16).toString().padStart(16, '0')
+              node.attrs.src = node.attrs.src + `?v=${randomNumber}`
             }
 
-            return tree.walk(process)
-          })()
-        ]
-      }
+            return node
+          }
+
+          return tree.walk(process)
+        })()
+      ]
     }
   }
-  ```
+}
+```
 
-</code-sample>
-
-<alert>Note that this is a naive example that doesn't take existing query strings into account.</alert>
+<Alert>Note that this is a naive example that doesn't take existing query strings into account.</Alert>
 
 ### Built-in plugins
 

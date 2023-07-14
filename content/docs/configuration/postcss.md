@@ -13,30 +13,22 @@ For example, here's how you'd use [Autoprefixer](https://github.com/postcss/auto
 
 First, install the plugin:
 
-<terminal show-copy>
-
-  ```
-  npm install autoprefixer
-  ```
-
-</terminal>
+```sh
+npm install autoprefixer
+```
 
 Then register it in `config.js`:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      postcss: {
-        plugins: [
-          require('autoprefixer')()
-        ]
-      }
+```js [config.js] {3-7}
+module.exports = {
+  build: {
+    postcss: {
+      plugins: [
+        require('autoprefixer')()
+      ]
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 Any plugins that you register in the `plugins` array will be added at the end of the PostCSS plugins stack, which means they'll run _after_ Tailwind CSS.

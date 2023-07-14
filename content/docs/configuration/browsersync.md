@@ -13,19 +13,15 @@ Maizzle sets some defaults for Browsersync, but you can customize them in your `
 
 For example, here's how you'd use a custom port number:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      browsersync: {
-        port: 8080,
-      }
+```js [config.js]
+module.exports = {
+  build: {
+    browsersync: {
+      port: 8080,
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 These are the defaults that Maizzle uses:
 
@@ -38,7 +34,7 @@ When running `maizzle serve` with `directory: true`, Browsersync will open a fil
 
 If you set `directory: false`, the page opened by Browsersync will be blank, and you'll need to manually navigate to your emails directory.
 
-<alert>Use `directory: false` together with the `tunnel` option for a client demo, so they can't freely browse all of your emails by going to the root directory URL.</alert>
+<Alert>Use `directory: false` together with the `tunnel` option for a client demo, so they can't freely browse all of your emails by going to the root directory URL.</Alert>
 
 ### notify
 
@@ -74,8 +70,7 @@ When set to `true`, Maizzle will enable localhost tunneling in Browsersync, so y
 
 Both parties see the same thing, and scrolling is synced, too.
 
-You can also use a string instead of a boolean - for example `tunnel: 'mybrand'`. In this case, Browsersync will attempt to use a custom subdomain for the URL, i.e. `https://mybrand.localtunnel.me`.
-If that subdomain is unavailable, you will be allocated a random name as usual.
+You can also use a string instead of a boolean - for example `tunnel: 'mybrand'`. In this case, Browsersync will attempt to use a custom subdomain for the URL, i.e. `https://mybrand.localtunnel.me`. If that subdomain is unavailable, you will be allocated a random name as usual.
 
 ### ui
 
@@ -100,21 +95,17 @@ By default, the following paths are watched for file changes:
 
 You may define additional file and folder paths to watch when developing locally:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    build: {
-      browsersync: {
-        watch: [
-          './some/folder',
-          'some-file.js'
-        ]
-      }
+```js [config.js]
+module.exports = {
+  build: {
+    browsersync: {
+      watch: [
+        './some/folder',
+        'some-file.js'
+      ]
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 When a file in any of these watch paths is updated, Browsersync will trigger a full rebuild and changes will be reflected in the browser.

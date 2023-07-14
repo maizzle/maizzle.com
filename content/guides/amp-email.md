@@ -18,25 +18,21 @@ Want to dive right in? Checkout our [AMP for Email Starter](https://github.com/m
 
 AMP for Email requires some special markup, so let's create an `amp.html` Layout and save it under `src/layouts`:
 
-<code-sample title="src/layouts/amp.html">
-
-  ```xml
-  <!doctype html>
-  <html ⚡4email>
-  <head>
-    <meta charset="utf-8">
-    <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <style amp4email-boilerplate>body{visibility:hidden}</style>
-    <style amp-custom>{{{ page.css }}}</style>
-    <stack name="head" />
-  </head>
-  <body>
-    <content />
-  </body>
-  </html>
-  ```
-
-</code-sample>
+```hbs [src/layouts/amp.html]
+<!doctype html>
+<html ⚡4email>
+<head>
+  <meta charset="utf-8">
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <style amp4email-boilerplate>body{visibility:hidden}</style>
+  <style amp-custom>{{{ page.css }}}</style>
+  <stack name="head" />
+</head>
+<body>
+  <content />
+</body>
+</html>
+```
 
 ## Template
 
@@ -44,27 +40,23 @@ For this tutorial, we'll use the [AMP Carousel](https://amp.dev/documentation/co
 
 Create `src/templates/amp/carousel.html` and add a basic AMP carousel:
 
-<code-sample title="src/templates/amp/carousel.html">
+```xml [src/templates/amp/carousel.html]
+<x-amp>
+  <push name="head">
+    <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"></script>
+  </push>
 
-  ```xml
-  <x-amp>
-    <push name="head">
-      <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"></script>
-    </push>
-
-    <div class="p-4">
-      <div class="max-w-full">
-        <amp-carousel width="600" height="400" layout="responsive" type="slides">
-          <amp-img src="https://ampbyexample.com/img/image1.jpg" width="600" height="400" alt="a sample image" />
-          <amp-img src="https://ampbyexample.com/img/image2.jpg" width="600" height="400" alt="another sample image" />
-          <amp-img src="https://ampbyexample.com/img/image3.jpg" width="600" height="400" alt="and another sample image" />
-        </amp-carousel>
-      </div>
+  <div class="p-4">
+    <div class="max-w-full">
+      <amp-carousel width="600" height="400" layout="responsive" type="slides">
+        <amp-img src="https://ampbyexample.com/img/image1.jpg" width="600" height="400" alt="a sample image" />
+        <amp-img src="https://ampbyexample.com/img/image2.jpg" width="600" height="400" alt="another sample image" />
+        <amp-img src="https://ampbyexample.com/img/image3.jpg" width="600" height="400" alt="and another sample image" />
+      </amp-carousel>
     </div>
-  </x-amp>
-  ```
-
-</code-sample>
+  </div>
+</x-amp>
+```
 
 You initialize [AMP components](https://amp.dev/documentation/guides-and-tutorials/learn/email-spec/amp-email-components/?format=email) by pushing their `<script>` tag to the `<stack name="head" />` from the layout, as shown above.
 
@@ -76,27 +68,19 @@ Inline style attributes are not allowed in AMP, so you need to disable CSS inlin
 
 Do it either globally, in your environment config:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    inlineCSS: false
-  }
-  ```
-
-</code-sample>
+```js [config.js]
+module.exports = {
+  inlineCSS: false
+}
+```
 
 ... or locally, in the Template's Front Matter:
 
-<code-sample title="src/templates/amp/carousel.html">
-
-  ```yaml
-  ---
-  inlineCSS: false
-  ---
-  ```
-
-</code-sample>
+```yaml [src/templates/amp/carousel.html]
+---
+inlineCSS: false
+---
+```
 
 ## !important
 
@@ -104,66 +88,49 @@ AMP for Email doesn't support `!important` in CSS, either.
 
 This can be easily turned off in your Tailwind config:
 
-<code-sample title="tailwind.config.js">
-
-  ```js
-  module.exports = {
-    important: false,
-  }
-  ```
-
-</code-sample>
+```js [tailwind.config.js]
+module.exports = {
+  important: false,
+}
+```
 
 However, you probably want to turn it off _only_ for AMP templates.
 
 You can do this with a custom build Environment:
 
-<code-sample title="config.amp.js">
-
-  ```js
-  module.exports = {
-    build: {
-      destination: {
-        path: 'build_amp'
-      },
-      templates: {
-        source: 'src/templates/amp'
-      },
-      tailwind: {
-        config: 'tailwind.amp.js'
-      }
+```js [config.amp.js]
+module.exports = {
+  build: {
+    destination: {
+      path: 'build_amp'
+    },
+    templates: {
+      source: 'src/templates/amp'
+    },
+    tailwind: {
+      config: 'tailwind.amp.js'
     }
   }
-  ```
-
-</code-sample>
+}
+```
 
 Next, duplicate `tailwind.config.js` to `tailwind.amp.js` and disable `important`:
 
-<code-sample title="tailwind.amp.js">
-
-  ```js
-  module.exports = {
-    important: false,
-    // ...
-  }
-  ```
-
-</code-sample>
+```js [tailwind.amp.js]
+module.exports = {
+  important: false,
+}
+```
 
 Finally, run `maizzle build amp` to build your ⚡4email templates.
 
 In case you haven't installed the [Maizzle CLI](/docs/cli), add an npm script to `package.json`:
 
-<code-sample title="package.json">
-
-  ```json
-  "scripts": {
-    "build:amp": "maizzle build amp"
-  }
-  ```
-
-</code-sample>
+```json [package.json]
+"scripts": {
+  "build:amp": "maizzle build amp"
+}
+```
 
 You'd then build your AMP emails by running `npm run build:amp`.
 

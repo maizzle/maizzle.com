@@ -9,41 +9,33 @@ You'll need [Node.js](https://nodejs.org/en/download/) installed first (comes wi
 
 Use this command to check the version:
 
-<terminal show-copy>
+```sh
+node -v
+```
 
-  ```
-  node -v
-  ```
-
-</terminal>
-
-<alert>Maizzle requires at least Node v14.0.0</alert>
+<Alert>Maizzle requires at least Node v14.0.0</Alert>
 
 ## Create a project
 
 The fastest way to get started is with the [official Starter](https://github.com/maizzle/maizzle):
 
-<terminal show-copy>
-
-  ```
-  npx degit maizzle/maizzle my-project
-  ```
-
-</terminal>
+```sh
+npx degit maizzle/maizzle my-project
+```
 
 That will clone the Starter repository into `my-project`.
 
-Next, switch the current directory to `my-project` and install dependencies:
+Next, switch the current directory to `my-project`:
 
-<terminal>
+```sh
+cd my-project
+```
 
-  ```
-  cd my-project
+... and install dependencies:
 
-  npm install
-  ```
-
-</terminal>
+```sh
+npm install
+```
 
 ## Development
 
@@ -55,13 +47,9 @@ You can start a development server that watches for file changes and automatical
 
 Start local email development by running the `dev` npm script:
 
-<terminal show-copy>
-
-  ```
-  npm run dev
-  ```
-
-</terminal>
+```sh
+npm run dev
+```
 
 This will start the local server at _http://localhost:3000_
 
@@ -71,47 +59,36 @@ Try making a change to a template in your editor and save it: the browser tab wi
 
 Build production-ready emails that have inlined CSS and many other optimizations, by running the following command:
 
-<terminal show-copy>
-
-  ```
-  npm run build
-  ```
-
-</terminal>
+```sh
+npm run build
+```
 
 This will use settings in your project's `config.production.js` to compile email templates that you can use with your <abbr title="Email Service Provider">ESP</abbr> or in your application.
 
-<alert>These npm scripts use the Maizzle CLI, check out the [CLI Tool docs](/docs/cli) for more details.</alert>
+<Alert>These npm scripts use the Maizzle CLI, check out the [CLI Tool docs](/docs/cli) for more details.</Alert>
 
 ## Updating
 
 Maizzle is listed as a dependency in your project's `package.json` file:
 
-<code-sample title="package.json">
-
-  ```json
-  "dependencies": {
-    "@maizzle/framework": "latest"
-  }
-  ```
-
-</code-sample>
+```json [package.json]
+"dependencies": {
+  "@maizzle/framework": "latest",
+}
+```
 
 By default, the latest version will be installed. To use a specific version, first change the value to the desired release number:
 
-<code-sample title="package.json">
-
-  ```json
-  "dependencies": {
-    "@maizzle/framework": "4.3.1"
-  }
-  ```
-
-</code-sample>
+```json [package.json] diff no-copy
+"dependencies": {
+-  "@maizzle/framework": "latest",
++  "@maizzle/framework": "4.4.6",
+}
+```
 
 Then, re-install dependencies by running `npm install` in your project's root folder.
 
-<alert>Latest stable Maizzle release is <latest-release as-link="true" /></alert>
+<Alert>Latest stable Maizzle release is <LatestRelease></LatestRelease></Alert>
 
 ### Clean update
 

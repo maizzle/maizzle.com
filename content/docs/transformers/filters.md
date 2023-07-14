@@ -11,15 +11,11 @@ Maizzle includes filters that enable you to do anything you want to text inside 
 
 Add a `filters` object to your Maizzle config:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    filters: {}
-  }
-  ```
-
-</code-sample>
+```js [config.js]
+module.exports = {
+  filters: {}
+}
+```
 
 Each entry in this object is made up of a `key: value` pair.
 
@@ -28,27 +24,19 @@ Each entry in this object is made up of a `key: value` pair.
 
 Example:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    filters: {
-      uppercase: str => str.toUpperCase()
-    }
+```js [config.js]
+module.exports = {
+  filters: {
+    uppercase: str => str.toUpperCase()
   }
-  ```
-
-</code-sample>
+}
+```
 
 Used in a Template:
 
-<code-sample title="src/templates/example.html">
-
-  ```xml
-  <p uppercase>Here is some foo.</p>
-  ```
-
-</code-sample>
+```xml [src/templates/example.html]
+<p uppercase>Here is some foo.</p>
+```
 
 Result:
 
@@ -67,15 +55,11 @@ Of course, this is just a dumb example - you could imagine more complex scenario
 
 You may disable all filters by setting the option to `false`:
 
-<code-sample title="config.js">
-
-  ```js
-  module.exports = {
-    filters: false
-  }
-  ```
-
-</code-sample>
+```js [config.js]
+module.exports = {
+  filters: false
+}
+```
 
 ## Default filters
 
@@ -85,293 +69,205 @@ The following filters are included by default.
 
 Append text to the end of the string.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p append=" bar">foo</p>
-  <!-- <p>foo bar</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p append=" bar">foo</p>
+<!-- <p>foo bar</p> -->
+```
 
 ### prepend
 
 Prepend text to the beginning of the string.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p prepend="foo ">bar</p>
-  <!-- <p>foo bar</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p prepend="foo ">bar</p>
+<!-- <p>foo bar</p> -->
+```
 
 ### uppercase
 
 Uppercase the string.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p uppercase>foo</p>
-  <!-- <p>FOO</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p uppercase>foo</p>
+<!-- <p>FOO</p> -->
+```
 
 ### lowercase
 
 Lowercase the string.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p lowercase>FOO</p>
-  <!-- <p>foo</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p lowercase>FOO</p>
+<!-- <p>foo</p> -->
+```
 
 ### capitalize
 
 Uppercase the first letter of the string.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p capitalize>foo</p>
-  <!-- <p>Foo</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p capitalize>foo</p>
+<!-- <p>Foo</p> -->
+```
 
 ### ceil
 
 Round up to the nearest integer.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p ceil>1.2</p>
-  <!-- <p>2</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p ceil>1.2</p>
+<!-- <p>2</p> -->
+```
 
 ### floor
 
 Round down to the nearest integer.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p ceil>1.2</p>
-  <!-- <p>1</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p ceil>1.2</p>
+<!-- <p>1</p> -->
+```
 
 ### round
 
 Round to the nearest integer.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p round>1234.567</p>
-  <!-- <p>1235</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p round>1234.567</p>
+<!-- <p>1235</p> -->
+```
 
 ### escape
 
 Escapes a string by replacing characters with escape sequences (so that the string can be used in a URL, for example).
 
-<code-sample title="example.html">
-
-  ```xml
-  <p escape>"&'<></p>
-  <!-- <p>&#34;&amp;&#39;&lt;&gt;</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p escape>"&'<></p>
+<!-- <p>&#34;&amp;&#39;&lt;&gt;</p> -->
+```
 
 ### escape-once
 
 Escapes a string without changing existing escaped entities.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p escape-once>1 &lt; 2 &amp; 3</p>
-  <!-- <p>1 &lt; 2 &amp; 3</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p escape-once>1 &lt; 2 &amp; 3</p>
+<!-- <p>1 &lt; 2 &amp; 3</p> -->
+```
 
 ### lstrip
 
 Remove leading whitespace from the string.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p lstrip> test </p>
-  <!-- <p>test </p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p lstrip> test </p>
+<!-- <p>test </p> -->
+```
 
 ### rstrip
 
 Remove trailing whitespace from the string.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p rstrip> test </p>
-  <!-- <p> test</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p rstrip> test </p>
+<!-- <p> test</p> -->
+```
 
 ### trim
 
 Remove leading and trailing whitespace from the string.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p trim> test </p>
-  <!-- <p>test</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p trim> test </p>
+<!-- <p>test</p> -->
+```
 
 ### minus
 
 Subtracts one number from another.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p minus="2">3</p>
-  <!-- <p>1</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p minus="2">3</p>
+<!-- <p>1</p> -->
+```
 
 ### plus
 
 Adds one number to another.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p plus="2">3</p>
-  <!-- <p>5</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p plus="2">3</p>
+<!-- <p>5</p> -->
+```
 
 ### multiply
 
 Alias: `times`
 
-<code-sample title="example.html">
-
-  ```xml
-  <p multiply="2">1.2</p>
-  <!-- <p>2.4</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p multiply="2">1.2</p>
+<!-- <p>2.4</p> -->
+```
 
 ### divide-by
 
 Alias: `divide`
 
-<code-sample title="example.html">
-
-  ```xml
-  <div divide-by="2">1.2</div>
-  <!-- <p>0.6</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<div divide-by="2">1.2</div>
+<!-- <p>0.6</p> -->
+```
 
 ### modulo
 
 Returns the remainder of one number divided by another.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p modulo="2">3</p>
-  <!-- <p>1</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p modulo="2">3</p>
+<!-- <p>1</p> -->
+```
 
 ### newline-to-br
 
 Insert an HTML line break (`<br />`) in front of each newline (`\n`) in a string.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p newline-to-br>
-    test
-    test
-  </p>
-  <!-- <p><br>  test<br>  test<br></p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p newline-to-br>
+  test
+  test
+</p>
+<!-- <p><br>  test<br>  test<br></p> -->
+```
 
 ### strip-newlines
 
 Remove any newline characters (line breaks) from the string.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p strip_newlines>
-    test
-    test
-  </p>
-  <!-- <p>  test  test</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p strip_newlines>
+  test
+  test
+</p>
+<!-- <p>  test  test</p> -->
+```
 
 ### remove
 
 Remove every occurrence of `text` from the string.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p remove="rain">I strained to see the train through the rain</p>
-  <!-- <p>I sted to see the t through the </p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p remove="rain">I strained to see the train through the rain</p>
+<!-- <p>I sted to see the t through the </p> -->
+```
 
 ### remove-first
 
 Remove the first occurrence of `text` from the string.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p remove-first="rain">I strained to see the train through the rain</p>
-  <!-- <p>I sted to see the train through the rain</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p remove-first="rain">I strained to see the train through the rain</p>
+<!-- <p>I sted to see the train through the rain</p> -->
+```
 
 ### replace
 
@@ -379,14 +275,10 @@ Replace every occurrence of the first argument with the second argument.
 
 You must separate arguments with a pipe character (`|`).
 
-<code-sample title="example.html">
-
-  ```xml
-  <p replace="1|test">test</p>
-  <!-- <p>1es1</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p replace="1|test">test</p>
+<!-- <p>1es1</p> -->
+```
 
 ### replace-first
 
@@ -394,126 +286,86 @@ Replace the first occurrence of the first argument with the second argument.
 
 You must separate arguments with a pipe character (`|`).
 
-<code-sample title="example.html">
-
-  ```xml
-  <p replace-first="t|b">test</p>
-  <!-- <p>best</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p replace-first="t|b">test</p>
+<!-- <p>best</p> -->
+```
 
 ### size
 
 Return the number of characters in the string.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p size>one</p>
-  <!-- <p>3</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p size>one</p>
+<!-- <p>3</p> -->
+```
 
 ### slice
 
 Return a slice of the string starting at the provided index.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p slice="1">test</p>
-  <!-- <p>est</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p slice="1">test</p>
+<!-- <p>est</p> -->
+```
 
 You may pass a startIndex and endIndex:
 
-<code-sample title="example.html">
-
-  ```xml
-  <p slice="0,-1">test</p>
-  <!-- <p>tes</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p slice="0,-1">test</p>
+<!-- <p>tes</p> -->
+```
 
 ### truncate
 
 Shorten a string down to the number of characters passed as the argument.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p truncate="17">Ground control to Major Tom.</p>
-  <!-- <p>Ground control to...</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p truncate="17">Ground control to Major Tom.</p>
+<!-- <p>Ground control to...</p> -->
+```
 
 You may pass a custom ellipsis as the second argument.
 
 Separate arguments with a comma:
 
-<code-sample title="example.html">
-
-  ```xml
-  <p truncate="17, no one">Ground control to Major Tom.</p>
-  <!-- <p>Ground control to no one</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p truncate="17, no one">Ground control to Major Tom.</p>
+<!-- <p>Ground control to no one</p> -->
+```
 
 ### truncate-words
 
 Shorten a string down to the number of words passed as the argument.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p truncate-words="2">Ground control to Major Tom.</p>
-  <!-- <p>Ground control...</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p truncate-words="2">Ground control to Major Tom.</p>
+<!-- <p>Ground control...</p> -->
+```
 
 You may pass a custom ellipsis as the second argument.
 
 Separate arguments with a comma:
 
-<code-sample title="example.html">
-
-  ```xml
-  <p truncate-words="2, over and out">Ground control to Major Tom.</p>
-  <!-- <p>Ground control over and out</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p truncate-words="2, over and out">Ground control to Major Tom.</p>
+<!-- <p>Ground control over and out</p> -->
+```
 
 ### url-decode
 
 Decode a string that has been encoded as a URL.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p url-decode>%27Stop%21%27+said+Fred</p>
-  <!-- <p>'Stop!' said Fred</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p url-decode>%27Stop%21%27+said+Fred</p>
+<!-- <p>'Stop!' said Fred</p> -->
+```
 
 ### url-encode
 
 Convert any URL-unsafe characters in a string into percent-encoded characters.
 
-<code-sample title="example.html">
-
-  ```xml
-  <p url-encode>user@example.com</p>
-  <!-- <p>user%40example.com</p> -->
-  ```
-
-</code-sample>
+```xml [example.html]
+<p url-encode>user@example.com</p>
+<!-- <p>user%40example.com</p> -->
+```
