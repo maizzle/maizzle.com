@@ -3,13 +3,13 @@ title: Privacy
 description: This document outlines your rights relating to your data, how we collect and process your data, what data is processed, and what cookies are set in connection with the use of the maizzle.com website.
 ---
 
-**The administrator of the Website www.maizzle.com (the "Website") and the data Controller is:**
+# Privacy Policy
 
-Cosmin Popovici.
+<blockquote class="text-slate-600">Last updated: July 15, 2023</blockquote>
 
-If you have any question about this privacy policy (the "Policy"), please contact our Data Protection Officer ("DPO") at the following email:
+The administrator of maizzle.com (the "Website") and the data Controller is:
 
-maizzleframework@gmail.com
+Cosmin Popovici
 
 ### Scope - application
 
@@ -44,9 +44,9 @@ We work closely with third party companies (subcontractors, service providers an
 
 We only provide them with the Data they need to carry out the services we assign to them, and we require that they do not use your Data for any other purpose. These third parties act only within the limits and in accordance with our instructions and are contractually bound to ensure the same level of security and confidentiality of your Data as we do and to comply with applicable regulations. These third parties have all sent us a GDPR certificate of compliance detailing their compliance.
 
-**We may share Data with** :
+**We share Data with** :
 
-1.Email Octopus, Three Hearts Digital Ltd, 86-90 Paul Street, London, EC2A 4NE, UK.
+_Email Octopus - Three Hearts Digital Ltd, 86-90 Paul Street, London, EC2A 4NE, UK_
 
 ### Data Transfer
 
@@ -61,10 +61,6 @@ Your Data may be transferred from European Union to a country outside the Europe
 - Either by making use of any appropriate guarantees referred to in Article 46 of the GDPR.
 
 You can access all of these documents by contacting us at the address at the top of this Policy.
-
-Cookies and tracking technologies
-
-Our Website uses cookies to provide you with a better browsing experience.
 
 ### Your rights over your personal Data
 
