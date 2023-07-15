@@ -47,15 +47,43 @@ const props = defineProps({
 
 const errorMessage = props.error.statusCode === 404 ? 'Page not found' : 'Something went wrong'
 
+const {public: runtimeConfig} = useRuntimeConfig()
+
 useHead({
   htmlAttrs: {
     lang: 'en',
-    class: 'scroll-smooth h-full',
+    class: 'h-full',
+    style: 'scrollbar-gutter: stable',
   },
   bodyAttrs: {
     class: 'h-full',
   },
-  title: `${errorMessage} | UnlimitDesign`,
+  title: `${errorMessage} | Maizzle`,
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/png',
+      sizes: '32x32',
+      href: '/favicon/favicon.png',
+    },
+    {
+      rel: 'apple-touch-icon',
+      href: '/favicon/apple-touch-icon.png',
+    },
+    {
+      rel: 'preconnect',
+      href: `https://${runtimeConfig.docsearch.appId}-dsn.algolia.net`,
+      crossorigin: true,
+    },
+  ],
+  script: [
+    {
+      src: 'https://scripts.withcabin.com/hello.js',
+      async: true,
+      defer: true,
+      body: true,
+    },
+  ],
 })
 
 const openDocsearch = () => {
