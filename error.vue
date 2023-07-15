@@ -13,7 +13,19 @@
           <p class="text-base text-gray-500">
             Try searching?
           </p>
-          <DocSearch />
+          <DocSearch class="hidden" />
+          <button
+            class="w-72 pl-4 pr-2 py-2 flex items-center justify-between border rounded-xl border-slate-300 hover:border-slate-400/75 bg-white text-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+            @click="openDocsearch"
+          >
+            <span class="flex items-center gap-2">
+              <svg class="h-4 w-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              Search docs
+            </span>
+            <span class="px-2 py-1 border rounded-md text-xs border-slate-300">Ctrl K</span>
+          </button>
         </div>
         <div class="mt-12">
           <NuxtLink
@@ -29,20 +41,24 @@
 </template>
 
 <script setup>
-  const props = defineProps({
-    error: Object
-  })
+const props = defineProps({
+  error: Object
+})
 
-  const errorMessage = props.error.statusCode === 404 ? 'Page not found' : 'Something went wrong'
+const errorMessage = props.error.statusCode === 404 ? 'Page not found' : 'Something went wrong'
 
-  useHead({
-    htmlAttrs: {
-      lang: 'en',
-      class: 'scroll-smooth h-full',
-    },
-    bodyAttrs: {
-      class: 'h-full',
-    },
-    title: `${errorMessage} | UnlimitDesign`,
-  })
+useHead({
+  htmlAttrs: {
+    lang: 'en',
+    class: 'scroll-smooth h-full',
+  },
+  bodyAttrs: {
+    class: 'h-full',
+  },
+  title: `${errorMessage} | UnlimitDesign`,
+})
+
+const openDocsearch = () => {
+  document.querySelector('#docsearch button').click()
+}
 </script>

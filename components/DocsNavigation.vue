@@ -140,9 +140,9 @@
 </template>
 
 <script setup>
-  const {public: {navigation}} = useRuntimeConfig()
+const {public: {navigation}} = useRuntimeConfig()
 
-  const openDocsearch = () => {
-    document.querySelector('#docsearch button').click()
-  }
+const openDocsearch = () => {
+  document.querySelector('#docsearch button').click()
+}
 </script>
