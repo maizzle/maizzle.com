@@ -22,7 +22,7 @@
 
 .home-code-sample pre {
   @apply overflow-x-auto p-6 rounded-b-md;
-  @apply bg-gradient-to-br from-white/75 to-pink-50/20;
+  @apply bg-gradient-to-br from-white/75 to-slate-50/20;
 }
 
 .home-code-sample .shiki {
