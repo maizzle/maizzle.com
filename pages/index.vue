@@ -428,6 +428,10 @@
 <script setup>
 import features from '@/data/features'
 
+definePageMeta({
+  layout: 'homepage',
+})
+
 useContentHead({
   head: {
     titleTemplate: () => 'Maizzle - Quickly build HTML emails with Tailwind CSS',

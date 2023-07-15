@@ -1,33 +1,45 @@
 <template>
-  <div class="col-span-12 lg:col-span-8 grid grid-cols-1 lg:grid-cols-12 max-w-[65ch] lg:max-w-full mx-auto lg:m-0">
-    <article class="col-span-9 2xl:col-span-7 3xl:col-span-6 px-4 sm:px-8 pb-12 mt-4 xl:mt-8 space-y-8">
-      <div class="divide-y divide-slate-100">
-        <div
-          v-for="guide in guides"
-          :key="guide._id"
-          class="py-6 space-y-1"
-        >
-          <p class="text-sm text-gray-500">
-            <time :datetime="guide.date">{{ formatDate(guide.date) }}</time>
-          </p>
-          <NuxtLink
-            :to="guide._path"
-            class="block"
+  <div class="bg-white py-12 sm:py-24">
+    <PatternTemplates class="max-w-3xl mt-0 fixed bottom-72 lg:bottom-0 -left-44 lg:left-0 w-auto md:w-2/3 lg:w-1/2 z-0 text-slate-300" />
+
+    <div class="mx-auto max-w-7xl px-6 lg:px-8 relative">
+      <div class="mx-auto max-w-2xl">
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+          Guides
+        </h1>
+        <p class="mt-2 text-lg leading-8 text-gray-600">
+          Learn how to create HTML emails with Tailwind CSS in Maizzle.
+        </p>
+        <div class="mt-10 space-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16">
+          <article
+            v-for="guide in guides"
+            :key="guide._id"
+            class="flex max-w-xl flex-col items-start justify-between"
           >
-            <h2 class="text-xl font-bold text-gray-900" v-text="guide.title" />
-            <p class="mt-3 text-base text-gray-500" v-text="guide.description" />
-          </NuxtLink>
+            <div class="flex items-center gap-x-4 text-xs">
+              <time :datetime="guide.date" class="text-gray-500">
+                {{ formatDate(guide.date) }}
+              </time>
+            </div>
+            <div class="group relative">
+              <h2 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+                <NuxtLink :to="guide._path">
+                  <span class="absolute inset-0"></span>
+                  {{ guide.title }}
+                </NuxtLink>
+              </h2>
+              <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
+                {{ guide.description }}
+              </p>
+            </div>
+          </article>
         </div>
       </div>
-    </article>
+    </div>
   </div>
 </template>
 
 <script setup>
-definePageMeta({
-  layout: 'documentation',
-})
-
 const route = useRoute()
 
 const guides = await queryContent('guides')
