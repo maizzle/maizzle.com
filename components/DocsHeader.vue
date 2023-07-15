@@ -327,7 +327,6 @@ const mobileVersionDropdownOpen = ref(false)
 const showMobileMenu = ref(false)
 
 const router = useRouter()
-const route = useRoute()
 
 const goToBrandPage = () => {
   router.push('/brand')

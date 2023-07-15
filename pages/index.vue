@@ -495,21 +495,4 @@ const formatDateToISO = string => {
   const date = new Date(string)
   return date.toISOString().split('T')[0]
 }
-
-const environmentCode = `
-module.exports = {
-  build: {
-    templates: {
-      source: 'src/templates',
-      destination: {
-        path: 'build_production',
-        extension: 'html',
-      },
-      assets: {
-        source: 'src/images',
-        destination: 'images',
-      },
-    },
-  }
-}`
 </script>
