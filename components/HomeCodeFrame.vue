@@ -22,7 +22,7 @@
       </svg>
     </div>
 
-    <div class="border border-t-0 relative z-20 rounded-b-md backdrop-blur-[3px] bg-white">
+    <div class="relative z-20 rounded-b-md backdrop-blur-[3px] bg-white">
       <slot />
     </div>
 

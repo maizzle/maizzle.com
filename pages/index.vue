@@ -98,15 +98,11 @@
           <div class="lg:sticky top-28">
             <div class="relative">
               <HomeCodeFrame
-                title="tailwind.config.js"
                 no-copy
+                title="tailwind.config.js"
                 bg-frame-class="top-4 sm:top-8 right-4 sm:right-8 backdrop-blur-[2px]"
               >
-                <SyntaxHighlight
-                  class="relative z-10"
-                  lang="js"
-                  :code="configCode"
-                />
+                <ContentDoc path="code/config" />
               </HomeCodeFrame>
             </div>
           </div>
@@ -157,11 +153,7 @@
               bg-frame-class="top-4 sm:top-8 right-4 sm:right-8 bg-white/30 backdrop-blur-[2px]"
               no-copy
             >
-              <SyntaxHighlight
-                class="relative z-10"
-                lang="xml"
-                :code="templateCode"
-              />
+            <ContentDoc path="code/template" />
             </HomeCodeFrame>
           </div>
         </div>
@@ -202,11 +194,7 @@
                 bg-frame-class="top-4 sm:top-8 right-4 sm:right-8 bg-white/30 backdrop-blur-[1px]"
                 no-copy
               >
-                <SyntaxHighlight
-                  class="relative z-10"
-                  lang="js"
-                  :code="environmentCode"
-                />
+                <ContentDoc path="code/environment" />
               </HomeCodeFrame>
             </div>
           </div>
@@ -440,6 +428,12 @@
 <script setup>
 import features from '@/data/features'
 
+useContentHead({
+  head: {
+    titleTemplate: () => 'Maizzle - Quickly build HTML emails with Tailwind CSS',
+  }
+})
+
 const templates = await queryContent('templates')
   .only([
     '_id',
@@ -501,53 +495,6 @@ const formatDateToISO = string => {
   const date = new Date(string)
   return date.toISOString().split('T')[0]
 }
-
-const configCode = `
-module.exports = {
-  theme: {
-    screens: {
-      sm: {max: '600px'},
-      xs: {max: '425px'},
-    },
-    extend: {
-      colors: {
-        blue: {
-          brand: '#286dbd',
-        },
-      },
-      spacing: {
-        full: '100%',
-        px: '1px',
-        0: '0',
-        2: '8px',
-      }
-    }
-  },
-  plugins: [
-    require('tailwindcss-mso'),
-    require('tailwindcss-email-variants'),
-  ]
-}`
-
-const templateCode = `
-<x-main>
-  <table align="center">
-    <tr>
-      <td class="w-[600px] max-w-full bg-white">
-        <h1 class="m-0 mb-8">
-          BYOHTML
-        </h1>
-        <p class="text-base/6">
-          Bring your own HTML
-        </p>
-
-        <x-button href="https://maizzle.com">
-          Read more
-        </x-button>
-      </td>
-    </tr>
-  </table>
-</x-main>`
 
 const environmentCode = `
 module.exports = {
