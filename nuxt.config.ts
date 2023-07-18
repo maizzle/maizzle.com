@@ -44,6 +44,7 @@ export default defineNuxtConfig({
       }
     },
   },
+  spaLoadingTemplate: false,
   typescript: {
     shim: false,
   },
