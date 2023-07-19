@@ -40,7 +40,7 @@ let attributes = {
   table: {
     cellpadding: 0,
     cellspacing: 0,
-    role: 'presentation'
+    role: 'none'
   },
   img: {
     alt: ''
