@@ -17,6 +17,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      screens: {
+        '3xl': '1921px',
+      },
       fontFamily: {
         inter: ['"Inter"', ...defaultTheme.fontFamily.sans],
       },
