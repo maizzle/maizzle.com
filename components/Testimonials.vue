@@ -27,9 +27,9 @@
                 :height="40"
                 class="h-10 w-10 rounded-full bg-gray-50"
               />
-              <div class="flex-auto">
+              <div class="flex-auto leading-normal">
                 <div class="font-semibold">Eric L. Barnes</div>
-                <div class="text-gray-600">Laravel News</div>
+                <div class="text-gray-600">@ericlbarnes</div>
               </div>
               <div class="flex items-center">
                 <span class="sr-only">Laravel News</span>
@@ -50,7 +50,7 @@
               </blockquote>
               <figcaption class="mt-6 flex items-center gap-x-4">
                 <svg class="w-8 h-8" fill="none" height="132" viewBox="0 0 134 132" width="134" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><linearGradient id="a"><stop offset="0" stop-color="#fff"></stop><stop offset=".1217" stop-color="#fffbfb"></stop><stop offset=".241" stop-color="#fff0ef"></stop><stop offset=".3594" stop-color="#ffdedc"></stop><stop offset=".4773" stop-color="#ffc3c0"></stop><stop offset=".5948" stop-color="#ffa29c"></stop><stop offset=".7121" stop-color="#ff7970"></stop><stop offset=".8272" stop-color="#ff493e"></stop><stop offset=".8616" stop-color="#ff392d"></stop><stop offset="1" stop-color="#ff2d20"></stop></linearGradient><linearGradient id="b" gradientUnits="userSpaceOnUse" x1="27.8771" x2="86.7363" xlink:href="#a" y1="65.8138" y2="65.8138"></linearGradient><linearGradient id="c" gradientUnits="userSpaceOnUse" x1="54.7828" x2="54.7828" xlink:href="#a" y1="57.2727" y2="86.9087"></linearGradient><path d="m129.001 0h-124.22756c-2.20914 0-4.000002 1.79086-4.000002 4v123.628c0 2.209 1.790872 4 4.000012 4h124.22755c2.209 0 4-1.791 4-4v-123.628c0-2.20914-1.791-4-4-4z" fill="#ff2d20"></path><path d="m81.5414 89.0681h-42.8088v-56.1614h-10.8537v65.8141h9.0356 1.8181 47.9877z" fill="url(#b)"></path><path d="m105.894 32.9067h-10.3027v55.229l-30.0267-55.229h-15.8673v48.3734h10.1374v-37.7883l30.0268 55.229h16.0325z" fill="#fff"></path><path d="m59.8347 57.2583h-10.1374v29.6163h10.1374z" fill="url(#c)"></path></svg>
-                <div>
+                <div class="leading-normal">
                   <div class="font-semibold">Eric L. Barnes</div>
                   <div class="text-gray-600">Laravel News</div>
                 </div>
@@ -72,7 +72,7 @@
                       :height="40"
                       class="h-10 w-10 rounded-full bg-gray-50"
                     />
-                    <div>
+                    <div class="leading-normal">
                       <div class="font-semibold">Tobias Petry</div>
                       <div class="text-gray-600">@tobias_petry</div>
                     </div>
@@ -94,7 +94,7 @@
                     <path fill="#ff0089" d="M0 0h72v72H0z"></path>
                     <path fill="#fff" d="M21.8 17.8h28.4v7.3H30v7.7h17.8v7.3H30v14.1h-8.2z"></path>
                   </svg>
-                  <div>
+                  <div class="leading-normal">
                     <div class="font-semibold">Michael Warning</div>
                     <div class="text-gray-600">Found</div>
                   </div>
@@ -116,7 +116,7 @@
                   <svg class="simple-logo" width="29" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 22" fill="none" data-title="Dialpad">
                     <path d="M21.1355 3.81281C19.4319 3.81113 17.7852 4.43774 16.4989 5.57712C15.2126 6.7165 14.3735 8.29182 14.1363 10.0126V0.108626C14.1364 0.0869409 14.1301 0.0657361 14.1182 0.0477565C14.1063 0.029777 14.0894 0.0158506 14.0697 0.00778021C14.05 -0.000290209 14.0283 -0.00213304 14.0075 0.00249027C13.9868 0.00711357 13.9678 0.0179901 13.9532 0.033712L9.81917 4.37782C8.94818 4.00357 8.01241 3.81144 7.06729 3.81281C3.16599 3.81281 0 7.0305 0 11C0 14.9696 3.16422 18.1873 7.06817 18.1873C8.77163 18.189 10.4183 17.5625 11.7045 16.4233C12.9908 15.2841 13.83 13.709 14.0673 11.9884V21.8914C14.0673 21.9889 14.1832 22.0359 14.2496 21.9664L18.3845 17.6223C19.2552 17.9964 20.1907 18.1885 21.1355 18.1873C25.0386 18.1873 28.2028 14.9696 28.2028 11C28.2028 7.0305 25.0386 3.81281 21.1355 3.81281Z" fill="#7C52FF"></path>
                   </svg>
-                  <div>
+                  <div class="leading-normal">
                     <div class="font-semibold">Ted Goas</div>
                     <div class="text-gray-600">Dialpad</div>
                   </div>
@@ -140,7 +140,7 @@
                     <path d="M7.4 11.2c.8.1 1.6.5 2.2 1.1-.6.6-1.3 1-2.2 1.1-.8-.1-1.6-.5-2.2-1.1.6-.7 1.4-1.1 2.2-1.1zm12.9 0c.8.1 1.6.5 2.2 1.1-.6.6-1.3 1-2.2 1.1-.8-.1-1.6-.5-2.2-1.1.6-.7 1.3-1.1 2.2-1.1z" fill="#b3d143" />
                     <path fill="#9bc947" d="M7.4 11.2c.8.1 1.6.5 2.2 1.1-.6.6-1.3 1-2.2 1.1-.8-.1-1.6-.5-2.2-1.1.6-.7 1.4-1.1 2.2-1.1zm12.9 0c.8.1 1.6.5 2.2 1.1-.6.6-1.3 1-2.2 1.1-.8-.1-1.6-.5-2.2-1.1.6-.7 1.3-1.1 2.2-1.1zM8.5 16c.6-.5 1.5-.8 2.3-.8 0 .8-.2 1.6-.8 2.3-.6.5-1.5.8-2.3.8 0-.8.3-1.7.8-2.3zm9.1-9.1c.6-.5 1.5-.8 2.3-.8 0 .8-.2 1.6-.8 2.3-.6.5-1.5.8-2.3.8 0-.8.3-1.6.8-2.3zm0 10.6c-.5-.6-.8-1.5-.8-2.3.8 0 1.6.2 2.3.8.5.6.8 1.5.8 2.3-.8 0-1.6-.3-2.3-.8zM8.5 8.4C8 7.8 7.7 7 7.7 6.1c.8 0 1.6.2 2.3.8.5.6.8 1.5.8 2.3-.8 0-1.6-.3-2.3-.8zm8.2 4c0 1.4-1.3 2.5-2.9 2.5s-2.9-1.1-2.9-2.5.6-2.9 2.9-2.9 2.9 1.5 2.9 2.9z" />
                   </svg>
-                  <div>
+                  <div class="leading-normal">
                     <div class="font-semibold">Rémi Parmentier</div>
                     <div class="text-gray-600">Tilt Studio</div>
                   </div>
