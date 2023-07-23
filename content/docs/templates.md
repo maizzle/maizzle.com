@@ -64,7 +64,7 @@ That will render as:
 <h1>Hello {{ user.name }}, please confirm your email address</h1>
 ```
 
-If you need to use an escaped Front Matter expression in Layout, like in a preheader variable, you need to double-escape it:
+If the Front Matter variable will be used in a Layout, you need to double-escape it:
 
 ```hbs [src/templates/example.html]
 ---

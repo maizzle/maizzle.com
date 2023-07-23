@@ -328,7 +328,7 @@ Maizzle uses [tailwindcss-box-shadow](https://www.npmjs.com/package/tailwindcss-
 
 The default, CSS variables-based box shadows need to be disabled in your `tailwind.config.js`, because email clients have very poor support for CSS variables.
 
-```js [tailwind.config.js]
+```js [tailwind.config.js] diff
 module.exports = {
   theme: {
     extend: {
@@ -343,8 +343,7 @@ module.exports = {
       },
     },
     corePlugins: {
-      boxShadow: false,
-      // ...
+-      boxShadow: false,
     },
   }
 }
@@ -418,7 +417,11 @@ So you can use `leading` utilities to easily create vertical spacing, like this:
 <div class="leading-16">&zwj;</div>
 ```
 
-Result: `<div style="line-height: 64px">&zwj;</div>`{lang=html}
+Result:
+
+```html
+<div style="line-height: 64px">&zwj;</div>
+```
 
 ### maxWidth
 

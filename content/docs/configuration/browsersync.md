@@ -95,13 +95,13 @@ By default, the following paths are watched for file changes:
 
 You may define additional file and folder paths to watch when developing locally:
 
-```js [config.js]
+```js [config.js] {5,6} diff
 module.exports = {
   build: {
     browsersync: {
       watch: [
-        './some/folder',
-        'some-file.js'
++        './some/folder',
++        'some-file.js'
       ]
     }
   }
