@@ -91,19 +91,23 @@ Read more about the concept of utility-first CSS and familiarize yourself with t
 
 ### Components
 
-If you find yourself repeating common utility combinations to apply the same styling in many different places (buttons maybe?), you can extract those to a component.
+If you're repeating the same utility classes over and over again, you can extract them to a [Component](/docs/components) so you've got a single source of truth and can make changes in one place.
 
-Tailwind CSS includes an [@apply directive](https://tailwindcss.com/docs/extracting-components#extracting-css-components-with-apply) that can be used to compose custom CSS classes by "applying" utilities to them.
+### Custom classes
+
+As an alternative to creating a Component, you can extract utility classes to a custom class using Tailwind's `@apply` directive.
 
 Here's a quick example:
 
 ```postcss [src/css/components.css]
-.button-danger {
-  @apply px-6 py-3 text-white bg-red-500;
+@layer components {
+  .button-danger {
+    @apply px-6 py-3 text-white bg-red-500;
+  }
 }
 ```
 
-Unlike utility classes that you add to `tailwind.config.js`, you add that in a CSS file that Maizzle tells Tailwind to compile along with the rest of the CSS.
+Unlike utility classes that you add to `tailwind.config.js`, you add that in a CSS file that is imported in the main `tailwind.css` file.
 
 And that brings us to...
 
@@ -111,9 +115,9 @@ And that brings us to...
 
 The [official Maizzle Starter](https://github.com/maizzle/maizzle) uses a `tailwind.css` file stored in `src/css`.
 
-Although optional, this is included in order to provide an example of how you can use custom CSS components that go beyond the utility-first concept of Tailwind.
+Although optional, this file is included in order to provide an example of how you can use custom CSS in Maizzle.
 
-For example, Tailwind CSS might not include some utility class that you need. If you want to organize custom utilities and CSS components into files, this is how you do it.
+For example, as we've just seen above, you might want to create a custom class based on Tailwind CSS utilities. If you want to organize custom utilities and CSS classes into files, this is how you do it.
 
 `tailwind.css` does two things:
 
@@ -159,11 +163,11 @@ Again, this is totally optional: you can use Tailwind CSS in Maizzle without cre
 
 Add custom CSS files anywhere under `src/css`.
 
-Maizzle adds `utilities.css`, which contains a sample custom utility class that Tailwind CSS doesn't provide.
+Maizzle provides the `utilities.css` file, which contains a sample custom utility class that Tailwind CSS doesn't provide.
 
 <Alert type="warning">Files that you `@import` in `tailwind.css` must be relative to `src/css`</Alert>
 
-<Alert type="danger">Any `@import` rules must come first in your `tailwind.css` file.</Alert>
+<Alert type="danger">Any `@import` rules must come first in your `tailwind.css` file, before any CSS.</Alert>
 
 ## Shorthand CSS
 
