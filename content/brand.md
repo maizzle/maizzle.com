@@ -34,7 +34,7 @@ You may use the following assets when referring to Maizzle, for example in artic
 </div>
 
 <div>
-  <a href="/assets/brand/mark.svg" target="_blank">
+  <a href="/assets/brand/mark-gradient.svg" target="_blank">
     <img src="/assets/brand/mark-gradient.svg" alt="Maizzle mark with gradient" width="130">
   </a>
 
