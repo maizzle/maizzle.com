@@ -30,6 +30,9 @@ export default defineNuxtConfig({
         '/starters',
         '/guides',
       ],
+      ignore: [
+        '/code',
+      ],
     },
   },
   runtimeConfig: {
