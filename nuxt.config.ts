@@ -48,9 +48,6 @@ export default defineNuxtConfig({
       }
     },
   },
-  site: {
-    url: 'https://maizzle.com',
-  },
   spaLoadingTemplate: false,
   typescript: {
     shim: false,
