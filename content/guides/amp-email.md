@@ -1,6 +1,6 @@
 ---
 title: "How to create an AMP for Email template"
-description: "Use AMP for Email in Maizzle to easily create interactive HTML emails with realtime information and in-line actions"
+description: "Use AMP for Email in Maizzle to easily create interactive HTML emails with realtime information and in-line actions."
 date: 2021-03-03
 ---
 

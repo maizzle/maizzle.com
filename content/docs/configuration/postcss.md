@@ -1,6 +1,6 @@
 ---
 title: "PostCSS configuration"
-description: "Configuring PostCSS options in Maizzle"
+description: "Configuring PostCSS options in Maizzle."
 ---
 
 # PostCSS configuration

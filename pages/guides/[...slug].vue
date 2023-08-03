@@ -55,6 +55,12 @@ const route = useRoute()
 const page = await queryContent('guides').where({ _path: route.path }).findOne()
 const [prev, next] = await queryContent('guides').only(['_path', 'title']).sort([{ date: -1 }]).findSurround(route.path)
 
+defineOgImage({
+  component: 'OGImageGuides',
+  title: page.title,
+  description: page.description,
+})
+
 useHead({
   title: page.title,
   meta: [

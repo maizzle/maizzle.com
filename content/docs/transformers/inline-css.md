@@ -1,6 +1,6 @@
 ---
 title: "Inline CSS"
-description: "Inline CSS in your HTML emails for better email client compatibility"
+description: "Inline CSS in your HTML emails for better email client compatibility."
 ---
 
 # Inline CSS

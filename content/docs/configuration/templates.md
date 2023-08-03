@@ -1,6 +1,6 @@
 ---
 title: "Templates configuration"
-description: "Configuring template sources and other related options in Maizzle"
+description: "Configuring template sources and other related options in Maizzle."
 ---
 
 # Templates configuration

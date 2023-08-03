@@ -1,6 +1,6 @@
 ---
 title: "Components"
-description: "Import components into your HTML email templates and render them with custom slot content and data"
+description: "Import components into your HTML email templates and render them with custom slot content and data."
 ---
 
 # Components

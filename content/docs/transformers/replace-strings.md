@@ -1,6 +1,6 @@
 ---
 title: "Replace strings"
-description: "Replace strings in your HTML email content"
+description: "Replace strings in your HTML email content."
 ---
 
 # Replace strings

@@ -1,6 +1,6 @@
 ---
 title: "Components configuration"
-description: "Configuring components in Maizzle"
+description: "Configuring components in Maizzle."
 ---
 
 # Components configuration

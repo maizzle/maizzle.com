@@ -1,6 +1,6 @@
 ---
 title: "Prettify Email Code"
-description: "Pretty print your HTML email template code before sending it to a colleague or a client"
+description: "Pretty print your HTML email template code before sending it to a colleague or a client."
 ---
 
 # Prettify Code

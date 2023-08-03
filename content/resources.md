@@ -1,6 +1,6 @@
 ---
 title: "Resources"
-description: "Resources and tools that can enhance your Maizzle workflow"
+description: "Resources and tools that can enhance your Maizzle workflow."
 ---
 
 # Resources

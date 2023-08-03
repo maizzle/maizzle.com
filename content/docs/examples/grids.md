@@ -1,6 +1,6 @@
 ---
 title: "Grids"
-description: "Learn how to create a simple grid system for HTML email with Tailwind CSS in Maizzle"
+description: "Learn how to create a simple grid system for HTML email with Tailwind CSS in Maizzle."
 ---
 
 # Grids

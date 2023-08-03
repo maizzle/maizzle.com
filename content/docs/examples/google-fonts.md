@@ -1,6 +1,6 @@
 ---
 title: "Google Fonts"
-description: "Easily import and use Google Fonts in your HTML email templates"
+description: "Easily import and use Google Fonts in your HTML email templates."
 ---
 
 # Google Fonts

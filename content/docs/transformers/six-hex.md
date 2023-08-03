@@ -1,6 +1,6 @@
 ---
 title: "Six-digit HEX"
-description: "Ensure your bgcolor attributes use six-digit hexadecimal"
+description: "Ensure your bgcolor attributes use six-digit hexadecimal."
 ---
 
 # Six-digit HEX

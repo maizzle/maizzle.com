@@ -1,6 +1,6 @@
 ---
 title: "Base URL"
-description: "Set a base URL and easily prepend absolute URLs to any source in your HTML emails"
+description: "Set a base URL and easily prepend absolute URLs to any source in your HTML emails."
 ---
 
 # Base URL

@@ -1,6 +1,6 @@
 ---
 title: "Remove unused CSS"
-description: "Optimize your HTML email file size by removing unused CSS and rewriting CSS selectors to be as short as possible"
+description: "Optimize your HTML email file size by removing unused CSS and rewriting CSS selectors to be as short as possible."
 ---
 
 # Remove unused CSS

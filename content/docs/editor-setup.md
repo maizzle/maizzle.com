@@ -1,6 +1,6 @@
 ---
 title: "Editor Setup"
-description: "Setting up your editor for an enhanced Maizzle workflow"
+description: "Setting up your editor for an enhanced Maizzle workflow."
 ---
 
 # Editor Setup

@@ -1,6 +1,6 @@
 ---
 title: "CLI Tool"
-description: "Using the Maizzle CLI tool to scaffold projects and build emails"
+description: "Using the Maizzle CLI tool to scaffold projects and build emails."
 ---
 
 # Maizzle CLI

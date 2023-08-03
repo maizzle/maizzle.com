@@ -1,6 +1,6 @@
 ---
 title: "Spacers"
-description: "Learn how to create reliable vertical spacing for HTML email with Tailwind CSS in Maizzle"
+description: "Learn how to create reliable vertical spacing for HTML email with Tailwind CSS in Maizzle."
 ---
 
 # Spacers

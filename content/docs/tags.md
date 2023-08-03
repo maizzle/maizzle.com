@@ -1,6 +1,6 @@
 ---
 title: "Custom Tags"
-description: "Special tags for templating logic that you can use in Maizzle"
+description: "Special tags for templating logic that you can use in Maizzle."
 ---
 
 # Custom Tags

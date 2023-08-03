@@ -1,6 +1,6 @@
 ---
 title: "Attribute to style"
-description: "Convert HTML attributes to inline CSS in your HTML emails"
+description: "Convert HTML attributes to inline CSS in your HTML emails."
 ---
 
 # Attribute to style

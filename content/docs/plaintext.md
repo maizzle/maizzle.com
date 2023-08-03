@@ -1,6 +1,6 @@
 ---
 title: "Plaintext"
-description: "Automatically create plaintext versions of your HTML emails in Maizzle"
+description: "Automatically create plaintext versions of your HTML emails in Maizzle."
 ---
 
 # Plaintext

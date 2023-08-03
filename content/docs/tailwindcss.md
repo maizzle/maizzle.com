@@ -1,6 +1,6 @@
 ---
 title: "Tailwind CSS"
-description: "Learn how to use Tailwind CSS to create HTML email templates with CSS utility classes"
+description: "Learn how to use Tailwind CSS to create HTML email templates with CSS utility classes."
 ---
 
 # Using Tailwind CSS

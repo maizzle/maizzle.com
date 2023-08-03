@@ -1,6 +1,6 @@
 ---
 title: "Assets"
-description: "How Maizzle handles asset files for your HTML emails"
+description: "How Maizzle handles asset files for your HTML emails."
 ---
 
 # Asset Files

@@ -1,6 +1,6 @@
 ---
 title: "Safe class names"
-description: "Replace escaped characters in class names and CSS selectors for better email client compatibility"
+description: "Replace escaped characters in class names and CSS selectors for better email client compatibility."
 ---
 
 # Safe class names

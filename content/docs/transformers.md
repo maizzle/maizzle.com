@@ -1,6 +1,6 @@
 ---
 title: "Transformers"
-description: "What are Maizzle Transformers and how to use them to transform your HTML emails"
+description: "What are Maizzle Transformers and how to use them to transform your HTML emails."
 ---
 
 # What are Transformers?

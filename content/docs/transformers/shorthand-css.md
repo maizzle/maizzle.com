@@ -1,6 +1,6 @@
 ---
 title: "Shorthand CSS"
-description: "Group CSS properties of the same type into shorthand inline CSS in your HTML email"
+description: "Group CSS properties of the same type into shorthand inline CSS in your HTML email."
 ---
 
 # Shorthand CSS

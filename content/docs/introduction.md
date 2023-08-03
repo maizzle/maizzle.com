@@ -1,6 +1,6 @@
 ---
 title: "Introduction"
-description: "Getting started with the Maizzle Email Framework"
+description: "Getting started with the Maizzle Email Framework."
 ---
 
 # What is Maizzle?

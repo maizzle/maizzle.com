@@ -1,6 +1,6 @@
 ---
 title: Privacy
-description: This document outlines your rights relating to your data, how we collect and process your data, what data is processed, and what cookies are set in connection with the use of the maizzle.com website.
+description: "This document outlines your rights relating to your data, how we collect and process your data, what data is processed, and what cookies are set in connection with the use of the maizzle.com website."
 ---
 
 # Privacy Policy

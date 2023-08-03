@@ -1,6 +1,6 @@
 ---
 title: "Events"
-description: "Use lifecycle hooks to hook into the email build process at specific points in time"
+description: "Use lifecycle hooks to hook into the email build process at specific points in time."
 ---
 
 # Events

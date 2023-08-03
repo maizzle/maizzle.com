@@ -1,6 +1,6 @@
 ---
 title: "Compatibility"
-description: "Email client compatibility and what Maizzle does to help improve your template's rendering"
+description: "Email client compatibility and what Maizzle does to help improve your template's rendering."
 ---
 
 # Compatibility

@@ -45,6 +45,12 @@ definePageMeta({
   layout: 'documentation',
 })
 
+defineOgImage({
+  component: 'OGImageDocs',
+  title: 'Starters',
+  description: 'Scaffold a Maizzle project quickly by using one of our starters.',
+})
+
 const route = useRoute()
 
 const starters = await queryContent('starters')

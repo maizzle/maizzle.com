@@ -1,6 +1,6 @@
 ---
 title: "Tailwind CSS configuration"
-description: "Tailwind CSS configuration options for email development in Maizzle"
+description: "Tailwind CSS configuration options for email development in Maizzle."
 ---
 
 # Tailwind CSS configuration

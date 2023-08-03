@@ -1,6 +1,6 @@
 ---
 title: "Expressions configuration"
-description: "Configuring expressions in Maizzle"
+description: "Configuring expressions in Maizzle."
 ---
 
 # Expressions configuration

@@ -1,6 +1,6 @@
 ---
 title: "Expressions"
-description: "Learn how to create HTML emails with template inheritance in Maizzle"
+description: "Learn how to create HTML emails with template inheritance in Maizzle."
 ---
 
 # Expressions

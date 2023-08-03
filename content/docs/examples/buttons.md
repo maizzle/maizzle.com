@@ -1,6 +1,6 @@
 ---
 title: "Buttons"
-description: "Learn how to create simple buttons for your HTML email templates in Maizzle"
+description: "Learn how to create simple buttons for your HTML email templates in Maizzle."
 ---
 
 # Buttons

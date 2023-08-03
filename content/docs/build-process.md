@@ -1,6 +1,6 @@
 ---
 title: "Build process"
-description: "See how the build process works and how Maizzle builds your emails"
+description: "See how the build process works and how Maizzle builds your emails."
 ---
 
 # Build process

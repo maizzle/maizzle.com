@@ -1,6 +1,6 @@
 ---
 title: "Build errors configuration"
-description: "Configuration options for displaying build errors in Maizzle"
+description: "Configuration options for displaying build errors in Maizzle."
 ---
 
 # Build errors

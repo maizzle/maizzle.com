@@ -1,6 +1,6 @@
 ---
 title: "Markdown"
-description: "Transform markdown in your HTML emails"
+description: "Transform markdown in your HTML emails."
 ---
 
 # Markdown

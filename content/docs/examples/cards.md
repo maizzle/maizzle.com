@@ -1,6 +1,6 @@
 ---
 title: "Cards"
-description: "Create simple, effective attention grabbers in HTML emails with Tailwind CSS in Maizzle"
+description: "Create simple, effective attention grabbers in HTML emails with Tailwind CSS in Maizzle."
 ---
 
 # Cards

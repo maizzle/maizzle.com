@@ -1,6 +1,6 @@
 ---
 title: "Filters"
-description: "Apply transformations to content inside tags from your HTML email templates"
+description: "Apply transformations to content inside tags from your HTML email templates."
 ---
 
 # Filters

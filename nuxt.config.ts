@@ -14,6 +14,7 @@ export default defineNuxtConfig({
     './modules/github-release',
     './modules/shiki/shiki-custom',
     '@nuxt/content',
+    'nuxt-og-image',
   ],
   postcss: {
     plugins: {
@@ -46,6 +47,9 @@ export default defineNuxtConfig({
         indexName: process.env.DOCSEARCH_INDEX_NAME,
       }
     },
+  },
+  site: {
+    url: 'https://maizzle.com',
   },
   spaLoadingTemplate: false,
   typescript: {
