@@ -13,17 +13,17 @@ The Spacer component is defined in `src/components/spacer.html`.
 
 This enables the `<x-spacer>` syntax, which you can use like this:
 
-  ```xml{5}
-  <x-main>
-    <table>
-      <tr>
-        <td>
-          <x-spacer height="32px" />
-        </td>
-      </tr>
-    </table>
-  </x-main>
-  ```
+```xml{5}
+<x-main>
+  <table>
+    <tr>
+      <td>
+        <x-spacer height="32px" />
+      </td>
+    </tr>
+  </table>
+</x-main>
+```
 
 You can use it anywhere you'd use a `<div>`.
 

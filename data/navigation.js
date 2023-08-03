@@ -223,6 +223,10 @@ export default [
         title: 'Button',
         path: '/docs/components/button'
       },
+      {
+        title: 'VML',
+        path: '/docs/components/vml'
+      },
     ]
   },
   {
