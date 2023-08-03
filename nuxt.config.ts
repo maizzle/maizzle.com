@@ -13,8 +13,8 @@ export default defineNuxtConfig({
     './modules/docs-navigation',
     './modules/github-release',
     './modules/shiki/shiki-custom',
-    '@nuxt/content',
     'nuxt-og-image',
+    '@nuxt/content',
   ],
   postcss: {
     plugins: {
