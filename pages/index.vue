@@ -438,6 +438,10 @@ useContentHead({
   }
 })
 
+defineOgImage({
+  component: 'OGImageHome',
+})
+
 const templates = await queryContent('templates')
   .only([
     '_id',
