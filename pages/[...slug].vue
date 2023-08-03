@@ -82,5 +82,11 @@ useHead({
       content: 'article',
     }
   ],
+  link: [
+    {
+      rel: 'canonical',
+      href: `https://maizzle.com${route.path}`,
+    },
+  ],
 })
 </script>

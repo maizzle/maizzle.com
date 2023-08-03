@@ -74,6 +74,12 @@ useHead({
       content: `https://maizzle.com${route.path}`
     },
   ],
+  link: [
+    {
+      rel: 'canonical',
+      href: `https://maizzle.com${route.path}`,
+    },
+  ],
 })
 
 const formatDate = string => {
