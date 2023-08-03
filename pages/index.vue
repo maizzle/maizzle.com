@@ -432,12 +432,6 @@ definePageMeta({
   layout: 'homepage',
 })
 
-useContentHead({
-  head: {
-    titleTemplate: () => 'Maizzle - Quickly build HTML emails with Tailwind CSS',
-  }
-})
-
 defineOgImage({
   component: 'OGImageHome',
 })
