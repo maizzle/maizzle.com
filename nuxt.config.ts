@@ -9,12 +9,12 @@ export default defineNuxtConfig({
     payloadExtraction: false,
   },
   modules: [
-    '@nuxt/content',
-    'nuxt-og-image',
     './modules/routes-list',
     './modules/docs-navigation',
     './modules/github-release',
     './modules/shiki/shiki-custom',
+    '@nuxt/content',
+    'nuxt-og-image',
   ],
   postcss: {
     plugins: {
