@@ -178,12 +178,12 @@ module.exports = {
 
 ### afterBuild
 
-Runs after all Templates have been compiled and output to disk. Returns an array with the paths to all the files inside the [`destination.path`](/docs/configuration/templates#path) directory.
+Runs after all Templates have been compiled and output to disk. The `files` parameter will contain the paths to all the files inside the [`destination.path`](/docs/configuration/templates#path) directory.
 
 ```js [config.js]
 module.exports = {
   events: {
-    afterBuild(files) {
+    afterBuild(files, config) {
       console.log(files)
     }
   }
