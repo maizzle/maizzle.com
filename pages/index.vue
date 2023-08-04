@@ -100,7 +100,9 @@
                 title="tailwind.config.js"
                 bg-frame-class="top-4 sm:top-8 right-4 sm:right-8 backdrop-blur-[2px]"
               >
-                <ContentDoc path="code/config" />
+                <ContentQuery path="/code/config" find="one" v-slot="{ data }">
+                  <ContentRenderer :value="data" />
+                </ContentQuery>
               </HomeCodeFrame>
             </div>
           </div>
@@ -150,7 +152,9 @@
               bg-frame-class="top-4 sm:top-8 right-4 sm:right-8 bg-white/30 backdrop-blur-[2px]"
               no-copy
             >
-              <ContentDoc path="code/template" />
+              <ContentQuery path="code/template" find="one" v-slot="{ data }">
+                <ContentRenderer :value="data" />
+              </ContentQuery>
             </HomeCodeFrame>
           </div>
         </div>
@@ -190,7 +194,9 @@
                 bg-frame-class="top-4 sm:top-8 right-4 sm:right-8 bg-white/30 backdrop-blur-[1px]"
                 no-copy
               >
-                <ContentDoc path="code/environment" />
+                <ContentQuery path="code/environment" find="one" v-slot="{ data }">
+                  <ContentRenderer :value="data" />
+                </ContentQuery>
               </HomeCodeFrame>
             </div>
           </div>
