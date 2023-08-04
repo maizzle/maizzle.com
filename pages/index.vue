@@ -249,35 +249,37 @@
           <p class="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Learn how to create HTML emails with Tailwind CSS in Maizzle.</p>
         </header>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative">
-          <ContentList :query="guides" v-slot="{ list }">
-            <div
-              v-for="guide in list"
-              :key="guide.title"
-              class="group relative"
-            >
-              <NuxtLink
-                class="relative text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white transition-colors"
-                :to="guide._path"
+          <ContentList :query="guides">
+            <template #default="{ list }">
+              <div
+                v-for="guide in list"
+                :key="guide.title"
+                class="group relative"
               >
-                <div class="h-full px-6 py-6 rounded-2xl ring-1 ring-slate-900/5 bg-white hover:ring-indigo-500 transition-all flex flex-col md:flex-row md:flex-wrap flex-1 content-between relative z-1">
-                  <div>
-                    <time
-                      class="mb-5 block text-sm text-slate-500"
-                      :datetime="formatDateToISO(guide.date)"
-                    >
-                      {{ formatDate(guide.date) }}
-                    </time>
-                    <p class="mb-5 font-bold text-xl text-slate-700">
-                      {{ guide.title }}
-                    </p>
-                    <p
-                      class="text-base text-slate-500"
-                      v-html="guide.description"
-                    />
+                <NuxtLink
+                  class="relative text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white transition-colors"
+                  :to="guide._path"
+                >
+                  <div class="h-full px-6 py-6 rounded-2xl ring-1 ring-slate-900/5 bg-white hover:ring-indigo-500 transition-all flex flex-col md:flex-row md:flex-wrap flex-1 content-between relative z-1">
+                    <div>
+                      <time
+                        class="mb-5 block text-sm text-slate-500"
+                        :datetime="formatDateToISO(guide.date)"
+                      >
+                        {{ formatDate(guide.date) }}
+                      </time>
+                      <p class="mb-5 font-bold text-xl text-slate-700">
+                        {{ guide.title }}
+                      </p>
+                      <p
+                        class="text-base text-slate-500"
+                        v-html="guide.description"
+                      />
+                    </div>
                   </div>
-                </div>
-              </NuxtLink>
-            </div>
+                </NuxtLink>
+              </div>
+            </template>
           </ContentList>
         </div>
         <footer class="text-center mt-12 sm:mt-16">
