@@ -13,7 +13,7 @@
             bg-frame-class="top-4 sm:top-8 right-4 sm:right-8 bg-white/30 backdrop-blur-[2px]"
             no-copy
           >
-          <ContentDoc path="code/template" />
+            <ContentRenderer :value="page" />
           </HomeCodeFrame>
         </div>
       </div>
@@ -40,3 +40,7 @@
     </div>
   </section>
 </template>
+
+<script setup>
+  const page = await queryContent('code/template').findOne()
+</script>

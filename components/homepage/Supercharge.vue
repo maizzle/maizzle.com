@@ -13,7 +13,7 @@
               title="tailwind.config.js"
               bg-frame-class="top-4 sm:top-8 right-4 sm:right-8 backdrop-blur-[2px]"
             >
-              <ContentDoc path="code/config" />
+              <ContentRenderer :value="page" />
             </HomeCodeFrame>
           </div>
         </div>
@@ -49,3 +49,7 @@
     </div>
   </section>
 </template>
+
+<script setup>
+  const page = await queryContent('code/config').findOne()
+</script>
