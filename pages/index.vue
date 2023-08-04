@@ -465,10 +465,6 @@ const guides = await queryContent('guides')
   .limit(6)
   .find()
 
-defineOgImage({
-  component: 'OGImageHome',
-})
-
 const showAllFeatures = ref(false)
 const windowPosition = ref(0)
 
