@@ -15,8 +15,4 @@ useHead({
     class: 'scroll-smooth',
   },
 })
-
-defineOgImage({
-  component: 'OGImageHome',
-})
 </script>

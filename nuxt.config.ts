@@ -1,8 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
+  components: [
+    '~/components',
+    '~/components/homepage',
+  ],
   content: {
-    highlight: false
+    highlight: false,
   },
   css: ['~/assets/css/tailwind.css'],
   experimental: {
