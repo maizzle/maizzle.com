@@ -349,7 +349,9 @@
   import templates from '@/data/ce-templates'
 
   defineOgImage({
-    component: 'OGImageHome',
+    component: 'OGImageDocs',
+    title: 'Maizzle',
+    description: 'Quickly build HTML emails with Tailwind CSS',
   })
 
   useContentHead({
