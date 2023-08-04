@@ -42,12 +42,6 @@
 <script setup>
 const route = useRoute()
 
-defineOgImage({
-  component: 'OGImageDocs',
-  title: 'Guides',
-  description: 'Learn how to create HTML emails with Tailwind CSS in Maizzle.',
-})
-
 const guides = await queryContent('guides')
   .only([
     '_id',

@@ -42,6 +42,10 @@ useHead({
       property: 'og:description',
       content: 'Maizzle is a framework that helps you quickly build HTML emails with Tailwind CSS and advanced, email-specific post-processing.',
     },
+    {
+      property: 'og:image',
+      content: 'https://maizzle.com/images/og.png',
+    },
   ],
   link: [
     {

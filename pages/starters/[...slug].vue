@@ -31,12 +31,6 @@ const route = useRoute()
 const page = await queryContent('starters').where({ _path: route.path }).findOne()
 const toc = page.body.toc
 
-defineOgImage({
-  component: 'OGImageDocs',
-  title: page.title,
-  description: page.description,
-})
-
 useHead({
   title: page.title,
   meta: [

@@ -1,8 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-
 export default defineNuxtConfig({
   content: {
-    highlight: false
+    highlight: false,
   },
   css: ['~/assets/css/tailwind.css'],
   experimental: {
@@ -14,7 +13,6 @@ export default defineNuxtConfig({
     './modules/github-release',
     './modules/shiki/shiki-custom',
     '@nuxt/content',
-    'nuxt-og-image',
   ],
   postcss: {
     plugins: {
