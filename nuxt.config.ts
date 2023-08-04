@@ -1,10 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
-  components: [
-    '~/components',
-    '~/components/homepage',
-  ],
   content: {
     highlight: false,
   },
@@ -13,12 +9,12 @@ export default defineNuxtConfig({
     payloadExtraction: false,
   },
   modules: [
+    'nuxt-og-image',
     './modules/routes-list',
     './modules/docs-navigation',
     './modules/github-release',
     './modules/shiki/shiki-custom',
     '@nuxt/content',
-    'nuxt-og-image',
   ],
   postcss: {
     plugins: {
