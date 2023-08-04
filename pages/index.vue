@@ -194,8 +194,10 @@
                 bg-frame-class="top-4 sm:top-8 right-4 sm:right-8 bg-white/30 backdrop-blur-[1px]"
                 no-copy
               >
-                <ContentQuery path="code/environment" find="one" v-slot="{ data }">
-                  <ContentRenderer :value="data" />
+                <ContentQuery path="code/environment" find="one">
+                  <template #default="{ data }">
+                    <ContentRenderer :value="data" />
+                  </template>
                 </ContentQuery>
               </HomeCodeFrame>
             </div>
