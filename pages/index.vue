@@ -426,77 +426,81 @@
 </template>
 
 <script setup>
-import features from '@/data/features'
+  import features from '@/data/features'
 
-definePageMeta({
-  layout: 'homepage',
-})
-
-useContentHead({
-  head: {
-    titleTemplate: () => 'Maizzle - Quickly build HTML emails with Tailwind CSS',
-  }
-})
-
-const templates = await queryContent('templates')
-  .only([
-    '_id',
-    '_path',
-    'date',
-    'title',
-    'name',
-    'image',
-    'url',
-    'purpose',
-  ])
-  .sort({date: -1})
-  .limit(3)
-  .find()
-
-const guides = await queryContent('guides')
-  .only([
-    '_id',
-    '_path',
-    'title',
-    'description',
-    'date',
-  ])
-  .sort({date: -1})
-  .limit(6)
-  .find()
-
-const showAllFeatures = ref(false)
-const windowPosition = ref(0)
-
-const showFeatures = () => {
-  if (!showAllFeatures.value) {
-    windowPosition.value = getYPosition()
-  } else {
-    setYPosition(windowPosition.value)
-  }
-
-  showAllFeatures.value = !showAllFeatures.value
-}
-
-const getYPosition = () => window.pageYOffset
-const setYPosition = amount => window.scrollTo({left: 0, top: amount, behavior: 'smooth'})
-
-const formatDate = string => {
-  const date = new Date(string)
-  return date.toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-    year: 'numeric'
+  definePageMeta({
+    layout: 'homepage',
   })
-}
 
-const openDocsearch = () => {
-  document.querySelector('#docsearch button').click()
-}
+  defineOgImage({
+    component: 'OGImageHome',
+  })
 
-// date to YYYY-MM-DD
-const formatDateToISO = string => {
-  const date = new Date(string)
-  return date.toISOString().split('T')[0]
-}
+  useContentHead({
+    head: {
+      titleTemplate: () => 'Maizzle - Quickly build HTML emails with Tailwind CSS',
+    }
+  })
+
+  const templates = await queryContent('templates')
+    .only([
+      '_id',
+      '_path',
+      'date',
+      'title',
+      'name',
+      'image',
+      'url',
+      'purpose',
+    ])
+    .sort({date: -1})
+    .limit(3)
+    .find()
+
+  const guides = await queryContent('guides')
+    .only([
+      '_id',
+      '_path',
+      'title',
+      'description',
+      'date',
+    ])
+    .sort({date: -1})
+    .limit(6)
+    .find()
+
+  const showAllFeatures = ref(false)
+  const windowPosition = ref(0)
+
+  const showFeatures = () => {
+    if (!showAllFeatures.value) {
+      windowPosition.value = getYPosition()
+    } else {
+      setYPosition(windowPosition.value)
+    }
+
+    showAllFeatures.value = !showAllFeatures.value
+  }
+
+  const getYPosition = () => window.pageYOffset
+  const setYPosition = amount => window.scrollTo({left: 0, top: amount, behavior: 'smooth'})
+
+  const formatDate = string => {
+    const date = new Date(string)
+    return date.toLocaleDateString('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric'
+    })
+  }
+
+  const openDocsearch = () => {
+    document.querySelector('#docsearch button').click()
+  }
+
+  // date to YYYY-MM-DD
+  const formatDateToISO = string => {
+    const date = new Date(string)
+    return date.toISOString().split('T')[0]
+  }
 </script>
