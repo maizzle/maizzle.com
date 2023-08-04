@@ -41,49 +41,55 @@
 </template>
 
 <script setup>
-definePageMeta({
-  layout: 'documentation',
-})
+  definePageMeta({
+    layout: 'documentation',
+  })
 
-const route = useRoute()
+  defineOgImage({
+    component: 'OGImageDocs',
+    title: 'Starters',
+    description: 'Scaffold a Maizzle project quickly by using one of our starters.',
+  })
 
-const starters = await queryContent('starters')
-  .only([
-    '_id',
-    '_path',
-    'title',
-    'description',
-    'image',
-    'date',
-  ])
-  .sort([{ date: -1 }])
-  .find()
+  const route = useRoute()
 
-useHead({
-  title: 'Starters',
-  meta: [
-    {
-      name: 'description',
-      content: 'Scaffold a Maizzle project quickly by using one of our starters.',
-    },
-    {
-      property: 'og:title',
-      content: 'Starters | Maizzle',
-    },
-    {
-      property: 'og:description',
-      content: 'Scaffold a Maizzle project quickly by using one of our starters.'
-    },
-    {
-      property: 'og:url',
-      content: `https://maizzle.com${route.path}`
-    },
-  ],
-  link: [
-    {
-      rel: 'canonical',
-      href: `https://maizzle.com${route.path}`,
-    },
-  ],
-})
+  const starters = await queryContent('starters')
+    .only([
+      '_id',
+      '_path',
+      'title',
+      'description',
+      'image',
+      'date',
+    ])
+    .sort([{ date: -1 }])
+    .find()
+
+  useHead({
+    title: 'Starters',
+    meta: [
+      {
+        name: 'description',
+        content: 'Scaffold a Maizzle project quickly by using one of our starters.',
+      },
+      {
+        property: 'og:title',
+        content: 'Starters | Maizzle',
+      },
+      {
+        property: 'og:description',
+        content: 'Scaffold a Maizzle project quickly by using one of our starters.'
+      },
+      {
+        property: 'og:url',
+        content: `https://maizzle.com${route.path}`
+      },
+    ],
+    link: [
+      {
+        rel: 'canonical',
+        href: `https://maizzle.com${route.path}`,
+      },
+    ],
+  })
 </script>

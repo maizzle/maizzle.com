@@ -50,41 +50,47 @@
 </template>
 
 <script setup>
-const route = useRoute()
+  const route = useRoute()
 
-const page = await queryContent('guides').where({ _path: route.path }).findOne()
-const [prev, next] = await queryContent('guides').only(['_path', 'title']).sort([{ date: -1 }]).findSurround(route.path)
+  const page = await queryContent('guides').where({ _path: route.path }).findOne()
+  const [prev, next] = await queryContent('guides').only(['_path', 'title']).sort([{ date: -1 }]).findSurround(route.path)
 
-useHead({
-  title: page.title,
-  meta: [
-    {
-      name: 'description',
-      content: page.description,
-    },
-    // Open Graph
-    {
-      property: 'og:url',
-      content: `https://maizzle.com${page._path}`
-    },
-    {
-      property: 'og:title',
-      content: page.title,
-    },
-    {
-      property: 'og:description',
-      content: page.description,
-    },
-    {
-      property: 'og:type',
-      content: 'article',
-    }
-  ],
-  link: [
-    {
-      rel: 'canonical',
-      href: `https://maizzle.com${route.path}`,
-    },
-  ],
-})
+  defineOgImage({
+    component: 'OGImageGuides',
+    title: page.title,
+    description: page.description,
+  })
+
+  useHead({
+    title: page.title,
+    meta: [
+      {
+        name: 'description',
+        content: page.description,
+      },
+      // Open Graph
+      {
+        property: 'og:url',
+        content: `https://maizzle.com${page._path}`
+      },
+      {
+        property: 'og:title',
+        content: page.title,
+      },
+      {
+        property: 'og:description',
+        content: page.description,
+      },
+      {
+        property: 'og:type',
+        content: 'article',
+      }
+    ],
+    link: [
+      {
+        rel: 'canonical',
+        href: `https://maizzle.com${route.path}`,
+      },
+    ],
+  })
 </script>
