@@ -389,7 +389,7 @@
           </div>
           <div class="col-span-2">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <!-- <div
+              <div
                 v-for="(template, index) in templates"
                 :key="template.title"
                 class="flex"
@@ -414,7 +414,7 @@
                     <p class="text-base text-slate-500">{{ template.purpose }}</p>
                   </div>
                 </a>
-              </div> -->
+              </div>
             </div>
           </div>
         </div>
@@ -438,24 +438,20 @@ useContentHead({
   }
 })
 
-defineOgImage({
-  component: 'OGImageHome',
-})
-
-// const templates = await queryContent('templates')
-//   .only([
-//     '_id',
-//     '_path',
-//     'date',
-//     'title',
-//     'name',
-//     'image',
-//     'url',
-//     'purpose',
-//   ])
-//   .sort({date: -1})
-//   .limit(3)
-//   .find()
+const templates = await queryContent('templates')
+  .only([
+    '_id',
+    '_path',
+    'date',
+    'title',
+    'name',
+    'image',
+    'url',
+    'purpose',
+  ])
+  .sort({date: -1})
+  .limit(3)
+  .find()
 
 const guides = await queryContent('guides')
   .only([
@@ -468,6 +464,10 @@ const guides = await queryContent('guides')
   .sort({date: -1})
   .limit(6)
   .find()
+
+defineOgImage({
+  component: 'OGImageHome',
+})
 
 const showAllFeatures = ref(false)
 const windowPosition = ref(0)
