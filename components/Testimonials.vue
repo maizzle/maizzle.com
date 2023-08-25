@@ -21,7 +21,7 @@
             </blockquote>
             <figcaption class="flex items-center gap-x-4 border-t border-gray-900/10 px-6 py-4">
               <Image
-                url="https://pbs.twimg.com/profile_images/1585701892163833877/TgI_EJnf_400x400.jpg"
+                url="https://pbs.twimg.com/profile_images/1683816970909523969/X9CCh__U_400x400.jpg"
                 alt="Eric L. Barnes"
                 :width="40"
                 :height="40"
