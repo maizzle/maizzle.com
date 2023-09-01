@@ -133,7 +133,7 @@ module.exports = {
   build: {
     posthtml: {
       expressions: {
-        delimiters: ['[[', ']]']
+        delimiters: ['[[', ']]'],
         unescapeDelimiters: ['[[[', ']]]']
       }
     }
