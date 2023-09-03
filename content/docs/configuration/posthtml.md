@@ -309,7 +309,7 @@ module.exports = {
 Type: Boolean\
 Default: `true`
 
-Disable if you want to remove quotes on all attributes.
+Replaces quotes in attribute values with `&quote;`.
 
 ```js [config.js]
 module.exports = {
