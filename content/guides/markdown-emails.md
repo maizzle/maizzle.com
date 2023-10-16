@@ -44,7 +44,7 @@ src
 
 <Alert>You can remove the `src/templates` directory, we won't need it.</Alert>
 
-Next, create `src/content/newsletter-1.md` and add some content to it:
+Next, create `src/content/newsletter-1.md` and add some markdown to it:
 
 ```md [newsletter-1.md]
 # Hello world
@@ -179,8 +179,7 @@ Here's a step-by-step explanation of what's happening:
 
 1. We're hooking into the `beforeRender` event to alter the HTML before it's compiled.
 1. We use `front-matter` to extract the Markdown content from the file into a `body` variable. This ensures that we only parse Markdown content, and not the Front Matter too.
-1. We're returning a string that contains the contents of the `body` property, wrapped in `<md>` tags so Maizzle can parse them as Markdown. See the [Markdown documentation](/docs/markdown) for more info on this tag.
-1. We're wrapping the `<md>` tag in `<x-main>` and `<fill:template>` tags, to tell Maizzle to use our `main.html` layout.
+1. We're returning a string that includes the contents of the `body` property wrapped in `<md>` tags, so Maizzle can parse them as Markdown. See the [Markdown documentation](/docs/markdown) for more info on this tag. Finally, the `<x-main>` tag tells Maizzle to use our `main.html` layout.
 
 Run `npm run build` again and you'll see that the files in the `build_production` folder are now compiled to HTML using our `main.html` layout 🥳
 
