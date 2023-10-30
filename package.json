@@ -19,7 +19,7 @@
     "postcss-nesting": "^12.0.1",
     "shiki-es": "^0.14.0",
     "strip-indent": "^4.0.0",
-    "tailwindcss": "^3.3.2"
+    "tailwindcss": "^3.3.5"
   },
   "dependencies": {
     "@docsearch/css": "^3.5.1",
