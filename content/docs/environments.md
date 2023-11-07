@@ -21,12 +21,21 @@ Maizzle comes with two config files, each enabling its own build command:
 
 | File | Command |
 | --- | --- |
-| `config.js` | `maizzle build` |
-| `config.production.js` | `maizzle build production` |
+| `config.js` | `maizzle build`<br>`maizzle serve` |
+| `config.production.js` | `maizzle build production`<br>`maizzle serve production` |
 
 You probably noticed the link between <span class="font-mono text-sm">config.<strong>production</strong>.js</span> and <span class="font-mono text-sm">maizzle build <strong>production</strong></span> - the keyword in the config file name enables its own build command.
 
 <Alert>Remember, the `maizzle` executable will only be available if you installed the [CLI tool](/docs/cli) globally. Otherwise, use the npm scripts provided by the Starter in `package.json`.</Alert>
+
+### maizzle.config.js
+
+You may use the `maizzle.config.js` configuration file naming pattern if you prefer:
+
+| File | Command |
+| --- | --- |
+| `maizzle.config.js` | `maizzle build`<br>`maizzle serve` |
+| `maizzle.config.production.js` | `maizzle build production`<br>`maizzle serve production` |
 
 ### Data merging
 
