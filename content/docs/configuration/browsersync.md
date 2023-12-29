@@ -61,17 +61,6 @@ Default: `3000`
 
 Set a custom server port number - by default, your local development server will be available at http://localhost:3000
 
-### tunnel
-
-Type: Boolean|String\
-Default: `false`
-
-When set to `true`, Maizzle will enable localhost tunneling in Browsersync, so you can live-share a URL to an email that you're working on right now, with a colleague or a client. Under the hood, [localtunnel.me](https://localtunnel.me) will be used.
-
-Both parties see the same thing, and scrolling is synced, too.
-
-You can also use a string instead of a boolean - for example `tunnel: 'mybrand'`. In this case, Browsersync will attempt to use a custom subdomain for the URL, i.e. `https://mybrand.localtunnel.me`. If that subdomain is unavailable, you will be allocated a random name as usual.
-
 ### ui
 
 Type: Object|Boolean\
