@@ -21,46 +21,38 @@ Enabling it will use this default configuration:
 
 ```js
 {
-  space_around_combinator: true, // Preserve space around CSS selector combinators
-  newline_between_rules: false, // Remove empty lines between CSS rules
-  indent_inner_html: false, // Helps reduce file size
-  extra_liners: [] // Don't add extra new line before any tag
+  parser: 'html',
+  printWidth: 500,
+  htmlWhitespaceSensitivity: 'ignore',
+  xmlMode: false,
 }
 ```
 
+## xmlMode
+
+The prettifier will remove the closing slash from self-closing tags, like `<br />`, if your HTML has an HTML 5 `doctype` (`<!doctype html>`) and `xmlMode` is set to `false`.
+
+If you set `build.posthtml.options.xmlMode` to `true`, `prettify` will respect it and not remove the closing slash, but only if your HTML does not have an HTML 5 `doctype`.
+
 ## Customization
 
-You may configure JS Beautify's CSS and HTML Beautifier options.
+You may configure [prettier options](https://prettier.io/docs/en/options).
 
 Maybe you prefer tabs for indentation?
 
 ```js [config.js]
 module.exports = {
   prettify: {
-    indent_with_tabs: true,
+    useTabs: true,
   }
 }
 ```
-
-Checkout the full [list of HTML & CSS beautifier options](https://www.npmjs.com/package/js-beautify#css--html).
-
-## OCD
-
-Type: Boolean\
-Default: `false`
-
-This option applies several code indentation strategies:
-
-- condenses multiple newlines to a single newline
-- trims leading and trailing whitespace
-- ensures that a trailing newline is inserted
-- normalizes whitespace before code comments
 
 ## API
 
 ```js [app.js]
 const {prettify} = require('@maizzle/framework')
-const options = {/* prettify options */}
+const options = {/* prettier options */}
 
 const html = await prettify('html string', options)
 ```
