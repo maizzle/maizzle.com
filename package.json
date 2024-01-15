@@ -26,6 +26,6 @@
     "@docsearch/js": "^3.5.2",
     "@vueuse/components": "^10.7.2",
     "scroll-to-element": "^2.0.3",
-    "typeit": "^8.8.0"
+    "typeit": "^8.8.3"
   }
 }
