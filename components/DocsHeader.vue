@@ -65,7 +65,7 @@
               href="https://github.com/maizzle/framework/releases"
               class="hidden sm:table px-3 py-1 rounded-full text-indigo-500 border border-indigo-300 hover:text-indigo-600 text-sm group"
             >
-              Maizzle v4.4.0: Blade-like components, omit/skip, and a ton of bugfixes &rarr;
+              Maizzle v4.7.0: config types, better prettify, improved filters &rarr;
             </a>
           </div>
         </div>
@@ -308,7 +308,7 @@
     <!-- Mobile menu: Backdrop -->
     <div
       class="fixed lg:hidden inset-0 bg-white/80 opacity-0 transition-opacity pointer-events-none"
-      :class="{'opacity-100 z-50 pointer-events-auto': showMobileMenu}"
+      :class="{ 'opacity-100 z-50 pointer-events-auto': showMobileMenu }"
       @click="closeMobileMenu"
     ></div>
 
@@ -320,7 +320,7 @@
 import { vOnClickOutside } from '@vueuse/components'
 
 const nuxtApp = useNuxtApp()
-const {public: {navigation, latestRelease}} = useRuntimeConfig()
+const { public: { navigation, latestRelease } } = useRuntimeConfig()
 
 const versionDropdownOpen = ref(false)
 const mobileVersionDropdownOpen = ref(false)
