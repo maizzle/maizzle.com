@@ -36,7 +36,7 @@ Here's the Filled button, fully clickable in Outlook:
 
 As you can see it's just a simple `<a>` tag, but with some nifty workarounds for Outlook's lack of support for `padding` on inline elements:
 
-- left/right padding is faked with `<i>` elements that use `"mso-font-width` with a `&emsp;` to grow in width; these elements are wrapped in conditional comments, so they only show in Outlook and Windows 10 Mail
+- left/right padding is faked with `<i>` elements that use `mso-font-width` with a `&emsp;` to grow in width; these elements are wrapped in conditional comments, so they only show in Outlook and Windows 10 Mail
 - the text label is wrapped in a `<span>` and `mso-text-raise` adjusts its vertical position, allowing us to control the top padding
 - the first `<i>` also adds bottom padding
 
