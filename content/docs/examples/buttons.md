@@ -27,19 +27,18 @@ Here's the Filled button, fully clickable in Outlook:
   <a
     href="https://maizzle.com/"
     class="inline-block py-4 px-6 text-sm leading-none font-semibold rounded [text-decoration:none] text-white bg-indigo-500 hover:bg-indigo-600">
-    <!--[if mso]><i style="letter-spacing: 27px; mso-font-width: -100%; mso-text-raise: 26pt;">&nbsp;</i><![endif]-->
+    <!--[if mso]><i style="mso-font-width: 150%; mso-text-raise: 26pt;" hidden>&emsp;</i><![endif]-->
       <span style="mso-text-raise: 13pt;">Read more</span>
-    <!--[if mso]><i style="letter-spacing: 27px; mso-font-width: -100%;">&nbsp;</i><![endif]-->
+    <!--[if mso]><i style="mso-font-width: 150%;" hidden>&emsp;&#8203;</i><![endif]-->
   </a>
   ```
 </div>
 
 As you can see it's just a simple `<a>` tag, but with some nifty workarounds for Outlook's lack of support for `padding` on inline elements:
 
-- left/right padding is faked with a `<i>` elements that use `letter-spacing` to grow in width; these elements are wrapped in conditional comments, so they only show in Outlook and Windows 10 Mail
+- left/right padding is faked with `<i>` elements that use `"mso-font-width` with a `&emsp;` to grow in width; these elements are wrapped in conditional comments, so they only show in Outlook and Windows 10 Mail
 - the text label is wrapped in a `<span>` and `mso-text-raise` adjusts its vertical position, allowing us to control the top padding
-- the first `<i>` adds bottom padding
-- the width of the `&nbsp;` character is reset through the `mso-font-width` property
+- the first `<i>` also adds bottom padding
 
 <Alert>Line breaks and spaces between tags in the example above might render the button larger (although barely noticeable). If you want your button to be absolutely pixel perfect, just remove them.</Alert>
 
@@ -50,11 +49,11 @@ As you can see it's just a simple `<a>` tag, but with some nifty workarounds for
   href="https://maizzle.com/"
   class="inline-block py-4 px-6 text-sm leading-none [text-decoration:none] text-white font-semibold rounded bg-indigo-500 hover:bg-indigo-600">
   <outlook>
-    <i class="tracking-6 mso-font-width-[-100%] mso-text-raise-[26pt]">&nbsp;</i>
+    <i class="mso-font-width-[150%] mso-text-raise-[26pt]">&nbsp;</i>
   </outlook>
     <span class="mso-text-raise-[13pt]">Read more</span>
   <outlook>
-    <i class="tracking-6 mso-font-width-[-100%]">&nbsp;</i>
+    <i class="mso-font-width-[150%]">&nbsp;</i>
   </outlook>
 </a>
 ```
@@ -89,9 +88,9 @@ Here is a simplified VML button with rounded corners, styled with Tailwind CSS:
     href="https://example.com/"
     class="inline-block px-6 leading-10 text-base rounded-md [text-decoration:none] text-white bg-blue-700"
   >
-    <!--[if mso]><i style="letter-spacing: 8px; mso-font-width: -100%;" hidden>&nbsp;</i><![endif]-->
+    <!--[if mso]><i style="mso-font-width: 150%;" hidden>&emsp;</i><![endif]-->
     <span>Link Text</span>
-    <!--[if mso]><i style="letter-spacing: 8px; mso-font-width: -100%;" hidden>&nbsp;</i><![endif]-->
+    <!--[if mso]><i style="mso-font-width: 150%;" hidden>&emsp;&#8203;</i><![endif]-->
   </a>
 <!--[if mso]>
 </v:roundrect>
