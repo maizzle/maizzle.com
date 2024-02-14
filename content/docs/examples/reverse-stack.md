@@ -1,6 +1,6 @@
 ---
 title: "Reverse Stack"
-description: "See how you can reorder stacked columns in a mobile responsive HTML email template with table layout CSS properties."
+description: "Reorder stacked columns in a mobile responsive HTML email template with table layout CSS properties."
 ---
 
 # Reverse Stack

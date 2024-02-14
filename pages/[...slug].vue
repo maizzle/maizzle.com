@@ -43,56 +43,55 @@
 </template>
 
 <script setup>
-  definePageMeta({
-    layout: 'documentation',
-  })
+definePageMeta({
+  layout: 'documentation',
+})
 
-  const route = useRoute()
+const route = useRoute()
 
-  // Page content
-  const page = await queryContent(route.path).findOne()
-  const toc = page.body.toc
+// Page content
+const page = await queryContent(route.path).findOne()
+const toc = page.body.toc
 
-  defineOgImage({
-    component: 'OGImageDocs',
-    title: page.title,
-    description: page.description,
-  })
+defineOgImageComponent('OGImageDocs', {
+  title: page.title,
+  description: page.description,
+})
 
-  const year = computed(() => {
-    return new Date().getFullYear()
-  })
+const year = computed(() => {
+  return new Date().getFullYear()
+})
 
-  useHead({
-    title: page.title,
-    meta: [
-      {
-        name: 'description',
-        content: page.description,
-      },
-      // Open Graph
-      {
-        property: 'og:url',
-        content: `https://maizzle.com${page._path}`
-      },
-      {
-        property: 'og:title',
-        content: page.title,
-      },
-      {
-        property: 'og:description',
-        content: page.description,
-      },
-      {
-        property: 'og:type',
-        content: 'article',
-      }
-    ],
-    link: [
-      {
-        rel: 'canonical',
-        href: `https://maizzle.com${route.path}`,
-      },
-    ],
-  })
+useHead({
+  title: page.title,
+  meta: [
+    {
+      name: 'description',
+      content: page.description,
+    },
+    // Open Graph
+    {
+      property: 'og:url',
+      content: `https://maizzle.com${page._path}`
+    },
+    {
+      property: 'og:title',
+      content: page.title,
+    },
+    {
+      property: 'og:description',
+      content: page.description,
+    },
+    {
+      property: 'og:type',
+      content: 'article',
+    }
+  ],
+  link: [
+    {
+      rel: 'canonical',
+      href: `https://maizzle.com${route.path}`,
+    },
+  ],
+})
 </script>

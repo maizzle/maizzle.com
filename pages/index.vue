@@ -254,11 +254,11 @@
         </div>
         <div
           class="pt-4 px-6 overflow-y-hidden"
-          :class="{'pb-36' : showAllFeatures}"
+          :class="{ 'pb-36': showAllFeatures }"
         >
           <div
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 relative"
-            :class="{'h-[650px]' : !showAllFeatures}"
+            :class="{ 'h-[650px]': !showAllFeatures }"
           >
             <NuxtLink
               v-for="feature in features"
@@ -280,12 +280,12 @@
         </div>
         <div
           class="w-full px-6 flex items-end bottom-0 left-0 z-10 bg-gradient-to-t from-white"
-          :class="{'h-44 sticky -mt-36' : showAllFeatures, 'h-96 absolute' : !showAllFeatures}"
+          :class="{ 'h-44 sticky -mt-36': showAllFeatures, 'h-96 absolute': !showAllFeatures }"
         >
           <button
             type="button"
             class="py-2.5 mb-16 mx-auto inline-flex text-base bg-indigo-600 hover:bg-indigo-700 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white duration-300"
-            :class="{'px-2.5 rounded-full duration-300 hover:rotate-180' : showAllFeatures, 'px-6 rounded-xl transition-colors' : !showAllFeatures}"
+            :class="{ 'px-2.5 rounded-full duration-300 hover:rotate-180': showAllFeatures, 'px-6 rounded-xl transition-colors': !showAllFeatures }"
             @click="showFeatures"
           >
             <span v-show="!showAllFeatures">
@@ -393,7 +393,7 @@
                 v-for="(template, index) in templates"
                 :key="template.title"
                 class="flex"
-                :class="{'row-span-2 items-center': index === 0}"
+                :class="{ 'row-span-2 items-center': index === 0 }"
               >
                 <a
                   :href="template.url"
@@ -426,81 +426,79 @@
 </template>
 
 <script setup>
-  import features from '@/data/features'
+import features from '@/data/features'
 
-  definePageMeta({
-    layout: 'homepage',
+definePageMeta({
+  layout: 'homepage',
+})
+
+defineOgImageComponent('OGImageHome')
+
+useContentHead({
+  head: {
+    titleTemplate: () => 'Maizzle - Quickly build HTML emails with Tailwind CSS',
+  }
+})
+
+const templates = await queryContent('templates')
+  .only([
+    '_id',
+    '_path',
+    'date',
+    'title',
+    'name',
+    'image',
+    'url',
+    'purpose',
+  ])
+  .sort({ date: -1 })
+  .limit(3)
+  .find()
+
+const guides = await queryContent('guides')
+  .only([
+    '_id',
+    '_path',
+    'title',
+    'description',
+    'date',
+  ])
+  .sort({ date: -1 })
+  .limit(6)
+  .find()
+
+const showAllFeatures = ref(false)
+const windowPosition = ref(0)
+
+const showFeatures = () => {
+  if (!showAllFeatures.value) {
+    windowPosition.value = getYPosition()
+  } else {
+    setYPosition(windowPosition.value)
+  }
+
+  showAllFeatures.value = !showAllFeatures.value
+}
+
+const getYPosition = () => window.pageYOffset
+const setYPosition = amount => window.scrollTo({ left: 0, top: amount, behavior: 'smooth' })
+
+const formatDate = string => {
+  const date = new Date(string)
+  return date.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric'
   })
+}
 
-  defineOgImage({
-    component: 'OGImageHome',
-  })
+const openDocsearch = () => {
+  document.querySelector('#docsearch button').click()
+}
 
-  useContentHead({
-    head: {
-      titleTemplate: () => 'Maizzle - Quickly build HTML emails with Tailwind CSS',
-    }
-  })
-
-  const templates = await queryContent('templates')
-    .only([
-      '_id',
-      '_path',
-      'date',
-      'title',
-      'name',
-      'image',
-      'url',
-      'purpose',
-    ])
-    .sort({date: -1})
-    .limit(3)
-    .find()
-
-  const guides = await queryContent('guides')
-    .only([
-      '_id',
-      '_path',
-      'title',
-      'description',
-      'date',
-    ])
-    .sort({date: -1})
-    .limit(6)
-    .find()
-
-  const showAllFeatures = ref(false)
-  const windowPosition = ref(0)
-
-  const showFeatures = () => {
-    if (!showAllFeatures.value) {
-      windowPosition.value = getYPosition()
-    } else {
-      setYPosition(windowPosition.value)
-    }
-
-    showAllFeatures.value = !showAllFeatures.value
-  }
-
-  const getYPosition = () => window.pageYOffset
-  const setYPosition = amount => window.scrollTo({left: 0, top: amount, behavior: 'smooth'})
-
-  const formatDate = string => {
-    const date = new Date(string)
-    return date.toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric'
-    })
-  }
-
-  const openDocsearch = () => {
-    document.querySelector('#docsearch button').click()
-  }
-
-  // date to YYYY-MM-DD
-  const formatDateToISO = string => {
-    const date = new Date(string)
-    return date.toISOString().split('T')[0]
-  }
+// date to YYYY-MM-DD
+const formatDateToISO = string => {
+  const date = new Date(string)
+  return date.toISOString().split('T')[0]
+}
 </script>

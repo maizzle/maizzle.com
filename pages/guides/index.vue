@@ -40,60 +40,59 @@
 </template>
 
 <script setup>
-  const route = useRoute()
+const route = useRoute()
 
-  defineOgImage({
-    component: 'OGImageDocs',
-    title: 'Guides',
-    description: 'Learn how to create HTML emails with Tailwind CSS in Maizzle.',
+defineOgImageComponent('OGImageDocs', {
+  title: 'Guides',
+  description: 'Learn how to create HTML emails with Tailwind CSS in Maizzle.',
+})
+
+const guides = await queryContent('guides')
+  .only([
+    '_id',
+    '_path',
+    'title',
+    'description',
+    'image',
+    'date',
+  ])
+  .sort([{ date: -1 }])
+  .find()
+
+useHead({
+  title: 'Guides',
+  meta: [
+    {
+      name: 'description',
+      content: 'Learn how to create HTML emails with Tailwind CSS in Maizzle.',
+    },
+    {
+      property: 'og:title',
+      content: 'Guides | Maizzle',
+    },
+    {
+      property: 'og:description',
+      content: 'Learn how to create HTML emails with Tailwind CSS in Maizzle.'
+    },
+    {
+      property: 'og:url',
+      content: `https://maizzle.com${route.path}`
+    },
+  ],
+  link: [
+    {
+      rel: 'canonical',
+      href: `https://maizzle.com${route.path}`,
+    },
+  ],
+})
+
+const formatDate = string => {
+  const date = new Date(string)
+  return date.toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric'
   })
-
-  const guides = await queryContent('guides')
-    .only([
-      '_id',
-      '_path',
-      'title',
-      'description',
-      'image',
-      'date',
-    ])
-    .sort([{ date: -1 }])
-    .find()
-
-  useHead({
-    title: 'Guides',
-    meta: [
-      {
-        name: 'description',
-        content: 'Learn how to create HTML emails with Tailwind CSS in Maizzle.',
-      },
-      {
-        property: 'og:title',
-        content: 'Guides | Maizzle',
-      },
-      {
-        property: 'og:description',
-        content: 'Learn how to create HTML emails with Tailwind CSS in Maizzle.'
-      },
-      {
-        property: 'og:url',
-        content: `https://maizzle.com${route.path}`
-      },
-    ],
-    link: [
-      {
-        rel: 'canonical',
-        href: `https://maizzle.com${route.path}`,
-      },
-    ],
-  })
-
-  const formatDate = string => {
-    const date = new Date(string)
-    return date.toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric'
-    })
-  }
+}
 </script>

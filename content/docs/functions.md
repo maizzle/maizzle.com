@@ -1,6 +1,6 @@
 ---
 title: "Functions"
-description: "Programmatically configure Maizzle or use the output of other Node.js packages as variables in your email templates."
+description: "Define functions in the config and use their output in your email templates."
 ---
 
 # Config Functions
