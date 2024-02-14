@@ -41,55 +41,54 @@
 </template>
 
 <script setup>
-  definePageMeta({
-    layout: 'documentation',
-  })
+definePageMeta({
+  layout: 'documentation',
+})
 
-  defineOgImage({
-    component: 'OGImageDocs',
-    title: 'Starters',
-    description: 'Scaffold a Maizzle project quickly by using one of our starters.',
-  })
+defineOgImageComponent('OGImageDocs', {
+  title: 'Starters',
+  description: 'Scaffold a Maizzle project quickly by using one of our starters.',
+})
 
-  const route = useRoute()
+const route = useRoute()
 
-  const starters = await queryContent('starters')
-    .only([
-      '_id',
-      '_path',
-      'title',
-      'description',
-      'image',
-      'date',
-    ])
-    .sort([{ date: -1 }])
-    .find()
+const starters = await queryContent('starters')
+  .only([
+    '_id',
+    '_path',
+    'title',
+    'description',
+    'image',
+    'date',
+  ])
+  .sort([{ date: -1 }])
+  .find()
 
-  useHead({
-    title: 'Starters',
-    meta: [
-      {
-        name: 'description',
-        content: 'Scaffold a Maizzle project quickly by using one of our starters.',
-      },
-      {
-        property: 'og:title',
-        content: 'Starters | Maizzle',
-      },
-      {
-        property: 'og:description',
-        content: 'Scaffold a Maizzle project quickly by using one of our starters.'
-      },
-      {
-        property: 'og:url',
-        content: `https://maizzle.com${route.path}`
-      },
-    ],
-    link: [
-      {
-        rel: 'canonical',
-        href: `https://maizzle.com${route.path}`,
-      },
-    ],
-  })
+useHead({
+  title: 'Starters',
+  meta: [
+    {
+      name: 'description',
+      content: 'Scaffold a Maizzle project quickly by using one of our starters.',
+    },
+    {
+      property: 'og:title',
+      content: 'Starters | Maizzle',
+    },
+    {
+      property: 'og:description',
+      content: 'Scaffold a Maizzle project quickly by using one of our starters.'
+    },
+    {
+      property: 'og:url',
+      content: `https://maizzle.com${route.path}`
+    },
+  ],
+  link: [
+    {
+      rel: 'canonical',
+      href: `https://maizzle.com${route.path}`,
+    },
+  ],
+})
 </script>
