@@ -21,7 +21,7 @@
             </blockquote>
             <figcaption class="flex items-center gap-x-4 border-t border-gray-900/10 px-6 py-4">
               <Image
-                url="https://pbs.twimg.com/profile_images/1683816970909523969/X9CCh__U_400x400.jpg"
+                url="/images/avatars/eric-barnes.jpg"
                 alt="Eric L. Barnes"
                 :width="40"
                 :height="40"
@@ -66,7 +66,7 @@
                 <figcaption class="mt-6">
                   <a href="https://twitter.com/tobias_petry" target="_blank" class="flex items-center gap-x-4">
                     <Image
-                      url="https://pbs.twimg.com/profile_images/1618512474432569345/-ExL_vDn_400x400.jpg"
+                      url="/images/avatars/tobias-petry.jpg"
                       alt="Tobias Petry"
                       :width="40"
                       :height="40"
