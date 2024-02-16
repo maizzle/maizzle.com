@@ -381,10 +381,13 @@
               </p>
               <a
                 href="https://craftingemails.com/email-templates"
-                class="px-6 py-2.5 mb-6 md:mb-12 inline-flex rounded-xl text-base bg-indigo-600 hover:bg-indigo-700 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white transition-colors"
+                class="px-6 py-2.5 mb-6 inline-flex rounded-xl text-base bg-indigo-600 hover:bg-indigo-700 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white transition-colors"
               >
-                View all templates
+                View all 165+ templates
               </a>
+              <p class="text-sm text-slate-500">
+                Get them all with <a href="https://craftingemails.com/unlimited-downloads" class="text-sm text-slate-500 underline">Unlimited Downloads</a>
+              </p>
             </div>
           </div>
           <div class="col-span-2">
@@ -451,7 +454,7 @@ const templates = await queryContent('templates')
     'url',
     'purpose',
   ])
-  .sort({ date: -1 })
+  .sort({ order: 1 })
   .limit(3)
   .find()
 
