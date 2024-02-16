@@ -17,13 +17,17 @@ node -v
 
 ## Create a project
 
-The fastest way to get started is with the [official Starter](https://github.com/maizzle/maizzle):
+The fastest way to get started is with the [official Starter](https://github.com/maizzle/maizzle).
+
+Run this command in your terminal to create a new Maizzle project:
 
 ```sh
-npx degit maizzle/maizzle my-project
+npx create-maizzle
 ```
 
-That will clone the Starter repository into `my-project`.
+In the interactive setup wizard, specify the directory name to create the project in, i.e. `./my-project`, select the Default Starter, and choose Yes to Install dependencies.
+
+Installing the dependencies will take a while, but usually under a minute.
 
 Next, switch the current directory to `my-project`:
 
@@ -31,7 +35,7 @@ Next, switch the current directory to `my-project`:
 cd my-project
 ```
 
-... and install dependencies:
+If you didn't install dependencies in the interactive setup, do so now:
 
 ```sh
 npm install
