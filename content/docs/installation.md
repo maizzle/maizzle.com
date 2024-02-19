@@ -41,6 +41,19 @@ If you didn't install dependencies in the interactive setup, do so now:
 npm install
 ```
 
+Alternatively, you may create a new project manually by running the following commands:
+
+```sh
+# download the starter repo
+npx degit maizzle/maizzle my-project
+
+# change directory
+cd my-project
+
+# install dependencies
+npm install
+```
+
 ## Development
 
 Maizzle includes different commands for developing locally on your machine and for building production-ready emails.
