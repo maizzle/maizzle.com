@@ -41,16 +41,25 @@ If you didn't install dependencies in the interactive setup, do so now:
 npm install
 ```
 
-Alternatively, you may create a new project manually by running the following commands:
+### Manual setup
+
+Alternatively, you may create a new project manually.
+
+First, you'll need to download a Starter project - the following command will create a new project using the official Starter in a directory called `my-project`:
 
 ```sh
-# download the starter repo
 npx degit maizzle/maizzle my-project
+```
 
-# change directory
+Next, change the current directory to `my-project`:
+
+```sh
 cd my-project
+```
 
-# install dependencies
+Finally, install the project's dependencies:
+
+```sh
 npm install
 ```
 
