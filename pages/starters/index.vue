@@ -13,8 +13,8 @@
           >
             <Image
               class="rounded-lg"
-              :width="145"
-              :height="185"
+              :width="172"
+              :height="220"
               :url="starter.image"
               :alt="starter.title"
             />
