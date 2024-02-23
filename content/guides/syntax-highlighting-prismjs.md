@@ -17,18 +17,14 @@ With Maizzle however, we can use JavaScript libraries to do that work for us ðŸ’
 Let's create a new Maizzle project.
 
 ```sh
-npx degit maizzle/maizzle example-syntax-highlight
+npx create-maizzle
 ```
 
-Install dependencies:
+In the interactive setup wizard, specify the directory name to create the project in, i.e. `./example-syntax-highlight`, and select the Default Starter.
 
-```sh
-cd example-syntax-highlight
+Choose Yes when prompted to Install dependencies.
 
-npm install
-```
-
-Once it finishes installing dependencies open it in your editor.
+Once it finishes installing dependencies open the project folder in your favorite code editor.
 
 We'll be covering two different techniques:
 

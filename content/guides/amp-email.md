@@ -14,6 +14,20 @@ For a syntax refresher, checkout the [AMP Email docs](https://amp.dev/documentat
 
 Want to dive right in? Checkout our [AMP for Email Starter](https://github.com/maizzle/starter-amp4email).
 
+## Initial setup
+
+As always, let's scaffold a new project:
+
+```sh
+npx create-maizzle
+```
+
+In the interactive setup wizard, specify the directory name to create the project in, i.e. `./amp-emails`, and select the Default Starter.
+
+Choose Yes when prompted to Install dependencies.
+
+Once it finishes installing dependencies, open the project folder in your favorite editor.
+
 ## Layout
 
 AMP for Email requires some special markup, so let's create an `amp.html` Layout and save it under `src/layouts`:

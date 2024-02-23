@@ -17,24 +17,26 @@ In this tutorial, you will learn how to use the [tailwindcss-gradients](https://
 Let's start by creating a new Maizzle project.
 
 ```sh
-npx degit maizzle/maizzle example-gradients
+npx create-maizzle
 ```
 
-Install dependencies:
+In the interactive setup wizard, specify the directory name to create the project in, i.e. `./example-gradients`, and select the Default Starter.
+
+Choose Yes when prompted to Install dependencies.
+
+After dependencies finish installing, change the current directory to `example-gradients`:
 
 ```sh
 cd example-gradients
-
-npm install
 ```
 
-Next, install the gradients plugin:
+Next, install the `tailwindcss-gradients` plugin:
 
 ```sh
 npm install tailwindcss-gradients
 ```
 
-Once it finishes, open the `example-gradients` folder in your editor.
+Once it finishes, open the `example-gradients` folder in your favorite code editor.
 
 ## CSS Gradients
 
@@ -180,4 +182,4 @@ We can then write the utility class like this:
 ## Resources
 
 - [tailwindcss-gradients](https://www.npmjs.com/package/tailwindcss-gradients) plugin
-- [GitHub repo](https://github.com/maizzle/starter-gradients) for this tutorial
+- [GitHub repository](https://github.com/maizzle/starter-gradients) for this tutorial

@@ -40,18 +40,14 @@ With this in mind, we must also make sure that the images are referenced correct
 We're starting from scratch, so let's scaffold a new project using the Official Starter:
 
 ```sh
-npx degit maizzle/maizzle mailchimp-project
+npx create-maizzle
 ```
 
-Install dependencies:
+In the interactive setup wizard, specify the directory name to create the project in, i.e. `./mailchimp-project`, and select the Default Starter.
 
-```sh
-cd mailchimp-project
+Choose Yes when prompted to Install dependencies.
 
-npm install
-```
-
-Once it finishes installing dependencies, open the project in your favorite editor.
+Once it finishes installing dependencies, open the project folder in your favorite editor.
 
 ### Structure
 

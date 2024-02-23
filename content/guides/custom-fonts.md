@@ -19,16 +19,14 @@ In this tutorial, you'll learn how to add your own custom fonts to emails in Mai
 First, let's scaffold a new project:
 
 ```sh
-npx degit maizzle/maizzle example-font-face
+npx create-maizzle
 ```
 
-Install dependencies:
+In the interactive setup wizard, specify the directory name to create the project in, i.e. `./example-font-face`, and select the Default Starter.
 
-```sh
-cd example-font-face
+Choose Yes when prompted to Install dependencies.
 
-npm install
-```
+Once it finishes installing dependencies, open the project folder in your favorite editor.
 
 ## Register @font-face
 
@@ -59,18 +57,17 @@ This adds a separate `<style>` tag in the compiled email HTML, right after the m
 
 If you prefer a single `<style>` tag in your email template, you can register the font in the Layout instead. Open `src/layouts/main.html` and update the `<style>` tag:
 
-```css [src/layouts/main.html] no-copy diff
--   <style>{{{ page.css }}}</style>
-+   <style>
+```css [src/layouts/main.html] no-copy {2-7} diff
+   <style>
 +     @font-face {
 +       font-family: 'Barosan';
 +       font-style: normal;
 +       font-weight: 400;
 +       src: local('Barosan Regular'), local('Barosan-Regular'), url(https://example.com/fonts/barosan.woff2) format('woff2');
 +     }
-+
-+     {{{ page.css }}}
-+   </style>
+
+     {{{ page.css }}}
+   </style>
 ```
 
 <Alert>

@@ -17,18 +17,14 @@ You can [preview the final result](https://codepen.io/maizzle/pen/ExjvmdP?editor
 Let's start by creating a new Maizzle project.
 
 ```sh
-npx degit maizzle/maizzle example-rss
+npx create-maizzle
 ```
 
-Install dependencies:
+In the interactive setup wizard, specify the directory name to create the project in, i.e. `./example-rss`, and select the Default Starter.
 
-```sh
-cd example-rss
+Choose Yes when prompted to Install dependencies.
 
-npm install
-```
-
-Once it finishes installing dependencies, open the project in your favorite editor.
+Once it finishes installing dependencies, open the project folder in your favorite editor.
 
 ### rss-parser
 
@@ -176,5 +172,5 @@ Take a look at the [final result on CodePen](https://codepen.io/maizzle/pen/Exjv
 - [Laracasts](https://laracasts.com/)
 - [rss-parser](https://www.npmjs.com/package/rss-parser)
 - [Maizzle Events](/docs/events/)
-- [GitHub repo](https://github.com/maizzle/starter-rss) for this tutorial
+- [GitHub repository](https://github.com/maizzle/starter-rss) for this tutorial
 - [CodePen preview](https://codepen.io/maizzle/pen/ExjvmdP)

@@ -14,21 +14,17 @@ If you want to dive right in, check out the [Markdown Starter](https://github.co
 
 ## Project setup
 
-Scaffold a new project using the Starter:
+Scaffold a new project using the Markdown Starter:
 
 ```sh
-npx degit maizzle/maizzle markdown-project
+npx create-maizzle
 ```
 
-Install dependencies:
+In the interactive setup wizard, specify the directory name to create the project in, i.e. `./markdown-project`, and select the Default Starter.
 
-```sh
-cd markdown-project
+Choose Yes when prompted to Install dependencies.
 
-npm install
-```
-
-Once it finishes installing dependencies, open the project in your favorite editor.
+Once it finishes installing dependencies, open the project folder in your favorite code editor.
 
 ### Structure
 

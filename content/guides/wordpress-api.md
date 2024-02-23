@@ -17,18 +17,14 @@ You may [preview the final result](https://codepen.io/maizzle/pen/wvaeOVM?editor
 As always, let's start by creating a new Maizzle project.
 
 ```sh
-npx degit maizzle/maizzle example-wordpress
+npx create-maizzle
 ```
 
-Install dependencies:
+In the interactive setup wizard, specify the directory name to create the project in, i.e. `./example-wordpress`, and select the Default Starter.
 
-```sh
-cd example-wordpress
+Choose Yes when prompted to Install dependencies.
 
-npm install
-```
-
-Once it finishes installing dependencies, open the project in your favorite editor.
+Once it finishes installing dependencies, open the project folder in your favorite editor.
 
 ## WordPress API
 
