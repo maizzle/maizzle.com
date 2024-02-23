@@ -19,15 +19,15 @@ Simply add your markdown files to `src/content`, run the build command, and they
 Scaffold a new project based on this starter:
 
 ```sh
-npx degit maizzle/starter-markdown my-project
+npx create-maizzle
 ```
 
-Install dependencies:
+In the interactive setup wizard, specify the directory name to create the project in, i.e. `./my-project`, select Custom Starter → Markdown, and choose Yes when prompted to Install dependencies.
+
+Next, switch the current directory to `my-project`:
 
 ```sh no-copy
 cd my-project
-
-npm install
 ```
 
 Start local development:

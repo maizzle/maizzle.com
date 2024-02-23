@@ -13,6 +13,34 @@ Original, free ⚡4email templates built with Tailwind CSS in Maizzle.
 
 [View on GitHub &rarr;](https://github.com/maizzle/starter-amp4email.git)
 
+## Getting started
+
+Scaffold a new project based on this starter:
+
+```sh
+npx create-maizzle
+```
+
+In the interactive setup wizard, specify the directory name to create the project in, i.e. `./amp-emails`, select Custom Starter → AMP4Email, and choose Yes when prompted to Install dependencies.
+
+Next, switch the current directory to `amp-emails`:
+
+```sh no-copy
+cd amp-emails
+```
+
+Start local development:
+
+```sh
+npm run dev
+```
+
+Build emails for production:
+
+```sh
+npm run build
+```
+
 ## Templates
 
 The following templates are included:
