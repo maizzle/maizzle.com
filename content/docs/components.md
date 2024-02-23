@@ -294,7 +294,7 @@ Looping over this Component will only push that CSS once to the `head` stack:
 ```xml [src/templates/example.html]
 <x-layout>
   <fill:template>
-    <each loop="[1,2,3]">
+    <each loop="item in [1,2,3]">
       <x-card />
     </each>
   </fill:template>
