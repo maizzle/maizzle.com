@@ -65,7 +65,7 @@
               href="https://github.com/maizzle/framework/releases"
               class="hidden sm:table px-3 py-1 rounded-full text-indigo-500 border border-indigo-300 hover:text-indigo-600 text-sm group"
             >
-              Maizzle v4.7.0: config types, better prettify, improved filters &rarr;
+              Maizzle v4.8.0: asset arrays, attributes for URL params &amp; more &rarr;
             </a>
           </div>
         </div>

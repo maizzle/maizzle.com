@@ -53,7 +53,9 @@ Configure the tags to process and other transformer options.
 Type: Array\
 Default: `['a']`
 
-Array of tag names to process. Only URLs inside `href=""` attributes of tags in this array will be processed.
+Array of tag names to process.
+
+By default, only URLs inside [known attributes](#attributes) of tags in this array will be processed.
 
 You may use CSS selectors to select only certain attributes. For example, this will apply parameters only to anchors that include example.com in their `href` value:
 
@@ -66,6 +68,41 @@ module.exports = {
     utm_source: 'maizzle',
   }
 }
+```
+
+### attributes
+
+Type: Array\
+Default: `['src', 'href', 'poster', 'srcset', 'background']`
+
+Array of attributes to process for the given tags.
+
+You may override this with your own list of attributes - the plugin will only process URLs in these attributes.
+
+```js [config.js]
+module.exports = {
+  urlParameters: {
+    _options: {
+      tags: ['a', 'img'],
+      attributes: ['data-href', 'src']
+    },
+    foo: 'bar',
+  }
+}
+```
+
+Given this HTML:
+
+```html
+<a href="https://foo.bar" data-href="https://example.com">Test</a>
+<img src="https://example.com">
+```
+
+The result will be:
+
+```html
+<a href="https://foo.bar" data-href="https://example.com?foo=bar">Test</a>
+<img src="https://example.com?foo=bar">
 ```
 
 ### strict
