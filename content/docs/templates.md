@@ -46,13 +46,13 @@ title: "Please confirm your email address"
 
 <Alert type="warning">Front Matter must be defined at the very top of a Template, starting on the first line.</Alert>
 
-### Escaping expressions
+### Expressions
 
-Expressions in Front Matter can be escaped with a single `@` symbol when they're used in the Template they're defined in:
+Expressions in Front Matter will be automatically ignored and output as-is:
 
 ```hbs [src/templates/example.html]
 ---
-greeting: "Hello @{{ user.name }}, please confirm your email address"
+greeting: "Hello {{ user.name }}, please confirm your email address"
 ---
 
 <h1>{{ page.greeting }}</h1>
@@ -62,22 +62,6 @@ That will render as:
 
 ```hbs [build_production/example.html]
 <h1>Hello {{ user.name }}, please confirm your email address</h1>
-```
-
-If the Front Matter variable will be used in a Layout, you need to double-escape it:
-
-```hbs [src/templates/example.html]
----
-preheader: "Hello @@{{ user.name }}, please confirm your email address"
----
-```
-
-```hbs [src/layouts/main.html]
-<if condition="page.preheader">
-  <div class="hidden">
-    {{{ page.preheader }}}
-  </div>
-</if>
 ```
 
 ## Using Layouts

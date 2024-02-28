@@ -75,17 +75,26 @@ markup: '<strong>Bold</strong>'
 
 Other templating engines and many <abbr title="Email Service Provider">ESP</abbr>s also use the `{{ }}` syntax.
 
-If you want to prevent expression compilation and actually render the curly braces so you can evaluate them at a later stage, you have several options:
+By default, Maizzle will output the original reference like `{{ unsubscribe }}` for any value is not [defined in your config](/docs/environments#config-variables).
+
+For other cases, like `{{ 1 + 2 }}` or if had to change how [`missingLocal`](/docs/configuration/expressions#missinglocal) is handled, you have several options for preventing expression compilation:
 
 ### Ignore inline
 
-The [Blade](https://laravel.com/docs/blade)-inspired `@{{ }}` syntax is useful for one-offs, where you need to ignore a single expression. The compiled email will render `{{ }}` without the `@`.
+The [Laravel Blade](https://laravel.com/docs/blade)-inspired `@{{ }}` syntax is useful for one-offs, where you need to ignore a single expression. The compiled HTML will render `{{ }}` without the `@`.
 
 ```hbs [src/templates/example.html]
-<x-main>
-  @{{ page.markup }}
-  <!-- Result: {{ page.markup }} -->
-</x-main>
+<div>
+  @{{ 1 + 2 }}
+</div>
+```
+
+Result:
+
+```hbs [build_production/example.html]
+<div>
+  {{ 1 + 2 }}
+</div>
 ```
 
 ### Ignore in Front Matter
@@ -94,7 +103,7 @@ You may also use `@{{ }}` to prevent expressions in Front Matter from being eval
 
 ```hbs [src/templates/example.html]
 ---
-title: "Weekly newsletter no. @{{ edition_count }}"
+title: "Weekly newsletter no. @{{ 1 + 2 }}"
 ---
 
 <x-main>
@@ -105,7 +114,7 @@ title: "Weekly newsletter no. @{{ edition_count }}"
 Result:
 
 ```hbs [build_production/example.html]
-Weekly newsletter no. {{ edition_count }}
+Weekly newsletter no. {{ 1 + 2 }}
 ```
 
 ### Ignore with `<raw>`
@@ -114,14 +123,14 @@ This is useful if you want to ignore multiple expressions in one go:
 
 ```hbs [src/templates/example.html]
 <raw>
-  <p>The quick brown {{ animals[0] }} jumps over the lazy {{ animals[1] }}.</p>
+  <p>The quick brown {{ 1 + 2 }} jumps over the lazy {{ 3 + 4 }}.</p>
 </raw>
 ```
 
 `<raw>` will be removed in the final output, but the curly braces will be left untouched:
 
 ```hbs [build_production/example.html]
-<p>The quick brown {{ animals[0] }} jumps over the lazy {{ animals[1] }}.</p>
+<p>The quick brown {{ 1 + 2 }} jumps over the lazy {{ 3 + 4 }}.</p>
 ```
 
 ### Change delimiters
