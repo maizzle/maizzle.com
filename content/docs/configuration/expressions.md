@@ -101,7 +101,7 @@ Maizzle disables `strictMode` so that, if you have an error inside an expression
 ## missingLocal
 
 Type: `undefined|String`\
-Default: `{local}`
+Default: `undefined`
 
 Define what to render when referencing a value that is not defined in `locals`.
 

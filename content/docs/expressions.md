@@ -75,26 +75,17 @@ markup: '<strong>Bold</strong>'
 
 Other templating engines and many <abbr title="Email Service Provider">ESP</abbr>s also use the `{{ }}` syntax.
 
-By default, Maizzle will output the original reference like `{{ unsubscribe }}` for any value is not [defined in your config](/docs/environments#config-variables).
-
-For other cases, like `{{ 1 + 2 }}` or if had to change how [`missingLocal`](/docs/configuration/expressions#missinglocal) is handled, you have several options for preventing expression compilation:
+If you want to prevent expression compilation and actually render the curly braces so you can evaluate them at a later stage, you have several options:
 
 ### Ignore inline
 
-The [Laravel Blade](https://laravel.com/docs/blade)-inspired `@{{ }}` syntax is useful for one-offs, where you need to ignore a single expression. The compiled HTML will render `{{ }}` without the `@`.
+The [Blade](https://laravel.com/docs/blade)-inspired `@{{ }}` syntax is useful for one-offs, where you need to ignore a single expression. The compiled email will render `{{ }}` without the `@`.
 
 ```hbs [src/templates/example.html]
-<div>
-  @{{ 1 + 2 }}
-</div>
-```
-
-Result:
-
-```hbs [build_production/example.html]
-<div>
-  {{ 1 + 2 }}
-</div>
+<x-main>
+  @{{ page.markup }}
+  <!-- Result: {{ page.markup }} -->
+</x-main>
 ```
 
 ### Ignore in Front Matter
@@ -103,9 +94,8 @@ You may also use `@{{ }}` to prevent expressions in Front Matter from being eval
 
 ```hbs [src/templates/example.html]
 ---
-title: "Weekly newsletter no. @{{ 1 + 2 }}"
+title: "Weekly newsletter no. @{{ edition_count }}"
 ---
-
 <x-main>
   {{ page.title }}
 </x-main>
@@ -114,7 +104,7 @@ title: "Weekly newsletter no. @{{ 1 + 2 }}"
 Result:
 
 ```hbs [build_production/example.html]
-Weekly newsletter no. {{ 1 + 2 }}
+Weekly newsletter no. {{ edition_count }}
 ```
 
 ### Ignore with `<raw>`

@@ -48,13 +48,12 @@ title: "Please confirm your email address"
 
 ### Expressions
 
-Expressions in Front Matter will be automatically ignored and output as-is:
+Expressions in Front Matter can be ignore with a single `@` symbol when they're used in the Template they're defined in:
 
 ```hbs [src/templates/example.html]
 ---
-greeting: "Hello {{ user.name }}, please confirm your email address"
+greeting: "Hello @{{ user.name }}, please confirm your email address"
 ---
-
 <h1>{{ page.greeting }}</h1>
 ```
 
@@ -62,6 +61,22 @@ That will render as:
 
 ```hbs [build_production/example.html]
 <h1>Hello {{ user.name }}, please confirm your email address</h1>
+```
+
+If the Front Matter variable will be used in a Layout, you need to double-ignore it:
+
+```hbs [src/templates/example.html]
+---
+preheader: "Hello @@{{ user.name }}, please confirm your email address"
+---
+```
+
+```hbs [src/layouts/main.html]
+<if condition="page.preheader">
+  <div class="hidden">
+    {{{ page.preheader }}}
+  </div>
+</if>
 ```
 
 ## Using Layouts
