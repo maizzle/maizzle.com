@@ -112,6 +112,4 @@ Define what to render when referencing a value that is not defined in `locals`.
 |      `''`      | `false`/`true` | `''` (no output, empty string)      |
 |   `{local}`    | `false`/`true` | Original reference like `{{ foo }}` |
 
-By default, Maizzle will output the original reference like `{{ foo }}` when a value is not defined in `locals`.
-
-So you can use ESP merge tags like `{{ unsubscribe }}` in your templates without having to ignore them with `@{{ unsubscribe }}` or changing the [delimiters](#delimiters).
+By default, Maizzle will output the string `undefined` when a value is not defined in `locals`.
