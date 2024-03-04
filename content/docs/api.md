@@ -1,6 +1,6 @@
 ---
 title: "API"
-description: "Use Maizzle's API on the server to compile a string to an HTML email, styled with Tailwind CSS."
+description: "Using the API to compile an HTML email styled with Tailwind CSS."
 ---
 
 # API

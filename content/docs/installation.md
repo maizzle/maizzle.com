@@ -1,6 +1,6 @@
 ---
 title: "Getting Started"
-description: "Installing the Maizzle Email Framework on your machine and creating a new project."
+description: "Installing Maizzle on your machine and creating a new project."
 ---
 
 # Getting Started

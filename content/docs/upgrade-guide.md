@@ -1,6 +1,6 @@
 ---
 title: "Upgrade Guide"
-description: "Upgrading your Maizzle projects from v3 to v4."
+description: "How to upgrade your Maizzle project to the latest major framework release."
 ---
 
 # Upgrade Guide

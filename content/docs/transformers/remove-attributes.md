@@ -1,6 +1,6 @@
 ---
 title: "Remove attributes"
-description: "Automatically remove attributes from your HTML email."
+description: "Automatically remove attributes when building your HTML email."
 ---
 
 # Remove attributes

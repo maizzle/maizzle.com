@@ -102,7 +102,7 @@
                 title="tailwind.config.js"
                 bg-frame-class="top-4 sm:top-8 right-4 sm:right-8 backdrop-blur-[2px]"
               >
-                <ContentDoc path="code/config" />
+                <ContentDoc path="code/config" :head="false" />
               </HomeCodeFrame>
             </div>
           </div>
@@ -153,7 +153,7 @@
               bg-frame-class="top-4 sm:top-8 right-4 sm:right-8 bg-white/30 backdrop-blur-[2px]"
               no-copy
             >
-            <ContentDoc path="code/template" />
+            <ContentDoc path="code/template" :head="false" />
             </HomeCodeFrame>
           </div>
         </div>
@@ -194,7 +194,7 @@
                 bg-frame-class="top-4 sm:top-8 right-4 sm:right-8 bg-white/30 backdrop-blur-[1px]"
                 no-copy
               >
-                <ContentDoc path="code/environment" />
+                <ContentDoc path="code/environment" :head="false" />
               </HomeCodeFrame>
             </div>
           </div>
@@ -432,16 +432,16 @@
 import features from '@/data/features'
 
 definePageMeta({
-  layout: 'homepage',
+  layout: 'homepage'
 })
-
-defineOgImageComponent('OGImageHome')
 
 useContentHead({
   head: {
     titleTemplate: () => 'Maizzle - Quickly build HTML emails with Tailwind CSS',
   }
 })
+
+defineOgImageComponent('OGImageHome')
 
 const templates = await queryContent('templates')
   .only([

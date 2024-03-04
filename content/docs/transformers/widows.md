@@ -1,6 +1,6 @@
 ---
 title: "Prevent Widow Words"
-description: "Prevent widow words in your HTML email content."
+description: "Preventing widow words in your HTML email content."
 ---
 
 # Prevent Widow Words

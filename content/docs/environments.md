@@ -1,6 +1,6 @@
 ---
 title: "Environments"
-description: "Define distinct build scenarios for your HTML email workflow, each with their own settings."
+description: "Define distinct build scenarios for your HTML email workflow, each with their own config and data."
 ---
 
 # Environments

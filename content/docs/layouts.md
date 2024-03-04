@@ -1,6 +1,6 @@
 ---
 title: "Layouts"
-description: "See how to use layouts with templating inheritance to build your HTML emails in Maizzle."
+description: "How to use layouts with templating inheritance to build HTML emails in Maizzle."
 ---
 
 # Layouts

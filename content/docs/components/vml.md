@@ -1,6 +1,6 @@
 ---
 title: "VML Components"
-description: "VML components for background images support in HTML emails for Outlook on Windows."
+description: "Components for coding background images for Outlook on Windows."
 ---
 
 # VML Components

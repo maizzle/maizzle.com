@@ -1,6 +1,6 @@
 ---
 title: "Email Code Minification"
-description: "Minify your HTML email code so that your production emails weigh even less and you avoid Gmail clipping."
+description: "Minify your HTML email code so that production emails weigh even less, avoiding Gmail clipping."
 ---
 
 # Minify Email Code

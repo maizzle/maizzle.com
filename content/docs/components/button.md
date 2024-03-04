@@ -1,6 +1,6 @@
 ---
 title: "Button Component"
-description: "A Maizzle component that makes it easy to add a styled link button to your HTML emails."
+description: "A component for creating styled link buttons to your HTML emails."
 ---
 
 # Button Component

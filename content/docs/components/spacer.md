@@ -1,6 +1,6 @@
 ---
 title: "Spacer Component"
-description: "A component for creating vertical spacing in HTML emails built with Maizzle."
+description: "A component for creating consistent vertical spacing in HTML emails."
 ---
 
 # Spacer Component

@@ -1,11 +1,11 @@
 ---
 title: "Markdown"
-description: "Use Markdown in your HTML email templates. GitHub Flavored Markdown included, too."
+description: "Using Markdown in HTML emails."
 ---
 
 # Markdown
 
-You can use Markdown in your Maizzle email templates.
+Maizzle makes it easy to use Markdown in your email templates.
 
 [markdown-it](https://github.com/markdown-it/markdown-it) is used and you can configure it either globally from your Environment config, or through Front Matter for each Template.
 

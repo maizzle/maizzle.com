@@ -1,6 +1,6 @@
 ---
 title: "Dividers"
-description: "Create dividers or horizontal rules for your HTML email template in Maizzle."
+description: "How to create dividers or horizontal rules for HTML emails."
 ---
 
 # Dividers

@@ -1,6 +1,6 @@
 ---
 title: "Browsersync configuration"
-description: "Configuring Browsersync to watch files when developing locally in a Maizzle project."
+description: "Configuring Browsersync to watch files when developing locally."
 ---
 
 # Browsersync configuration

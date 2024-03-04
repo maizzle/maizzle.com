@@ -1,6 +1,6 @@
 ---
 title: "Divider Component"
-description: "A Maizzle component for easily creating horizontal visual dividers in your HTML emails."
+description: "A component for creating horizontal visual dividers in HTML emails."
 ---
 
 # Divider Component

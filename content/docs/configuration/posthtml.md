@@ -1,6 +1,6 @@
 ---
 title: "PostHTML configuration"
-description: "Configuring PostHTML options in Maizzle."
+description: "Configuring PostHTML in Maizzle."
 ---
 
 # PostHTML configuration

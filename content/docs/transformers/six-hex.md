@@ -1,6 +1,6 @@
 ---
 title: "Six-digit HEX"
-description: "Ensure your bgcolor attributes use six-digit hexadecimal."
+description: "Using six-digit hexadecimal for improved email client compatibility."
 ---
 
 # Six-digit HEX

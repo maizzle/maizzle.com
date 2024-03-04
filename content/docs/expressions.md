@@ -1,6 +1,6 @@
 ---
 title: "Expressions"
-description: "Learn how to create HTML emails with template inheritance in Maizzle."
+description: "Syntax for using basic JavaScript to manipulate data in HTML emails."
 ---
 
 # Expressions

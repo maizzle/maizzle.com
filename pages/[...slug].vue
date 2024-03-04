@@ -76,7 +76,7 @@ useHead({
     },
     {
       property: 'og:title',
-      content: page.title,
+      content: page.title + ' | Maizzle',
     },
     {
       property: 'og:description',

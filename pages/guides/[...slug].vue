@@ -61,7 +61,7 @@ defineOgImageComponent('OGImageGuides', {
 })
 
 useHead({
-  title: page.title,
+  title: page.title + ' | Maizzle Guides',
   meta: [
     {
       name: 'description',
@@ -74,7 +74,7 @@ useHead({
     },
     {
       property: 'og:title',
-      content: page.title,
+      content: page.title + ' | Maizzle Guides',
     },
     {
       property: 'og:description',

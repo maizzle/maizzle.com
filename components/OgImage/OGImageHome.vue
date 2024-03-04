@@ -24,7 +24,7 @@
         </linearGradient>
       </defs>
     </svg>
-    <svg class="absolute bottom-0 right-0 opacity-30 z-0" width="825" height="505" viewBox="0 0 825 505" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg class="absolute bottom-0 right-0 opacity-35 z-0" width="825" height="505" viewBox="0 0 825 505" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M873.763 114.012C873.763 69.1911 837.429 32.8568 792.609 32.8568C747.788 32.8568 711.454 69.1911 711.454 114.012V546.838C711.454 591.658 747.788 627.993 792.609 627.993C837.429 627.993 873.763 591.658 873.763 546.838V114.012Z" stroke="url(#paint0_linear_478_340)" stroke-width="2" stroke-miterlimit="10"/>
       <path d="M534.262 114.012C534.262 69.1911 497.928 32.8568 453.108 32.8568C408.287 32.8568 371.953 69.1911 371.953 114.012V546.838C371.953 591.658 408.287 627.993 453.108 627.993C497.928 627.993 534.262 591.658 534.262 546.838V114.012Z" stroke="url(#paint1_linear_478_340)" stroke-width="2" stroke-miterlimit="10"/>
       <path d="M856.555 163.933C884.174 128.633 877.947 77.6276 842.647 50.0086C807.347 22.3896 756.342 28.6162 728.723 63.916L389.831 497.054C362.212 532.354 368.439 583.359 403.739 610.978C439.038 638.597 490.044 632.371 517.663 597.071L856.555 163.933Z" stroke="url(#paint2_linear_478_340)" stroke-width="2" stroke-miterlimit="10"/>

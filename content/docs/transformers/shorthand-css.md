@@ -1,11 +1,13 @@
 ---
 title: "Shorthand CSS"
-description: "Group CSS properties of the same type into shorthand inline CSS in your HTML email."
+description: "Group CSS properties of the same type into shorthand inline CSS."
 ---
 
 # Shorthand CSS
 
 Rewrite longhand CSS inside `style` attributes with shorthand syntax. Only works with `margin`, `padding` and `border`, and only when all sides are specified.
+
+Shorthand syntax for CSS properties means less code, so fewer bytes to send over the wire. Today, most email clients support shorthand CSS.
 
 Something like this:
 

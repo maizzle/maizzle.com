@@ -32,12 +32,12 @@ const page = await queryContent('starters').where({ _path: route.path }).findOne
 const toc = page.body.toc
 
 defineOgImageComponent('OGImageDocs', {
-  title: page.title,
+  title: page.title + ' Starter',
   description: page.description,
 })
 
 useHead({
-  title: page.title,
+  title: page.title + ' Starter',
   meta: [
     {
       name: 'description',

@@ -1,6 +1,6 @@
 ---
 title: "Layouts configuration"
-description: "Configuring layout options in Maizzle."
+description: "Configuring (legacy) layout options in Maizzle."
 ---
 
 # Layouts configuration

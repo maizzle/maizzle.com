@@ -60,7 +60,7 @@ const guides = await queryContent('guides')
   .find()
 
 useHead({
-  title: 'Guides',
+  title: 'Guides | Maizzle',
   meta: [
     {
       name: 'description',
