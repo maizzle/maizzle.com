@@ -65,6 +65,7 @@ Alternatively, you may use the `<component>` tag to insert a Component:
 ```
 
 The `src` attribute is mandatory and it needs to point to the Component's file path, relative to the project root.
+If you're used to partials that you simply include in your HTML, this may look more familiar.
 
 ## Nested file structure
 
