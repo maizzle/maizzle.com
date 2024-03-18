@@ -6,7 +6,6 @@
     @apply fixed font-inter bg-white/90;
   }
 
-
   .DocSearch-Modal {
     @apply md:max-w-[65ch] 2xl:max-w-[68.5ch];
     @apply bg-white shadow-2xl shadow-indigo-600/10 border;

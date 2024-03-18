@@ -2,15 +2,15 @@
   <div class="sticky top-28">
     <nav
       v-if="toc.links.length > 0"
-      class="custom-scrollbar max-w-[16rem] max-h-[calc(100vh-7rem)] overflow-y-auto pb-8 [scrollbar-gutter:stable]"
+      class="custom-scrollbar lg:max-w-[16rem] lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto pb-8 [scrollbar-gutter:stable]"
     >
-      <div class="sticky top-0">
+      <div class="hidden lg:block sticky top-0">
         <h4 class="text-xs uppercase text-slate-700 font-semibold bg-white">
           On this page:
         </h4>
         <div class="bg-gradient-to-b from-white h-6 w-full"></div>
       </div>
-      <ul class="space-y-2.5 text-sm">
+      <ul class="hidden lg:block space-y-2.5 text-sm">
         <li
           v-for="link of toc.links"
           :key="link.id"
@@ -42,7 +42,7 @@
           </ul>
         </li>
       </ul>
-      <div class="mt-8">
+      <div class="lg:mt-8 px-4 max-w-xs">
         <ClientOnly>
           <Component
             is="script"

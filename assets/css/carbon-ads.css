@@ -2,7 +2,12 @@
   display: block;
   line-height: 1.5;
   overflow: hidden;
-  max-width: 130px;
+}
+
+@screen lg {
+  #carbonads {
+    max-width: 130px;
+  }
 }
 
 #carbonads a {

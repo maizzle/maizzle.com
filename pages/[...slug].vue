@@ -36,7 +36,7 @@
         </div>
       </div>
     </div>
-    <aside class="hidden lg:block col-span-3 2xl:col-span-5 mt-4">
+    <aside class="col-span-3 2xl:col-span-5 lg:mt-4">
       <TableOfContents :toc="toc" />
     </aside>
   </div>
