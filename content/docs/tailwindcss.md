@@ -499,7 +499,7 @@ Result:
 
 ### Outlook.com dark mode
 
-Change `color` and `background-color` of elements in [Outlook.com dark mode](https://www.hteumeuleu.com/2021/emails-react-outlook-com-dark-mode/).
+Use the `ogsc` and `ogsb` variants to change `color` and `background-color` of elements in [Outlook.com dark mode](https://www.hteumeuleu.com/2021/emails-react-outlook-com-dark-mode/).
 
 ```html
 <!-- Color -->
