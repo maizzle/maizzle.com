@@ -54,7 +54,7 @@
 
 <script setup>
   useHead({
-    title: 'Supporters',
+    title: 'Sponsors | Maizzle',
     meta: [
       {
         name: 'description',
@@ -63,11 +63,11 @@
       // Open Graph
       {
         property: 'og:url',
-        content: 'https://maizzle.com/supporters'
+        content: 'https://maizzle.com/sponsors'
       },
       {
         property: 'og:title',
-        content: 'Supporters'
+        content: 'Sponsors'
       },
       {
         property: 'og:description',
@@ -81,8 +81,13 @@
     link: [
       {
         rel: 'canonical',
-        href: 'https://maizzle.com/supporters',
+        href: 'https://maizzle.com/sponsors',
       },
     ],
+  })
+
+  defineOgImageComponent('OGImageDocs', {
+    title: 'Sponsors',
+    description: 'Support Maizzle development through a monthly or one-time sponsorship.',
   })
 </script>
