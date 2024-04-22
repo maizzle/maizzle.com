@@ -13,7 +13,7 @@
     "@tailwindcss/typography": "^0.5.12",
     "autoprefixer": "^10.4.19",
     "nuxt": "^3.10.1",
-    "nuxt-og-image": "^3.0.0-rc.38",
+    "nuxt-og-image": "^3.0.0-rc.52",
     "postcss": "^8.4.38",
     "postcss-import": "^16.1.0",
     "postcss-nesting": "^12.1.2",
