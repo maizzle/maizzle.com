@@ -24,7 +24,7 @@
   "dependencies": {
     "@docsearch/css": "^3.6.0",
     "@docsearch/js": "^3.6.0",
-    "@vueuse/components": "^10.9.0",
+    "@vueuse/components": "^10.10.0",
     "scroll-to-element": "^2.0.3",
     "typeit": "^8.8.3"
   }
