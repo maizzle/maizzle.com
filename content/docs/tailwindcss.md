@@ -281,21 +281,20 @@ Arbitrary values might look like inline styles with extra steps, but it's still 
 
 ## Plugins
 
-To use a Tailwind CSS plugin, simply `npm install` it and follow its instructions to add it to `plugins: []` in your `tailwind.config.js`.
+To use a Tailwind CSS plugin, simply `npm install` it and follow its instructions to add it to `plugins: []` in your `tailwind.config.js`:
 
-For example, here are the plugins used in the Starter:
-
-```js [tailwind.config.js] {3-5}
+```js [tailwind.config.js] {3}
 module.exports = {
   plugins: [
-    require('tailwindcss-mso'),
-    require('tailwindcss-box-shadow'),
     require('tailwindcss-email-variants'),
   ],
 }
 ```
 
 See the [Tailwind CSS docs](https://tailwindcss.com/docs/configuration#plugins) for more information on plugins.
+
+<alert><code>tailwindcss-email-variants</code> is already included in our Tailwind CSS preset, you don't need to install it separately.</alert>
+
 
 ## Use in Template
 
@@ -543,7 +542,7 @@ Result:
 
 Outlook and Office 365 on Windows support proprietary `mso-` CSS properties.
 
-You can use [tailwindcss-mso](https://github.com/maizzle/tailwindcss-mso) in Maizzle to add Outlook-only CSS:
+Maizzle includes [tailwindcss-mso](https://github.com/maizzle/tailwindcss-mso), allowing you to use Outlook-only utilities:
 
 ```html
 <p class="mso-hide-all">...</p>

@@ -17,13 +17,13 @@ This means that you're in complete control over your email code: no need to worr
 
 Maizzle uses the Tailwind CSS framework, enabling you to quickly style HTML emails.
 
-Using utility classes to style your emails makes you more productive by eliminating the tiring context switching present in a traditional email coding approach, where you keep moving back and forward between your responsive CSS and your HTML markup.
+Using utility classes to style emails makes you more productive by eliminating the tiring context switching that is common in a traditional email coding approach, where you keep moving back and forward between your responsive CSS and your HTML markup.
 
 And since you no longer need to come up with names for your CSS classes, you can focus on coding your emails at warp speed.
 
-An email-tailored `tailwind.config.js` is provided in the [official Starter](https://github.com/maizzle/maizzle) - this configures Tailwind CSS for optimal email client support.
+We use [`tailwindcss-preset-email`](https://github.com/maizzle/tailwindcss-preset-email), a custom preset that configures Tailwind CSS for better email client support: `rem` values are replaced with `px`, HEX values are preferred over CSS vars, there are custom screens and an extended spacing scale etc.
 
-When you build the production-ready emails, Maizzle can automatically take care of CSS inlining, as well as many other optimizations.
+When you build the production-ready emails, Maizzle can automatically take care of CSS inlining, as well as many other HTML and CSS optimizations.
 
 ## Build System
 

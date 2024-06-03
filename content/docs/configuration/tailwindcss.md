@@ -77,7 +77,11 @@ You shouldn't need this in real life, it's there for internal use mostly.
 
 ## tailwind.config.js
 
-Maizzle comes with an email-tailored `tailwind.config.js`, customized for optimal email client compatibility.
+Maizzle uses [`tailwindcss-preset-email`](https://github.com/maizzle/tailwindcss-preset-email), a custom preset that configures Tailwind CSS for better email client support.
+
+Additionally, we set some defaults like where to look for class names to generate utilities (`content` key), or how to handle `!important`.
+
+You might notice the examples below are not present in the `tailwind.config.js` file in your project - don't worry, that's because they're tucked away in the email preset. We list them here for reference, and you can always override them in your own `tailwind.config.js` by extending the `theme` key.
 
 ### Content
 
@@ -150,7 +154,9 @@ You can also [configure the replacement mappings](/docs/transformers/safe-class-
 
 ### Screens
 
-Maizzle uses a desktop-first approach with `max-width` media queries instead of Tailwind's default, mobile-first approach that uses `min-width`:
+Maizzle uses a desktop-first approach with `max-width` media queries instead of Tailwind's default, mobile-first approach that uses `min-width`.
+
+These are the default screens in Maizzle:
 
 ```js [tailwind.config.js]
 module.exports = {
@@ -204,8 +210,7 @@ module.exports = {
 
 ### Pixel units
 
-Because of poor email client support, `rem` units have been replaced with `px`.
-
+Because of poor email client support, our email preset for Tailwind replaces `rem` units with `px`.
 This affects the following utilities:
 
 - `spacing` (width, height, margin, padding, etc)
@@ -215,6 +220,8 @@ This affects the following utilities:
 - `lineHeight`
 
 ### Spacing
+
+The spacing scale has been extended to include more values:
 
 ```js [tailwind.config.js]
 module.exports = {
@@ -227,74 +234,15 @@ module.exports = {
         0: '0',
         0.5: '2px',
         1: '4px',
-        1.5: '6px',
-        2: '8px',
-        2.5: '10px',
-        3: '12px',
-        3.5: '14px',
-        4: '16px',
-        4.5: '18px',
-        5: '20px',
-        5.5: '22px',
-        6: '24px',
-        6.5: '26px',
-        7: '28px',
-        7.5: '30px',
-        8: '32px',
-        8.5: '34px',
-        9: '36px',
-        9.5: '38px',
-        10: '40px',
-        11: '44px',
-        12: '48px',
+        // ...
         14: '56px',
         16: '64px',
-        20: '80px',
-        24: '96px',
-        28: '112px',
-        32: '128px',
-        36: '144px',
-        40: '160px',
-        44: '176px',
+        18: '72px',
+        // ...
         48: '192px',
-        52: '208px',
-        56: '224px',
-        60: '240px',
-        64: '256px',
-        72: '288px',
-        80: '320px',
+        50: '200px',
+        // ...
         96: '384px',
-        97.5: '390px',
-        120: '480px',
-        150: '600px',
-        160: '640px',
-        175: '700px',
-        '1/2': '50%',
-        '1/3': '33.333333%',
-        '2/3': '66.666667%',
-        '1/4': '25%',
-        '2/4': '50%',
-        '3/4': '75%',
-        '1/5': '20%',
-        '2/5': '40%',
-        '3/5': '60%',
-        '4/5': '80%',
-        '1/6': '16.666667%',
-        '2/6': '33.333333%',
-        '3/6': '50%',
-        '4/6': '66.666667%',
-        '5/6': '83.333333%',
-        '1/12': '8.333333%',
-        '2/12': '16.666667%',
-        '3/12': '25%',
-        '4/12': '33.333333%',
-        '5/12': '41.666667%',
-        '6/12': '50%',
-        '7/12': '58.333333%',
-        '8/12': '66.666667%',
-        '9/12': '75%',
-        '10/12': '83.333333%',
-        '11/12': '91.666667%',
       },
     }
   }
@@ -466,19 +414,20 @@ module.exports = {
 }
 ```
 
-<Alert type="info">`tailwindcss-email-variants` is already included in the Starter, no need to install it.</Alert>
+<Alert type="info">`tailwindcss-email-variants` is already included in the email preset, no need to install it.</Alert>
 
 ### Disabled plugins
 
-The Maizzle Starter disables the following Tailwind CSS core plugins due to poor support in the majority of email clients:
+`tailwindcss-preset-email` disables the following Tailwind CSS core plugins due to poor support in the majority of email clients:
 
 - preflight
 - backgroundOpacity
 - borderOpacity
-- boxShadow
+- borderSpacing
 - divideOpacity
 - placeholderOpacity
 - textOpacity
+- textDecoration
 
 If you want to use one of these plugins, simply set it to `true` in `corePlugins` at the bottom of your `tailwind.config.js`:
 
