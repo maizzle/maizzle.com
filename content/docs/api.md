@@ -9,23 +9,24 @@ Use the Maizzle API to compile a string to an HTML email.
 
 ## Usage
 
-First, `require()` the framework in your application:
+First, `require()` the `render` method in your application:
 
 ```js [app.js]
-const Maizzle = require('@maizzle/framework')
+const { render } = require('@maizzle/framework')
 ```
 
-Then, call the `render()` method, passing it a string and an options object:
+<alert>Use destructuring so that you don't load all the other exported methods, like <code>serve</code>.</alert>
+
+Then call it, passing it a string and an options object:
 
 ```js [app.js]
-const Maizzle = require('@maizzle/framework')
+const { render } = require('@maizzle/framework')
 
-Maizzle
-  .render(`html string`, options)
+render(`html string`, options)
   .then(({html, config}) => console.log(html, config))
 ```
 
-The `render()` method returns an object containing the compiled HTML and the [environment config](/docs/environments) that was computed for it.
+The `render` method returns an object containing the compiled HTML and the [Environment config](/docs/environments) that was computed for it.
 
 ### Options
 
@@ -72,9 +73,9 @@ The Maizzle Environment configuration object.
 ## Example
 
 ```js [app.js]
-const Maizzle = require('@maizzle/framework')
+const { render } = require('@maizzle/framework')
 
-const html = `---
+let html = `---
 title: Using Maizzle on the server
 ---
 
@@ -94,7 +95,7 @@ title: Using Maizzle on the server
   </body>
 </html>`
 
-Maizzle.render(html,
+render(html,
   {
     tailwind: {
       config: require('./tailwind.config.js'),
@@ -116,7 +117,7 @@ Maizzle.render(html,
 Of course, templating tags are available when using Maizzle programmatically.
 
 ```js [app.js]
-const html = `---
+let html = `---
 title: Using Maizzle programmatically
 ---
 
@@ -129,7 +130,7 @@ title: Using Maizzle programmatically
 
 ## Gotchas
 
-Since the `config` you can pass to the `render()` method is optional, there are a few gotchas that you need to be aware of.
+Since the options object you can pass to the `render` method is optional, there are a few gotchas that you need to be aware of.
 
 ### Default Tailwind
 
@@ -143,7 +144,7 @@ Also, the default Tailwind config will not include any `content` paths that shou
 
 ### Transformers
 
-Transformers, such as CSS inlining or minification, are opt-in: they transform content only when you enable them. Since you don't need to pass in a Maizzle config object, this means that most of them will not run.
+Most Transformers, such as CSS inlining or minification, are opt-in: they transform content only when you enable them. Since you don't need to pass in a Maizzle config object, this means that most of them will not run.
 
 The following Transformers always run:
 
