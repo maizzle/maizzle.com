@@ -42,3 +42,7 @@ These are some web apps that you can use with any HTML email, not just the ones 
 - [tailwindcss-mso](https://github.com/maizzle/tailwindcss-mso) - a Tailwind CSS plugin that generates MSO utilities
 - [tailwindcss-email-variants](https://github.com/maizzle/tailwindcss-email-variants) - Tailwind CSS plugin that provides variants for email client targeting hacks used in HTML emails.
 - [tailwindcss-box-shadow](https://github.com/cossssmin/tailwindcss-box-shadow) - Tailwind CSS plugin that generates shadow utilities exactly as you have them defined in your `theme` config.
+
+## Presets
+
+- [tailwindcss-preset-email](https://github.com/maizzle/tailwindcss-preset-email) - a Tailwind CSS config preset that changes some utility classes to use values that are better supported in email clients. It also includes all of the plugins above.
