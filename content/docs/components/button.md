@@ -55,26 +55,38 @@ This will add the `text-center` class to the button's wrapper `<div>`, which wil
 
 ### Styling
 
-You may style the Button as needed with Tailwind CSS utilities.
+You may style the Button as needed through props or with Tailwind CSS utilities.
 
-The button includes a background and text color by default, so you'll need to override them with the `!` important modifier.
+The button includes a <span class="inline-flex gap-1 px-2 translate-y-0.5 border border-solid rounded"><span class="w-3 h-3 mt-1.5 bg-indigo-700 rounded" title="#4338ca"></span><span class="text-sm/6">bg-indigo-700</span></span> background and <span class="inline-flex gap-1 px-2 translate-y-0.5 border border-solid rounded"><span class="w-3 h-3 mt-1.5 border border-solid rounded bg-slate-50" title="#f8fafc"></span><span class="text-sm/6">text-slate-50</span></span> text color by default, which you can change through props.
 
 For example, let's make the button blue-themed:
 
 ```xml [src/templates/example.html]
 <x-button
   href="https://example.com"
-  class="!bg-blue-600 !text-blue-100"
+  color="#fffffe"
+  bg-color="#1e65e1"
 >
   Book now
 </x-button>
 ```
 
-Of course, you may change the colors directly in `src/components/button.html`.
+You can also use Tailwind CSS utilities to set the text and background colors, but you will need to use the `!` important modifier to override the default colors:
+
+```xml [src/templates/example.html]
+<x-button
+  href="https://example.com"
+  class="!bg-blue-500 !text-white"
+>
+  Book now
+</x-button>
+```
+
+Of course, you may also change the colors directly in `src/components/button.html`.
 
 ### MSO Padding
 
-Left, right and bottom padding for Outlook on Windows is controlled through `letter-spacing` and `mso-text-raise`, a proprietary Outlook CSS property.
+Top and bottom padding for Outlook on Windows is controlled through `letter-spacing` and `mso-text-raise`, a proprietary Outlook CSS property.
 
 This technique is based on the Link Button from [goodemailcode.com](https://www.goodemailcode.com/email-code/link-button).
 
@@ -90,33 +102,9 @@ Adjust the top padding for Outlook on Windows with the `mso-pt` prop:
 </x-button>
 ```
 
-#### MSO left padding
-
-Default: `32px`
-
-Adjust the left padding for Outlook on Windows with the `mso-pl` prop:
-
-```xml [src/templates/example.html]
-<x-button mso-pl="24px">
-  Book now
-</x-button>
-```
-
-#### MSO right padding
-
-Default: `32px`
-
-Adjust the right padding for Outlook on Windows with the `mso-pr` prop:
-
-```xml [src/templates/example.html]
-<x-button mso-pr="24px">
-  Book now
-</x-button>
-```
-
 #### MSO bottom padding
 
-Default: `32px`
+Default: `30px`
 
 Adjust the bottom padding for Outlook on Windows with the `mso-pb` prop:
 
@@ -130,7 +118,7 @@ Adjust the bottom padding for Outlook on Windows with the `mso-pb` prop:
 
 You may pass any other HTML attributes to the component, such as `data-*` or `id` - they will all be added to the `<a>` tag.
 
-Note that non-standard attributes will be ignored by default - you'll need to define them as props in the component if you need them preserved. Alternatively, you can safelist them in your `build.components` config.
+Note that non-standard attributes will be ignored by default - you'll need to define them as props in the component if you need them preserved. Alternatively, you can [safelist](/docs/configuration/components#safelistattributes) them in your `build.components` config.
 
 ## Responsive
 
