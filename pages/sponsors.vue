@@ -1,14 +1,14 @@
 <template>
-  <div class="bg-white px-6 py-12 sm:py-24 lg:px-8">
-    <PatternTemplates class="max-w-3xl mt-0 fixed bottom-72 lg:bottom-0 -left-44 lg:left-0 w-auto md:w-2/3 lg:w-1/2 z-0 pointer-events-none text-slate-300" />
+  <div class="px-6 py-12 bg-white sm:py-24 lg:px-8">
+    <PatternTemplates class="fixed z-0 w-auto max-w-3xl mt-0 pointer-events-none bottom-72 lg:bottom-0 -left-44 lg:left-0 md:w-2/3 lg:w-1/2 text-slate-300" />
 
-    <div class="mx-auto max-w-7xl xl:px-6 text-base leading-7 text-gray-700 relative">
+    <div class="relative mx-auto text-base leading-7 text-gray-700 max-w-7xl xl:px-6">
       <div class="space-y-6">
         <h1 class="text-5xl font-bold text-slate-800">
           Maizzle Sponsors
         </h1>
         <div class="space-y-10">
-          <p class="max-w-xl text-balance text-lg">
+          <p class="max-w-xl text-lg text-balance">
             If you use Maizzle at work and feel that it has made your life easier, please consider supporting
             development through a monthly or one-time sponsorship and see your name or company logo here.
           </p>
@@ -23,31 +23,91 @@
       </div>
     </div>
 
-    <div class="max-w-7xl mx-auto xl:px-6 my-16">
+    <div class="mx-auto my-16 max-w-7xl xl:px-6">
       <hr>
     </div>
 
-    <div class="mx-auto grid max-w-7xl gap-x-16 gap-y-12 lg:gap-y-20 lg:px-8 xl:grid-cols-3">
-      <div class="max-w-2xl">
-        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Individual++</h2>
-        <p class="mt-6 text-lg leading-8 text-gray-600">
-          Maizzle has made your HTML email coding work easier or more enjoyable and you'd like to support its development.
-        </p>
+    <div class="relative space-y-16">
+      <div class="grid mx-auto max-w-7xl gap-x-16 gap-y-12 lg:gap-y-20 lg:px-8 xl:grid-cols-3">
+        <div class="max-w-2xl">
+          <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            Individual++
+            <span class="block text-base font-medium text-slate-600">$32/mo</span>
+          </h2>
+          <p class="mt-6 text-lg leading-8 text-gray-600">
+            Maizzle has made your HTML email coding work easier or more enjoyable and you'd like to support its development.
+          </p>
+        </div>
+        <ul role="list" class="grid max-w-2xl grid-cols-2 text-center gap-x-8 gap-y-16 sm:grid-cols-3 md:grid-cols-4 sm:mx-0 lg:max-w-none lg:grid-cols-5 xl:col-span-2">
+          <li v-for="item in Array.from(Array(4))">
+            <a href="https://github.com/sponsors/maizzle/sponsorships?tier_id=374199" target="_blank" class="group">
+              <div class="w-24 h-24 mx-auto transition-all rounded-full bg-slate-200/75 group-hover:bg-slate-300"></div>
+              <div class="mt-3.5 mx-auto w-28 h-4 bg-slate-200/75"></div>
+              <div class="mt-3.5 mx-auto w-16 h-3 bg-slate-200/75"></div>
+            </a>
+          </li>
+        </ul>
       </div>
-      <ul role="list" class="grid max-w-2xl grid-cols-2 gap-x-8 gap-y-16 text-center sm:grid-cols-3 md:grid-cols-4 sm:mx-0 lg:max-w-none lg:grid-cols-5 xl:col-span-2">
-        <li>
-          <a href="https://joeyfigaro.com" rel="noopener noreferrer" target="_blank">
-            <img class="mx-auto h-24 w-24 rounded-full" src="https://avatars.githubusercontent.com/u/1386477?v=4" alt>
-            <h3 class="mt-2 text-base font-semibold leading-7 tracking-tight text-gray-900">Joey Figaro</h3>
-            <p class="text-sm leading-6 text-gray-600">joeyfigaro.com</p>
-          </a>
-        </li>
-        <li v-for="item in Array.from(Array(3))">
-          <div class="mx-auto h-24 w-24 rounded-full bg-slate-200/75"></div>
-          <div class="mt-3.5 mx-auto w-28 h-4 bg-slate-200/75"></div>
-          <div class="mt-3.5 mx-auto w-16 h-3 bg-slate-200/75"></div>
-        </li>
-      </ul>
+      <div class="grid mx-auto max-w-7xl gap-x-16 gap-y-12 lg:gap-y-20 lg:px-8 xl:grid-cols-3">
+        <div class="max-w-2xl">
+          <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            Freelancer
+            <span class="block text-base font-medium text-slate-600">$64/mo</span>
+          </h2>
+          <p class="mt-6 text-lg leading-8 text-gray-600">
+            You're a solo developer and Maizzle makes your email coding freelancing career easier.
+          </p>
+        </div>
+        <ul role="list" class="grid max-w-2xl grid-cols-2 text-center gap-x-8 gap-y-16 sm:grid-cols-3 md:grid-cols-4 sm:mx-0 lg:max-w-none lg:grid-cols-5 xl:col-span-2">
+          <li v-for="item in Array.from(Array(4))">
+            <a href="https://github.com/sponsors/maizzle/sponsorships?tier_id=374194" target="_blank" class="group">
+              <div class="w-24 h-24 mx-auto transition-all rounded-full bg-slate-200/75 group-hover:bg-slate-300"></div>
+              <div class="mt-3.5 mx-auto w-28 h-4 bg-slate-200/75"></div>
+              <div class="mt-3.5 mx-auto w-16 h-3 bg-slate-200/75"></div>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="grid mx-auto max-w-7xl gap-x-16 gap-y-12 lg:gap-y-20 lg:px-8 xl:grid-cols-3">
+        <div class="max-w-2xl">
+          <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            Startup
+            <span class="block text-base font-medium text-slate-600">$128/mo</span>
+          </h2>
+          <p class="mt-6 text-lg leading-8 text-gray-600">
+            You're working at a company that is benefiting from Maizzle and you'd like to contribute back.
+          </p>
+        </div>
+        <ul role="list" class="grid max-w-2xl grid-cols-2 text-center gap-x-8 gap-y-16 sm:grid-cols-3 md:grid-cols-4 sm:mx-0 lg:max-w-none lg:grid-cols-5 xl:col-span-2">
+          <li v-for="item in Array.from(Array(4))">
+            <a href="https://github.com/sponsors/maizzle/sponsorships?tier_id=374200" target="_blank" class="group">
+              <div class="w-24 h-24 mx-auto transition-all rounded-full bg-slate-200/75 group-hover:bg-slate-300"></div>
+              <div class="mt-3.5 mx-auto w-28 h-4 bg-slate-200/75"></div>
+              <div class="mt-3.5 mx-auto w-16 h-3 bg-slate-200/75"></div>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="grid mx-auto max-w-7xl gap-x-16 gap-y-12 lg:gap-y-20 lg:px-8 xl:grid-cols-3">
+        <div class="max-w-2xl">
+          <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            Agency++
+            <span class="block text-base font-medium text-slate-600">$512/mo</span>
+          </h2>
+          <p class="mt-6 text-lg leading-8 text-gray-600">
+            You run a successful company or agency that uses Maizzle and want to ensure its continued development 🤝
+          </p>
+        </div>
+        <ul role="list" class="grid max-w-2xl grid-cols-2 text-center gap-x-8 gap-y-16 sm:grid-cols-3 md:grid-cols-4 sm:mx-0 lg:max-w-none lg:grid-cols-5 xl:col-span-2">
+          <li v-for="item in Array.from(Array(4))">
+            <a href="https://github.com/sponsors/maizzle/sponsorships?tier_id=374207" target="_blank" class="group">
+              <div class="w-24 h-24 mx-auto transition-all rounded-full bg-slate-200/75 group-hover:bg-slate-300"></div>
+              <div class="mt-3.5 mx-auto w-28 h-4 bg-slate-200/75"></div>
+              <div class="mt-3.5 mx-auto w-16 h-3 bg-slate-200/75"></div>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
