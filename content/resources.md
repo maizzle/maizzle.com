@@ -35,7 +35,6 @@ Extensions that can enhance your Maizzle development workflow.
 These are some web apps that you can use with any HTML email, not just the ones that you create with Maizzle.
 
 - [Parcel](https://parcel.io) - online code editor built for email development
-- [alter.email](https://alter.email) - inline CSS, remove unused CSS, etc. - powered by Maizzle
 
 ## Plugins
 
