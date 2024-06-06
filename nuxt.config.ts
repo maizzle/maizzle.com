@@ -15,6 +15,11 @@ export default defineNuxtConfig({
     '@nuxt/content',
     'nuxt-og-image',
   ],
+  ogImage: {
+    defaults: {
+      extension: 'jpeg',
+    }
+  },
   postcss: {
     plugins: {
       'tailwindcss/nesting': 'postcss-nesting',
