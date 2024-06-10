@@ -30,11 +30,15 @@ Extensions that can enhance your Maizzle development workflow.
 
 - [Tailwind CSS Extension](https://extensions.panic.com/extensions/jasonplatts/jasonplatts.tailwindcss/) - Tailwind CSS Extension for Panic's Nova Code Editor.
 
-## Web Apps
+## Tools
 
 These are some web apps that you can use with any HTML email, not just the ones that you create with Maizzle.
 
 - [Parcel](https://parcel.io) - online code editor built for email development
+- [Can I email](https://www.caniemail.com/) - check email client support for HTML and CSS features
+- [`mailto:` Link Generator](https://parcel.io/tools/mailto) - generate `mailto:` links with pre-filled fields
+- [Calendar Link Generator](https://parcel.io/tools/calendar) - generate "add event" links for popular calendar services
+- [How to Target Email Clients](https://www.howtotarget.email/) - CSS selectors to help you target and style emails for specific email clients
 
 ## Plugins
 
@@ -44,4 +48,4 @@ These are some web apps that you can use with any HTML email, not just the ones 
 
 ## Presets
 
-- [tailwindcss-preset-email](https://github.com/maizzle/tailwindcss-preset-email) - a Tailwind CSS config preset that changes some utility classes to use values that are better supported in email clients. It also includes all of the plugins above.
+- [tailwindcss-preset-email](https://github.com/maizzle/tailwindcss-preset-email) - a Tailwind CSS config preset that changes some utility classes to use values that are better supported in email clients. It also includes all of the plugins above and is used by default in Maizzle.
