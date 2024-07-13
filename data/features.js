@@ -7,7 +7,7 @@ export default ([
   {
     title: 'Starters',
     path: '/starters',
-    description: 'Free, open source email templates built with Maizzle. Simply clone a repository and start building your HTML emails.'
+    description: 'Free, open source Tailwind CSS email templates built with Maizzle. Simply clone a repository and start building your emails.'
   },
   {
     title: 'BYOHTML™',
@@ -30,14 +30,14 @@ export default ([
     description: 'Run your own JavaScript code at key steps in the build process, for even greater customization and control.'
   },
   {
-    title: 'Browsersync',
-    path: '/docs/configuration/browsersync',
-    description: 'Start local development and see a live preview of your emails in a browser, that updates every time you make a change.',
+    title: 'Dev Server',
+    path: '/docs/configuration/server',
+    description: 'Develop locally with a live preview server that updates super fast as you make changes to your emails.',
   },
   {
     title: 'Configured in JavaScript',
     path: '/docs/introduction#configure-it-out',
-    description: 'Maizzle is configured in JavaScript, so you can even <code class="py-px">require()</code> packages or fetch template data from an API.'
+    description: 'Maizzle is configured in JavaScript, so you can even <code class="py-px">import()</code> packages or fetch template data from an API.'
   },
   {
     title: 'Powerful Templating',
@@ -57,7 +57,7 @@ export default ([
   {
     title: 'APIs',
     path: '/docs/api',
-    description: 'Require Maizzle or its Transformers in your application and compile or process your HTML emails.'
+    description: 'Use Maizzle or its Transformers in your application and compile or process your HTML emails.'
   },
   {
     title: 'Front Matter',
@@ -108,11 +108,6 @@ export default ([
     title: 'Build System',
     path: '/docs/introduction#build-system',
     description: 'Simple and fast Node.js build system that takes care of all the transformations necessary for HTML emails.'
-  },
-  {
-    title: 'Localhost Tunneling',
-    path: '/docs/configuration/browsersync#tunnel',
-    description: 'Live-share a configurable URL to a Maizzle project that you\'re working on, with a colleague or a client.'
   },
   {
     title: '⚡4email',
