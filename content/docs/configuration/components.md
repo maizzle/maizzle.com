@@ -5,12 +5,6 @@ description: "Configuring components in Maizzle."
 
 # Components configuration
 
-**👋 New components config**
-
-You are viewing the configuration documentation for the new Components system, that was introduced in `v4.4.0`. Not ready to switch yet? See the [legacy Components configuration docs](https://v43x.maizzle.com/docs/configuration/components).
-
----
-
 Control where your Components live and how you reference them.
 
 ## root
@@ -30,12 +24,10 @@ Folder paths where to look for component files. Relative to `root`.
 If you keep your components in a different folder, you can add it here:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    components: {
-      folders: ['src/custom-components'],
-    },
-  }
+export default {
+  components: {
+    folders: ['src/custom-components'],
+  },
 }
 ```
 
@@ -51,12 +43,10 @@ Prefix string to use for component tags.
 If you prefer to write `<a-button>` instead of `<x-button>`, do this:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    components: {
-      tagPrefix: 'a-',
-    },
-  }
+export default {
+  components: {
+    tagPrefix: 'a-',
+  },
 }
 ```
 
@@ -72,12 +62,10 @@ By default, this ensures backwards compatibility with the old components system 
 For example, if you prefer to write `<module src="button.html" />`, do this:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    components: {
-      tag: 'module',
-    },
-  }
+export default {
+  components: {
+    tag: 'module',
+  },
 }
 ```
 
@@ -91,12 +79,10 @@ Default: `'src'`
 You may define a custom attribute name to use for the `tag`.
 
 ```js [config.js]
-module.exports = {
-  build: {
-    components: {
-      attribute: 'href',
-    },
-  }
+export default {
+  components: {
+    attribute: 'href',
+  },
 }
 ```
 
@@ -114,21 +100,17 @@ Any other files will be ignored and not be made available as components.
 ## yield
 
 Type: String\
-Default: `'content'`
+Default: `'yield'`
 
 Name of the tag that will be replaced with the content that is passed to the component.
 
-Maizzle uses `content` by default, to ensure backwards compatibility with the old components system.
-
-If you want to change this to be `yield`:
+If you want to change it to be `content` as in previous versions of Maizzle, do this:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    components: {
-      yield: 'yield',
-    },
-  }
+export default {
+  components: {
+    yield: 'content',
+  },
 }
 ```
 
@@ -136,7 +118,7 @@ You'd then define a component like this:
 
 ```xml [src/components/button.html]
 <a href="...">
-  <yield />
+  <content />
 </a>
 ```
 
@@ -150,12 +132,10 @@ Name for the [`slot` tag](/docs/components#slots).
 For example, maybe you want to change this to be `provide`:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    components: {
-      slot: 'provide',
-    },
-  }
+export default {
+  components: {
+    slot: 'provide',
+  },
 }
 ```
 
@@ -211,12 +191,10 @@ Name for the [`fill` tag](/docs/components#slots).
 For example, maybe you want to change this to be `inject`:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    components: {
-      fill: 'inject',
-    },
-  }
+export default {
+  components: {
+    fill: 'inject',
+  },
 }
 ```
 
@@ -242,12 +220,10 @@ String to use as a separator between the `slot` tag and its name.
 For example, changing it to `@`:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    components: {
-      slotSeparator: '@',
-    },
-  }
+export default {
+  components: {
+    slotSeparator: '@',
+  },
 }
 ```
 
@@ -285,12 +261,10 @@ Name of the props attribute to use in the `<script>` tag of a component.
 If you change it to `locals`:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    components: {
-      propsScriptAttribute: 'locals',
-    },
-  }
+export default {
+  components: {
+    propsScriptAttribute: 'locals',
+  },
 }
 ```
 
@@ -304,7 +278,7 @@ module.exports = {
 </script>
 
 <a href="{{ href }}">
-  <content />
+  <yield />
 </a>
 ```
 
@@ -318,12 +292,10 @@ Name of the object that will be used to store the props of a component.
 For example, if you change it to `data` like this:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    components: {
-      propsContext: 'data',
-    },
-  }
+export default {
+  components: {
+    propsContext: 'data',
+  },
 }
 ```
 
@@ -337,7 +309,7 @@ module.exports = {
 </script>
 
 <a href="{{ href }}">
-  <content />
+  <yield />
 </a>
 ```
 
@@ -353,12 +325,10 @@ Set to `locals` by default, for backwards compatibility with the old components 
 Again, let's change it to `data`:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    components: {
-      propsAttribute: 'data',
-    },
-  }
+export default {
+  components: {
+    propsAttribute: 'data',
+  },
 }
 ```
 
@@ -447,18 +417,16 @@ For example, say you have an attribute called `tracking-id` that you only use on
 But you can add it to the 'valid' attributes list for `<div>` elements like this:
 
 ```js [config.js] {5-8}
-module.exports = {
-  build: {
-    components: {
-      elementAttributes: {
-        DIV: (defaultAttributes) => {
-          defaultAttributes.push('tracking-id')
+export default {
+  components: {
+    elementAttributes: {
+      DIV: (defaultAttributes) => {
+        defaultAttributes.push('tracking-id')
 
-          return defaultAttributes
-        },
+        return defaultAttributes
       },
     },
-  }
+  },
 }
 ```
 
@@ -474,12 +442,10 @@ Array of attributes that should be preserved in components (on all elements).
 You can use a `*` wildcard to match the rest of the string:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    components: {
-      safelistAttributes: ['data-*', 'tracking-*'],
-    },
-  }
+export default {
+  components: {
+    safelistAttributes: ['data-*', 'tracking-*'],
+  },
 }
 ```
 
@@ -491,12 +457,10 @@ Default: `[]`
 Array of attributes that should be removed from components (on all elements).
 
 ```js [config.js]
-module.exports = {
-  build: {
-    components: {
-      // remove the `id` attribute from all elements in components
-      blacklistAttributes: ['id'],
-    },
-  }
+export default {
+  components: {
+    // remove the `id` attribute from all elements in components
+    blacklistAttributes: ['id'],
+  },
 }
 ```

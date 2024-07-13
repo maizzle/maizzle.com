@@ -49,10 +49,6 @@ export default [
     name: 'Configuration',
     items: [
       {
-        title: 'Layouts',
-        path: '/docs/configuration/layouts'
-      },
-      {
         title: 'Templates',
         path: '/docs/configuration/templates'
       },

@@ -13,7 +13,7 @@ Use this command to check the version:
 node -v
 ```
 
-<Alert>Maizzle requires at least Node v14.0.0</Alert>
+<Alert>Maizzle requires at least Node v18.0.0</Alert>
 
 ## Create a project
 
@@ -69,7 +69,7 @@ Maizzle includes different commands for developing locally on your machine and f
 
 ### Local
 
-You can start a development server that watches for file changes and automatically refreshes a preview in the browser.
+You can start a development server that watches for file changes and automatically updates a preview in the browser.
 
 Start local email development by running the `dev` npm script:
 
@@ -79,7 +79,7 @@ npm run dev
 
 This will start the local server at _http://localhost:3000_
 
-Try making a change to a template in your editor and save it: the browser tab will refresh to show the updated HTML.
+Try making a change to a template in your editor and save it: your changes will be injected and the page will reflect them almost instantly.
 
 ### Production
 

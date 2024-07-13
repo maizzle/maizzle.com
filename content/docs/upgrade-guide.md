@@ -5,22 +5,41 @@ description: "How to upgrade your Maizzle project to the latest major framework 
 
 # Upgrade Guide
 
-Upgrading your Maizzle projects from v3.x to v4.x.
+Upgrading your Maizzle projects from v4.x to v5.x (beta).
 
-Maizzle 4 is a major framework update that comes with awesome new features and improvements, but also includes a few breaking changes.
+Maizzle 5 is a major framework rewrite that comes with awesome new features and improvements, but also includes a few breaking changes.
 
-Migrating to Maizzle 4 should take less than 10 minutes for most users.
+Migrating to Maizzle 5 should take less than 10 minutes for most users.
 
 ## Node.js
 
 <strong class="text-indigo-500">BREAKING CHANGE</strong>
 
-Maizzle 4 requires Node.js v14.0.0 or higher.
+Maizzle 5 requires Node.js v18.0.0 or higher.
 
 Check your current Node.js version:
 
 ```sh
 node --version
+```
+
+## Update package.json
+
+The `@maizzle/framework` package is now a module, so you need to update your `package.json` file to reflect this change.
+
+```json [package.json] {3}
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "maizzle serve",
+    "build": "maizzle build production"
+  },
+  "dependencies": {
+    "@maizzle/framework": "next",
+    "tailwindcss-preset-email": "^1.1.0"
+  }
+}
 ```
 
 ## Upgrade dependencies
@@ -30,351 +49,351 @@ It's probably best that you do a clean install:
 - remove `node_modules` directory
 - remove `package-lock.json` and/or `yarn.lock`
 
-
 <Alert>If using yarn, note that it might have cached your dependencies.</Alert>
 
-Install the latest version of Maizzle:
+Install the `next` version of Maizzle:
 
 ```sh
-npm install @maizzle/framework@latest
+npm install @maizzle/framework@next
+```
+
+## Update your HTML
+
+### yield
+
+The `<content />` tag has been replaced with `<yield />`.
+
+Make sure to update it in your Layouts and Components.
+
+### style
+
+Tailwind CSS can now be used as expected, with `@tailwind` directives in any `<style>` tag, instead of the old `<style>{{{ page.css }}}</style>`.
+
+```handlebars [src/layouts/main.html]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+    @tailwind utilities;
+    @tailwind components;
+  </style>
+</head>
+<body>
+  <yield />
+</body>
+</html>
 ```
 
 ## Update `tailwind.config.js`
 
-Some configuration keys are deprecated in Tailwind CSS 3, and others have changed.
+We've created [`tailwindcss-preset-email`](https://github.com/maizzle/tailwindcss-preset-email) specifically for Maizzle, which configures Tailwind CSS for better email client support.
 
-### Remove deprecated keys
+Using it will now greatly simplify your `tailwind.config.js` file, this is all you need:
 
-The following keys are now configured by default or deprecated, so you can safely remove them from your `tailwind.config.js`:
+```js [tailwind.config.js]
+import emailPreset from 'tailwindcss-preset-email'
 
-- remove `mode` - the JIT engine is the default starting with Tailwind CSS v3.0
-- remove `inset` - no longer needed
-- remove `maxHeight` - no longer needed
-
-```js [tailwind.config.js] no-copy diff
-module.exports = {
--  mode: 'jit',
-  theme: {
-    extend: {
--      inset: theme => ({
--        ...theme('spacing'),
--      }),
--      maxHeight: theme => ({
--        ...theme('spacing'),
--      }),
-    },
-  },
-}
-```
-
-### Update `corePlugins`
-
-Tailwind CSS 3 has moved to using CSS variables for color utilities, which are not widely supported by email clients.
-
-Replace your `corePlugins` key with the following:
-
-```js [tailwind.config.js] {3-9} diff
-module.exports = {
-  corePlugins: {
-+    preflight: false,
-+    backgroundOpacity: false,
-+    borderOpacity: false,
-+    boxShadow: false,
-+    divideOpacity: false,
-+    placeholderOpacity: false,
-+    textOpacity: false,
-  },
+/** @type {import('tailwindcss').Config} */
+export default {
+  presets: [
+    emailPreset,
+  ],
+  content: [
+    './src/**/*.html',
+  ],
 }
 ```
 
 ## Update `config.js`
 
-Some Maizzle config keys have been deprecated, and some have changed.
+The Maizzle config has been reimagined from the ground up, so naturally there are a few breaking changes.
 
-### Remove deprecated keys
-
-All CSS purging configuration is now done in `tailwind.config.js` through the `content` key, so you can remove `purgeCSS` from your `config.js`:
-
-```js [config.js] no-copy diff
-module.exports = {
--  purgeCSS: false,
-}
-```
-
-### Update `baseImageURL`
+### ESM export
 
 <strong class="text-indigo-500">BREAKING CHANGE</strong>
 
-The `baseImageURL` key has been renamed to `baseURL`:
+The config file is now an ESM module, which means you can use `import` and cool stuff like top-level `await`.
+It also means you need to make this change:
 
 ```js [config.js] no-copy diff
-module.exports = {
--  baseImageURL: 'https://example.com/images/',
-+  baseURL: 'https://example.com/images/',
-}
+- module.exports = {
++ export default {
 ```
 
-Note that `baseURL` works differently from `baseImageURL`, the most important change being that if you've configured it to be a string like in the example above, it will apply to all tags that it supports.
+Using `module.exports` will now throw an error and the build will fail.
 
-That includes `<a>` tags, which might lead to unexpected results in some projects.
+### build
 
-The `baseURL` Transformer can be customized to target only the tags/attributes that you need it to work on, for example:
+<strong class="text-indigo-500">BREAKING CHANGE</strong>
+
+The `build` key, which is where you define what emails to build and where to output them, has changed considerably.
+
+This is everything that the `build` key can contain in Maizzle 5:
 
 ```js [config.js]
-module.exports = {
-  baseURL: {
-    url: 'https://example.com/images/',
-    tags: ['img'],
+export default {
+  build: {
+    content: ['src/templates/**/*.html'],
+    static: {
+      source: ['src/images/**/*.*'],
+      destination: 'images',
+    },
+    output: {
+      path: 'build_production',
+      extension: 'html',
+    },
+    summary: true,
+    spinner: 'circleHalves',
   },
 }
 ```
 
-### Rename `transform`
+### components
 
-<strong class="text-indigo-500">BREAKING CHANGE</strong>
-
-The `transform` key has been renamed to `filters`.
+The `components` key has been moved outside `build`, to the root of the config file:
 
 ```js [config.js] no-copy diff
-module.exports = {
--  transform: {}
-+  filters: {}
+export default {
+-  build: {
+-    components: {}
+-  }
++  components: {}
 }
 ```
 
-### Update `mergeLonghand`
+### events
 
-<strong class="text-indigo-500">BREAKING CHANGE</strong>
-
-The `inlineCSS.mergeLonghand` key has been moved up one level and renamed to `shorthandInlineCSS`, so you can now use it even if `inlineCSS` is disabled.
+Events have been moved to the root of the config file:
 
 ```js [config.js] no-copy diff
-module.exports = {
-  inlineCSS: {
--    mergeLonghand: true
-  }
-+  shorthandInlineCSS: true
+export default {
+-  events: {...}
++  async beforeRender({html, config, render}) {
++    // must return `html`
++    return html
++  },
 }
 ```
 
-The options that you can pass to this Transformer have not changed, see the [`shorthandInlineCSS` docs](/docs/transformers/shorthand-inline-css) for more info.
+### extraAttributes
+
+This key has been moved to `css.attributes.add`:
+
+```js [config.js] no-copy diff
+export default {
+-  extraAttributes: {}
++  css: {
++    attributes: {
++      add: {}
++    }
++  }
+}
+```
+
+### layouts
+
+The `layouts` key has been deprecated, you can safely remove it.
+
+### inlineCSS
+
+Configuration for CSS inlining has been moved under the `css.inline` key:
+
+```js [config.js] no-copy diff
+export default {
+-  inlineCSS: {}
++  css: {
++    inline: {}
++  }
+}
+```
+
+There are some new options ([see docs](./transformers/inline-css)), this is the full new config for inlining:
+
+```js [config.js]
+export default {
+  css: {
+    inline: {
+      styleToAttribute: {
+        'vertical-align': 'valign',
+      },
+      attributeToStyle: ['width', 'height', 'bgcolor', 'background', 'align', 'valign'],
+      applyWidthAttributes: [],
+      applyHeightAttributes: [],
+      useAttributeSizes: true,
+      resolveCSSVariables: true,
+      removeInlinedSelectors: true,
+      excludedProperties: [],
+      preferUnitlessValues: false,
+      resolveCalc: true,
+    },
+  },
+}
+```
+
+### outlook
+
+Configuring the custom tag for Outlook conditionals is done through the same `outlook` key, but at the root of the config file instead of inside the `posthtml` key:
+
+```js [config.js] no-copy diff
+export default {
+-  posthtml: {
+-    outlook: {}
+-  }
++  outlook: {
++    tag: 'mso',
++  },
+}
+```
+
+### postcss
+
+PostCSS is now configured under the root `postcss` key instead of the one under `build.postcss`:
+
+```js [config.js] no-copy diff
+export default {
+-  build: {
+-    postcss: {}
+-  }
++  postcss: {}
+}
+```
+
+### removeAttributes
+
+This Transformer has been moved to `css.attributes.remove`:
+
+```js [config.js] no-copy diff
+export default {
+-  removeAttributes: []
++  css: {
++    attributes: {
++      remove: []
++    }
++  }
+}
+```
+
+### removeUnusedCSS
+
+Configuration for this Transformer has been moved to `css.purge`:
+
+```js [config.js] no-copy diff
+export default {
+-  removeUnusedCSS: {}
++  css: {
++    purge: {}
++  }
+}
+```
+
+### shorthandCSS
+
+This key has been moved to `css.shorthand`:
+
+```js [config.js] no-copy diff
+export default {
+-  shorthandCSS: true
++  css: {
++    shorthand: true
++  }
+}
+```
+
+### safeClassNames
+
+This key has been moved to `css.safeClassNames`:
+
+```js [config.js] no-copy diff
+export default {
+-  safeClassNames: true
++  css: {
++    safeClassNames: true
++  }
+}
+```
+
+### server
+
+Browsersync has been replaced with a custom dev server, powered by Express.js and WebSockets with morphdom for an HMR-like experience.
+
+The [new dev server](./configuration/server) is much faster and provides a nicer experience, but you'll need to update your `config.js` if you want to configure it:
+
+```js [config.js] no-copy diff
+// delete the entire browsersync key
+- browsersync: {...},
++ server: {
++   port: 3000,
++   hmr: true,
++   scrollSync: true,
++   watch: ['./src/images/**/*'],
++   reportFileSize: true,
++ },
+```
+
+### sixHex
+
+This key has been moved to `css.sixHex`:
+
+```js [config.js] no-copy diff
+export default {
+-  sixHex: true
++  css: {
++    sixHex: true
++  }
+}
+```
+
+### tailwind
+
+The `tailwind` key in `config.js` has been deprecated, you can safely remove it.
+You may now use `@config` in your CSS to specify a custom Tailwind CSS config file to use:
+
+```html
+<style>
+  @config 'tailwind.custom.js';
+  @tailwind utilities;
+</style>
+```
+
+Alternatively, you may define a Tailwind config object under `css.tailwind`:
+
+```js [config.js]
+export default {
+  css: {
+    tailwind: {}, // custom Tailwind CSS config object
+  },
+}
+```
+
+### templates
+
+The `templates` key has been deprecated, see [`build`](#build) above for how to define template and other assets sources.
+
+### applyTransformers
+
+This has been renamed to `useTransformers`:
+
+```js [config.js] no-copy diff
+export default {
+-  applyTransformers: true
++  useTransformers: true
+}
+```
 
 ## Optional
 
-The following changes are not required for v4.0 compatibility, it's totally up to you if you want to add them to your projects.
+These updates are optional but highly recommended.
 
+### Update components
 
-### Tailwind CSS plugins
+The Maizzle 5 Starter uses updated components for dividers, spacers, or buttons.
 
-The Maizzle Starter now includes some custom Tailwind CSS plugins that can help when developing HTML emails.
+We recommend you update your components to the latest versions, which you can find in the [Starter project](https://github.com/maizzle/maizzle) on GitHub.
 
-Install the plugins:
+### Update @maizzle/cli
+
+If you had `@maizzle/cli` installed globally, you should update it to the latest version:
 
 ```sh
-npm install tailwindcss-box-shadow@latest tailwindcss-email-variants@latest tailwindcss-mso@latest
+npm install -g @maizzle/cli
 ```
-
-Then add them to your `tailwind.config.js`:
-
-```js [tailwind.config.js] {3-5} diff
-module.exports = {
-  plugins: [
-+    require('tailwindcss-mso'),
-+    require('tailwindcss-box-shadow'),
-+    require('tailwindcss-email-variants'),
-  ],
-}
-```
-
-### Update npm scripts
-
-The npm scripts in the Starter have been renamed:
-
-```js [package.json] diff
-module.exports = {
-  "scripts": {
--  "local": "maizzle build",
--  "production": "maizzle build production",
--  "watch": "maizzle serve"
-+  "dev": "maizzle serve",
-+  "build": "maizzle build production"
-  },
-}
-```
-
-### Spacing scale
-
-Starting with v4.0 we've moved to a spacing scale that is consistent with the one from Tailwind CSS. It still uses pixels, but it's based on the rem scale:
-
-```js [tailwind.config.js]
-module.exports = {
-  theme: {
-    extend: {
-      spacing: {
-        screen: '100vw',
-        full: '100%',
-        px: '1px',
-        0: '0',
-        0.5: '2px',
-        1: '4px',
-        1.5: '6px',
-        2: '8px',
-        2.5: '10px',
-        3: '12px',
-        3.5: '14px',
-        4: '16px',
-        4.5: '18px',
-        5: '20px',
-        5.5: '22px',
-        6: '24px',
-        6.5: '26px',
-        7: '28px',
-        7.5: '30px',
-        8: '32px',
-        8.5: '34px',
-        9: '36px',
-        9.5: '38px',
-        10: '40px',
-        11: '44px',
-        12: '48px',
-        14: '56px',
-        16: '64px',
-        20: '80px',
-        24: '96px',
-        28: '112px',
-        32: '128px',
-        36: '144px',
-        40: '160px',
-        44: '176px',
-        48: '192px',
-        52: '208px',
-        56: '224px',
-        60: '240px',
-        64: '256px',
-        72: '288px',
-        80: '320px',
-        96: '384px',
-        97.5: '390px',
-        120: '480px',
-        150: '600px',
-        160: '640px',
-        175: '700px',
-        '1/2': '50%',
-        '1/3': '33.333333%',
-        '2/3': '66.666667%',
-        '1/4': '25%',
-        '2/4': '50%',
-        '3/4': '75%',
-        '1/5': '20%',
-        '2/5': '40%',
-        '3/5': '60%',
-        '4/5': '80%',
-        '1/6': '16.666667%',
-        '2/6': '33.333333%',
-        '3/6': '50%',
-        '4/6': '66.666667%',
-        '5/6': '83.333333%',
-        '1/12': '8.333333%',
-        '2/12': '16.666667%',
-        '3/12': '25%',
-        '4/12': '33.333333%',
-        '5/12': '41.666667%',
-        '6/12': '50%',
-        '7/12': '58.333333%',
-        '8/12': '66.666667%',
-        '9/12': '75%',
-        '10/12': '83.333333%',
-        '11/12': '91.666667%',
-      },
-    },
-  },
-}
-```
-
-If you update your spacing scale, make sure to update all spacing utilities in your emails:
-
-```html [src/templates/example.html] diff
--  <td class="px-16 py-32">
-+  <td class="px-4 py-8">
-```
-
-### Font size
-
-Update your `fontSize` scale:
-
-```js [tailwind.config.js]
-module.exports = {
-  theme: {
-    extend: {
-      fontSize: {
-        0: '0',
-        xxs: '11px',
-        xs: '12px',
-        '2xs': '13px',
-        sm: '14px',
-        '2sm': '15px',
-        base: '16px',
-        lg: '18px',
-        xl: '20px',
-        '2xl': '24px',
-        '3xl': '30px',
-        '4xl': '36px',
-        '5xl': '48px',
-        '6xl': '60px',
-        '7xl': '72px',
-        '8xl': '96px',
-        '9xl': '128px',
-      },
-    },
-  },
-}
-```
-
-### Border radius
-
-Update the `borderRadius` scale:
-
-```js [tailwind.config.js]
-module.exports = {
-  theme: {
-    extend: {
-      borderRadius: {
-        none: '0px',
-        sm: '2px',
-        DEFAULT: '4px',
-        md: '6px',
-        lg: '8px',
-        xl: '12px',
-        '2xl': '16px',
-        '3xl': '24px',
-      },
-    },
-  },
-}
-```
-
-### Box shadow
-
-Shadows will not work without the `tailwindcss-box-shadow` plugin because Tailwind's default shadows use CSS syntax that is not supported in email.
-
-If you have installed the `tailwindcss-box-shadow` plugin, add the `boxShadow` key to your `tailwind.config.js`:
-
-```js [tailwind.config.js]
-module.exports = {
-  theme: {
-    extend: {
-      boxShadow: {
-        sm: '0 1px 2px 0 rgba(0, 0, 0, 0.05)',
-        DEFAULT: '0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1)',
-        md: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)',
-        lg: '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)',
-        xl: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1)',
-        '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-        inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.05)',
-      },
-    },
-  },
-}
-```
-
-<Alert type="warning">The default shadows in Tailwind CSS will break your styles in Gmail, because of the `/` character in the `box-shadow` property value.</Alert>

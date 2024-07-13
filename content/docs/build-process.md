@@ -17,25 +17,15 @@ For example, running `maizzle build production` will tell Maizzle to look for th
 
 Otherwise, if you're simply running the `maizzle build` or `maizzle serve` commands, only the base `config.js` will be used.
 
-## Compile Tailwind CSS
-
-Tailwind CSS is compiled, and various [PostCSS](https://postcss.org/) plugins are enabled depending on the build environment and your config.
-
-## Clean destination
-
-The destination directories that you have defined under `destination.path` in your environment config are deleted.
-
-<Alert type="warning">Be careful when customizing this path, so you don't end up deleting important directories and files on your machine.</Alert>
-
-## Copy sources
-
-All of your source Templates are copied over to the `destination.path` directories.
-
-This is done so that we can then process the files in-place, which makes it easier to preserve your directory structure.
-
 ## beforeCreate()
 
 The [beforeCreate](/docs/events#beforecreate) event (CLI-only) is triggered, giving you access to the config before Maizzle loops over your Templates to compile them.
+
+## Clean destination
+
+The directory that you have defined under `build.output.path` is deleted.
+
+<Alert type="warning">Be careful when customizing this path, so you don't end up deleting important directories and files on your machine.</Alert>
 
 ## Compile templates
 
@@ -51,7 +41,7 @@ Each Template is parsed and compiled in-place, in your destination directory:
 
 5. PostHTML renders the template string
 
-    Your Environment name, the compiled Tailwind CSS, and all `config` options (including any you defined in Front Matter) are exposed to all your templating parts as PostHTML expressions that you can use, under the `page` object.
+    Your Environment name and all `config` options (including any that you defined in Front Matter) are exposed to all your Templates and Components as variables that you can use in PostHTML expressions, through the `page` object.
 
 6. [afterRender](/docs/events#afterrender) event is triggered
 
@@ -85,7 +75,7 @@ Each Template is parsed and compiled in-place, in your destination directory:
 
     9.1 A plaintext version is created at the same location and with the same name, if `plaintext` was enabled
 
-10. Your assets are copied to the destination folder. All files and folders in `templates.assets.source` are copied to `templates.assets.destination`
+10. Your assets are copied to the destination folder. All files and folders in `build.static.source` are copied to `build.static.destination`
 
 ## afterBuild()
 

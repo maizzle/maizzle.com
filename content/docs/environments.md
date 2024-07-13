@@ -64,13 +64,11 @@ You may create as many Environments as you need, and name them as you like.
 For example, you might create a config file named `config.shopify.js` that you would use to build only the templates from the `src/templates/shopify` folder:
 
 ```js [config.shopify.js]
-module.exports = {
+export default {
   build: {
-    templates: {
-      source: 'src/templates/shopify',
-      destination: {
-        path: 'build_shopify'
-      }
+    content: ['src/templates/shopify/**/*.html'],
+    output: {
+      path: 'build_shopify'
     }
   }
 }
@@ -94,7 +92,7 @@ This object contains:
 This makes it possible to define variables in `config.js`:
 
 ```js [config.js]
-module.exports = {
+export default {
   doctype: 'html'
 }
 ```
@@ -114,7 +112,7 @@ The current Environment name is globally available under the `page.env` variable
 You can output content in your emails based on the Environment that you're building for:
 
 ```xml [src/templates/example.html]
-<if condition="page.env === 'production'">
+<if condition="page.environment === 'production'">
   This will show only when running `maizzle build production`
 </if>
 ```
@@ -124,7 +122,7 @@ You can output content in your emails based on the Environment that you're build
 If you need to define variables outside of the `page` object, you can use the `locals` key in your `config.js`:
 
 ```js [config.js]
-module.exports = {
+export default {
   locals: {
     company: {
       name: 'Spacely Space Sprockets, Inc.'
@@ -141,3 +139,19 @@ Now, you can access `company` properties directly:
 ```
 
 <Alert>Maizzle does not allow overwriting the `page` object through `locals`.</Alert>
+
+## Top-level await
+
+You can use top-level `await` in your `config.js` to fetch data from an API, for example:
+
+```js [config.js]
+const data = await fetch('https://jsonplaceholder.typicode.com/todos').then(res => res.json())
+
+/** @type {import('@maizzle/framework').Config} */
+export default {
+  todos: data,
+  build: {
+    /* ... */
+  },
+}
+```

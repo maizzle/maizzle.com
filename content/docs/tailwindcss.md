@@ -29,25 +29,22 @@ For most of the time, you won't be writing CSS anymore 😎
 
 The compiled Tailwind CSS is available under `page.css`, so you need to make sure it is added inside a `<style>` tag in your Layout's `<head>`:
 
-```hbs [src/layouts/main.html] {5}
+```hbs [src/layouts/main.html] {5-6}
 <!doctype html>
 <html>
   <head>
     <style>
-      {{{ page.css }}}
+      @tailwind utilities;
+      @tailwind components;
     </style>
   </head>
   <body>
-    <content />
+    <yield />
   </body>
 </html>
 ```
 
-You might have noticed that we used `{{{ }}}` instead of the usual `{{ }}`.
-
-We do this to avoid double-escaping the CSS, which can break the build process when quoted property values are encountered (for example quoted font family names, background image URLs, etc.).
-
-<Alert type="warning">Tailwind CSS only works when `page.css` is added inside a `<style>` tag in the `<head>`.</Alert>
+<Alert type="warning">Tailwind CSS only works when at least `@tailwind utilities` exists either inside a `<style>` tag in the `<head>`, or in a CSS file referenced through a `<link>` tag.</Alert>
 
 ### Utility-first
 
@@ -79,7 +76,7 @@ You can write:
       <h1 class="m-0 text-4xl font-sans text-black">
         Some title
       </h1>
-      <p class="m-0 text-base leading-6 text-gray-700">
+      <p class="m-0 text-base/6 text-gray-700">
         Content here...
       </p>
     </td>
@@ -102,78 +99,46 @@ Here's a quick example:
 ```postcss [src/css/components.css]
 @layer components {
   .button-danger {
-    @apply px-6 py-3 text-white bg-red-500;
+    @apply py-3 px-6 text-white bg-red-500;
   }
 }
 ```
 
-Unlike utility classes that you add to `tailwind.config.js`, you add that in a CSS file that is imported in the main `tailwind.css` file.
+Unlike custom utility classes that you may add to `tailwind.config.js`, you would add that in a CSS file that is imported in your main `<style>` tag.
 
 And that brings us to...
 
 ## CSS Files
 
-The [official Maizzle Starter](https://github.com/maizzle/maizzle) uses a `tailwind.css` file stored in `src/css`.
+You may organize your CSS into files if you prefer, and then `@import` them in a `<style>` tag in your Layout's `<head>`.
 
-Although optional, this file is included in order to provide an example of how you can use custom CSS in Maizzle.
+For example, let's import that `src/css/components.css` file we just created:
 
-For example, as we've just seen above, you might want to create a custom class based on Tailwind CSS utilities. If you want to organize custom utilities and CSS classes into files, this is how you do it.
-
-`tailwind.css` does two things:
-
-1. it imports Tailwind CSS components and utilities
-2. it imports custom CSS files
-
-```postcss [src/css/tailwind.css]
-/* Tailwind CSS components */
-@import "tailwindcss/components";
-
-/**
-  * @import here any custom CSS components - that is, CSS that
-  * you'd want loaded before the Tailwind utilities, so the
-  * utilities can still override them.
-*/
-
-/* Tailwind CSS utility classes */
-@import "tailwindcss/utilities";
-
-/* Your custom utility classes */
-@import "utilities";
+```hbs [src/layouts/main.html] {5}
+<!doctype html>
+<html>
+  <head>
+    <style>
+      @import "src/css/components.css";
+      @tailwind utilities;
+      @tailwind components;
+    </style>
+  </head>
+  <body>
+    <yield />
+  </body>
+</html>
 ```
 
-### Custom file paths
+<Alert>When importing CSS files you need to use the path relative to the root of your project's directory.</Alert>
 
-Maizzle will automatically use `src/css/tailwind.css` if it's available.
-
-If you need to use a custom file, you must define its path:
-
-```js [config.js]
-module.exports = {
-  build: {
-    tailwind: {
-      css: 'src/css/custom/tw-custom.css',
-    }
-  }
-}
-```
-
-Again, this is totally optional: you can use Tailwind CSS in Maizzle without creating any CSS file at all! Doing so will only generate components and utilities based on your `tailwind.config.js`.
-
-### Custom CSS
-
-Add custom CSS files anywhere under `src/css`.
-
-Maizzle provides the `utilities.css` file, which contains a sample custom utility class that Tailwind CSS doesn't provide.
-
-<Alert type="warning">Files that you `@import` in `tailwind.css` must be relative to `src/css`</Alert>
-
-<Alert type="danger">Any `@import` rules must come first in your `tailwind.css` file, before any CSS.</Alert>
+<Alert type="danger">`@import` statements need to come before any other CSS rules in the `<style>` tag.</Alert>
 
 ## Shorthand CSS
 
 <Alert>This section refers to writing shorthand CSS inside `<style>` tags. For _inline_ CSS shorthand, see the [Shorthand CSS Transformer docs](/docs/transformers/shorthand-css).</Alert>
 
-Maizzle can rewrite your `padding`, `margin`, and `border` CSS properties in shorthand-form, when possible.
+Maizzle can automatically rewrite your `padding`, `margin`, and `border` CSS properties in shorthand-form, when possible.
 
 Because utility classes map one-to-one with CSS properties, this normally doesn't have any effect with Tailwind CSS. However, in the context of `<style>` tags, it's useful when you extract utilities to components, with Tailwind's `@apply`.
 
@@ -187,26 +152,28 @@ Consider this template:
 
 Let's use `@apply` to compose a `col` class by  extracting two padding utilities:
 
-```postcss [src/css/components.css]
-.col {
-  @apply py-2 px-1;
-}
+```hbs [src/layouts/main.html] {5-7}
+<!doctype html>
+<html>
+  <head>
+    <style>
+      .col {
+        @apply py-2 px-1;
+      }
+
+      @tailwind utilities;
+      @tailwind components;
+    </style>
+  </head>
+  <body>
+    <yield />
+  </body>
+</html>
 ```
 
-Remember to import that file:
+When running the build command, normally that would generate:
 
-```postcss [src/css/tailwind.css]
-/**
-  * @import here any custom CSS components - that is, classes that
-  * you'd want loaded before the Tailwind utilities, so the
-  * utilities can still override them.
-*/
-@import "components";
-```
-
-When running the build command, normally that would yield:
-
-```css [src/templates/example.html]
+```css
 .col {
   padding-top: 8px;
   padding-bottom: 8px;
@@ -217,7 +184,7 @@ When running the build command, normally that would yield:
 
 However, Maizzle will merge those to shorthand-form, so we get this:
 
-```css [src/templates/example.html]
+```css
 .col {
   padding: 8px 4px;
 }
@@ -263,6 +230,12 @@ Alternatively, you may use an arbitrary values:
 <div class="[border:1px_solid_#3f83f8]">Border example</div>
 ```
 
+You can even reference colors from your Tailwind config:
+
+```xml
+<div class="[border:1px_solid_theme(colors.gray.300)]">Border example</div>
+```
+
 Arbitrary values are actually really useful for Outlook, because something like `border-b border-solid border-black` will not be shorthanded and Outlook can only apply individual borders when you write them in shorthand.
 
 So you can do this:
@@ -283,10 +256,13 @@ Arbitrary values might look like inline styles with extra steps, but it's still 
 
 To use a Tailwind CSS plugin, simply `npm install` it and follow its instructions to add it to `plugins: []` in your `tailwind.config.js`:
 
-```js [tailwind.config.js] {3}
-module.exports = {
+```js [tailwind.config.js]
+import emailVariants from 'tailwindcss-email-variants'
+
+/** @type {import('tailwindcss').Config} */
+export default {
   plugins: [
-    require('tailwindcss-email-variants'),
+    emailVariants,
   ],
 }
 ```
@@ -298,21 +274,22 @@ See the [Tailwind CSS docs](https://tailwindcss.com/docs/configuration#plugins) 
 
 ## Use in Template
 
-You can use Tailwind CSS, including directives like `@apply`, `@responsive`, and even nested syntax, right inside a Template. You simply need to use a `<stack>` to push a `<style tailwindcss>` tag to the Layout being extended.
+You can use Tailwind CSS, including directives like `@apply`, `@responsive`, and even nested syntax, right inside a Template. You simply need to use a `<stack>` to push a `<style>` tag to the Layout being extended.
 
 First, add a `<stack name="head" />` inside your Layout's `<head>` tag:
 
-```xml [src/layouts/main.html] {7} diff
+```xml [src/layouts/main.html] {8} diff
 <!doctype html>
 <html>
 <head>
   <style>
-    {{{ page.css }}}
+    @tailwind utilities;
+    @tailwind components;
   </style>
 +  <stack name="head" />
 </head>
 <body>
-  <content />
+  <yield />
 </body>
 ```
 
@@ -321,7 +298,7 @@ Next, `push` to that `stack` from a Template:
 ```hbs [src/templates/example.html]
 <x-main>
   <push name="head">
-    <style tailwindcss>
+    <style>
       a {
         @apply text-blue-500;
       }
@@ -338,20 +315,6 @@ Next, `push` to that `stack` from a Template:
 </x-main>
 ```
 
-The `tailwindcss` attribute is only required if you want the CSS to be compiled with Tailwind CSS. There's no need to include it if you're just writing plain CSS.
-
-#### postcss attribute
-
-You may also use the `postcss` attribute instead of `tailwindcss`.
-
-This will compile the contents of `<style postcss>` tags with PostCSS and any plugins you've enabled, including:
-
-- postcss-import
-- postcss-nested
-- postcss-merge-longhand
-
-However, Tailwind CSS will not be enabled in this case.
-
 ### Prevent inlining
 
 When adding a `<style>` tag inside a Template, you can prevent all CSS rules inside it from being inlined by using a `data-embed` attribute:
@@ -359,10 +322,9 @@ When adding a `<style>` tag inside a Template, you can prevent all CSS rules ins
 ```hbs [src/templates/example.html]
 <x-main>
   <push name="head">
-    <style tailwindcss data-embed>
+    <style data-embed>
       img {
-        border: 0;
-        @apply leading-full align-middle;
+        @apply max-w-full align-middle;
       }
     </style>
   </push>
@@ -372,34 +334,6 @@ When adding a `<style>` tag inside a Template, you can prevent all CSS rules ins
 ```
 
 Although it will no longer be inlined, unused CSS will still be purged by the [removeUnusedCSS](/docs/transformers/remove-unused-css) Transformer.
-
-## Transforms
-
-Maizzle doesn't include Tailwind's base reset, as that would lead to many unwanted CSS properties being inlined all over the place.
-
-To use transform utilities, add the resets back in a `<style>` tag that won't be inlined:
-
-```hbs [src/templates/example.html]
-  <x-main>
-  <push name="head">
-    <style data-embed>
-      *, ::before, ::after {
-        --tw-translate-x: 0;
-        --tw-translate-y: 0;
-        --tw-rotate: 0;
-        --tw-skew-x: 0;
-        --tw-skew-y: 0;
-        --tw-scale-x: 1;
-        --tw-scale-y: 1;
-      }
-    </style>
-  </push>
-
-  <div class="translate-x-10 rotate-45 bg-rose-600 w-4 h-4"></div>
-</x-main>
-```
-
-The same applies to other utilities that rely on resets through `--tw-x` CSS variables, like `backdrop-blur` or CSS filters.
 
 ## Email client targeting
 
