@@ -91,12 +91,10 @@ We've created [`tailwindcss-preset-email`](https://github.com/maizzle/tailwindcs
 Using it will now greatly simplify your `tailwind.config.js` file, this is all you need:
 
 ```js [tailwind.config.js]
-import emailPreset from 'tailwindcss-preset-email'
-
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   presets: [
-    emailPreset,
+    require('tailwindcss-preset-email'),
   ],
   content: [
     './src/**/*.html',
@@ -120,7 +118,14 @@ It also means you need to make this change:
 + export default {
 ```
 
-Using `module.exports` will now throw an error and the build will fail.
+If you need to keep using `module.exports` you must use the `.cjs` extension:
+
+```diff
+- config.js
+- config.production.js
++ config.cjs
++ config.production.cjs
+```
 
 ### build
 
@@ -390,10 +395,14 @@ The Maizzle 5 Starter uses updated components for dividers, spacers, or buttons.
 
 We recommend you update your components to the latest versions, which you can find in the [Starter project](https://github.com/maizzle/maizzle) on GitHub.
 
+Note: while in beta, the updated Starter project is in the `next` branch:
+
+https://github.com/maizzle/maizzle/tree/next
+
 ### Update @maizzle/cli
 
-If you had `@maizzle/cli` installed globally, you should update it to the latest version:
+If you use `@maizzle/cli` installed globally, you'll need to upgrade it to v2.x:
 
 ```sh
-npm install -g @maizzle/cli
+npm install -g @maizzle/cli@next
 ```
