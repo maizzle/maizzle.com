@@ -14,7 +14,7 @@ Additionally, it reduces the risk of [Gmail clipping](https://github.com/hteumeu
 ## Usage
 
 ```js [config.js]
-module.exports = {
+export default {
   minify: true,
 }
 ```
@@ -24,7 +24,7 @@ module.exports = {
 You may configure the underlying `html-crush` library:
 
 ```js [config.js]
-module.exports = {
+export default {
   minify: {
     lineLengthLimit: 500,
   }
@@ -101,7 +101,8 @@ Set to `false`, `null`, or an empty array `[]` to disable.
 ## API
 
 ```js [app.js]
-const {minify} = require('@maizzle/framework')
+import { minify } from '@maizzle/framework'
+
 const options = {/* html-crush options */}
 
 const html = await minify('html string', options)

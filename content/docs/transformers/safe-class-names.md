@@ -55,10 +55,12 @@ You may define new replacement mappings (or overwrite existing ones) by adding a
 For example:
 
 ```js [config.js]
-module.exports = {
-  safeClassNames: {
-    ':': '__',
-    '!': 'i-',
+export default {
+  css: {
+    safeClassNames: {
+      ':': '__',
+      '!': 'i-',
+    }
   }
 }
 ```
@@ -70,8 +72,10 @@ That would turn `sm:w-full` into `sm__w-full` and `sm:!text-xl` into `sm__i-text
 You can prevent Maizzle from rewriting your class names with safe characters, by setting this option to `false`:
 
 ```js [config.js]
-module.exports = {
-  safeClassNames: false,
+export default {
+  css: {
+    safeClassNames: false,
+  }
 }
 ```
 
@@ -80,7 +84,7 @@ module.exports = {
 You may use the `safeClassNames` Transformer in your application.
 
 ```js [app.js]
-const {safeClassNames} = require('@maizzle/framework')
+import { safeClassNames } from '@maizzle/framework'
 
 const html = await safeClassNames(
   '<div class="sm:text-left w-1.5">foo</div>', // html string

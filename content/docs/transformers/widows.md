@@ -28,7 +28,7 @@ The `prevent-widows` attribute will be removed and the HTML will be transformed 
 You may configure the transformer through the `widowWords` key in your `config.js`:
 
 ```js [config.js]
-module.exports = {
+export default {
   widowWords: {
     attrName: 'prevent-widows',
     // ...options for string-remove-widows
@@ -116,7 +116,7 @@ Maizzle defines common templating language start and end tags here, and also inc
 Any new pairs that you add will be merged on top of the default ones.
 
 ```js [config.js]
-module.exports = {
+export default {
   widowWords: {
     ignore: [
       {
@@ -133,7 +133,7 @@ module.exports = {
 You can use the transformer the other way around, too.
 
 ```js [config.js]
-module.exports = {
+export default {
   widowWords: {
     attrName: 'create-widows',
     removeWidowPreventionMeasures: true,
@@ -162,7 +162,7 @@ Output:
 ## API
 
 ```js [app.js]
-const {preventWidows} = require('@maizzle/framework')
+import { preventWidows } from '@maizzle/framework'
 
 const html = await preventWidows('html string', options)
 ```

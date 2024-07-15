@@ -12,7 +12,7 @@ Need to send HTML to a human? Enable `prettify` in your config:
 ## Usage
 
 ```js [config.js]
-module.exports = {
+export default {
   prettify: true,
 }
 ```
@@ -35,7 +35,7 @@ You may configure JS Beautify's CSS and HTML Beautifier options.
 Maybe you prefer tabs for indentation?
 
 ```js [config.js]
-module.exports = {
+export default {
   prettify: {
     indent_with_tabs: true,
   }
@@ -59,7 +59,8 @@ This option applies several code indentation strategies:
 ## API
 
 ```js [app.js]
-const {prettify} = require('@maizzle/framework')
+import { prettify } from '@maizzle/framework'
+
 const options = {/* prettify options */}
 
 const html = await prettify('html string', options)

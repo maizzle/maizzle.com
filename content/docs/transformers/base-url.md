@@ -30,7 +30,7 @@ Both `<style>` tags and `style=""` attributes are supported. CSS property values
 Make it globally available by setting it in your environment config:
 
 ```js [config.js]
-module.exports = {
+export default {
   baseURL: 'https://cdn.example.com/'
 }
 ```
@@ -49,7 +49,7 @@ Default: [see default tags](https://github.com/posthtml/posthtml-base-url/blob/m
 Apply the base URL only to `<img>` tags:
 
 ```js [config.js]
-module.exports = {
+export default {
   baseURL: {
     url: 'https://cdn.example.com/',
     tags: ['img'],
@@ -62,7 +62,7 @@ That will apply the `url` to all known source attributes on all `<img>` elements
 If you need greater control, you may specify which attributes of which tags should be prepended what URL, by passing in an object instead:
 
 ```js [config.js]
-module.exports = {
+export default {
   baseURL: {
     url: 'https://cdn.example.com/',
     tags: {
@@ -83,7 +83,7 @@ Default: `{}`
 Key-value pairs of attributes and what to prepend to them.
 
 ```js [config.js]
-module.exports = {
+export default {
   baseURL: {
     attributes: {
       'data-url': 'https://example.com/',
@@ -100,7 +100,7 @@ Default: `true`
 By default, the transformer will prepend your `url` to all `url()` sources in `<style>` tags. Set this option to `false` to prevent it from doing so:
 
 ```js [config.js]
-module.exports = {
+export default {
   baseURL: {
     url: 'https://cdn.example.com/',
     tags: ['img'],
@@ -117,7 +117,7 @@ Default: `true`
 Similarly, the transformer will prepend your `url` to all `url()` sources in `style=""` attributes. You may disable this if you need to:
 
 ```js [config.js]
-module.exports = {
+export default {
   baseURL: {
     url: 'https://cdn.example.com/',
     tags: ['img'],
@@ -174,10 +174,11 @@ baseURL: false
 ## API
 
 ```js [app.js]
-const {applyBaseUrl} = require('@maizzle/framework')
+import { addBaseUrl } from '@maizzle/framework'
+
 const config = {
   url: 'https://cdn.example.com/img/',
 }
 
-const html = await applyBaseUrl('<img src="image.jpg">', config)
+const html = await addBaseUrl('<img src="image.jpg">', config)
 ```

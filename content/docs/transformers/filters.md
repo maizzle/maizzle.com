@@ -12,8 +12,8 @@ Maizzle includes filters that enable you to do anything you want to text inside 
 Add a `filters` object to your Maizzle config:
 
 ```js [config.js]
-module.exports = {
-  filters: {}
+export default {
+  filters: {},
 }
 ```
 
@@ -25,9 +25,9 @@ Each entry in this object is made up of a `key: value` pair.
 Example:
 
 ```js [config.js]
-module.exports = {
+export default {
   filters: {
-    uppercase: str => str.toUpperCase()
+    uppercase: str => str.toUpperCase(),
   }
 }
 ```
@@ -56,8 +56,8 @@ Of course, this is just a dumb example - you could imagine more complex scenario
 You may disable all filters by setting the option to `false`:
 
 ```js [config.js]
-module.exports = {
-  filters: false
+export default {
+  filters: false,
 }
 ```
 

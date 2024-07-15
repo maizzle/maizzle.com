@@ -11,15 +11,17 @@ CSS inlining is still important in HTML email, mainly because of Outlook on Wind
 
 It can also help preserve a decent layout in email clients that do not support embedded CSS (in `<style>` tags), or when an email is forwarded.
 
-Not to mention that the utility-first approach in Tailwind CSS works great with CSS inlining: utility classes are not 'global', so you won't end up with a `font-family` inlined on every element.
+Not to mention that the utility-first approach in Tailwind CSS works great with CSS inlining: utility classes are not 'global', so you won't end up with a `font-family` inlined on every element (unless you really, really want to).
 
 ## Usage
 
-To enable CSS inlining, simply set `inlineCSS` to `true` in your config:
+To enable CSS inlining, simply set `css.inline` to `true` in your config:
 
 ```js [config.js]
-module.exports = {
-  inlineCSS: true,
+export default {
+  css: {
+    inline: true,
+  }
 }
 ```
 
@@ -39,7 +41,7 @@ Defines which CSS properties should be duplicated as what HTML attributes.
 For example, this property-attribute assignment:
 
 ```js [config.js]
-module.exports = {
+export default {
   inlineCSS: {
     styleToAttribute: {
       'background-color': 'bgcolor',
@@ -95,9 +97,11 @@ Defaults to an empty array `[]` so that no `width` attributes are added.
 Works together with `styleToAttribute`.
 
 ```js [config.js]
-module.exports = {
-  inlineCSS: {
-    applyWidthAttributes: ['table', 'td', 'th']
+export default {
+  css: {
+    inline: {
+      applyWidthAttributes: ['table', 'td', 'th'],
+    }
   }
 }
 ```
@@ -114,75 +118,14 @@ Defaults to an empty array `[]` so that no `height` attributes are added.
 Works together with `styleToAttribute`.
 
 ```js [config.js]
-module.exports = {
-  inlineCSS: {
-    applyHeightAttributes: ['table', 'td', 'th']
-  }
-}
-```
-
-### keepOnlyAttributeSizes
-
-Define for which elements should Maizzle keep _only_ attribute sizes, like `width=""` and `height=""`. Elements in these arrays will have their inline CSS widths and heights removed.
-
-It's set to empty arrays by default, so that no elements are affected:
-
-```js [config.js]
-module.exports = {
-  inlineCSS: {
-    keepOnlyAttributeSizes: {
-      width: [],
-      height: []
+export default {
+  css: {
+    inline: {
+      applyHeightAttributes: ['table', 'td', 'th'],
     }
   }
 }
 ```
-
-You can add HTML elements like this:
-
-```js [config.js]
-module.exports = {
-  inlineCSS: {
-    keepOnlyAttributeSizes: {
-      width: ['table', 'td', 'th', 'img', 'video'],
-      height: ['table', 'td', 'th', 'img', 'video']
-    }
-  }
-}
-```
-
-<Alert>This will only work for elements defined in [styleToAttribute](#style-to-attribute)</Alert>
-
-<Alert type="warning">Using only attribute sizes is known to cause <a href="https://www.courtneyfantinato.com/correcting-outlook-dpi-scaling-issues/">scaling issues in Outlook</a></Alert>
-
-### preferBgColorAttribute
-
-Type: Boolean|Array\
-Default: `false`
-
-Enable this option to remove any inlined `background-color` CSS properties but keep any corresponding `bgcolor` attributes.
-
-```js [config.js]
-module.exports = {
-  inlineCSS: {
-    preferBgColorAttribute: true
-  }
-}
-```
-
-You may pass an array of tag names that it should remove the `background-color` from:
-
-```js [config.js]
-module.exports = {
-  inlineCSS: {
-    preferBgColorAttribute: ['td'] // default: ['body', 'marquee', 'table', 'tbody', 'td', 'tfoot', 'th', 'thead', 'tr']
-  }
-}
-```
-
-In the example above, `background-color` will be removed only from `<td>` elements.
-
-<Alert>You most likely won't need to use this. CSS background-color is well-supported in HTML email.</Alert>
 
 ### excludedProperties
 
@@ -196,9 +139,11 @@ Names are considered unique, so you will need to specify each one you'd like to 
 For example:
 
 ```js [config.js]
-module.exports = {
-  inlineCSS: {
-    excludedProperties: ['padding', 'padding-left']
+export default {
+  css: {
+    inline: {
+      excludedProperties: ['padding', 'padding-left'],
+    }
   }
 }
 ```
@@ -221,11 +166,37 @@ By default, <abbr title="Embedded JavaScript Templates">EJS</abbr> and <abbr tit
 }
 ```
 
+### removeInlinedSelectors
+
+Type: Boolean\
+Default: `undefined`
+
+By default, classes are removed from the `class` attribute of a tag after they have been successfully inlined.
+
+Set this option to `false` to prevent that from happening:
+
+```js [config.production.js]
+export default {
+  css: {
+    inline: {
+      removeInlinedSelectors: false,
+    }
+  }
+}
+```
+
 ## Prevent inlining
 
 Use the `data-embed` attribute on a `<style>` tag to prevent Juice from inlining the CSS inside it. Useful for writing email client CSS hacks, or for preserving CSS comments when using the [`removeCSSComments: false`](/docs/transformers/remove-unused-css#removecsscomments) Cleanup option.
 
-<Alert>CSS selectors that don't appear in your markup will still need to be [whitelisted](/docs/transformers/remove-unused-css#whitelist).</Alert>
+```html
+<style data-embed>
+  /* This CSS will not be inlined */
+  .text-red { color: red; }
+</style>
+```
+
+<Alert>CSS selectors that don't appear in your markup will still need to be [whitelisted for purging](/docs/transformers/remove-unused-css#whitelist).</Alert>
 
 ## API
 
@@ -236,9 +207,10 @@ If you don't specify `customCSS`, your HTML string will need to have a `<style>`
 Additionally, you may configure the [Juice](https://www.npmjs.com/package/juice) library by passing options in the same object.
 
 ```js [app.js]
-const {inlineCSS} = require('@maizzle/framework')
+import { inlineCSS } from '@maizzle/framework'
+
 const config = {
-  customCSS: '',
+  customCSS: 'body { background-color: #f8f9fa; }',
   excludedProperties: ['padding', 'padding-left'] // Juice option
 }
 
