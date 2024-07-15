@@ -47,15 +47,15 @@ The traditional content block for showing article excerpts, like those from a bl
     <tr>
       <td class="p-6 bg-white rounded-b">
         <span class="text-xs text-slate-500">April 7, 2020</span>
-        <h2 class="mt-2 mb-3 text-2xl leading-full">
-          <a href="https://example.com" class="text-black hover:text-slate-700 [text-decoration:none]">
+        <h2 class="m-0 mt-2 mb-3 text-2xl leading-full">
+          <a href="https://example.com" class="text-black hover:text-slate-700 no-underline">
             Lorem ipsum dolor sit amet, consectetur
           </a>
         </h2>
         <p class="m-0 mb-16 text-base text-slate-500">
           Anim ullamco anim ipsum Lorem id voluptate consequat excepteur proident cillum mollit.
         </p>
-        <a href="https://example.com" class="text-blue-500 [text-decoration:none] hover:[text-decoration:underline]">
+        <a href="https://example.com" class="text-blue-500 no-underline hover:underline">
           Learn more &rarr;
         </a>
       </td>
