@@ -49,6 +49,10 @@ export default [
     name: 'Configuration',
     items: [
       {
+        title: 'Server',
+        path: '/docs/configuration/server'
+      },
+      {
         title: 'Templates',
         path: '/docs/configuration/templates'
       },
@@ -65,20 +69,12 @@ export default [
         path: '/docs/configuration/tailwindcss'
       },
       {
-        title: 'Browsersync',
-        path: '/docs/configuration/browsersync'
-      },
-      {
         title: 'PostHTML',
         path: '/docs/configuration/posthtml'
       },
       {
         title: 'PostCSS',
         path: '/docs/configuration/postcss'
-      },
-      {
-        title: 'Build Errors',
-        path: '/docs/configuration/build-errors'
       },
     ]
   },
