@@ -63,9 +63,9 @@
           <div class="hidden sm:block max-w-[75ch] whitespace-nowrap overflow-auto">
             <a
               href="https://github.com/maizzle/framework/releases"
-              class="hidden sm:table px-3 py-1 rounded-full text-indigo-500 border border-indigo-300 hover:text-indigo-600 text-sm group"
+              class="hidden sm:inline-block px-3 py-1 rounded-full text-indigo-500 border border-indigo-300 hover:text-indigo-600 text-base group"
             >
-              Maizzle v4.8.0: asset arrays, attributes for URL params &amp; more &rarr;
+              Maizzle 5 is here, try it out now &rarr;
             </a>
           </div>
         </div>
