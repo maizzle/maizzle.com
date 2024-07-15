@@ -21,12 +21,12 @@ You can configure the PostHTML parser to correctly process custom directives.
 For example, you may tell it to ignore `<?php ?>` tags instead of treating them as HTML:
 
 ```js [config.js]
-module.exports = {
+export default {
   build: {
     posthtml: {
       options: {
         directives: [
-          { name: '?php', start: '<', end: '>' }
+          { name: '?php', start: '<', end: '>' },
         ]
       }
     }
@@ -42,11 +42,11 @@ Default: `false`
 Enable `xmlMode` if you're using Maizzle to output XML content, and not actual HTML.
 
 ```js [config.js]
-module.exports = {
+export default {
   build: {
     posthtml: {
       options: {
-        xmlMode: true
+        xmlMode: true,
       }
     }
   }
@@ -61,11 +61,11 @@ Default: `false`
 Set this to `true` to have entities within the document decoded.
 
 ```js [config.js]
-module.exports = {
+export default {
   build: {
     posthtml: {
       options: {
-        decodeEntities: true
+        decodeEntities: true,
       }
     }
   }
@@ -80,11 +80,11 @@ Default: `false`
 Set this to `true` to output all tags in lowercase. Works only when `xmlMode` is disabled.
 
 ```js [config.js]
-module.exports = {
+export default {
   build: {
     posthtml: {
       options: {
-        lowerCaseTags: true
+        lowerCaseTags: true,
       }
     }
   }
@@ -101,11 +101,11 @@ Output all attribute names in lowercase.
 <Alert type="warning">This has a significant impact on speed.</Alert>
 
 ```js [config.js]
-module.exports = {
+export default {
   build: {
     posthtml: {
       options: {
-        lowerCaseAttributeNames: true
+        lowerCaseAttributeNames: true,
       }
     }
   }
@@ -123,11 +123,11 @@ Recognize CDATA sections as text even if the `xmlMode` option is disabled.
 <Alert>If `xmlMode` is enabled, CDATA sections will always be recognized as text.</Alert>
 
 ```js [config.js]
-module.exports = {
+export default {
   build: {
     posthtml: {
       options: {
-        recognizeCDATA: true
+        recognizeCDATA: true,
       }
     }
   }
@@ -146,11 +146,11 @@ If enabled, self-closing tags will trigger the `onclosetag` event even if `xmlMo
 Maizzle sets this to `true` to ensure self-closing tags like those of Components are rendered correctly.
 
 ```js [config.js]
-module.exports = {
+export default {
   build: {
     posthtml: {
       options: {
-        recognizeSelfClosing: true
+        recognizeSelfClosing: true,
       }
     }
   }
@@ -165,11 +165,11 @@ Default: `false`
 If set to `true`, AST nodes will have a `location` property containing the `start` and `end` line and column position of the node.
 
 ```js [config.js]
-module.exports = {
+export default {
   build: {
     posthtml: {
       options: {
-        sourceLocations: true
+        sourceLocations: true,
       }
     }
   }
@@ -184,11 +184,11 @@ Default: `true`
 If set to `true`, PostHTML will render attributes with no values exactly as they were written and will not add `=""` to them.
 
 ```js [config.js]
-module.exports = {
+export default {
   build: {
     posthtml: {
       options: {
-        recognizeNoValueAttribute: true
+        recognizeNoValueAttribute: true,
       }
     }
   }
@@ -205,7 +205,7 @@ Use the `singleTags` option to tell PostHTML to treat custom tags as self-closin
 <Alert type="warning">This needs to be used in conjunction with `closingSingleTag` to tell PostHTML how to close the tag, otherwise you will end up with an unclosed tag.</Alert>
 
 ```js [config.js]
-module.exports = {
+export default {
   build: {
     posthtml: {
       options: {
@@ -244,12 +244,12 @@ Available options:
 Will add a closing tag.
 
 ```js [config.js]
-module.exports = {
+export default {
   build: {
     posthtml: {
       options: {
         singleTags: ['custom'],
-        closingSingleTag: 'tag'
+        closingSingleTag: 'tag',
       }
     }
   }
@@ -265,12 +265,12 @@ module.exports = {
 Will add a closing tag.
 
 ```js [config.js]
-module.exports = {
+export default {
   build: {
     posthtml: {
       options: {
         singleTags: ['custom'],
-        closingSingleTag: 'slash'
+        closingSingleTag: 'slash',
       }
     }
   }
@@ -289,11 +289,11 @@ Default: `true`
 Disable if you want to remove quotes on all attributes
 
 ```js [config.js]
-module.exports = {
+export default {
   build: {
     posthtml: {
       options: {
-        quoteAllAttributes: false
+        quoteAllAttributes: false,
       }
     }
   }
@@ -312,11 +312,11 @@ Default: `true`
 Replaces quotes in attribute values with `&quote;`.
 
 ```js [config.js]
-module.exports = {
+export default {
   build: {
     posthtml: {
       options: {
-        replaceQuote: false
+        replaceQuote: false,
       }
     }
   }
@@ -339,11 +339,11 @@ Default: `2`
 Specify the attribute value quotes style.
 
 ```js [config.js]
-module.exports = {
+export default {
   build: {
     posthtml: {
       options: {
-        quoteStyle: 1
+        quoteStyle: 1,
       }
     }
   }
@@ -366,17 +366,21 @@ module.exports = {
 Type: Array\
 Default: `[]`
 
-Register any PostHTML plugins that you would like to use, in the `plugins` array:
+Register any PostHTML plugins that you would like to use, in the `plugins` array.
+
+You may register plugins to run either before all other plugins, or after all other plugins, by using the `before` and `after` keys.
 
 ```js [config.js]
-const spaceless = require('posthtml-spaceless')
+import spaceless from 'posthtml-spaceless'
 
-module.exports = {
+export default {
   build: {
     posthtml: {
-      plugins: [
-        spaceless()
-      ]
+      plugins: {
+        before: [
+          spaceless()
+        ]
+      }
     }
   }
 }
@@ -389,23 +393,25 @@ You may write your own PostHTML plugins, right in your Maizzle `config.js` file.
 For example, here's a plugin that adds a random number to all `<img>` src URLs:
 
 ```js [config.js]
-module.exports = {
+export default {
   build: {
     posthtml: {
-      plugins: [
-        (() => tree => {
-          const process = node => {
-            if (node.tag === 'img' && node.attrs?.src) {
-              const randomNumber = Math.floor(Math.random() * 10 ** 16).toString().padStart(16, '0')
-              node.attrs.src = node.attrs.src + `?v=${randomNumber}`
+      plugins: {
+        after: [
+          (() => tree => {
+            const process = node => {
+              if (node.tag === 'img' && node.attrs?.src) {
+                const randomNumber = Math.floor(Math.random() * 10 ** 16).toString().padStart(16, '0')
+                node.attrs.src = node.attrs.src + `?v=${randomNumber}`
+              }
+
+              return node
             }
 
-            return node
-          }
-
-          return tree.walk(process)
-        })()
-      ]
+            return tree.walk(process)
+          })()
+        ]
+      }
     }
   }
 }
@@ -417,8 +423,6 @@ module.exports = {
 
 Maizzle already uses the following PostHTML plugins internally:
 
-- [posthtml-extend](https://github.com/posthtml/posthtml-extend)
-- [posthtml-fetch](https://github.com/posthtml/posthtml-fetch)
 - [posthtml-mso](https://github.com/posthtml/posthtml-mso)
 - [posthtml-base-url](https://github.com/posthtml/posthtml-base-url)
 - [posthtml-content](https://github.com/posthtml/posthtml-content)
