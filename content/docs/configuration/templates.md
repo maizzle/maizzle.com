@@ -24,7 +24,7 @@ Default: `src/templates/**/*.html`
 
 Define the source directories where Maizzle should look for Templates to compile.
 
-This is an array of glob patterns, just like you're used to when configuring content sources for Tailwind. See [fast-glob](https://github.com/mrmlnc/fast-glob) for more information on how to write glob patterns.
+This is an array of glob patterns, similar to how content sources are configured in Tailwind CSS. See [fast-glob](https://github.com/mrmlnc/fast-glob) for more information on how to write glob patterns.
 
 ### File types
 

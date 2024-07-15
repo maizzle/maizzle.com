@@ -8,12 +8,10 @@ description: "Configuring expressions in Maizzle."
 Expressions may be configured in your project's `config.js`:
 
 ```js [config.js]
-module.exports = {
+export default {
   build: {
-    posthtml: {
-      expressions: {
-        // posthtml-expressions options
-      }
+    expressions: {
+      // ...
     }
   }
 }
@@ -26,6 +24,18 @@ Default: `['{{', '}}']`
 
 Array containing beginning and ending delimiters for expressions.
 
+It's common for templating engines (like those used by email service providers) to use `{{` and `}}` as delimiters, so you can change them in order to avoid conflicts:
+
+```js [config.js]
+export default {
+  build: {
+    expressions: {
+      delimiters: ['[[', ']]'],
+    }
+  }
+}
+```
+
 ## unescapeDelimiters
 
 Type: `Array`\
@@ -33,14 +43,28 @@ Default: `['{{{', '}}}']`
 
 Array containing beginning and ending delimiters for unescaped locals.
 
+You'd normally use these when you want to output HTML from a variable without escaping it:
+
+```hbs
+{{ '<span>escaped</span>' }}
+{{{ '<span>unescaped</span>' }}}
+```
+
+Result:
+
+```html
+&lt;span&gt;escaped&lt;/span&gt;
+<span>unescaped</span>
+```
+
 ## locals
 
 Type: `Object`\
 Default: `{}`
 
-Data defined here will be available under the `page` object.
+Data defined here will be available globally.
 
-For example, if you set this to `{foo: 'bar'}`, you can access it in your templates through `{{ page.foo }}`.
+For example, if you set this to something like `{foo: 'bar'}`, you can access it in your templates through `{{ foo }}`.
 
 ## localsAttr
 
@@ -101,7 +125,7 @@ Maizzle disables `strictMode` so that, if you have an error inside an expression
 ## missingLocal
 
 Type: `undefined|String`\
-Default: `undefined`
+Default: `{local}`
 
 Define what to render when referencing a value that is not defined in `locals`.
 
@@ -112,4 +136,4 @@ Define what to render when referencing a value that is not defined in `locals`.
 |      `''`      | `false`/`true` | `''` (no output, empty string)      |
 |   `{local}`    | `false`/`true` | Original reference like `{{ foo }}` |
 
-By default, Maizzle will output the string `undefined` when a value is not defined in `locals`.
+By default, Maizzle will output the string the original reference as a string, i.e. `{{ foo }}`, when a value is not defined in `locals`.

@@ -112,7 +112,7 @@ The current Environment name is globally available under the `page.env` variable
 You can output content in your emails based on the Environment that you're building for:
 
 ```xml [src/templates/example.html]
-<if condition="page.environment === 'production'">
+<if condition="page.env === 'production'">
   This will show only when running `maizzle build production`
 </if>
 ```
