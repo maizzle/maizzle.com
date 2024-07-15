@@ -5,12 +5,6 @@ description: "Use components into your HTML email templates and render them with
 
 # Components
 
-**👋 New syntax**
-
-You are viewing the documentation for the new Components syntax introduced in `v4.4.0`. Not ready to switch yet? See the [legacy Components docs](https://v43x.maizzle.com/docs/components).
-
----
-
 Components help you organize blocks of markup into files that can be referenced throughout your project with simple, declarative syntax.
 
 ## Create
@@ -18,12 +12,12 @@ Components help you organize blocks of markup into files that can be referenced 
 To create a Component, add an HTML file in `src/components`:
 
 ```xml [src/components/alert.html]
-<content />
+<yield />
 ```
 
-The `<content />` tag will be replaced with the content passed to the Component.
+The `<yield />` tag will be replaced with the content passed to the Component.
 
-<Alert type="info">You can safely omit the `<content />` tag if you want to use Components as includes, and don't actually need to pass any content to them.</Alert>
+<Alert type="info">You can safely omit the `<yield />` tag if you want to use Components as includes, and don't actually need to pass any content to them.</Alert>
 
 ## Tags
 
@@ -75,7 +69,7 @@ For example, consider the following Component:
 
 ```xml [src/components/button/alt.html]
 <a href="https://maizzle.com">
-  <content />
+  <yield />
 </a>
 ```
 
@@ -95,7 +89,7 @@ If you add an `index.html` Component inside a nested directory, you can also ref
 
 ```xml [src/components/button/index.html]
 <a href="https://maizzle.com">
-  <content />
+  <yield />
 </a>
 ```
 
@@ -121,7 +115,7 @@ For example, let's create a banner Component with a slot for a custom title:
 <div role="banner">
   <slot:title />
 
-  <content />
+  <yield />
 </div>
 ```
 
@@ -157,7 +151,7 @@ A slot may have default content, which will be used if it hasn't been filled.
     <slot:title>Default title</slot:title>
   </h2>
 
-  <content />
+  <yield />
 </div>
 ```
 
@@ -213,7 +207,7 @@ For example, let's create a `<x-footer>` Component that will pull in another Com
 
 ```xml [src/components/footer.html]
 <div>
-  <content />
+  <yield />
 
   <if condition="$slots.copyright?.filled">
     <!-- src/components/copyright.html -->
@@ -230,13 +224,16 @@ For example, imagine you're coding a Shopify email template and need to add some
 
 You would modify your Layout to include a `stack` tag:
 
-```hbs [src/layouts/layout.html]
+```xml [src/layouts/layout.html]
 <stack name="liquid-vars" />
 
 <!doctype html>
 <html>
 <head>
-  <style>{{{ page.css }}}</style>
+  <style>
+    @tailwind utilities;
+    @tailwind components;
+  </style>
 </head>
 <body>
   <slot:template />
@@ -278,7 +275,7 @@ For example, imagine this Card Component:
 
 ```hbs [src/components/card.html]
 <push name="head" once>
-  <style tailwindcss>
+  <style>
     .card {
       @apply bg-white rounded-lg shadow-md;
     }
@@ -319,6 +316,8 @@ To use props in a Component, you need to define them first. This is done by addi
   {{ title }}
 </div>
 ```
+
+<Alert type="warning">Only CommonJS syntax with `module.exports` is currently supported in Components.</Alert>
 
 Props that you pass to the Component will be available in the `<script>` tag as the `props` object. In this example we're getting the `title` prop from `props.title`, falling back to a default value if it's not provided.
 
@@ -427,7 +426,7 @@ If you want to change the element to which the attributes are added, you can use
 <table>
   <tr>
     <td attributes>
-      <content />
+      <yield />
     </td>
   </tr>
 </table>

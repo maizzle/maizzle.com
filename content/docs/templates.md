@@ -5,12 +5,6 @@ description: "Learn how to create HTML emails with template inheritance in Maizz
 
 # Templates
 
-**👋 New syntax**
-
-You are viewing the documentation for Templates using the new Components syntax introduced in `v4.4.0`. Not ready to switch yet? See the [legacy Templates docs](https://v43x.maizzle.com/docs/templates).
-
----
-
 A Template in Maizzle is an HTML file that typically contains the body of your email: the HTML that defines the design and content.
 
 It's made up of two distinct sections:
@@ -54,6 +48,7 @@ Expressions in Front Matter can be ignore with a single `@` symbol when they're 
 ---
 greeting: "Hello @{{ user.name }}, please confirm your email address"
 ---
+
 <h1>{{ page.greeting }}</h1>
 ```
 
@@ -61,22 +56,6 @@ That will render as:
 
 ```hbs [build_production/example.html]
 <h1>Hello {{ user.name }}, please confirm your email address</h1>
-```
-
-If the Front Matter variable will be used in a Layout, you need to double-ignore it:
-
-```hbs [src/templates/example.html]
----
-preheader: "Hello @@{{ user.name }}, please confirm your email address"
----
-```
-
-```hbs [src/layouts/main.html]
-<if condition="page.preheader">
-  <div class="hidden">
-    {{{ page.preheader }}}
-  </div>
-</if>
 ```
 
 ## Using Layouts
@@ -87,14 +66,17 @@ Although you're free to do it, it would be very inefficient to always have to wr
 
 To reuse this code in Maizzle, you may create a [Layout](/docs/layouts):
 
-```hbs [src/layouts/main.html]
+```xml [src/layouts/main.html]
 <!doctype html>
 <html>
 <head>
-  <style>{{{ page.css }}}</style>
+  <style>
+    @tailwind utilities;
+    @tailwind components;
+  </style>
 </head>
 <body>
-  <content />
+  <yield />
 </body>
 ```
 
@@ -106,26 +88,26 @@ When creating a Template, you can wrap it with this Layout:
 </x-main>
 ```
 
-In the example above, we use the `<x-main>` Component tag to say that we want to use the `main.html` Layout. At build time, the `<content />` tag in the Layout file is replaced with what's inside the `<x-main>` tag in our Template.
+In the example above, we use the `<x-main>` Component tag to say that we want to use the `main.html` Layout. At build time, the `<yield />` tag in the Layout file is replaced with what's inside the `<x-main>` tag in our Template.
 
 Learn more about how these x-tags work, in the [Components docs](/docs/components#x-tag).
 
 ## Current template
 
-When developing locally, information about the Template file that is currently being processed is available under `page.build.current`.
-
-It's an object containing a parsed path of the destination file name:
+Information about the Template file that is currently being processed is available under `page.build.current`:
 
 ```js
 build: {
   current: {
     path: {
-      root: '',
-      dir: 'build_production',
+      root: 'src',
+      dir: 'src/templates',
       base: 'transactional.html',
       ext: '.html',
       name: 'transactional'
-    }
+    },
+    baseDir: 'src/templates',
+    relativePath: 'transactional.html'
   }
 }
 ```
@@ -136,12 +118,25 @@ It can be used in Events like `beforeRender` if you need the file name or extens
 
 ## Archiving
 
-Maizzle will only compile templates found in path(s) that you have defined in `build.templates.source`, which have the same extension as the one defined in `build.templates.filetypes` (`html` by default).
+Maizzle will only compile Templates found at paths defined in `build.content`.
 
-If your project has _a lot_ of emails, your builds may start to slow down since all Templates are rebuilt on cold start (every time you run the `maizzle build <env>` command) or when developing locally and making changes to a Layout, a Component, or a config file (this needs to trigger a full rebuild to reflect changes across all Templates).
+If your project has _a lot_ of emails, your builds may start to slow down since all Templates are rebuilt on cold start (every time you run the `maizzle build <env>` command).
 
-You can archive Templates in a few ways:
+You can archive Templates in a few ways.
 
-1. Move them to a directory outside the one defined in `build.templates.source`, so they don't get copied over to the destination directory (recommended).
-2. Change their file extension to something that is not defined in `build.templates.filetypes`. They'll just be copied over to the destination, Maizzle will not try to compile them.
-3. Use the [`omit` option](/docs/configuration/templates#omit)
+1. Move them to a directory outside the ones defined in `build.content`
+2. Change their file extension so that it's not covered by paths from `build.content`
+3. Use negated glob patterns in `build.content` to exclude them.
+    <br><br>
+    For example, if you have a `src/templates/archive` directory, you can exclude it from builds like this:
+    <br><br>
+    ```js [config.js]
+    export default {
+      build: {
+        content: [
+          'src/templates/**/*.html',
+          '!src/templates/archive/**/*'
+        ]
+      }
+    }
+    ```

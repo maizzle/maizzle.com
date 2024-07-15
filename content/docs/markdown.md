@@ -122,7 +122,7 @@ Use two tildes `~~` to ~~`~~strikethrough~~`~~ text.
 You may configure how Markdown is rendered through the `markdown` config object:
 
 ```js [config.js]
-module.exports = {
+export default {
   markdown: {
     root: './', // A path relative to which markdown files are imported
     encoding: 'utf8', // Encoding for imported Markdown files
@@ -163,7 +163,7 @@ That will output:
 Disable the markdown Transformer by setting it to `false`:
 
 ```js [config.js]
-module.exports = {
+export default {
   markdown: false
 }
 ```
@@ -175,11 +175,13 @@ There are over 300 plugins for `markdown-it` available on NPM! To use a plugin, 
 For example, imagine we installed [markdown-it-emoji](https://www.npmjs.com/package/markdown-it-emoji):
 
 ```js [config.js]
-module.exports = {
+import mdEmoji from 'markdown-it-emoji'
+
+export default {
   markdown: {
     plugins: [
       {
-        plugin: require('markdown-it-emoji'),
+        plugin: mdEmoji,
         options: {} // Options for markdown-it-emoji
       }
     ]
@@ -206,7 +208,7 @@ Result:
 If you're using expressions to render markdown from a variable that you have defined in your config like this:
 
 ```js [config.js]
-module.exports = {
+export default {
   data: {
     content: '> a markdown string'
   }

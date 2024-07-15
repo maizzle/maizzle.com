@@ -22,13 +22,11 @@ For example, you may tell it to ignore `<?php ?>` tags instead of treating them 
 
 ```js [config.js]
 export default {
-  build: {
-    posthtml: {
-      options: {
-        directives: [
-          { name: '?php', start: '<', end: '>' },
-        ]
-      }
+  posthtml: {
+    options: {
+      directives: [
+        { name: '?php', start: '<', end: '>' },
+      ]
     }
   }
 }
@@ -43,11 +41,9 @@ Enable `xmlMode` if you're using Maizzle to output XML content, and not actual H
 
 ```js [config.js]
 export default {
-  build: {
-    posthtml: {
-      options: {
-        xmlMode: true,
-      }
+  posthtml: {
+    options: {
+      xmlMode: true,
     }
   }
 }
@@ -62,11 +58,9 @@ Set this to `true` to have entities within the document decoded.
 
 ```js [config.js]
 export default {
-  build: {
-    posthtml: {
-      options: {
-        decodeEntities: true,
-      }
+  posthtml: {
+    options: {
+      decodeEntities: true,
     }
   }
 }
@@ -81,11 +75,9 @@ Set this to `true` to output all tags in lowercase. Works only when `xmlMode` is
 
 ```js [config.js]
 export default {
-  build: {
-    posthtml: {
-      options: {
-        lowerCaseTags: true,
-      }
+  posthtml: {
+    options: {
+      lowerCaseTags: true,
     }
   }
 }
@@ -102,11 +94,9 @@ Output all attribute names in lowercase.
 
 ```js [config.js]
 export default {
-  build: {
-    posthtml: {
-      options: {
-        lowerCaseAttributeNames: true,
-      }
+  posthtml: {
+    options: {
+      lowerCaseAttributeNames: true,
     }
   }
 }
@@ -124,11 +114,9 @@ Recognize CDATA sections as text even if the `xmlMode` option is disabled.
 
 ```js [config.js]
 export default {
-  build: {
-    posthtml: {
-      options: {
-        recognizeCDATA: true,
-      }
+  posthtml: {
+    options: {
+      recognizeCDATA: true,
     }
   }
 }
@@ -147,11 +135,9 @@ Maizzle sets this to `true` to ensure self-closing tags like those of Components
 
 ```js [config.js]
 export default {
-  build: {
-    posthtml: {
-      options: {
-        recognizeSelfClosing: true,
-      }
+  posthtml: {
+    options: {
+      recognizeSelfClosing: true,
     }
   }
 }
@@ -166,11 +152,9 @@ If set to `true`, AST nodes will have a `location` property containing the `star
 
 ```js [config.js]
 export default {
-  build: {
-    posthtml: {
-      options: {
-        sourceLocations: true,
-      }
+  posthtml: {
+    options: {
+      sourceLocations: true,
     }
   }
 }
@@ -185,11 +169,9 @@ If set to `true`, PostHTML will render attributes with no values exactly as they
 
 ```js [config.js]
 export default {
-  build: {
-    posthtml: {
-      options: {
-        recognizeNoValueAttribute: true,
-      }
+  posthtml: {
+    options: {
+      recognizeNoValueAttribute: true,
     }
   }
 }
@@ -206,12 +188,10 @@ Use the `singleTags` option to tell PostHTML to treat custom tags as self-closin
 
 ```js [config.js]
 export default {
-  build: {
-    posthtml: {
-      options: {
-        singleTags: ['custom'],
-        closingSingleTag: 'slash', // see docs below
-      }
+  posthtml: {
+    options: {
+      singleTags: ['custom'],
+      closingSingleTag: 'slash', // see docs below
     }
   }
 }
@@ -245,12 +225,10 @@ Will add a closing tag.
 
 ```js [config.js]
 export default {
-  build: {
-    posthtml: {
-      options: {
-        singleTags: ['custom'],
-        closingSingleTag: 'tag',
-      }
+  posthtml: {
+    options: {
+      singleTags: ['custom'],
+      closingSingleTag: 'tag',
     }
   }
 }
@@ -266,12 +244,10 @@ Will add a closing tag.
 
 ```js [config.js]
 export default {
-  build: {
-    posthtml: {
-      options: {
-        singleTags: ['custom'],
-        closingSingleTag: 'slash',
-      }
+  posthtml: {
+    options: {
+      singleTags: ['custom'],
+      closingSingleTag: 'slash',
     }
   }
 }
@@ -290,11 +266,9 @@ Disable if you want to remove quotes on all attributes
 
 ```js [config.js]
 export default {
-  build: {
-    posthtml: {
-      options: {
-        quoteAllAttributes: false,
-      }
+  posthtml: {
+    options: {
+      quoteAllAttributes: false,
     }
   }
 }
@@ -313,11 +287,9 @@ Replaces quotes in attribute values with `&quote;`.
 
 ```js [config.js]
 export default {
-  build: {
-    posthtml: {
-      options: {
-        replaceQuote: false,
-      }
+  posthtml: {
+    options: {
+      replaceQuote: false,
     }
   }
 }
@@ -340,11 +312,9 @@ Specify the attribute value quotes style.
 
 ```js [config.js]
 export default {
-  build: {
-    posthtml: {
-      options: {
-        quoteStyle: 1,
-      }
+  posthtml: {
+    options: {
+      quoteStyle: 1,
     }
   }
 }
@@ -374,13 +344,11 @@ You may register plugins to run either before all other plugins, or after all ot
 import spaceless from 'posthtml-spaceless'
 
 export default {
-  build: {
-    posthtml: {
-      plugins: {
-        before: [
-          spaceless()
-        ]
-      }
+  posthtml: {
+    plugins: {
+      before: [
+        spaceless()
+      ]
     }
   }
 }
@@ -394,24 +362,22 @@ For example, here's a plugin that adds a random number to all `<img>` src URLs:
 
 ```js [config.js]
 export default {
-  build: {
-    posthtml: {
-      plugins: {
-        after: [
-          (() => tree => {
-            const process = node => {
-              if (node.tag === 'img' && node.attrs?.src) {
-                const randomNumber = Math.floor(Math.random() * 10 ** 16).toString().padStart(16, '0')
-                node.attrs.src = node.attrs.src + `?v=${randomNumber}`
-              }
-
-              return node
+  posthtml: {
+    plugins: {
+      after: [
+        (() => tree => {
+          const process = node => {
+            if (node.tag === 'img' && node.attrs?.src) {
+              const randomNumber = Math.floor(Math.random() * 10 ** 16).toString().padStart(16, '0')
+              node.attrs.src = node.attrs.src + `?v=${randomNumber}`
             }
 
-            return tree.walk(process)
-          })()
-        ]
-      }
+            return node
+          }
+
+          return tree.walk(process)
+        })()
+      ]
     }
   }
 }

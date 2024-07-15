@@ -38,12 +38,10 @@ Of course, you can create more complex conditions:
 You may customize the conditional tag names:
 
 ```js [config.js]
-module.exports = {
+export default {
   build: {
-    posthtml: {
-      expressions: {
-        conditionalTags: ['when', 'ifnotthen', 'otherwise']
-      }
+    expressions: {
+      conditionalTags: ['when', 'ifnotthen', 'otherwise'],
     }
   }
 }
@@ -159,13 +157,9 @@ Result:
 Of course, you may customize the `<outlook>` tag name:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      outlook: {
-        tag: 'mso'
-      }
-    }
+export default {
+  outlook: {
+    tag: 'mso',
   }
 }
 ```
@@ -200,12 +194,10 @@ Need to use a [switch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/R
 You may define custom tags for the switch statement:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      expressions: {
-        switchTags: ['handle', 'when', 'fallback']
-      }
+export default {
+  posthtml: {
+    expressions: {
+      switchTags: ['handle', 'when', 'fallback'],
     }
   }
 }
@@ -267,12 +259,10 @@ Example:
 You may customize the name of the loop tag:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      expressions: {
-        loopTags: ['for']
-      }
+export default {
+  posthtml: {
+    expressions: {
+      loopTags: ['for'],
     }
   }
 }
@@ -293,7 +283,7 @@ Use `<scope>` tags to provide a data context to the content inside.
 Imagine we had this data in our `config.js`:
 
 ```js [config.js]
-module.exports = {
+export default {
   roles: {
     author: { name: 'John' },
     editor: { name: 'Jane' },
@@ -320,12 +310,10 @@ We could provide each object as a scope, so we can then access it from the conte
 You may customize the `<scope>` tag name:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      expressions: {
-        scopeTags: ['context']
-      }
+export default {
+  posthtml: {
+    expressions: {
+      scopeTags: ['context'],
     }
   }
 }
@@ -338,40 +326,6 @@ Example:
 <context with="page.roles.editor">
   {{ name }}
 </context>
-```
-
-## Fetch
-
-You can fetch and display remote content in your email templates:
-
-```hbs [src/templates/example.html]
-<fetch url="https://jsonplaceholder.typicode.com/users">
-  <each loop="user in response">
-    {{ user.name }}
-  </each>
-</fetch>
-```
-
-Inside the `<fetch>` tag, you have access to a `{{ response }}` variable.
-
-#### Fetch options
-
-You may use the `fetch` key to customize options:
-
-```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      fetch: {
-        tags: ['get'], // default ['fetch', 'remote']
-        attribute: 'resource', // default 'url'
-        got: {}, // pass options to the `got` package
-        preserveTag: true, // default false
-        expressions: {}, // configure expressions in fetch context
-      }
-    }
-  }
-}
 ```
 
 ## Raw
@@ -403,12 +357,10 @@ Neither will this expression: {{ page.env }}
 The `<raw>` tag name may be customized:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      expressions: {
-        ignoredTag: 'verbatim'
-      }
+export default {
+  posthtml: {
+    expressions: {
+      ignoredTag: 'verbatim',
     }
   }
 }

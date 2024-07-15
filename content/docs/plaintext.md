@@ -12,12 +12,8 @@ Maizzle can automatically create plaintext versions of your HTML emails.
 Generate a plaintext version for all your email templates by adding a `plaintext` key to your templates source in `config.js`:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    templates: {
-      plaintext: true,
-    },
-  },
+export default {
+  plaintext: true,
 }
 ```
 
@@ -26,59 +22,17 @@ module.exports = {
 You may configure where the plaintext files are output and what file extension they have.
 
 ```js [config.js]
-module.exports = {
-  build: {
-    templates: {
-      plaintext: {
-        destination: {
-          path: 'dist/brand/plaintext',
-          extension: 'rtxt',
-        }
-      },
-    },
+export default {
+  plaintext: {
+    output: {
+      path: 'dist/brand/plaintext',
+      extension: 'rtxt',
+    }
   },
 }
 ```
 
 <Alert>The `path` option must be a directory path, otherwise a single plaintext file will be generated for all of your emails.</Alert>
-
-Using multiple Template sources? You can enable plaintext on a per-source basis:
-
-```js [config.js]
-module.exports = {
-  build: {
-    templates: [
-      {
-        source: 'src/templates',
-        destination: {
-          path: 'build-1',
-        },
-        plaintext: true // build-1 folder only: output plaintext files next to the HTML counterparts
-      },
-      {
-        source: 'src/templates',
-        destination: {
-          path: 'build-2',
-        },
-        // build-2 folder only: output plaintext files in the `plaintext` subdirectory, with custom extension
-        plaintext: {
-          destination: {
-            path: 'build-2/plaintext',
-            extension: 'rtxt'
-          }
-        },
-      },
-      // plaintext won't be generated in the `build-3` directory, because we didn't enable it
-      {
-        source: 'src/templates',
-        destination: {
-          path: 'build-3',
-        }
-      },
-    ]
-  }
-}
-```
 
 ## Front Matter
 
@@ -128,24 +82,20 @@ This ensures URLs from anchors are actually output in the plaintext version.
 You may use a `plaintext` object in your `config.js` to overwrite any of the defaults from `string-strip-html`.
 
 ```js [config.js]
-module.exports = {
-  build: {
-    templates: {
-      plaintext: {
-        ignoreTags: [],
-        onlyStripTags: [],
-        stripTogetherWithTheirContents: ['script', 'style', 'xml', 'not-plaintext'],
-        skipHtmlDecoding: false,
-        trimOnlySpaces: false,
-        dumpLinkHrefsNearby: {
-          enabled: false,
-          putOnNewLine: false,
-          wrapHeads: '',
-          wrapTails: ''
-        },
-        cb: null,
-      },
+export default {
+  plaintext: {
+    ignoreTags: [],
+    onlyStripTags: [],
+    stripTogetherWithTheirContents: ['script', 'style', 'xml', 'not-plaintext'],
+    skipHtmlDecoding: false,
+    trimOnlySpaces: false,
+    dumpLinkHrefsNearby: {
+      enabled: false,
+      putOnNewLine: false,
+      wrapHeads: '',
+      wrapTails: ''
     },
+    cb: null,
   },
 }
 ```
@@ -222,9 +172,9 @@ plaintext: true
 You may render an HTML string to plaintext in your application with the help of the `plaintext()` method. The custom tags, like `<plaintext>`, are also supported.
 
 ```js [app.js]
-const Maizzle = require('@maizzle/framework')
+import { generatePlaintext } from '@maizzle/framework'
 
-const {plaintext} = await Maizzle.plaintext(`<p>your html string</p>`)
+const plaintext = await generatePlaintext(`<p>your html string</p>`)
 
 // your html string
 ```
@@ -232,11 +182,10 @@ const {plaintext} = await Maizzle.plaintext(`<p>your html string</p>`)
 You can also pass a config object to this method:
 
 ```js [app.js]
-const {plaintext} = await Maizzle.plaintext('html string', {
-  plaintext: {
-    // string-strip-html options
+const plaintext = await generatePlaintext('html string', {
+  posthtml: {
+    // PostHTML options...
   }
+  // ... string-strip-html options
 })
 ```
-
-The object that you pass here must contain a `plaintext: {}` key, as explained in the [customization section](/docs/plaintext#customization) above.

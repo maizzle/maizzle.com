@@ -15,15 +15,13 @@ You may use Events both when developing locally with the CLI `build` or `serve` 
 
 ### CLI
 
-To use events when developing locally with the CLI commands, add them inside an `events` object in your config:
+To use events with the CLI commands, add them to your `config.js` file:
 
 ```js [config.js]
-module.exports = {
-  events: {
-    beforeCreate(config) {
-      // do stuff with config
-    },
-  }
+export default {
+  beforeCreate(config) {
+    // do stuff with config
+  },
 }
 ```
 
@@ -35,8 +33,6 @@ When using the API, add events inside the object that you pass to the `render()`
 const Maizzle = require('@maizzle/framework')
 
 html = Maizzle.render(`some HTML string...`, {
-    tailwind: {},
-    maizzle: {},
     beforeRender(config) {
       // ...
     }
@@ -66,22 +62,20 @@ Runs after the [Environment config](/docs/environments) has been computed, but b
 For example, let's use a custom highlight function for Markdown fenced code blocks:
 
 ```js [config.js]
-const Prism = require('prismjs')
+import Prism from 'prismjs'
 
-module.exports = {
-  events: {
-    async beforeCreate(config) {
-      config = Object.assign(config, {
-        markdown: {
-          markdownit: {
-            highlight: (code, lang) => {
-              lang = lang || 'html'
-              return Prism.highlight(code, Prism.languages[lang], lang)
-            }
+export default {
+  async beforeCreate(config) {
+    config = Object.assign(config, {
+      markdown: {
+        markdownit: {
+          highlight: (code, lang) => {
+            lang = lang || 'html'
+            return Prism.highlight(code, Prism.languages[lang], lang)
           }
         }
-      })
-    }
+      }
+    })
   }
 }
 ```
@@ -95,18 +89,16 @@ Runs after the Template's config has been computed, but just before it is compil
 For (a silly) example, let's fetch data from an API and set it as the preheader text:
 
 ```js [config.js]
-const axios = require('axios')
+import axios from 'axios'
 
-module.exports = {
-  events: {
-    async beforeRender(html, config) {
-      const url = 'https://baconipsum.com/api/?type=all-meat&sentences=1&start-with-lorem=1'
+export default {
+  async beforeRender(html, config) {
+    const url = 'https://baconipsum.com/api/?type=all-meat&sentences=1&start-with-lorem=1'
 
-      config.preheader = await axios(url).then(result => result.data).catch(error => 'Could not fetch preheader, using default one.')
+    config.preheader = await axios(url).then(result => result.data).catch(error => 'Could not fetch preheader, using default one.')
 
-      // must return `html`
-      return html
-    }
+    // must return `html`
+    return html
   }
 }
 ```
@@ -115,11 +107,11 @@ Then, you'd render it in your HTML, like so:
 
 ```hbs [src/layouts/main.html]
 <if condition="page.preheader">
-  <div class="hidden">{{ page.preheader }}</div>
+  <div class="hidden">{{{ page.preheader }}}</div>
 </if>
 ```
 
-`beforeRender` runs for each template that is going to be compiled. For performance reasons, you should only use it if you need access to the config of the Template that is about to be compiled (which includes variables from the Template's Front Matter).
+`beforeRender` runs for each Template that is going to be compiled. For performance reasons, you should only use it if you need access to the config of the Template that is about to be compiled (which includes variables from the Template's Front Matter).
 
 <Alert type="warning">You must always return the `html` when using `beforeRender()`.</Alert>
 
@@ -132,14 +124,14 @@ It's your last chance to alter the HTML or any settings in your config, before T
 For example, let's disable CSS inlining:
 
 ```js [config.js]
-module.exports = {
-  events: {
-    afterRender(html, config) {
-      config.inlineCSS = false
-
-      // must return `html`
-      return html
+export default {
+  afterRender(html, config) {
+    config.css = {
+      inline: false
     }
+
+    // must return `html`
+    return html
   }
 }
 ```
@@ -157,20 +149,18 @@ Same as `afterRender()`, it exposes the `html` and the `config`, so you can do f
 For example, maybe you don't like the minifier that Maizzle includes, and you disabled it in your config so that you can use your own:
 
 ```js [config.js]
-const Minifier = require('imaginary-minifier')
+import Minifier from 'imaginary-minifier'
 
-module.exports = {
+export default {
   minify: false,
-  events: {
-    afterTransformers(html, config) {
-      if (!config.minify) {
-        return Minifier.minify(html)
-      }
-
-      // must return `html`
-      return html
+  afterTransformers(html, config) {
+    if (!config.minify) {
+      return Minifier.minify(html)
     }
-  }
+
+    // must return `html`
+    return html
+  },
 }
 ```
 
@@ -181,11 +171,9 @@ module.exports = {
 Runs after all Templates have been compiled and output to disk. The `files` parameter will contain the paths to all the files inside the [`destination.path`](/docs/configuration/templates#path) directory.
 
 ```js [config.js]
-module.exports = {
-  events: {
-    afterBuild(files, config) {
-      console.log(files)
-    }
+export default {
+  afterBuild(files, config) {
+    console.log(files)
   }
 }
 ```
