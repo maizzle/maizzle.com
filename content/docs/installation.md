@@ -5,6 +5,12 @@ description: "Installing Maizzle on your machine and creating a new project."
 
 # Getting Started
 
+## Video Tutorials
+
+If you prefer to watch a video, check out the [Maizzle Series on Laracasts](https://laracasts.com/series/build-html-emails-with-maizzle).
+
+## Requirements
+
 You'll need [Node.js](https://nodejs.org/en/download/) installed first (comes with NPM included).
 
 Use this command to check the version:
