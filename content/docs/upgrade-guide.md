@@ -23,6 +23,16 @@ Check your current Node.js version:
 node --version
 ```
 
+## Update @maizzle/cli
+
+If you use `@maizzle/cli` installed globally, you must upgrade it to v2.x in order to use it in Maizzle 5 projects:
+
+```sh
+npm install -g @maizzle/cli@next
+```
+
+Alternatively you can just use the NPM scripts like `npm run dev` from `package.json`.
+
 ## Update package.json
 
 The `@maizzle/framework` package is now a module, so you need to update your `package.json` file to reflect this change.
@@ -398,11 +408,3 @@ We recommend you update your components to the latest versions, which you can fi
 Note: while in beta, the updated Starter project is in the `next` branch:
 
 https://github.com/maizzle/maizzle/tree/next
-
-### Update @maizzle/cli
-
-If you use `@maizzle/cli` installed globally, you must upgrade it to v2.x in order to use it in Maizzle 5 projects:
-
-```sh
-npm install -g @maizzle/cli@next
-```
