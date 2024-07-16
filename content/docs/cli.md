@@ -5,6 +5,8 @@ description: "Using the Maizzle CLI tool to scaffold projects and build emails."
 
 # Maizzle CLI
 
+<Alert type="danger">These are the docs for the 1.x Maizzle CLI. We're working on updating them for v2.x, which is the one used in Maizzle 5.</Alert>
+
 You can use the Maizzle CLI to:
 
 - create new projects
