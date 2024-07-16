@@ -5,6 +5,31 @@ description: "Installing Maizzle on your machine and creating a new project."
 
 # Getting Started
 
+## Maizzle 5 Beta
+
+The next version of Maizzle is here! 🥳
+
+Try it out now by running `npx create-maizzle` and selecting the `5.0.0-beta` Starter:
+
+```sh example no-root no-copy
+$ npx create-maizzle
+
+┌   create-maizzle
+│
+◇  Where should we create your project?
+│  ./maizzle-5
+│
+◆  Select a Starter
+│  ● 5.0.0-beta
+│  ○ Default
+│  ○ Custom
+└
+```
+
+We would greatly appreciate it if you could test it out and provide feedback through [GitHub Discussions](https://github.com/orgs/maizzle/discussions) or by [opening an issue](https://github.com/maizzle/framework/issues/new). Thanks!
+
+---
+
 You'll need [Node.js](https://nodejs.org/en/download/) installed first (comes with NPM included).
 
 Use this command to check the version:

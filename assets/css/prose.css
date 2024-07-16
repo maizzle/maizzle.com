@@ -86,7 +86,7 @@ abbr,
   @apply rounded-t-none;
 }
 
-.prose .frame-terminal + .shiki .line:not(.empty):before {
+.prose .frame-terminal + .shiki:not(.no-root) .line:not(.empty):before {
   content: '$';
   @apply text-base pr-4 text-slate-400;
 }
