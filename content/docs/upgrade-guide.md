@@ -37,7 +37,7 @@ The `@maizzle/framework` package is now a module, so you need to update your `pa
   },
   "dependencies": {
     "@maizzle/framework": "next",
-    "tailwindcss-preset-email": "^1.1.0"
+    "tailwindcss-preset-email": "^1.3.0"
   }
 }
 ```
@@ -84,7 +84,7 @@ Tailwind CSS can now be used as expected, with `@tailwind` directives in any `<s
 </html>
 ```
 
-## Update `tailwind.config.js`
+## Update tailwind.config.js
 
 We've created [`tailwindcss-preset-email`](https://github.com/maizzle/tailwindcss-preset-email) specifically for Maizzle, which configures Tailwind CSS for better email client support.
 
@@ -102,7 +102,7 @@ module.exports = {
 }
 ```
 
-## Update `config.js`
+## Update config.js
 
 The Maizzle config has been reimagined from the ground up, so naturally there are a few breaking changes.
 
@@ -306,13 +306,13 @@ export default {
 
 ### safeClassNames
 
-This key has been moved to `css.safeClassNames`:
+The `safeClassNames` option has been moved to `css.safe`:
 
 ```js [config.js] no-copy diff
 export default {
 -  safeClassNames: true
 +  css: {
-+    safeClassNames: true
++    safe: true
 +  }
 }
 ```
@@ -401,7 +401,7 @@ https://github.com/maizzle/maizzle/tree/next
 
 ### Update @maizzle/cli
 
-If you use `@maizzle/cli` installed globally, you'll need to upgrade it to v2.x:
+If you use `@maizzle/cli` installed globally, you must upgrade it to v2.x in order to use it in Maizzle 5 projects:
 
 ```sh
 npm install -g @maizzle/cli@next
