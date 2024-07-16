@@ -50,14 +50,12 @@ This is the default replacement strategy:
 
 ## Customization
 
-You may define new replacement mappings (or overwrite existing ones) by adding a `safeClassNames` key to your config.
-
-For example:
+You may define new replacement mappings (or overwrite existing ones) by adding a `css.safe` key to your config:
 
 ```js [config.js]
 export default {
   css: {
-    safeClassNames: {
+    safe: {
       ':': '__',
       '!': 'i-',
     }
@@ -74,7 +72,7 @@ You can prevent Maizzle from rewriting your class names with safe characters, by
 ```js [config.js]
 export default {
   css: {
-    safeClassNames: false,
+    safe: false,
   }
 }
 ```
