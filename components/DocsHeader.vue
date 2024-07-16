@@ -36,9 +36,10 @@
               tabindex="-1"
             >
               <div class="py-1" role="none">
-                <span
-                  class="block px-4 py-2 text-indigo-600 font-medium cursor-default" role="menuitem" tabindex="-1"
-                >
+                <a href="https://next.maizzle.com/docs/installation" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
+                  v5.0.0-beta
+                </a>
+                <span class="block px-4 py-2 text-indigo-600 font-medium cursor-default" role="menuitem" tabindex="-1">
                   {{ latestRelease }}
                 </span>
                 <a href="https://v43x.maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
@@ -147,6 +148,9 @@
             tabindex="-1"
           >
             <div class="py-1" role="none">
+              <a href="https://next.maizzle.com/docs/installation" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
+                v5.0.0-beta
+              </a>
               <NuxtLink
                 to="/docs/installation"
                 class="block px-4 py-2 bg-slate-100" role="menuitem" tabindex="-1"
