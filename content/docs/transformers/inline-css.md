@@ -87,20 +87,35 @@ See the documentation [here](/docs/transformers/attribute-to-style).
 
 ### applyWidthAttributes
 
-Type: Array\
-Default: `[]`
+Type: Boolean\
+Default: `true`
 
-Array of HTML elements that will receive `width` attributes based on inline CSS width.
+Whether to use any CSS pixel widths to create `width` attributes on elements set in `css.inline.widthElements`.
 
-Defaults to an empty array `[]` so that no `width` attributes are added.
-
-Works together with `styleToAttribute`.
+Set it to `false` to prevent any `width` attributes from being added based on inline CSS width:
 
 ```js [config.js]
 export default {
   css: {
     inline: {
-      applyWidthAttributes: ['table', 'td', 'th'],
+      applyWidthAttributes: false,
+    }
+  }
+}
+```
+
+### widthElements
+
+Type: Array\
+Default: `['img', 'video']`
+
+Array of HTML elements that can receive `width` attributes based on inline CSS width.
+
+```js [config.js]
+export default {
+  css: {
+    inline: {
+      widthElements: ['table', 'td', 'th'],
     }
   }
 }
@@ -108,20 +123,35 @@ export default {
 
 ### applyHeightAttributes
 
-Type: Array\
-Default: `[]`
+Type: Boolean\
+Default: `true`
 
-Array of HTML elements that will receive `height` attributes based on inline CSS height.
+Whether to use any CSS pixel heights to create `height` attributes on elements set in `css.inline.heightElements`.
 
-Defaults to an empty array `[]` so that no `height` attributes are added.
-
-Works together with `styleToAttribute`.
+Set it to `false` to prevent any `height` attributes from being added based on inline CSS height:
 
 ```js [config.js]
 export default {
   css: {
     inline: {
-      applyHeightAttributes: ['table', 'td', 'th'],
+      applyHeightAttributes: false,
+    }
+  }
+}
+```
+
+### heightElements
+
+Type: Array\
+Default: `['img', 'video']`
+
+Array of HTML elements that can receive `height` attributes based on inline CSS height.
+
+```js [config.js]
+export default {
+  css: {
+    inline: {
+      heightElements: ['table', 'td', 'th'],
     }
   }
 }
@@ -169,17 +199,101 @@ By default, <abbr title="Embedded JavaScript Templates">EJS</abbr> and <abbr tit
 ### removeInlinedSelectors
 
 Type: Boolean\
-Default: `undefined`
+Default: `true`
 
-By default, classes are removed from the `class` attribute of a tag after they have been successfully inlined.
+When `css.inline` is enabled, classes will be removed from the `class` attribute of a tag after they have been successfully inlined.
 
-Set this option to `false` to prevent that from happening:
+Set this option to `false` to preserve the classes in the `class` attribute.
 
 ```js [config.production.js]
 export default {
   css: {
     inline: {
       removeInlinedSelectors: false,
+    }
+  }
+}
+```
+
+### resolveCSSVariables
+
+Type: Boolean\
+Default: `true`
+
+Whether to resolve CSS variables to their actual values in the inlined CSS.
+
+By default, something like this:
+
+```html
+<style>
+  :root {
+    --color: red;
+  }
+  .text-red { color: var(--color); }
+</style>
+
+<div class="text-red">Hello</div>
+```
+
+... will be inlined as:
+
+```html
+<div style="color: red">Hello</div>
+```
+
+If you prefer to keep CSS variables when inlining, set this option to `false`:
+
+```js [config.js]
+export default {
+  css: {
+    inline: {
+      resolveCSSVariables: false,
+    }
+  }
+}
+```
+
+### resolveCalc
+
+Type: Boolean\
+Default: `true`
+
+Whether to resolve `calc()` expressions in the inlined CSS.
+
+By default, something like this:
+
+```html
+<style>
+  div {
+    width: calc(100% / 3);
+  }
+</style>
+
+<div>Hello</div>
+```
+
+... will be inlined as:
+
+```html
+<div style="width: 33.33%">Hello</div>
+```
+
+### preferUnitlessValues
+
+Type: Boolean\
+Default: `true`
+
+When inlining CSS, 0 values will be inlined without units.
+
+For example, `margin: 0px` will be inlined as `margin: 0` instead of `margin: 0px`.
+
+Set this option to `false` to keep units on 0 values.
+
+```js [config.js]
+export default {
+  css: {
+    inline: {
+      preferUnitlessValues: false,
     }
   }
 }
