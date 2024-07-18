@@ -18,6 +18,10 @@ abbr,
   @apply mb-6;
 }
 
+.prose th {
+  @apply text-left;
+}
+
 /* Syntax highlighting */
 .prose .shiki pre {
   @apply grid m-0 p-0 leading-relaxed bg-white;
