@@ -27,15 +27,15 @@ For most of the time, you won't be writing CSS anymore 😎
 
 ## Workflow
 
-The compiled Tailwind CSS is available under `page.css`, so you need to make sure it is added inside a `<style>` tag in your Layout's `<head>`:
+To use Tailwind CSS in your HTML emails, simply add the `@tailwind` directives to a `<style>` tag in your Layout's `<head>`:
 
 ```hbs [src/layouts/main.html] {5-6}
 <!doctype html>
 <html>
   <head>
     <style>
-      @tailwind utilities;
       @tailwind components;
+      @tailwind utilities;
     </style>
   </head>
   <body>
@@ -44,7 +44,39 @@ The compiled Tailwind CSS is available under `page.css`, so you need to make sur
 </html>
 ```
 
-<Alert type="warning">Tailwind CSS only works when at least `@tailwind utilities` exists either inside a `<style>` tag in the `<head>`, or in a CSS file referenced through a `<link>` tag.</Alert>
+Alternatively, you may store them in a CSS file:
+
+```postcss [src/css/tailwind.css]
+img {
+  @apply max-w-full align-middle;
+}
+
+@tailwind components;
+@tailwind utilities;
+```
+
+... and `@import` that instead:
+
+```hbs [src/layouts/main.html]
+<style>
+  @import "src/css/tailwind.css";
+</style>
+```
+
+Prefer `<link>` tags? Maizzle supports that too:
+
+```hbs [src/layouts/main.html] {4}
+<!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" href="src/css/tailwind.css">
+  </head>
+  <body>
+    <yield />
+  </body>
+</html>
+```
+
 
 ### Utility-first
 
@@ -84,7 +116,7 @@ You can write:
 </table>
 ```
 
-Read more about the concept of utility-first CSS and familiarize yourself with the syntax in the [Tailwind CSS docs](https://tailwindcss.com/docs/utility-first). And if you're using VSCode, make sure to install the [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) extension.
+Read more about the concept of utility-first CSS and familiarize yourself with the syntax in the [Tailwind CSS docs](https://tailwindcss.com/docs/utility-first). And if you're using VSCode, make sure to install the [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) extension, to get autocompletion and hover tooltips for Tailwind classes.
 
 ### Components
 
@@ -92,7 +124,7 @@ If you're repeating the same utility classes over and over again, you can extrac
 
 ### Custom classes
 
-As an alternative to creating a Component, you can extract utility classes to a custom class using Tailwind's `@apply` directive.
+As an alternative to creating a Component, you may extract utility classes to a custom class using Tailwind's `@apply` directive.
 
 Here's a quick example:
 
@@ -104,13 +136,13 @@ Here's a quick example:
 }
 ```
 
-Unlike custom utility classes that you may add to `tailwind.config.js`, you would add that in a CSS file that is imported in your main `<style>` tag.
+Unlike custom utility classes that you may add to `tailwind.config.js`, you would add that in a CSS file that is imported in your main `<style>` tag or through a `<link>` tag.
 
 And that brings us to...
 
 ## CSS Files
 
-You may organize your CSS into files if you prefer, and then `@import` them in a `<style>` tag in your Layout's `<head>`.
+You may organize your CSS into files if you prefer, and then `@import` them in a `<style>` tag or through a `<link>` in your Layout's `<head>`.
 
 For example, let's import that `src/css/components.css` file we just created:
 
@@ -120,8 +152,8 @@ For example, let's import that `src/css/components.css` file we just created:
   <head>
     <style>
       @import "src/css/components.css";
-      @tailwind utilities;
       @tailwind components;
+      @tailwind utilities;
     </style>
   </head>
   <body>
@@ -132,7 +164,7 @@ For example, let's import that `src/css/components.css` file we just created:
 
 <Alert>When importing CSS files you need to use the path relative to the root of your project's directory.</Alert>
 
-<Alert type="danger">`@import` statements need to come before any other CSS rules in the `<style>` tag.</Alert>
+<Alert type="danger">`@import` statements need to come before any other CSS rules in the `<style>` tag, otherwise the entire CSS inside them will be discarded.</Alert>
 
 ## Shorthand CSS
 
@@ -161,8 +193,8 @@ Let's use `@apply` to compose a `col` class by  extracting two padding utilities
         @apply py-2 px-1;
       }
 
-      @tailwind utilities;
       @tailwind components;
+      @tailwind utilities;
     </style>
   </head>
   <body>
@@ -244,7 +276,7 @@ So you can do this:
 <div class="[border-bottom:1px_solid_#000]">Bottom border example</div>
 ```
 
-Arbitrary values might look like inline styles with extra steps, but it's still Tailwind so you can do stuff that you can't with inline CSS, like pseudos or media queries:
+This might look like inline styles with extra steps, but it's still Tailwind so you can do stuff that you can't do with inline CSS, like pseudos or media queries:
 
 ```xml
 <div class="hover:[border:1px_solid_#000] sm:[border:none]">
@@ -267,6 +299,17 @@ export default {
 }
 ```
 
+Or, with a CJS config file:
+
+```js [tailwind.config.js]
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  plugins: [
+    require('tailwindcss-email-variants'),
+  ],
+}
+```
+
 See the [Tailwind CSS docs](https://tailwindcss.com/docs/configuration#plugins) for more information on plugins.
 
 <alert><code>tailwindcss-email-variants</code> is already included in our Tailwind CSS preset, you don't need to install it separately.</alert>
@@ -274,17 +317,17 @@ See the [Tailwind CSS docs](https://tailwindcss.com/docs/configuration#plugins) 
 
 ## Use in Template
 
-You can use Tailwind CSS, including directives like `@apply`, `@responsive`, and even nested syntax, right inside a Template. You simply need to use a `<stack>` to push a `<style>` tag to the Layout being extended.
+You may use Tailwind CSS, including directives like `@apply`, `@layer`, and even nested syntax, right inside a Template. You simply need to use the stack/push pattern to inject a `<style>` tag into the Layout being extended.
 
 First, add a `<stack name="head" />` inside your Layout's `<head>` tag:
 
-```xml [src/layouts/main.html] {8} diff
+```hbs [src/layouts/main.html] {8} diff
 <!doctype html>
 <html>
 <head>
   <style>
-    @tailwind utilities;
     @tailwind components;
+    @tailwind utilities;
   </style>
 +  <stack name="head" />
 </head>
@@ -303,7 +346,7 @@ Next, `push` to that `stack` from a Template:
         @apply text-blue-500;
       }
 
-      @screen sm {
+      @media screen(sm) {
         table {
           @apply w-full;
         }

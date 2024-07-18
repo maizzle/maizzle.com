@@ -5,11 +5,11 @@ description: "Configuring PostCSS in Maizzle."
 
 # PostCSS configuration
 
-You may add extra PostCSS plugins to your config and Maizzle will use them when it compiles Tailwind CSS.
+You may use custom PostCSS plugins in Maizzle.
 
 ## Plugins
 
-Here's how you'd add PostCSS plugins, we'll use [Autoprefixer](https://github.com/postcss/autoprefixer).
+Here's how you can add PostCSS plugins - we'll use [Autoprefixer](https://github.com/postcss/autoprefixer).
 
 First, install the plugin:
 

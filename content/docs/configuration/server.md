@@ -51,7 +51,7 @@ export default {
 Type: `Number`\
 Default: `3000`
 
-Port number for the dev server. The server will be available at `http://localhost:3000` by default.
+Port number for the dev server.
 
 ```js [config.js]
 export default {
@@ -60,6 +60,8 @@ export default {
   }
 }
 ```
+
+The server will now be available at `http://localhost:8080`.
 
 ### maxRetries
 

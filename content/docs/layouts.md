@@ -21,13 +21,13 @@ Layouts are typically stored in the `src/layouts` directory.
 
 Layouts must include a `<yield />` tag, which is where the Template's HTML will be rendered. Here's a very basic `layout.html`:
 
-```mdx [src/layouts/layout.html] {10}
+```hbs [src/layouts/layout.html] {10}
 <!doctype html>
 <html>
 <head>
   <style>
-    @tailwind utilities;
     @tailwind components;
+    @tailwind utilities;
   </style>
 </head>
 <body>
@@ -35,13 +35,13 @@ Layouts must include a `<yield />` tag, which is where the Template's HTML will 
 </body>
 ```
 
-<Alert>For Tailwind CSS to work, Layouts must include it in a `<style>` tag like above.</Alert>
+<Alert>For Tailwind CSS to work, Layouts must include it in a `<style>` tag like above, or reference a CSS file with those directives through a `<link>` tag.</Alert>
 
 When creating a Template, you may use that Layout like this:
 
 ```xml [src/templates/example.html]
 <x-layout>
-  <!-- your email HTML... -->
+  <!-- your email template HTML... -->
 </x-layout>
 ```
 
@@ -60,8 +60,8 @@ When using a `<style>` tag, you can include Tailwind's `utilities` and `componen
 <html>
 <head>
 +   <style>
-+     @tailwind utilities;
 +     @tailwind components;
++     @tailwind utilities;
 +   </style>
 </head>
 <body>
@@ -86,9 +86,9 @@ Maizzle also supports `<link rel="stylesheet">` tags - it will read the file fro
 
 Then, in your `tailwind.css` file:
 
-```css [src/css/tailwind.css]
-@tailwind utilities;
+```postcss [src/css/tailwind.css]
 @tailwind components;
+@tailwind utilities;
 ```
 
 ## Variables

@@ -224,15 +224,15 @@ For example, imagine you're coding a Shopify email template and need to add some
 
 You would modify your Layout to include a `stack` tag:
 
-```xml [src/layouts/layout.html]
+```hbs [src/layouts/layout.html]
 <stack name="liquid-vars" />
 
 <!doctype html>
 <html>
 <head>
   <style>
-    @tailwind utilities;
     @tailwind components;
+    @tailwind utilities;
   </style>
 </head>
 <body>
@@ -301,7 +301,7 @@ Looping over this Component will only push that CSS once to the `head` stack:
 
 ## Props
 
-Props are attributes that can be added to a Component. They can be used to pass data to the Component, or to configure its behavior.
+Props are attributes that can be added to a Component's tag. They can be used to pass data to the Component, or to configure its behavior.
 
 To use props in a Component, you need to define them first. This is done by adding a `<script>` tag with the `props` attribute:
 

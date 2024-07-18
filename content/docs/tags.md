@@ -195,10 +195,8 @@ You may define custom tags for the switch statement:
 
 ```js [config.js]
 export default {
-  posthtml: {
-    expressions: {
-      switchTags: ['handle', 'when', 'fallback'],
-    }
+  expressions: {
+    switchTags: ['handle', 'when', 'fallback'],
   }
 }
 ```
@@ -260,10 +258,8 @@ You may customize the name of the loop tag:
 
 ```js [config.js]
 export default {
-  posthtml: {
-    expressions: {
-      loopTags: ['for'],
-    }
+  expressions: {
+    loopTags: ['for'],
   }
 }
 ```
@@ -311,10 +307,8 @@ You may customize the `<scope>` tag name:
 
 ```js [config.js]
 export default {
-  posthtml: {
-    expressions: {
-      scopeTags: ['context'],
-    }
+  expressions: {
+    scopeTags: ['context'],
   }
 }
 ```
@@ -358,10 +352,8 @@ The `<raw>` tag name may be customized:
 
 ```js [config.js]
 export default {
-  posthtml: {
-    expressions: {
-      ignoredTag: 'verbatim',
-    }
+  expressions: {
+    ignoredTag: 'verbatim',
   }
 }
 ```

@@ -20,7 +20,7 @@ export default {
 ## content
 
 Type: String[]\
-Default: `src/templates/**/*.html`
+Default: `['src/templates/**/*.html']`
 
 Define the source directories where Maizzle should look for Templates to compile.
 
@@ -47,11 +47,13 @@ export default {
   build: {
     content: [
       'src/templates/**/*.html',
-      '!src/templates/**/*-ignore.html'
+      '!src/templates/**/*-ignore.html',
     ],
   }
 }
 ```
+
+<Alert>Files that you exclude will still be copied to the output directory, but they will not be compiled.</Alert>
 
 ### Compute paths
 
@@ -69,11 +71,11 @@ export default {
 }
 ```
 
-<Alert>Previously this was called 'Function source', and it allowed defining sources as a function that was evaluated by Maizzle. This is depreacted in Maizzle 5.</Alert>
+<Alert>Previously this was called 'Function source', and it allowed defining sources as a function that was evaluated by Maizzle. This is deprecated starting with Maizzle 5.</Alert>
 
 ### Multiple sources
 
-You may define multiple content sources where Maizzle should look for templates to compile.
+You may define multiple content sources:
 
 ```js [config.js]
 export default {
@@ -132,6 +134,8 @@ export default {
 
 The compiled templates will be output as `build_laravel/*.blade.php`.
 
+By default, Maizzle will use the extension of the source file.
+
 ## permalink
 
 Type: String\
@@ -169,7 +173,7 @@ Output at a specific system location:
 
 ```hbs [src/templates/example.html]
 ---
-permalink: C:/Users/Cosmin/Newsletter/2022/12/index.html
+permalink: C:/Users/Cosmin/Newsletter/2024/07/index.html
 ---
 
 <x-main>

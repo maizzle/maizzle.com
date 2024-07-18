@@ -84,7 +84,7 @@ export default {
 
 ### beforeRender
 
-Runs after the Template's config has been computed, but just before it is compiled. It exposes the Template's config, as well as the HTML.
+Runs after the Template's config has been computed, but just before it is compiled. It exposes the Template's config, its HTML, as well as the PostHTML compile function and all Transformers.
 
 For (a silly) example, let's fetch data from an API and set it as the preheader text:
 
@@ -92,7 +92,7 @@ For (a silly) example, let's fetch data from an API and set it as the preheader 
 import axios from 'axios'
 
 export default {
-  async beforeRender(html, config) {
+  async beforeRender({html, config, posthtml, transform}) {
     const url = 'https://baconipsum.com/api/?type=all-meat&sentences=1&start-with-lorem=1'
 
     config.preheader = await axios(url).then(result => result.data).catch(error => 'Could not fetch preheader, using default one.')
@@ -113,11 +113,11 @@ Then, you'd render it in your HTML, like so:
 
 `beforeRender` runs for each Template that is going to be compiled. For performance reasons, you should only use it if you need access to the config of the Template that is about to be compiled (which includes variables from the Template's Front Matter).
 
-<Alert type="warning">You must always return the `html` when using `beforeRender()`.</Alert>
+<Alert type="warning">You must always return the `html` when using `beforeRender()`, otherwise the event will be discarded and the original HTML will be compiled.</Alert>
 
 ### afterRender
 
-Runs after the Template has been compiled, but before any Transformers have been applied. Exposes the rendered `html` string and the `config`.
+Runs after the Template has been compiled, but before any Transformers have been applied. Exposes the rendered `html` string and the `config`, as well as the PostHTML compile function and all Transformers.
 
 It's your last chance to alter the HTML or any settings in your config, before Transformers process your email template.
 
@@ -125,10 +125,13 @@ For example, let's disable CSS inlining:
 
 ```js [config.js]
 export default {
-  afterRender(html, config) {
+  afterRender({html, config, posthtml, transform}) {
     config.css = {
       inline: false
     }
+
+    // Replace the word 'foo' with 'bar' in the HTML
+    html = transform.replaceStrings(html, {foo: 'bar'})
 
     // must return `html`
     return html
@@ -136,15 +139,15 @@ export default {
 }
 ```
 
-`afterRender` runs for each template, right after it has been compiled. Use it only if you need access to the config of the Template that was just compiled.
+`afterRender` runs for each Template, right after it has been compiled. Use it only if you need access to the config of the Template that was just compiled.
 
-<Alert type="warning">You must always return the `html` when using `afterRender()`.</Alert>
+<Alert type="warning">You must always return the `html` when using `afterRender()`, otherwise the event will be discarded and the original HTML will be compiled.</Alert>
 
 ### afterTransformers
 
 Runs after all Transformers have been applied, just before the final HTML is returned.
 
-Same as `afterRender()`, it exposes the `html` and the `config`, so you can do further adjustments to the HTML, or read some config settings.
+It exposes the same options as `afterRender()`, so you can do further adjustments to the HTML, or read some config settings.
 
 For example, maybe you don't like the minifier that Maizzle includes, and you disabled it in your config so that you can use your own:
 
@@ -153,7 +156,7 @@ import Minifier from 'imaginary-minifier'
 
 export default {
   minify: false,
-  afterTransformers(html, config) {
+  afterTransformers({html, config, posthtml, transform}) {
     if (!config.minify) {
       return Minifier.minify(html)
     }
@@ -172,7 +175,7 @@ Runs after all Templates have been compiled and output to disk. The `files` para
 
 ```js [config.js]
 export default {
-  afterBuild(files, config) {
+  afterBuild({files, config, transform}) {
     console.log(files)
   }
 }

@@ -363,9 +363,9 @@ By default, it enables support for self-closing component tags.
 Type: Object\
 Default: `{/*custom object*/}`
 
-Object to configure `posthtml-expressions`.
+Object to configure how expressions are handled in components.
 
-By default, Maizzle passes your config variables and the contents of your `build.posthtml.expressions` object to it, so that you have them all available inside your&nbsp;components.
+Maizzle passes your config variables and the contents of your `build.expressions` object to it, so that you have them all available inside your&nbsp;components.
 
 ## plugins
 

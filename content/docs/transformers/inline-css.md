@@ -285,7 +285,7 @@ Default: `true`
 
 When inlining CSS, 0 values will be inlined without units.
 
-For example, `margin: 0px` will be inlined as `margin: 0` instead of `margin: 0px`.
+For example, `margin: 0px` will be inlined as `margin: 0`.
 
 Set this option to `false` to keep units on 0 values.
 

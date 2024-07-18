@@ -62,9 +62,9 @@ Result:
 Type: `Object`\
 Default: `{}`
 
-Data defined here will be available globally.
+Variables defined here will be available 'locally', meaning you won't need to use the `page` object when accessing them.
 
-For example, if you set this to something like `{foo: 'bar'}`, you can access it in your templates through `{{ foo }}`.
+For example, if you set this to something like `{foo: 'bar'}`, you can access it in your templates through `{{ foo }}` instead of `{{ page.foo }}`.
 
 ## localsAttr
 

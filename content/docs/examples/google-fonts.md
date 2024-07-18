@@ -23,8 +23,8 @@ For example, add it before Tailwind CSS:
   <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&display=swap" rel="stylesheet" media="screen">
 
   <style>
-    @tailwind utilities;
     @tailwind components;
+    @tailwind utilities;
   </style>
 </head>
 ```

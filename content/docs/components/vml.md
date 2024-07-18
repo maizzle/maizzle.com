@@ -19,16 +19,16 @@ Use it when you need to add a background image that you don't know the height of
 
 You can use it immediately inside a container that has a CSS background image:
 
-```xml {4-9} diff
+```xml {4-9}
 <table>
   <tr>
     <td style="background-image: url('https://picsum.photos/600/400')">
-+     <x-v-fill
-+       image="https://picsum.photos/600/400"
-+       width="600px"
-+     >
-+       HTML to show on top of the image
-+     </x-v-fill>
+      <x-v-fill
+        image="https://picsum.photos/600/400"
+        width="600px"
+      >
+        HTML to show on top of the image
+      </x-v-fill>
     </td>
   </tr>
 </table>

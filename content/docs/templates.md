@@ -42,7 +42,7 @@ title: "Please confirm your email address"
 
 ### Expressions
 
-Expressions in Front Matter can be ignore with a single `@` symbol when they're used in the Template they're defined in:
+Expressions in Front Matter can be ignored with a `@` symbol when they're used in the Template they're defined in:
 
 ```hbs [src/templates/example.html]
 ---
@@ -66,13 +66,13 @@ Although you're free to do it, it would be very inefficient to always have to wr
 
 To reuse this code in Maizzle, you may create a [Layout](/docs/layouts):
 
-```xml [src/layouts/main.html]
+```hbs [src/layouts/main.html]
 <!doctype html>
 <html>
 <head>
   <style>
-    @tailwind utilities;
     @tailwind components;
+    @tailwind utilities;
   </style>
 </head>
 <body>
@@ -106,8 +106,6 @@ build: {
       ext: '.html',
       name: 'transactional'
     },
-    baseDir: 'src/templates',
-    relativePath: 'transactional.html'
   }
 }
 ```

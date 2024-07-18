@@ -142,16 +142,25 @@ baseURL: 'https://res.cloudinary.com/user/image/upload/'
 
 ## Trailing slash
 
-Mind the trailing slash on your URL, this influences how you reference images:
+When `baseURL` is not an absolute URL, `path.join` is used to prepend the base URL to the source, so you don't need to worry about trailing slashes.
 
-```xml
-<!-- baseURL: 'https://cdn.example.com/img' -->
+However, you need to consider trailing slashes when the base URL is an absolute URL.
+
+```xml [baseURL: 'https://example.com/img']
 <img src="/folder/product-1.png">
 
-<!-- baseURL: 'https://cdn.example.com/img/' -->
-<img src="folder/product-1.png">
+<!-- Result -->
+<img src="https://example.com/img/folder/product-1.png">
 ```
 
+If we add a trailing slash to `baseURL`, we get a double slash in the result:
+
+```xml [baseURL: 'https://example.com/img/']
+<img src="/folder/product-1.png">
+
+<!-- Result -->
+<img src="https://example.com/img//folder/product-1.png">
+```
 
 ## Disabling
 

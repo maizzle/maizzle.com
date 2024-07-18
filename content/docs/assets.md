@@ -15,7 +15,7 @@ You may define a global email assets folder that will be copied to the build dir
 export default {
   build: {
     static: {
-      source: 'src/images/**/*.*',
+      source: ['src/images/**/*.*'],
       destination: 'images',
     }
   }
@@ -26,7 +26,7 @@ Everything inside `static.source` will be copied to the `static.destination` dir
 
 ## Multiple sources
 
-You may define multiple asset source paths by using an array - all files will be copied to a single destination directory:
+You may define multiple asset source paths and all files from those paths will be copied to a single destination directory:
 
 ```js [config.js]
 export default {

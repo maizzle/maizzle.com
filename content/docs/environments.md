@@ -19,23 +19,35 @@ We call these Environments.
 
 Maizzle comes with two config files, each enabling its own build command:
 
-| File | Command |
-| --- | --- |
-| `config.js` | `maizzle build`<br>`maizzle serve` |
+| File                   | Command                                                  |
+|------------------------|----------------------------------------------------------|
+| `config.js`            | `maizzle build`<br>`maizzle serve`                       |
 | `config.production.js` | `maizzle build production`<br>`maizzle serve production` |
 
 You probably noticed the link between <span class="font-mono text-sm">config.<strong>production</strong>.js</span> and <span class="font-mono text-sm">maizzle build <strong>production</strong></span> - the keyword in the config file name enables its own build command.
 
-<Alert>Remember, the `maizzle` executable will only be available if you installed the [CLI tool](/docs/cli) globally. Otherwise, use the npm scripts provided by the Starter in `package.json`.</Alert>
+<Alert>Remember, the `maizzle` executable will only be available if you installed the [CLI tool](/docs/cli) globally. Otherwise, use the NPM scripts provided by the Starter in `package.json`.</Alert>
 
-### maizzle.config.js
+### Config file naming
 
 You may use the `maizzle.config.js` configuration file naming pattern if you prefer:
 
-| File | Command |
-| --- | --- |
-| `maizzle.config.js` | `maizzle build`<br>`maizzle serve` |
+| File                           | Command                                                  |
+|--------------------------------|----------------------------------------------------------|
+| `maizzle.config.js`            | `maizzle build`<br>`maizzle serve`                       |
 | `maizzle.config.production.js` | `maizzle build production`<br>`maizzle serve production` |
+
+### CJS config
+
+If you need to use CommonJS with `module.exports` and `require()` in your Maizzle config file, you'll need to change the file extension to `.cjs`:
+
+| ESM                            | CJS                             |
+|--------------------------------|---------------------------------|
+| `config.js`                    | `config.cjs`                    |
+| `config.production.js`         | `config.production.cjs`         |
+| `maizzle.config.js`            | `maizzle.config.cjs`            |
+| `maizzle.config.production.js` | `maizzle.config.production.cjs` |
+
 
 ### Data merging
 
@@ -80,14 +92,18 @@ The build command for it would be:
 maizzle build shopify
 ```
 
+Or, if you're using NPM scripts and didn't set up a script for this environment:
+
+```sh
+npm run build -- shopify
+```
+
+
 ## Config variables
 
 Maizzle exposes a `page` object that you can access through [expressions](/docs/expressions) in your HTML.
 
-This object contains:
-
-- your Template config (`config.[env].js` merged with Front Matter variables)
-- the compiled Tailwind CSS (`page.css`)
+This object contains the computed Template config, which is `config.[env].js` merged with Front Matter variables from the Template currently being processed.
 
 This makes it possible to define variables in `config.js`:
 
@@ -119,7 +135,7 @@ You can output content in your emails based on the Environment that you're build
 
 ### Top-level variables
 
-If you need to define variables outside of the `page` object, you can use the `locals` key in your `config.js`:
+You may define 'local' variables that can be accessed outside of the `page` object, through the `locals` key:
 
 ```js [config.js]
 export default {
@@ -133,16 +149,16 @@ export default {
 
 Now, you can access `company` properties directly:
 
-```js [src/templates/example.html] diff
+```js [src/templates/example.html] diff {2}
 - Company name is {{ page.company.name }}
 + Company name is {{ company.name }}
 ```
 
-<Alert>Maizzle does not allow overwriting the `page` object through `locals`.</Alert>
+<Alert type="warning">Maizzle does not allow overwriting the `page` object through `locals`.</Alert>
 
 ## Top-level await
 
-You can use top-level `await` in your `config.js` to fetch data from an API, for example:
+You may use top-level `await` in your `config.js` to fetch data from an API:
 
 ```js [config.js]
 const data = await fetch('https://jsonplaceholder.typicode.com/todos').then(res => res.json())

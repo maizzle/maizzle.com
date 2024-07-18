@@ -26,7 +26,8 @@ Here's the Filled button, fully clickable in Outlook:
   ```xml
   <a
     href="https://maizzle.com/"
-    class="inline-block py-4 px-6 text-sm/none font-semibold rounded no-underline text-white bg-indigo-500 hover:bg-indigo-600">
+    class="inline-block py-4 px-6 text-sm/none font-semibold rounded no-underline text-white bg-indigo-500 hover:bg-indigo-600"
+  >
     <outlook>
       <i class="mso-font-width-[150%] mso-text-raise-[26pt]">&nbsp;</i>
     </outlook>
@@ -45,22 +46,6 @@ As you can see it's just a simple `<a>` tag, but with some nifty workarounds for
 - the first `<i>` also adds bottom padding
 
 <Alert>Line breaks and spaces between tags in the example above might render the button larger (although barely noticeable). If you want your button to be absolutely pixel perfect, just remove them.</Alert>
-
-**Tip**: use the [`<outlook>`](/docs/tags#outlook) tag for cleaner-looking, editor-friendly markup. As an added bonus, you can now also use Tailwind CSS utilities with it:
-
-```xml [button.html]
-<a
-  href="https://maizzle.com/"
-  class="inline-block py-4 px-6 text-sm/none no-underline text-white font-semibold rounded bg-indigo-500 hover:bg-indigo-600">
-  <outlook>
-    <i class="mso-font-width-[150%] mso-text-raise-[26pt]">&nbsp;</i>
-  </outlook>
-    <span class="mso-text-raise-[13pt]">Read more</span>
-  <outlook>
-    <i class="mso-font-width-[150%]">&nbsp;</i>
-  </outlook>
-</a>
-```
 
 ## VML
 

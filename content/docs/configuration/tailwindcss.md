@@ -30,8 +30,6 @@ Maizzle uses [`tailwindcss-preset-email`](https://github.com/maizzle/tailwindcss
 This preset helps generate more email-friendly CSS, by disabling some of the default Tailwind CSS features that are not well supported in email clients.
 For example, HEX values are preferred over CSS variables, and `rem` units are replaced with `px` units.
 
-Options that are more project-specific are simply added to the `tailwind.config.js` file.
-
 ### content
 
 By default, Tailwind CSS in Maizzle is configured to scan all `.html` files in your project's `src` directory for classes to generate:
@@ -78,7 +76,7 @@ Because some email clients (Gmail 👀) fail to parse selectors with escaped cha
 
 So you can safely use Tailwind's awesome default separator and write classes like `sm:w-1/2` - Maizzle will convert that to `sm-w-1-2` in your compiled template.
 
-You can also [configure the replacement mappings](/docs/transformers/safe-class-names) if you need to.
+You may also [configure the replacement mappings](/docs/transformers/safe-class-names) if you need to.
 
 ### screens
 
@@ -341,7 +339,7 @@ module.exports = {
 
 If you want to use one of these plugins, simply set it to `true` in `corePlugins` at the bottom of your `tailwind.config.js`:
 
-```js [tailwind.config.js] diff
+``` [tailwind.config.js] diff {3}
 corePlugins: {
 - backgroundOpacity: false,
 + backgroundOpacity: true,

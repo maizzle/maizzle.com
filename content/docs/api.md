@@ -22,8 +22,11 @@ Then call it, passing it a string and an options object:
 ```js [app.js]
 import { render } from '@maizzle/framework'
 
-render(`html string`, options)
-  .then(({html, config}) => console.log(html, config))
+const options = {
+  // Maizzle config object
+}
+
+const { html, config } = await render(`html string`, options)
 ```
 
 The `render` method returns an object containing the compiled HTML and the [Environment config](/docs/environments) that was computed for it.
@@ -82,8 +85,8 @@ title: Using Maizzle on the server
         @apply inline-block py-4 px-6 text-sm font-semibold no-underline text-white;
       }
 
-      @tailwind utilities;
       @tailwind components;
+      @tailwind utilities;
     </style>
   </head>
   <body>
@@ -128,13 +131,13 @@ title: Using Maizzle programmatically
 
 ## Gotchas
 
-Since the options object you can pass to the `render` method is optional, there are a few gotchas that you need to be aware of.
+Since the options object that you can pass to the `render` method is optional, there are a few gotchas that you need to be aware of.
 
 ### Default Tailwind
 
 If you don't specify a [Tailwind config object](#tailwindcss), Maizzle will try to compile Tailwind using `tailwind.config.js` at your current path.
 
-_If the file is not found, Tailwind will be compiled with its [default config](https://github.com/tailwindlabs/tailwindcss/blob/master/stubs/config.full.js)._
+_If the file is not found, Tailwind CSS will be compiled with its [default config](https://github.com/tailwindlabs/tailwindcss/blob/master/stubs/config.full.js)._
 
 The default config is not optimized for HTML email: it uses units like `rem` and CSS properties that are used for _web_ design and which have little to no support in the majority of email clients.
 
@@ -160,8 +163,8 @@ You must add the `@tailwind` directives in a `<style>` tag in the `<head>` of yo
   <html>
     <head>
 +      <style>
-+        @tailwind utilities;
 +        @tailwind components;
++        @tailwind utilities;
 +      </style>
     </head>
     <body>
