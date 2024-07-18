@@ -171,3 +171,30 @@ export default {
   },
 }
 ```
+
+## Environment attribute values
+
+Sometimes you may need to define different values for attributes based on the Environment you're building for.
+
+While you may use ternaries in expressions to do so:
+
+```xml [src/templates/example.html]
+<x-main>
+  <a href="{{ page.env === 'production' ? 'https://example.com' : 'https://dev.example.com' }}">Link</a>
+</x-main>
+```
+
+... Maizzle also supports Environment-based attributes:
+
+```xml [src/templates/example.html]
+<x-main>
+  <a
+    href="https://dev.example.com"
+    href-production="https://example.com"
+  >Link</a>
+</x-main>
+```
+
+The value of the `href-production` attribute will be used when building for the `href` attribute when doing `npm run build` or `maizzle build production`.
+
+The `href-production` attribute itself will then be removed from the output.
