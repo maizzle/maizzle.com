@@ -136,4 +136,4 @@ Define what to render when referencing a value that is not defined in `locals`.
 |      `''`      | `false`/`true` | `''` (no output, empty string)      |
 |   `{local}`    | `false`/`true` | Original reference like `{{ foo }}` |
 
-By default, Maizzle will output the string the original reference as a string, i.e. `{{ foo }}`, when a value is not defined in `locals`.
+By default, Maizzle will output the string the original reference as a string, i.e. `{{ foo }}`, when a value is not defined.
