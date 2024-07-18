@@ -69,7 +69,7 @@ Prefer `<link>` tags? Maizzle supports that too:
 <!doctype html>
 <html>
   <head>
-    <link rel="stylesheet" href="src/css/tailwind.css">
+    <link rel="stylesheet" href="src/css/tailwind.css" inline>
   </head>
   <body>
     <yield />
@@ -77,6 +77,12 @@ Prefer `<link>` tags? Maizzle supports that too:
 </html>
 ```
 
+When using `<link>` tags, you must make sure they include:
+
+- the `rel="stylesheet"` attribute
+- an `inline` or `expand` attribute
+
+Otherwise, the CSS file they reference will not be compiled.
 
 ### Utility-first
 
