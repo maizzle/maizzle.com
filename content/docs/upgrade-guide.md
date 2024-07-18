@@ -112,6 +112,8 @@ module.exports = {
 }
 ```
 
+You now also need to define content sources in your `tailwind.config.js` - Maizzle will not automatically scan any paths for files containing Tailwind classes to generate.
+
 ## Update config.js
 
 The Maizzle config has been reimagined from the ground up, so naturally there are a few breaking changes.
@@ -123,14 +125,14 @@ The Maizzle config has been reimagined from the ground up, so naturally there ar
 The config file is now an ESM module, which means you can use `import` and cool stuff like top-level `await`.
 It also means you need to make this change:
 
-```js [config.js] no-copy diff
+```js [config.js] no-copy diff {2}
 - module.exports = {
 + export default {
 ```
 
 If you need to keep using `module.exports` you must use the `.cjs` extension:
 
-```diff
+```js [ ] diff {3,4}
 - config.js
 - config.production.js
 + config.cjs
@@ -143,7 +145,7 @@ If you need to keep using `module.exports` you must use the `.cjs` extension:
 
 The `build` key, which is where you define what emails to build and where to output them, has changed considerably.
 
-This is everything that the `build` key can contain in Maizzle 5:
+This is how the `build` key looks in Maizzle 5:
 
 ```js [config.js]
 export default {
@@ -167,7 +169,7 @@ export default {
 
 The `components` key has been moved outside `build`, to the root of the config file:
 
-```js [config.js] no-copy diff
+```js [config.js] diff {5}
 export default {
 -  build: {
 -    components: {}
@@ -180,12 +182,11 @@ export default {
 
 Events have been moved to the root of the config file:
 
-```js [config.js] no-copy diff
+```js [config.js] diff {3-5}
 export default {
 -  events: {...}
 +  async beforeRender({html, config, render}) {
-+    // must return `html`
-+    return html
++    // ...
 +  },
 }
 ```
@@ -194,7 +195,7 @@ export default {
 
 This key has been moved to `css.attributes.add`:
 
-```js [config.js] no-copy diff
+```js [config.js] diff {3-7}
 export default {
 -  extraAttributes: {}
 +  css: {
@@ -213,7 +214,7 @@ The `layouts` key has been deprecated, you can safely remove it.
 
 Configuration for CSS inlining has been moved under the `css.inline` key:
 
-```js [config.js] no-copy diff
+```js [config.js] diff {3-5}
 export default {
 -  inlineCSS: {}
 +  css: {
@@ -235,11 +236,11 @@ export default {
       applyWidthAttributes: [],
       applyHeightAttributes: [],
       useAttributeSizes: true,
-      resolveCSSVariables: true,
-      removeInlinedSelectors: true,
+      resolveCSSVariables: true, // new
+      removeInlinedSelectors: true, // new
       excludedProperties: [],
-      preferUnitlessValues: false,
-      resolveCalc: true,
+      preferUnitlessValues: false, // new
+      resolveCalc: true, // new
     },
   },
 }
@@ -249,7 +250,7 @@ export default {
 
 Configuring the custom tag for Outlook conditionals is done through the same `outlook` key, but at the root of the config file instead of inside the `posthtml` key:
 
-```js [config.js] no-copy diff
+```js [config.js] diff {5-7}
 export default {
 -  posthtml: {
 -    outlook: {}
@@ -262,9 +263,9 @@ export default {
 
 ### postcss
 
-PostCSS is now configured under the root `postcss` key instead of the one under `build.postcss`:
+PostCSS may now be configured under the root `postcss` key:
 
-```js [config.js] no-copy diff
+```js [config.js] diff {5}
 export default {
 -  build: {
 -    postcss: {}
@@ -277,7 +278,7 @@ export default {
 
 This Transformer has been moved to `css.attributes.remove`:
 
-```js [config.js] no-copy diff
+```js [config.js] diff {3-7}
 export default {
 -  removeAttributes: []
 +  css: {
@@ -292,7 +293,7 @@ export default {
 
 Configuration for this Transformer has been moved to `css.purge`:
 
-```js [config.js] no-copy diff
+```js [config.js] diff {3-5}
 export default {
 -  removeUnusedCSS: {}
 +  css: {
@@ -303,9 +304,9 @@ export default {
 
 ### shorthandCSS
 
-This key has been moved to `css.shorthand`:
+The shorthand CSS Transformer config has been moved to `css.shorthand`:
 
-```js [config.js] no-copy diff
+```js [config.js] diff {3-5}
 export default {
 -  shorthandCSS: true
 +  css: {
@@ -316,9 +317,9 @@ export default {
 
 ### safeClassNames
 
-The `safeClassNames` option has been moved to `css.safe`:
+The `safeClassNames` option has been renamed and moved to `css.safe`:
 
-```js [config.js] no-copy diff
+```js [config.js] diff {3-5}
 export default {
 -  safeClassNames: true
 +  css: {
@@ -329,12 +330,11 @@ export default {
 
 ### server
 
-Browsersync has been replaced with a custom dev server, powered by Express.js and WebSockets with morphdom for an HMR-like experience.
+Browsersync has been replaced with a custom dev server, powered by Express.js and WebSockets with `morphdom` for an HMR-like local development experience.
 
-The [new dev server](./configuration/server) is much faster and provides a nicer experience, but you'll need to update your `config.js` if you want to configure it:
+This [new dev server](./configuration/server) is much faster and provides a nicer experience, but you'll need to update your `config.js` if you want to configure it:
 
-```js [config.js] no-copy diff
-// delete the entire browsersync key
+```js [config.js] diff {2-8}
 - browsersync: {...},
 + server: {
 +   port: 3000,
@@ -347,9 +347,9 @@ The [new dev server](./configuration/server) is much faster and provides a nicer
 
 ### sixHex
 
-This key has been moved to `css.sixHex`:
+This Transformer config has been moved to `css.sixHex`:
 
-```js [config.js] no-copy diff
+```js [config.js] diff {3-5}
 export default {
 -  sixHex: true
 +  css: {
@@ -361,16 +361,37 @@ export default {
 ### tailwind
 
 The `tailwind` key in `config.js` has been deprecated, you can safely remove it.
-You may now use `@config` in your CSS to specify a custom Tailwind CSS config file to use:
 
-```html
+You may now simply use `@config` in your `<style>` tags or files included with `<link>`, to specify a custom Tailwind CSS config file to use:
+
+```html [src/layouts/main.html]
 <style>
   @config 'tailwind.custom.js';
+  @tailwind components;
   @tailwind utilities;
 </style>
 ```
 
-Alternatively, you may define a Tailwind config object under `css.tailwind`:
+If you prefer using CSS files:
+
+```css [src/css/tailwind.css]
+@config 'tailwind.custom.js';
+@tailwind components;
+@tailwind utilities;
+```
+
+... you may import that either through a `<link>` tag or through an `@import` statement in a `<style>` tag:
+
+```html
+<link rel="stylesheet" href="src/css/tailwind.css">
+
+<!-- or -->
+<style>
+  @import 'src/css/tailwind.css';
+</style>
+```
+
+You can still define a Tailwind config object if you need to, under `css.tailwind`:
 
 ```js [config.js]
 export default {
@@ -388,7 +409,7 @@ The `templates` key has been deprecated, see [`build`](#build) above for how to 
 
 This has been renamed to `useTransformers`:
 
-```js [config.js] no-copy diff
+```js [config.js] diff {3}
 export default {
 -  applyTransformers: true
 +  useTransformers: true
@@ -408,3 +429,5 @@ We recommend you update your components to the latest versions, which you can fi
 Note: while in beta, the updated Starter project is in the `next` branch:
 
 https://github.com/maizzle/maizzle/tree/next
+
+You may also initialize a Maizzle 5 project with the updated starter by running `npx create-maizzle` and selecting the `5.0.0-beta` Starter.
