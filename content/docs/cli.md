@@ -73,12 +73,13 @@ maizzle build [env]
 | --- | --- | --- | --- |
 | `[env]` | no |  `local` | An environment name to use
 
-| Flag | Short | Description
+| Option | Short | Description
 | --- | --- | --- |
 | `--bin` | `-b` | Path to the Maizzle executable
-| `--config` | `-c` | Path to a config file
+| `--config` | `-c` | Path to a config file to use
+| `--summary` | `-s` | Show a summary of the build process
 
-<Alert>If no `[env]` is specified, Maizzle will use `config.js`.</Alert>
+<Alert>If no `[env]` is specified, Maizzle will use `config.js` from the current working directory.</Alert>
 
 #### --bin
 
@@ -104,6 +105,30 @@ So for example the `custom-config.js` file will be used even if `production` is 
 maizzle build production --config /path/to/custom-config.js
 ```
 
+#### --summary
+
+You may pass the `--summary` flag to show a summary of the build process.
+
+This will output a list of all the Templates that were built, their file size, and how long it took to build each one.
+
+```sh no-root no-copy
+$ maizzle build production --summary
+
+┌────────────────────────┬───────────┬────────────┐
+│ File name              │ File size │ Build time │
+├────────────────────────┼───────────┼────────────┤
+│ confirmation.html      │ 5.07 KB   │ 432 ms     │
+├────────────────────────┼───────────┼────────────┤
+│ email-change.html      │ 5.07 KB   │ 79 ms      │
+├────────────────────────┼───────────┼────────────┤
+│ invitation.html        │ 5.08 KB   │ 81 ms      │
+├────────────────────────┼───────────┼────────────┤
+│ password-recovery.html │ 4.99 KB   │ 65 ms      │
+└────────────────────────┴───────────┴────────────┘
+
+✔ Build completed in 698 ms
+```
+
 ## Scaffolding
 
 CLI commands for creating new projects and scaffolding Templates or config files.
@@ -126,7 +151,7 @@ maizzle make:config [env] --full?
 | --- | --- |
 | `[env]` | Environment name to use for the config.
 
-| Flag | Shorthand | Description
+| Option | Shorthand | Description
 | --- | --- | --- |
 | `--full` | `-f` |  Scaffold a full config.
 
