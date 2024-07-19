@@ -321,9 +321,9 @@ The `safeClassNames` option has been renamed and moved to `css.safe`:
 
 ```js [config.js] diff {3-5}
 export default {
--  safeClassNames: true
+-  safeClassNames: {}
 +  css: {
-+    safe: true
++    safe: {}
 +  }
 }
 ```
