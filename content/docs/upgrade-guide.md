@@ -37,10 +37,10 @@ Alternatively you can just use the NPM scripts like `npm run dev` from `package.
 
 The `@maizzle/framework` package is now a module, so you need to update your `package.json` file to reflect this change.
 
-```json [package.json] {3}
+```json [package.json] diff {3}
 {
   "private": true,
-  "type": "module",
++  "type": "module",
   "scripts": {
     "dev": "maizzle serve",
     "build": "maizzle build production"
@@ -84,8 +84,8 @@ Tailwind CSS can now be used as expected, with `@tailwind` directives in any `<s
 <html lang="en">
 <head>
   <style>
-    @tailwind utilities;
     @tailwind components;
+    @tailwind utilities;
   </style>
 </head>
 <body>
@@ -218,14 +218,14 @@ Configuration for CSS inlining has been moved under the `css.inline` key:
 export default {
 -  inlineCSS: {}
 +  css: {
-+    inline: {}
++    inline: true,
 +  }
 }
 ```
 
 There are some new options ([see docs](./transformers/inline-css)), this is the full new config for inlining:
 
-```js [config.js]
+```js [config.js] {11-12,14-15}
 export default {
   css: {
     inline: {
@@ -236,11 +236,11 @@ export default {
       applyWidthAttributes: [],
       applyHeightAttributes: [],
       useAttributeSizes: true,
-      resolveCSSVariables: true, // new
-      removeInlinedSelectors: true, // new
+      resolveCSSVariables: true,
+      removeInlinedSelectors: true,
       excludedProperties: [],
-      preferUnitlessValues: false, // new
-      resolveCalc: true, // new
+      preferUnitlessValues: false,
+      resolveCalc: true,
     },
   },
 }
@@ -334,15 +334,17 @@ Browsersync has been replaced with a custom dev server, powered by Express.js an
 
 This [new dev server](./configuration/server) is much faster and provides a nicer experience, but you'll need to update your `config.js` if you want to configure it:
 
-```js [config.js] diff {2-8}
-- browsersync: {...},
-+ server: {
-+   port: 3000,
-+   hmr: true,
-+   scrollSync: true,
-+   watch: ['./src/images/**/*'],
-+   reportFileSize: true,
-+ },
+```js [config.js] diff {3-9}
+export default {
+-  browsersync: {...},
++  server: {
++    port: 3000,
++    hmr: true,
++    scrollSync: true,
++    watch: ['./src/images/**/*'],
++    reportFileSize: true,
++  },
+}
 ```
 
 ### sixHex
