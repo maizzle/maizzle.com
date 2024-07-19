@@ -365,3 +365,25 @@ Example:
   This will not be parsed: {{ page.env }}
 </verbatim>
 ```
+
+## Env
+
+You may output content based on the current Environment through the `<env:>` tag:
+
+```xml [src/templates/example.html]
+<env:local>
+  This will only show in local.
+</env:local>
+
+<env:production>
+  This will only show in production.
+</env:production>
+```
+
+If the tag doesn't match the current Environment, it will be removed from the output.
+
+In this example, running `maizzle build production` will output:
+
+```xml
+This will only show in production.
+```
