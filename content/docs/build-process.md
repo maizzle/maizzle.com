@@ -5,7 +5,7 @@ description: "See how the build process works and how Maizzle builds your emails
 
 # Build process
 
-When you run `maizzle build`, your templates go through a series of events that compile them to plain HTML and apply various, email-specific transformations.
+When you run `maizzle build`, your Templates go through a series of events that compile them to plain HTML and apply various, email-specific transformations.
 
 To get a better understanding of how Maizzle builds your emails, here's a step-by-step guide of what's going on under the hood:
 
@@ -50,13 +50,13 @@ Each Template is parsed and compiled in-place, in your destination directory:
     The order of events is exactly as follows, and they all happen (or not) depending on how you've configured them in your Environment config or in the Template's Front Matter:
 
     - Escaped characters in `<head>` and `<body>` CSS classes are replaced with email-safe alternatives
-    - `filters` are applied to the HTML. For example, `<style postcss|tailwindcss>` tags are compiled with PostCSS/Tailwind CSS. [posthtml-content](https://github.com/posthtml/posthtml-content) is used to transform content marked with those custom attributes.
-    - Markdown is compiled with [posthtml-markdownit](https://github.com/posthtml/posthtml-markdownit)
-    - [prevent-widows](https://github.com/bashaus/prevent-widows) looks for tags containing the `prevent-widows` attribute. When it finds one, it will replace the last space in your text with a `&nbsp;`.
+    - Liquid-like `filters` are parsed
+    - Markdown is compiled
+    - The [prevent-widows](/docs/widow-words) Transformer runs, replacing the last space in tags marked with a `prevent-widows` attribute, with a `&nbsp;`
     - [attributeToStyle](/docs/transformers/inline-css#attribute-to-style) translates HTML attributes to inline CSS
     - CSS is inlined with [Juice](https://github.com/Automattic/juice)
     - Longhand CSS in `style` attributes is converted to shorthand-form
-    - Unused CSS is removed with [email-comb](https://www.npmjs.com/package/email-comb)
+    - Unused CSS is purged with [email-comb](https://www.npmjs.com/package/email-comb)
     - Inline CSS sizes are removed (`width=""` and `height=""` are preserved)
     - Inline background colors are removed (`bgcolor=""` is preserved)
     - Attributes are removed based on your config. By default, Maizzle cleans up any empty `style=""` and `class=""` attributes.
