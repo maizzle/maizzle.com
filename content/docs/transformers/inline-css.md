@@ -11,7 +11,7 @@ CSS inlining is still important in HTML email, mainly because of Outlook on Wind
 
 It can also help preserve a decent layout in email clients that do not support embedded CSS (in `<style>` tags), or when an email is forwarded.
 
-Not to mention that the utility-first approach in Tailwind CSS works great with CSS inlining: utility classes are not 'global', so you won't end up with a `font-family` inlined on every element (unless you really, really want to).
+The utility-first approach in Tailwind CSS works great with CSS inlining: utility classes are not 'global', so you won't end up with a `font-family` inlined on every element (unless you really, really want to).
 
 ## Usage
 
@@ -278,16 +278,18 @@ By default, something like this:
 <div style="width: 33.33%">Hello</div>
 ```
 
+<Alert>Maizzle uses a 2-decimal precision when resolving `calc()` expressions.</Alert>
+
 ### preferUnitlessValues
 
 Type: Boolean\
 Default: `true`
 
-When inlining CSS, 0 values will be inlined without units.
+When inlining CSS, `0` values will be inlined without units.
 
 For example, `margin: 0px` will be inlined as `margin: 0`.
 
-Set this option to `false` to keep units on 0 values.
+Set this to `false` to keep units on `0` values.
 
 ```js [config.js]
 export default {
@@ -301,22 +303,29 @@ export default {
 
 ## Prevent inlining
 
-Use the `data-embed` attribute on a `<style>` tag to prevent Juice from inlining the CSS inside it. Useful for writing email client CSS hacks, or for preserving CSS comments when using the [`removeCSSComments: false`](/docs/transformers/remove-unused-css#removecsscomments) Cleanup option.
+You may add an attribute on a `<style>` tag to prevent Juice from inlining the CSS inside it. Useful for writing email client CSS hacks, or for preserving CSS comments when using the [`removeCSSComments: false`](/docs/transformers/remove-unused-css#removecsscomments) Cleanup option.
 
 ```html
-<style data-embed>
+<style no-inline>
   /* This CSS will not be inlined */
   .text-red { color: red; }
 </style>
 ```
 
+Maizzle supports the following attributes for this purpose:
+
+-  `embed`
+-  `no-inline`
+-  `data-embed`
+
 <Alert>CSS selectors that don't appear in your markup will still need to be [whitelisted for purging](/docs/transformers/remove-unused-css#whitelist).</Alert>
 
 ## API
 
-You may pass your own CSS to inline through the `customCSS` option.
+You can use the `inlineCSS` function to inline CSS in a string of HTML.
 
-If you don't specify `customCSS`, your HTML string will need to have a `<style>` with CSS tag in the `<head>`, so it can be inlined instead.
+Your HTML string will need to have at least one `<style>` tag in the `<head>`.
+Alternatively, you may pass your own CSS to inline through the `customCSS` option.
 
 Additionally, you may configure the [Juice](https://www.npmjs.com/package/juice) library by passing options in the same object.
 
