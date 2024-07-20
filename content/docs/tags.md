@@ -61,6 +61,54 @@ Example:
 </otherwise>
 ```
 
+## Template
+
+The `<template>` tag will only return its contents.
+
+You can use it to apply a filter to a string, for example:
+
+```xml [src/templates/example.html]
+<template uppercase>test</template>
+```
+
+Result:
+
+```xml
+TEST
+```
+
+... or to compile a markdown string:
+
+```xml [src/templates/example.html]
+<template markdown>
+  # Hello, world!
+</template>
+```
+
+Result:
+
+```xml
+<h1>Hello, world!</h1>
+```
+
+#### Preserving template tags
+
+If you actually need to output a `<template>` tag in the compiled HTML, you may use the `preserve` attribute:
+
+```xml [src/templates/example.html]
+<template preserve>
+  test
+</template>
+```
+
+Result:
+
+```xml
+<template>
+  test
+</template>
+```
+
 ## Outlook
 
 Wrap content with MSO conditional comments so that it will only show up in Outlook 2007-2019 on Windows:
