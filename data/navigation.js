@@ -49,12 +49,12 @@ export default [
     name: 'Configuration',
     items: [
       {
-        title: 'Server',
-        path: '/docs/configuration/server'
+        title: 'Build',
+        path: '/docs/configuration/build'
       },
       {
-        title: 'Templates',
-        path: '/docs/configuration/templates'
+        title: 'Server',
+        path: '/docs/configuration/server'
       },
       {
         title: 'Components',

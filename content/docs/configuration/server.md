@@ -124,3 +124,20 @@ Between 50KB and 102KB:
 More than 102KB:
 
 <div class="font-mono">✔ Done in 41 ms [src/templates/example.html] · <span class="text-red-500">112.3 KB</span></div>
+
+### spinner
+
+Type: String|Object\
+Default: `'circleHalves'`
+
+Customize the spinner shown in the console when compiling a Template.
+
+```js [config.js]
+export default {
+  server: {
+    spinner: 'dots'
+  }
+}
+```
+
+See the [ora spinners list](https://github.com/sindresorhus/cli-spinners/blob/main/spinners.json) for available options.

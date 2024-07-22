@@ -1,11 +1,11 @@
 ---
-title: "Templates configuration"
-description: "Configuring template sources and other related options in Maizzle."
+title: "Build configuration"
+description: "Configuring content sources and other build related options in Maizzle."
 ---
 
-# Templates configuration
+# Build configuration
 
-Configure the paths where Maizzle should look for Templates to compile, and where they should be output to or what extensions they should use.
+Configure the paths where Maizzle should look for Templates to compile, where they should be output to, or what extensions they should use.
 
 This is done under the `build` key of your config:
 
@@ -52,8 +52,6 @@ export default {
   }
 }
 ```
-
-<Alert>Files that you exclude will still be copied to the output directory, but they will not be compiled.</Alert>
 
 ### Compute paths
 
@@ -132,7 +130,7 @@ export default {
 }
 ```
 
-The compiled templates will be output as `build_laravel/*.blade.php`.
+The compiled Templates will be output as `build_laravel/*.blade.php`.
 
 By default, Maizzle will use the extension of the source file.
 
@@ -196,7 +194,7 @@ At build time, `build.static.destination` will be created relative to `build.out
 export default {
   build: {
     static: {
-      source: 'src/images',
+      source: 'src/images/**/*',
       destination: 'images',
     }
   }
@@ -204,3 +202,20 @@ export default {
 ```
 
 You can use it to store _any_ files you might need, not just images.
+
+## spinner
+
+Type: String|Object\
+Default: `'circleHalves'`
+
+Customize the spinner shown in the console during build.
+
+```js [config.js]
+export default {
+  build: {
+    spinner: 'dots'
+  }
+}
+```
+
+See the [ora spinners list](https://github.com/sindresorhus/cli-spinners/blob/main/spinners.json) for available options.
