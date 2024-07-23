@@ -5,7 +5,7 @@ description: "Using lifecycle hooks to tap into the email build process."
 
 # Events
 
-When compiling your email templates, Maizzle goes through a series of steps like generating a Template config, rendering, or applying Transformers.
+When compiling your HTML emails, Maizzle goes through a series of steps like generating a Template config, rendering, or applying Transformers.
 
 You can hook into the build process and manipulate it by using functions that run before or after some of these steps.
 
@@ -19,7 +19,7 @@ To use events with the CLI commands, add them to your `config.js` file:
 
 ```js [config.js]
 export default {
-  beforeCreate(config) {
+  beforeCreate({config}) {
     // do stuff with config
   },
 }
@@ -33,7 +33,7 @@ When using the API, add events inside the object that you pass to the `render()`
 const Maizzle = require('@maizzle/framework')
 
 html = Maizzle.render(`some HTML string...`, {
-    beforeRender(config) {
+    beforeRender({config}) {
       // ...
     }
   }
@@ -65,7 +65,7 @@ For example, let's use a custom highlight function for Markdown fenced code bloc
 import Prism from 'prismjs'
 
 export default {
-  async beforeCreate(config) {
+  async beforeCreate({config}) {
     config = Object.assign(config, {
       markdown: {
         markdownit: {

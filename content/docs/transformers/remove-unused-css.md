@@ -29,7 +29,7 @@ You may configure this Transformer through the `css.purge` key in your `config.j
 
 ### whitelist
 
-Type: Array\
+Type: `String[]`\
 Default: `[]`
 
 Array of classes or id's that you don't want removed.
@@ -72,7 +72,7 @@ Maizzle uses the [`tailwindcss-email-variants`](https://github.com/maizzle/tailw
 
 ### backend
 
-Type: Array\
+Type: `Array<Record<string, string>>`\
 Default: `[{heads: '{{', tails: '}}'}, {heads: '{%', tails: '%}'}]`
 
 If you use computed class names, like for example `class="{{ computedRed }} text-sm"`, the library will normally treat `{{` and `}}` as class names and will remove them, since there will be no corresponding CSS selectors defined.
@@ -95,7 +95,7 @@ By default, Maizzle preserves `{{ }}` and `{% %}`.
 
 ### removeHTMLComments
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 Set to `false` to prevent `email-comb` from removing `<!-- HTML comments -->`.
@@ -112,7 +112,7 @@ export default {
 
 ### removeCSSComments
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 Set to `false` to prevent `email-comb` from removing `/* CSS comments */`.
@@ -153,7 +153,7 @@ For example, MailChimp uses CSS comments to define styles that are editable in t
 
 ### doNotRemoveHTMLCommentsWhoseOpeningTagContains
 
-Type: Array\
+Type: `String[]`\
 Default: `['[if', '[endif']`
 
 HTML email code often includes Outlook or IE conditional comments, which you probably want to preserve. If the opening tag of a conditional includes any of the strings you list here, the Transformer will not remove that comment.
@@ -170,7 +170,7 @@ export default {
 
 ### uglify
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `false`
 
 Enable this to rename all classes and id's in both your `<style>` tags and your body HTML elements, to be as few characters as possible.

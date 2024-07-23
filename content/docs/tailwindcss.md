@@ -366,7 +366,7 @@ Next, `push` to that `stack` from a Template:
 
 ### Prevent inlining
 
-When adding a `<style>` tag inside a Template, you can prevent all CSS rules inside it from being inlined by using a `data-embed` attribute:
+You can prevent CSS inside a `<style>` tag from being inlined:
 
 ```hbs [src/templates/example.html]
 <x-main>
@@ -382,7 +382,13 @@ When adding a `<style>` tag inside a Template, you can prevent all CSS rules ins
 </x-main>
 ```
 
-Although it will no longer be inlined, unused CSS will still be purged by the [removeUnusedCSS](/docs/transformers/remove-unused-css) Transformer.
+You may use any of the following attributes for this purpose:
+
+- `data-embed`
+- `no-inline`
+- `embed`
+
+Although it will no longer be inlined, unused CSS will still be purged - see the [css.purge](/docs/transformers/remove-unused-css) Transformer docs for more information.
 
 ## Email client targeting
 

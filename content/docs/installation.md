@@ -26,6 +26,8 @@ $ npx create-maizzle
 └
 ```
 
+Or, if you'd like to try it out on an existing v4 project, check out the [upgrade guide](/docs/upgrade-guide) - upgrading to v5 takes less than 10 minutes for most projects.
+
 We would greatly appreciate it if you could test it out and provide feedback through [GitHub Discussions](https://github.com/orgs/maizzle/discussions) or by [opening an issue](https://github.com/maizzle/framework/issues/new). Thanks!
 
 ---
@@ -104,7 +106,7 @@ npm run dev
 
 This will start the local server at _http://localhost:3000_
 
-Try making a change to a template in your editor and save it: your changes will be injected and the page will reflect them almost instantly.
+Navigate to one of the Templates there, make a change to it in your editor and save it: your changes will be injected and the page will reflect them almost instantly.
 
 ### Production
 
@@ -116,7 +118,7 @@ npm run build
 
 This will use settings in your project's `config.production.js` to compile email templates that you can use with your <abbr title="Email Service Provider">ESP</abbr> or in your application.
 
-<Alert>These npm scripts use the Maizzle CLI, check out the [CLI Tool docs](/docs/cli) for more details.</Alert>
+<Alert>These NPM scripts use the Maizzle CLI, check out the [CLI Tool docs](/docs/cli) for more details.</Alert>
 
 ## Updating
 
@@ -124,16 +126,16 @@ Maizzle is listed as a dependency in your project's `package.json` file:
 
 ```json [package.json]
 "dependencies": {
-  "@maizzle/framework": "latest",
+  "@maizzle/framework": "next",
 }
 ```
 
-By default, the latest version will be installed. To use a specific version, first change the value to the desired release number:
+With the v5 Beta Starter, the `next` version will be installed. To use a specific version, first change the value to the desired release number:
 
 ```json [package.json] diff no-copy
 "dependencies": {
--  "@maizzle/framework": "latest",
-+  "@maizzle/framework": "4.4.6",
+-  "@maizzle/framework": "next",
++  "@maizzle/framework": "5.0.0-beta.10",
 }
 ```
 

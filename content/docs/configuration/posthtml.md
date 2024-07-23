@@ -13,7 +13,7 @@ PostHTML is configured under `build.posthtml.options` in your `config.js`.
 
 ### directives
 
-Type: Array\
+Type: `Array`\
 Default: `[]`
 
 You can configure the PostHTML parser to correctly process custom directives.
@@ -34,7 +34,7 @@ export default {
 
 ### xmlMode
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `false`
 
 Enable `xmlMode` if you're using Maizzle to output XML content, and not actual HTML.
@@ -51,7 +51,7 @@ export default {
 
 ### decodeEntities
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `false`
 
 Set this to `true` to have entities within the document decoded.
@@ -68,7 +68,7 @@ export default {
 
 ### lowerCaseTags
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `false`
 
 Set this to `true` to output all tags in lowercase. Works only when `xmlMode` is disabled.
@@ -85,7 +85,7 @@ export default {
 
 ### lowerCaseAttributeNames
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `false`
 
 Output all attribute names in lowercase.
@@ -105,7 +105,7 @@ export default {
 
 ### recognizeCDATA
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `false`
 
 Recognize CDATA sections as text even if the `xmlMode` option is disabled.
@@ -124,7 +124,7 @@ export default {
 
 ### recognizeSelfClosing
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 If enabled, self-closing tags will trigger the `onclosetag` event even if `xmlMode` is disabled.
@@ -145,7 +145,7 @@ export default {
 
 ### sourceLocations
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `false`
 
 If set to `true`, AST nodes will have a `location` property containing the `start` and `end` line and column position of the node.
@@ -162,7 +162,7 @@ export default {
 
 ### recognizeNoValueAttribute
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 If set to `true`, PostHTML will render attributes with no values exactly as they were written and will not add `=""` to them.
@@ -179,7 +179,7 @@ export default {
 
 ### singleTags
 
-Type: Array&lt;String|RegExp&gt;\
+Type: `Array<String|RegExp>`\
 Default: `[]`
 
 Use the `singleTags` option to tell PostHTML to treat custom tags as self-closing.
@@ -205,7 +205,7 @@ You may then use the `<custom />` tag as self-closing:
 
 ### closingSingleTag
 
-Type: String\
+Type: `String`\
 Default: `'default'`
 
 Define the closing format for single tags.
@@ -259,7 +259,7 @@ export default {
 
 ### quoteAllAttributes
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 Disable if you want to remove quotes on all attributes
@@ -280,7 +280,7 @@ export default {
 
 ### replaceQuote
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 Replaces quotes in attribute values with `&quote;`.
@@ -305,7 +305,7 @@ export default {
 
 ### quoteStyle
 
-Type: Number\
+Type: `Number`\
 Default: `2`
 
 Specify the attribute value quotes style.
@@ -333,7 +333,7 @@ export default {
 
 ## Plugins
 
-Type: Array\
+Type: `Array`\
 Default: `[]`
 
 Register any PostHTML plugins that you would like to use, in the `plugins` array.

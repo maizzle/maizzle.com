@@ -38,7 +38,7 @@ export default {
 
 ### attrName
 
-Type: String\
+Type: `String`\
 Default: `'prevent-widows'`
 
 The attribute name to use.
@@ -47,14 +47,14 @@ Only tags that have this attribute will be processed by the transformer.
 
 ### removeWidowPreventionMeasures
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `false`
 
 Set this to `true` if you want the opposite of preventing widow words: it will replace all widow word `nbsp;` locations with a single space.
 
 ### convertEntities
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 Convert the space entity to the `targetLanguage`.
@@ -63,7 +63,7 @@ Set it to `false` to insert a raw non-breaking space.
 
 ### targetLanguage
 
-Type: String\
+Type: `String`\
 Default: `'html'`
 
 Language to encode non-breaking spaces in.
@@ -75,7 +75,7 @@ Available options:
 
 ### hyphens
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 Whitespace in front of:
@@ -88,7 +88,7 @@ Whitespace in front of:
 
 ### minWordCount
 
-Type: Number\
+Type: `Number`\
 Default: `3`
 
 The minimum amount of words in a target string, in order to trigger the transformer.
@@ -97,7 +97,7 @@ You may set it to `0` or `false` to disable it.
 
 ### minCharCount
 
-Type: Number\
+Type: `Number`\
 Default: `20`
 
 The minimum amount non-whitespace characters in a target string, in order to trigger the transformer.
@@ -106,7 +106,7 @@ You may set it to `0` or `false` to disable it.
 
 ### ignore
 
-Type: Array|String\
+Type: `Array<Record<string, string>>`\
 Default: custom array
 
 Start/end pairs of strings that will prevent the transformer from removing widow words inside them.

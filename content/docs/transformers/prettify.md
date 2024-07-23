@@ -44,10 +44,18 @@ export default {
 
 Checkout the full [list of HTML & CSS beautifier options](https://www.npmjs.com/package/js-beautify#css--html).
 
-## OCD
+## ocd
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `false`
+
+```js [config.js]
+export default {
+  prettify: {
+    ocd: true,
+  }
+}
+```
 
 This option applies several code indentation strategies:
 

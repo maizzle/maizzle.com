@@ -55,7 +55,7 @@ Since we just want to write Markdown and not have to deal with any tables and su
 Replace its contents with the following:
 
 ```hbs [src/layouts/main.html]
-<!DOCTYPE {{{ page.doctype || 'html' }}}>
+<!doctype {{{ page.doctype || 'html' }}}>
 <html lang="{{ page.language || 'en' }}" xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
   <meta charset="{{ page.charset || 'utf-8' }}">

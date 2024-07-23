@@ -133,9 +133,9 @@ Click here
 [https://example.com]
 ```
 
-## `<plaintext>` tag
+## &lt;plaintext&gt; tag
 
-You can output content only in the plaintext version, with the `<plaintext>` tag:
+Output content only in the plaintext version:
 
 ```hbs [src/templates/example.html]
 ---
@@ -149,7 +149,7 @@ plaintext: true
 </x-main>
 ```
 
-## `<not-plaintext>` tag
+## &lt;not-plaintext&gt; tag
 
 You may also discard content from the plaintext version while preserving it in the HTML, with the help of the `<not-plaintext>` tag:
 

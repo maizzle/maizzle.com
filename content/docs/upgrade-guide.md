@@ -9,7 +9,7 @@ Upgrading your Maizzle projects from v4.x to v5.x (beta).
 
 Maizzle 5 is a major framework rewrite that comes with awesome new features and improvements, but also includes a few breaking changes.
 
-Migrating to Maizzle 5 should take less than 10 minutes for most users.
+Migrating an existing project to Maizzle 5 takes less than 10 minutes in most cases.
 
 ## Node.js
 
@@ -23,6 +23,8 @@ Check your current Node.js version:
 node --version
 ```
 
+<Alert>Maizzle is tested on Node.js 18, 20, and 22.</Alert>
+
 ## Update @maizzle/cli
 
 If you use `@maizzle/cli` installed globally, you must upgrade it to v2.x in order to use it in Maizzle 5 projects:
@@ -31,7 +33,7 @@ If you use `@maizzle/cli` installed globally, you must upgrade it to v2.x in ord
 npm install -g @maizzle/cli@next
 ```
 
-Alternatively you can just use the NPM scripts like `npm run dev` from `package.json`.
+Alternatively, you can just use the NPM scripts like `npm run dev` from `package.json`.
 
 ## Update package.json
 
@@ -47,7 +49,7 @@ The `@maizzle/framework` package is now a module, so you need to update your `pa
   },
   "dependencies": {
     "@maizzle/framework": "next",
-    "tailwindcss-preset-email": "^1.3.0"
+    "tailwindcss-preset-email": "latest"
   }
 }
 ```
@@ -71,21 +73,26 @@ npm install @maizzle/framework@next
 
 ### yield
 
+<strong class="text-indigo-500">BREAKING CHANGE</strong>
+
 The `<content />` tag has been replaced with `<yield />`.
 
 Make sure to update it in your Layouts and Components.
 
 ### style
 
+<strong class="text-indigo-500">BREAKING CHANGE</strong>
+
 Tailwind CSS can now be used as expected, with `@tailwind` directives in any `<style>` tag, instead of the old `<style>{{{ page.css }}}</style>`.
 
-```handlebars [src/layouts/main.html]
-<!DOCTYPE html>
+```xml diff [src/layouts/main.html] {6-7}
+<!doctype html>
 <html lang="en">
 <head>
   <style>
-    @tailwind components;
-    @tailwind utilities;
+-    {{{ page.css }}}
++    @tailwind components;
++    @tailwind utilities;
   </style>
 </head>
 <body>
@@ -96,7 +103,7 @@ Tailwind CSS can now be used as expected, with `@tailwind` directives in any `<s
 
 ## Update tailwind.config.js
 
-We've created [`tailwindcss-preset-email`](https://github.com/maizzle/tailwindcss-preset-email) specifically for Maizzle, which configures Tailwind CSS for better email client support.
+We created [`tailwindcss-preset-email`](https://github.com/maizzle/tailwindcss-preset-email) to make it easier to use Tailwind CSS for styling HTML emails - it outputs more email-friendly CSS and includes some useful plugins.
 
 Using it will now greatly simplify your `tailwind.config.js` file, this is all you need:
 
@@ -112,11 +119,11 @@ module.exports = {
 }
 ```
 
-You now also need to define content sources in your `tailwind.config.js` - Maizzle will not automatically scan any paths for files containing Tailwind classes to generate.
+You now also need to define content sources in your `tailwind.config.js` - Maizzle will _not_ automatically scan any paths for files containing Tailwind classes to generate.
 
 ## Update config.js
 
-The Maizzle config has been reimagined from the ground up, so naturally there are a few breaking changes.
+The Maizzle config has been reimagined, so naturally there are a few breaking changes.
 
 ### ESM export
 
@@ -332,17 +339,20 @@ export default {
 
 Browsersync has been replaced with a custom dev server, powered by Express.js and WebSockets with `morphdom` for an HMR-like local development experience.
 
+We call this Hot Markup Replacement&trade;.
+
 This [new dev server](./configuration/server) is much faster and provides a nicer experience, but you'll need to update your `config.js` if you want to configure it:
 
-```js [config.js] diff {3-9}
+```js [config.js] diff {3-10}
 export default {
 -  browsersync: {...},
 +  server: {
 +    port: 3000,
 +    hmr: true,
-+    scrollSync: true,
++    scrollSync: false,
 +    watch: ['./src/images/**/*'],
-+    reportFileSize: true,
++    reportFileSize: false,
++    spinner: 'circleHalves',
 +  },
 }
 ```
@@ -366,7 +376,7 @@ The `tailwind` key in `config.js` has been deprecated, you can safely remove it.
 
 You may now simply use `@config` in your `<style>` tags or files included with `<link>`, to specify a custom Tailwind CSS config file to use:
 
-```html [src/layouts/main.html]
+```mdx [src/layouts/main.html]
 <style>
   @config 'tailwind.custom.js';
   @tailwind components;
@@ -376,7 +386,7 @@ You may now simply use `@config` in your `<style>` tags or files included with `
 
 If you prefer using CSS files:
 
-```css [src/css/tailwind.css]
+```mdx [src/css/tailwind.css]
 @config 'tailwind.custom.js';
 @tailwind components;
 @tailwind utilities;
@@ -405,7 +415,7 @@ export default {
 
 ### templates
 
-The `templates` key has been deprecated, see [`build`](#build) above for how to define template and other assets sources.
+The `templates` key has been deprecated, see [`build`](#build) above for how to define Template and other assets sources.
 
 ### applyTransformers
 

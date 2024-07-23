@@ -5,7 +5,7 @@ description: "Apply transformations to content inside tags from your HTML email 
 
 # Filters
 
-Maizzle includes filters that enable you to do anything you want to text inside elements that you mark with custom attributes.
+Maizzle includes filters that enable you to do anything you want to text nodes inside elements that you mark with custom attributes.
 
 ## Usage
 

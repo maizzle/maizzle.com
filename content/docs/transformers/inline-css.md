@@ -33,7 +33,7 @@ If you need control over how your CSS is inlined, you may pass a configuration o
 
 ### styleToAttribute
 
-Type: Object\
+Type: `Object`\
 Default: `{}`
 
 Defines which CSS properties should be duplicated as what HTML attributes.
@@ -81,13 +81,16 @@ CSS Property | HTML Attribute
 
 ### attributeToStyle
 
+Type: `Boolean|String[]`\
+Default: `undefined`
+
 Duplicates specified HTML attributes as inline CSS.
 
 See the documentation [here](/docs/transformers/attribute-to-style).
 
 ### applyWidthAttributes
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 Whether to use any CSS pixel widths to create `width` attributes on elements set in `css.inline.widthElements`.
@@ -106,7 +109,7 @@ export default {
 
 ### widthElements
 
-Type: Array\
+Type: `String[]`\
 Default: `['img', 'video']`
 
 Array of HTML elements that can receive `width` attributes based on inline CSS width.
@@ -123,7 +126,7 @@ export default {
 
 ### applyHeightAttributes
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 Whether to use any CSS pixel heights to create `height` attributes on elements set in `css.inline.heightElements`.
@@ -142,7 +145,7 @@ export default {
 
 ### heightElements
 
-Type: Array\
+Type: `String[]`\
 Default: `['img', 'video']`
 
 Array of HTML elements that can receive `height` attributes based on inline CSS height.
@@ -159,7 +162,7 @@ export default {
 
 ### excludedProperties
 
-Type: Array\
+Type: `String[]`\
 Default: `[]`
 
 Array of CSS property names that should be excluded from the CSS inlining process.
@@ -182,7 +185,7 @@ export default {
 
 ### codeBlocks
 
-Type: Object\
+Type: `Object`\
 Default: `{ EJS: {}, HBS: {} }`
 
 An object where each value has a start and end to specify fenced code blocks that should be ignored during CSS inlining.
@@ -198,7 +201,7 @@ By default, <abbr title="Embedded JavaScript Templates">EJS</abbr> and <abbr tit
 
 ### removeInlinedSelectors
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 When `css.inline` is enabled, classes will be removed from the `class` attribute of a tag after they have been successfully inlined.
@@ -217,7 +220,7 @@ export default {
 
 ### resolveCSSVariables
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 Whether to resolve CSS variables to their actual values in the inlined CSS.
@@ -255,7 +258,7 @@ export default {
 
 ### resolveCalc
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 Whether to resolve `calc()` expressions in the inlined CSS.
@@ -282,7 +285,7 @@ By default, something like this:
 
 ### preferUnitlessValues
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 When inlining CSS, `0` values will be inlined without units.
@@ -306,7 +309,7 @@ export default {
 You may add an attribute on a `<style>` tag to prevent Juice from inlining the CSS inside it. Useful for writing email client CSS hacks, or for preserving CSS comments when using the [`removeCSSComments: false`](/docs/transformers/remove-unused-css#removecsscomments) Cleanup option.
 
 ```html
-<style no-inline>
+<style data-embed>
   /* This CSS will not be inlined */
   .text-red { color: red; }
 </style>
@@ -314,9 +317,9 @@ You may add an attribute on a `<style>` tag to prevent Juice from inlining the C
 
 Maizzle supports the following attributes for this purpose:
 
--  `embed`
--  `no-inline`
 -  `data-embed`
+-  `no-inline`
+-  `embed`
 
 <Alert>CSS selectors that don't appear in your markup will still need to be [whitelisted for purging](/docs/transformers/remove-unused-css#whitelist).</Alert>
 

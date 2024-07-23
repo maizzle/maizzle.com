@@ -92,7 +92,7 @@ The build command for it would be:
 maizzle build shopify
 ```
 
-Or, if you're using NPM scripts and didn't set up a script for this environment:
+Or, if you're using NPM scripts and didn't set up a script for this Environment:
 
 ```sh
 npm run build -- shopify
@@ -103,7 +103,7 @@ npm run build -- shopify
 
 Maizzle exposes a `page` object that you can access through [expressions](/docs/expressions) in your HTML.
 
-This object contains the computed Template config, which is `config.[env].js` merged with Front Matter variables from the Template currently being processed.
+This object contains the computed Template config, which is based on `config.[env].js` merged with Front Matter variables from the Template currently being processed.
 
 This makes it possible to define variables in `config.js`:
 
@@ -115,7 +115,7 @@ export default {
 
 ... and use them in your markup:
 
-```xml [src/templates/example.html]
+```hbs [src/templates/example.html]
 <x-main>
   <p>doctype is: {{ page.doctype }}</p>
 </x-main>
@@ -133,9 +133,11 @@ You can output content in your emails based on the Environment that you're build
 </if>
 ```
 
+<Alert>You may also use the `<env:production>` tag, [see the docs](/docs/tags#env).</Alert>
+
 ### Top-level variables
 
-You may define 'local' variables that can be accessed outside of the `page` object, through the `locals` key:
+You may define 'local' variables that can be accessed outside of the `page` object:
 
 ```js [config.js]
 export default {
@@ -147,7 +149,7 @@ export default {
 }
 ```
 
-Now, you can access `company` properties directly:
+These local variables can be accessed without `page`:
 
 ```js [src/templates/example.html] diff {2}
 - Company name is {{ page.company.name }}
@@ -176,7 +178,7 @@ export default {
 
 Sometimes you may need to define different values for attributes based on the Environment you're building for.
 
-While you may use ternaries in expressions to do so:
+While you could use long, verbose ternaries in expressions to do so:
 
 ```xml [src/templates/example.html]
 <x-main>
@@ -195,6 +197,6 @@ While you may use ternaries in expressions to do so:
 </x-main>
 ```
 
-The value of the `href-production` attribute will be used when building for the `href` attribute when doing `npm run build` or `maizzle build production`.
+The value of the `href-production` attribute will be used for the `href` attribute when doing `npm run build` or `maizzle build production`.
 
 The `href-production` attribute itself will then be removed from the output.

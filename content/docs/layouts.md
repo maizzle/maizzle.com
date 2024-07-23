@@ -77,12 +77,14 @@ Maizzle also supports `<link rel="stylesheet">` tags - it will read the file fro
 <!doctype html>
 <html>
 <head>
-+   <link rel="stylesheet" href="src/css/tailwind.css">
++   <link rel="stylesheet" href="src/css/tailwind.css" inline>
 </head>
 <body>
   <yield />
 </body>
 ```
+
+<Alert>Make sure to include the `inline` attribute on the `<link>` tag.</Alert>
 
 Then, in your `tailwind.css` file:
 
@@ -114,3 +116,5 @@ For example, you could use `page.env` to output some content only when running t
   <p>This text will show when running `maizzle build production`</p>
 </if>
 ```
+
+<Alert>You may also use the `<env:production>` tag, [see the docs](/docs/tags#env).</Alert>

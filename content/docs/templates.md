@@ -5,7 +5,7 @@ description: "Learn how to create HTML emails with template inheritance in Maizz
 
 # Templates
 
-A Template in Maizzle is an HTML file that typically contains the body of your email: the HTML that defines the design and content.
+A Template in Maizzle is a file that typically contains the body of your email: the HTML markup that defines the design and content.
 
 It's made up of two distinct sections:
 
@@ -28,7 +28,7 @@ title: "Please confirm your email address"
 
 Front Matter variables are accessible through the `page` object.
 
-To output them in a Template, use the `{{ }}` [expression](/docs/expressions) syntax:
+To output them in a Template, use the `{{ }}` [expression syntax](/docs/expressions):
 
 ```hbs [src/templates/example.html]
 ---
@@ -57,6 +57,8 @@ That will render as:
 ```hbs [build_production/example.html]
 <h1>Hello {{ user.name }}, please confirm your email address</h1>
 ```
+
+Also, if the variable being referenced in an expression is not defined, Maizzle will ignore it and output it as-is.
 
 ## Using Layouts
 
@@ -94,7 +96,7 @@ Learn more about how these x-tags work, in the [Components docs](/docs/component
 
 ## Current template
 
-Information about the Template file that is currently being processed is available under `page.build.current`:
+Information about the Template file that is currently being processed will be available under `page.build.current`:
 
 ```js
 build: {

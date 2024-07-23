@@ -19,12 +19,12 @@ export default {
 
 ## content
 
-Type: String[]\
+Type: `String[]`\
 Default: `['src/templates/**/*.html']`
 
 Define the source directories where Maizzle should look for Templates to compile.
 
-This is an array of glob patterns, similar to how content sources are configured in Tailwind CSS. See [fast-glob](https://github.com/mrmlnc/fast-glob) for more information on how to write glob patterns.
+This is an array of glob patterns, similar to how content sources are configured in Tailwind CSS. See [fast-glob](https://github.com/mrmlnc/fast-glob) for how to write glob patterns.
 
 ### File types
 
@@ -88,14 +88,14 @@ export default {
 
 ## output
 
-Type: Object\
+Type: `Object`\
 Default: `{ path: 'build_[env]', extension: 'html' }`
 
 Define the output path for compiled Templates, and what file extension they should use.
 
 ### path
 
-Type: String\
+Type: `String`\
 Default: `build_[env]`
 
 Directory path where Maizzle should output the compiled emails.
@@ -114,7 +114,7 @@ If you omit this key, a `build_[env]` directory name will be used, where `[env]`
 
 ### extension
 
-Type: String\
+Type: `String`\
 Default: `undefined`
 
 Define the file extension - without the leading dot - to be used for the compiled templates. For example, let's output [Laravel Blade](https://laravel.com/docs/8.x/blade) files:
@@ -136,7 +136,7 @@ By default, Maizzle will use the extension of the source file.
 
 ## permalink
 
-Type: String\
+Type: `String`\
 Default: `undefined`
 
 Use the `permalink` Front Matter key to define a custom output path right in a Template:
@@ -183,7 +183,7 @@ permalink: C:/Users/Cosmin/Newsletter/2024/07/index.html
 
 ## static
 
-Type: Object\
+Type: `Object`\
 Default: `{ source: '', destination: 'assets' }`
 
 Source and destination directories for static asset files.
@@ -205,7 +205,7 @@ You can use it to store _any_ files you might need, not just images.
 
 ## spinner
 
-Type: String|Object\
+Type: `String|Object`\
 Default: `'circleHalves'`
 
 Customize the spinner shown in the console during build.

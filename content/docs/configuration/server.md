@@ -7,9 +7,9 @@ Maizzle includes a dev server for local email development. It can watch your Tem
 Type: `Boolean`\
 Default: `true`
 
-Enable Hot Module Replacement (HMR) for the dev server.
+Enable Hot Markup Replacement&trade; for the dev server.
 
-When `true`, changes you make to Templates, Components, config files etc. will be reflected in the browser without a full page reload.
+When `true`, changes you make to Templates, Components, config files etc. will be instantly reflected in the browser without a full page reload.
 
 You may disable HMR by setting this to `false`:
 
@@ -81,16 +81,16 @@ export default {
 ### scrollSync
 
 Type: `Boolean`\
-Default: `true`
+Default: `false`
 
-Scrolling in one browser window will be mirrored across all browser windows that are showing the same Template.
+Scrolling in one browser window will be mirrored across all browser windows that are viewing the same Template.
 
-Disable it by setting this to `false`:
+Enable it by setting this to `true`:
 
 ```js [config.js]
 export default {
   server: {
-    scrollSync: false,
+    scrollSync: true,
   }
 }
 ```
@@ -127,7 +127,7 @@ More than 102KB:
 
 ### spinner
 
-Type: String|Object\
+Type: `String|Object`\
 Default: `'circleHalves'`
 
 Customize the spinner shown in the console when compiling a Template.

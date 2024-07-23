@@ -50,7 +50,7 @@ Configure the tags to process and other transformer options.
 
 ### tags
 
-Type: Array\
+Type: `String[]`\
 Default: `['a']`
 
 Array of tag names to process.
@@ -72,7 +72,7 @@ export default {
 
 ### attributes
 
-Type: Array\
+Type: `String[]`\
 Default: `['src', 'href', 'poster', 'srcset', 'background']`
 
 Array of attributes to process for the given tags.
@@ -107,7 +107,7 @@ The result will be:
 
 ### strict
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 By default, query parameters are appended only to valid URLs.
@@ -139,7 +139,7 @@ Result:
 
 ### qs
 
-Type: Object\
+Type: `Object`\
 Default: `undefined`
 
 Options to pass to the [query-string](https://github.com/sindresorhus/query-string#stringifyobject-options) library.

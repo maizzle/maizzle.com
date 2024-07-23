@@ -43,7 +43,7 @@ You'll most likely want to customize the transformer so that it applies only to 
 
 ### tags
 
-Type: Array|Object\
+Type: `String[]|<Record<string, boolean|string>>`\
 Default: [see default tags](https://github.com/posthtml/posthtml-base-url/blob/main/lib/index.js)
 
 Apply the base URL only to `<img>` tags:
@@ -77,7 +77,7 @@ export default {
 
 ### attributes
 
-Type: Object\
+Type: `Object`\
 Default: `{}`
 
 Key-value pairs of attributes and what to prepend to them.
@@ -94,7 +94,7 @@ export default {
 
 ### styleTag
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 By default, the transformer will prepend your `url` to all `url()` sources in `<style>` tags. Set this option to `false` to prevent it from doing so:
@@ -111,7 +111,7 @@ export default {
 
 ### inlineCss
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 Similarly, the transformer will prepend your `url` to all `url()` sources in `style=""` attributes. You may disable this if you need to:

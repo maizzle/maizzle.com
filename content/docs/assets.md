@@ -15,7 +15,7 @@ You may define a global email assets folder that will be copied to the build dir
 export default {
   build: {
     static: {
-      source: ['src/images/**/*.*'],
+      source: ['src/images/**/*'],
       destination: 'images',
     }
   }
@@ -32,7 +32,7 @@ You may define multiple asset source paths and all files from those paths will b
 export default {
   build: {
     static: {
-      source: ['src/images/**/*.*', 'src/fonts/**/*.*'],
+      source: ['src/images/**/*', 'src/fonts/**/*'],
       destination: 'assets'
     }
   }

@@ -48,7 +48,7 @@ The following naming convention is used:
 
 As you can see, the second and last examples are not very readable, which is why we recommend using a [nested file structure](#nested-file-structure) instead.
 
-### `<component>` tag
+### &lt;component&gt; tag
 
 Alternatively, you may use the `<component>` tag to insert a Component:
 
@@ -60,6 +60,8 @@ Alternatively, you may use the `<component>` tag to insert a Component:
 
 The `src` attribute is mandatory and it needs to point to the Component's file path, relative to the project root.
 If you're used to partials that you simply include in your HTML, this may look more familiar.
+
+<Alert type="warning">The `src` attribute is reserved on Components, make sure not to use it as a prop name.</Alert>
 
 ## Nested file structure
 
@@ -236,7 +238,7 @@ You would modify your Layout to include a `stack` tag:
   </style>
 </head>
 <body>
-  <slot:template />
+  <yield />
 </body>
 ```
 
@@ -250,13 +252,9 @@ You may then push content to that stack from a Template:
 </push>
 
 <x-layout>
-  <fill:template>
-    <!-- your email HTML... -->
-  </fill:template>
+  <!-- your email HTML... -->
 </x-layout>
 ```
-
-<Alert>You may also use the `<push>` tag inside the `<fill:template>` tag.</Alert>
 
 Result:
 
@@ -291,11 +289,9 @@ Looping over this Component will only push that CSS once to the `head` stack:
 
 ```xml [src/templates/example.html]
 <x-layout>
-  <fill:template>
-    <each loop="item in [1,2,3]">
-      <x-card />
-    </each>
-  </fill:template>
+  <each loop="item in [1,2,3]">
+    <x-card />
+  </each>
 </x-layout>
 ```
 
@@ -329,7 +325,38 @@ To pass the `title` prop to the Component, you would use the `title` attribute:
 <x-alert title="Hello, world!" />
 ```
 
-#### Encoding props data
+### Reserved props
+
+The `src` prop is reserved when used on Components - it will always try to load a Component file at the path defined in the attribute value.
+
+So if you're trying to pass a `src` prop to a Component, you should use a different name:
+
+```hbs [src/components/alert.html] {3}
+<script props>
+  module.exports = {
+    imgSrc: props['img-src'] || 'example.jpg',
+  }
+</script>
+
+<img src="{{ imgSrc }}">
+```
+
+```hbs diff [src/templates/example.html] {2}
+- <x-alert src="image.jpg" />
++ <x-alert img-src="image.jpg" />
+```
+
+Alternatively, you may change the prop attribute name to something other than `src`:
+
+```js [config.js]
+export default {
+  components: {
+    attribute: 'href',
+  },
+}
+```
+
+### Encoding props data
 
 When passing a props object to a Component, you need to encode the values.
 

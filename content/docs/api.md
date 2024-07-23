@@ -71,7 +71,7 @@ let html = `---
 title: Using Maizzle on the server
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <style>
@@ -159,7 +159,7 @@ The following Transformers always run:
 You must add the `@tailwind` directives in a `<style>` tag in the `<head>` of your email HTML, otherwise Tailwind CSS will not be compiled.
 
 ```mdx {4-7} diff
-  <!DOCTYPE html>
+  <!doctype html>
   <html>
     <head>
 +      <style>

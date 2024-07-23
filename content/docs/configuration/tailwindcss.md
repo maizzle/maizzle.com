@@ -9,7 +9,7 @@ Configuring Tailwind CSS in Maizzle.
 
 ## Build configuration
 
-You may provide a custom Tailwind configuration object under the `css.tailwind` key in your `config.js` file:
+You may provide a custom Tailwind CSS configuration object under the `css.tailwind` key in your `config.js` file:
 
 ```js [config.js]
 export default {
@@ -56,13 +56,11 @@ The Tailwind preset in Maizzle sets `important: true` - this way, things like re
 
 You may disable this behavior by setting the `important` key to `false`:
 
-```js [tailwind.config.js] diff {8}
-import emailPreset from 'tailwindcss-preset-email'
-
+```js [tailwind.config.js] diff {6}
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   presets: [
-    emailPreset,
+    require('tailwindcss-preset-email'),
   ],
 +  important: false,
 }
@@ -95,17 +93,15 @@ export default {
 
 Of course, you're free to adjust this as you like. For example, you might add a breakpoint that targets tablet devices based on their viewport width:
 
-```js [tailwind.config.js] diff {10}
-import emailPreset from 'tailwindcss-preset-email'
-
+```js [tailwind.config.js] diff {7}
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   presets: [
-    emailPreset,
+    require('tailwindcss-preset-email'),
   ],
   screens: {
-    sm: {max: '600px'},
 +    md: {min: '768px', max: '1023px'},
+    sm: {max: '600px'},
     xs: {max: '425px'},
   },
 }

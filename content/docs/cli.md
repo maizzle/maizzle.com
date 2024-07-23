@@ -50,9 +50,9 @@ When you run this command, a local development server will be started, which you
 
 You can edit a Template or Component in your code editor, save it, and the changes will instantly be reflected in the browser.
 
-#### serve [env]
+#### serve \[env\]
 
-You may specify which environment config file to use by passing an `[env]` argument:
+You may specify which Environment config file to use by passing an `[env]` argument:
 
 ```sh
 maizzle serve production
@@ -67,11 +67,11 @@ You can use this to start a dev server that uses settings from a different Envir
 maizzle build [env]
 ```
 
-`maizzle build` is used to compile your Templates and output them to the destination directory. If `[env]` is specified, Maizzle will try to compute an Environment config by merging `config.[env].js` on top of the default `config.js`.
+The `build` command is used to compile your Templates and output them to the destination directory. If `[env]` is specified, Maizzle will try to compute an Environment config by merging `config.[env].js` on top of the default `config.js`.
 
 | Argument | Required | Default | Description
 | --- | --- | --- | --- |
-| `[env]` | no |  `local` | An environment name to use
+| `[env]` | no |  `local` | An Environment name to use
 
 | Option | Short | Description
 | --- | --- | --- |
@@ -126,7 +126,7 @@ $ maizzle build production --summary
 │ password-recovery.html │ 4.99 KB   │ 65 ms      │
 └────────────────────────┴───────────┴────────────┘
 
-✔ Build completed in 698 ms
+✔ Built 4 templates in 698 ms
 ```
 
 ## Scaffolding
@@ -139,7 +139,7 @@ CLI commands for creating new projects and scaffolding Templates or config files
 maizzle make:config
 ```
 
-This will start an interactive prompt that will guide you through the process of creating a new Maizzle config file.
+This command will start an interactive prompt that will guide you through the process of creating a new Maizzle config file.
 
 You may skip the prompt by passing in arguments:
 
@@ -305,13 +305,16 @@ Scaffolds a new Tailwind CSS config based on the one in the [Starter](https://gi
 
 Running it with no arguments will present an interactive prompt.
 
-A minimal Tailwind config will be output:
+A minimal Tailwind CSS config will be output:
 
 ```js [tailwind.config.js]
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   presets: [
     require('tailwindcss-preset-email'),
+  ],
+  content: [
+    './src/**/*.html',
   ],
 }
 ```
@@ -323,7 +326,7 @@ You can skip the prompt by passing in arguments:
 | `filepath` | Full path of the file to create, including file name
 
 ```sh
-maizzle make:tailwind configs/tailwind.config.js
+maizzle make:tailwind config/tailwind.config.js
 ```
 
 <Alert type="warning">If the file already exists, an error will be thrown. The file will _not_ be overwritten.</Alert>
