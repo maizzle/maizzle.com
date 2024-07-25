@@ -98,7 +98,7 @@ export default [
         path: '/docs/expressions'
       },
       {
-        title: 'Custom Tags',
+        title: 'Tags',
         path: '/docs/tags'
       },
       {

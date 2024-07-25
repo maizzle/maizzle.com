@@ -1,9 +1,9 @@
 ---
-title: "Custom Tags"
+title: "Tags"
 description: "Special tags for templating logic that you can use in Maizzle."
 ---
 
-# Custom Tags
+# Tags
 
 Maizzle includes some special tags designed to help you with templating logic.
 
@@ -368,6 +368,36 @@ Example:
 <context with="page.roles.editor">
   {{ name }}
 </context>
+```
+
+## Fetch
+
+You can fetch and display remote content in your email templates:
+
+```hbs [src/templates/example.html]
+<fetch url="https://jsonplaceholder.typicode.com/users">
+  <each loop="user in response">
+    {{ user.name }}
+  </each>
+</fetch>
+```
+
+Inside the `<fetch>` tag, you have access to a `{{ response }}` variable.
+
+#### Fetch options
+
+You may use the `fetch` key to customize options:
+
+```js [config.js]
+module.exports = {
+  fetch: {
+    tags: ['get'], // default ['fetch', 'remote']
+    attribute: 'resource', // default 'url'
+    ofetch: {}, // pass options to the `ofetch` package
+    preserveTag: true, // default false
+    expressions: {}, // configure expressions in fetch context
+  }
+}
 ```
 
 ## Raw
