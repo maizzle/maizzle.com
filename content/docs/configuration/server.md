@@ -11,7 +11,7 @@ Enable Hot Markup Replacement&trade; for the dev server.
 
 When `true`, changes you make to Templates, Components, config files etc. will be instantly reflected in the browser without a full page reload.
 
-You may disable HMR by setting this to `false`:
+You may disable HMR and force a page reload by setting this to `false`:
 
 ```js [config.js]
 export default {
