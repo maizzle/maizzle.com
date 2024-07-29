@@ -389,7 +389,7 @@ Inside the `<fetch>` tag, you have access to a `{{ response }}` variable.
 You may use the `fetch` key to customize options:
 
 ```js [config.js]
-module.exports = {
+export default {
   fetch: {
     tags: ['get'], // default ['fetch', 'remote']
     attribute: 'resource', // default 'url'

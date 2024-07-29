@@ -205,7 +205,7 @@ Events have been moved to the root of the config file:
 ```js [config.js] diff {3-5}
 export default {
 -  events: {...}
-+  async beforeRender({html, config, render}) {
++  async beforeRender({html, matter, config, posthtml}) {
 +    // ...
 +  },
 }
@@ -228,7 +228,7 @@ export default {
 
 ### layouts
 
-The `layouts` key has been deprecated, you can safely remove it.
+The `layouts` key is no longer used, you can safely remove it.
 
 ### inlineCSS
 
@@ -280,6 +280,23 @@ export default {
 +  },
 }
 ```
+
+### fetch
+
+The `fetch` key has been moved to the root of the config file:
+
+```js [config.js] diff {5-7}
+export default {
+-  posthtml: {
+-    fetch: {}
+-  }
++  fetch: {
++    tags: ['get'],
++  },
+}
+```
+
+See the [fetch docs](/docs/tags#fetch-options) for the available options.
 
 ### postcss
 
