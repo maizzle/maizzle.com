@@ -77,7 +77,20 @@ npm install @maizzle/framework@next
 
 The `<content />` tag has been replaced with `<yield />`.
 
-Make sure to update it in your Layouts and Components.
+Make sure to update it in your Layouts and Components:
+
+```hbs diff [src/layouts/main.html] {8}
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- ... -->
+</head>
+<body>
+-  <content />
++  <yield />
+</body>
+</html>
+```
 
 ### style
 
