@@ -19,7 +19,7 @@ To use events with the CLI commands, add them to your `config.js` file:
 
 ```js [config.js]
 export default {
-  beforeCreate({config}) {
+  beforeCreate({ config }) {
     // do stuff with config
   },
 }
@@ -33,7 +33,7 @@ When using the API, add events inside the object that you pass to the `render()`
 const Maizzle = require('@maizzle/framework')
 
 html = Maizzle.render(`some HTML string...`, {
-    beforeRender({html, config, matter, posthtml}) {
+    beforeRender({ html, config, matter }) {
       // ...
     }
   }
