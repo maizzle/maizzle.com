@@ -65,7 +65,7 @@ For example, let's use a custom highlight function for Markdown fenced code bloc
 import Prism from 'prismjs'
 
 export default {
-  async beforeCreate({config}) {
+  async beforeCreate({ config }) {
     config = Object.assign(config, {
       markdown: {
         markdownit: {
@@ -86,7 +86,7 @@ export default {
 
 Runs after the Template's config has been computed, but just before it is compiled.
 
-It exposes the Template's config, its HTML and Front Matter, as well as the PostHTML compile function.
+It exposes the Template's HTML and Front Matter, as well as its config.
 
 For (a silly) example, let's fetch data from an API and set it as the preheader text:
 
@@ -94,7 +94,7 @@ For (a silly) example, let's fetch data from an API and set it as the preheader 
 import axios from 'axios'
 
 export default {
-  async beforeRender({html, config, matter, posthtml}) {
+  async beforeRender({ html, config, matter }) {
     const url = 'https://baconipsum.com/api/?type=all-meat&sentences=1&start-with-lorem=1'
 
     config.preheader = await axios(url).then(result => result.data).catch(error => 'Could not fetch preheader, using default one.')
@@ -118,7 +118,7 @@ Then, you'd render it in your HTML, like so:
 
 ### afterRender
 
-Runs after the Template has been compiled, but before any Transformers have been applied. Exposes the rendered `html` string and the `config`, as well as the Template's Front Matter and the PostHTML compile function.
+Runs after the Template has been compiled, but before any Transformers have been applied. Exposes the rendered `html` string and the `config`, as well as the Template's Front Matter.
 
 It's your last chance to alter the HTML or any settings in your config, before Transformers process your email template.
 
@@ -126,7 +126,7 @@ For example, let's disable CSS inlining:
 
 ```js [config.js]
 export default {
-  afterRender({html, config, matter, posthtml}) {
+  afterRender({ html, config, matter }) {
     config.css = {
       inline: false
     }
@@ -153,7 +153,7 @@ import Minifier from 'imaginary-minifier'
 
 export default {
   minify: false,
-  afterTransformers({html, config, matter, posthtml}) {
+  afterTransformers({ html, config, matter }) {
     if (!config.minify) {
       return Minifier.minify(html)
     }
@@ -171,7 +171,7 @@ Runs after all Templates have been compiled and output to disk. The `files` para
 
 ```js [config.js]
 export default {
-  afterBuild({files, config}) {
+  afterBuild({ files, config }) {
     console.log(files)
   }
 }
