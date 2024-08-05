@@ -16,7 +16,7 @@
     "nuxt-og-image": "^3.0.0-rc.38",
     "postcss": "^8.4.39",
     "postcss-import": "^16.1.0",
-    "postcss-nesting": "^12.1.5",
+    "postcss-nesting": "^13.0.0",
     "sharp": "^0.33.4",
     "shiki-es": "^0.14.0",
     "strip-indent": "^4.0.0",
