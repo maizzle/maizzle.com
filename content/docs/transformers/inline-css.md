@@ -304,6 +304,29 @@ export default {
 }
 ```
 
+### useAttributeSizes
+
+Type: `Boolean`\
+Default: `undefined`
+
+Prefer HTML `width` and `height` attributes over inline CSS.
+
+Useful for retina images in Outlook on Windows, which doesn't respect CSS sizes and will render the image in its natural size.
+
+Set this to `true` to use HTML attributes for sizes instead of inline CSS:
+
+```js [config.js]
+export default {
+  css: {
+    inline: {
+      useAttributeSizes: true,
+    }
+  }
+}
+```
+
+<alert>`useAttributeSizes` will apply to all elements defined in [`widthElements`](/docs/transformers/inline-css#widthelements) and [`heightElements`](/docs/transformers/inline-css#heightelements)</alert>
+
 ## Prevent inlining
 
 You may add an attribute on a `<style>` tag to prevent Juice from inlining the CSS inside it. Useful for writing email client CSS hacks, or for preserving CSS comments when using the [`removeCSSComments: false`](/docs/transformers/remove-unused-css#removecsscomments) Cleanup option.
