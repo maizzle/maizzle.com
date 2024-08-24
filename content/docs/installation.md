@@ -135,7 +135,7 @@ With the v5 Beta Starter, the `next` version will be installed. To use a specifi
 ```json [package.json] diff no-copy
 "dependencies": {
 -  "@maizzle/framework": "next",
-+  "@maizzle/framework": "5.0.0-beta.10",
++  "@maizzle/framework": "5.0.0-beta.23",
 }
 ```
 

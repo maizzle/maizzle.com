@@ -2,7 +2,7 @@
   <header class="sticky top-0 sm:h-20 items-center z-50">
     <!-- Desktop Header -->
     <div class="hidden lg:grid grid-cols-12 h-full">
-      <div class="grid col-span-4 lg:col-span-3 xl:col-span-4 h-full justify-end items-center space-y-2 bg-slate-50">
+      <div class="grid col-span-4 lg:col-span-3 h-full justify-end items-center space-y-2 bg-slate-50">
         <div class="w-60 flex items-end gap-4">
           <NuxtLink
             to="/" @click.native.right.prevent="goToBrandPage"
@@ -61,7 +61,7 @@
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-12 col-span-8 lg:col-span-9 xl:col-span-8 h-full border-b border-slate-100 backdrop-blur bg-white/90">
+      <div class="grid grid-cols-12 col-span-8 lg:col-span-9 h-full border-b border-slate-100 backdrop-blur bg-white/90">
         <div class="grid col-span-12 xl:col-span-9 2xl:col-span-7 3xl:col-span-6 xl:py-4 px-8 3xl:pl-12 items-center">
           <div class="hidden sm:block max-w-[75ch] whitespace-nowrap overflow-auto">
             <NuxtLink
