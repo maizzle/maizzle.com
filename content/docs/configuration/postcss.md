@@ -35,7 +35,7 @@ export default {
 
 Any plugins that you register in the `plugins` array will be added at the end of the PostCSS plugins stack, which means they'll run _after_ Tailwind CSS.
 
-### Options
+## Options
 
 You may also configure PostCSS options:
 
