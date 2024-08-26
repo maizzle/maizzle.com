@@ -69,6 +69,8 @@ When using a `<style>` tag, you can include Tailwind's `utilities` and `componen
 </body>
 ```
 
+<Alert>We don't recommend using `@tailwind base` because it contains CSS resets that won't work or are not needed in HTML emails. Also, some resets use the `*` selector, which can cause issues when CSS is inlined.</Alert>
+
 ### link tag
 
 Maizzle also supports `<link rel="stylesheet">` tags - it will read the file from the `href` attribute and process it with PostCSS (including Tailwind CSS).
