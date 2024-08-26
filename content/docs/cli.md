@@ -14,7 +14,7 @@ You can use the Maizzle CLI to:
 
 ## Installation
 
-Install the CLI tool globally, so the `maizzle` executable gets added to your `$PATH` :
+Install the CLI tool globally, so that the `maizzle` executable gets added to your `$PATH` :
 
 ```sh
 npm install -g @maizzle/cli
@@ -44,9 +44,15 @@ maizzle serve [env]
 | --- | --- | --- | --- |
 | `[env]` | no |  `local` | An [Environment](/docs/environments) name to use
 
-When you run this command, a local development server will be started, which you can access in your browser at _http://localhost:3000_.
+| Option | Short | Description
+| --- | --- | --- |
+| `--bin` | `-b` | Path to the Maizzle executable
+| `--config` | `-c` | Path to a config file to use
+| `--port` | `-p` | Port number to run the server on
 
-`[env]` is optional, you can simply run `maizzle serve` and a local development server will be started using the settings from your project's `config.js`.
+Use the `maizzle serve` command to start a local development server, which you can access in your browser at http://localhost:3000.
+
+`[env]` is optional, you can simply run `maizzle serve` and a server will be started using the settings from your project's `config.js`.
 
 You can edit a Template or Component in your code editor, save it, and the changes will instantly be reflected in the browser.
 
@@ -60,6 +66,34 @@ maizzle serve production
 
 In this example, a local development server will be started using the settings from your project's `config.production.js`.
 You can use this to start a dev server that uses settings from a different Environment config file.
+
+#### --bin
+
+If needed, you may specify the path to Maizzle's executable by passing the `--bin` flag:
+
+```sh
+maizzle serve --bin /path/to/@maizzle/framework/src
+```
+
+#### --config
+
+You may specify the path to a config file by passing the `--config` flag:
+
+This config file path takes precedence over the `[env]` argument, so for example the `dev.config.js` file will be used even if `production` is passed:
+
+```sh
+maizzle serve production --config /path/to/dev.config.js
+```
+
+#### --port
+
+You may pass the `--port` flag to specify a port number to run the server on:
+
+```sh
+maizzle serve --port 8080
+```
+
+By default, `maizzle serve` will start on port `3000`.
 
 ### build
 
@@ -109,7 +143,7 @@ maizzle build production --config /path/to/custom-config.js
 
 You may pass the `--summary` flag to show a summary of the build process.
 
-This will output a list of all the Templates that were built, their file size, and how long it took to build each one.
+This will output a list of all the Templates that were built, their compiled file size, and how long it took to build each one.
 
 ```sh no-root no-copy
 $ maizzle build production --summary
@@ -141,21 +175,18 @@ maizzle make:config
 
 This command will start an interactive prompt that will guide you through the process of creating a new Maizzle config file.
 
-You may skip the prompt by passing in arguments:
+You may skip the prompt by passing a name for the config file:
 
 ```sh
-maizzle make:config [env] --full?
+maizzle make:config [env]
 ```
-
-| Argument | Description
-| --- | --- |
-| `[env]` | Environment name to use for the config.
 
 | Option | Shorthand | Description
 | --- | --- | --- |
+| `[env]` | n/a | Environment name to use for the config file name.
 | `--full` | `-f` |  Scaffold a full config.
 
-The `[env]` argument is an Environment name, like `preview`.
+The `[env]` option is an Environment name, like `preview`.
 
 For example, let's scaffold `config.preview.js`:
 

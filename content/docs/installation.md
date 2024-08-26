@@ -12,7 +12,7 @@ The next version of Maizzle is here! 🥳
 Try it out now by running `npx create-maizzle` and selecting the `5.0.0-beta` Starter:
 
 ```sh example no-root no-copy
-$ npx create-maizzle
+npx create-maizzle
 
 ┌   create-maizzle
 │

@@ -205,7 +205,7 @@ Events have been moved to the root of the config file:
 ```js [config.js] diff {3-5}
 export default {
 -  events: {...}
-+  async beforeRender({html, matter, config, posthtml}) {
++  async beforeRender({html, matter, config}) {
 +    // ...
 +  },
 }
@@ -422,7 +422,7 @@ If you prefer using CSS files:
 @tailwind utilities;
 ```
 
-... you may import that either through a `<link>` tag or through an `@import` statement in a `<style>` tag:
+... you may import that through a `<link>` tag or with an `@import` statement:
 
 ```html
 <link rel="stylesheet" href="src/css/tailwind.css">
