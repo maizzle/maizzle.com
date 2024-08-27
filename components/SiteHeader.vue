@@ -52,6 +52,15 @@
         </li>
         <li>
           <a
+            href="https://laracasts.com/series/build-html-emails-with-maizzle"
+            role="menuitem"
+            class="text-slate-600 hover:text-slate-800 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+          >
+            Videos
+          </a>
+        </li>
+        <li>
+          <a
             href="https://github.com/maizzle"
             class="text-slate-400 hover:text-slate-500"
             rel="nofollow"
@@ -91,6 +100,14 @@
         tabindex="-1"
       >
         <div class="py-1" role="none">
+          <a
+            href="https://laracasts.com/series/build-html-emails-with-maizzle"
+            role="menuitem"
+            class="mobile-menu-item text-gray-700 hover:bg-slate-50 block px-4 py-2 text-sm"
+            tabindex="-1"
+          >
+            Laracasts Series
+          </a>
           <NuxtLink
             to="/docs/introduction"
             role="menuitem"

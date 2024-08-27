@@ -36,9 +36,7 @@
               tabindex="-1"
             >
               <div class="py-1" role="none">
-                <span
-                  class="block px-4 py-2 text-indigo-600 font-medium cursor-default" role="menuitem" tabindex="-1"
-                >
+                <span class="block px-4 py-2 text-indigo-600 font-medium cursor-default" role="menuitem" tabindex="-1">
                   v5.0.0-beta
                 </span>
                 <a href="https://maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
@@ -150,6 +148,9 @@
             tabindex="-1"
           >
             <div class="py-1" role="none">
+              <a href="https://next.maizzle.com/docs/installation" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
+                v5.0.0-beta
+              </a>
               <NuxtLink
                 to="/docs/installation"
                 class="block px-4 py-2 bg-slate-100" role="menuitem" tabindex="-1"
@@ -208,6 +209,18 @@
         <!-- Top fade -->
         <div class="sticky top-0 bg-slate-5s00 h-10 w-full -mt-4 bg-gradient-to-b from-white pointer-events-none z-0"></div>
         <ul class="mb-4 -ml-4 text-sm sm:text-base sm:leading-7">
+          <li>
+            <a
+              href="https://laracasts.com/series/build-html-emails-with-maizzle"
+              class="flex gap-2 items-center px-4 py-2 text-sm text-slate-600"
+            >
+              <svg class="w-5 mx-0.5 h-auto" viewBox="0 0 71 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#475569" d="M16.5361 25.1503L31.0642 2.84357e-06L39.6977 0L70.9999 54.2169L66.9364 61.255L19.5094 61.2547L27.1208 48.0713L52.2291 48.0723L35.3921 18.9072L31.7697 25.1503L16.5361 25.1503Z"/>
+                <path fill="#94a3b8" d="M12.258 32.5835L12.2614 32.5835L27.4929 32.5835L10.8776 61.3039L4.34502 61.3038L0 53.778L12.258 32.5835Z"/>
+              </svg>
+              Laracasts Series
+            </a>
+          </li>
           <li>
             <NuxtLink
               to="/docs/introduction"

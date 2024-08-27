@@ -23,6 +23,18 @@
       </div>
       <ul class="mb-8 -ml-4">
         <li>
+          <a
+            href="https://laracasts.com/series/build-html-emails-with-maizzle"
+            class="flex gap-2 items-center px-4 py-2 text-sm text-slate-500 hover:text-slate-900"
+          >
+            <svg class="w-5 mx-0.5 h-auto" viewBox="0 0 71 62" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#475569" d="M16.5361 25.1503L31.0642 2.84357e-06L39.6977 0L70.9999 54.2169L66.9364 61.255L19.5094 61.2547L27.1208 48.0713L52.2291 48.0723L35.3921 18.9072L31.7697 25.1503L16.5361 25.1503Z"/>
+              <path fill="#94a3b8" d="M12.258 32.5835L12.2614 32.5835L27.4929 32.5835L10.8776 61.3039L4.34502 61.3038L0 53.778L12.258 32.5835Z"/>
+            </svg>
+            Laracasts Series
+          </a>
+        </li>
+        <li>
           <NuxtLink
             to="/docs/introduction"
             class="flex gap-2 items-center px-4 py-2 text-sm text-slate-500 group hover:text-slate-900"

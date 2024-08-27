@@ -32,6 +32,14 @@ We would greatly appreciate it if you could test it out and provide feedback thr
 
 ---
 
+## Video Tutorials
+
+If you prefer to watch a video, check out the [Maizzle Series on Laracasts](https://laracasts.com/series/build-html-emails-with-maizzle).
+
+They were originally made for Maizzle 4.x, but the same concepts apply in v5 and only some configuration options are different (see our [upgrade guide](/docs/upgrade-guide)).
+
+## Requirements
+
 You'll need [Node.js](https://nodejs.org/en/download/) installed first (comes with NPM included).
 
 Use this command to check the version:
@@ -40,7 +48,7 @@ Use this command to check the version:
 node -v
 ```
 
-<Alert>Maizzle requires at least Node v18.0.0</Alert>
+<Alert>Maizzle requires at least Node v18.20.0</Alert>
 
 ## Create a project
 
