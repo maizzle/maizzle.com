@@ -39,10 +39,8 @@ You may customize the conditional tag names:
 
 ```js [config.js]
 export default {
-  build: {
-    expressions: {
-      conditionalTags: ['when', 'ifnotthen', 'otherwise'],
-    }
+  expressions: {
+    conditionalTags: ['when', 'ifnotthen', 'otherwise'],
   }
 }
 ```
@@ -111,7 +109,7 @@ Result:
 
 ## Outlook
 
-Wrap content with MSO conditional comments so that it will only show up in Outlook 2007-2019 on Windows:
+Wrap content in <abbr title="Microsoft Office">MSO</abbr> conditional comments to show it only in Outlook 2007-2021 on Windows:
 
 ```xml [src/templates/example.html]
 <outlook>
@@ -127,11 +125,11 @@ That will output:
 <![endif]-->
 ```
 
-Of course, there's also a tag for showing content everywhere _except_ in Outlook:
+Of course, there's also a tag for showing content in all email clients _except_ in Outlook:
 
 ```xml [src/templates/example.html]
 <not-outlook>
-  <div>All Outlooks will ignore this</div>
+  <div>All Outlooks (on Windows) will ignore this</div>
 </not-outlook>
 ```
 
@@ -139,7 +137,7 @@ Result:
 
 ```xml
 <!--[if !mso]><!-->
-  <div>All Outlooks will ignore this</div>
+  <div>All Outlooks (on Windows) will ignore this</div>
 <!--<![endif]-->
 ```
 
