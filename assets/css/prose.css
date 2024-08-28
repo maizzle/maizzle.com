@@ -18,7 +18,8 @@ abbr,
   @apply mb-6;
 }
 
-.prose th {
+.prose th,
+.prose td {
   @apply text-left;
 }
 
