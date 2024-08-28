@@ -83,9 +83,9 @@ export default {
 Type: `Boolean`\
 Default: `false`
 
-Scrolling in one browser window will be mirrored across all browser windows that are viewing the same Template.
+Scrolling in one browser tab will be synchronized across all other browser tabs that are viewing the same Template. This works across devices too.
 
-Enable it by setting this to `true`:
+Enable synchronized scrolling:
 
 ```js [config.js]
 export default {
@@ -94,6 +94,8 @@ export default {
   }
 }
 ```
+
+You can now open the same Template on both your laptop and your phone, and scrolling on one will be mirrored on the other.
 
 ### reportFileSize
 
