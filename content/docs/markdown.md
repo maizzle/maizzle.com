@@ -224,3 +224,16 @@ export default {
 ```
 
 This is required for things like blockquotes to work, otherwise `>` will be output as `&gt;` and the blockquote will be rendered as a paragraph.
+
+## API
+
+You may use the Markdown Transformer in your application.
+
+```js [app.js]
+import { markdown } from '@maizzle/framework'
+
+const options = {/* posthtml-markdownit options */}
+const posthtmlOptions = {/* posthtml options */}
+
+const html = await markdown('### Heading 3', options, posthtmlOptions)
+```

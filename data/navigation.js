@@ -143,10 +143,6 @@ export default [
         path: '/docs/transformers/filters'
       },
       {
-        title: 'Markdown',
-        path: '/docs/transformers/markdown'
-      },
-      {
         title: 'Widow Words',
         path: '/docs/transformers/widows'
       },
