@@ -237,3 +237,17 @@ const posthtmlOptions = {/* posthtml options */}
 
 const html = await markdown('### Heading 3', options, posthtmlOptions)
 ```
+
+If you only need some parts of your string to be parsed as Markdown, you can use the `manual` option and then wrap the Markdown content in `<md>` tags:
+
+```js [app.js]
+const html = await markdown(
+  `
+  <section>
+    <h2>Code sample</h2>
+    <md>`const foo = 'bar'`</md>
+  <section>
+  `,
+  { manual: true },
+)
+```
