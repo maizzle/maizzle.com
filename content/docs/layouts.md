@@ -5,13 +5,13 @@ description: "How to use layouts with templating inheritance to build HTML email
 
 # Layouts
 
-The workflow in Maizzle is structured around the concept of Layouts and Templates.
+The workflow in Maizzle revolves around the concept of Layouts, Templates and Components.
 
-A Layout is basically a Component that contains the `doctype`, `<head>` and `<body>` tags of your HTML - the kind of code that changes rarely and can be reused.
+A Layout is basically a [Component](/docs/components) that contains the `doctype`, `<head>` and `<body>` tags of your HTML - the kind of code that changes rarely and can be reused.
 
-A Layout may include a `<yield />` tag, which will be used to render a Template. This allows us to create a parent-child relationship between Layouts and Templates.
+Layouts may include a `<yield />` tag, which can be used to render a Template. This allows us to create a parent-child relationship between Layouts and Templates.
 
-In Maizzle, we add this `<yield />` tag in the `<body>` of the `main.html` Layout, to define where a Template's HTML should be injected.
+In Maizzle we add this `<yield />` tag in the `<body>` of the `main.html` Layout, to define where a Template's HTML should be injected.
 
 ## Getting started
 
@@ -19,7 +19,9 @@ Layouts are typically stored in the `src/layouts` directory.
 
 <Alert>Need to store them elsewhere? Make sure to [update the config](/docs/configuration/components#folders).</Alert>
 
-Layouts must include a `<yield />` tag, which is where the Template's HTML will be rendered. Here's a very basic `layout.html`:
+Layouts must include a `<yield />` tag, which is where the Template's HTML will be rendered.
+
+Here's a very basic `layout.html`:
 
 ```hbs [src/layouts/layout.html] {10}
 <!doctype html>
@@ -35,7 +37,7 @@ Layouts must include a `<yield />` tag, which is where the Template's HTML will 
 </body>
 ```
 
-<Alert>For Tailwind CSS to work, Layouts must include it in a `<style>` tag like above, or reference a CSS file with those directives through a `<link>` tag.</Alert>
+<Alert>For Tailwind CSS to work, Layouts must include it either via a `<style>` tag like above or through a `<link>` tag that references a CSS file.</Alert>
 
 When creating a Template, you may use that Layout like this:
 
@@ -45,7 +47,14 @@ When creating a Template, you may use that Layout like this:
 </x-layout>
 ```
 
-As you can see, the `<x-layout>` tag name is based on the Layout's filename, with the `.html` extension removed. Read more about this in the [Components docs](/docs/components#x-tag).
+As you can see, the `<x-layout>` tag name is based on the Layout's file name, with the `.html` extension removed, here are some examples:
+
+| Layout file name        | Layout tag name |
+|-------------------------|-----------------|
+| `src/layouts/main.html` | `<x-main>`      |
+| `src/layouts/alt.html`  | `<x-alt>`       |
+
+Read more about this in the [Components docs](/docs/components#x-tag).
 
 ## Tailwind CSS
 
@@ -73,7 +82,7 @@ When using a `<style>` tag, you can include Tailwind's `utilities` and `componen
 
 ### link tag
 
-Maizzle also supports `<link rel="stylesheet">` tags - it will read the file from the `href` attribute and process it with PostCSS (including Tailwind CSS).
+Maizzle also supports `<link rel="stylesheet">` tags - it will try to read the file from the `href` attribute and process it with PostCSS (including Tailwind CSS).
 
 ```hbs [src/layouts/main.html] diff {4}
 <!doctype html>
@@ -86,7 +95,7 @@ Maizzle also supports `<link rel="stylesheet">` tags - it will read the file fro
 </body>
 ```
 
-<Alert>Make sure to include the `inline` attribute on the `<link>` tag.</Alert>
+<Alert>Make sure to include the `inline` attribute on the `<link>` tag, this will replace it with a `<style>` tag that can be inlined and is generally better supported in email clients.</Alert>
 
 Then, in your `tailwind.css` file:
 

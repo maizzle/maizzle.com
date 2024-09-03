@@ -7,17 +7,53 @@ description: "Use components into your HTML email templates and render them with
 
 Components help you organize blocks of markup into files that can be referenced throughout your project with simple, declarative syntax.
 
-## Create
+## Usage
 
 To create a Component, add an HTML file in `src/components`:
 
 ```xml [src/components/alert.html]
-<yield />
+<div>
+  <yield />
+</div>
 ```
 
-The `<yield />` tag will be replaced with the content passed to the Component.
+The `<yield />` tag will be replaced with the content passed to the Component:
 
-<Alert type="info">You can safely omit the `<yield />` tag if you want to use Components as includes, and don't actually need to pass any content to them.</Alert>
+```xml [src/templates/example.html]
+<x-alert>
+  This text will replace the `yield` tag in the Component.
+</x-alert>
+```
+
+Result:
+
+```xml [build_production/example.html]
+<div>
+  This text will replace the `yield` tag in the Component.
+</div>
+```
+
+## Includes
+
+You can safely omit the `<yield />` tag if you want to use Components as includes, and don't actually need to pass any content to them:
+
+```xml [src/components/alert.html]
+<div>
+  This is a Component used as an include.
+</div>
+```
+
+```xml [src/templates/example.html]
+<x-alert />
+```
+
+Result:
+
+```xml [build_production/example.html]
+<div>
+  This is a Component used as an include.
+</div>
+```
 
 ## Tags
 
@@ -34,7 +70,7 @@ For example, let's use the `alert.html` Component we created earlier:
 
 ```xml [src/templates/example.html]
 <x-alert>
-  This text will replace the `content` tag in the Component.
+  This text will replace the <yield /> tag in the Component.
 </x-alert>
 ```
 
@@ -54,14 +90,14 @@ Alternatively, you may use the `<component>` tag to insert a Component:
 
 ```xml [src/templates/example.html]
 <component src="src/components/alert.html">
-  This text will replace the `content` tag in the Component.
+  This text will replace the <yield /> tag in the Component.
 </component>
 ```
 
 The `src` attribute is mandatory and it needs to point to the Component's file path, relative to the project root.
 If you're used to partials that you simply include in your HTML, this may look more familiar.
 
-<Alert type="warning">The `src` attribute is reserved on Components, make sure not to use it as a prop name.</Alert>
+<Alert type="warning">The `src` attribute is reserved on Components, make sure not to use it as a [prop](#props) name.</Alert>
 
 ## Nested file structure
 

@@ -58,7 +58,7 @@ That will render as:
 <h1>Hello {{ user.name }}, please confirm your email address</h1>
 ```
 
-Also, if the variable being referenced in an expression is not defined, Maizzle will ignore it and output it as-is.
+Also, if the variable in an expression is not defined, Maizzle will ignore it and output it as-is.
 
 ## Using Layouts
 
