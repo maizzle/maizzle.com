@@ -51,6 +51,7 @@ export default defineNuxtConfig({
   },
   site: {
     url: 'https://maizzle.com',
+    name: 'Maizzle Email Framework',
   },
   spaLoadingTemplate: false,
   typescript: {
