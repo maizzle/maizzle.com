@@ -81,9 +81,9 @@ Each Template is parsed and compiled in-place, in your destination directory:
 
 8. [afterTransformers](/docs/events#aftertransformers) event is triggered
 
-9. The compiled email template is saved at the [configured location](/docs/configuration/templates#path), with the [configured extension](/docs/configuration/templates#extension).
-
-    9.1 A plaintext version is created at the same location and with the same name, if `plaintext` was enabled
+9. The compiled email template is saved.
+    9.1. A plaintext version is created at the [configured location](/docs/plaintext#custom-path), if `plaintext` was enabled. Note that `plaintext` processing uses PostHTML, which may transform the compiled HTML.
+    9.2. The compiled HTML is saved at the [configured location](/docs/configuration/templates#path), with the [configured extension](/docs/configuration/templates#extension).
 
 10. Your assets are copied to the destination folder. All files and folders in `templates.assets.source` are copied to `templates.assets.destination`
 
