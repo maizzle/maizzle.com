@@ -5,7 +5,7 @@ description: "See how the build process works and how Maizzle builds your emails
 
 # Build process
 
-When you run `maizzle build`, your Templates go through a series of events that compile them to plain HTML and apply various, email-specific transformations.
+When you run `maizzle build`, your templates go through a series of events that compile them to plain HTML and apply various, email-specific transformations.
 
 To get a better understanding of how Maizzle builds your emails, here's a step-by-step guide of what's going on under the hood:
 
@@ -17,15 +17,25 @@ For example, running `maizzle build production` will tell Maizzle to look for th
 
 Otherwise, if you're simply running the `maizzle build` or `maizzle serve` commands, only the base `config.js` will be used.
 
-## beforeCreate()
+## Compile Tailwind CSS
 
-The [beforeCreate](/docs/events#beforecreate) event (CLI-only) is triggered, giving you access to the config before Maizzle loops over your Templates to compile them.
+Tailwind CSS is compiled, and various [PostCSS](https://postcss.org/) plugins are enabled depending on the build environment and your config.
 
 ## Clean destination
 
-The directory that you have defined under `build.output.path` is deleted.
+The destination directories that you have defined under `destination.path` in your environment config are deleted.
 
 <Alert type="warning">Be careful when customizing this path, so you don't end up deleting important directories and files on your machine.</Alert>
+
+## Copy sources
+
+All of your source Templates are copied over to the `destination.path` directories.
+
+This is done so that we can then process the files in-place, which makes it easier to preserve your directory structure.
+
+## beforeCreate()
+
+The [beforeCreate](/docs/events#beforecreate) event (CLI-only) is triggered, giving you access to the config before Maizzle loops over your Templates to compile them.
 
 ## Compile templates
 
@@ -41,7 +51,7 @@ Each Template is parsed and compiled in-place, in your destination directory:
 
 5. PostHTML renders the template string
 
-    Your Environment name and all `config` options (including any that you defined in Front Matter) are exposed to all your Templates and Components as variables that you can use in PostHTML expressions, through the `page` object.
+    Your Environment name, the compiled Tailwind CSS, and all `config` options (including any you defined in Front Matter) are exposed to all your templating parts as PostHTML expressions that you can use, under the `page` object.
 
 6. [afterRender](/docs/events#afterrender) event is triggered
 
@@ -50,13 +60,13 @@ Each Template is parsed and compiled in-place, in your destination directory:
     The order of events is exactly as follows, and they all happen (or not) depending on how you've configured them in your Environment config or in the Template's Front Matter:
 
     - Escaped characters in `<head>` and `<body>` CSS classes are replaced with email-safe alternatives
-    - Liquid-like `filters` are parsed
-    - Markdown is compiled
-    - The [prevent-widows](/docs/widow-words) Transformer runs, replacing the last space in tags marked with a `prevent-widows` attribute, with a `&nbsp;`
+    - `filters` are applied to the HTML. For example, `<style postcss|tailwindcss>` tags are compiled with PostCSS/Tailwind CSS. [posthtml-content](https://github.com/posthtml/posthtml-content) is used to transform content marked with those custom attributes.
+    - Markdown is compiled with [posthtml-markdownit](https://github.com/posthtml/posthtml-markdownit)
+    - [prevent-widows](https://github.com/bashaus/prevent-widows) looks for tags containing the `prevent-widows` attribute. When it finds one, it will replace the last space in your text with a `&nbsp;`.
     - [attributeToStyle](/docs/transformers/inline-css#attribute-to-style) translates HTML attributes to inline CSS
     - CSS is inlined with [Juice](https://github.com/Automattic/juice)
     - Longhand CSS in `style` attributes is converted to shorthand-form
-    - Unused CSS is purged with [email-comb](https://www.npmjs.com/package/email-comb)
+    - Unused CSS is removed with [email-comb](https://www.npmjs.com/package/email-comb)
     - Inline CSS sizes are removed (`width=""` and `height=""` are preserved)
     - Inline background colors are removed (`bgcolor=""` is preserved)
     - Attributes are removed based on your config. By default, Maizzle cleans up any empty `style=""` and `class=""` attributes.
@@ -71,11 +81,11 @@ Each Template is parsed and compiled in-place, in your destination directory:
 
 8. [afterTransformers](/docs/events#aftertransformers) event is triggered
 
-9. The compiled email template is saved at the [configured location](/docs/configuration/templates#path), with the [configured extension](/docs/configuration/templates#extension).
+9. The compiled email template is saved.
+    9.1. A plaintext version is created at the [configured location](/docs/plaintext#custom-path), if `plaintext` was enabled. Note that `plaintext` processing uses PostHTML, which may transform the compiled HTML.
+    9.2. The compiled HTML is saved at the [configured location](/docs/configuration/templates#path), with the [configured extension](/docs/configuration/templates#extension).
 
-    9.1 A plaintext version is created at the same location and with the same name, if `plaintext` was enabled
-
-10. Your assets are copied to the destination folder. All files and folders in `build.static.source` are copied to `build.static.destination`
+10. Your assets are copied to the destination folder. All files and folders in `templates.assets.source` are copied to `templates.assets.destination`
 
 ## afterBuild()
 
