@@ -14,11 +14,11 @@ Imagine a two column layout, with text on the left and an image on the right:
 ```xml [2-col.html]
 <table class="w-full">
   <tr>
-    <th class="sm:block w-1/2 sm:w-full px-2 font-sans font-normal text-left">
+    <th class="sm:block w-1/2 sm:w-full font-sans font-normal text-left">
       <p class="text-2xl font-hairline text-black">Left text</p>
       <p class="text-slate-700">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore aspernatur.</p>
     </th>
-    <th class="sm:block w-1/2 sm:w-full px-2 font-normal text-left">
+    <th class="sm:block w-1/2 sm:w-full font-normal text-left">
       <img src="https://picsum.photos/600/600" alt="Unsplash photo">
     </th>
   </tr>
@@ -32,13 +32,13 @@ However, using table responsive display utilities, we can reverse the columns:
 ```xml [2-col-reverse.html]
 <table class="w-full">
   <tr>
-    <th class="w-1/2 sm:table-footer-group px-2 font-sans font-normal text-left">
+    <th class="w-1/2 sm:table-footer-group font-sans font-normal text-left">
       <div class="sm:w-full sm:px-8">
         <h2 class="text-2xl font-hairline text-black">Left text</h2>
         <p class="text-slate-700 m-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore aspernatur.</p>
       </div>
     </th>
-    <th class="w-1/2 sm:table-header-group px-2 font-normal text-left">
+    <th class="w-1/2 sm:table-header-group font-normal text-left">
       <div class="sm:w-full sm:px-8">
         <img src="https://picsum.photos/600/600" alt="Unsplash photo">
       </div>

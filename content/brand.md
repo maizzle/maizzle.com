@@ -9,17 +9,17 @@ Maizzle brand usage guidelines and assets downloads.
 
 ## Usage guidelines
 
-Usage of the Maizzle name or logos in any way that could imply any official connection with or endorsement of Maizzle is not permitted. Use of the Maizzle name or logos in any way that could cause customer confusion is not permitted.
+Usage of the Maizzle name or logos in any way that could imply any official connection with or endorsement of Maizzle is not permitted without prior consent. Use of the Maizzle name or logos in any way that could cause user confusion is not permitted.
 
 This includes naming a product or a service in a way that emphasizes the Maizzle brand, like “Maizzle Themes” or “Maizzle Builder”, as well as in domain names like "maizzletemplates.com”.
 
-You must use your own brand name in a way that clearly distinguishes it from Maizzle. Examples that are permitted include “EmailTemplates for Maizzle” or “EmailBuider: Create Templates for Maizzle”.
+You must use your own brand name in a way that clearly distinguishes it from Maizzle. Examples that are permitted include “EmailTemplates for Maizzle” or “Email Builder: Create Templates for Maizzle”.
 
 You may not use our brand for t-shirts, stickers, or other merchandise without explicit written consent.
 
 ## Assets
 
-You may use the following assets when referring to Maizzle, for example in articles or video tutorials. They should not be used in any way that could cause confusion for customers or imply any affiliation with maizzle.com.
+You may use the following assets when referring to Maizzle, for example in articles or video tutorials. They should not be used in any way that could cause confusion for users or imply any affiliation with maizzle.com.
 
 ### Mark
 

@@ -55,7 +55,7 @@ Since we just want to write Markdown and not have to deal with any tables and su
 Replace its contents with the following:
 
 ```hbs [src/layouts/main.html]
-<!DOCTYPE {{{ page.doctype || 'html' }}}>
+<!doctype {{{ page.doctype || 'html' }}}>
 <html lang="{{ page.language || 'en' }}" xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
   <meta charset="{{ page.charset || 'utf-8' }}">
@@ -78,7 +78,8 @@ Replace its contents with the following:
     <title>{{{ page.title }}}</title>
   </if>
   <style>
-    {{{ page.css }}}
+    @tailwind utilities;
+    @tailwind components;
   </style>
   <stack name="head" />
 </head>
@@ -103,8 +104,8 @@ Replace its contents with the following:
         <td class="w-[600px] max-w-full bg-white rounded-xl">
           <table class="w-full">
             <tr>
-              <td class="px-8 sm:px-4 text-base leading-6 text-slate-700">
-                <content />
+              <td class="p-0 px-8 sm:px-4 text-base/6 text-slate-700">
+                <yield />
               </td>
             </tr>
           </table>
@@ -135,13 +136,10 @@ Since we're not using the default setup anymore, we need to tell Maizzle where t
 
 Update `build.templates` to use .md files from the `content` folder:
 
-```js [config.js] {4-5}
-module.exports = {
+```js [config.js] {3}
+export default {
   build: {
-    templates: {
-      source: 'src/content',
-      filetypes: ['md'],
-    },
+    content: ['src/content/**/*.md'],
   },
 }
 ```
@@ -155,18 +153,16 @@ Maizzle doesn't know what layout to use or that the content of our .md files is 
 We can use the [`beforeRender` event](/docs/events#beforerender) for this:
 
 ```js [config.js]
-const fm = require('front-matter')
+import fm from 'front-matter'
 
-module.exports = {
-  events: {
-    beforeRender(html) {
-      const { body } = fm(html)
+export default {
+  beforeRender(html) {
+    const { body } = fm(html)
 
-      return `
-        <x-main>
-          <md>${body}</md>
-        </x-main>`
-    }
+    return `
+      <x-main>
+        <md>${body}</md>
+      </x-main>`
   },
 }
 ```
@@ -198,16 +194,14 @@ img {
 }
 ```
 
-Make sure to import this file in `src/css/tailwind.css`:
+Make sure to import this file in the `<style>` tag:
 
-```postcss [src/css/tailwind.css]
-@import "tailwindcss/components";
-
-/* Our markdown.css file */
-@import "markdown";
-
-@import "tailwindcss/utilities";
-@import "utilities";
+```html [src/layouts/main.html]
+<style>
+  @import "src/css/markdown.css";
+  @import 'tailwindcss/components';
+  @import 'tailwindcss/utilities';
+</style>
 ```
 
 Run `npm run build` again and you'll see that the styles are now applied:
@@ -225,12 +219,14 @@ To do this, we'll use the `markdown-it-attrs` plugin, which allows us to add att
 
 Update `config.js` to have Maizzle use the plugin:
 
-```js [config.js] {5} diff
-module.exports = {
+```js [config.js] {7} diff
+import mdAttrs from 'markdown-it-attrs'
+
+export default {
   markdown: {
     plugins: [
       {
-+        plugin: require('markdown-it-attrs'),
++        plugin: mdAttrs,
       }
     ]
   },
@@ -279,26 +275,25 @@ npm install shiki
 Next, define a custom `highlight` method for `markdown-it`. Add it in the `beforeCreate` event so that the highlighter is retrieved once, before templates are compiled:
 
 ```js [config.js]
-const shiki = require('shiki')
+import { createHighlighter } from 'shiki'
 
-module.exports = {
-  events: {
-    async beforeCreate(config) {
-      const highlighter = await shiki.getHighlighter({
-        theme: 'nord',
-      })
+export default {
+  async beforeCreate(config) {
+    const highlighter = await createHighlighter({
+      themes: ['nord'],
+      langs: ['html'],
+    })
 
-      config = Object.assign(config, {
-        markdown: {
-          markdownit: {
-            highlight: (code, lang) => {
-              lang = lang || 'html'
-              return highlighter.codeToHtml(code, { lang })
-            }
+    config = Object.assign(config, {
+      markdown: {
+        markdownit: {
+          highlight: (code, lang) => {
+            lang = lang || 'html'
+            return highlighter.codeToHtml(code, { lang, theme: 'nord' })
           }
         }
-      })
-    },
+      }
+    })
   },
 }
 ```
@@ -332,7 +327,7 @@ For example, let's create an `<x-alert>` component:
       attributes
       class="py-2 px-4 bg-blue-100 text-blue-600 rounded"
     >
-      <content />
+      <yield />
     </td>
   </tr>
 </table>
@@ -374,7 +369,7 @@ title: "Edition #1"
 </x-alert>
 ```
 
-To prevent an issue with code indentation in `markdown-it` that would result in `<pre>` tags being added to the rendered HTML, simply don't indent the closing tags after `</content>`. A bit of a workaround, but it works:
+To prevent an issue with code indentation in `markdown-it` that would result in `<pre>` tags being added to the rendered HTML, simply don't indent the closing tags after `<yield />`. A bit of a workaround, but it works:
 
 ```xml [src/components/alert.html]
 <table class="w-full mb-8">
@@ -383,7 +378,7 @@ To prevent an issue with code indentation in `markdown-it` that would result in 
       attributes
       class="py-2 px-4 bg-blue-100 text-blue-600 rounded"
     >
-      <content />
+      <yield />
 </td>
 </tr>
 </table>
@@ -392,16 +387,14 @@ To prevent an issue with code indentation in `markdown-it` that would result in 
 Alternatively, you may use the `prettify` transformer to remove the indentation:
 
 ```js [config.js]
-const {prettify} = require('@maizzle/framework')
+import { prettify } from '@maizzle/framework'
 
-module.exports = {
-  events: {
-    afterRender(html) {
-      return prettify(html, {
-        indent_size: 0,
-      })
-    }
-  },
+export default {
+  afterRender(html) {
+    return prettify(html, {
+      indent_size: 0,
+    })
+  }
 }
 ```
 
@@ -416,20 +409,18 @@ For the purpose of this tutorial, we'll just change the body background color to
 Next, update the `beforeRender` event in `config.js` to use the layout name from Front Matter:
 
 ```js [config.js]
-const fm = require('front-matter')
+import fm from 'front-matter'
 
-module.exports = {
-  events: {
-    beforeRender(html) {
-      const { attributes, body } = fm(html)
-      const layout = attributes.layout || 'main'
+export default {
+  beforeRender(html) {
+    const { attributes, body } = fm(html)
+    const layout = attributes.layout || 'main'
 
-      return `
-        <x-${layout}>
-          <md>${body}</md>
-        </x-${layout}>`
-    }
-  },
+    return `
+      <x-${layout}>
+        <md>${body}</md>
+      </x-${layout}>`
+  }
 }
 ```
 

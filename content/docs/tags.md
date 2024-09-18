@@ -1,9 +1,9 @@
 ---
-title: "Custom Tags"
+title: "Tags"
 description: "Special tags for templating logic that you can use in Maizzle."
 ---
 
-# Custom Tags
+# Tags
 
 Maizzle includes some special tags designed to help you with templating logic.
 
@@ -38,13 +38,9 @@ Of course, you can create more complex conditions:
 You may customize the conditional tag names:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      expressions: {
-        conditionalTags: ['when', 'ifnotthen', 'otherwise']
-      }
-    }
+export default {
+  expressions: {
+    conditionalTags: ['when', 'ifnotthen', 'otherwise'],
   }
 }
 ```
@@ -63,9 +59,57 @@ Example:
 </otherwise>
 ```
 
+## Template
+
+The `<template>` tag will only return its contents.
+
+You can use it to apply a filter to a string, for example:
+
+```xml [src/templates/example.html]
+<template uppercase>test</template>
+```
+
+Result:
+
+```xml
+TEST
+```
+
+... or to compile a markdown string:
+
+```xml [src/templates/example.html]
+<template markdown>
+  # Hello, world!
+</template>
+```
+
+Result:
+
+```xml
+<h1>Hello, world!</h1>
+```
+
+#### Preserving template tags
+
+If you actually need to output a `<template>` tag in the compiled HTML, you may use the `preserve` attribute:
+
+```xml [src/templates/example.html]
+<template preserve>
+  test
+</template>
+```
+
+Result:
+
+```xml
+<template>
+  test
+</template>
+```
+
 ## Outlook
 
-Wrap content with MSO conditional comments so that it will only show up in Outlook 2007-2019 on Windows:
+Wrap content in <abbr title="Microsoft Office">MSO</abbr> conditional comments to show it only in Outlook 2007-2021 on Windows:
 
 ```xml [src/templates/example.html]
 <outlook>
@@ -81,11 +125,11 @@ That will output:
 <![endif]-->
 ```
 
-Of course, there's also a tag for showing content everywhere _except_ in Outlook:
+Of course, there's also a tag for showing content in all email clients _except_ in Outlook:
 
 ```xml [src/templates/example.html]
 <not-outlook>
-  <div>All Outlooks will ignore this</div>
+  <div>All Outlooks (on Windows) will ignore this</div>
 </not-outlook>
 ```
 
@@ -93,7 +137,7 @@ Result:
 
 ```xml
 <!--[if !mso]><!-->
-  <div>All Outlooks will ignore this</div>
+  <div>All Outlooks (on Windows) will ignore this</div>
 <!--<![endif]-->
 ```
 
@@ -159,13 +203,9 @@ Result:
 Of course, you may customize the `<outlook>` tag name:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      outlook: {
-        tag: 'mso'
-      }
-    }
+export default {
+  outlook: {
+    tag: 'mso',
   }
 }
 ```
@@ -200,13 +240,9 @@ Need to use a [switch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/R
 You may define custom tags for the switch statement:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      expressions: {
-        switchTags: ['handle', 'when', 'fallback']
-      }
-    }
+export default {
+  expressions: {
+    switchTags: ['handle', 'when', 'fallback'],
   }
 }
 ```
@@ -267,13 +303,9 @@ Example:
 You may customize the name of the loop tag:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      expressions: {
-        loopTags: ['for']
-      }
-    }
+export default {
+  expressions: {
+    loopTags: ['for'],
   }
 }
 ```
@@ -293,7 +325,7 @@ Use `<scope>` tags to provide a data context to the content inside.
 Imagine we had this data in our `config.js`:
 
 ```js [config.js]
-module.exports = {
+export default {
   roles: {
     author: { name: 'John' },
     editor: { name: 'Jane' },
@@ -320,13 +352,9 @@ We could provide each object as a scope, so we can then access it from the conte
 You may customize the `<scope>` tag name:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      expressions: {
-        scopeTags: ['context']
-      }
-    }
+export default {
+  expressions: {
+    scopeTags: ['context'],
   }
 }
 ```
@@ -359,17 +387,13 @@ Inside the `<fetch>` tag, you have access to a `{{ response }}` variable.
 You may use the `fetch` key to customize options:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      fetch: {
-        tags: ['get'], // default ['fetch', 'remote']
-        attribute: 'resource', // default 'url'
-        got: {}, // pass options to the `got` package
-        preserveTag: true, // default false
-        expressions: {}, // configure expressions in fetch context
-      }
-    }
+export default {
+  fetch: {
+    tags: ['get'], // default ['fetch', 'remote']
+    attribute: 'resource', // default 'url'
+    ofetch: {}, // pass options to the `ofetch` package
+    preserveTag: true, // default false
+    expressions: {}, // configure expressions in fetch context
   }
 }
 ```
@@ -403,13 +427,9 @@ Neither will this expression: {{ page.env }}
 The `<raw>` tag name may be customized:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      expressions: {
-        ignoredTag: 'verbatim'
-      }
-    }
+export default {
+  expressions: {
+    ignoredTag: 'verbatim',
   }
 }
 ```
@@ -420,4 +440,26 @@ Example:
 <verbatim>
   This will not be parsed: {{ page.env }}
 </verbatim>
+```
+
+## Env
+
+You may output content based on the current Environment through the `<env:>` tag:
+
+```xml [src/templates/example.html]
+<env:local>
+  This will only show in local.
+</env:local>
+
+<env:production>
+  This will only show in production.
+</env:production>
+```
+
+If the tag doesn't match the current Environment, it will be removed from the output.
+
+In this example, running `maizzle build production` will output:
+
+```xml
+This will only show in production.
 ```

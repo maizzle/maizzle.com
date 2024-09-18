@@ -16,18 +16,20 @@ This Transformer will remove any unused CSS styles and corresponding classes in 
 Enable it in your Environment config:
 
 ```js [config.js]
-module.exports = {
-  removeUnusedCSS: true,
+export default {
+  css: {
+    purge: true,
+  }
 }
 ```
 
 ## Customization
 
-You may configure this Transformer through the `removeUnusedCSS` key in your `config.js`.
+You may configure this Transformer through the `css.purge` key in your `config.js`.
 
 ### whitelist
 
-Type: Array\
+Type: `String[]`\
 Default: `[]`
 
 Array of classes or id's that you don't want removed.
@@ -35,14 +37,18 @@ Array of classes or id's that you don't want removed.
 You may use any [matcher](https://www.npmjs.com/package/matcher) patterns, for example:
 
 ```js [config.js]
-module.exports = {
-  removeUnusedCSS: {
-    whitelist: ['.External*', '.ReadMsgBody', '.yshortcuts', '.Mso*', '#*'],
+export default {
+  css: {
+    purge: {
+      whitelist: ['.External*', '.ReadMsgBody', '.yshortcuts', '.Mso*', '#*'],
+    }
   }
 }
 ```
 
-Resetting email client styles is often done through CSS selectors that do not exist in your email's code. Maizzle uses the `tailwindcss-email-variants` plugin to do this, so to ensure works as expected `whitelist` automatically preserves the following selectors:
+Resetting email client styles is commonly done through CSS selectors that do not exist in your email's code.
+
+Maizzle uses the [`tailwindcss-email-variants`](https://github.com/maizzle/tailwindcss-email-variants) plugin for that purpose, so to make sure the plugin works as expected `whitelist` automatically preserves the following selectors:
 
 ```js
 [
@@ -66,7 +72,7 @@ Resetting email client styles is often done through CSS selectors that do not ex
 
 ### backend
 
-Type: Array\
+Type: `Array<Record<string, string>>`\
 Default: `[{heads: '{{', tails: '}}'}, {heads: '{%', tails: '%}'}]`
 
 If you use computed class names, like for example `class="{{ computedRed }} text-sm"`, the library will normally treat `{{` and `}}` as class names and will remove them, since there will be no corresponding CSS selectors defined.
@@ -74,11 +80,13 @@ If you use computed class names, like for example `class="{{ computedRed }} text
 To prevent this from happening, use the `backend` option to define the delimiters:
 
 ```js [config.js]
-module.exports = {
-  removeUnusedCSS: {
-    backend: [
-      { heads: '[[', tails: ']]' },
-    ]
+export default {
+  css: {
+    purge: {
+      backend: [
+        { heads: '[[', tails: ']]' },
+      ]
+    }
   }
 }
 ```
@@ -87,30 +95,34 @@ By default, Maizzle preserves `{{ }}` and `{% %}`.
 
 ### removeHTMLComments
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 Set to `false` to prevent `email-comb` from removing `<!-- HTML comments -->`.
 
 ```js [config.js]
-module.exports = {
-  removeUnusedCSS: {
-    removeHTMLComments: false
+export default {
+  css: {
+    purge: {
+      removeHTMLComments: false,
+    }
   }
 }
 ```
 
 ### removeCSSComments
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 Set to `false` to prevent `email-comb` from removing `/* CSS comments */`.
 
 ```js [config.js]
-module.exports = {
-  removeUnusedCSS: {
-    removeCSSComments: false
+export default {
+  css: {
+    purge: {
+      removeCSSComments: false,
+    }
   }
 }
 ```
@@ -139,44 +151,26 @@ For example, MailChimp uses CSS comments to define styles that are editable in t
 </style>
 ```
 
-### removeInlinedSelectors
-
-Type: Boolean\
-Default: `undefined`
-
-By default, classes are removed from the `class` attribute of a tag, after they have been successfully inlined.
-
-Set this option to `false` to prevent that from happening:
-
-```js [config.production.js]
-module.exports = {
-  removeUnusedCSS: {
-    removeInlinedSelectors: false,
-  }
-}
-```
-
-<Alert>This has no effect if [inlineCss](/docs/transformers/inline-css) is not enabled.</Alert>
-
-
 ### doNotRemoveHTMLCommentsWhoseOpeningTagContains
 
-Type: Array\
+Type: `String[]`\
 Default: `['[if', '[endif']`
 
 HTML email code often includes Outlook or IE conditional comments, which you probably want to preserve. If the opening tag of a conditional includes any of the strings you list here, the Transformer will not remove that comment.
 
 ```js [config.js]
-module.exports = {
-  removeUnusedCSS: {
-    doNotRemoveHTMLCommentsWhoseOpeningTagContains: ['[if', '[endif']
+export default {
+  css: {
+    purge: {
+      doNotRemoveHTMLCommentsWhoseOpeningTagContains: ['[if', '[endif'],
+    }
   }
 }
 ```
 
 ### uglify
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `false`
 
 Enable this to rename all classes and id's in both your `<style>` tags and your body HTML elements, to be as few characters as possible.
@@ -184,9 +178,11 @@ Enable this to rename all classes and id's in both your `<style>` tags and your 
 Used in production, it will help trim down your HTML size.
 
 ```js [config.js]
-module.exports = {
-  removeUnusedCSS: {
-    uglify: true
+export default {
+  css: {
+    purge: {
+      uglify: true,
+    }
   }
 }
 ```
@@ -196,7 +192,8 @@ module.exports = {
 The Transformer uses the email-comb library, see all available options [here](https://www.npmjs.com/package/email-comb).
 
 ```js [app.js]
-const {removeUnusedCSS} = require('@maizzle/framework')
+import { removeUnusedCSS } from '@maizzle/framework'
+
 const config = {/* email-comb options */}
 
 const html = await removeUnusedCSS(`<div class="unused">test</div>`, config)

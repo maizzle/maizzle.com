@@ -66,7 +66,8 @@ If you prefer a single `<style>` tag in your email template, you can register th
 +       src: local('Barosan Regular'), local('Barosan-Regular'), url(https://example.com/fonts/barosan.woff2) format('woff2');
 +     }
 
-     {{{ page.css }}}
+     @tailwind components;
+     @tailwind utilities;
    </style>
 ```
 
@@ -81,7 +82,7 @@ Now that we're importing the font, we should register a Tailwind CSS utility for
 Open `tailwind.config.js`, scroll down to `fontFamily`, and add a new font:
 
 ```js [tailwind.config.js] {5} diff
-module.exports = {
+export default {
   theme: {
     extend: {
       fontFamily: {
@@ -133,7 +134,7 @@ We can work around that by making use of Tailwind's `screen` variants and an Out
 First, let's register a new `@media` query - we will call it `screen`:
 
 ```js [tailwind.config.js] {6} diff
-module.exports = {
+export default {
   theme: {
     screens: {
       sm: {max: '600px'},

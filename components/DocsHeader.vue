@@ -2,7 +2,7 @@
   <header class="sticky top-0 sm:h-20 items-center z-50">
     <!-- Desktop Header -->
     <div class="hidden lg:grid grid-cols-12 h-full">
-      <div class="grid col-span-4 lg:col-span-3 xl:col-span-4 h-full justify-end items-center space-y-2 bg-slate-50">
+      <div class="grid col-span-4 lg:col-span-3 2xl:col-span-4 h-full justify-end items-center space-y-2 bg-slate-50">
         <div class="w-60 flex items-end gap-4">
           <NuxtLink
             to="/" @click.native.right.prevent="goToBrandPage"
@@ -21,7 +21,7 @@
                 aria-haspopup="true"
                 @click="versionDropdownOpen = !versionDropdownOpen"
               >
-                {{ latestRelease }}
+                v5.0.0-beta
                 <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
@@ -29,19 +29,19 @@
             </div>
             <div
               v-show="versionDropdownOpen"
-              class="origin-top-right absolute z-10 left-0 mt-2 w-24 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+              class="origin-top-right absolute z-10 left-0 mt-2 w-[6.5rem] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
               role="menu"
               aria-orientation="vertical"
               aria-labelledby="menu-button"
               tabindex="-1"
             >
               <div class="py-1" role="none">
-                <a href="https://next.maizzle.com/docs/installation" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
-                  v5.0.0-beta
-                </a>
                 <span class="block px-4 py-2 text-indigo-600 font-medium cursor-default" role="menuitem" tabindex="-1">
-                  {{ latestRelease }}
+                  v5.0.0-beta
                 </span>
+                <a href="https://maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
+                  v4.8.8
+                </a>
                 <a href="https://v43x.maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
                   v4.3.1
                 </a>
@@ -59,15 +59,15 @@
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-12 col-span-8 lg:col-span-9 xl:col-span-8 h-full border-b border-slate-100 backdrop-blur bg-white/90">
-        <div class="grid col-span-12 xl:col-span-9 2xl:col-span-7 3xl:col-span-6 xl:py-4 px-8 3xl:pl-12 items-center">
+      <div class="grid grid-cols-12 col-span-8 lg:col-span-9 2xl:col-span-8 h-full border-b border-slate-100 backdrop-blur bg-white/90">
+        <div class="grid col-span-12 xl:col-span-9 2xl:col-span-7 3xl:col-span-6 xl:py-4 px-8 3xl:pl-16 items-center">
           <div class="hidden sm:block max-w-[75ch] whitespace-nowrap overflow-auto">
-            <a
-              href="https://github.com/maizzle/framework/releases"
-              class="hidden sm:table px-3 py-1 rounded-full text-indigo-500 border border-indigo-300 hover:text-indigo-600 text-sm group"
+            <NuxtLink
+              to="/docs/installation"
+              class="hidden sm:inline-block px-3 py-1 rounded-full text-indigo-500 border border-indigo-300 hover:text-indigo-600 text-base group"
             >
-              Maizzle v4.8.0: asset arrays, attributes for URL params &amp; more &rarr;
-            </a>
+              Maizzle 5 is here, try the beta now &rarr;
+            </NuxtLink>
           </div>
         </div>
         <div class="hidden xl:grid col-span-3 2xl:col-span-5 items-end h-full">
@@ -133,7 +133,7 @@
               aria-haspopup="true"
               @click="mobileVersionDropdownOpen = !mobileVersionDropdownOpen"
             >
-              {{ latestRelease }}
+              v5.0.0-beta
               <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
               </svg>
@@ -155,8 +155,11 @@
                 to="/docs/installation"
                 class="block px-4 py-2 bg-slate-100" role="menuitem" tabindex="-1"
               >
-                {{ latestRelease }}
+                v5.0.0-beta3
               </NuxtLink>
+              <a href="https://maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
+                v4.8.8
+              </a>
               <a href="https://v43x.maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
                 v4.3.1
               </a>

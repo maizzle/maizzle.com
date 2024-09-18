@@ -8,22 +8,22 @@
       <PatternMasthead class="absolute scale-[1.2] sm:scale-100 top-32 sm:top-0 right-20 sm:right-10 z-0 text-slate-300" />
 
       <div class="mt-[88px] relative z-10">
-        <a
-          href="https://next.maizzle.com/docs/installation"
+        <NuxtLink
+          to="/docs/installation"
           class="px-6 py-2 rounded-full bg-slate-900 hover:bg-indigo-600 text-white text-sm flex justify-center items-center text-center gap-2 max-w-max mx-auto mb-12 group transition-colors"
         >
           <span>Maizzle 5 is here! Try the beta now</span>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-4 group-hover:translate-x-1 transition-transform">
             <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
           </svg>
-        </a>
+        </NuxtLink>
 
         <h1 class="mb-9 mx-auto text-4xl lg:text-5xl text-center font-bold text-slate-800">
           Quickly <span class="text-indigo-600">build HTML emails</span>
           <br>with Tailwind CSS
         </h1>
 
-        <p class="max-w-5xl mb-14 mx-auto text-lg md:text-xl text-center text-slate-500">Maizzle is a framework that helps you quickly build HTML emails with <br>Tailwind CSS and advanced, email-specific post-processing.</p>
+        <p class="max-w-5xl mb-14 mx-auto text-lg md:text-xl text-center text-slate-500">Maizzle is a framework that helps you quickly build HTML emails with <br>Tailwind CSS and advanced email optimizations.</p>
 
         <!-- Cta -->
         <div class="w-full mb-20 md:mb-32 mx-auto flex flex-col md:flex-row items-center justify-center gap-5">

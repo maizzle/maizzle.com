@@ -18,7 +18,7 @@ Here's the Filled button, fully clickable in Outlook:
 <div class="example-preview">
   <div>
     <button
-      class="block py-4 px-6 text-sm leading-none no-underline text-white font-semibold rounded bg-indigo-500 hover:bg-indigo-600 focus:outline-none">
+      class="block py-4 px-6 text-sm/none no-underline text-white font-semibold rounded bg-indigo-500 hover:bg-indigo-600 focus:outline-none">
         Read more
     </button>
   </div>
@@ -26,10 +26,15 @@ Here's the Filled button, fully clickable in Outlook:
   ```xml
   <a
     href="https://maizzle.com/"
-    class="inline-block py-4 px-6 text-sm leading-none font-semibold rounded [text-decoration:none] text-white bg-indigo-500 hover:bg-indigo-600">
-    <!--[if mso]><i style="mso-font-width: 150%; mso-text-raise: 26pt;" hidden>&emsp;</i><![endif]-->
-      <span style="mso-text-raise: 13pt;">Read more</span>
-    <!--[if mso]><i style="mso-font-width: 150%;" hidden>&emsp;&#8203;</i><![endif]-->
+    class="inline-block py-4 px-6 text-sm/none font-semibold rounded no-underline text-white bg-indigo-500 hover:bg-indigo-600"
+  >
+    <outlook>
+      <i class="mso-font-width-[150%] mso-text-raise-[26pt]">&nbsp;</i>
+    </outlook>
+      <span class="mso-text-raise-[13pt]">Read more</span>
+    <outlook>
+      <i class="mso-font-width-[150%]">&nbsp;</i>
+    </outlook>
   </a>
   ```
 </div>
@@ -41,22 +46,6 @@ As you can see it's just a simple `<a>` tag, but with some nifty workarounds for
 - the first `<i>` also adds bottom padding
 
 <Alert>Line breaks and spaces between tags in the example above might render the button larger (although barely noticeable). If you want your button to be absolutely pixel perfect, just remove them.</Alert>
-
-**Tip**: use the [`<outlook>`](/docs/tags#outlook) tag for cleaner-looking, editor-friendly markup. As an added bonus, you can now also use Tailwind CSS utilities with it:
-
-```xml [button.html]
-<a
-  href="https://maizzle.com/"
-  class="inline-block py-4 px-6 text-sm leading-none [text-decoration:none] text-white font-semibold rounded bg-indigo-500 hover:bg-indigo-600">
-  <outlook>
-    <i class="mso-font-width-[150%] mso-text-raise-[26pt]">&nbsp;</i>
-  </outlook>
-    <span class="mso-text-raise-[13pt]">Read more</span>
-  <outlook>
-    <i class="mso-font-width-[150%]">&nbsp;</i>
-  </outlook>
-</a>
-```
 
 ## VML
 
@@ -86,11 +75,15 @@ Here is a simplified VML button with rounded corners, styled with Tailwind CSS:
 <![endif]-->
   <a
     href="https://example.com/"
-    class="inline-block px-6 leading-10 text-base rounded-md [text-decoration:none] text-white bg-blue-700"
+    class="inline-block p-0 px-6 text-base/10 rounded-md no-underline text-white bg-blue-700"
   >
-    <!--[if mso]><i style="mso-font-width: 150%;" hidden>&emsp;</i><![endif]-->
+    <outlook>
+      <i class="mso-font-width-[150%] mso-text-raise-[26pt]">&nbsp;</i>
+    </outlook>
     <span>Link Text</span>
-    <!--[if mso]><i style="mso-font-width: 150%;" hidden>&emsp;&#8203;</i><![endif]-->
+    <outlook>
+      <i class="mso-font-width-[150%]">&nbsp;</i>
+    </outlook>
   </a>
 <!--[if mso]>
 </v:roundrect>
@@ -118,7 +111,7 @@ For an extra touch, let's add rounded corners and a hover effect:
 <div class="example-preview">
   <div>
     <button
-      class="py-4 px-6 text-sm leading-none no-underline text-white font-semibold rounded bg-indigo-500 hover:bg-indigo-600 focus:outline-none">
+      class="py-4 px-6 text-sm/none no-underline text-white font-semibold rounded bg-indigo-500 hover:bg-indigo-600 focus:outline-none">
         Read more
     </button>
   </div>
@@ -129,7 +122,7 @@ For an extra touch, let's add rounded corners and a hover effect:
       <th class="bg-indigo-500 hover:bg-indigo-600 rounded mso-padding-alt-[12px_24px]">
         <a
           href="https://maizzle.com"
-          class="block py-4 px-6 text-white text-sm leading-full [text-decoration:none]"
+          class="block py-4 px-6 text-white text-sm/[100%] no-underline"
         >
           Button
         </a>
@@ -158,10 +151,10 @@ To make it more interesting, let's also change the background on hover:
   ```xml
   <table>
     <tr>
-      <th class="border-2 border-indigo-500 hover:bg-indigo-500 block rounded mso-padding-alt-[12px_24px]">
+      <th class="block border-2 border-indigo-500 hover:bg-indigo-500 rounded mso-padding-alt-[12px_24px]">
         <a
           href="https://maizzle.com"
-          class="block py-3 px-6 text-sm text-indigo-500 hover:text-white leading-full [text-decoration:none]"
+          class="block py-3 px-6 text-sm/[100%] text-indigo-500 hover:text-white no-underline"
         >
           Button
         </a>
@@ -186,7 +179,7 @@ Pill buttons simply use a larger border-radius value.
       <th class="bg-indigo-500 hover:bg-indigo-600 shadow-md rounded-full mso-padding-alt-[16px_24px]">
         <a
           href="https://maizzle.com"
-          class="block py-3 px-6 text-sm text-white leading-full [text-decoration:none]"
+          class="block py-3 px-6 text-sm/none text-white no-underline"
         >
           Button
         </a>

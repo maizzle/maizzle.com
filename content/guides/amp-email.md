@@ -43,7 +43,7 @@ AMP for Email requires some special markup, so let's create an `amp.html` Layout
   <stack name="head" />
 </head>
 <body>
-  <content />
+  <yield />
 </body>
 </html>
 ```
@@ -83,8 +83,10 @@ Inline style attributes are not allowed in AMP, so you need to disable CSS inlin
 Do it either globally, in your environment config:
 
 ```js [config.js]
-module.exports = {
-  inlineCSS: false
+export default {
+  css: {
+    inline: false,
+  }
 }
 ```
 
@@ -92,7 +94,8 @@ module.exports = {
 
 ```yaml [src/templates/amp/carousel.html]
 ---
-inlineCSS: false
+css:
+  inline: false
 ---
 ```
 
@@ -103,29 +106,21 @@ AMP for Email doesn't support `!important` in CSS, either.
 This can be easily turned off in your Tailwind config:
 
 ```js [tailwind.config.js]
-module.exports = {
+export default {
   important: false,
 }
 ```
 
 However, you probably want to turn it off _only_ for AMP templates.
 
-You can do this with a custom build Environment:
+You can do this by updating your `<style>` tag for AMP templates to use a different Tailwind config file:
 
-```js [config.amp.js]
-module.exports = {
-  build: {
-    destination: {
-      path: 'build_amp'
-    },
-    templates: {
-      source: 'src/templates/amp'
-    },
-    tailwind: {
-      config: 'tailwind.amp.js'
-    }
-  }
-}
+```html [src/layouts/amp.html]
+<style>
+  @config 'tailwind.amp.js';
+  @tailwind components;
+  @tailwind utilities;
+</style>
 ```
 
 Next, duplicate `tailwind.config.js` to `tailwind.amp.js` and disable `important`:
@@ -138,7 +133,7 @@ module.exports = {
 
 Finally, run `maizzle build amp` to build your ⚡4email templates.
 
-In case you haven't installed the [Maizzle CLI](/docs/cli), add an npm script to `package.json`:
+In case you haven't installed the [Maizzle CLI](/docs/cli), add an NPM script to `package.json`:
 
 ```json [package.json]
 "scripts": {

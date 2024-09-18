@@ -30,7 +30,7 @@ Both `<style>` tags and `style=""` attributes are supported. CSS property values
 Make it globally available by setting it in your environment config:
 
 ```js [config.js]
-module.exports = {
+export default {
   baseURL: 'https://cdn.example.com/'
 }
 ```
@@ -43,13 +43,13 @@ You'll most likely want to customize the transformer so that it applies only to 
 
 ### tags
 
-Type: Array|Object\
+Type: `String[]|<Record<string, boolean|string>>`\
 Default: [see default tags](https://github.com/posthtml/posthtml-base-url/blob/main/lib/index.js)
 
 Apply the base URL only to `<img>` tags:
 
 ```js [config.js]
-module.exports = {
+export default {
   baseURL: {
     url: 'https://cdn.example.com/',
     tags: ['img'],
@@ -62,7 +62,7 @@ That will apply the `url` to all known source attributes on all `<img>` elements
 If you need greater control, you may specify which attributes of which tags should be prepended what URL, by passing in an object instead:
 
 ```js [config.js]
-module.exports = {
+export default {
   baseURL: {
     url: 'https://cdn.example.com/',
     tags: {
@@ -77,13 +77,13 @@ module.exports = {
 
 ### attributes
 
-Type: Object\
+Type: `Object`\
 Default: `{}`
 
 Key-value pairs of attributes and what to prepend to them.
 
 ```js [config.js]
-module.exports = {
+export default {
   baseURL: {
     attributes: {
       'data-url': 'https://example.com/',
@@ -94,13 +94,13 @@ module.exports = {
 
 ### styleTag
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 By default, the transformer will prepend your `url` to all `url()` sources in `<style>` tags. Set this option to `false` to prevent it from doing so:
 
 ```js [config.js]
-module.exports = {
+export default {
   baseURL: {
     url: 'https://cdn.example.com/',
     tags: ['img'],
@@ -111,13 +111,13 @@ module.exports = {
 
 ### inlineCss
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 Similarly, the transformer will prepend your `url` to all `url()` sources in `style=""` attributes. You may disable this if you need to:
 
 ```js [config.js]
-module.exports = {
+export default {
   baseURL: {
     url: 'https://cdn.example.com/',
     tags: ['img'],
@@ -142,16 +142,25 @@ baseURL: 'https://res.cloudinary.com/user/image/upload/'
 
 ## Trailing slash
 
-Mind the trailing slash on your URL, this influences how you reference images:
+When `baseURL` is not an absolute URL, `path.join` is used to prepend the base URL to the source, so you don't need to worry about trailing slashes.
 
-```xml
-<!-- baseURL: 'https://cdn.example.com/img' -->
+However, you need to consider trailing slashes when the base URL is an absolute URL.
+
+```xml [baseURL: 'https://example.com/img']
 <img src="/folder/product-1.png">
 
-<!-- baseURL: 'https://cdn.example.com/img/' -->
-<img src="folder/product-1.png">
+<!-- Result -->
+<img src="https://example.com/img/folder/product-1.png">
 ```
 
+If we add a trailing slash to `baseURL`, we get a double slash in the result:
+
+```xml [baseURL: 'https://example.com/img/']
+<img src="/folder/product-1.png">
+
+<!-- Result -->
+<img src="https://example.com/img//folder/product-1.png">
+```
 
 ## Disabling
 
@@ -174,10 +183,11 @@ baseURL: false
 ## API
 
 ```js [app.js]
-const {applyBaseUrl} = require('@maizzle/framework')
+import { addBaseUrl } from '@maizzle/framework'
+
 const config = {
   url: 'https://cdn.example.com/img/',
 }
 
-const html = await applyBaseUrl('<img src="image.jpg">', config)
+const html = await addBaseUrl('<img src="image.jpg">', config)
 ```

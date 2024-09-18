@@ -13,7 +13,7 @@ PostHTML is configured under `build.posthtml.options` in your `config.js`.
 
 ### directives
 
-Type: Array\
+Type: `Array`\
 Default: `[]`
 
 You can configure the PostHTML parser to correctly process custom directives.
@@ -21,14 +21,12 @@ You can configure the PostHTML parser to correctly process custom directives.
 For example, you may tell it to ignore `<?php ?>` tags instead of treating them as HTML:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      options: {
-        directives: [
-          { name: '?php', start: '<', end: '>' }
-        ]
-      }
+export default {
+  posthtml: {
+    options: {
+      directives: [
+        { name: '?php', start: '<', end: '>' },
+      ]
     }
   }
 }
@@ -36,18 +34,16 @@ module.exports = {
 
 ### xmlMode
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `false`
 
 Enable `xmlMode` if you're using Maizzle to output XML content, and not actual HTML.
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      options: {
-        xmlMode: true
-      }
+export default {
+  posthtml: {
+    options: {
+      xmlMode: true,
     }
   }
 }
@@ -55,18 +51,16 @@ module.exports = {
 
 ### decodeEntities
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `false`
 
 Set this to `true` to have entities within the document decoded.
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      options: {
-        decodeEntities: true
-      }
+export default {
+  posthtml: {
+    options: {
+      decodeEntities: true,
     }
   }
 }
@@ -74,18 +68,16 @@ module.exports = {
 
 ### lowerCaseTags
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `false`
 
 Set this to `true` to output all tags in lowercase. Works only when `xmlMode` is disabled.
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      options: {
-        lowerCaseTags: true
-      }
+export default {
+  posthtml: {
+    options: {
+      lowerCaseTags: true,
     }
   }
 }
@@ -93,7 +85,7 @@ module.exports = {
 
 ### lowerCaseAttributeNames
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `false`
 
 Output all attribute names in lowercase.
@@ -101,12 +93,10 @@ Output all attribute names in lowercase.
 <Alert type="warning">This has a significant impact on speed.</Alert>
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      options: {
-        lowerCaseAttributeNames: true
-      }
+export default {
+  posthtml: {
+    options: {
+      lowerCaseAttributeNames: true,
     }
   }
 }
@@ -115,7 +105,7 @@ module.exports = {
 
 ### recognizeCDATA
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `false`
 
 Recognize CDATA sections as text even if the `xmlMode` option is disabled.
@@ -123,12 +113,10 @@ Recognize CDATA sections as text even if the `xmlMode` option is disabled.
 <Alert>If `xmlMode` is enabled, CDATA sections will always be recognized as text.</Alert>
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      options: {
-        recognizeCDATA: true
-      }
+export default {
+  posthtml: {
+    options: {
+      recognizeCDATA: true,
     }
   }
 }
@@ -136,7 +124,7 @@ module.exports = {
 
 ### recognizeSelfClosing
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 If enabled, self-closing tags will trigger the `onclosetag` event even if `xmlMode` is disabled.
@@ -146,12 +134,10 @@ If enabled, self-closing tags will trigger the `onclosetag` event even if `xmlMo
 Maizzle sets this to `true` to ensure self-closing tags like those of Components are rendered correctly.
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      options: {
-        recognizeSelfClosing: true
-      }
+export default {
+  posthtml: {
+    options: {
+      recognizeSelfClosing: true,
     }
   }
 }
@@ -159,18 +145,16 @@ module.exports = {
 
 ### sourceLocations
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `false`
 
 If set to `true`, AST nodes will have a `location` property containing the `start` and `end` line and column position of the node.
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      options: {
-        sourceLocations: true
-      }
+export default {
+  posthtml: {
+    options: {
+      sourceLocations: true,
     }
   }
 }
@@ -178,18 +162,16 @@ module.exports = {
 
 ### recognizeNoValueAttribute
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 If set to `true`, PostHTML will render attributes with no values exactly as they were written and will not add `=""` to them.
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      options: {
-        recognizeNoValueAttribute: true
-      }
+export default {
+  posthtml: {
+    options: {
+      recognizeNoValueAttribute: true,
     }
   }
 }
@@ -197,7 +179,7 @@ module.exports = {
 
 ### singleTags
 
-Type: Array&lt;String|RegExp&gt;\
+Type: `Array<String|RegExp>`\
 Default: `[]`
 
 Use the `singleTags` option to tell PostHTML to treat custom tags as self-closing.
@@ -205,13 +187,11 @@ Use the `singleTags` option to tell PostHTML to treat custom tags as self-closin
 <Alert type="warning">This needs to be used in conjunction with `closingSingleTag` to tell PostHTML how to close the tag, otherwise you will end up with an unclosed tag.</Alert>
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      options: {
-        singleTags: ['custom'],
-        closingSingleTag: 'slash', // see docs below
-      }
+export default {
+  posthtml: {
+    options: {
+      singleTags: ['custom'],
+      closingSingleTag: 'slash', // see docs below
     }
   }
 }
@@ -225,7 +205,7 @@ You may then use the `<custom />` tag as self-closing:
 
 ### closingSingleTag
 
-Type: String\
+Type: `String`\
 Default: `'default'`
 
 Define the closing format for single tags.
@@ -244,13 +224,11 @@ Available options:
 Will add a closing tag.
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      options: {
-        singleTags: ['custom'],
-        closingSingleTag: 'tag'
-      }
+export default {
+  posthtml: {
+    options: {
+      singleTags: ['custom'],
+      closingSingleTag: 'tag',
     }
   }
 }
@@ -265,13 +243,11 @@ module.exports = {
 Will add a closing tag.
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      options: {
-        singleTags: ['custom'],
-        closingSingleTag: 'slash'
-      }
+export default {
+  posthtml: {
+    options: {
+      singleTags: ['custom'],
+      closingSingleTag: 'slash',
     }
   }
 }
@@ -283,18 +259,16 @@ module.exports = {
 
 ### quoteAllAttributes
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 Disable if you want to remove quotes on all attributes
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      options: {
-        quoteAllAttributes: false
-      }
+export default {
+  posthtml: {
+    options: {
+      quoteAllAttributes: false,
     }
   }
 }
@@ -306,18 +280,16 @@ module.exports = {
 
 ### replaceQuote
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 Replaces quotes in attribute values with `&quote;`.
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      options: {
-        replaceQuote: false
-      }
+export default {
+  posthtml: {
+    options: {
+      replaceQuote: false,
     }
   }
 }
@@ -333,18 +305,16 @@ module.exports = {
 
 ### quoteStyle
 
-Type: Number\
+Type: `Number`\
 Default: `2`
 
 Specify the attribute value quotes style.
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      options: {
-        quoteStyle: 1
-      }
+export default {
+  posthtml: {
+    options: {
+      quoteStyle: 1,
     }
   }
 }
@@ -363,18 +333,20 @@ module.exports = {
 
 ## Plugins
 
-Type: Array\
+Type: `Array`\
 Default: `[]`
 
-Register any PostHTML plugins that you would like to use, in the `plugins` array:
+Register any PostHTML plugins that you would like to use, in the `plugins` array.
+
+You may register plugins to run either before all other plugins, or after all other plugins, by using the `before` and `after` keys.
 
 ```js [config.js]
-const spaceless = require('posthtml-spaceless')
+import spaceless from 'posthtml-spaceless'
 
-module.exports = {
-  build: {
-    posthtml: {
-      plugins: [
+export default {
+  posthtml: {
+    plugins: {
+      before: [
         spaceless()
       ]
     }
@@ -389,10 +361,10 @@ You may write your own PostHTML plugins, right in your Maizzle `config.js` file.
 For example, here's a plugin that adds a random number to all `<img>` src URLs:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      plugins: [
+export default {
+  posthtml: {
+    plugins: {
+      after: [
         (() => tree => {
           const process = node => {
             if (node.tag === 'img' && node.attrs?.src) {
@@ -417,8 +389,6 @@ module.exports = {
 
 Maizzle already uses the following PostHTML plugins internally:
 
-- [posthtml-extend](https://github.com/posthtml/posthtml-extend)
-- [posthtml-fetch](https://github.com/posthtml/posthtml-fetch)
 - [posthtml-mso](https://github.com/posthtml/posthtml-mso)
 - [posthtml-base-url](https://github.com/posthtml/posthtml-base-url)
 - [posthtml-content](https://github.com/posthtml/posthtml-content)

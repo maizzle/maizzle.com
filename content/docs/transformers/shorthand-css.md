@@ -34,16 +34,22 @@ By default, `shorthandCSS` is disabled.
 Enable it for all tags:
 
 ```js [config.js]
-module.exports = {
-  shorthandCSS: true,
+export default {
+  css: {
+    shorthand: true,
+  }
 }
 ```
 
 Enable it only for a selection of tags:
 
 ```js [config.js]
-module.exports = {
-  shorthandCSS: ['td', 'div'],
+export default {
+  css: {
+    shorthand: {
+      tags: ['td', 'div'],
+    }
+  }
 }
 ```
 
@@ -52,15 +58,17 @@ module.exports = {
 Set it to `false` or simply omit it:
 
 ```js [config.js]
-module.exports = {
-  shorthandCSS: false,
+export default {
+  css: {
+    shorthand: false,
+  }
 }
 ```
 
 ## API
 
 ```js [app.js]
-const {shorthandCSS} = require('@maizzle/framework')
+import { shorthandCSS } from '@maizzle/framework'
 
 const html = await shorthandCSS('html string')
 ```

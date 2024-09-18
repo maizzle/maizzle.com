@@ -18,8 +18,10 @@ You may configure which attributes to remove through the `removeAttributes` arra
 To remove attributes with no values, specify the attribute name as a string:
 
 ```js [config.js]
-module.exports = {
-  removeAttributes: ['data-src']
+export default {
+  attributes: {
+    remove: ['data-src'],
+  }
 }
 ```
 
@@ -42,10 +44,12 @@ Output:
 If you know the exact name and value, you may pass them to the array as an object:
 
 ```js [config.js]
-module.exports = {
-  removeAttributes: [
-    {name: 'id', value: 'test'}
-  ]
+export default {
+  attributes: {
+    remove: [
+      {name: 'id', value: 'test'},
+    ],
+  }
 }
 ```
 
@@ -68,10 +72,12 @@ You may also use a regular expression for the `value`.
 All attributes with a value matching the regex will be removed:
 
 ```js [config.js]
-module.exports = {
-  removeAttributes: [
-    {name: 'data-id', value: /\d/}
-  ]
+export default {
+  attributes: {
+    remove: [
+      {name: 'data-id', value: /\d/},
+    ],
+  }
 }
 ```
 
@@ -92,10 +98,11 @@ Output:
 ## API
 
 ```js [app.js]
-const {removeAttributes} = require('@maizzle/framework')
+import { removeAttributes } from '@maizzle/framework'
+
 const options = [
   'id',
-  {name: 'role', value: 'article'}
+  {name: 'role', value: 'article'},
 ]
 
 const html = await removeAttributes(`<div id="" style="" role="article"></div>`, options)

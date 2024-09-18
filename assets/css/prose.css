@@ -18,6 +18,11 @@ abbr,
   @apply mb-6;
 }
 
+.prose th,
+.prose td {
+  @apply text-left;
+}
+
 /* Syntax highlighting */
 .prose .shiki pre {
   @apply grid m-0 p-0 leading-relaxed bg-white;
@@ -86,8 +91,8 @@ abbr,
   @apply rounded-t-none;
 }
 
-.prose .frame-terminal + .shiki .line:not(.empty):before {
-  content: '$';
+.prose .frame-terminal + .shiki:not(.no-root) .line:not(.empty):before {
+  content: '➜';
   @apply text-base pr-4 text-slate-400;
 }
 
