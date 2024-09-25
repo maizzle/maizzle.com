@@ -21,7 +21,7 @@ For example, the Starter uses it to output a preheader in its Layout:
 
 Of course, you can create more complex conditions:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <if condition="page.env === 'node'">
   <p>Using Maizzle programmatically</p>
 </if>
@@ -47,7 +47,7 @@ export default {
 
 Example:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <when condition="page.env === 'node'">
   <p>Using Maizzle programmatically</p>
 </when>
@@ -65,7 +65,7 @@ The `<template>` tag will only return its contents.
 
 You can use it to apply a filter to a string, for example:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <template uppercase>test</template>
 ```
 
@@ -77,7 +77,7 @@ TEST
 
 ... or to compile a markdown string:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <template markdown>
   # Hello, world!
 </template>
@@ -85,7 +85,7 @@ TEST
 
 Result:
 
-```xml
+```html
 <h1>Hello, world!</h1>
 ```
 
@@ -93,7 +93,7 @@ Result:
 
 If you actually need to output a `<template>` tag in the compiled HTML, you may use the `preserve` attribute:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <template preserve>
   test
 </template>
@@ -101,7 +101,7 @@ If you actually need to output a `<template>` tag in the compiled HTML, you may 
 
 Result:
 
-```xml
+```html
 <template>
   test
 </template>
@@ -111,7 +111,7 @@ Result:
 
 Wrap content in <abbr title="Microsoft Office">MSO</abbr> conditional comments to show it only in Outlook 2007-2021 on Windows:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <outlook>
   <div>Show this in all Outlook versions</div>
 </outlook>
@@ -119,7 +119,7 @@ Wrap content in <abbr title="Microsoft Office">MSO</abbr> conditional comments t
 
 That will output:
 
-```xml
+```html
 <!--[if mso|ie]>
   <div>Show this in all Outlook versions</div>
 <![endif]-->
@@ -127,7 +127,7 @@ That will output:
 
 Of course, there's also a tag for showing content in all email clients _except_ in Outlook:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <not-outlook>
   <div>All Outlooks (on Windows) will ignore this</div>
 </not-outlook>
@@ -135,7 +135,7 @@ Of course, there's also a tag for showing content in all email clients _except_ 
 
 Result:
 
-```xml
+```html
 <!--[if !mso]><!-->
   <div>All Outlooks (on Windows) will ignore this</div>
 <!--<![endif]-->
@@ -152,7 +152,7 @@ The `<outlook>` tag supports various combinations of attributes that will help w
 
 For example:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <outlook only="2013">
   <div>Show only in Outlook 2013</div>
 </outlook>
@@ -160,7 +160,7 @@ For example:
 
 Result:
 
-```xml
+```html
 <!--[if mso 15]>
   <div>Show only in Outlook 2013</div>
 <![endif]-->
@@ -168,7 +168,7 @@ Result:
 
 The `only` and `not` attributes support multiple values, separated with a comma:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <outlook only="2013,2016">
   <div>Show only in Outlook 2013 and 2016</div>
 </outlook>
@@ -176,7 +176,7 @@ The `only` and `not` attributes support multiple values, separated with a comma:
 
 Result:
 
-```xml
+```html
 <!--[if (mso 15)|(mso 16)]>
   <div>Show only in Outlook 2013 and 2016</div>
 <![endif]-->
@@ -184,7 +184,7 @@ Result:
 
 You may also combine attributes:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <outlook gt="2003" lte="2013">
   <div>Show in 2007, 2010, 2013</div>
 </outlook>
@@ -192,7 +192,7 @@ You may also combine attributes:
 
 Result:
 
-```xml
+```html
 <!--[if (gt mso 11)&(lte mso 15)]>
   <div>Show in 2007, 2010, 2013</div>
 <![endif]-->
@@ -212,7 +212,7 @@ export default {
 
 You'd then use it like this:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <mso only="2013">Show only in Outlook 2013</mso>
 <not-mso>Hide from all Outlooks</not-mso>
 ```
@@ -221,7 +221,7 @@ You'd then use it like this:
 
 Need to use a [switch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement?
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <switch expression="page.user.subscription">
   <case n="'monthly'">
     <p>Your monthly subscription is about to renew.</p>
@@ -249,7 +249,7 @@ export default {
 
 Example:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <handle expression="page.env">
   <when n="'production'">
     production
@@ -266,7 +266,7 @@ You can iterate over arrays and objects with the `<each>` tag.
 
 For arrays:
 
-```xml [src/templates/example.html]
+```hbs [src/templates/example.html]
 <each loop="item, index in someArray">
   <p>{{ index }}: {{ item }}</p>
 </each>
@@ -274,7 +274,7 @@ For arrays:
 
 For objects:
 
-```xml [src/templates/example.html]
+```hbs [src/templates/example.html]
 <each loop="value, key in anObject">
   <p>{{ key }}: {{ value }}</p>
 </each>
@@ -292,7 +292,7 @@ Inside a loop you will have access to a `{{ loop }}` object that contains inform
 
 Example:
 
-```xml [src/templates/example.html]
+```hbs [src/templates/example.html]
 <each loop="item, index in [1,2,3]">
   <p>Number of iterations until the end: {{ loop.remaining }}</p>
 </each>
@@ -312,7 +312,7 @@ export default {
 
 You can now use a `<for>` tag instead:
 
-```xml [src/templates/example.html]
+```hbs [src/templates/example.html]
 <for loop="item, index in [1,2,3]">
   <p>{{ item }}</p>
 </for>
@@ -446,7 +446,7 @@ Example:
 
 You may output content based on the current Environment through the `<env:>` tag:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <env:local>
   This will only show in local.
 </env:local>

@@ -79,7 +79,7 @@ The `<content />` tag has been replaced with `<yield />`.
 
 Make sure to update it in your Layouts and Components:
 
-```hbs diff [src/layouts/main.html] {8}
+```html diff [src/layouts/main.html] {8}
 <!doctype html>
 <html lang="en">
 <head>
@@ -98,7 +98,7 @@ Make sure to update it in your Layouts and Components:
 
 Tailwind CSS can now be used as expected, with `@tailwind` directives in any `<style>` tag, instead of the old `<style>{{{ page.css }}}</style>`.
 
-```xml diff [src/layouts/main.html] {6-7}
+```html diff [src/layouts/main.html] {6-7}
 <!doctype html>
 <html lang="en">
 <head>
@@ -152,7 +152,7 @@ It also means you need to make this change:
 
 If you need to keep using `module.exports` you must use the `.cjs` extension:
 
-```js [ ] diff {3,4}
+``` [ ] diff {3,4}
 - config.js
 - config.production.js
 + config.cjs
@@ -202,7 +202,7 @@ export default {
 
 Events have been moved to the root of the config file:
 
-```js [config.js] diff {3-5}
+```diff [config.js] diff {3-5}
 export default {
 -  events: {...}
 +  async beforeRender({html, matter, config}) {
@@ -215,7 +215,7 @@ export default {
 
 This key has been moved to `css.attributes.add`:
 
-```js [config.js] diff {3-7}
+```diff [config.js] diff {3-7}
 export default {
 -  extraAttributes: {}
 +  css: {
@@ -234,7 +234,7 @@ The `layouts` key is no longer used, you can safely remove it.
 
 Configuration for CSS inlining has been moved under the `css.inline` key:
 
-```js [config.js] diff {3-5}
+```diff [config.js] diff {3-5}
 export default {
 -  inlineCSS: {}
 +  css: {
@@ -270,7 +270,7 @@ export default {
 
 Configuring the custom tag for Outlook conditionals is done through the same `outlook` key, but at the root of the config file instead of inside the `posthtml` key:
 
-```js [config.js] diff {5-7}
+```diff [config.js] diff {5-7}
 export default {
 -  posthtml: {
 -    outlook: {}
@@ -285,7 +285,7 @@ export default {
 
 The `fetch` key has been moved to the root of the config file:
 
-```js [config.js] diff {5-7}
+```diff [config.js] diff {5-7}
 export default {
 -  posthtml: {
 -    fetch: {}
@@ -302,7 +302,7 @@ See the [fetch docs](/docs/tags#fetch-options) for the available options.
 
 PostCSS may now be configured under the root `postcss` key:
 
-```js [config.js] diff {5}
+```diff [config.js] diff {5}
 export default {
 -  build: {
 -    postcss: {}
@@ -315,7 +315,7 @@ export default {
 
 This Transformer has been moved to `css.attributes.remove`:
 
-```js [config.js] diff {3-7}
+```diff [config.js] diff {3-7}
 export default {
 -  removeAttributes: []
 +  css: {
@@ -330,7 +330,7 @@ export default {
 
 Configuration for this Transformer has been moved to `css.purge`:
 
-```js [config.js] diff {3-5}
+```diff [config.js] diff {3-5}
 export default {
 -  removeUnusedCSS: {}
 +  css: {
@@ -343,7 +343,7 @@ export default {
 
 The shorthand CSS Transformer config has been moved to `css.shorthand`:
 
-```js [config.js] diff {3-5}
+```diff [config.js] diff {3-5}
 export default {
 -  shorthandCSS: true
 +  css: {
@@ -356,7 +356,7 @@ export default {
 
 The `safeClassNames` option has been renamed and moved to `css.safe`:
 
-```js [config.js] diff {3-5}
+```diff [config.js] diff {3-5}
 export default {
 -  safeClassNames: {}
 +  css: {
@@ -373,7 +373,7 @@ We call this Hot Markup Replacement&trade;.
 
 This [new dev server](./configuration/server) is much faster and provides a nicer experience, but you'll need to update your `config.js` if you want to configure it:
 
-```js [config.js] diff {3-10}
+```diff [config.js] diff {3-10}
 export default {
 -  browsersync: {...},
 +  server: {
@@ -391,7 +391,7 @@ export default {
 
 This Transformer config has been moved to `css.sixHex`:
 
-```js [config.js] diff {3-5}
+```diff [config.js] diff {3-5}
 export default {
 -  sixHex: true
 +  css: {
@@ -406,7 +406,7 @@ The `tailwind` key in `config.js` has been deprecated, you can safely remove it.
 
 You may now simply use `@config` in your `<style>` tags or files included with `<link>`, to specify a custom Tailwind CSS config file to use:
 
-```mdx [src/layouts/main.html]
+```html [src/layouts/main.html]
 <style>
   @config 'tailwind.custom.js';
   @tailwind components;
@@ -416,7 +416,7 @@ You may now simply use `@config` in your `<style>` tags or files included with `
 
 If you prefer using CSS files:
 
-```mdx [src/css/tailwind.css]
+```css [src/css/tailwind.css]
 @config 'tailwind.custom.js';
 @tailwind components;
 @tailwind utilities;
@@ -451,7 +451,7 @@ The `templates` key has been deprecated, see [`build`](#build) above for how to 
 
 This has been renamed to `useTransformers`:
 
-```js [config.js] diff {3}
+```diff [config.js] diff {3}
 export default {
 -  applyTransformers: true
 +  useTransformers: true

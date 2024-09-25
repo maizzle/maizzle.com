@@ -116,7 +116,7 @@ export default {
 
 You'd then define a component like this:
 
-```xml [src/components/button.html]
+```html [src/components/button.html]
 <a href="...">
   <content />
 </a>
@@ -141,7 +141,7 @@ export default {
 
 You could then use `provide` instead of `slot` when defining a component:
 
-```jsx [src/components/footer.html]
+```html [src/components/footer.html]
 <script props>
   module.exports = {
     year: new Date().getFullYear(),
@@ -159,7 +159,7 @@ You could then use `provide` instead of `slot` when defining a component:
 
 You'd fill `provide` as usual:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-footer>
   <fill:footer-logo>
     <img src="logo.png">
@@ -200,7 +200,7 @@ export default {
 
 Given the previous example, you'd now use `inject` instead of `fill` when defining a component:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-footer>
   <inject:footer-logo>
     <img src="logo.png">
@@ -229,7 +229,7 @@ export default {
 
 You'd then use `<slot@footer-logo />` and `<fill@footer-logo>`:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-footer>
   <fill@footer-logo>
     <img src="logo.png">
@@ -334,7 +334,7 @@ export default {
 
 You'd then use `data` instead of `locals` when passing props as JSON to a component:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-button data='{"href": "https://example.com"}'>
   Click me
 </x-button>

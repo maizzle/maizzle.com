@@ -32,7 +32,7 @@ Once it finishes installing dependencies, open the project folder in your favori
 
 AMP for Email requires some special markup, so let's create an `amp.html` Layout and save it under `src/layouts`:
 
-```hbs [src/layouts/amp.html]
+```html [src/layouts/amp.html]
 <!doctype html>
 <html ⚡4email>
 <head>
@@ -54,7 +54,7 @@ For this tutorial, we'll use the [AMP Carousel](https://amp.dev/documentation/co
 
 Create `src/templates/amp/carousel.html` and add a basic AMP carousel:
 
-```xml [src/templates/amp/carousel.html]
+```html [src/templates/amp/carousel.html]
 <x-amp>
   <push name="head">
     <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"></script>

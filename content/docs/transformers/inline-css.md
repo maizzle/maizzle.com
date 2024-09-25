@@ -52,7 +52,7 @@ export default {
 
 ... will transform this:
 
-```xml
+```html
 <table class="bg-slate-300">
   <tr>
     <td>...</td>
@@ -62,7 +62,7 @@ export default {
 
 ... into this:
 
-```xml
+```html
 <table bgcolor="#cbd5e1" style="background-color: #cbd5e1">
   <tr>
     <td>...</td>

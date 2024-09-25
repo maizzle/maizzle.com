@@ -23,7 +23,7 @@ Layouts must include a `<yield />` tag, which is where the Template's HTML will 
 
 Here's a very basic `layout.html`:
 
-```hbs [src/layouts/layout.html] {10}
+```html [src/layouts/layout.html] {10}
 <!doctype html>
 <html>
 <head>
@@ -41,7 +41,7 @@ Here's a very basic `layout.html`:
 
 When creating a Template, you may use that Layout like this:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-layout>
   <!-- your email template HTML... -->
 </x-layout>
@@ -64,7 +64,7 @@ In order for Tailwind CSS to work, you need to include it in a `<style>` or `<li
 
 When using a `<style>` tag, you can include Tailwind's `utilities` and `components` by using the `@tailwind` directive:
 
-```hbs [src/layouts/main.html] diff {4-7}
+```html [src/layouts/main.html] diff {4-7}
 <!doctype html>
 <html>
 <head>
@@ -84,7 +84,7 @@ When using a `<style>` tag, you can include Tailwind's `utilities` and `componen
 
 Maizzle also supports `<link rel="stylesheet">` tags - it will try to read the file from the `href` attribute and process it with PostCSS (including Tailwind CSS).
 
-```hbs [src/layouts/main.html] diff {4}
+```html [src/layouts/main.html] diff {4}
 <!doctype html>
 <html>
 <head>
@@ -99,7 +99,7 @@ Maizzle also supports `<link rel="stylesheet">` tags - it will try to read the f
 
 Then, in your `tailwind.css` file:
 
-```postcss [src/css/tailwind.css]
+```css [src/css/tailwind.css]
 @tailwind components;
 @tailwind utilities;
 ```
@@ -110,7 +110,7 @@ Variables from your [Environment config](/docs/environments) or from the Templat
 
 You can use the curly braces [expression syntax](/docs/expressions) to output variables in a Layout:
 
-```xml
+```html
 <meta charset="{{ page.charset || 'utf8' }}">
 ```
 
@@ -122,7 +122,7 @@ The Environment name is available under `page.env`. You can use it to output stu
 
 For example, you could use `page.env` to output some content only when running the `maizzle build production` command:
 
-```xml [src/layouts/layout.html]
+```html [src/layouts/layout.html]
 <if condition="page.env === 'production'">
   <p>This text will show when running `maizzle build production`</p>
 </if>

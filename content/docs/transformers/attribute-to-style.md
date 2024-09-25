@@ -23,7 +23,7 @@ export default {
 
 Given this HTML:
 
-```xml
+```html
 <table width="100%">
   <tr>
     <td>
@@ -35,7 +35,7 @@ Given this HTML:
 
 It will transform it to:
 
-```xml
+```html
 <table width="100%" style="width: 100%">
   <tr>
     <td>

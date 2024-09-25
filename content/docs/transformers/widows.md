@@ -7,7 +7,7 @@ description: "Preventing widow words in your HTML email content."
 
 Add a `prevent-widows` attribute on any HTML tag to prevent widow words by adding a `&nbsp;` between the last two words inside it.
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-main>
   <div prevent-widows>
     <p>The quick brown fox jumped over the lazy dog.</p>
@@ -17,7 +17,7 @@ Add a `prevent-widows` attribute on any HTML tag to prevent widow words by addin
 
 The `prevent-widows` attribute will be removed and the HTML will be transformed to:
 
-```xml
+```html
 <div>
   <p>The quick brown fox jumped over the lazy&nbsp;dog.</p>
 </div>
@@ -143,7 +143,7 @@ export default {
 
 Input:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-main>
   <div create-widows>
     <p>The quick brown fox jumped over the lazy&nbsp;dog.</p>
@@ -153,7 +153,7 @@ Input:
 
 Output:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <div>
   <p>The quick brown fox jumped over the lazy dog.</p>
 </div>

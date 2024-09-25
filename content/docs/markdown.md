@@ -13,14 +13,14 @@ Maizzle makes it easy to use Markdown in your email templates.
 
 There are two tags that you can use to add Markdown to your emails:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <markdown>This Markdown will be **compiled** to HTML</markdown>
 <md>A _shorter_ version of the `markdown` tag.</md>
 ```
 
 Result:
 
-```xml
+```html
 <p>This Markdown will be <strong>compiled</strong> to HTML</p>
 <p>A <em>shorter</em> version of the <code>markdown</code> tag.</p>
 ```
@@ -29,14 +29,14 @@ Result:
 
 Use attributes if you need the element wrapping your Markdown to be preserved:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <div markdown>Using a `markdown` attribute</div>
 <p md>You can also use the `md` attribute.</p>
 ```
 
 Result:
 
-```xml
+```html
 <div>
   <p>Using a <code>markdown</code> attribute</p>
 </div>
@@ -47,13 +47,13 @@ Result:
 
 Use the `tag` attribute to specify a tag name to wrap your Markdown with:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <md tag="section">This Markdown will be _compiled_ to HTML</md>
 ```
 
 Result:
 
-```xml
+```html
 <section>
   <p>This Markdown will be <em>compiled</em> to HTML</p>
 </section>
@@ -63,7 +63,7 @@ Result:
 
 Already have some Markdown in a file? Simply include it:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <md src="./README.md">
   # You'll see contents of README.md above this heading
 </md>
@@ -71,14 +71,14 @@ Already have some Markdown in a file? Simply include it:
 
 Result:
 
-```xml
+```html
 <!-- contents of README.md here -->
 <h1>You'll see contents of README.md above this heading</h1>
 ```
 
 If you're including a file that will be used as an inline element and don't want the enclosing `<p>` tags, use the `inline` attribute:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <p class="example">
   <markdown src="./example.md" inline>
     _Imported_
@@ -88,7 +88,7 @@ If you're including a file that will be used as an inline element and don't want
 
 Result:
 
-```xml
+```html
 <p class="example">
   <!-- Contents of ./example.md rendered to HTML -->
   <em>Imported</em>
@@ -103,7 +103,7 @@ Result:
 
 Create tables with pipes `|` and hyphens `-`. Use hyphens to define each column's header, and pipes to separate each column.
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <markdown>
   | Markdown      | tables are    | cool  |
   | ------------- |:-------------:| -----:|
@@ -154,7 +154,7 @@ markdown:
 
 That will output:
 
-```xml
+```html
 <p><a href="https://example.com">https://example.com</a></p>
 ```
 
@@ -191,7 +191,7 @@ export default {
 
 We can now use emojis in markdown:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <md>
   You can use emojis :)
 </md>
@@ -199,7 +199,7 @@ We can now use emojis in markdown:
 
 Result:
 
-```xml
+```html
 <p>You can use emojis 😃</p>
 ```
 

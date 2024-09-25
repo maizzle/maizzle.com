@@ -199,7 +199,7 @@ export default {
 
 You may then use the `<custom />` tag as self-closing:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <custom name="opencounter" type="tracking" />
 ```
 
@@ -212,7 +212,7 @@ Define the closing format for single tags.
 
 By default it will not close self-closing tags that it knows about:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <img>
 <p></p>
 ```
@@ -234,7 +234,7 @@ export default {
 }
 ```
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <custom></custom>
 ```
 
@@ -253,7 +253,7 @@ export default {
 }
 ```
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <custom />
 ```
 
@@ -274,7 +274,7 @@ export default {
 }
 ```
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <img src=example.jpg>
 ```
 
@@ -295,7 +295,7 @@ export default {
 }
 ```
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <!-- `true` (default) -->
 <img src="<?php echo $foo[&quote;bar&quote;] ?>">
 
@@ -320,7 +320,7 @@ export default {
 }
 ```
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <!-- `2` (double quotes, default) -->
 <img src="example.png" onload="testFunc("test")">
 

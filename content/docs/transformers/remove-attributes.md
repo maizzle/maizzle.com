@@ -27,13 +27,13 @@ export default {
 
 Input:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <img src="example.jpg" data-src alt="">
 ```
 
 Output:
 
-```xml
+```html
 <img src="example.jpg" alt="">
 ```
 
@@ -55,13 +55,13 @@ export default {
 
 Input:
 
-```xml
+```html
 <div style="color: #000" id="test">Test</div>
 ```
 
 Output:
 
-```xml
+```html
 <div style="color: #000">Test</div>
 ```
 
@@ -83,14 +83,14 @@ export default {
 
 Input:
 
-```xml
+```html
 <div data-id="test"></div>
 <div data-id="99"></div>
 ```
 
 Output:
 
-```xml
+```html
 <div data-id="test"></div>
 <div></div>
 ```

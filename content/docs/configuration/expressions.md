@@ -41,7 +41,7 @@ Array containing beginning and ending delimiters for unescaped locals.
 
 You'd normally use these when you want to output HTML from a variable without escaping it:
 
-```hbs
+```html
 {{ '<span>escaped</span>' }}
 {{{ '<span>unescaped</span>' }}}
 ```

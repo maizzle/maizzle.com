@@ -106,7 +106,7 @@
       <div class="max-w-7xl px-6 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 relative z-10">
         <div class="relative">
           <div class="lg:sticky top-28">
-            <div class="relative">
+            <div class="relative leading-7">
               <HomeCodeFrame
                 no-copy
                 title="tailwind.config.js"
@@ -157,7 +157,7 @@
 
       <div class="max-w-7xl px-6 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 relative z-10">
         <div class="lg:order-2">
-          <div class="relative">
+          <div class="relative leading-7">
             <HomeCodeFrame
               title="src/templates/example.html"
               bg-frame-class="top-4 sm:top-8 right-4 sm:right-8 bg-white/30 backdrop-blur-[2px]"
@@ -198,7 +198,7 @@
       <div class="max-w-7xl px-6 mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32 relative z-10">
         <div>
           <div class="lg:sticky top-28">
-            <div class="relative">
+            <div class="relative leading-7">
               <HomeCodeFrame
                 title="config.production.js"
                 bg-frame-class="top-4 sm:top-8 right-4 sm:right-8 bg-white/30 backdrop-blur-[1px]"

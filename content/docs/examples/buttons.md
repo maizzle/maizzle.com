@@ -23,7 +23,7 @@ Here's the Filled button, fully clickable in Outlook:
     </button>
   </div>
 
-  ```xml
+  ```html
   <a
     href="https://maizzle.com/"
     class="inline-block py-4 px-6 text-sm/none font-semibold rounded no-underline text-white bg-indigo-500 hover:bg-indigo-600"
@@ -69,7 +69,7 @@ Probably the only reason you'd want to use a VML button is because it's the only
 
 Here is a simplified VML button with rounded corners, styled with Tailwind CSS:
 
-```xml [vml-rounded-button.html]
+```html [vml-rounded-button.html]
 <!--[if mso]>
 <v:roundrect arcsize="50%" style="height: 48px; mso-wrap-style: none;" stroke="f" fillcolor="#1d4ed8">
 <![endif]-->
@@ -116,7 +116,7 @@ For an extra touch, let's add rounded corners and a hover effect:
     </button>
   </div>
 
-  ```xml
+  ```html
   <table>
     <tr>
       <th class="bg-indigo-500 hover:bg-indigo-600 rounded mso-padding-alt-[12px_24px]">
@@ -148,7 +148,7 @@ To make it more interesting, let's also change the background on hover:
     </button>
   </div>
 
-  ```xml
+  ```html
   <table>
     <tr>
       <th class="block border-2 border-indigo-500 hover:bg-indigo-500 rounded mso-padding-alt-[12px_24px]">
@@ -173,7 +173,7 @@ Pill buttons simply use a larger border-radius value.
     <button class="py-3 px-6 rounded-full shadow-md bg-indigo-500 hover:bg-indigo-600 text-sm text-white font-bold leading-full focus:outline-none">Read more</button>
   </div>
 
-  ```xml
+  ```html
   <table>
     <tr>
       <th class="bg-indigo-500 hover:bg-indigo-600 shadow-md rounded-full mso-padding-alt-[16px_24px]">

@@ -92,6 +92,6 @@ const html = await safeClassNames(
 
 Result:
 
-```xml
+```html
 <div class="sm-text-left w-1dot5">foo</div>
 ```

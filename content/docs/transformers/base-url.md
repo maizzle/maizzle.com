@@ -146,7 +146,7 @@ When `baseURL` is not an absolute URL, `path.join` is used to prepend the base U
 
 However, you need to consider trailing slashes when the base URL is an absolute URL.
 
-```xml [baseURL: 'https://example.com/img']
+```html [baseURL: 'https://example.com/img']
 <img src="/folder/product-1.png">
 
 <!-- Result -->
@@ -155,7 +155,7 @@ However, you need to consider trailing slashes when the base URL is an absolute 
 
 If we add a trailing slash to `baseURL`, we get a double slash in the result:
 
-```xml [baseURL: 'https://example.com/img/']
+```html [baseURL: 'https://example.com/img/']
 <img src="/folder/product-1.png">
 
 <!-- Result -->

@@ -179,7 +179,7 @@ Run `npm run build` again and you'll see that the files in the `build_production
 
 Let's create a `src/css/markdown.css` file so we can add some global styles for our Markdown content:
 
-```postcss [src/css/markdown.css]
+```css [src/css/markdown.css]
 h1 {
   @apply text-3xl leading-9;
 }
@@ -320,7 +320,7 @@ You can also import Maizzle components in your Markdown files.
 
 For example, let's create an `<x-alert>` component:
 
-```xml [src/components/alert.html]
+```html [src/components/alert.html]
 <table class="w-full mb-8">
   <tr>
     <td
@@ -371,7 +371,7 @@ title: "Edition #1"
 
 To prevent an issue with code indentation in `markdown-it` that would result in `<pre>` tags being added to the rendered HTML, simply don't indent the closing tags after `<yield />`. A bit of a workaround, but it works:
 
-```xml [src/components/alert.html]
+```html [src/components/alert.html]
 <table class="w-full mb-8">
   <tr>
     <td

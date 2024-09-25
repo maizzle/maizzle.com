@@ -11,7 +11,7 @@ With responsive HTML emails, you sometimes need to reverse the order in which st
 
 Imagine a two column layout, with text on the left and an image on the right:
 
-```xml [2-col.html]
+```html [2-col.html]
 <table class="w-full">
   <tr>
     <th class="sm:block w-1/2 sm:w-full font-sans font-normal text-left">
@@ -29,7 +29,7 @@ Naturally, the image will show under the text when viewed on a mobile device.
 
 However, using table responsive display utilities, we can reverse the columns:
 
-```xml [2-col-reverse.html]
+```html [2-col-reverse.html]
 <table class="w-full">
   <tr>
     <th class="w-1/2 sm:table-footer-group font-sans font-normal text-left">
@@ -58,7 +58,7 @@ See the [2 col reorder demo on CodePen](https://codepen.io/maizzle/pen/dgpxbB?ed
 
 In a similar fashion, we can reorder a 3+ column layout:
 
-```xml [3-col-reverse.html]
+```html [3-col-reverse.html]
 <table class="w-full">
   <tr class="sm:w-full sm:table">
     <th class="w-1/3 sm:table-footer-group">

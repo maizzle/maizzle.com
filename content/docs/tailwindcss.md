@@ -29,7 +29,7 @@ For most of the time, you won't be writing CSS anymore 😎
 
 To use Tailwind CSS in your HTML emails, simply add the `@tailwind` directives to a `<style>` tag in your Layout's `<head>`:
 
-```hbs [src/layouts/main.html] {5-6}
+```html [src/layouts/main.html] {5-6}
 <!doctype html>
 <html>
   <head>
@@ -46,7 +46,7 @@ To use Tailwind CSS in your HTML emails, simply add the `@tailwind` directives t
 
 Alternatively, you may store them in a CSS file:
 
-```postcss [src/css/tailwind.css]
+```css [src/css/tailwind.css]
 img {
   @apply max-w-full align-middle;
 }
@@ -57,7 +57,7 @@ img {
 
 ... and `@import` that instead:
 
-```hbs [src/layouts/main.html]
+```html [src/layouts/main.html]
 <style>
   @import "src/css/tailwind.css";
 </style>
@@ -65,7 +65,7 @@ img {
 
 Prefer `<link>` tags? Maizzle supports that too:
 
-```hbs [src/layouts/main.html] {4}
+```html [src/layouts/main.html] {4}
 <!doctype html>
 <html>
   <head>
@@ -90,7 +90,7 @@ Simply write your HTML markup and use Tailwind CSS utility classes to style elem
 
 Instead of writing something like this:
 
-```xml
+```html
 <table style="width: 100%;">
   <tr>
     <td style="padding: 24px 0; background-color: #e5e7eb;">
@@ -107,7 +107,7 @@ Instead of writing something like this:
 
 You can write:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <table class="w-full">
   <tr>
     <td class="py-6 px-0 bg-gray-200">
@@ -152,7 +152,7 @@ You may organize your CSS into files if you prefer, and then `@import` them in a
 
 For example, let's import that `src/css/components.css` file we just created:
 
-```hbs [src/layouts/main.html] {5}
+```html [src/layouts/main.html] {5}
 <!doctype html>
 <html>
   <head>
@@ -182,7 +182,7 @@ Because utility classes map one-to-one with CSS properties, this normally doesn'
 
 Consider this template:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-main>
   <div class="col">test</div>
 </x-main>
@@ -190,7 +190,7 @@ Consider this template:
 
 Let's use `@apply` to compose a `col` class by  extracting two padding utilities:
 
-```hbs [src/layouts/main.html] {5-7}
+```html [src/layouts/main.html] {5-7}
 <!doctype html>
 <html>
   <head>
@@ -252,25 +252,25 @@ With Tailwind's `@apply`, that means you can do something like this:
 
 ... which will turn this:
 
-```xml
+```html
 <div class="my-border">Border example</div>
 ```
 
 ... into this:
 
-```xml
+```html
 <div style="border: 1px solid #3f83f8;">Border example</div>
 ```
 
 Alternatively, you may use an arbitrary values:
 
-```xml
+```html
 <div class="[border:1px_solid_#3f83f8]">Border example</div>
 ```
 
 You can even reference colors from your Tailwind config:
 
-```xml
+```html
 <div class="[border:1px_solid_theme(colors.gray.300)]">Border example</div>
 ```
 
@@ -278,13 +278,13 @@ Arbitrary values are actually really useful for Outlook, because something like 
 
 So you can do this:
 
-```xml
+```html
 <div class="[border-bottom:1px_solid_#000]">Bottom border example</div>
 ```
 
 This might look like inline styles with extra steps, but it's still Tailwind so you can do stuff that you can't do with inline CSS, like pseudos or media queries:
 
-```xml
+```html
 <div class="hover:[border:1px_solid_#000] sm:[border:none]">
   Border example
 </div>
@@ -327,7 +327,7 @@ You may use Tailwind CSS, including directives like `@apply`, `@layer`, and even
 
 First, add a `<stack name="head" />` inside your Layout's `<head>` tag:
 
-```hbs [src/layouts/main.html] {8} diff
+```html [src/layouts/main.html] {8} diff
 <!doctype html>
 <html>
 <head>
@@ -344,7 +344,7 @@ First, add a `<stack name="head" />` inside your Layout's `<head>` tag:
 
 Next, `push` to that `stack` from a Template:
 
-```hbs [src/templates/example.html]
+```html [src/templates/example.html]
 <x-main>
   <push name="head">
     <style>
@@ -368,7 +368,7 @@ Next, `push` to that `stack` from a Template:
 
 You can prevent CSS inside a `<style>` tag from being inlined:
 
-```hbs [src/templates/example.html]
+```html [src/templates/example.html]
 <x-main>
   <push name="head">
     <style data-embed>

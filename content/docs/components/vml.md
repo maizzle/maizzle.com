@@ -19,7 +19,7 @@ Use it when you need to add a background image that you don't know the height of
 
 You can use it immediately inside a container that has a CSS background image:
 
-```xml {4-9}
+```html {4-9}
 <table>
   <tr>
     <td style="background-image: url('https://picsum.photos/600/400')">
@@ -36,7 +36,7 @@ You can use it immediately inside a container that has a CSS background image:
 
 That will compile to:
 
-```xml {4-9}
+```html {4-9}
 <table cellpadding="0" cellspacing="0" role="none">
   <tr>
     <td style="background-image: url('https://picsum.photos/600/400')">
@@ -77,7 +77,7 @@ The order of the values is `left, top, right, bottom`.
 
 This is applied to a `<v:textbox>` element that wraps the content of the component - basically, the content that you want overlayed on top of the background image.
 
-```xml
+```html
 <x-v-fill
   image="https://picsum.photos/600/400"
   width="600px"
@@ -99,7 +99,7 @@ Define the exact dimensions of the `<v:fill>` element.
 
 Both values need to be set and they can be separated by either a comma or a space:
 
-```xml
+```html
 <x-v-fill
   image="https://picsum.photos/600/400"
   width="600px"
@@ -113,7 +113,7 @@ Default: `undefined`
 
 Replicates the CSS `background-position` property.
 
-```xml
+```html
 <x-v-fill
   image="https://picsum.photos/600/400"
   width="600px"
@@ -143,7 +143,7 @@ Possible values:
 
 Example:
 
-```xml
+```html
 <x-v-fill
   image="https://picsum.photos/600/400"
   width="600px"
@@ -159,7 +159,7 @@ Replicates the CSS `background-color` property.
 
 Example:
 
-```xml
+```html
 <x-v-fill
   image="https://picsum.photos/600/400"
   width="600px"
@@ -175,7 +175,7 @@ Whether to fill the shape with a color.
 
 Example:
 
-```xml
+```html
 <x-v-fill
   image="https://picsum.photos/600/400"
   width="600px"
@@ -191,7 +191,7 @@ Adds a border to the shape.
 
 Example:
 
-```xml
+```html
 <x-v-fill
   image="https://picsum.photos/600/400"
   width="600px"
@@ -207,7 +207,7 @@ The color of the border.
 
 Example:
 
-```xml
+```html
 <x-v-fill
   image="https://picsum.photos/600/400"
   width="600px"

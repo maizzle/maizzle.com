@@ -72,7 +72,7 @@ For this written guide, we'll be using a simplified template with a few images. 
 
 Create `src/templates/template-1/index.html` and paste in the following code:
 
-```xml [src/templates/template-1/index.html]
+```hbs [src/templates/template-1/index.html]
 ---
 title: "Example template 1"
 ---

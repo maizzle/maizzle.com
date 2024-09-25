@@ -68,7 +68,7 @@ Although you're free to do it, it would be very inefficient to always have to wr
 
 To reuse this code in Maizzle, you may create a [Layout](/docs/layouts):
 
-```hbs [src/layouts/main.html]
+```html [src/layouts/main.html]
 <!doctype html>
 <html>
 <head>
@@ -84,7 +84,7 @@ To reuse this code in Maizzle, you may create a [Layout](/docs/layouts):
 
 When creating a Template, you can wrap it with this Layout:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-main>
   <!-- your email HTML... -->
 </x-main>

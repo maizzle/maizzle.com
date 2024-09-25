@@ -11,19 +11,19 @@ Shorthand syntax for CSS properties means less code, so fewer bytes to send over
 
 Something like this:
 
-```xml
+```html
 <p class="mx-2 my-4">Example</p>
 ```
 
 ... instead of becoming this:
 
-```xml
+```html
 <p style="margin-left: 2px; margin-right: 2px; margin-top: 4px; margin-bottom: 4px;">Example</p>
 ```
 
 ... is rewritten to this:
 
-```xml
+```html
 <p style="margin: 4px 2px;">Example</p>
 ```
 

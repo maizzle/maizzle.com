@@ -34,7 +34,7 @@ The traditional content block for showing article excerpts, like those from a bl
     </table>
   </div>
 
-  ```xml example
+  ```html example
   <table class="sm:w-full font-sans shadow-xl rounded">
     <tr>
       <td>

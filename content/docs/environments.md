@@ -151,7 +151,7 @@ export default {
 
 These local variables can be accessed without `page`:
 
-```js [src/templates/example.html] diff {2}
+```diff [src/templates/example.html] diff {2}
 - Company name is {{ page.company.name }}
 + Company name is {{ company.name }}
 ```

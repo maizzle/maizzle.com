@@ -25,7 +25,7 @@ abbr,
 
 /* Syntax highlighting */
 .prose .shiki pre {
-  @apply grid m-0 p-0 leading-relaxed bg-white;
+  @apply grid m-0 p-0 leading-7 bg-white;
   @apply selection:bg-blue-500 selection:text-white;
 }
 

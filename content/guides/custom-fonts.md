@@ -38,7 +38,7 @@ We'll use `@font-face` to register our custom font family - we can do this in th
 
 Open `src/templates/transactional.html` and add this before the `<x-main>` tag:
 
-```hbs [src/templates/transactional.html]
+```html [src/templates/transactional.html]
 <push name="head">
   <style>
     @font-face {
@@ -147,7 +147,7 @@ export default {
 
 We can now use it on the outermost<sup>1</sup> element:
 
-```xml [src/templates/transactional.html]
+```html [src/templates/transactional.html]
 <x-main>
   <table class="screen:font-barosan">
     <!-- your email HTML... -->
@@ -170,7 +170,7 @@ This will tuck the `font-family` away in an `@media` query:
 
 Since Outlook on Windows doesn't read `@media` queries, define a fallback<sup>2</sup> for it in the `<head>` of your Layout:
 
-```xml [src/layouts/main.html]
+```html [src/layouts/main.html]
 <!--[if mso]>
 <style>
   td,th,div,p,a,h1,h2,h3,h4,h5,h6 {font-family: "Segoe UI", sans-serif;}

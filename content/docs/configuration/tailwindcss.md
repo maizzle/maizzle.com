@@ -335,7 +335,7 @@ module.exports = {
 
 If you want to use one of these plugins, simply set it to `true` in `corePlugins` at the bottom of your `tailwind.config.js`:
 
-``` [tailwind.config.js] diff {3}
+```diff [tailwind.config.js] diff {3}
 corePlugins: {
 - backgroundOpacity: false,
 + backgroundOpacity: true,

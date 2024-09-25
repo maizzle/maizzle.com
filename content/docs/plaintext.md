@@ -127,8 +127,12 @@ No matter what you set `plaintext` to in Front Matter in this case, as long as i
 By default, the plaintext generator in Maizzle uses most default options from [`string-strip-html`](https://codsen.com/os/string-strip-html/#optional-options-object), with this exception:
 
 ```js
-dumpLinkHrefsNearby: {
-  enabled: true
+export default {
+  plaintext: {
+    dumpLinkHrefsNearby: {
+      enabled: true
+    }
+  },
 },
 ```
 
