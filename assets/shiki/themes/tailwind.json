@@ -237,6 +237,18 @@
     },
     "tokenColors": [
         {
+            "name": "Shell Numbers and Version Strings",
+            "scope": [
+                "constant.numeric",
+                "string",      
+                "support.constant",
+                "variable.other.constant"
+            ],
+            "settings": {
+                "foreground": "#1E40AF"
+            }
+        },
+        {
             "name": "Comment",
             "scope": [
                 "comment",
@@ -369,10 +381,11 @@
         {
             "name": "[HTML] - Attribute Names",
             "scope": [
-                "text.html entity.other.attribute-name"
+                "text.html entity.other.attribute-name",
+                "text.html meta.tag"
             ],
             "settings": {
-                "foreground": "#758ca9"
+                "foreground": "#0ea5e9"
             }
         },
         {
@@ -381,7 +394,7 @@
                 "text.html string.quoted"
             ],
             "settings": {
-                "foreground": "#3b82f6"
+                "foreground": "#1E40AF"
             }
         },
         {
@@ -390,18 +403,17 @@
                 "text.html punctuation.definition.string"
             ],
             "settings": {
-                "foreground": "#758ca9"
+                "foreground": "#0ea5e9"
             }
         },
         {
             "name": "[HTML] - Punctuation",
             "scope": [
                 "text.html punctuation",
-                "text.html keyword.operator",
-                "text.html meta.tag"
+                "text.html keyword.operator"
             ],
             "settings": {
-                "foreground": "#758ca9"
+                "foreground": "#0ea5e9"
             }
         },
         {

@@ -93,7 +93,7 @@ abbr,
 
 .prose .frame-terminal + .shiki:not(.no-root) .line:not(.empty):before {
   content: '➜';
-  @apply text-base pr-4 text-slate-400;
+  @apply text-base pr-4 text-slate-400 translate-y-px inline-block;
 }
 
 /* Line blurring */

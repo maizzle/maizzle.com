@@ -141,13 +141,15 @@ maizzle build production --config /path/to/custom-config.js
 
 #### --summary
 
-You may pass the `--summary` flag to show a summary of the build process.
-
-This will output a list of all the Templates that were built, their compiled file size, and how long it took to build each one.
+You may pass the `--summary` flag to show a summary of the build process:
 
 ```sh no-root no-copy
 $ maizzle build production --summary
+```
 
+This will output a list of all the Templates that were built, their compiled file size, and how long it took to build each one:
+
+```md
 ┌────────────────────────┬───────────┬────────────┐
 │ File name              │ File size │ Build time │
 ├────────────────────────┼───────────┼────────────┤
