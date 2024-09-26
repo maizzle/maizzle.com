@@ -63,7 +63,7 @@ module.exports = {
 
 Add a block of code in your template, like so:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-main>
   <pre>
     <code class="language-javascript">
@@ -170,7 +170,7 @@ module.exports = {
 
 We can now write code inside a fenced code block in our Template:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-main>
   <md>
     ```js
@@ -206,7 +206,7 @@ Padding on `<pre>` doesn't work in Outlook.
 
 We can fix this by wrapping `<pre>` inside a table that we only show in Outlook. We then style this table inline, like so:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-main>
   <!--[if mso]>
   <table style="width:100%;">

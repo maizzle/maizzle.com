@@ -31,7 +31,7 @@ The build system in Maizzle is based on what we call [Environments](/docs/enviro
 
 These allow you to define distinct build scenarios for your email workflow.
 
-Each environment is customized through a JavaScript config file, so you can even `require()` packages or programmatically set options.
+Each environment is customized through a JavaScript config file, so you can even `import()` packages or programmatically set options.
 
 [PostHTML](https://posthtml.org/) plugins are used for the templating logic, and you can use components, loops, if statements - even fetch remote content. Markdown with <abbr title="GitHub Flavored Markdown">GFM</abbr> is supported, too.
 
@@ -72,6 +72,6 @@ Maizzle is configured in JavaScript.
 
 Besides things like "_should inlining be enabled?_" or "_do we need to minify the HTML?_", you can even pass options to the Markdown renderer or choose where on your machine the compiled HTML file should be saved.
 
-You can do even more advanced things, like pulling data from an API to use in a template, or `require()` some NPM package to further transform your emails.
+You can do even more advanced things, like pulling data from an API to use in a template, or `import()` some NPM package to further transform your emails.
 
 Each config file represents a distinct [build Environment](/docs/environments) that can be triggered with its own `maizzle build [environment]` command, so you can create as many build scenarios as you need, each with their own settings!

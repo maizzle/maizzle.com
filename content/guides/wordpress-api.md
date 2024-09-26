@@ -54,7 +54,7 @@ https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=3&_embed=1
 
 Let's use the `<fetch>` tag to fetch posts from the CSS-Tricks WordPress API.
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-main>
   <fetch url="https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=6&_embed=1">
     <!-- Posts are now available in {{ response }} -->

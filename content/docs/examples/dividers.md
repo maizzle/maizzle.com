@@ -13,7 +13,7 @@ Similar to Spacers, Dividers provide consistent vertical spacing while also offe
 
 The simplest, most reliable way to create a visual, horizontal divider line in HTML emails is to use a `<div>` element:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <div class="h-px leading-px bg-slate-300" role="separator">&zwj;</div>
 ```
 
@@ -21,7 +21,7 @@ The `separator` role indicates that this is a divider that separates and disting
 
 You may adjust the top and bottom spacing around the divider with margin utilities:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <div class="h-px leading-px bg-slate-300 my-8" role="separator">&zwj;</div>
 ```
 
@@ -29,7 +29,7 @@ You may adjust the top and bottom spacing around the divider with margin utiliti
 
 To create a semantic Divider, we can use a regular `<hr>` element:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <hr class="border-0 bg-slate-500 text-gray-500 h-px">
 ```
 
@@ -51,13 +51,13 @@ An `<hr>` goes full width by default, but we can set a custom width.
 
 While we're at it, let's also use `max-w-full`, to make it responsive.
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <hr class="border-0 bg-slate-500 text-slate-500 h-px w-[400px] max-w-full">
 ```
 
 Need a custom width for mobile devices? Use the `sm` breakpoint:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <hr class="border-0 bg-slate-500 text-slate-500 h-px sm:w-16 max-w-full">
 ```
 
@@ -67,13 +67,13 @@ You may customize top and bottom spacing with CSS margins.
 
 For example, let's add `32px` to the top and bottom:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <hr class="border-0 bg-slate-500 text-slate-500 h-px my-8">
 ```
 
 Need uneven spacing?
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <hr class="border-0 bg-slate-500 text-slate-500 h-px mt-4 mb-8">
 ```
 
@@ -83,7 +83,7 @@ Need uneven spacing?
 
 You can use the `align` attribute to align a Divider.
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <hr align="right" class="border-0 bg-slate-500 text-slate-500 h-px mt-4 mb-8">
 ```
 
@@ -93,7 +93,7 @@ By default, it will be centered.
 
 For a vertical Divider, simply use a narrow width and a bigger height:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <hr class="border-0 bg-slate-500 text-slate-500 w-px h-16 m-0">
 ```
 
@@ -103,7 +103,7 @@ The `<hr>` divider is harder to control in Outlook on Windows - it usually rende
 
 A proposed solution, as seen in Mark's example, is to wrap it in a `<div>` and add margins to that instead:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <div class="mx-6">
   <hr class="border-0 bg-slate-500 text-gray-500 h-px">
 </div>
@@ -117,7 +117,7 @@ The Maizzle Starter includes a [Divider component](/docs/components/divider) tha
 
 The spacing above and below the Table Divider line is defined through the vertical padding of the inner `<td>` element, with Tailwind CSS utilities:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <table class="w-full" role="separator">
   <tr>
     <td class="py-6">
@@ -141,7 +141,7 @@ The `<div>` element where we use `leading-px` needs some extra attention for Out
 
 To make Outlook respect the line height you set on elements, you may use the `mso-line-height-rule-exactly` class that is available from the `tailwindcss-mso` plugin (included in the Starter).
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <table class="w-full" role="separator">
   <tr>
     <td class="py-6">

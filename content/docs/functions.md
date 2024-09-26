@@ -15,13 +15,13 @@ When defining a function, you need to make sure that:
 2. you invoke it
 
 ```js [config.js]
-const imaginaryLib = require('imaginary-lib')
+import imaginaryLib from 'imaginary-lib'
 
 const foo = function() {
   return 'manchu'
 }
 
-module.exports = {
+export default {
   foo: foo(), // invoke function defined above
   bar: function() {
     // do stuff and return

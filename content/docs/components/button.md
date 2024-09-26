@@ -13,7 +13,7 @@ The Button component is defined in `src/components/button.html`.
 
 This enables the `<x-button>` tag, which you can use like this:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-button href="https://example.com">
   Book now
 </x-button>
@@ -31,7 +31,7 @@ Default: `undefined`
 
 If you want the Button to link somewhere, you need to pass it the `href` prop:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-button href="https://example.com">
   Book now
 </x-button>
@@ -45,7 +45,7 @@ Default: `undefined`
 
 You can align the Button to the left, center or right, through the `align` prop:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-button align="center">
   Book now
 </x-button>
@@ -61,7 +61,7 @@ The button includes a <span class="inline-flex gap-1 px-2 translate-y-0.5 border
 
 For example, let's make the button blue-themed:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-button
   href="https://example.com"
   color="#fffffe"
@@ -73,7 +73,7 @@ For example, let's make the button blue-themed:
 
 You can also use Tailwind CSS utilities to set the text and background colors, but you will need to use the `!` important modifier to override the default colors:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-button
   href="https://example.com"
   class="!bg-blue-500 !text-white"
@@ -96,7 +96,7 @@ Default: `16px`
 
 Adjust the top padding for Outlook on Windows with the `mso-pt` prop:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-button mso-pt="12px">
   Book now
 </x-button>
@@ -108,7 +108,7 @@ Default: `30px`
 
 Adjust the bottom padding for Outlook on Windows with the `mso-pb` prop:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-button mso-pb="24px">
   Book now
 </x-button>
@@ -126,7 +126,7 @@ To override Button styling on small viewports, use Tailwind CSS utilities.
 
 For example, let's make the button full-width on small viewports:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-button class="sm:block">
   Book now
 </x-button>

@@ -43,11 +43,9 @@ The [Laracasts](https://laracasts.com) feed is available at https://laracasts.co
 Let's add that feed URL inside the `build` object in `config.js`:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    feed: {
-      url: 'https://laracasts.com/feed'
-    }
+export default {
+  feed: {
+    url: 'https://laracasts.com/feed'
   }
 }
 ```
@@ -59,30 +57,28 @@ We can use `rss-parser` inside the [beforeCreate](/docs/events#beforecreate) eve
 Edit `config.js`, require `rss-parser`, and use it in the `beforeCreate` event:
 
 ```js [config.js]
-const Parser = require('rss-parser')
+import Parser from 'rss-parser'
 
-module.exports = {
-  events: {
-    async beforeCreate(config) {
-      // create a new Parser instance
-      const parser = new Parser({
-        customFields: {
-          feed: ['subtitle'],
-          item: ['summary']
-        }
-      })
-
-      // fetch and parse the feed
-      let feed = await parser.parseURL(config.build.feed.url)
-
-      // store the feed data in our config
-      config.feed = {
-        title: feed.title,
-        subtitle: feed.subtitle,
-        link: feed.link,
-        updated_at: feed.lastBuildDate,
-        posts: feed.items
+export default {
+  async beforeCreate(config) {
+    // create a new Parser instance
+    const parser = new Parser({
+      customFields: {
+        feed: ['subtitle'],
+        item: ['summary']
       }
+    })
+
+    // fetch and parse the feed
+    let feed = await parser.parseURL(config.feed.url)
+
+    // store the feed data in our config
+    config.feed = {
+      title: feed.title,
+      subtitle: feed.subtitle,
+      link: feed.link,
+      updated_at: feed.lastBuildDate,
+      posts: feed.items
     }
   }
 }
@@ -97,7 +93,7 @@ We'll probably need to format the date of a feed item to something more readable
 We can add a function to `config.js` and use it to format the item's date according to our audience's locale:
 
 ```js [config.js]
-module.exports = {
+export default {
   formattedDate(str) {
     const date = new Date(str)
     return date.toLocaleDateString('en-US', {day: 'numeric', month: 'short', year: 'numeric'})

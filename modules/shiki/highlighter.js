@@ -1,6 +1,6 @@
 import { getHighlighter, toShikiTheme, FontStyle, BUNDLED_LANGUAGES } from 'shiki-es'
 import { createSingleton } from '@/assets/shiki/utils'
-import vsCodeTheme from '@/assets/shiki/themes/github-light.json'
+import vsCodeTheme from '@/assets/shiki/themes/tailwind.json'
 import { consola } from 'consola'
 
 // Re-create logger locally as utils cannot be imported from here

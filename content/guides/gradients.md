@@ -74,7 +74,7 @@ Simply add the utility class on an element that supports `background-image` CSS.
 
 We also specify a background color first, so that email clients that don't support CSS background-image gradients can display a fallback:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-main>
   <table class="w-full">
     <tr>
@@ -92,7 +92,7 @@ Outlook for Windows doesn't support CSS gradients, but we can use <abbr title="V
 
 You need to add it right after the element with the CSS gradient class:
 
-```xml [src/templates/example.html] {5-11} diff
+```html [src/templates/example.html] {5-11} diff
 <x-main>
   <table class="w-full">
     <tr>
@@ -125,7 +125,7 @@ To achieve this, we:
 
 Here's an example:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-main>
   <div class="bg-gray-200">
     <!--[if gte mso 9]>
@@ -167,7 +167,7 @@ module.exports = {
 
 We can then write the utility class like this:
 
-```xml [src/templates/example.html]
+```html [src/templates/example.html]
 <x-main>
   <table class="w-full">
     <tr>

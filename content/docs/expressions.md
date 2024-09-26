@@ -107,7 +107,7 @@ Result:
 Weekly newsletter no. {{ edition_count }}
 ```
 
-### Ignore with `<raw>`
+### Ignore with &lt;raw&gt;
 
 This is useful if you want to ignore multiple expressions in one go:
 
@@ -150,4 +150,20 @@ Then you can safely use `{{ }}` and its contents will not be evaluated:
   <!-- But this won't be -->
   Hi, {{ user.name }}.
 </x-main>
+```
+
+### Undefined variables
+
+Any variable that is not defined will be output as-is:
+
+```hbs [src/templates/example.html]
+<x-main>
+  {{ undefinedVariable }}
+</x-main>
+```
+
+Result:
+
+```hbs [build_production/example.html]
+{{ undefinedVariable }}
 ```

@@ -1,5 +1,5 @@
 <template>
-  <div class="hidden lg:flex justify-end items-start col-span-4 lg:col-span-3 xl:col-span-4 bg-slate-50">
+  <div class="hidden lg:flex justify-end items-start col-span-4 lg:col-span-3 2xl:col-span-4 bg-slate-50">
     <nav class="custom-scrollbar grid w-60 sticky top-24 overflow-y-auto max-h-[calc(100vh-6rem)] [scrollbar-gutter:stable]">
       <div class="sticky top-0">
         <div class="pt-4 bg-slate-50">
