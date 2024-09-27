@@ -527,7 +527,7 @@
                 "source.css keyword.other.unit"
             ],
             "settings": {
-                "foreground": "#94a3b8"
+                "foreground": "#1E40AF"
             }
         },
         {
@@ -542,9 +542,17 @@
             }
         },
         {
+            "name": "[CSS] - Braces - eg. {}",
+            "scope": [
+                "source.css punctuation.section"
+            ],
+            "settings": {
+                "foreground": "#94a3b8"
+            }
+        },
+        {
             "name": "[CSS] - Punctuation - eg. <> , . () []",
             "scope": [
-                "source.css punctuation.section",
                 "source.css punctuation.separator",
                 "source.css punctuation.terminator",
                 "source.css punctuation.definition.constant",
@@ -554,7 +562,7 @@
                 "source.css meta.property-list"
             ],
             "settings": {
-                "foreground": "#3730a3"
+                "foreground": "#6366F1"
             }
         },
         {
