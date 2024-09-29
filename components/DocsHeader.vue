@@ -40,7 +40,7 @@
                   v5.0.0-beta
                 </span>
                 <a href="https://maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
-                  v4.8.8
+                  v4.8.9
                 </a>
                 <a href="https://v43x.maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
                   v4.3.1
@@ -288,22 +288,6 @@
             </NuxtLink>
           </li>
           <li>
-            <NuxtLink
-              to="/resources"
-              class="flex gap-2 items-center px-4 py-2"
-              :class="[$route.path.startsWith('/resources') ? 'text-indigo-700 font-medium' : 'text-slate-500']"
-            >
-              <svg
-                class="h-6 w-6"
-                :class="[$route.path.startsWith('/resources') ? 'text-indigo-500' : 'text-slate-400']"
-                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-              </svg>
-              Resources
-            </NuxtLink>
-          </li>
-          <li>
             <a
               href="https://maizzle.com/discord"
               class="flex gap-2 items-center px-4 py-2 text-slate-500"
@@ -347,13 +331,13 @@
     <div
       v-show="showMobileMenu"
       class="lg:hidden fixed left-0 bottom-0 w-64 h-10 bg-gradient-to-t from-white pointer-events-none z-[60]"
-    ></div>
+    />
     <!-- Mobile menu: Backdrop -->
     <div
       class="fixed lg:hidden inset-0 bg-white/80 opacity-0 transition-opacity pointer-events-none"
       :class="{ 'opacity-100 z-50 pointer-events-auto': showMobileMenu }"
       @click="closeMobileMenu"
-    ></div>
+    />
 
     <DocSearch class="hidden" />
   </header>

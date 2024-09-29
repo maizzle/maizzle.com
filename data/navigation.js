@@ -15,12 +15,20 @@ export default [
         path: '/docs/editor-setup'
       },
       {
+        title: 'Compatibility',
+        path: '/docs/compatibility'
+      },
+      {
         title: 'Upgrade Guide',
         path: '/docs/upgrade-guide'
       },
       {
-        title: 'Compatibility',
-        path: '/docs/compatibility'
+        title: 'Resources',
+        path: '/resources'
+      },
+      {
+        title: 'Glossary',
+        path: '/glossary'
       },
       {
         title: 'CLI',
