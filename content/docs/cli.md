@@ -131,9 +131,11 @@ You may specify the path to a config file by passing the `--config` flag:
 maizzle build --config /path/to/custom-config.js
 ```
 
-Specifying a config file path takes precedence over the `[env]` argument.
+The Environment config will be computed based exclusively on the contents of the specified file, there will be no merging with `config.js`.
 
-So for example the `custom-config.js` file will be used even if `production` is passed:
+Also, specifying a config file path takes precedence over the `[env]` argument.
+
+In this example, `custom-config.js` will be used even if `production` is passed:
 
 ```sh
 maizzle build production --config /path/to/custom-config.js
