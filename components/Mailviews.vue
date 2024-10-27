@@ -17,7 +17,7 @@
           <p
             v-else
             class="text-3xl font-bold text-white"
-          >Thanks for subscribing, we'll notify you when Mailviews launches.</p>
+          >Awesome, please check your inbox and confirm your subscription.</p>
           <p
             v-if="!subscribed"
             class="mb-7 text-lg text-slate-400"
