@@ -80,7 +80,7 @@
               v-if="subscribed"
               class="text-slate-50 text-sm"
             >
-              Thanks for signing up, we will notify you when we launch Mailviews.
+              Awesome, please check your inbox and confirm your subscription.
             </p>
             <div
               v-show="hasError"
