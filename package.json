@@ -23,7 +23,7 @@
     "tailwindcss": "^3.4.4"
   },
   "dependencies": {
-    "@docsearch/css": "^3.6.0",
+    "@docsearch/css": "^3.6.3",
     "@docsearch/js": "^3.6.0",
     "@vueuse/components": "^10.11.0",
     "scroll-to-element": "^2.0.3",
