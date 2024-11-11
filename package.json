@@ -14,7 +14,7 @@
     "autoprefixer": "^10.4.20",
     "nuxt": "^3.10.1",
     "nuxt-og-image": "^3.0.0-rc.38",
-    "postcss": "^8.4.39",
+    "postcss": "^8.4.48",
     "postcss-import": "^16.1.0",
     "postcss-nesting": "^12.1.5",
     "sharp": "^0.33.4",
