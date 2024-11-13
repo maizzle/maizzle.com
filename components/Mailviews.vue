@@ -17,7 +17,7 @@
           <p
             v-else
             class="text-3xl font-bold text-white"
-          >Thanks for subscribing, we'll notify you when Mailviews launches.</p>
+          >Awesome, please check your inbox and confirm your subscription.</p>
           <p
             v-if="!subscribed"
             class="mb-7 text-lg text-slate-400"
@@ -65,7 +65,7 @@
               v-if="!subscribed"
               :disabled="submitDisabled"
               class="py-2.5 px-6 flex items-center self-start rounded-xl text-base bg-indigo-600 hover:bg-indigo-700 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900 transition-colors duration-300"
-              :class="{'pointer-events-none': submitDisabled}"
+              :class="{ 'pointer-events-none': submitDisabled }"
               type="submit"
             >
               <span v-if="loading">
@@ -80,7 +80,7 @@
               v-if="subscribed"
               class="text-slate-50 text-sm"
             >
-              Thanks for signing up, we will notify you when we launch Mailviews.
+              Awesome, please check your inbox and confirm your subscription.
             </p>
             <div
               v-show="hasError"
@@ -179,36 +179,36 @@
 </template>
 
 <script setup>
-  const email = ref('')
-  const loading = ref(false)
-  const subscribed = ref(false)
-  const hasError = ref(false)
-  const errorMessage = ref('')
-  const consent = ref(false)
+const email = ref('')
+const loading = ref(false)
+const subscribed = ref(false)
+const hasError = ref(false)
+const errorMessage = ref('')
+const consent = ref(false)
 
-  const submitDisabled = computed(() => {
-    return loading.value ? true : false
+const submitDisabled = computed(() => {
+  return loading.value ? true : false
+})
+
+const subscribe = async () => {
+  loading.value = true
+  hasError.value = false
+
+  const { data, error } = await useFetch('/.netlify/functions/subscribe', {
+    method: 'POST',
+    body: {
+      email: email.value,
+      consent: consent.value
+    }
   })
 
-  const subscribe = async () => {
-    loading.value = true
-    hasError.value = false
-
-    const {data, error} = await useFetch('/.netlify/functions/subscribe', {
-      method: 'POST',
-      body: {
-        email: email.value,
-        consent: consent.value
-      }
-    })
-
-    if (!error.value) {
-      loading.value = false
-      subscribed.value = true
-    } else {
-      hasError.value = true
-      loading.value = false
-      errorMessage.value = 'Something went wrong, please try again later.'
-    }
+  if (!error.value) {
+    loading.value = false
+    subscribed.value = true
+  } else {
+    hasError.value = true
+    loading.value = false
+    errorMessage.value = 'Something went wrong, please try again later.'
   }
+}
 </script>
