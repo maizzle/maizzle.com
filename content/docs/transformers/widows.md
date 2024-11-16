@@ -30,7 +30,7 @@ You may configure the transformer through the `widowWords` key in your `config.j
 ```js [config.js]
 export default {
   widowWords: {
-    attrName: 'prevent-widows',
+    attributes: ['fix-widows'],
     // ...options for string-remove-widows
   },
 }
@@ -39,54 +39,13 @@ export default {
 ### attrName
 
 Type: `String`\
-Default: `'prevent-widows'`
+Default: `['prevent-widows', 'no-widows']`
 
-The attribute name to use.
+A list of attribute names that will trigger the transformer.
 
-Only tags that have this attribute will be processed by the transformer.
+Only tags that have this attribute will be processed.
 
-### removeWidowPreventionMeasures
-
-Type: `Boolean`\
-Default: `false`
-
-Set this to `true` if you want the opposite of preventing widow words: it will replace all widow word `nbsp;` locations with a single space.
-
-### convertEntities
-
-Type: `Boolean`\
-Default: `true`
-
-Convert the space entity to the `targetLanguage`.
-
-Set it to `false` to insert a raw non-breaking space.
-
-### targetLanguage
-
-Type: `String`\
-Default: `'html'`
-
-Language to encode non-breaking spaces in.
-
-Available options:
-
-- `'css'` - spaces will be encoded to `\00A0`
-- `'js'` - spaces will be encoded to `\u00A0`
-
-### hyphens
-
-Type: `Boolean`\
-Default: `true`
-
-Whitespace in front of:
-
-- dashes (`-`)
-- n-dashes (`–`)
-- or m-dashes (`—`)
-
-...will be replaced with a `&nbsp;`.
-
-### minWordCount
+### minWords
 
 Type: `Number`\
 Default: `3`
@@ -95,23 +54,29 @@ The minimum amount of words in a target string, in order to trigger the transfor
 
 You may set it to `0` or `false` to disable it.
 
-### minCharCount
+### createWidows
 
-Type: `Number`\
-Default: `20`
+Type: `Boolean`\
+Default: `false`
 
-The minimum amount non-whitespace characters in a target string, in order to trigger the transformer.
+Set this to `true` if you want the opposite of preventing widow words: it will replace all widow word `nbsp;` locations with a single space.
 
-You may set it to `0` or `false` to disable it.
 
 ### ignore
 
 Type: `Array<Record<string, string>>`\
 Default: custom array
 
-Start/end pairs of strings that will prevent the transformer from removing widow words inside them.
+Start/end pairs of strings that will prevent the transformer from removing widow words inside of them. Maizzle will ignore the following  common templating language start and end delimiters:
 
-Maizzle defines common templating language start and end tags here, and also includes support for MSO comments.
+- `{{ }}` -  Handlebars, Liquid, Nunjucks, Twig, Jinja2, Mustache
+- `{% %}` -  Liquid, Nunjucks, Twig, Jinja2
+- `<%= %>` - EJS, ERB
+- `<% %>` -  EJS, ERB
+- `{$ }` - Smarty
+- `<?php ?>` - PHP
+- `<?= ?>` - PHP
+- `#{ }` - Pug
 
 Any new pairs that you add will be merged on top of the default ones.
 
@@ -120,8 +85,8 @@ export default {
   widowWords: {
     ignore: [
       {
-        heads: '{{',
-        tails: '}}'
+        start: '[[',
+        end: ']]'
       },
     ],
   },
@@ -135,8 +100,8 @@ You can use the transformer the other way around, too.
 ```js [config.js]
 export default {
   widowWords: {
-    attrName: 'create-widows',
-    removeWidowPreventionMeasures: true,
+    createWidows: true,
+    attributes: ['create-widows'],
   },
 }
 ```
@@ -164,5 +129,10 @@ Output:
 ```js [app.js]
 import { preventWidows } from '@maizzle/framework'
 
-const html = await preventWidows('html string', options)
+const html = await preventWidows(
+  '<p prevent-widows>the quick brown fox</p>',
+  {
+    minWords: 4,
+  }
+)
 ```
