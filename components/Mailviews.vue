@@ -14,10 +14,10 @@
             v-if="!subscribed"
             class="mb-7 text-3xl font-bold text-white"
           >Get notified when we launch Mailviews.</p>
-          <p
-            v-else
-            class="text-3xl font-bold text-white"
-          >Awesome, please check your inbox and confirm your subscription.</p>
+          <div v-else class="space-y-4">
+            <p class="text-3xl font-bold text-white">Awesome, please check your inbox and confirm your subscription.</p>
+            <p class="text-lg text-slate-50">Tip: check your spam/junk folder if you don't see the email.</p>
+          </div>
           <p
             v-if="!subscribed"
             class="mb-7 text-lg text-slate-400"
@@ -76,12 +76,14 @@
               </span>
               <span class="mx-auto">{{ loading ? 'Subscribing...' : 'Subscribe' }}</span>
             </button>
-            <p
-              v-if="subscribed"
-              class="text-slate-50 text-sm"
-            >
-              Awesome, please check your inbox and confirm your subscription.
-            </p>
+            <div v-if="subscribed">
+              <p class="text-slate-50 text-sm">
+                Awesome, please check your inbox and confirm your subscription.
+              </p>
+              <p class="text-slate-50 text-sm">
+                Tip: check your spam/junk folder if you don't see the email.
+              </p>
+            </div>
             <div
               v-show="hasError"
               class="w-full mt-3 absolute text-sm text-rose-400"
