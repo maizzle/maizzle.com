@@ -27,10 +27,9 @@ export default {
 
 You may configure this Transformer through the `css.purge` key in your `config.js`.
 
-### whitelist
+### safelist
 
-Type: `String[]`\
-Default: `[]`
+Type: `String[]`
 
 Array of classes or id's that you don't want removed.
 
@@ -40,15 +39,14 @@ You may use any [matcher](https://www.npmjs.com/package/matcher) patterns, for e
 export default {
   css: {
     purge: {
-      whitelist: ['.External*', '.ReadMsgBody', '.yshortcuts', '.Mso*', '#*'],
+      safelist: ['.External*', '.ReadMsgBody', '.yshortcuts', '.Mso*', '#*'],
     }
   }
 }
 ```
 
 Resetting email client styles is commonly done through CSS selectors that do not exist in your email's code.
-
-Maizzle uses the [`tailwindcss-email-variants`](https://github.com/maizzle/tailwindcss-email-variants) plugin for that purpose, so to make sure the plugin works as expected `whitelist` automatically preserves the following selectors:
+Maizzle uses the [`tailwindcss-email-variants`](https://github.com/maizzle/tailwindcss-email-variants) plugin for this, so to make sure the plugin works as expected `safelist` defaults to this:
 
 ```js
 [

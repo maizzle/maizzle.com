@@ -327,6 +327,24 @@ export default {
 
 <alert>`useAttributeSizes` will apply to all elements defined in [`widthElements`](/docs/transformers/inline-css#widthelements) and [`heightElements`](/docs/transformers/inline-css#heightelements)</alert>
 
+### safelist
+
+Type: `String[]`
+
+An array of strings representing CSS selectors that should not be removed after inlining.
+
+These can be substring matches, so you can use `text-red` to preserve `.text-red`, `.text-red-500`, etc.
+
+```js [config.js]
+export default {
+  css: {
+    inline: {
+      safelist: ['text-red', '.bg-blue-500'],
+    }
+  }
+}
+```
+
 ## Prevent inlining
 
 You may add an attribute on a `<style>` tag to prevent Juice from inlining the CSS inside it. Useful for writing email client CSS hacks, or for preserving CSS comments when using the [`removeCSSComments: false`](/docs/transformers/remove-unused-css#removecsscomments) Cleanup option.
