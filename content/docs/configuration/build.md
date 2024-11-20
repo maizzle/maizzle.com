@@ -12,7 +12,7 @@ This is done under the `build` key of your config:
 ```js [config.js]
 export default {
   build: {
-    content: ['src/templates/**/*.html'],
+    content: ['emails/**/*.html'],
   }
 }
 ```
@@ -20,7 +20,7 @@ export default {
 ## content
 
 Type: `String[]`\
-Default: `['src/templates/**/*.html']`
+Default: `['emails/**/*.html']`
 
 Define the source directories where Maizzle should look for Templates to compile.
 
@@ -33,7 +33,7 @@ Specify which file extensions should be considered when looking for Templates to
 ```js [config.js]
 export default {
   build: {
-    content: ['src/templates/**/*.{html,blade.php}'],
+    content: ['emails/**/*.{html,blade.php}'],
   }
 }
 ```
@@ -46,8 +46,8 @@ You may exclude files from being compiled by prefixing the glob pattern with an 
 export default {
   build: {
     content: [
-      'src/templates/**/*.html',
-      '!src/templates/**/*-ignore.html',
+      'emails/**/*.html',
+      '!emails/**/*-ignore.html',
     ],
   }
 }
@@ -141,7 +141,7 @@ Default: `undefined`
 
 Use the `permalink` Front Matter key to define a custom output path right in a Template:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 permalink: output/this/template/here.html
 ---
@@ -157,7 +157,7 @@ You may use both relative and absolute file paths.
 
 For example, output one level above project directory:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 permalink: ../newsletter.html
 ---
@@ -169,7 +169,7 @@ permalink: ../newsletter.html
 
 Output at a specific system location:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 permalink: C:/Users/Cosmin/Newsletter/2024/07/index.html
 ---

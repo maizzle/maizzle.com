@@ -73,12 +73,12 @@ The Starter's `config.production.js` is configured to output production-ready em
 
 You may create as many Environments as you need, and name them as you like.
 
-For example, you might create a config file named `config.shopify.js` that you would use to build only the templates from the `src/templates/shopify` folder:
+For example, you might create a config file named `config.shopify.js` that you would use to build only the templates from the `emails/shopify` folder:
 
 ```js [config.shopify.js]
 export default {
   build: {
-    content: ['src/templates/shopify/**/*.html'],
+    content: ['emails/shopify/**/*.html'],
     output: {
       path: 'build_shopify'
     }
@@ -115,7 +115,7 @@ export default {
 
 ... and use them in your markup:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 <x-main>
   <p>doctype is: {{ page.doctype }}</p>
 </x-main>
@@ -127,7 +127,7 @@ The current Environment name is globally available under the `page.env` variable
 
 You can output content in your emails based on the Environment that you're building for:
 
-```xml [src/templates/example.html]
+```xml [emails/example.html]
 <if condition="page.env === 'production'">
   This will show only when running `maizzle build production`
 </if>
@@ -151,7 +151,7 @@ export default {
 
 These local variables can be accessed without `page`:
 
-```diff [src/templates/example.html] diff {2}
+```diff [emails/example.html] diff {2}
 - Company name is {{ page.company.name }}
 + Company name is {{ company.name }}
 ```
@@ -180,7 +180,7 @@ Sometimes you may need to define different values for attributes based on the En
 
 While you could use long, verbose ternaries in expressions to do so:
 
-```xml [src/templates/example.html]
+```xml [emails/example.html]
 <x-main>
   <a href="{{ page.env === 'production' ? 'https://example.com' : 'https://dev.example.com' }}">Link</a>
 </x-main>
@@ -188,7 +188,7 @@ While you could use long, verbose ternaries in expressions to do so:
 
 ... Maizzle also supports Environment-based attributes:
 
-```xml [src/templates/example.html]
+```xml [emails/example.html]
 <x-main>
   <a
     href="https://dev.example.com"

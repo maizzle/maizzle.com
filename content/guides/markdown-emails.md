@@ -50,11 +50,11 @@ This is the first newsletter.
 
 ### Layout
 
-Since we just want to write Markdown and not have to deal with any tables and such, we need to update `src/layouts/main.html` to contain the entire HTML boilerplate.
+Since we just want to write Markdown and not have to deal with any tables and such, we need to update `layouts/main.html` to contain the entire HTML boilerplate.
 
 Replace its contents with the following:
 
-```hbs [src/layouts/main.html]
+```hbs [layouts/main.html]
 <!doctype {{{ page.doctype || 'html' }}}>
 <html lang="{{ page.language || 'en' }}" xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
@@ -196,7 +196,7 @@ img {
 
 Make sure to import this file in the `<style>` tag:
 
-```html [src/layouts/main.html]
+```html [layouts/main.html]
 <style>
   @import "src/css/markdown.css";
   @import 'tailwindcss/components';
@@ -320,7 +320,7 @@ You can also import Maizzle components in your Markdown files.
 
 For example, let's create an `<x-alert>` component:
 
-```html [src/components/alert.html]
+```html [components/alert.html]
 <table class="w-full mb-8">
   <tr>
     <td
@@ -371,7 +371,7 @@ title: "Edition #1"
 
 To prevent an issue with code indentation in `markdown-it` that would result in `<pre>` tags being added to the rendered HTML, simply don't indent the closing tags after `<yield />`. A bit of a workaround, but it works:
 
-```html [src/components/alert.html]
+```html [components/alert.html]
 <table class="w-full mb-8">
   <tr>
     <td
@@ -402,7 +402,7 @@ export default {
 
 You may need to use different designs for your newsletters. We can use Front Matter to do this, by defining a custom layout name for each Markdown file to use.
 
-Go ahead and create `src/layouts/secondary.html` based on `main.html`.
+Go ahead and create `layouts/secondary.html` based on `main.html`.
 
 For the purpose of this tutorial, we'll just change the body background color to differentiate it from the `main.html` layout: replace both occurrences of `bg-slate-100` with `bg-indigo-200`.
 

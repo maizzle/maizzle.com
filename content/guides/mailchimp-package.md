@@ -70,9 +70,9 @@ This will not only make it easier to create the .zip archive, but this way we ca
 
 For this written guide, we'll be using a simplified template with a few images. See the [Mailchimp Starter](https://github.com/maizzle/starter-mailchimp) for a more extensive example.
 
-Create `src/templates/template-1/index.html` and paste in the following code:
+Create `emails/template-1/index.html` and paste in the following code:
 
-```hbs [src/templates/template-1/index.html]
+```hbs [emails/template-1/index.html]
 ---
 title: "Example template 1"
 ---

@@ -116,7 +116,7 @@ export default {
 
 You'd then define a component like this:
 
-```html [src/components/button.html]
+```html [components/button.html]
 <a href="...">
   <content />
 </a>
@@ -141,7 +141,7 @@ export default {
 
 You could then use `provide` instead of `slot` when defining a component:
 
-```html [src/components/footer.html]
+```html [components/footer.html]
 <script props>
   module.exports = {
     year: new Date().getFullYear(),
@@ -159,7 +159,7 @@ You could then use `provide` instead of `slot` when defining a component:
 
 You'd fill `provide` as usual:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-footer>
   <fill:footer-logo>
     <img src="logo.png">
@@ -200,7 +200,7 @@ export default {
 
 Given the previous example, you'd now use `inject` instead of `fill` when defining a component:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-footer>
   <inject:footer-logo>
     <img src="logo.png">
@@ -229,7 +229,7 @@ export default {
 
 You'd then use `<slot@footer-logo />` and `<fill@footer-logo>`:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-footer>
   <fill@footer-logo>
     <img src="logo.png">
@@ -270,7 +270,7 @@ export default {
 
 ... you'd then use `locals` instead of `props` when defining the script in a component:
 
-```hbs [src/components/button.html]
+```hbs [components/button.html]
 <script locals>
   module.exports = {
     href: props.href || '#',
@@ -301,7 +301,7 @@ export default {
 
 ... you'd then use `data` instead of `props` when defining the props of a component:
 
-```hbs [src/components/button.html]
+```hbs [components/button.html]
 <script props>
   module.exports = {
     href: data.href || '#', // using data.href instead of props.href
@@ -334,7 +334,7 @@ export default {
 
 You'd then use `data` instead of `locals` when passing props as JSON to a component:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-button data='{"href": "https://example.com"}'>
   Click me
 </x-button>

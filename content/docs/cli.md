@@ -204,7 +204,7 @@ By default, a minimal config will be output:
 /** @type {import('@maizzle/framework').Config} */
 export default {
   build: {
-    content: ['src/templates/**/*.html'],
+    content: ['emails/**/*.html'],
     output: {
       path: 'build_preview',
     },
@@ -237,7 +237,7 @@ You may skip the prompt by passing in arguments:
 | `filepath` | Full path of the file to create, including file name
 
 ```sh
-maizzle make:layout src/layouts/layout.html
+maizzle make:layout layouts/layout.html
 ```
 
 <Alert type="warning">If the file already exists, an error will be thrown. The file will _not_ be overwritten.</Alert>
@@ -260,7 +260,7 @@ Running it with no arguments will present an interactive prompt.
 
 A minimal Template structure will be output:
 
-```hbs [src/templates/my-template.html]
+```hbs [emails/my-template.html]
 ---
 preheader: "Sample preheader text"
 ---
@@ -277,7 +277,7 @@ You may skip the prompt by passing in arguments:
 | `filepath` | Full path of the file to create, including file name
 
 ```sh
-maizzle make:template src/templates/my-template.html
+maizzle make:template emails/my-template.html
 ```
 
 <Alert type="warning">If the file already exists, an error will be thrown. The file will _not_ be overwritten.</Alert>
@@ -305,12 +305,12 @@ You may skip the prompt by passing in arguments:
 | `filepath` | Full path of the file to create, including file name
 
 ```sh
-maizzle make:component src/components/my-component.html
+maizzle make:component components/my-component.html
 ```
 
 A minimal Component structure will be output:
 
-```hbs [src/components/my-component.html]
+```hbs [components/my-component.html]
 <script props>
   module.exports = {
     greeting: props.greeting || 'Hello, World!',

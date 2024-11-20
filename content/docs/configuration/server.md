@@ -117,15 +117,15 @@ export default {
 
 Less than 50KB:
 
-<div class="font-mono">✔ Done in 41 ms [src/templates/example.html] · 6.74 KB</div>
+<div class="font-mono">✔ Done in 41 ms [emails/example.html] · 6.74 KB</div>
 
 Between 50KB and 102KB:
 
-<div class="font-mono">✔ Done in 41 ms [src/templates/example.html] · <span class="text-amber-500">78.1 KB</span></div>
+<div class="font-mono">✔ Done in 41 ms [emails/example.html] · <span class="text-amber-500">78.1 KB</span></div>
 
 More than 102KB:
 
-<div class="font-mono">✔ Done in 41 ms [src/templates/example.html] · <span class="text-red-500">112.3 KB</span></div>
+<div class="font-mono">✔ Done in 41 ms [emails/example.html] · <span class="text-red-500">112.3 KB</span></div>
 
 ### spinner
 

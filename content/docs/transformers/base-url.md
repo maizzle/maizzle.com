@@ -130,7 +130,7 @@ export default {
 
 You may override it for a single Template, through Front Matter:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 baseURL: 'https://res.cloudinary.com/user/image/upload/'
 ---

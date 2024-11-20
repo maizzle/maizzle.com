@@ -9,11 +9,11 @@ Quickly add horizontal visual dividers to your HTML emails.
 
 ## Usage
 
-The Divider component is defined in `src/components/divider.html`.
+The Divider component is defined in `components/divider.html`.
 
 This enables the `<x-divider>` syntax, which you can use like this:
 
-  ```html [src/templates/example.html] {5}
+  ```html [emails/example.html] {5}
   <x-main>
     <table>
       <tr>
@@ -39,7 +39,7 @@ Default: `1px`
 
 The default height is `1px`, but you can change it with the `height` prop:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-divider height="2px" />
 ```
 
@@ -53,13 +53,13 @@ If you omit this prop, the Divider will use `bg-slate-300` from Tailwind CSS, wh
 
 Let's change the color to red:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-divider color="#e53e3e" />
 ```
 
 You can also use Tailwind CSS utilities if you prefer:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-divider class="bg-rose-500" />
 ```
 
@@ -78,7 +78,7 @@ Add margins to any of the four sides of the Divider, through these props:
 
 For example, let's add `32px` to the top and `64px` to the bottom:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-divider top="32px" bottom="64px" />
 ```
 
@@ -97,13 +97,13 @@ You may add top/bottom or left/right spacing through a single prop:
 
 For example, let's add `32px` to the top and bottom:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-divider space-y="32px" />
 ```
 
 Similarly, let's add `24px` to the left and right:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-divider space-x="24px" />
 ```
 
@@ -119,7 +119,7 @@ Note that non-standard attributes will be ignored by default - you'll need to de
 
 To override Divider styling on small viewports, use Tailwind CSS utilities:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-divider space-y="32px" class="sm:my-4 sm:bg-black" />
 ```
 
@@ -131,17 +131,17 @@ For the Divider to render the visual line as expected in Outlook on Windows too,
 
 However, if you can't use that layout for some reason or are worried that the Outlook-specific CSS in the `<head>` might be stripped in some situations, simply add it in a style attribute on the tag:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-divider style="mso-line-height-rule: exactly;" />
 ```
 
 Alternatively, you may also use the `mso-line-height-rule-exactly` class that is available from the `tailwindcss-mso` plugin (included in the Starter):
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-divider class="mso-line-height-rule-exactly" />
 ```
 
-Of course, you can also modify `src/components/divider.html` and add the `mso-line-height-rule: exactly` CSS rule to the `<div>` element.
+Of course, you can also modify `components/divider.html` and add the `mso-line-height-rule: exactly` CSS rule to the `<div>` element.
 
 ## Alternatives
 

@@ -23,7 +23,7 @@ Layouts must include a `<yield />` tag, which is where the Template's HTML will 
 
 Here's a very basic `layout.html`:
 
-```html [src/layouts/layout.html] {10}
+```html [layouts/layout.html] {10}
 <!doctype html>
 <html>
 <head>
@@ -41,7 +41,7 @@ Here's a very basic `layout.html`:
 
 When creating a Template, you may use that Layout like this:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-layout>
   <!-- your email template HTML... -->
 </x-layout>
@@ -51,8 +51,8 @@ As you can see, the `<x-layout>` tag name is based on the Layout's file name, wi
 
 | Layout file name        | Layout tag name |
 |-------------------------|-----------------|
-| `src/layouts/main.html` | `<x-main>`      |
-| `src/layouts/alt.html`  | `<x-alt>`       |
+| `layouts/main.html` | `<x-main>`      |
+| `layouts/alt.html`  | `<x-alt>`       |
 
 Read more about this in the [Components docs](/docs/components#x-tag).
 
@@ -64,7 +64,7 @@ In order for Tailwind CSS to work, you need to include it in a `<style>` or `<li
 
 When using a `<style>` tag, you can include Tailwind's `utilities` and `components` by using the `@tailwind` directive:
 
-```html [src/layouts/main.html] diff {4-7}
+```html [layouts/main.html] diff {4-7}
 <!doctype html>
 <html>
 <head>
@@ -84,7 +84,7 @@ When using a `<style>` tag, you can include Tailwind's `utilities` and `componen
 
 Maizzle also supports `<link rel="stylesheet">` tags - it will try to read the file from the `href` attribute and process it with PostCSS (including Tailwind CSS).
 
-```html [src/layouts/main.html] diff {4}
+```html [layouts/main.html] diff {4}
 <!doctype html>
 <html>
 <head>
@@ -122,7 +122,7 @@ The Environment name is available under `page.env`. You can use it to output stu
 
 For example, you could use `page.env` to output some content only when running the `maizzle build production` command:
 
-```html [src/layouts/layout.html]
+```html [layouts/layout.html]
 <if condition="page.env === 'production'">
   <p>This text will show when running `maizzle build production`</p>
 </if>

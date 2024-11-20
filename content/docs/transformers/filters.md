@@ -34,7 +34,7 @@ export default {
 
 Used in a Template:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <p uppercase>Here is some foo.</p>
 ```
 

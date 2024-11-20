@@ -27,7 +27,7 @@ export default {
 
 Input:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <img src="example.jpg" data-src alt="">
 ```
 

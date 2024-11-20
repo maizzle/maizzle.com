@@ -15,7 +15,7 @@ Using the same Google Fonts in all your emails? Paste the code in your main Layo
 
 For example, add it before Tailwind CSS:
 
-```html [src/layouts/main.html]
+```html [layouts/main.html]
 <head>
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -33,7 +33,7 @@ For example, add it before Tailwind CSS:
 
 If you only need Google Fonts in a certain Template, push to the `head` stack:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-main>
   <push name="head">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -100,7 +100,7 @@ export default {
 
 We can use it like this:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <div class="screen:font-open-sans">
   <h1>Lorem ipsum</h1>
   <p>Labore exercitation consequat tempor quis eu nulla amet.</p>

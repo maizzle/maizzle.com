@@ -36,9 +36,9 @@ We'll use `@font-face` to register our custom font family - we can do this in th
 
 ### Add in Template
 
-Open `src/templates/transactional.html` and add this before the `<x-main>` tag:
+Open `emails/transactional.html` and add this before the `<x-main>` tag:
 
-```html [src/templates/transactional.html]
+```html [emails/transactional.html]
 <push name="head">
   <style>
     @font-face {
@@ -55,9 +55,9 @@ This adds a separate `<style>` tag in the compiled email HTML, right after the m
 
 ### Add in Layout
 
-If you prefer a single `<style>` tag in your email template, you can register the font in the Layout instead. Open `src/layouts/main.html` and update the `<style>` tag:
+If you prefer a single `<style>` tag in your email template, you can register the font in the Layout instead. Open `layouts/main.html` and update the `<style>` tag:
 
-```css [src/layouts/main.html] no-copy {2-7} diff
+```css [layouts/main.html] no-copy {2-7} diff
    <style>
 +     @font-face {
 +       font-family: 'Barosan';
@@ -119,7 +119,7 @@ Repeatedly writing that `font-barosan` class on all elements isn't just impracti
 
 `font-family` is inherited, which means you can just add the utility to the top element:
 
-```xml [src/templates/transactional.html]
+```xml [emails/transactional.html]
 <x-main>
   <table class="font-barosan">
     <!-- your email HTML... -->
@@ -147,7 +147,7 @@ export default {
 
 We can now use it on the outermost<sup>1</sup> element:
 
-```html [src/templates/transactional.html]
+```html [emails/transactional.html]
 <x-main>
   <table class="screen:font-barosan">
     <!-- your email HTML... -->
@@ -170,7 +170,7 @@ This will tuck the `font-family` away in an `@media` query:
 
 Since Outlook on Windows doesn't read `@media` queries, define a fallback<sup>2</sup> for it in the `<head>` of your Layout:
 
-```html [src/layouts/main.html]
+```html [layouts/main.html]
 <!--[if mso]>
 <style>
   td,th,div,p,a,h1,h2,h3,h4,h5,h6 {font-family: "Segoe UI", sans-serif;}

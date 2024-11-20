@@ -13,7 +13,7 @@ You can use if/elseif/else conditionals in your email templates.
 
 For example, the Starter uses it to output a preheader in its Layout:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 <if condition="page.preheader">
   <div class="hidden">{{ page.preheader }}</div>
 </if>
@@ -21,7 +21,7 @@ For example, the Starter uses it to output a preheader in its Layout:
 
 Of course, you can create more complex conditions:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <if condition="page.env === 'node'">
   <p>Using Maizzle programmatically</p>
 </if>
@@ -47,7 +47,7 @@ export default {
 
 Example:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <when condition="page.env === 'node'">
   <p>Using Maizzle programmatically</p>
 </when>
@@ -65,7 +65,7 @@ The `<template>` tag will only return its contents.
 
 You can use it to apply a filter to a string, for example:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <template uppercase>test</template>
 ```
 
@@ -77,7 +77,7 @@ TEST
 
 ... or to compile a markdown string:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <template markdown>
   # Hello, world!
 </template>
@@ -93,7 +93,7 @@ Result:
 
 If you actually need to output a `<template>` tag in the compiled HTML, you may use the `preserve` attribute:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <template preserve>
   test
 </template>
@@ -111,7 +111,7 @@ Result:
 
 Wrap content in <abbr title="Microsoft Office">MSO</abbr> conditional comments to show it only in Outlook 2007-2021 on Windows:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <outlook>
   <div>Show this in all Outlook versions</div>
 </outlook>
@@ -127,7 +127,7 @@ That will output:
 
 Of course, there's also a tag for showing content in all email clients _except_ in Outlook:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <not-outlook>
   <div>All Outlooks (on Windows) will ignore this</div>
 </not-outlook>
@@ -152,7 +152,7 @@ The `<outlook>` tag supports various combinations of attributes that will help w
 
 For example:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <outlook only="2013">
   <div>Show only in Outlook 2013</div>
 </outlook>
@@ -168,7 +168,7 @@ Result:
 
 The `only` and `not` attributes support multiple values, separated with a comma:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <outlook only="2013,2016">
   <div>Show only in Outlook 2013 and 2016</div>
 </outlook>
@@ -184,7 +184,7 @@ Result:
 
 You may also combine attributes:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <outlook gt="2003" lte="2013">
   <div>Show in 2007, 2010, 2013</div>
 </outlook>
@@ -212,7 +212,7 @@ export default {
 
 You'd then use it like this:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <mso only="2013">Show only in Outlook 2013</mso>
 <not-mso>Hide from all Outlooks</not-mso>
 ```
@@ -221,7 +221,7 @@ You'd then use it like this:
 
 Need to use a [switch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement?
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <switch expression="page.user.subscription">
   <case n="'monthly'">
     <p>Your monthly subscription is about to renew.</p>
@@ -249,7 +249,7 @@ export default {
 
 Example:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <handle expression="page.env">
   <when n="'production'">
     production
@@ -266,7 +266,7 @@ You can iterate over arrays and objects with the `<each>` tag.
 
 For arrays:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 <each loop="item, index in someArray">
   <p>{{ index }}: {{ item }}</p>
 </each>
@@ -274,7 +274,7 @@ For arrays:
 
 For objects:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 <each loop="value, key in anObject">
   <p>{{ key }}: {{ value }}</p>
 </each>
@@ -292,7 +292,7 @@ Inside a loop you will have access to a `{{ loop }}` object that contains inform
 
 Example:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 <each loop="item, index in [1,2,3]">
   <p>Number of iterations until the end: {{ loop.remaining }}</p>
 </each>
@@ -312,7 +312,7 @@ export default {
 
 You can now use a `<for>` tag instead:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 <for loop="item, index in [1,2,3]">
   <p>{{ item }}</p>
 </for>
@@ -335,7 +335,7 @@ export default {
 
 We could provide each object as a scope, so we can then access it from the context, instead of going up to the parent:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 <!-- Will output 'John', no need to write {{ page.roles.author.name }} -->
 <scope with="page.roles.author">
   {{ name }}
@@ -361,7 +361,7 @@ export default {
 
 Example:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 <!-- Will output 'Jane' -->
 <context with="page.roles.editor">
   {{ name }}
@@ -372,7 +372,7 @@ Example:
 
 You can fetch and display remote content in your email templates:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 <fetch url="https://jsonplaceholder.typicode.com/users">
   <each loop="user in response">
     {{ user.name }}
@@ -402,7 +402,7 @@ export default {
 
 Need to skip tag and expressions parsing in a whole block?
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 <raw>
   This will not be parsed:
   <if condition="page.env">
@@ -436,7 +436,7 @@ export default {
 
 Example:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 <verbatim>
   This will not be parsed: {{ page.env }}
 </verbatim>
@@ -446,7 +446,7 @@ Example:
 
 You may output content based on the current Environment through the `<env:>` tag:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <env:local>
   This will only show in local.
 </env:local>

@@ -3,7 +3,7 @@
 
 export default {
   build: {
-    content: ['src/templates/**/*.html'],
+    content: ['emails/**/*.html'],
     output: {
       path: 'build_production',
       extension: 'blade.php',

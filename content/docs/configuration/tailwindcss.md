@@ -248,7 +248,7 @@ lineHeight: theme => ({
 
 So you can use `leading` utilities to easily create vertical spacing, like this:
 
-```xml [src/templates/example.html]
+```xml [emails/example.html]
 <div class="leading-16">&zwj;</div>
 ```
 

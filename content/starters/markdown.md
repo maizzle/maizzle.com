@@ -46,7 +46,7 @@ npm run build
 
 The starter supports custom layouts, which you can add to `src/layouts`.
 
-The default layout is `src/layouts/main.html`, but if you want to use a different layout for a specific markdown file, you can add a `layout` property to its front matter:
+The default layout is `layouts/main.html`, but if you want to use a different layout for a specific markdown file, you can add a `layout` property to its front matter:
 
 ```md [src/content/example.md]
 ---
@@ -55,7 +55,7 @@ layout: secondary
 
 ## Custom layout
 
-This email uses a custom layout, defined in `src/layouts/secondary.html`.
+This email uses a custom layout, defined in `layouts/secondary.html`.
 ```
 
 ## Customization

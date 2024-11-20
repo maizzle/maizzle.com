@@ -20,7 +20,7 @@ Maizzle knows to parse this block's variables and makes them available to all ot
 
 Templates can define new variables and even override existing ones from your config, through the optional YAML-style Front Matter block:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 title: "Please confirm your email address"
 ---
@@ -30,7 +30,7 @@ Front Matter variables are accessible through the `page` object.
 
 To output them in a Template, use the `{{ }}` [expression syntax](/docs/expressions):
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 title: "Please confirm your email address"
 ---
@@ -44,7 +44,7 @@ title: "Please confirm your email address"
 
 Expressions in Front Matter can be ignored with a `@` symbol when they're used in the Template they're defined in:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 greeting: "Hello @{{ user.name }}, please confirm your email address"
 ---
@@ -68,7 +68,7 @@ Although you're free to do it, it would be very inefficient to always have to wr
 
 To reuse this code in Maizzle, you may create a [Layout](/docs/layouts):
 
-```html [src/layouts/main.html]
+```html [layouts/main.html]
 <!doctype html>
 <html>
 <head>
@@ -84,7 +84,7 @@ To reuse this code in Maizzle, you may create a [Layout](/docs/layouts):
 
 When creating a Template, you can wrap it with this Layout:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-main>
   <!-- your email HTML... -->
 </x-main>
@@ -128,14 +128,14 @@ You can archive Templates in a few ways.
 2. Change their file extension so that it's not covered by paths from `build.content`
 3. Use negated glob patterns in `build.content` to exclude them.
     <br><br>
-    For example, if you have a `src/templates/archive` directory, you can exclude it from builds like this:
+    For example, if you have a `emails/archive` directory, you can exclude it from builds like this:
     <br><br>
     ```js [config.js]
     export default {
       build: {
         content: [
-          'src/templates/**/*.html',
-          '!src/templates/archive/**/*'
+          'emails/**/*.html',
+          '!emails/archive/**/*'
         ]
       }
     }

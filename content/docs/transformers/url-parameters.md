@@ -31,7 +31,7 @@ export default {
 
 Of course, you may define URL parameters at a Template level, through Front Matter:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 title: "These URL params are unique to this template"
 urlParameters:

@@ -11,7 +11,7 @@ The Maizzle Starter includes a VML component that you can use to add support for
 
 ## v-fill
 
-The Fill component is defined in `src/components/v-fill.html`.
+The Fill component is defined in `components/v-fill.html`.
 
 Use it when you need to add a background image that you don't know the height of.
 

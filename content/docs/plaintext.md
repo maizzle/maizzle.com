@@ -46,7 +46,7 @@ export default {
 
 Generate a plaintext version for a specific Template by enabling it in its Front Matter:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 plaintext: true
 ---
@@ -62,7 +62,7 @@ You may of course set `plaintext` to a custom path in Front Matter as well.
 
 Using a file path for `plaintext` in Front Matter will output that file at the specified location relative to the project root:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 plaintext: dist/brand/plain.txt
 ---
@@ -83,7 +83,7 @@ package.json
 
 However if you use a directory path, the plaintext file will be output relative to the `build.output.path` folder instead, and will use the same name as the Template:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 plaintext: dist/brand
 ---
@@ -107,7 +107,7 @@ package.json
 
 If you're using the [`permalink`](/docs/configuration/templates#permalink) Front Matter key in your Template, Maizzle will output the `.txt` file at that location:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 permalink: example/email.html
 plaintext: true
@@ -196,7 +196,7 @@ Click here
 
 Output content only in the plaintext version:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 plaintext: true
 ---
@@ -212,7 +212,7 @@ plaintext: true
 
 You may also discard content from the plaintext version while preserving it in the HTML, with the help of the `<not-plaintext>` tag:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 plaintext: true
 ---

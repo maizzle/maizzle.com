@@ -106,7 +106,7 @@ export default {
 
 Then, you'd render it in your HTML, like so:
 
-```hbs [src/layouts/main.html]
+```hbs [layouts/main.html]
 <if condition="page.preheader">
   <div class="hidden">{{{ page.preheader }}}</div>
 </if>

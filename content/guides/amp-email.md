@@ -32,7 +32,7 @@ Once it finishes installing dependencies, open the project folder in your favori
 
 AMP for Email requires some special markup, so let's create an `amp.html` Layout and save it under `src/layouts`:
 
-```html [src/layouts/amp.html]
+```html [layouts/amp.html]
 <!doctype html>
 <html ⚡4email>
 <head>
@@ -52,9 +52,9 @@ AMP for Email requires some special markup, so let's create an `amp.html` Layout
 
 For this tutorial, we'll use the [AMP Carousel](https://amp.dev/documentation/components/amp-carousel/?format=email) component.
 
-Create `src/templates/amp/carousel.html` and add a basic AMP carousel:
+Create `emails/amp/carousel.html` and add a basic AMP carousel:
 
-```html [src/templates/amp/carousel.html]
+```html [emails/amp/carousel.html]
 <x-amp>
   <push name="head">
     <script async custom-element="amp-carousel" src="https://cdn.ampproject.org/v0/amp-carousel-0.2.js"></script>
@@ -92,7 +92,7 @@ export default {
 
 ... or locally, in the Template's Front Matter:
 
-```yaml [src/templates/amp/carousel.html]
+```yaml [emails/amp/carousel.html]
 ---
 css:
   inline: false
@@ -115,7 +115,7 @@ However, you probably want to turn it off _only_ for AMP templates.
 
 You can do this by updating your `<style>` tag for AMP templates to use a different Tailwind config file:
 
-```html [src/layouts/amp.html]
+```html [layouts/amp.html]
 <style>
   @config 'tailwind.amp.js';
   @tailwind components;

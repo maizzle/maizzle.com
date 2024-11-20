@@ -63,7 +63,7 @@ module.exports = {
 
 Add a block of code in your template, like so:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-main>
   <pre>
     <code class="language-javascript">
@@ -79,7 +79,7 @@ Add a block of code in your template, like so:
 
 <Alert>Notice how we added the `language-javascript` class on the `<code>` tag - this is required in order to get language-specific syntax highlighting.</Alert>
 
-<Alert type="warning">You need to reset the indentation of code inside the `<pre>` tag yourself - see the <a href="https://github.com/maizzle/example-syntax-highlight/blob/master/src/templates/posthtml.html">PostHTML example</a> in the tutorial repository.</Alert>
+<Alert type="warning">You need to reset the indentation of code inside the `<pre>` tag yourself - see the <a href="https://github.com/maizzle/example-syntax-highlight/blob/master/emails/posthtml.html">PostHTML example</a> in the tutorial repository.</Alert>
 
 ## Build
 
@@ -170,7 +170,7 @@ module.exports = {
 
 We can now write code inside a fenced code block in our Template:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-main>
   <md>
     ```js
@@ -206,7 +206,7 @@ Padding on `<pre>` doesn't work in Outlook.
 
 We can fix this by wrapping `<pre>` inside a table that we only show in Outlook. We then style this table inline, like so:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-main>
   <!--[if mso]>
   <table style="width:100%;">

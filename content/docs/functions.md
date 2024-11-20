@@ -33,7 +33,7 @@ export default {
 
 You would access those variables under the `page` object:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 <x-main>
   {{ page.foo }}
   {{ page.bar }}

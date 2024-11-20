@@ -79,7 +79,7 @@ The `<content />` tag has been replaced with `<yield />`.
 
 Make sure to update it in your Layouts and Components:
 
-```html diff [src/layouts/main.html] {8}
+```html diff [layouts/main.html] {8}
 <!doctype html>
 <html lang="en">
 <head>
@@ -98,7 +98,7 @@ Make sure to update it in your Layouts and Components:
 
 Tailwind CSS can now be used as expected, with `@tailwind` directives in any `<style>` tag, instead of the old `<style>{{{ page.css }}}</style>`.
 
-```html diff [src/layouts/main.html] {6-7}
+```html diff [layouts/main.html] {6-7}
 <!doctype html>
 <html lang="en">
 <head>
@@ -170,7 +170,7 @@ This is how the `build` key looks in Maizzle 5:
 ```js [config.js]
 export default {
   build: {
-    content: ['src/templates/**/*.html'],
+    content: ['emails/**/*.html'],
     static: {
       source: ['src/images/**/*.*'],
       destination: 'images',
@@ -406,7 +406,7 @@ The `tailwind` key in `config.js` has been deprecated, you can safely remove it.
 
 You may now simply use `@config` in your `<style>` tags or files included with `<link>`, to specify a custom Tailwind CSS config file to use:
 
-```html [src/layouts/main.html]
+```html [layouts/main.html]
 <style>
   @config 'tailwind.custom.js';
   @tailwind components;

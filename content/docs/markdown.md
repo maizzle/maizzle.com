@@ -13,7 +13,7 @@ Maizzle makes it easy to use Markdown in your email templates.
 
 There are two tags that you can use to add Markdown to your emails:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <markdown>This Markdown will be **compiled** to HTML</markdown>
 <md>A _shorter_ version of the `markdown` tag.</md>
 ```
@@ -29,7 +29,7 @@ Result:
 
 Use attributes if you need the element wrapping your Markdown to be preserved:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <div markdown>Using a `markdown` attribute</div>
 <p md>You can also use the `md` attribute.</p>
 ```
@@ -47,7 +47,7 @@ Result:
 
 Use the `tag` attribute to specify a tag name to wrap your Markdown with:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <md tag="section">This Markdown will be _compiled_ to HTML</md>
 ```
 
@@ -63,7 +63,7 @@ Result:
 
 Already have some Markdown in a file? Simply include it:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <md src="./README.md">
   # You'll see contents of README.md above this heading
 </md>
@@ -78,7 +78,7 @@ Result:
 
 If you're including a file that will be used as an inline element and don't want the enclosing `<p>` tags, use the `inline` attribute:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <p class="example">
   <markdown src="./example.md" inline>
     _Imported_
@@ -103,7 +103,7 @@ Result:
 
 Create tables with pipes `|` and hyphens `-`. Use hyphens to define each column's header, and pipes to separate each column.
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <markdown>
   | Markdown      | tables are    | cool  |
   | ------------- |:-------------:| -----:|
@@ -138,7 +138,7 @@ Checkout the options for [markdown-it](https://github.com/markdown-it/markdown-i
 
 You may override the global Markdown config from your Template's Front Matter.
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 markdown:
   markdownit:
@@ -191,7 +191,7 @@ export default {
 
 We can now use emojis in markdown:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <md>
   You can use emojis :)
 </md>
@@ -217,7 +217,7 @@ export default {
 
 ... you will need to use triple curly braces to output the unescaped content:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 <x-main>
   {{{ page.data.content }}}
 </x-main>

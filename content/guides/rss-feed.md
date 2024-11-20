@@ -105,13 +105,13 @@ export default {
 
 ## Template
 
-We'll use a simplified version of the [promotional template](https://github.com/maizzle/maizzle/blob/master/src/templates/promotional.html) from the Starter, displaying posts as full width cards.
+We'll use a simplified version of the [promotional template](https://github.com/maizzle/maizzle/blob/master/emails/promotional.html) from the Starter, displaying posts as full width cards.
 
 ### Header
 
 Let's update the existing header row:
 
-```hbs [src/templates/promotional.html]
+```hbs [emails/promotional.html]
 <!-- ... -->
 <tr>
   <td class="p-12 sm:py-8 sm:px-6 text-center">
@@ -127,9 +127,9 @@ Let's update the existing header row:
 
 ### Items Loop
 
-Let's use a full width card from the [promotional template](https://github.com/maizzle/maizzle/blob/master/src/templates/promotional.html) to show a list of all items from the feed:
+Let's use a full width card from the [promotional template](https://github.com/maizzle/maizzle/blob/master/emails/promotional.html) to show a list of all items from the feed:
 
-```hbs [src/templates/promotional.html]
+```hbs [emails/promotional.html]
 <!-- ... -->
 <each loop="post in page.feed.posts">
   <tr>

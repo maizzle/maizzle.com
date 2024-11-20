@@ -9,7 +9,7 @@ The Spacer component in Maizzle makes it super simple to add consistent, accessi
 
 ## Usage
 
-The Spacer component is defined in `src/components/spacer.html`.
+The Spacer component is defined in `components/spacer.html`.
 
 This enables the `<x-spacer>` syntax, which you can use like this:
 
@@ -41,13 +41,13 @@ This will define the height of the Spacer.
 
 You may use any CSS unit that you prefer, it doesn't have to be `px`.
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-spacer height="1em" />
 ```
 
 That will render the following HTML:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <div style="line-height: 1em;" role="separator">&zwj;</div>
 ```
 
@@ -59,7 +59,7 @@ Default: `undefined`
 
 Override the height of the Spacer in Outlook for Windows.
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-spacer height="32px" mso-height="30px" />
 ```
 
@@ -69,17 +69,17 @@ Note: for the Spacer to work as expected in Outlook on Windows, it should also b
 
 However, if you can't use that layout for some reason or are worried that the Outlook-specific CSS in the `<head>` might be stripped in some situations, simply add it in a style attribute on the tag:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-spacer style="mso-line-height-rule: exactly;" />
 ```
 
 Alternatively, you may also use the `mso-line-height-rule-exactly` class that is available from the `tailwindcss-mso` plugin (included in the Starter):
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-spacer class="mso-line-height-rule-exactly" />
 ```
 
-Of course, you can also modify `src/components/spacer.html` and add the `mso-line-height-rule: exactly` CSS rule to the `<div>` element.
+Of course, you can also modify `components/spacer.html` and add the `mso-line-height-rule: exactly` CSS rule to the `<div>` element.
 
 ### Other attributes
 
@@ -91,6 +91,6 @@ Note that non-standard attributes will be ignored by default - you'll need to de
 
 To override the height of the Spacer on mobile, use the `leading` utilities in Tailwind CSS:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-spacer height="32px" class="sm:leading-4" />
 ```

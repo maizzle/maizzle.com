@@ -29,7 +29,7 @@ For most of the time, you won't be writing CSS anymore 😎
 
 To use Tailwind CSS in your HTML emails, simply add the `@tailwind` directives to a `<style>` tag in your Layout's `<head>`:
 
-```html [src/layouts/main.html] {5-6}
+```html [layouts/main.html] {5-6}
 <!doctype html>
 <html>
   <head>
@@ -57,7 +57,7 @@ img {
 
 ... and `@import` that instead:
 
-```html [src/layouts/main.html]
+```html [layouts/main.html]
 <style>
   @import "src/css/tailwind.css";
 </style>
@@ -65,7 +65,7 @@ img {
 
 Prefer `<link>` tags? Maizzle supports that too:
 
-```html [src/layouts/main.html] {4}
+```html [layouts/main.html] {4}
 <!doctype html>
 <html>
   <head>
@@ -107,7 +107,7 @@ Instead of writing something like this:
 
 You can write:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <table class="w-full">
   <tr>
     <td class="py-6 px-0 bg-gray-200">
@@ -152,7 +152,7 @@ You may organize your CSS into files if you prefer, and then `@import` them in a
 
 For example, let's import that `src/css/components.css` file we just created:
 
-```html [src/layouts/main.html] {5}
+```html [layouts/main.html] {5}
 <!doctype html>
 <html>
   <head>
@@ -182,7 +182,7 @@ Because utility classes map one-to-one with CSS properties, this normally doesn'
 
 Consider this template:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-main>
   <div class="col">test</div>
 </x-main>
@@ -190,7 +190,7 @@ Consider this template:
 
 Let's use `@apply` to compose a `col` class by  extracting two padding utilities:
 
-```html [src/layouts/main.html] {5-7}
+```html [layouts/main.html] {5-7}
 <!doctype html>
 <html>
   <head>
@@ -327,7 +327,7 @@ You may use Tailwind CSS, including directives like `@apply`, `@layer`, and even
 
 First, add a `<stack name="head" />` inside your Layout's `<head>` tag:
 
-```html [src/layouts/main.html] {8} diff
+```html [layouts/main.html] {8} diff
 <!doctype html>
 <html>
 <head>
@@ -344,7 +344,7 @@ First, add a `<stack name="head" />` inside your Layout's `<head>` tag:
 
 Next, `push` to that `stack` from a Template:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-main>
   <push name="head">
     <style>
@@ -368,7 +368,7 @@ Next, `push` to that `stack` from a Template:
 
 You can prevent CSS inside a `<style>` tag from being inlined:
 
-```html [src/templates/example.html]
+```html [emails/example.html]
 <x-main>
   <push name="head">
     <style data-embed>
