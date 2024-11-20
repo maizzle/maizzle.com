@@ -71,18 +71,18 @@ For example, let's make the button blue-themed:
 </x-button>
 ```
 
-You can also use Tailwind CSS utilities to set the text and background colors, but you will need to use the `!` important modifier to override the default colors:
+You can also use Tailwind CSS utilities to set the text and background colors:
 
 ```html [src/templates/example.html]
 <x-button
   href="https://example.com"
-  class="!bg-blue-500 !text-white"
+  class="bg-blue-500 text-white"
 >
   Book now
 </x-button>
 ```
 
-Of course, you may also change the colors directly in `src/components/button.html`.
+Of course, you may also change the colors directly in `components/button.html`.
 
 ### MSO Padding
 
@@ -104,7 +104,7 @@ Adjust the top padding for Outlook on Windows with the `mso-pt` prop:
 
 #### MSO bottom padding
 
-Default: `30px`
+Default: `31px`
 
 Adjust the bottom padding for Outlook on Windows with the `mso-pb` prop:
 
