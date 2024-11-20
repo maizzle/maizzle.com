@@ -102,8 +102,8 @@ Information about the Template file that is currently being processed will be av
 build: {
   current: {
     path: {
-      root: 'src',
-      dir: 'src/templates',
+      root: 'build_production',
+      dir: 'build_production/emails',
       base: 'transactional.html',
       ext: '.html',
       name: 'transactional'

@@ -51,7 +51,7 @@ Once it finishes installing dependencies, open the project folder in your favori
 
 ### Structure
 
-We'll be organizing our templates into folders inside `src/templates`:
+We'll be organizing our templates into folders inside `templates`:
 
 ```
 src
@@ -144,15 +144,15 @@ export default {
   prettify: true,
 ```
 
-We're setting `static: false` because we don't want Maizzle to copy the global `src/images` folder to the `dist` folder. We'll handle any global images ourselves.
+We're setting `static: false` because we don't want Maizzle to copy the global `images` folder to the `dist` folder. We'll handle any global images ourselves.
 
 ## Get image paths from HTML
 
 We'll need a way of creating a list of images that are used in a template.
 
-Create `src/utils/getImagePaths.js` and paste in the following code:
+Create `utils/getImagePaths.js` and paste in the following code:
 
-```js [src/utils/getImagePaths.js]
+```js [utils/getImagePaths.js]
 export default function htmlString() {
   const imagePaths = []
   const regexSrcAttribute = /src=["'](.*?)["']/gi
@@ -253,7 +253,7 @@ Let's use the `afterTransformers` event to push information about each template 
 Modify your `config.production.js` to look like this:
 
 ```js [config.production.js] {18-29}
-import getImagePathsFromHTML from './src/utils/getImagePaths.js'
+import getImagePathsFromHTML from './utils/getImagePaths.js'
 
 const queue = []
 
@@ -296,7 +296,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import archiver from 'archiver'
 import baseConfig from './config.js'
-import getImagePathsFromHTML from './src/utils/getImagePaths.js'
+import getImagePathsFromHTML from './utils/getImagePaths.js'
 
 const queue = []
 
@@ -352,7 +352,7 @@ export default {
           archive.file(`${template.dir}/${file}`, { name: file })
         })
 
-        // Get a list of files found in `src/images` that have been used in the template
+        // Get a list of files found in `images` that have been used in the template
         const assetsSource = baseConfig.build.templates.assets.source
         const globalImages = fs.readdirSync(assetsSource)
           .filter(file => images.includes(path.basename(file)))

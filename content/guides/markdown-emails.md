@@ -28,7 +28,7 @@ Once it finishes installing dependencies, open the project folder in your favori
 
 ### Structure
 
-We'll be using the `src/content` folder to store our Markdown files:
+We'll be using the `content` folder to store our Markdown files:
 
 ```
 src
@@ -38,9 +38,9 @@ src
     └── ...
 ```
 
-<Alert>You can remove the `src/templates` directory, we won't need it.</Alert>
+<Alert>You can remove the `emails` directory, we won't need it.</Alert>
 
-Next, create `src/content/newsletter-1.md` and add some markdown to it:
+Next, create `content/newsletter-1.md` and add some markdown to it:
 
 ```md [newsletter-1.md]
 # Hello world
@@ -139,7 +139,7 @@ Update `build.templates` to use .md files from the `content` folder:
 ```js [config.js] {3}
 export default {
   build: {
-    content: ['src/content/**/*.md'],
+    content: ['content/**/*.md'],
   },
 }
 ```
@@ -177,9 +177,9 @@ Run `npm run build` again and you'll see that the files in the `build_production
 
 ## Styling
 
-Let's create a `src/css/markdown.css` file so we can add some global styles for our Markdown content:
+Let's create a `css/markdown.css` file so we can add some global styles for our Markdown content:
 
-```css [src/css/markdown.css]
+```css [css/markdown.css]
 h1 {
   @apply text-3xl leading-9;
 }
@@ -198,7 +198,7 @@ Make sure to import this file in the `<style>` tag:
 
 ```html [layouts/main.html]
 <style>
-  @import "src/css/markdown.css";
+  @import "css/markdown.css";
   @import 'tailwindcss/components';
   @import 'tailwindcss/utilities';
 </style>
@@ -235,7 +235,7 @@ export default {
 
 You can now add Tailwind CSS classes to your Markdown elements by adding them inside curly braces after the content:
 
-```md [src/content/newsletter-1.md]
+```md [content/newsletter-1.md]
 ---
 title: "Edition #1"
 ---
@@ -304,7 +304,7 @@ Now all your markdown code blocks will be highlighted with the Nord theme.
 
 You can use [expressions](/docs/templates#expressions) in Markdown files just as you would in any Maizzle template:
 
-```hbs [src/content/newsletter-1.md]
+```hbs [content/newsletter-1.md]
 ---
 title: "Edition #1"
 ---
@@ -337,7 +337,7 @@ Notice the `attributes` attribute - this indicates that any attributes passed to
 
 We can use it like this:
 
-```hbs [src/content/newsletter-1.md]
+```hbs [content/newsletter-1.md]
 ---
 title: "Edition #1"
 ---
@@ -355,7 +355,7 @@ This is the first newsletter.
 
 To use Markdown inside a component, add an empty line before and after the content that you pass inside:
 
-```hbs [src/content/newsletter-1.md]
+```hbs [content/newsletter-1.md]
 ---
 title: "Edition #1"
 ---
@@ -426,7 +426,7 @@ export default {
 
 You can now specify a custom layout for each Markdown file, via Front Matter:
 
-```md [src/content/newsletter-1.md]
+```md [content/newsletter-1.md]
 ---
 layout: secondary
 ---
@@ -448,7 +448,7 @@ While this is fine in browsers and modern email clients because you can control 
 
 To fix this, we can use `markdown-it-attrs` to manually add our image width in Markdown:
 
-```md [src/content/newsletter-1.md]
+```md [content/newsletter-1.md]
 # Hello world
 
 Welcome to our first newsletter.

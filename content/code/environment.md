@@ -10,7 +10,7 @@ export default {
     },
     summary: true,
     static: {
-      source: 'src/images',
+      source: 'images',
       destination: 'images',
     }
   }

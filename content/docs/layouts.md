@@ -15,7 +15,7 @@ In Maizzle we add this `<yield />` tag in the `<body>` of the `main.html` Layout
 
 ## Getting started
 
-Layouts are typically stored in the `src/layouts` directory.
+Layouts are typically stored in the `layouts` directory.
 
 <Alert>Need to store them elsewhere? Make sure to [update the config](/docs/configuration/components#folders).</Alert>
 
@@ -23,7 +23,7 @@ Layouts must include a `<yield />` tag, which is where the Template's HTML will 
 
 Here's a very basic `layout.html`:
 
-```html [layouts/layout.html] {10}
+```html [layouts/main.html] {10}
 <!doctype html>
 <html>
 <head>
@@ -42,12 +42,12 @@ Here's a very basic `layout.html`:
 When creating a Template, you may use that Layout like this:
 
 ```html [emails/example.html]
-<x-layout>
+<x-main>
   <!-- your email template HTML... -->
-</x-layout>
+</x-main>
 ```
 
-As you can see, the `<x-layout>` tag name is based on the Layout's file name, with the `.html` extension removed, here are some examples:
+As you can see, the `<x-main>` tag name is based on the Layout's file name, with the `.html` extension removed, here are some examples:
 
 | Layout file name        | Layout tag name |
 |-------------------------|-----------------|
@@ -88,7 +88,7 @@ Maizzle also supports `<link rel="stylesheet">` tags - it will try to read the f
 <!doctype html>
 <html>
 <head>
-+   <link rel="stylesheet" href="src/css/tailwind.css" inline>
++   <link rel="stylesheet" href="css/tailwind.css" inline>
 </head>
 <body>
   <yield />
@@ -99,7 +99,7 @@ Maizzle also supports `<link rel="stylesheet">` tags - it will try to read the f
 
 Then, in your `tailwind.css` file:
 
-```css [src/css/tailwind.css]
+```css [css/tailwind.css]
 @tailwind components;
 @tailwind utilities;
 ```

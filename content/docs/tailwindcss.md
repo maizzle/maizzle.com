@@ -46,7 +46,7 @@ To use Tailwind CSS in your HTML emails, simply add the `@tailwind` directives t
 
 Alternatively, you may store them in a CSS file:
 
-```css [src/css/tailwind.css]
+```css [css/tailwind.css]
 img {
   @apply max-w-full align-middle;
 }
@@ -59,7 +59,7 @@ img {
 
 ```html [layouts/main.html]
 <style>
-  @import "src/css/tailwind.css";
+  @import "css/tailwind.css";
 </style>
 ```
 
@@ -69,7 +69,7 @@ Prefer `<link>` tags? Maizzle supports that too:
 <!doctype html>
 <html>
   <head>
-    <link rel="stylesheet" href="src/css/tailwind.css" inline>
+    <link rel="stylesheet" href="css/tailwind.css" inline>
   </head>
   <body>
     <yield />
@@ -134,7 +134,7 @@ As an alternative to creating a Component, you may extract utility classes to a 
 
 Here's a quick example:
 
-```postcss [src/css/components.css]
+```postcss [css/components.css]
 @layer components {
   .button-danger {
     @apply py-3 px-6 text-white bg-red-500;
@@ -150,14 +150,14 @@ And that brings us to...
 
 You may organize your CSS into files if you prefer, and then `@import` them in a `<style>` tag or through a `<link>` in your Layout's `<head>`.
 
-For example, let's import that `src/css/components.css` file we just created:
+For example, let's import that `css/components.css` file we just created:
 
 ```html [layouts/main.html] {5}
 <!doctype html>
 <html>
   <head>
     <style>
-      @import "src/css/components.css";
+      @import "css/components.css";
       @tailwind components;
       @tailwind utilities;
     </style>

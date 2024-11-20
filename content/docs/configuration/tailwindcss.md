@@ -37,7 +37,9 @@ By default, Tailwind CSS in Maizzle is configured to scan all `.html` files in y
 ```js [tailwind.config.js]
 export default {
   content: [
-    './src/**/*.html',
+    './components/**/*.html',
+    './emails/**/*.html',
+    './layouts/**/*.html',
   ],
 }
 ```

@@ -9,7 +9,7 @@ Components help you organize blocks of markup into files that can be referenced 
 
 ## Usage
 
-To create a Component, add an HTML file in `src/components`:
+To create a Component, add an HTML file in `components`:
 
 ```html [components/alert.html]
 <div>
@@ -101,7 +101,7 @@ If you're used to partials that you simply include in your HTML, this may look m
 
 ## Nested file structure
 
-If a Component is nested deeper within your `src/components` directory, you can reference it through dot notation.
+If a Component is nested deeper within your `components` directory, you can reference it through dot notation.
 
 For example, consider the following Component:
 

@@ -59,7 +59,7 @@ If you need to compute the content source paths dynamically, you can use a funct
 
 ```js [config.js]
 const sources = () => {
-  return ['src/templates**/*.html', 'src/amp-templates/**/*.html']
+  return ['templates**/*.html', 'amp-templates/**/*.html']
 }
 
 export default {
@@ -79,8 +79,8 @@ You may define multiple content sources:
 export default {
   build: {
     content: [
-      'src/marketing/**/*.html',
-      'src/transactional/**/*.html'
+      'marketing/**/*.html',
+      'transactional/**/*.html'
     ]
   }
 }
@@ -194,7 +194,7 @@ At build time, `build.static.destination` will be created relative to `build.out
 export default {
   build: {
     static: {
-      source: 'src/images/**/*',
+      source: 'images/**/*',
       destination: 'images',
     }
   }

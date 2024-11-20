@@ -10,7 +10,7 @@ date: 2022-12-05
 
 This starter allows you to create emails from markdown files.
 
-Simply add your markdown files to `src/content`, run the build command, and they will be converted to HTML emails using a predefined layout.
+Simply add your markdown files to `content`, run the build command, and they will be converted to HTML emails using a predefined layout.
 
 [View on GitHub &rarr;](https://github.com/maizzle/starter-markdown.git)
 
@@ -44,11 +44,11 @@ npm run build
 
 ## Custom layouts
 
-The starter supports custom layouts, which you can add to `src/layouts`.
+The starter supports custom layouts, which you can add to `layouts`.
 
 The default layout is `layouts/main.html`, but if you want to use a different layout for a specific markdown file, you can add a `layout` property to its front matter:
 
-```md [src/content/example.md]
+```md [content/example.md]
 ---
 layout: secondary
 ---

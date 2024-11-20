@@ -17,7 +17,7 @@ Root path where to look for folders containing component files.
 ## folders
 
 Type: `Array`\
-Default: `['src/components', 'src/layouts', 'src/templates']`
+Default: `['components', 'layouts', 'emails']`
 
 Folder paths where to look for component files. Relative to `root`.
 
@@ -26,7 +26,7 @@ If you keep your components in a different folder, you can add it here:
 ```js [config.js]
 export default {
   components: {
-    folders: ['src/custom-components'],
+    folders: ['custom-components'],
   },
 }
 ```

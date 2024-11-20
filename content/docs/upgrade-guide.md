@@ -127,7 +127,9 @@ module.exports = {
     require('tailwindcss-preset-email'),
   ],
   content: [
-    './src/**/*.html',
+    './components/**/*.html',
+    './emails/**/*.html',
+    './layouts/**/*.html',
   ],
 }
 ```
@@ -172,7 +174,7 @@ export default {
   build: {
     content: ['emails/**/*.html'],
     static: {
-      source: ['src/images/**/*.*'],
+      source: ['images/**/*.*'],
       destination: 'images',
     },
     output: {
@@ -261,6 +263,7 @@ export default {
       excludedProperties: [],
       preferUnitlessValues: false,
       resolveCalc: true,
+      safelist: [],
     },
   },
 }
@@ -380,7 +383,7 @@ export default {
 +    port: 3000,
 +    hmr: true,
 +    scrollSync: false,
-+    watch: ['./src/images/**/*'],
++    watch: ['./images/**/*'],
 +    reportFileSize: false,
 +    spinner: 'circleHalves',
 +  },
@@ -416,7 +419,7 @@ You may now simply use `@config` in your `<style>` tags or files included with `
 
 If you prefer using CSS files:
 
-```css [src/css/tailwind.css]
+```css [css/tailwind.css]
 @config 'tailwind.custom.js';
 @tailwind components;
 @tailwind utilities;
@@ -425,11 +428,11 @@ If you prefer using CSS files:
 ... you may import that through a `<link>` tag or with an `@import` statement:
 
 ```html
-<link rel="stylesheet" href="src/css/tailwind.css">
+<link rel="stylesheet" href="css/tailwind.css">
 
 <!-- or -->
 <style>
-  @import 'src/css/tailwind.css';
+  @import 'css/tailwind.css';
 </style>
 ```
 

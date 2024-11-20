@@ -9,13 +9,13 @@ Any files that you add to your [Template sources](/docs/configuration/templates)
 
 ## Global assets
 
-You may define a global email assets folder that will be copied to the build directory. The Starter sets it to the `src/images` directory:
+You may define a global email assets folder that will be copied to the build directory. The Starter sets it to the `images` directory:
 
 ```js [config.js]
 export default {
   build: {
     static: {
-      source: ['src/images/**/*'],
+      source: ['images/**/*'],
       destination: 'images',
     }
   }
@@ -32,7 +32,7 @@ You may define multiple asset source paths and all files from those paths will b
 export default {
   build: {
     static: {
-      source: ['src/images/**/*', 'src/fonts/**/*'],
+      source: ['images/**/*', 'fonts/**/*'],
       destination: 'assets'
     }
   }

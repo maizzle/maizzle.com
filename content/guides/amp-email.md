@@ -30,7 +30,7 @@ Once it finishes installing dependencies, open the project folder in your favori
 
 ## Layout
 
-AMP for Email requires some special markup, so let's create an `amp.html` Layout and save it under `src/layouts`:
+AMP for Email requires some special markup, so let's create an `amp.html` Layout and save it under `layouts`:
 
 ```html [layouts/amp.html]
 <!doctype html>

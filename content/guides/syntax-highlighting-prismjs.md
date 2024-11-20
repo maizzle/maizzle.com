@@ -105,7 +105,7 @@ Choose one of the default themes, or see [prism-themes](https://github.com/Prism
 
 For this tutorial, we'll go with a Tailwind adaptation the [Synthwave '84 Theme](https://marketplace.visualstudio.com/items?itemName=RobbOwen.synthwave-vscode).
 
-Save [prism-synthwave84.css](https://raw.githubusercontent.com/maizzle/starter-prismjs/master/src/css/prism-synthwave84.css) to the `src/css` directory in your project, and import it into your `src/css/tailwind.css`:
+Save [prism-synthwave84.css](https://raw.githubusercontent.com/maizzle/starter-prismjs/master/src/css/prism-synthwave84.css) to the `css` directory in your project, and import it into your `css/tailwind.css`:
 
 ```css
 /* Tailwind CSS components */
@@ -194,7 +194,7 @@ Gmail will change our inline `white-space: pre;` to `white-space: pre-wrap;`. Th
 
 Fix it by adding the following CSS at the beginning of `prism-synthwave84.css`:
 
-```css [src/css/prism-synthwave84.css]
+```css [css/prism-synthwave84.css]
 pre {
   @apply whitespace-pre;
 }

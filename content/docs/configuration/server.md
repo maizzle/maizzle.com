@@ -41,7 +41,7 @@ You may add more paths to watch:
 ```js [config.js]
 export default {
   server: {
-    watch: ['./src/example/**/*'],
+    watch: ['./marketing/**/*'],
   }
 }
 ```
