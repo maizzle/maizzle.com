@@ -21,7 +21,7 @@ The simplest (and recommended) approach is to use Tailwind percentage widths:
     </table>
   </div>
 
-  ```xml
+  ```html
   <table class="w-[600px] sm:w-full">
     <tr>
       <td class="w-4/12">4 cols</td>
@@ -47,7 +47,7 @@ Of course, you can use fixed widths if you prefer.
     </table>
   </div>
 
-  ```xml
+  ```html
   <table class="w-[600px] sm:w-full">
     <tr>
       <td class="w-[300px]">6 cols</td>
@@ -73,7 +73,7 @@ Using the [percentage](#percentage) example, we might do:
     </table>
   </div>
 
-  ```xml
+  ```html
   <table class="w-[600px] sm:w-full">
     <tr>
       <td class="w-4/12 sm:w-full inline-block">4 cols</td>
@@ -95,7 +95,7 @@ Some email clients strip the `doctype` of your email, which prevents `inline-blo
     </table>
   </div>
 
-  ```xml
+  ```html
   <table class="w-[600px] sm:w-full">
     <tr>
       <th class="w-4/12 sm:w-full inline-block font-normal text-left">4 cols</th>

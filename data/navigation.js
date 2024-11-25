@@ -15,12 +15,20 @@ export default [
         path: '/docs/editor-setup'
       },
       {
+        title: 'Compatibility',
+        path: '/docs/compatibility'
+      },
+      {
         title: 'Upgrade Guide',
         path: '/docs/upgrade-guide'
       },
       {
-        title: 'Compatibility',
-        path: '/docs/compatibility'
+        title: 'Resources',
+        path: '/resources'
+      },
+      {
+        title: 'Glossary',
+        path: '/glossary'
       },
       {
         title: 'CLI',
@@ -49,12 +57,12 @@ export default [
     name: 'Configuration',
     items: [
       {
-        title: 'Layouts',
-        path: '/docs/configuration/layouts'
+        title: 'Build',
+        path: '/docs/configuration/build'
       },
       {
-        title: 'Templates',
-        path: '/docs/configuration/templates'
+        title: 'Server',
+        path: '/docs/configuration/server'
       },
       {
         title: 'Components',
@@ -69,20 +77,12 @@ export default [
         path: '/docs/configuration/tailwindcss'
       },
       {
-        title: 'Browsersync',
-        path: '/docs/configuration/browsersync'
-      },
-      {
         title: 'PostHTML',
         path: '/docs/configuration/posthtml'
       },
       {
         title: 'PostCSS',
         path: '/docs/configuration/postcss'
-      },
-      {
-        title: 'Build Errors',
-        path: '/docs/configuration/build-errors'
       },
     ]
   },
@@ -106,7 +106,7 @@ export default [
         path: '/docs/expressions'
       },
       {
-        title: 'Custom Tags',
+        title: 'Tags',
         path: '/docs/tags'
       },
       {
@@ -149,10 +149,6 @@ export default [
       {
         title: 'Filters',
         path: '/docs/transformers/filters'
-      },
-      {
-        title: 'Markdown',
-        path: '/docs/transformers/markdown'
       },
       {
         title: 'Widow Words',

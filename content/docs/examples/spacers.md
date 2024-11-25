@@ -13,7 +13,7 @@ Here's how easy it is to create simple yet reliable spacers for your emails, usi
 
 The simplest vertical spacer for HTML emails:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <div class="leading-4" role="separator">&zwj;</div>
 ```
 
@@ -25,7 +25,7 @@ How it works:
 
 You may specify a different height for smaller devices by using the `sm:` screen variant:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <div class="leading-4 sm:leading-2" role="separator">&zwj;</div>
 ```
 
@@ -37,7 +37,7 @@ The `div` spacer is also available as a [component](/docs/components/spacer).
 
 Need to add space between `<table>` rows?
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <tr role="separator">
   <td class="leading-4">&zwj;</td>
 </tr>
@@ -49,7 +49,7 @@ The default ARIA role for a `<tr>` is `row`, so we use `role="separator"` to ind
 
 We can use an `<hr>` to create a semantic Spacer.
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <hr class="border-0 text-white my-4 min-h-full">
 ```
 

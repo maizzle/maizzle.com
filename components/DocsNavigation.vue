@@ -1,5 +1,5 @@
 <template>
-  <div class="hidden lg:flex justify-end items-start col-span-4 lg:col-span-3 xl:col-span-4 bg-slate-50">
+  <div class="hidden lg:flex justify-end items-start col-span-4 lg:col-span-3 2xl:col-span-4 bg-slate-50">
     <nav class="custom-scrollbar grid w-60 sticky top-24 overflow-y-auto max-h-[calc(100vh-6rem)] [scrollbar-gutter:stable]">
       <div class="sticky top-0">
         <div class="pt-4 bg-slate-50">
@@ -98,22 +98,6 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
             </svg>
             Starters
-          </NuxtLink>
-        </li>
-        <li>
-          <NuxtLink
-            to="/resources"
-            class="flex gap-2 items-center px-4 py-2 text-sm text-slate-500 hover:text-slate-900 group"
-            :class="{ 'text-indigo-700 hover:text-indigo-700 font-medium': $route.path.startsWith('/resources') }"
-          >
-            <svg
-              class="h-6 w-6 transition-colors text-slate-400 group-hover:text-slate-500"
-              :class="{ 'text-indigo-500 group-hover:text-indigo-500': $route.path.startsWith('/resources') }"
-              fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
-            >
-              <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-            </svg>
-            Resources
           </NuxtLink>
         </li>
         <li>

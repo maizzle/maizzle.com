@@ -44,6 +44,7 @@
         'border-t-0 rounded-t-none rounded-b-md': frameType !== 'none' && filename || frameType === 'terminal',
         'blur-lines': shouldBlurUnhighlightedLines,
         'rounded-t-none border-t-0': isExampleFrame,
+        'no-root': noRoot,
       }]"
     >
       <slot />
@@ -81,6 +82,8 @@ const props = defineProps({
 const hideCopy = computed(() => props.meta.split(' ').includes('no-copy'))
 
 const isExampleFrame = computed(() => props.meta.split(' ').includes('example'))
+
+const noRoot = computed(() => props.meta.split(' ').includes('no-root'))
 
 const frameType = computed(() => {
   if (['sh', 'bash', 'shell'].includes(props.language)) return 'terminal'

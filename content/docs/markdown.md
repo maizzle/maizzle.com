@@ -13,14 +13,14 @@ Maizzle makes it easy to use Markdown in your email templates.
 
 There are two tags that you can use to add Markdown to your emails:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <markdown>This Markdown will be **compiled** to HTML</markdown>
 <md>A _shorter_ version of the `markdown` tag.</md>
 ```
 
 Result:
 
-```xml
+```html
 <p>This Markdown will be <strong>compiled</strong> to HTML</p>
 <p>A <em>shorter</em> version of the <code>markdown</code> tag.</p>
 ```
@@ -29,14 +29,14 @@ Result:
 
 Use attributes if you need the element wrapping your Markdown to be preserved:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <div markdown>Using a `markdown` attribute</div>
 <p md>You can also use the `md` attribute.</p>
 ```
 
 Result:
 
-```xml
+```html
 <div>
   <p>Using a <code>markdown</code> attribute</p>
 </div>
@@ -47,13 +47,13 @@ Result:
 
 Use the `tag` attribute to specify a tag name to wrap your Markdown with:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <md tag="section">This Markdown will be _compiled_ to HTML</md>
 ```
 
 Result:
 
-```xml
+```html
 <section>
   <p>This Markdown will be <em>compiled</em> to HTML</p>
 </section>
@@ -63,7 +63,7 @@ Result:
 
 Already have some Markdown in a file? Simply include it:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <md src="./README.md">
   # You'll see contents of README.md above this heading
 </md>
@@ -71,14 +71,14 @@ Already have some Markdown in a file? Simply include it:
 
 Result:
 
-```xml
+```html
 <!-- contents of README.md here -->
 <h1>You'll see contents of README.md above this heading</h1>
 ```
 
 If you're including a file that will be used as an inline element and don't want the enclosing `<p>` tags, use the `inline` attribute:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <p class="example">
   <markdown src="./example.md" inline>
     _Imported_
@@ -88,7 +88,7 @@ If you're including a file that will be used as an inline element and don't want
 
 Result:
 
-```xml
+```html
 <p class="example">
   <!-- Contents of ./example.md rendered to HTML -->
   <em>Imported</em>
@@ -103,7 +103,7 @@ Result:
 
 Create tables with pipes `|` and hyphens `-`. Use hyphens to define each column's header, and pipes to separate each column.
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <markdown>
   | Markdown      | tables are    | cool  |
   | ------------- |:-------------:| -----:|
@@ -122,7 +122,7 @@ Use two tildes `~~` to ~~`~~strikethrough~~`~~ text.
 You may configure how Markdown is rendered through the `markdown` config object:
 
 ```js [config.js]
-module.exports = {
+export default {
   markdown: {
     root: './', // A path relative to which markdown files are imported
     encoding: 'utf8', // Encoding for imported Markdown files
@@ -138,7 +138,7 @@ Checkout the options for [markdown-it](https://github.com/markdown-it/markdown-i
 
 You may override the global Markdown config from your Template's Front Matter.
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 markdown:
   markdownit:
@@ -154,7 +154,7 @@ markdown:
 
 That will output:
 
-```xml
+```html
 <p><a href="https://example.com">https://example.com</a></p>
 ```
 
@@ -163,7 +163,7 @@ That will output:
 Disable the markdown Transformer by setting it to `false`:
 
 ```js [config.js]
-module.exports = {
+export default {
   markdown: false
 }
 ```
@@ -175,11 +175,13 @@ There are over 300 plugins for `markdown-it` available on NPM! To use a plugin, 
 For example, imagine we installed [markdown-it-emoji](https://www.npmjs.com/package/markdown-it-emoji):
 
 ```js [config.js]
-module.exports = {
+import mdEmoji from 'markdown-it-emoji'
+
+export default {
   markdown: {
     plugins: [
       {
-        plugin: require('markdown-it-emoji'),
+        plugin: mdEmoji,
         options: {} // Options for markdown-it-emoji
       }
     ]
@@ -189,7 +191,7 @@ module.exports = {
 
 We can now use emojis in markdown:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <md>
   You can use emojis :)
 </md>
@@ -197,7 +199,7 @@ We can now use emojis in markdown:
 
 Result:
 
-```xml
+```html
 <p>You can use emojis 😃</p>
 ```
 
@@ -206,7 +208,7 @@ Result:
 If you're using expressions to render markdown from a variable that you have defined in your config like this:
 
 ```js [config.js]
-module.exports = {
+export default {
   data: {
     content: '> a markdown string'
   }
@@ -215,10 +217,37 @@ module.exports = {
 
 ... you will need to use triple curly braces to output the unescaped content:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 <x-main>
   {{{ page.data.content }}}
 </x-main>
 ```
 
 This is required for things like blockquotes to work, otherwise `>` will be output as `&gt;` and the blockquote will be rendered as a paragraph.
+
+## API
+
+You may use the Markdown Transformer in your application.
+
+```js [app.js]
+import { markdown } from '@maizzle/framework'
+
+const options = {/* posthtml-markdownit options */}
+const posthtmlOptions = {/* posthtml options */}
+
+const html = await markdown('### Heading 3', options, posthtmlOptions)
+```
+
+If you only need some parts of your string to be parsed as Markdown, you can use the `manual` option and then wrap the Markdown content in `<md>` tags:
+
+```js [app.js]
+const html = await markdown(
+  `
+  <section>
+    <h2>Code sample</h2>
+    <md>`const foo = 'bar'`</md>
+  <section>
+  `,
+  { manual: true },
+)
+```

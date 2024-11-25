@@ -9,11 +9,11 @@ The Button component makes it easy to add a styled link button to your HTML emai
 
 ## Usage
 
-The Button component is defined in `src/components/button.html`.
+The Button component is defined in `components/button.html`.
 
 This enables the `<x-button>` tag, which you can use like this:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-button href="https://example.com">
   Book now
 </x-button>
@@ -31,7 +31,7 @@ Default: `undefined`
 
 If you want the Button to link somewhere, you need to pass it the `href` prop:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-button href="https://example.com">
   Book now
 </x-button>
@@ -45,7 +45,7 @@ Default: `undefined`
 
 You can align the Button to the left, center or right, through the `align` prop:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-button align="center">
   Book now
 </x-button>
@@ -61,7 +61,7 @@ The button includes a <span class="inline-flex gap-1 px-2 translate-y-0.5 border
 
 For example, let's make the button blue-themed:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-button
   href="https://example.com"
   color="#fffffe"
@@ -71,18 +71,18 @@ For example, let's make the button blue-themed:
 </x-button>
 ```
 
-You can also use Tailwind CSS utilities to set the text and background colors, but you will need to use the `!` important modifier to override the default colors:
+You can also use Tailwind CSS utilities to set the text and background colors:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-button
   href="https://example.com"
-  class="!bg-blue-500 !text-white"
+  class="bg-blue-500 text-white"
 >
   Book now
 </x-button>
 ```
 
-Of course, you may also change the colors directly in `src/components/button.html`.
+Of course, you may also change the colors directly in `components/button.html`.
 
 ### MSO Padding
 
@@ -96,7 +96,7 @@ Default: `16px`
 
 Adjust the top padding for Outlook on Windows with the `mso-pt` prop:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-button mso-pt="12px">
   Book now
 </x-button>
@@ -104,11 +104,11 @@ Adjust the top padding for Outlook on Windows with the `mso-pt` prop:
 
 #### MSO bottom padding
 
-Default: `30px`
+Default: `31px`
 
 Adjust the bottom padding for Outlook on Windows with the `mso-pb` prop:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-button mso-pb="24px">
   Book now
 </x-button>
@@ -126,7 +126,7 @@ To override Button styling on small viewports, use Tailwind CSS utilities.
 
 For example, let's make the button full-width on small viewports:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-button class="sm:block">
   Book now
 </x-button>

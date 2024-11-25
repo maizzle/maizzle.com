@@ -7,7 +7,7 @@ description: "What are Maizzle Transformers and how to use them to transform you
 
 Transformers in Maizzle are functions that basically take a string of HTML, do something with it, and then return it for further processing.
 
-They run after your template has been compiled and allow you to manipulate the HTML in various ways, like prepending a base URL to all `<img>` tags, or preventing widow words.
+They run after your Template has been compiled and allow you to manipulate the HTML in various ways, like prepending a base URL to all `<img>` tags or preventing widow words.
 
 Some of the Transformers help you automate tedious tasks that are required when developing HTML emails, like inlining CSS, automatically adding attributes for better accessibility, or generating plaintext versions of your emails.
 
@@ -21,11 +21,11 @@ Because some operations need to happen before others, Transformers in Maizzle ru
 
 ## Disabling
 
-You may disable all Transformers by setting `applyTransformers` to `false`:
+You may disable all Transformers by setting `useTransformers` to `false`:
 
 ```js [config.js] {2} diff
-module.exports = {
-+  applyTransformers: false,
+export default {
++  useTransformers: false,
 }
 ```
 
