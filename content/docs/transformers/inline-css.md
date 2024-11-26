@@ -42,9 +42,11 @@ For example, this property-attribute assignment:
 
 ```js [config.js]
 export default {
-  inlineCSS: {
-    styleToAttribute: {
-      'background-color': 'bgcolor',
+  css: {
+    inline: {
+      styleToAttribute: {
+        'background-color': 'bgcolor',
+      }
     }
   }
 }
@@ -217,71 +219,6 @@ export default {
   }
 }
 ```
-
-### resolveCSSVariables
-
-Type: `Boolean`\
-Default: `true`
-
-Whether to resolve CSS variables to their actual values in the inlined CSS.
-
-By default, something like this:
-
-```html
-<style>
-  :root {
-    --color: red;
-  }
-  .text-red { color: var(--color); }
-</style>
-
-<div class="text-red">Hello</div>
-```
-
-... will be inlined as:
-
-```html
-<div style="color: red">Hello</div>
-```
-
-If you prefer to keep CSS variables when inlining, set this option to `false`:
-
-```js [config.js]
-export default {
-  css: {
-    inline: {
-      resolveCSSVariables: false,
-    }
-  }
-}
-```
-
-### resolveCalc
-
-Type: `Boolean`\
-Default: `true`
-
-Whether to resolve `calc()` expressions in the inlined CSS.
-
-By default, something like this:
-
-```html
-<style>
-  div {
-    width: calc(100% / 3);
-  }
-</style>
-
-<div>Hello</div>
-```
-
-... will be inlined as:
-
-```html
-<div style="width: 33.33%">Hello</div>
-```
-
-<Alert>Maizzle uses a 2-decimal precision when resolving `calc()` expressions.</Alert>
 
 ### preferUnitlessValues
 

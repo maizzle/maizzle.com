@@ -3,25 +3,177 @@ title: "Tailwind CSS configuration"
 description: "Tailwind CSS configuration options for email development in Maizzle."
 ---
 
-# Tailwind CSS configuration
+# CSS configuration
 
-Configuring Tailwind CSS in Maizzle.
+Configuring Tailwind CSS and how CSS is compiled in Maizzle.
 
-## Build configuration
+## Options
 
-You may provide a custom Tailwind CSS configuration object under the `css.tailwind` key in your `config.js` file:
+CSS handling in Maizzle can be configured under the `css` key in your `config.js` file:
 
 ```js [config.js]
 export default {
   css: {
-    tailwind: {
-      // ...
+    inline: true,
+    purge: true,
+    resolveCalc: true,
+    resolveProps: true,
+    safe: true,
+    shorthand: true,
+    sixHex: true,
+    tailwind: {},
+  },
+}
+```
+
+### inline
+
+Type: `Boolean`\
+Default: `undefined`
+
+Configure how CSS is inlined in your HTML emails.
+
+For details, see the [CSS inlining documentation](/docs/transformers/inline-css).
+
+### purge
+
+Type: `Boolean|Object`\
+Default: `undefined`
+
+Configure email-safe unused CSS purging.
+
+For details, see the [CSS Purge Transformer docs](/docs/transformers/remove-unused-css).
+
+### resolveCalc
+
+Type: `Boolean|Object`\
+Default: `true`
+
+Whether to resolve `calc()` expressions in the CSS to their computed values.
+
+By default, something like this:
+
+```html
+<style>
+  div {
+    width: calc(100% / 3);
+  }
+</style>
+```
+
+... will be compiled to:
+
+```html
+<style>
+  div {
+    width: 33.33%;
+  }
+</style>
+```
+
+<Alert>Maizzle uses a 2-decimal precision when resolving `calc()` expressions.</Alert>
+
+This uses [`postcss-calc`](https://www.npmjs.com/package/postcss-calc) to resolve `calc()` functions in your CSS to their computed values whenever possible. When multiple units are mixed in the same `calc()` expression, the statement will be output as-is.
+
+You may pass an object to configure `postcss-calc`:
+
+```js [config.js]
+export default {
+  css: {
+    resolveCalc: {
+      precision: 3, // precision for decimal numbers (2 by default)
     },
   },
 }
 ```
 
+### resolveProps
+
+Type: `Boolean|Object`\
+Default: `true`
+
+CSS custom properties, or CSS variables, are poorly supported in email clients. Whenever you use them, Maizzle will try to resolve them to their static representation.
+
+You may configure this behavior by setting the `resolveProps` key to `false` (to disable it) or to a [`postcss-css-variables`](https://www.npmjs.com/package/postcss-css-variables) options object:
+
+```js [config.js]
+export default {
+  css: {
+    resolveProps: false, // or postcss-css-variables options
+  },
+}
+```
+
+### safe
+
+Type: `Boolean|Object`\
+Default: `true`
+
+Rewrites Tailwind CSS class names to email-safe alternatives.
+
+See the [Safe Class Names Transformer docs](/docs/transformers/safe-class-names).
+
+### shorthand
+
+Type: `Boolean|Object`\
+Default: `undefined`
+
+Configure rewriting of CSS properties to their shorthand form. Disabled by default.
+
+See the [Shorthand Transformer docs](/docs/transformers/shorthand-css).
+
+### sixHex
+
+Type: `Boolean`\
+Default: `true`
+
+Whether to convert 3-digit HEX colors to 6-digit HEX colors. Enabled by default.
+
+See the [Six HEX Transformer docs](/docs/transformers/six-hex).
+
+### tailwind
+
 You'll probably only need this when using Maizzle programmatically - otherwise you can use the `@config` directive in your CSS to specify a custom Tailwind CSS config file to use.
+
+It's important to note that when using `css.tailwind` you need to provide a Tailwind CSS configuration object with all values that you need to be different from Tailwind's defaults. So you need to specify `px` values, screens etc. that work in email clients:
+
+```js [config.js]
+export default {
+  css: {
+    tailwind: {
+      content: [
+        './components/**/*.html',
+        './emails/**/*.html',
+        './layouts/**/*.html',
+      ],
+      important: true,
+      screens: {
+        sm: {max: '600px'},
+        xs: {max: '425px'},
+      },
+      spacing: {
+        px: '1px',
+        0.5: '2px',// etc.
+      },
+    },
+  },
+}
+```
+
+If you want, you can import `tailwindcss-preset-email`:
+
+```js [config.js]
+import emailPreset from 'tailwindcss-preset-email'
+
+export default {
+  css: {
+    tailwind: {
+      presets: [ emailPreset ],
+      content: [ /* ... */ ],
+    },
+  },
+}
+```
 
 ## tailwind.config.js
 

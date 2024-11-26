@@ -57,6 +57,10 @@ export default [
     name: 'Configuration',
     items: [
       {
+        title: 'CSS',
+        path: '/docs/configuration/css'
+      },
+      {
         title: 'Build',
         path: '/docs/configuration/build'
       },
@@ -71,10 +75,6 @@ export default [
       {
         title: 'Expressions',
         path: '/docs/configuration/expressions'
-      },
-      {
-        title: 'Tailwind CSS',
-        path: '/docs/configuration/tailwindcss'
       },
       {
         title: 'PostHTML',
