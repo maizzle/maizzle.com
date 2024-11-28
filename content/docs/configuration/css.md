@@ -46,7 +46,7 @@ For details, see the [CSS Purge Transformer docs](/docs/transformers/remove-unus
 
 ### resolveCalc
 
-Type: `Boolean|Object`\
+Type: `Boolean|PostCssCalcOptions`\
 Default: `true`
 
 Whether to resolve `calc()` expressions in the CSS to their computed values.
@@ -87,6 +87,8 @@ export default {
 }
 ```
 
+See the [postcss-calc options](https://github.com/postcss/postcss-calc/#options).
+
 ### resolveProps
 
 Type: `Boolean|Object`\
@@ -103,6 +105,8 @@ export default {
   },
 }
 ```
+
+See the [postcss-css-variables options](https://github.com/MadLittleMods/postcss-css-variables/#options).
 
 ### safe
 
