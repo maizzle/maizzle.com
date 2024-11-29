@@ -90,10 +90,20 @@ You can now use `<component href="button.html" />` in your templates.
 
 ## fileExtension
 
-Type: `String`\
+Type: `String`|`String[]`\
 Default: `'html'`
 
-Define the file extension that component files must use.
+Define the file extension(s) that component files must use.
+
+To define multiple file extensions, use an array:
+
+```js [config.js]
+export default {
+  components: {
+    fileExtension: ['html', 'php'],
+  },
+}
+```
 
 Any other files will be ignored and not be made available as components.
 
