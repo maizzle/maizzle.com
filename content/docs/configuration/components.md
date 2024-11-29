@@ -33,6 +33,25 @@ export default {
 
 The paths you defined will be added to the default folders.
 
+## fileExtension
+
+Type: `String`|`String[]`\
+Default: `'html'`
+
+Define the file extension(s) that component files must use.
+
+To define multiple file extensions, use an array:
+
+```js [config.js]
+export default {
+  components: {
+    fileExtension: ['html', 'php'],
+  },
+}
+```
+
+Any other files will be ignored and not be made available as components.
+
 ## tagPrefix
 
 Type: `String`\
@@ -87,25 +106,6 @@ export default {
 ```
 
 You can now use `<component href="button.html" />` in your templates.
-
-## fileExtension
-
-Type: `String`|`String[]`\
-Default: `'html'`
-
-Define the file extension(s) that component files must use.
-
-To define multiple file extensions, use an array:
-
-```js [config.js]
-export default {
-  components: {
-    fileExtension: ['html', 'php'],
-  },
-}
-```
-
-Any other files will be ignored and not be made available as components.
 
 ## yield
 
