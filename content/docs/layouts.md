@@ -82,7 +82,7 @@ When using a `<style>` tag, you can include Tailwind's `utilities` and `componen
 
 ### link tag
 
-Maizzle also supports `<link rel="stylesheet">` tags - it will try to read the file from the `href` attribute and process it with PostCSS (including Tailwind CSS).
+Maizzle also supports `<link rel="stylesheet">` tags - it will try to read the file from the `href` attribute and process it with PostCSS (including Tailwind CSS). Note that this currently only works with local files.
 
 ```html [layouts/main.html] diff {4}
 <!doctype html>

@@ -11,13 +11,31 @@ They run after your Template has been compiled and allow you to manipulate the H
 
 Some of the Transformers help you automate tedious tasks that are required when developing HTML emails, like inlining CSS, automatically adding attributes for better accessibility, or generating plaintext versions of your emails.
 
-## Opt-in by default
+## Transformers list
 
-Transformers are opt-in by default, you need to explicitly enable them in your `config.js`.
+Most Transformers are enabled by default:
 
-## Execution order
+- [Safe Class Names](/docs/transformers/safe-class-names) - rewrites Tailwind CSS class names to email-safe alternatives
+- [Filters](/docs/transformers/filters) - Liquid-like filters as HTML attributes
+- [Markdown](/docs/markdown) - converts Markdown to HTML
+- [Prevent Widows](/docs/transformers/widows) - enables an HTML attribute that prevents widow words
+- [Add Attributes](/docs/transformers/add-attributes) - improves accessibility by adding `alt` and `role` attributes
+- [Remove Attributes](/docs/transformers/remove-attributes) - removes empty `style` and `class` attributes
+- [Six-digit HEX](/docs/transformers/six-hex) - converts 3-digit HEX colors to 6-digit
+- [Outlook Tags](/docs/tags#outlook) - simplifies writing MSO conditionals for Outlook
+- [resolveProps](/docs/configuration/css#resolveprops) - resolves CSS variables to their static values
+- [resolveCalc](/docs/configuration/css#resolvecalc) - resolves CSS `calc()` functions to their static values
 
-Because some operations need to happen before others, Transformers in Maizzle run in a very specific order. You can see this order on the [build process](/docs/build-process#compile-templates) page and even in the navigation menu - they're listed in the exact order that they run.
+However, some are opt-in and need to be explicitly enabled in your `config.js`:
+
+- [Inline CSS](/docs/transformers/inline-css) - inlines CSS styles into the HTML
+- [Purge CSS](/docs/transformers/purge-css) - removes unused CSS classes from your HTML
+- [Shorthand CSS](/docs/transformers/shorthand-css) - converts long-hand CSS to shorthand in `style` attributes
+- [Base URL](/docs/transformers/base-url) - prepends a string to configured attributes in HTML
+- [URL parameters](/docs/transformers/url-parameters) - adds URL parameters to configured HTML tags
+- [Replace strings](/docs/transformers/replace-strings) - replaces strings through regular expressions
+- [Prettify](/docs/transformers/prettify) - pretty-prints the HTML
+- [Minify](/docs/transformers/minify) - minifies the HTML
 
 ## Disabling
 
@@ -28,6 +46,10 @@ export default {
 +  useTransformers: false,
 }
 ```
+
+## Execution order
+
+Transformers in Maizzle need to run in a specific order, see it on the [build process](/docs/build-process#compile-templates) page.
 
 ## API
 

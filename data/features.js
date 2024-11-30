@@ -81,7 +81,7 @@ export default ([
   },
   {
     title: 'Uglify Classes',
-    path: '/docs/transformers/remove-unused-css#uglify',
+    path: '/docs/transformers/purge-css#uglify',
     description: 'Rewrite CSS class names to be as short as possible, so your production emails are even&nbsp;lighter!'
   },
   {

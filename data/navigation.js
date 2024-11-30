@@ -143,32 +143,28 @@ export default [
         path: '/docs/transformers'
       },
       {
-        title: 'Safe Class Names',
-        path: '/docs/transformers/safe-class-names'
-      },
-      {
         title: 'Filters',
         path: '/docs/transformers/filters'
-      },
-      {
-        title: 'Widow Words',
-        path: '/docs/transformers/widows'
-      },
-      {
-        title: 'Attribute To Style',
-        path: '/docs/transformers/attribute-to-style'
       },
       {
         title: 'Inline CSS',
         path: '/docs/transformers/inline-css'
       },
       {
+        title: 'Safe Selectors',
+        path: '/docs/transformers/safe-class-names'
+      },
+      {
+        title: 'CSS Purging',
+        path: '/docs/transformers/purge-css'
+      },
+      {
         title: 'Shorthand CSS',
         path: '/docs/transformers/shorthand-css'
       },
       {
-        title: 'Remove Unused CSS',
-        path: '/docs/transformers/remove-unused-css'
+        title: 'Attribute To Style',
+        path: '/docs/transformers/attribute-to-style'
       },
       {
         title: 'Remove Attributes',
@@ -179,12 +175,20 @@ export default [
         path: '/docs/transformers/add-attributes'
       },
       {
-        title: 'Base URL',
-        path: '/docs/transformers/base-url'
+        title: 'Replace Strings',
+        path: '/docs/transformers/replace-strings'
+      },
+      {
+        title: 'Widow Words',
+        path: '/docs/transformers/widows'
       },
       {
         title: 'URL Parameters',
         path: '/docs/transformers/url-parameters'
+      },
+      {
+        title: 'Base URL',
+        path: '/docs/transformers/base-url'
       },
       {
         title: 'Six HEX',
@@ -197,10 +201,6 @@ export default [
       {
         title: 'Minify',
         path: '/docs/transformers/minify'
-      },
-      {
-        title: 'Replace Strings',
-        path: '/docs/transformers/replace-strings'
       },
     ]
   },

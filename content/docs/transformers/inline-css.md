@@ -284,7 +284,7 @@ export default {
 
 ## Prevent inlining
 
-You may add an attribute on a `<style>` tag to prevent Juice from inlining the CSS inside it. Useful for writing email client CSS hacks, or for preserving CSS comments when using the [`removeCSSComments: false`](/docs/transformers/remove-unused-css#removecsscomments) Cleanup option.
+You may add an attribute on a `<style>` tag to prevent Juice from inlining the CSS inside it. Useful for writing email client CSS hacks, or for preserving CSS comments when using the [`removeCSSComments: false`](/docs/transformers/purge-css#removecsscomments) Cleanup option.
 
 ```html
 <style data-embed>
@@ -299,7 +299,7 @@ Maizzle supports the following attributes for this purpose:
 -  `no-inline`
 -  `embed`
 
-<Alert>CSS selectors that don't appear in your markup will still need to be [whitelisted for purging](/docs/transformers/remove-unused-css#whitelist).</Alert>
+<Alert>CSS selectors that don't appear in your markup will still need to be [whitelisted for purging](/docs/transformers/purge-css#whitelist).</Alert>
 
 ## API
 

@@ -42,7 +42,7 @@ Default: `undefined`
 
 Configure email-safe unused CSS purging.
 
-For details, see the [CSS Purge Transformer docs](/docs/transformers/remove-unused-css).
+For details, see the [CSS Purge Transformer docs](/docs/transformers/purge-css).
 
 ### resolveCalc
 

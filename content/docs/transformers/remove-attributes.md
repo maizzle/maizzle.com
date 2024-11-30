@@ -15,7 +15,7 @@ You may configure which attributes to remove through the `removeAttributes` arra
 
 ### Empty values
 
-To remove attributes with no values, specify the attribute name as a string:
+To remove attributes that have no value, specify the attribute name as a string:
 
 ```js [config.js]
 export default {

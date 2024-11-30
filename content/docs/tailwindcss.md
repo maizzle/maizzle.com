@@ -388,7 +388,7 @@ You may use any of the following attributes for this purpose:
 - `no-inline`
 - `embed`
 
-Although it will no longer be inlined, unused CSS will still be purged - see the [css.purge](/docs/transformers/remove-unused-css) Transformer docs for more information.
+Although it will no longer be inlined, unused CSS will still be purged - see the [css.purge](/docs/transformers/purge-css) Transformer docs for more information.
 
 ## Email client targeting
 

@@ -5,87 +5,91 @@ description: "See how the build process works and how Maizzle builds your emails
 
 # Build process
 
-When you run `maizzle build`, your templates go through a series of events that compile them to plain HTML and apply various, email-specific transformations.
+When you run `maizzle build`, your Templates go through a series of events that compile them to plain HTML and apply various, email-specific transformations.
 
-To get a better understanding of how Maizzle builds your emails, here's a step-by-step guide of what's going on under the hood:
+To get a better understanding of how Maizzle builds your emails, here's a step-by-step guide of what's going on under the hood.
 
 ## Environment config
 
 First, a global configuration object is computed by merging your Environment config on top of the base `config.js`.
 
-For example, running `maizzle build production` will tell Maizzle to look for the `config.production.js` Environment config at your current location, and merge it on top of `config.js`.
+For example, running `maizzle build production` will tell Maizzle to look for the `config.production.js` file at your current location, and merge it on top of `config.js`.
 
-Otherwise, if you're simply running the `maizzle build` or `maizzle serve` commands, only the base `config.js` will be used.
-
-## Compile Tailwind CSS
-
-Tailwind CSS is compiled, and various [PostCSS](https://postcss.org/) plugins are enabled depending on the build environment and your config.
-
-## Clean destination
-
-The destination directories that you have defined under `destination.path` in your environment config are deleted.
-
-<Alert type="warning">Be careful when customizing this path, so you don't end up deleting important directories and files on your machine.</Alert>
-
-## Copy sources
-
-All of your source Templates are copied over to the `destination.path` directories.
-
-This is done so that we can then process the files in-place, which makes it easier to preserve your directory structure.
+When running `maizzle build` or `maizzle serve`, only the base `config.js` will be used.
 
 ## beforeCreate()
 
 The [beforeCreate](/docs/events#beforecreate) event (CLI-only) is triggered, giving you access to the config before Maizzle loops over your Templates to compile them.
 
+## Clean destination
+
+The destination directories that you have defined under `build.output.path` in your environment config are deleted.
+
+<Alert type="warning">Be careful when customizing this path, so you don't end up deleting important directories and files on your machine.</Alert>
+
+
 ## Compile templates
 
-Each Template is parsed and compiled in-place, in your destination directory:
+Each Template file is parsed and compiled:
 
 1. Maizzle reads the Template file
+1. It extracts its Front Matter
+1. A unique Template `config` is computed by merging the Template's Front Matter keys with the Environment `config`
+1. [beforeRender()](/docs/events#beforerender) event is triggered
+1. The HTML is rendered with PostHTML
+    <br><br>
+    Your Environment name and all `config` options (including any you defined in Front Matter) are exposed under the `page` object, which you can access through [expressions](/docs/expressions).
+    <br><br>
+    PostHTML plugins that are used as part of the rendering process:
+    - envTags - core plugin that enables [`<env:?>`](/docs/tags#env) tags
+    - envAttributes - core plugin that enables attributes like `src-{env}`
+    - expandLinkTags - core plugin that expands local [`<link>` tags](/docs/layouts#link-tag) into `<style>` tags
+    - postcssPlugin - this is where the Tailwind CSS magic happens
+    - fetchPlugin - enables the [`<fetch>`](/docs/tags#fetch) tag
+    - [`posthtml-component`](https://github.com/posthtml/posthtml-components) - the PostHTML plugin that powers Maizzle's components
+1. [afterRender()](/docs/events#afterrender) event is triggered
 
-2. It extracts its Front Matter
+## Transformers
 
-3. A unique Template `config` is computed by merging the Template's Front Matter keys with the Environment `config`
+The compiled HTML is now passed on to a series of Transformers. Most of them are enabled by default, but some need to be explicitly enabled in your `config.js`.
 
-4. [beforeRender](/docs/events#beforerender) event is triggered
+The order in which they're executed is exactly as follows:
 
-5. PostHTML renders the template string
+1. coreTransformers - remove `<plaintext>` tags when developing locally, enable `no-inline` attribute for `<style>` tags
+1. [safeClassNames](/docs/transformers/safe-class-names) - escaped characters in `<head>` and `<body>` CSS classes are replaced with email-safe alternatives
+1. [filters](/docs/transformers/filters) - Liquid-like filters are applied to the HTML
+1. [markdown](/docs/markdown) is compiled
+1. [widowWords](/docs/transformers/widows) - widow words are prevented in tags with the `prevent-widows` attribute
+1. [attributeToStyle](/docs/transformers/inline-css#attributetostyle) - translates HTML attributes to inline CSS
+1. [inlineCSS](/docs/transformers/inline-css) - CSS is inlined
+1. [removeAttributes](/docs/transformers/remove-attributes) - HTML attribute removal based on your config
+1. [shorthandCSS] - longhand CSS in `style` attributes is converted to shorthand-form
+1. [addAttributes](/docs/transformers/add-attributes) - user-configured attributes are added to tags
+1. [baseURL](/docs/transformers/base-url) - a base URL is prepended to configured attribute values
+1. [urlParameters](/docs/transformers/url-parameters) - configured parameters are added to URLs
+1. [sixHex](/docs/transformers/six-hex) - ensures six digit HEX color codes are used in `bgcolor` and `color` attributes
+1. [posthtmlMSO](/docs/tags#outlook) - `<outlook>` tags are replaced with the correct MSO comments
+1. [purgeCSS](/docs/transformers/purge-css) - unused CSS is removed from `<style>` tags and HTML attributes
+1. [templateTag](/docs/tags#template) - `<template>` tags are replaced with their content
+1. [replaceStrings](/docs/transformers/replace-strings) - strings are replaced based on your config
+1. [prettify](/docs/transformers/prettify) - HTML is prettified
+1. [minify](/docs/transformers/minify) - HTML is minified
 
-    Your Environment name, the compiled Tailwind CSS, and all `config` options (including any you defined in Front Matter) are exposed to all your templating parts as PostHTML expressions that you can use, under the `page` object.
+## afterTransformers()
 
-6. [afterRender](/docs/events#afterrender) event is triggered
+The [afterTransformers](/docs/events#aftertransformers) event is triggered.
 
-7. The compiled HTML is now passed on to a series of Transformers.
+## Plaintext
 
-    The order of events is exactly as follows, and they all happen (or not) depending on how you've configured them in your Environment config or in the Template's Front Matter:
+A plaintext version is created at the [configured location](/docs/plaintext#custom-path), if `plaintext` was enabled.
 
-    - Escaped characters in `<head>` and `<body>` CSS classes are replaced with email-safe alternatives
-    - `filters` are applied to the HTML. For example, `<style postcss|tailwindcss>` tags are compiled with PostCSS/Tailwind CSS. [posthtml-content](https://github.com/posthtml/posthtml-content) is used to transform content marked with those custom attributes.
-    - Markdown is compiled with [posthtml-markdownit](https://github.com/posthtml/posthtml-markdownit)
-    - [prevent-widows](https://github.com/bashaus/prevent-widows) looks for tags containing the `prevent-widows` attribute. When it finds one, it will replace the last space in your text with a `&nbsp;`.
-    - [attributeToStyle](/docs/transformers/inline-css#attribute-to-style) translates HTML attributes to inline CSS
-    - CSS is inlined with [Juice](https://github.com/Automattic/juice)
-    - Longhand CSS in `style` attributes is converted to shorthand-form
-    - Unused CSS is removed with [email-comb](https://www.npmjs.com/package/email-comb)
-    - Inline CSS sizes are removed (`width=""` and `height=""` are preserved)
-    - Inline background colors are removed (`bgcolor=""` is preserved)
-    - Attributes are removed based on your config. By default, Maizzle cleans up any empty `style=""` and `class=""` attributes.
-    - Any [extra attributes](/docs/transformers/add-attributes) defined are added to tags
-    - [baseURL](/docs/transformers/base-url) is prepended to configured tags
-    - [urlParameters](/docs/transformers/url-parameters) are added to links
-    - Ensure six digit HEX color codes are used in `bgcolor` and `color` attributes
-    - [`<outlook>` tags](/docs/tags#outlook) are replaced with the correct MSO comments
-    - Code is prettified/indented for humans, with [pretty](https://www.npmjs.com/package/pretty)
-    - Code is minified with [html-crush](https://www.npmjs.com/package/html-crush)
-    - Strings are replaced based on your [`replaceStrings`](/docs/transformers/replace-strings) definitions
+## Write to disk
 
-8. [afterTransformers](/docs/events#aftertransformers) event is triggered
+The compiled HTML is saved at the [configured location](/docs/configuration/build#path), with the [configured extension](/docs/configuration/build#extension).
 
-9. The compiled email template is saved.
-    9.1. A plaintext version is created at the [configured location](/docs/plaintext#custom-path), if `plaintext` was enabled. Note that `plaintext` processing uses PostHTML, which may transform the compiled HTML.
-    9.2. The compiled HTML is saved at the [configured location](/docs/configuration/templates#path), with the [configured extension](/docs/configuration/templates#extension).
+## Copy static files
 
-10. Your assets are copied to the destination folder. All files and folders in `templates.assets.source` are copied to `templates.assets.destination`
+All files and folders in `build.static.source` are copied to `build.static.destination`.
 
 ## afterBuild()
 
