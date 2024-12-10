@@ -12,79 +12,41 @@ Maizzle can automatically create plaintext versions of your HTML emails.
 Generate a plaintext version for all your email templates by adding a `plaintext` key to your templates source in `config.js`:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    templates: {
-      plaintext: true,
-    },
-  },
+export default {
+  plaintext: true,
 }
 ```
 
 ## Custom path
 
-You may configure where the plaintext files are output and what file extension they have.
+Set the `plaintext` key to be a directory path to output plaintext files to a custom location. Plaintext files will be output relative to the `build.output.path` folder.
 
 ```js [config.js]
-module.exports = {
-  build: {
-    templates: {
-      plaintext: {
-        destination: {
-          path: 'dist/brand/plaintext',
-          extension: 'rtxt',
-        }
-      },
-    },
+export default {
+  plaintext: 'dist/brand/plaintext',
+}
+```
+
+You may configure both the output directory and the file extension by providing an object with `output.path` and `output.extension` keys:
+
+```js [config.js]
+export default {
+  plaintext: {
+    output: {
+      path: 'dist/brand/plaintext',
+      extension: 'rtxt',
+    }
   },
 }
 ```
 
 <Alert>The `path` option must be a directory path, otherwise a single plaintext file will be generated for all of your emails.</Alert>
 
-Using multiple Template sources? You can enable plaintext on a per-source basis:
-
-```js [config.js]
-module.exports = {
-  build: {
-    templates: [
-      {
-        source: 'src/templates',
-        destination: {
-          path: 'build-1',
-        },
-        plaintext: true // build-1 folder only: output plaintext files next to the HTML counterparts
-      },
-      {
-        source: 'src/templates',
-        destination: {
-          path: 'build-2',
-        },
-        // build-2 folder only: output plaintext files in the `plaintext` subdirectory, with custom extension
-        plaintext: {
-          destination: {
-            path: 'build-2/plaintext',
-            extension: 'rtxt'
-          }
-        },
-      },
-      // plaintext won't be generated in the `build-3` directory, because we didn't enable it
-      {
-        source: 'src/templates',
-        destination: {
-          path: 'build-3',
-        }
-      },
-    ]
-  }
-}
-```
-
 ## Front Matter
 
-Generate a plaintext version for a single Template by enabling it in its Front Matter:
+Generate a plaintext version for a specific Template by enabling it in its Front Matter:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 plaintext: true
 ---
@@ -96,11 +58,56 @@ plaintext: true
 
 A `.txt` file will be output at the same location with the compiled Template.
 
+You may of course set `plaintext` to a custom path in Front Matter as well.
+
+Using a file path for `plaintext` in Front Matter will output that file at the specified location relative to the project root:
+
+```hbs [emails/example.html]
+---
+plaintext: dist/brand/plain.txt
+---
+```
+
+This will output the plaintext file at `dist/brand/plain.txt` relative to your project root:
+
+```sh no-root {1-3}
+dist
+└─  brand
+  └─  plain.txt
+src
+└─  templates
+  └─  example.html
+package.json
+...
+```
+
+However if you use a directory path, the plaintext file will be output relative to the `build.output.path` folder instead, and will use the same name as the Template:
+
+```hbs [emails/example.html]
+---
+plaintext: dist/brand
+---
+```
+
+Result:
+
+```sh no-root {2-4}
+build_production
+└─  dist
+  └─  brand
+    └─  example.txt
+src
+└─  templates
+  └─  example.html
+package.json
+...
+```
+
 ## Permalink
 
 If you're using the [`permalink`](/docs/configuration/templates#permalink) Front Matter key in your Template, Maizzle will output the `.txt` file at that location:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 permalink: example/email.html
 plaintext: true
@@ -113,13 +120,19 @@ plaintext: true
 
 For the Template above, `example/email.txt` will be generated.
 
+No matter what you set `plaintext` to in Front Matter in this case, as long as it's a truthy value the plaintext file will be output at the location specified by `permalink`, using the exact same filename but with the `.txt` extension.
+
 ## Customization
 
 By default, the plaintext generator in Maizzle uses most default options from [`string-strip-html`](https://codsen.com/os/string-strip-html/#optional-options-object), with this exception:
 
 ```js
-dumpLinkHrefsNearby: {
-  enabled: true
+export default {
+  plaintext: {
+    dumpLinkHrefsNearby: {
+      enabled: true
+    }
+  },
 },
 ```
 
@@ -128,24 +141,20 @@ This ensures URLs from anchors are actually output in the plaintext version.
 You may use a `plaintext` object in your `config.js` to overwrite any of the defaults from `string-strip-html`.
 
 ```js [config.js]
-module.exports = {
-  build: {
-    templates: {
-      plaintext: {
-        ignoreTags: [],
-        onlyStripTags: [],
-        stripTogetherWithTheirContents: ['script', 'style', 'xml', 'not-plaintext'],
-        skipHtmlDecoding: false,
-        trimOnlySpaces: false,
-        dumpLinkHrefsNearby: {
-          enabled: false,
-          putOnNewLine: false,
-          wrapHeads: '',
-          wrapTails: ''
-        },
-        cb: null,
-      },
+export default {
+  plaintext: {
+    ignoreTags: [],
+    onlyStripTags: [],
+    stripTogetherWithTheirContents: ['script', 'style', 'xml', 'not-plaintext'],
+    skipHtmlDecoding: false,
+    trimOnlySpaces: false,
+    dumpLinkHrefsNearby: {
+      enabled: false,
+      putOnNewLine: false,
+      wrapHeads: '',
+      wrapTails: ''
     },
+    cb: null,
   },
 }
 ```
@@ -156,9 +165,9 @@ module.exports = {
 
 Using `plaintext: true` like in the [Front Matter example](/docs/plaintext#front-matter) will override your plaintext config object if you have it defined in `config.js` like above.
 
-If you need to control `string-strip-html` options when generating plaintext for a single Template, you need to use `enabled: true`.
+If you need to control `string-strip-html` options when generating plaintext for a specific Template, you need to use `enabled: true`.
 
-You basically add the options object as shown above, but in Front Matter syntax:
+You basically add the options object to the Template's Front Matter:
 
 ```hbs
 ---
@@ -183,11 +192,11 @@ Click here
 [https://example.com]
 ```
 
-## `<plaintext>` tag
+## &lt;plaintext&gt; tag
 
-You can output content only in the plaintext version, with the `<plaintext>` tag:
+Output content only in the plaintext version:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 plaintext: true
 ---
@@ -199,11 +208,11 @@ plaintext: true
 </x-main>
 ```
 
-## `<not-plaintext>` tag
+## &lt;not-plaintext&gt; tag
 
 You may also discard content from the plaintext version while preserving it in the HTML, with the help of the `<not-plaintext>` tag:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 plaintext: true
 ---
@@ -222,9 +231,9 @@ plaintext: true
 You may render an HTML string to plaintext in your application with the help of the `plaintext()` method. The custom tags, like `<plaintext>`, are also supported.
 
 ```js [app.js]
-const Maizzle = require('@maizzle/framework')
+import { generatePlaintext } from '@maizzle/framework'
 
-const {plaintext} = await Maizzle.plaintext(`<p>your html string</p>`)
+const plaintext = await generatePlaintext(`<p>your html string</p>`)
 
 // your html string
 ```
@@ -232,11 +241,10 @@ const {plaintext} = await Maizzle.plaintext(`<p>your html string</p>`)
 You can also pass a config object to this method:
 
 ```js [app.js]
-const {plaintext} = await Maizzle.plaintext('html string', {
-  plaintext: {
-    // string-strip-html options
+const plaintext = await generatePlaintext('html string', {
+  posthtml: {
+    // PostHTML options...
   }
+  // ... string-strip-html options
 })
 ```
-
-The object that you pass here must contain a `plaintext: {}` key, as explained in the [customization section](/docs/plaintext#customization) above.

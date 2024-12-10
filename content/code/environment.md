@@ -1,17 +1,18 @@
 ```js
-module.exports = {
+/** @type {import('@maizzle/framework').Config} */
+
+export default {
   build: {
-    templates: {
-      source: 'src/templates',
-      destination: {
-        path: 'build_production',
-        extension: 'html',
-      },
-      assets: {
-        source: 'src/images',
-        destination: 'images',
-      },
+    content: ['emails/**/*.html'],
+    output: {
+      path: 'build_production',
+      extension: 'blade.php',
     },
+    summary: true,
+    static: {
+      source: 'images',
+      destination: 'images',
+    }
   }
 }
 ```

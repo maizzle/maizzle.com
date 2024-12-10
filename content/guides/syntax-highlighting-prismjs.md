@@ -63,7 +63,7 @@ module.exports = {
 
 Add a block of code in your template, like so:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-main>
   <pre>
     <code class="language-javascript">
@@ -79,7 +79,7 @@ Add a block of code in your template, like so:
 
 <Alert>Notice how we added the `language-javascript` class on the `<code>` tag - this is required in order to get language-specific syntax highlighting.</Alert>
 
-<Alert type="warning">You need to reset the indentation of code inside the `<pre>` tag yourself - see the <a href="https://github.com/maizzle/example-syntax-highlight/blob/master/src/templates/posthtml.html">PostHTML example</a> in the tutorial repository.</Alert>
+<Alert type="warning">You need to reset the indentation of code inside the `<pre>` tag yourself - see the <a href="https://github.com/maizzle/example-syntax-highlight/blob/master/emails/posthtml.html">PostHTML example</a> in the tutorial repository.</Alert>
 
 ## Build
 
@@ -105,7 +105,7 @@ Choose one of the default themes, or see [prism-themes](https://github.com/Prism
 
 For this tutorial, we'll go with a Tailwind adaptation the [Synthwave '84 Theme](https://marketplace.visualstudio.com/items?itemName=RobbOwen.synthwave-vscode).
 
-Save [prism-synthwave84.css](https://raw.githubusercontent.com/maizzle/starter-prismjs/master/src/css/prism-synthwave84.css) to the `src/css` directory in your project, and import it into your `src/css/tailwind.css`:
+Save [prism-synthwave84.css](https://raw.githubusercontent.com/maizzle/starter-prismjs/master/src/css/prism-synthwave84.css) to the `css` directory in your project, and import it into your `css/tailwind.css`:
 
 ```css
 /* Tailwind CSS components */
@@ -170,7 +170,7 @@ module.exports = {
 
 We can now write code inside a fenced code block in our Template:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-main>
   <md>
     ```js
@@ -194,7 +194,7 @@ Gmail will change our inline `white-space: pre;` to `white-space: pre-wrap;`. Th
 
 Fix it by adding the following CSS at the beginning of `prism-synthwave84.css`:
 
-```css [src/css/prism-synthwave84.css]
+```css [css/prism-synthwave84.css]
 pre {
   @apply whitespace-pre;
 }
@@ -206,7 +206,7 @@ Padding on `<pre>` doesn't work in Outlook.
 
 We can fix this by wrapping `<pre>` inside a table that we only show in Outlook. We then style this table inline, like so:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-main>
   <!--[if mso]>
   <table style="width:100%;">

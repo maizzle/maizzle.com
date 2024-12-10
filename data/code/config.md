@@ -1,4 +1,5 @@
 ```js
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   theme: {
     screens: {

@@ -12,7 +12,7 @@ Maizzle can batch-replace strings in your HTML email template, and you can even 
 Use the `replaceStrings` option to define key-value pairs of regular expressions and strings to replace them with:
 
 ```js [config.js]
-module.exports = {
+export default {
   replaceStrings: {
     'find and replace this exact string': 'with this one',
     '\\s?data-src=""': '', // remove empty data-src="" attributes
@@ -25,7 +25,7 @@ module.exports = {
 ## API
 
 ```js [app.js]
-const {replaceStrings} = require('@maizzle/framework')
+import { replaceStrings } from '@maizzle/framework'
 
 const html = await replaceStrings('initial text', {initial: 'updated'})
 ```

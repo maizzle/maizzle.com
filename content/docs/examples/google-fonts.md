@@ -15,14 +15,17 @@ Using the same Google Fonts in all your emails? Paste the code in your main Layo
 
 For example, add it before Tailwind CSS:
 
-```hbs [src/layouts/main.html]
+```html [layouts/main.html]
 <head>
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Merriweather&family=Open+Sans&display=swap" rel="stylesheet" media="screen">
 
-  <style>{{{ page.css }}}</style>
+  <style>
+    @tailwind components;
+    @tailwind utilities;
+  </style>
 </head>
 ```
 
@@ -30,7 +33,7 @@ For example, add it before Tailwind CSS:
 
 If you only need Google Fonts in a certain Template, push to the `head` stack:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-main>
   <push name="head">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,7 +62,7 @@ After pasting in the code from Google Fonts, you have one more thing to do: regi
 For example, let's register a Tailwind utility for Open Sans:
 
 ```js [tailwind.config.js]
-module.exports = {
+export default {
   theme: {
     extend: {
       fontFamily: {
@@ -84,7 +87,7 @@ This way it doesn't get inlined and you can keep this CSS away from any email cl
 To do this, we first register a `screen` breakpoint:
 
 ```js [tailwind.config.js] {6} diff
-module.exports = {
+export default {
   theme: {
     screens: {
       sm: {max: '600px'},
@@ -97,7 +100,7 @@ module.exports = {
 
 We can use it like this:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <div class="screen:font-open-sans">
   <h1>Lorem ipsum</h1>
   <p>Labore exercitation consequat tempor quis eu nulla amet.</p>

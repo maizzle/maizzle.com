@@ -54,7 +54,7 @@ https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=3&_embed=1
 
 Let's use the `<fetch>` tag to fetch posts from the CSS-Tricks WordPress API.
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-main>
   <fetch url="https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=6&_embed=1">
     <!-- Posts are now available in {{ response }} -->
@@ -72,7 +72,7 @@ Let's update the Hero with background image to show the first post.
 
 Our code becomes:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 bodyClass: bg-gray-200
 title: "Latest posts on CSS-Tricks"
@@ -156,7 +156,7 @@ Want to loop over a specific subset only? You can use [expressions](/docs/templa
 
 For example, let's show the last 2 posts in a list format at the end of the template:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 <x-main>
   <fetch url="https://css-tricks.com/wp-json/wp/v2/posts?page=1&per_page=6&_embed=1">
     <h3 class="m-0 text-base font-semibold text-gray-500 uppercase">From the archives</h3>
