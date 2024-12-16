@@ -5,7 +5,7 @@ description: "How to upgrade your Maizzle project to the latest major framework 
 
 # Upgrade Guide
 
-Upgrading your Maizzle projects from v4.x to v5.x (beta).
+Upgrading your Maizzle projects from v4.x to v5.
 
 Maizzle 5 is a major framework rewrite that comes with awesome new features and improvements, but also includes a few breaking changes.
 
@@ -15,7 +15,7 @@ Migrating an existing project to Maizzle 5 takes less than 10 minutes in most ca
 
 <strong class="text-indigo-500">BREAKING CHANGE</strong>
 
-Maizzle 5 requires Node.js v18.0.0 or higher.
+Maizzle 5 requires Node.js v18.20 or higher.
 
 Check your current Node.js version:
 
@@ -30,7 +30,7 @@ node --version
 If you use `@maizzle/cli` installed globally, you must upgrade it to v2.x in order to use it in Maizzle 5 projects:
 
 ```sh
-npm install -g @maizzle/cli@next
+npm install -g @maizzle/cli
 ```
 
 Alternatively, you can just use the NPM scripts like `npm run dev` from `package.json`.
@@ -48,7 +48,7 @@ The `@maizzle/framework` package is now a module, so you need to update your `pa
     "build": "maizzle build production"
   },
   "dependencies": {
-    "@maizzle/framework": "next",
+    "@maizzle/framework": "latest",
     "tailwindcss-preset-email": "latest"
   }
 }
@@ -63,10 +63,10 @@ It's probably best that you do a clean install:
 
 <Alert>If using yarn, note that it might have cached your dependencies.</Alert>
 
-Install the `next` version of Maizzle:
+Install the `latest` version of Maizzle:
 
 ```sh
-npm install @maizzle/framework@next
+npm install @maizzle/framework@latest
 ```
 
 ## Update your HTML
@@ -245,29 +245,7 @@ export default {
 }
 ```
 
-There are some new options ([see docs](./transformers/inline-css)), this is the full new config for inlining:
-
-```js [config.js] {11-12,14-15}
-export default {
-  css: {
-    inline: {
-      styleToAttribute: {
-        'vertical-align': 'valign',
-      },
-      attributeToStyle: ['width', 'height', 'bgcolor', 'background', 'align', 'valign'],
-      applyWidthAttributes: [],
-      applyHeightAttributes: [],
-      useAttributeSizes: true,
-      resolveCSSVariables: true,
-      removeInlinedSelectors: true,
-      excludedProperties: [],
-      preferUnitlessValues: false,
-      resolveCalc: true,
-      safelist: [],
-    },
-  },
-}
-```
+See the [CSS inlining docs](./transformers/inline-css) for all the options available.
 
 ### outlook
 
@@ -470,9 +448,3 @@ These updates are optional but highly recommended.
 The Maizzle 5 Starter uses updated components for dividers, spacers, or buttons.
 
 We recommend you update your components to the latest versions, which you can find in the [Starter project](https://github.com/maizzle/maizzle) on GitHub.
-
-Note: while in beta, the updated Starter project is in the `next` branch:
-
-https://github.com/maizzle/maizzle/tree/next
-
-You may also initialize a Maizzle 5 project with the updated starter by running `npx create-maizzle` and selecting the `5.0.0-beta` Starter.

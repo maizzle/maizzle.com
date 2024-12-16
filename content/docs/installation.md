@@ -5,33 +5,6 @@ description: "Installing Maizzle on your machine and creating a new project."
 
 # Getting Started
 
-## Maizzle 5 Beta
-
-The next version of Maizzle is here! 🥳
-
-Try it out now by running `npx create-maizzle` and selecting the `5.0.0-beta` Starter:
-
-```sh example no-root no-copy
-npx create-maizzle
-
-┌   create-maizzle
-│
-◇  Where should we create your project?
-│  ./maizzle-5
-│
-◆  Select a Starter
-│  ● 5.0.0-beta
-│  ○ Default
-│  ○ Custom
-└
-```
-
-Or, if you'd like to try it out on an existing v4 project, check out the [upgrade guide](/docs/upgrade-guide) - upgrading to v5 takes less than 10 minutes for most projects.
-
-We would greatly appreciate it if you could test it out and provide feedback through [GitHub Discussions](https://github.com/orgs/maizzle/discussions) or by [opening an issue](https://github.com/maizzle/framework/issues/new). Thanks!
-
----
-
 ## Video Tutorials
 
 If you prefer to watch a video, check out the [Maizzle Series on Laracasts](https://laracasts.com/series/build-html-emails-with-maizzle).
@@ -106,7 +79,7 @@ Maizzle includes different commands for developing locally on your machine and f
 
 You can start a development server that watches for file changes and automatically updates a preview in the browser.
 
-Start local email development by running the `dev` npm script:
+Do so by running the `dev` npm script in your project's root folder:
 
 ```sh
 npm run dev
@@ -134,16 +107,16 @@ Maizzle is listed as a dependency in your project's `package.json` file:
 
 ```json [package.json]
 "dependencies": {
-  "@maizzle/framework": "next",
+  "@maizzle/framework": "latest",
 }
 ```
 
-With the v5 Beta Starter, the `next` version will be installed. To use a specific version, first change the value to the desired release number:
+To use a specific version, first change the value to the desired release number:
 
 ```json [package.json] diff no-copy
 "dependencies": {
--  "@maizzle/framework": "next",
-+  "@maizzle/framework": "5.0.0-beta.23",
+-  "@maizzle/framework": "latest",
++  "@maizzle/framework": "5.0.0-beta.38",
 }
 ```
 

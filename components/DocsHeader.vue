@@ -21,7 +21,7 @@
                 aria-haspopup="true"
                 @click="versionDropdownOpen = !versionDropdownOpen"
               >
-                v5.0.0-beta
+                {{ latestRelease }}
                 <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
@@ -37,13 +37,10 @@
             >
               <div class="py-1" role="none">
                 <span class="block px-4 py-2 text-indigo-600 font-medium cursor-default" role="menuitem" tabindex="-1">
-                  v5.0.0-beta
+                  {{ latestRelease }}
                 </span>
-                <a href="https://maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
+                <a href="https://v4.maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
                   v4.8.9
-                </a>
-                <a href="https://v43x.maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
-                  v4.3.1
                 </a>
                 <a href="https://v3.maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
                   v3.7.3
@@ -63,10 +60,10 @@
         <div class="grid col-span-12 xl:col-span-9 2xl:col-span-7 3xl:col-span-6 xl:py-4 px-8 3xl:pl-16 items-center">
           <div class="hidden sm:block max-w-[75ch] whitespace-nowrap overflow-auto">
             <NuxtLink
-              to="/docs/installation"
-              class="hidden sm:inline-block px-3 py-1 rounded-full text-indigo-500 border border-indigo-300 hover:text-indigo-600 text-base group"
+              to="/docs/upgrade-guide"
+              class="hidden sm:inline-block px-3 py-1 rounded-full text-sm text-indigo-500 hover:text-indigo-600 border border-indigo-300 group"
             >
-              Maizzle 5 is here, try the beta now &rarr;
+              Maizzle 5: 10x faster local dev, streamlined Tailwind CSS, modern CSS support, and more!
             </NuxtLink>
           </div>
         </div>

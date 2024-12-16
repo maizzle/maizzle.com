@@ -47,12 +47,12 @@ To use Tailwind CSS in your HTML emails, simply add the `@tailwind` directives t
 Alternatively, you may store them in a CSS file:
 
 ```css [css/tailwind.css]
+@tailwind components;
+@tailwind utilities;
+
 img {
   @apply max-w-full align-middle;
 }
-
-@tailwind components;
-@tailwind utilities;
 ```
 
 ... and `@import` that instead:

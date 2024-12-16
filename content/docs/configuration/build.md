@@ -243,3 +243,20 @@ export default {
 ```
 
 See the [ora spinners list](https://github.com/sindresorhus/cli-spinners/blob/main/spinners.json) for available options.
+
+## summary
+
+Type: `Boolean`\
+Default: `false`
+
+Show a summary at the end the build process. A table with the following information will be displayed:
+
+- file name
+- file size
+- build time
+
+You may also enable this option by passing the `--summary` or `-s` flag to the build command.
+
+```sh
+maizzle build --summary
+```
