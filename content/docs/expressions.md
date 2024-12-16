@@ -7,7 +7,7 @@ description: "Syntax for using basic JavaScript to manipulate data in HTML email
 
 Handlebars-like, curly brace expression syntax is supported, allowing you to access variables from your [Environment config](/docs/environments) or from a Template's Front Matter:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 title: Example
 ---
@@ -29,7 +29,7 @@ You ran the `maizzle build production` command.
 
 You may use basic JavaScript expressions within curly braces:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 <x-main>
   doctype is {{ page.doctype || 'not set' }}
   this email {{ page.env === 'production' ? "is" : "isn't" }} production ready!
@@ -47,7 +47,7 @@ this email isn't production ready!
 
 By default, special characters are escaped when using two curly braces:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 markup: '<strong>Bold</strong>'
 ---
@@ -60,7 +60,7 @@ markup: '<strong>Bold</strong>'
 
 If you need to render values exactly as they are, use triple curly braces:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 markup: '<strong>Bold</strong>'
 ---
@@ -81,7 +81,7 @@ If you want to prevent expression compilation and actually render the curly brac
 
 The [Blade](https://laravel.com/docs/blade)-inspired `@{{ }}` syntax is useful for one-offs, where you need to ignore a single expression. The compiled email will render `{{ }}` without the `@`.
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 <x-main>
   @{{ page.markup }}
   <!-- Result: {{ page.markup }} -->
@@ -92,7 +92,7 @@ The [Blade](https://laravel.com/docs/blade)-inspired `@{{ }}` syntax is useful f
 
 You may also use `@{{ }}` to prevent expressions in Front Matter from being evaluated.
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 title: "Weekly newsletter no. @{{ edition_count }}"
 ---
@@ -107,11 +107,11 @@ Result:
 Weekly newsletter no. {{ edition_count }}
 ```
 
-### Ignore with `<raw>`
+### Ignore with &lt;raw&gt;
 
 This is useful if you want to ignore multiple expressions in one go:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 <raw>
   <p>The quick brown {{ 1 + 2 }} jumps over the lazy {{ 3 + 4 }}.</p>
 </raw>
@@ -142,7 +142,7 @@ module.exports = {
 
 Then you can safely use `{{ }}` and its contents will not be evaluated:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 <x-main>
   <!-- This will be evaluated -->
   [[ page.title ]]
@@ -150,4 +150,20 @@ Then you can safely use `{{ }}` and its contents will not be evaluated:
   <!-- But this won't be -->
   Hi, {{ user.name }}.
 </x-main>
+```
+
+### Undefined variables
+
+Any variable that is not defined will be output as-is:
+
+```hbs [emails/example.html]
+<x-main>
+  {{ undefinedVariable }}
+</x-main>
+```
+
+Result:
+
+```hbs [build_production/example.html]
+{{ undefinedVariable }}
 ```

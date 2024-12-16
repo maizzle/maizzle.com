@@ -15,7 +15,7 @@
           v-for="link of toc.links"
           :key="link.id"
           class="truncate"
-          :class="{ 'pl-4': [2,3].includes(link.depth) }"
+          :class="{ 'pl-4': [3,4].includes(link.depth) }"
         >
           <a
             :href="`#${link.id}`"
@@ -31,7 +31,7 @@
               v-for="child of link.children"
               :key="child.id"
               class="truncate"
-              :class="{ 'pl-4': [2,3].includes(child.depth) }"
+              :class="{ 'pl-4': [3,4].includes(child.depth) }"
             >
               <a
                 :href="`#${child.id}`"

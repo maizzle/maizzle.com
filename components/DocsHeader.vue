@@ -2,7 +2,7 @@
   <header class="sticky top-0 sm:h-20 items-center z-50">
     <!-- Desktop Header -->
     <div class="hidden lg:grid grid-cols-12 h-full">
-      <div class="grid col-span-4 lg:col-span-3 xl:col-span-4 h-full justify-end items-center space-y-2 bg-slate-50">
+      <div class="grid col-span-4 lg:col-span-3 2xl:col-span-4 h-full justify-end items-center space-y-2 bg-slate-50">
         <div class="w-60 flex items-end gap-4">
           <NuxtLink
             to="/" @click.native.right.prevent="goToBrandPage"
@@ -29,21 +29,18 @@
             </div>
             <div
               v-show="versionDropdownOpen"
-              class="origin-top-right absolute z-10 left-0 mt-2 w-24 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+              class="origin-top-right absolute z-10 left-0 mt-2 w-[6.5rem] rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
               role="menu"
               aria-orientation="vertical"
               aria-labelledby="menu-button"
               tabindex="-1"
             >
               <div class="py-1" role="none">
-                <a href="https://next.maizzle.com/docs/installation" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
-                  v5.0.0-beta
-                </a>
                 <span class="block px-4 py-2 text-indigo-600 font-medium cursor-default" role="menuitem" tabindex="-1">
                   {{ latestRelease }}
                 </span>
-                <a href="https://v43x.maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
-                  v4.3.1
+                <a href="https://v4.maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
+                  v4.8.9
                 </a>
                 <a href="https://v3.maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
                   v3.7.3
@@ -59,15 +56,15 @@
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-12 col-span-8 lg:col-span-9 xl:col-span-8 h-full border-b border-slate-100 backdrop-blur bg-white/90">
-        <div class="grid col-span-12 xl:col-span-9 2xl:col-span-7 3xl:col-span-6 xl:py-4 px-8 3xl:pl-12 items-center">
+      <div class="grid grid-cols-12 col-span-8 lg:col-span-9 2xl:col-span-8 h-full border-b border-slate-100 backdrop-blur bg-white/90">
+        <div class="grid col-span-12 xl:col-span-9 2xl:col-span-7 3xl:col-span-6 xl:py-4 px-8 3xl:pl-16 items-center">
           <div class="hidden sm:block max-w-[75ch] whitespace-nowrap overflow-auto">
-            <a
-              href="https://github.com/maizzle/framework/releases"
-              class="hidden sm:table px-3 py-1 rounded-full text-indigo-500 border border-indigo-300 hover:text-indigo-600 text-sm group"
+            <NuxtLink
+              to="/docs/upgrade-guide"
+              class="hidden sm:inline-block px-3 py-1 rounded-full text-sm text-indigo-500 hover:text-indigo-600 border border-indigo-300 group"
             >
-              Maizzle v4.8.0: asset arrays, attributes for URL params &amp; more &rarr;
-            </a>
+              Maizzle 5: 10x faster local dev, streamlined Tailwind CSS, modern CSS support, and more!
+            </NuxtLink>
           </div>
         </div>
         <div class="hidden xl:grid col-span-3 2xl:col-span-5 items-end h-full">
@@ -133,7 +130,7 @@
               aria-haspopup="true"
               @click="mobileVersionDropdownOpen = !mobileVersionDropdownOpen"
             >
-              {{ latestRelease }}
+              v5.0.0-beta
               <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
               </svg>
@@ -155,8 +152,11 @@
                 to="/docs/installation"
                 class="block px-4 py-2 bg-slate-100" role="menuitem" tabindex="-1"
               >
-                {{ latestRelease }}
+                v5.0.0-beta3
               </NuxtLink>
+              <a href="https://maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
+                v4.8.8
+              </a>
               <a href="https://v43x.maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
                 v4.3.1
               </a>
@@ -285,22 +285,6 @@
             </NuxtLink>
           </li>
           <li>
-            <NuxtLink
-              to="/resources"
-              class="flex gap-2 items-center px-4 py-2"
-              :class="[$route.path.startsWith('/resources') ? 'text-indigo-700 font-medium' : 'text-slate-500']"
-            >
-              <svg
-                class="h-6 w-6"
-                :class="[$route.path.startsWith('/resources') ? 'text-indigo-500' : 'text-slate-400']"
-                fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"
-              >
-                <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-              </svg>
-              Resources
-            </NuxtLink>
-          </li>
-          <li>
             <a
               href="https://maizzle.com/discord"
               class="flex gap-2 items-center px-4 py-2 text-slate-500"
@@ -344,13 +328,13 @@
     <div
       v-show="showMobileMenu"
       class="lg:hidden fixed left-0 bottom-0 w-64 h-10 bg-gradient-to-t from-white pointer-events-none z-[60]"
-    ></div>
+    />
     <!-- Mobile menu: Backdrop -->
     <div
       class="fixed lg:hidden inset-0 bg-white/80 opacity-0 transition-opacity pointer-events-none"
       :class="{ 'opacity-100 z-50 pointer-events-auto': showMobileMenu }"
       @click="closeMobileMenu"
-    ></div>
+    />
 
     <DocSearch class="hidden" />
   </header>

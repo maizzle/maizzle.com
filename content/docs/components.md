@@ -5,25 +5,55 @@ description: "Use components into your HTML email templates and render them with
 
 # Components
 
-**👋 New syntax**
-
-You are viewing the documentation for the new Components syntax introduced in `v4.4.0`. Not ready to switch yet? See the [legacy Components docs](https://v43x.maizzle.com/docs/components).
-
----
-
 Components help you organize blocks of markup into files that can be referenced throughout your project with simple, declarative syntax.
 
-## Create
+## Usage
 
-To create a Component, add an HTML file in `src/components`:
+To create a Component, add an HTML file in `components`:
 
-```xml [src/components/alert.html]
-<content />
+```html [components/alert.html]
+<div>
+  <yield />
+</div>
 ```
 
-The `<content />` tag will be replaced with the content passed to the Component.
+The `<yield />` tag will be replaced with the content passed to the Component:
 
-<Alert type="info">You can safely omit the `<content />` tag if you want to use Components as includes, and don't actually need to pass any content to them.</Alert>
+```html [emails/example.html]
+<x-alert>
+  This text will replace the `yield` tag in the Component.
+</x-alert>
+```
+
+Result:
+
+```html [build_production/example.html]
+<div>
+  This text will replace the `yield` tag in the Component.
+</div>
+```
+
+## Includes
+
+You can safely omit the `<yield />` tag if you want to use Components as includes, and don't actually need to pass any content to them:
+
+```html [components/alert.html]
+<div>
+  This is a Component used as an include.
+</div>
+```
+
+```html [emails/example.html]
+<x-alert />
+```
+
+Result:
+
+```html [build_production/example.html]
+<div>
+  This is a Component used as an include.
+</div>
+```
 
 ## Tags
 
@@ -38,9 +68,9 @@ Component names are automatically registered and can be used without having to s
 
 For example, let's use the `alert.html` Component we created earlier:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-alert>
-  This text will replace the `content` tag in the Component.
+  This text will replace the <yield /> tag in the Component.
 </x-alert>
 ```
 
@@ -54,34 +84,36 @@ The following naming convention is used:
 
 As you can see, the second and last examples are not very readable, which is why we recommend using a [nested file structure](#nested-file-structure) instead.
 
-### `<component>` tag
+### &lt;component&gt; tag
 
 Alternatively, you may use the `<component>` tag to insert a Component:
 
-```xml [src/templates/example.html]
-<component src="src/components/alert.html">
-  This text will replace the `content` tag in the Component.
+```html [emails/example.html]
+<component src="components/alert.html">
+  This text will replace the <yield /> tag in the Component.
 </component>
 ```
 
 The `src` attribute is mandatory and it needs to point to the Component's file path, relative to the project root.
 If you're used to partials that you simply include in your HTML, this may look more familiar.
 
+<Alert type="warning">The `src` attribute is reserved on Components, make sure not to use it as a [prop](#props) name.</Alert>
+
 ## Nested file structure
 
-If a Component is nested deeper within your `src/components` directory, you can reference it through dot notation.
+If a Component is nested deeper within your `components` directory, you can reference it through dot notation.
 
 For example, consider the following Component:
 
-```xml [src/components/button/alt.html]
+```html [components/button/alt.html]
 <a href="https://maizzle.com">
-  <content />
+  <yield />
 </a>
 ```
 
 You may reference it like this:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-button.alt>
   Go to website
 </x-button.alt>
@@ -93,15 +125,15 @@ The nested folder path comes after `x-`, and the file name comes after the dot.
 
 If you add an `index.html` Component inside a nested directory, you can also reference it without its file name part:
 
-```xml [src/components/button/index.html]
+```html [components/button/index.html]
 <a href="https://maizzle.com">
-  <content />
+  <yield />
 </a>
 ```
 
 Both of these will work and use the same `button/index.html` Component:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-button>
   Go to website
 </x-button>
@@ -117,17 +149,17 @@ A Component may define slots, which act as placeholders that can be replaced (fi
 
 For example, let's create a banner Component with a slot for a custom title:
 
-```xml [src/components/banner.html]
+```html [components/banner.html]
 <div role="banner">
   <slot:title />
 
-  <content />
+  <yield />
 </div>
 ```
 
 We can use it like this:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-banner>
   <fill:title>
     <h2>This is the title</h2>
@@ -139,7 +171,7 @@ We can use it like this:
 
 The result will be:
 
-```xml [build_production/example.html]
+```html [build_production/example.html]
 <div role="banner">
   <h2>This is the title</h2>
 
@@ -151,13 +183,13 @@ The result will be:
 
 A slot may have default content, which will be used if it hasn't been filled.
 
-```xml [src/components/banner.html]
+```html [components/banner.html]
 <div role="banner">
   <h2>
     <slot:title>Default title</slot:title>
   </h2>
 
-  <content />
+  <yield />
 </div>
 ```
 
@@ -165,7 +197,7 @@ A slot may have default content, which will be used if it hasn't been filled.
 
 You may prepend content to a slot by using the `prepend` attribute on the `<fill>` tag.
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-banner>
   <fill:title prepend>Hello, </fill:title>
 
@@ -175,7 +207,7 @@ You may prepend content to a slot by using the `prepend` attribute on the `<fill
 
 With our default `slot:title` example, that would result in:
 
-```xml [build_production/example.html]
+```html [build_production/example.html]
 <div role="banner">
   <h2>Hello, Default title</h2>
 
@@ -187,7 +219,7 @@ With our default `slot:title` example, that would result in:
 
 You may also append content to a slot by using the `append` attribute on the `<fill>` tag.
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-banner>
   <fill:title append>, what a name!</fill:title>
 
@@ -197,7 +229,7 @@ You may also append content to a slot by using the `append` attribute on the `<f
 
 With our default `slot:title` example, that would result in:
 
-```xml [build_production/example.html]
+```html [build_production/example.html]
 <div role="banner">
   <h2>Default title, what a name!</h2>
 
@@ -211,12 +243,12 @@ You may check if a slot has been filled by using the `$slots` variable in a Comp
 
 For example, let's create a `<x-footer>` Component that will pull in another Component based on whether a `copyright` slot has been filled or not:
 
-```xml [src/components/footer.html]
+```html [components/footer.html]
 <div>
-  <content />
+  <yield />
 
   <if condition="$slots.copyright?.filled">
-    <!-- src/components/copyright.html -->
+    <!-- components/copyright.html -->
     <x-copyright />
   </if>
 </div>
@@ -230,16 +262,19 @@ For example, imagine you're coding a Shopify email template and need to add some
 
 You would modify your Layout to include a `stack` tag:
 
-```hbs [src/layouts/layout.html]
+```html [layouts/layout.html]
 <stack name="liquid-vars" />
 
 <!doctype html>
 <html>
 <head>
-  <style>{{{ page.css }}}</style>
+  <style>
+    @tailwind components;
+    @tailwind utilities;
+  </style>
 </head>
 <body>
-  <slot:template />
+  <yield />
 </body>
 ```
 
@@ -247,23 +282,19 @@ You would modify your Layout to include a `stack` tag:
 
 You may then push content to that stack from a Template:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <push name="liquid-vars">
   {% capture email_title %} Your shopping cart is waiting for you {% endcapture %}
 </push>
 
 <x-layout>
-  <fill:template>
-    <!-- your email HTML... -->
-  </fill:template>
+  <!-- your email HTML... -->
 </x-layout>
 ```
 
-<Alert>You may also use the `<push>` tag inside the `<fill:template>` tag.</Alert>
-
 Result:
 
-```liquid [build_production/example.html]
+```html [build_production/example.html]
 {% capture email_title %} Your shopping cart is waiting for you {% endcapture %}
 
 <!doctype html>
@@ -276,9 +307,9 @@ You may use the `once` attribute on the `<push>` tag to only push content once i
 
 For example, imagine this Card Component:
 
-```hbs [src/components/card.html]
+```html [components/card.html]
 <push name="head" once>
-  <style tailwindcss>
+  <style>
     .card {
       @apply bg-white rounded-lg shadow-md;
     }
@@ -292,23 +323,21 @@ For example, imagine this Card Component:
 
 Looping over this Component will only push that CSS once to the `head` stack:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-layout>
-  <fill:template>
-    <each loop="item in [1,2,3]">
-      <x-card />
-    </each>
-  </fill:template>
+  <each loop="item in [1,2,3]">
+    <x-card />
+  </each>
 </x-layout>
 ```
 
 ## Props
 
-Props are attributes that can be added to a Component. They can be used to pass data to the Component, or to configure its behavior.
+Props are attributes that can be added to a Component's tag. They can be used to pass data to the Component, or to configure its behavior.
 
 To use props in a Component, you need to define them first. This is done by adding a `<script>` tag with the `props` attribute:
 
-```hbs [src/components/alert.html]
+```hbs [components/alert.html]
 <script props>
   module.exports = {
     title: props.title || 'Default title'
@@ -320,33 +349,66 @@ To use props in a Component, you need to define them first. This is done by addi
 </div>
 ```
 
+<Alert type="warning">Only CommonJS syntax with `module.exports` is currently supported in Components.</Alert>
+
 Props that you pass to the Component will be available in the `<script>` tag as the `props` object. In this example we're getting the `title` prop from `props.title`, falling back to a default value if it's not provided.
 
 The script uses `module.exports` to export an object with props as keys. You can use these keys inside the Component through the curly braces syntax, as shown above.
 
 To pass the `title` prop to the Component, you would use the `title` attribute:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-alert title="Hello, world!" />
 ```
 
-#### Encoding props data
+### Reserved props
+
+The `src` prop is reserved when used on Components - it will always try to load a Component file at the path defined in the attribute value.
+
+So if you're trying to pass a `src` prop to a Component, you should use a different name:
+
+```hbs [components/alert.html] {3}
+<script props>
+  module.exports = {
+    imgSrc: props['img-src'] || 'example.jpg',
+  }
+</script>
+
+<img src="{{ imgSrc }}">
+```
+
+```html diff [emails/example.html] {2}
+- <x-alert src="image.jpg" />
++ <x-alert img-src="image.jpg" />
+```
+
+Alternatively, you may change the prop attribute name to something other than `src`:
+
+```js [config.js]
+export default {
+  components: {
+    attribute: 'href',
+  },
+}
+```
+
+### Encoding props data
 
 When passing a props object to a Component, you need to encode the values.
 
 For example, these won't work:
 
-```xml
+```html
 <x-alert props='{ "title": "Component's Title" }' />
 ```
 
-```xml
+```html
 <x-alert props='{ "title": "Component\'s Title" }' />
 ```
 
 But this will:
 
-```xml
+```html
 <x-alert props='{ "title": "Component&#39;s Title" }' />
 ```
 
@@ -356,7 +418,7 @@ By default, props are scoped to the Component and are not available to nested Co
 
 Consider the following two Components:
 
-```hbs [src/components/child.html]
+```hbs [components/child.html]
 <script props>
   module.exports = {
     title: props.title || 'Default child title'
@@ -368,7 +430,7 @@ Consider the following two Components:
 </div>
 ```
 
-```hbs [src/components/parent.html]
+```hbs [components/parent.html]
 <script props>
   module.exports = {
     title: props.title || 'Default parent title'
@@ -383,7 +445,7 @@ Consider the following two Components:
 
 If you pass the `title` to the `x-parent` Component:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-parent title="Hello, world!" />
 ```
 
@@ -402,7 +464,7 @@ As you can see, the `title` prop was not passed down to the `x-child` Component,
 
 To make sure a prop is passed down to all nested Components, use the `aware:` prefix:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <x-parent aware:title="Hello, world!" />
 ```
 
@@ -423,11 +485,11 @@ You may pass HTML attributes to a Component and they will be added to the root e
 
 If you want to change the element to which the attributes are added, you can use the `attributes` attribute:
 
-```jsx [src/components/example.html]
+```html [components/example.html]
 <table>
   <tr>
     <td attributes>
-      <content />
+      <yield />
     </td>
   </tr>
 </table>
@@ -437,7 +499,7 @@ If you want to change the element to which the attributes are added, you can use
 
 [Expressions](/docs/expressions) may be used in a Component's attribute:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 title: "Hello, world!"
 ---
@@ -464,7 +526,7 @@ If you need to safelist or even block certain HTML attributes that you pass to a
 
 When creating a Component, you have access to global `page` variables:
 
-```hbs [src/components/example.html]
+```hbs [components/example.html]
 <div>
   Building for: {{ page.env }}
 </div>

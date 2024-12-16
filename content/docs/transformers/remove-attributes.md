@@ -15,23 +15,25 @@ You may configure which attributes to remove through the `removeAttributes` arra
 
 ### Empty values
 
-To remove attributes with no values, specify the attribute name as a string:
+To remove attributes that have no value, specify the attribute name as a string:
 
 ```js [config.js]
-module.exports = {
-  removeAttributes: ['data-src']
+export default {
+  attributes: {
+    remove: ['data-src'],
+  }
 }
 ```
 
 Input:
 
-```xml [src/templates/example.html]
+```html [emails/example.html]
 <img src="example.jpg" data-src alt="">
 ```
 
 Output:
 
-```xml
+```html
 <img src="example.jpg" alt="">
 ```
 
@@ -42,22 +44,24 @@ Output:
 If you know the exact name and value, you may pass them to the array as an object:
 
 ```js [config.js]
-module.exports = {
-  removeAttributes: [
-    {name: 'id', value: 'test'}
-  ]
+export default {
+  attributes: {
+    remove: [
+      {name: 'id', value: 'test'},
+    ],
+  }
 }
 ```
 
 Input:
 
-```xml
+```html
 <div style="color: #000" id="test">Test</div>
 ```
 
 Output:
 
-```xml
+```html
 <div style="color: #000">Test</div>
 ```
 
@@ -68,23 +72,25 @@ You may also use a regular expression for the `value`.
 All attributes with a value matching the regex will be removed:
 
 ```js [config.js]
-module.exports = {
-  removeAttributes: [
-    {name: 'data-id', value: /\d/}
-  ]
+export default {
+  attributes: {
+    remove: [
+      {name: 'data-id', value: /\d/},
+    ],
+  }
 }
 ```
 
 Input:
 
-```xml
+```html
 <div data-id="test"></div>
 <div data-id="99"></div>
 ```
 
 Output:
 
-```xml
+```html
 <div data-id="test"></div>
 <div></div>
 ```
@@ -92,10 +98,11 @@ Output:
 ## API
 
 ```js [app.js]
-const {removeAttributes} = require('@maizzle/framework')
+import { removeAttributes } from '@maizzle/framework'
+
 const options = [
   'id',
-  {name: 'role', value: 'article'}
+  {name: 'role', value: 'article'},
 ]
 
 const html = await removeAttributes(`<div id="" style="" role="article"></div>`, options)

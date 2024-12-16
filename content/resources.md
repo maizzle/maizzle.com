@@ -34,6 +34,7 @@ Extensions that can enhance your Maizzle development workflow.
 
 These are some web apps that you can use with any HTML email, not just the ones that you create with Maizzle.
 
+- [Polypane](https://polypane.app/?ref=maizzle)* - a browser for developers with side-by-side viewports, quick inspect, accessibility tools, media emulations etc. - we use it to develop all our HTML emails 👌
 - [Parcel](https://parcel.io) - online code editor built for email development
 - [Can I email](https://www.caniemail.com/) - check email client support for HTML and CSS features
 - [`mailto:` Link Generator](https://parcel.io/tools/mailto) - generate `mailto:` links with pre-filled fields
@@ -49,3 +50,7 @@ These are some web apps that you can use with any HTML email, not just the ones 
 ## Presets
 
 - [tailwindcss-preset-email](https://github.com/maizzle/tailwindcss-preset-email) - a Tailwind CSS config preset that changes some utility classes to use values that are better supported in email clients. It also includes all of the plugins above and is used by default in Maizzle.
+
+---
+
+\* indicates an affiliate link, which means we get a small commission if you purchase something on that site after clicking it (it does not affect the price you pay).

@@ -56,7 +56,7 @@ AMP templates don't allow inline CSS, so `important` is set to `false`  in `tail
 
 For each component that you want to use in a template, you need to add its script to the `<head>`. We can push to the `head` stack from the Template:
 
-```xml [src/templates/accordion.html]
+```xml [emails/accordion.html]
 <x-main>
   <push name="head">
     <script async custom-element="amp-accordion" src="https://cdn.ampproject.org/v0/amp-accordion-0.1.js"></script>
