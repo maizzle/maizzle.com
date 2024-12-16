@@ -36,9 +36,9 @@ We'll use `@font-face` to register our custom font family - we can do this in th
 
 ### Add in Template
 
-Open `src/templates/transactional.html` and add this before the `<x-main>` tag:
+Open `emails/transactional.html` and add this before the `<x-main>` tag:
 
-```hbs [src/templates/transactional.html]
+```html [emails/transactional.html]
 <push name="head">
   <style>
     @font-face {
@@ -55,9 +55,9 @@ This adds a separate `<style>` tag in the compiled email HTML, right after the m
 
 ### Add in Layout
 
-If you prefer a single `<style>` tag in your email template, you can register the font in the Layout instead. Open `src/layouts/main.html` and update the `<style>` tag:
+If you prefer a single `<style>` tag in your email template, you can register the font in the Layout instead. Open `layouts/main.html` and update the `<style>` tag:
 
-```css [src/layouts/main.html] no-copy {2-7} diff
+```css [layouts/main.html] no-copy {2-7} diff
    <style>
 +     @font-face {
 +       font-family: 'Barosan';
@@ -66,7 +66,8 @@ If you prefer a single `<style>` tag in your email template, you can register th
 +       src: local('Barosan Regular'), local('Barosan-Regular'), url(https://example.com/fonts/barosan.woff2) format('woff2');
 +     }
 
-     {{{ page.css }}}
+     @tailwind components;
+     @tailwind utilities;
    </style>
 ```
 
@@ -81,7 +82,7 @@ Now that we're importing the font, we should register a Tailwind CSS utility for
 Open `tailwind.config.js`, scroll down to `fontFamily`, and add a new font:
 
 ```js [tailwind.config.js] {5} diff
-module.exports = {
+export default {
   theme: {
     extend: {
       fontFamily: {
@@ -118,7 +119,7 @@ Repeatedly writing that `font-barosan` class on all elements isn't just impracti
 
 `font-family` is inherited, which means you can just add the utility to the top element:
 
-```xml [src/templates/transactional.html]
+```xml [emails/transactional.html]
 <x-main>
   <table class="font-barosan">
     <!-- your email HTML... -->
@@ -133,7 +134,7 @@ We can work around that by making use of Tailwind's `screen` variants and an Out
 First, let's register a new `@media` query - we will call it `screen`:
 
 ```js [tailwind.config.js] {6} diff
-module.exports = {
+export default {
   theme: {
     screens: {
       sm: {max: '600px'},
@@ -146,7 +147,7 @@ module.exports = {
 
 We can now use it on the outermost<sup>1</sup> element:
 
-```xml [src/templates/transactional.html]
+```html [emails/transactional.html]
 <x-main>
   <table class="screen:font-barosan">
     <!-- your email HTML... -->
@@ -169,7 +170,7 @@ This will tuck the `font-family` away in an `@media` query:
 
 Since Outlook on Windows doesn't read `@media` queries, define a fallback<sup>2</sup> for it in the `<head>` of your Layout:
 
-```xml [src/layouts/main.html]
+```html [layouts/main.html]
 <!--[if mso]>
 <style>
   td,th,div,p,a,h1,h2,h3,h4,h5,h6 {font-family: "Segoe UI", sans-serif;}

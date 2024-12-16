@@ -13,18 +13,20 @@ This can be useful for:
 - not having to write required attributes all the time
 - automating email accessibility
 
-The `extraAttributes` key in your config defines which elements in your emails should receive which attributes with what values.
+The `attributes.add` key in your config defines which elements in your emails should receive which attributes with what values.
 
 ## Usage
 
 Here is how you would add a `role="article"` attribute to a `<div>`:
 
 ```js [config.js]
-module.exports = {
-  extraAttributes: {
-    div: {
-      role: 'article'
-    }
+export default {
+  attributes: {
+    add: {
+      div: {
+        role: 'article',
+      },
+    },
   }
 }
 ```
@@ -40,10 +42,10 @@ let attributes = {
   table: {
     cellpadding: 0,
     cellspacing: 0,
-    role: 'none'
+    role: 'none',
   },
   img: {
-    alt: ''
+    alt: '',
   }
 }
 ```
@@ -55,8 +57,10 @@ let attributes = {
 You may turn this off by setting `extraAttributes` to `false` in your config:
 
 ```js [config.js]
-module.exports = {
-  extraAttributes: false,
+export default {
+  attributes: {
+    add: false,
+  }
 }
 ```
 
@@ -65,20 +69,20 @@ module.exports = {
 Tag, class, id, and attribute selectors are supported:
 
 ```js [config.js]
-module.exports = {
+export default {
   extraAttributes: {
     div: {
-      id: 'new'
+      id: 'new',
     },
     '.test': {
-      editable: true
+      editable: true,
     },
     '#test': {
-      'data-foo': 'bar'
+      'data-foo': 'bar',
     },
     '[role]': {
-      'aria-roledescription': 'slide'
-    }
+      'aria-roledescription': 'slide',
+    },
   }
 }
 ```
@@ -88,14 +92,16 @@ module.exports = {
 Add multiple attributes to multiple elements in one go:
 
 ```js [config.js]
-module.exports = {
-  extraAttributes: {
-    'div, p': {
-      class: 'test'
+export default {
+  attributes: {
+    add: {
+      'div, p': {
+        class: 'test',
+      },
+      'div[role=alert], section.alert': {
+        class: 'alert',
+      },
     },
-    'div[role=alert], section.alert': {
-      class: 'alert'
-    }
   }
 }
 ```
@@ -107,7 +113,7 @@ Any Tailwind CSS classes that you add with this Transformer need to be added to 
 To do this, simply add the path to your `config.js` file to the `content` array:
 
 ```js [tailwind.config.js]
-module.exports = {
+export default {
   content: ['./config.js'],
 }
 ```
@@ -115,12 +121,13 @@ module.exports = {
 ## API
 
 ```js [app.js]
-const {applyExtraAttributes} = require('@maizzle/framework')
+import { addAttributes } from '@maizzle/framework'
+
 const options = {
   div: {
     role: 'article'
   }
 }
 
-const html = await applyExtraAttributes('<div></div>', options)
+const html = await addAttributes('<div></div>', options)
 ```

@@ -12,7 +12,7 @@ Maizzle can automatically append custom parameters to your URLs.
 To add the same parameters to all URLs in all Templates, use the environment config:
 
 ```js [config.js]
-module.exports = {
+export default {
   urlParameters: {
     _options: {
       tags: ['a'],
@@ -31,7 +31,7 @@ module.exports = {
 
 Of course, you may define URL parameters at a Template level, through Front Matter:
 
-```hbs [src/templates/example.html]
+```hbs [emails/example.html]
 ---
 title: "These URL params are unique to this template"
 urlParameters:
@@ -50,7 +50,7 @@ Configure the tags to process and other transformer options.
 
 ### tags
 
-Type: Array\
+Type: `String[]`\
 Default: `['a']`
 
 Array of tag names to process.
@@ -60,7 +60,7 @@ By default, only URLs inside [known attributes](#attributes) of tags in this arr
 You may use CSS selectors to select only certain attributes. For example, this will apply parameters only to anchors that include example.com in their `href` value:
 
 ```js [config.js]
-module.exports = {
+export default {
   urlParameters: {
     _options: {
       tags: ['a[href*="example.com"]'],
@@ -72,7 +72,7 @@ module.exports = {
 
 ### attributes
 
-Type: Array\
+Type: `String[]`\
 Default: `['src', 'href', 'poster', 'srcset', 'background']`
 
 Array of attributes to process for the given tags.
@@ -80,7 +80,7 @@ Array of attributes to process for the given tags.
 You may override this with your own list of attributes - the plugin will only process URLs in these attributes.
 
 ```js [config.js]
-module.exports = {
+export default {
   urlParameters: {
     _options: {
       tags: ['a', 'img'],
@@ -107,7 +107,7 @@ The result will be:
 
 ### strict
 
-Type: Boolean\
+Type: `Boolean`\
 Default: `true`
 
 By default, query parameters are appended only to valid URLs.
@@ -115,7 +115,7 @@ By default, query parameters are appended only to valid URLs.
 Disable strict mode to append parameters to any string:
 
 ```js [config.js]
-module.exports = {
+export default {
   urlParameters: {
     _options: {
       strict: false,
@@ -139,7 +139,7 @@ Result:
 
 ### qs
 
-Type: Object\
+Type: `Object`\
 Default: `undefined`
 
 Options to pass to the [query-string](https://github.com/sindresorhus/query-string#stringifyobject-options) library.
@@ -147,7 +147,7 @@ Options to pass to the [query-string](https://github.com/sindresorhus/query-stri
 For example, Maizzle disables encoding by default, but you can enable it:
 
 ```js [config.js]
-module.exports = {
+export default {
   urlParameters: {
     _options: {
       qs: {
@@ -168,7 +168,7 @@ https://example.com/?foo=%40Bar%40
 ## API
 
 ```js [app.js]
-const {addURLParams} = require('@maizzle/framework')
+import { addURLParams } from '@maizzle/framework'
 
 const html = await addURLParams('<a href="https://example.com">test</a>', {utm_source: 'maizzle'})
 ```

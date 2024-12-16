@@ -9,6 +9,8 @@ description: "Installing Maizzle on your machine and creating a new project."
 
 If you prefer to watch a video, check out the [Maizzle Series on Laracasts](https://laracasts.com/series/build-html-emails-with-maizzle).
 
+They were originally made for Maizzle 4.x, but the same concepts apply in v5 and only some configuration options are different (see our [upgrade guide](/docs/upgrade-guide)).
+
 ## Requirements
 
 You'll need [Node.js](https://nodejs.org/en/download/) installed first (comes with NPM included).
@@ -19,7 +21,7 @@ Use this command to check the version:
 node -v
 ```
 
-<Alert>Maizzle requires at least Node v14.0.0</Alert>
+<Alert>Maizzle requires at least Node v18.20.0</Alert>
 
 ## Create a project
 
@@ -75,9 +77,9 @@ Maizzle includes different commands for developing locally on your machine and f
 
 ### Local
 
-You can start a development server that watches for file changes and automatically refreshes a preview in the browser.
+You can start a development server that watches for file changes and automatically updates a preview in the browser.
 
-Start local email development by running the `dev` npm script:
+Do so by running the `dev` npm script in your project's root folder:
 
 ```sh
 npm run dev
@@ -85,7 +87,7 @@ npm run dev
 
 This will start the local server at _http://localhost:3000_
 
-Try making a change to a template in your editor and save it: the browser tab will refresh to show the updated HTML.
+Navigate to one of the Templates there, make a change to it in your editor and save it: your changes will be injected and the page will reflect them almost instantly.
 
 ### Production
 
@@ -97,7 +99,7 @@ npm run build
 
 This will use settings in your project's `config.production.js` to compile email templates that you can use with your <abbr title="Email Service Provider">ESP</abbr> or in your application.
 
-<Alert>These npm scripts use the Maizzle CLI, check out the [CLI Tool docs](/docs/cli) for more details.</Alert>
+<Alert>These NPM scripts use the Maizzle CLI, check out the [CLI Tool docs](/docs/cli) for more details.</Alert>
 
 ## Updating
 
@@ -109,12 +111,12 @@ Maizzle is listed as a dependency in your project's `package.json` file:
 }
 ```
 
-By default, the latest version will be installed. To use a specific version, first change the value to the desired release number:
+To use a specific version, first change the value to the desired release number:
 
 ```json [package.json] diff no-copy
 "dependencies": {
 -  "@maizzle/framework": "latest",
-+  "@maizzle/framework": "4.4.6",
++  "@maizzle/framework": "5.0.0-beta.38",
 }
 ```
 

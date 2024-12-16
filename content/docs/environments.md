@@ -19,23 +19,35 @@ We call these Environments.
 
 Maizzle comes with two config files, each enabling its own build command:
 
-| File | Command |
-| --- | --- |
-| `config.js` | `maizzle build`<br>`maizzle serve` |
+| File                   | Command                                                  |
+|------------------------|----------------------------------------------------------|
+| `config.js`            | `maizzle build`<br>`maizzle serve`                       |
 | `config.production.js` | `maizzle build production`<br>`maizzle serve production` |
 
 You probably noticed the link between <span class="font-mono text-sm">config.<strong>production</strong>.js</span> and <span class="font-mono text-sm">maizzle build <strong>production</strong></span> - the keyword in the config file name enables its own build command.
 
-<Alert>Remember, the `maizzle` executable will only be available if you installed the [CLI tool](/docs/cli) globally. Otherwise, use the npm scripts provided by the Starter in `package.json`.</Alert>
+<Alert>Remember, the `maizzle` executable will only be available if you installed the [CLI tool](/docs/cli) globally. Otherwise, use the NPM scripts provided by the Starter in `package.json`.</Alert>
 
-### maizzle.config.js
+### Config file naming
 
 You may use the `maizzle.config.js` configuration file naming pattern if you prefer:
 
-| File | Command |
-| --- | --- |
-| `maizzle.config.js` | `maizzle build`<br>`maizzle serve` |
+| File                           | Command                                                  |
+|--------------------------------|----------------------------------------------------------|
+| `maizzle.config.js`            | `maizzle build`<br>`maizzle serve`                       |
 | `maizzle.config.production.js` | `maizzle build production`<br>`maizzle serve production` |
+
+### CJS config
+
+If you need to use CommonJS with `module.exports` and `require()` in your Maizzle config file, you'll need to change the file extension to `.cjs`:
+
+| ESM                            | CJS                             |
+|--------------------------------|---------------------------------|
+| `config.js`                    | `config.cjs`                    |
+| `config.production.js`         | `config.production.cjs`         |
+| `maizzle.config.js`            | `maizzle.config.cjs`            |
+| `maizzle.config.production.js` | `maizzle.config.production.cjs` |
+
 
 ### Data merging
 
@@ -44,6 +56,7 @@ Any new Environment configuration file that you create will be merged _on top_ o
 With the example above, when running the `maizzle build production` command, `config.production.js` will be merged on top of the base `config.js`: if the same key is present in both files, the value from `config.production.js` will be used.
 
 <Alert>When creating a new Environment config file you only need to specify the config values that will be different from those (or don't exist) in `config.js`.</Alert>
+<Alert type="warning">`build.content` keys are not merged, so that each Environment sources its own files to compile.</Alert>
 
 ## Environment builds
 
@@ -61,16 +74,14 @@ The Starter's `config.production.js` is configured to output production-ready em
 
 You may create as many Environments as you need, and name them as you like.
 
-For example, you might create a config file named `config.shopify.js` that you would use to build only the templates from the `src/templates/shopify` folder:
+For example, you might create a config file named `config.shopify.js` that you would use to build only the templates from the `emails/shopify` folder:
 
 ```js [config.shopify.js]
-module.exports = {
+export default {
   build: {
-    templates: {
-      source: 'src/templates/shopify',
-      destination: {
-        path: 'build_shopify'
-      }
+    content: ['emails/shopify/**/*.html'],
+    output: {
+      path: 'build_shopify'
     }
   }
 }
@@ -82,26 +93,30 @@ The build command for it would be:
 maizzle build shopify
 ```
 
+Or, if you're using NPM scripts and didn't set up a script for this Environment:
+
+```sh
+npm run build -- shopify
+```
+
+
 ## Config variables
 
 Maizzle exposes a `page` object that you can access through [expressions](/docs/expressions) in your HTML.
 
-This object contains:
-
-- your Template config (`config.[env].js` merged with Front Matter variables)
-- the compiled Tailwind CSS (`page.css`)
+This object contains the computed Template config, which is based on `config.[env].js` merged with Front Matter variables from the Template currently being processed.
 
 This makes it possible to define variables in `config.js`:
 
 ```js [config.js]
-module.exports = {
+export default {
   doctype: 'html'
 }
 ```
 
 ... and use them in your markup:
 
-```xml [src/templates/example.html]
+```hbs [emails/example.html]
 <x-main>
   <p>doctype is: {{ page.doctype }}</p>
 </x-main>
@@ -113,18 +128,20 @@ The current Environment name is globally available under the `page.env` variable
 
 You can output content in your emails based on the Environment that you're building for:
 
-```xml [src/templates/example.html]
+```xml [emails/example.html]
 <if condition="page.env === 'production'">
   This will show only when running `maizzle build production`
 </if>
 ```
 
+<Alert>You may also use the `<env:production>` tag, [see the docs](/docs/tags#env).</Alert>
+
 ### Top-level variables
 
-If you need to define variables outside of the `page` object, you can use the `locals` key in your `config.js`:
+You may define 'local' variables that can be accessed outside of the `page` object:
 
 ```js [config.js]
-module.exports = {
+export default {
   locals: {
     company: {
       name: 'Spacely Space Sprockets, Inc.'
@@ -133,11 +150,54 @@ module.exports = {
 }
 ```
 
-Now, you can access `company` properties directly:
+These local variables can be accessed without `page`:
 
-```js [src/templates/example.html] diff
+```diff [emails/example.html] diff {2}
 - Company name is {{ page.company.name }}
 + Company name is {{ company.name }}
 ```
 
-<Alert>Maizzle does not allow overwriting the `page` object through `locals`.</Alert>
+<Alert type="warning">Maizzle does not allow overwriting the `page` object through `locals`.</Alert>
+
+## Top-level await
+
+You may use top-level `await` in your `config.js` to fetch data from an API:
+
+```js [config.js]
+const data = await fetch('https://jsonplaceholder.typicode.com/todos').then(res => res.json())
+
+/** @type {import('@maizzle/framework').Config} */
+export default {
+  todos: data,
+  build: {
+    /* ... */
+  },
+}
+```
+
+## Environment attribute values
+
+Sometimes you may need to define different values for attributes based on the Environment you're building for.
+
+While you could use long, verbose ternaries in expressions to do so:
+
+```xml [emails/example.html]
+<x-main>
+  <a href="{{ page.env === 'production' ? 'https://example.com' : 'https://dev.example.com' }}">Link</a>
+</x-main>
+```
+
+... Maizzle also supports Environment-based attributes:
+
+```xml [emails/example.html]
+<x-main>
+  <a
+    href="https://dev.example.com"
+    href-production="https://example.com"
+  >Link</a>
+</x-main>
+```
+
+The value of the `href-production` attribute will be used for the `href` attribute when doing `npm run build` or `maizzle build production`.
+
+The `href-production` attribute itself will then be removed from the output.

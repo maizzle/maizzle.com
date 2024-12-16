@@ -51,7 +51,7 @@ Once it finishes installing dependencies, open the project folder in your favori
 
 ### Structure
 
-We'll be organizing our templates into folders inside `src/templates`:
+We'll be organizing our templates into folders inside `templates`:
 
 ```
 src
@@ -70,9 +70,9 @@ This will not only make it easier to create the .zip archive, but this way we ca
 
 For this written guide, we'll be using a simplified template with a few images. See the [Mailchimp Starter](https://github.com/maizzle/starter-mailchimp) for a more extensive example.
 
-Create `src/templates/template-1/index.html` and paste in the following code:
+Create `emails/template-1/index.html` and paste in the following code:
 
-```xml [src/templates/template-1/index.html]
+```hbs [emails/template-1/index.html]
 ---
 title: "Example template 1"
 ---
@@ -126,34 +126,34 @@ Our strategy is as follows:
 
 For now, update your `config.production.js` to look like this:
 
-```js [config.production.js] {1,6}
+```js [config.production.js] {1,5}
 const queue = []
 
-module.exports = {
+export default {
   build: {
-    templates: {
-      assets: false,
-      destination: {
-        path: 'build_production',
-      },
+    static: false,
+    output: {
+      path: 'dist',
     },
   },
+  css: {
+    inline: true,
+    purge: true,
+    shorthand: true,
+  },
   prettify: true,
-  inlineCSS: true,
-  removeUnusedCSS: true,
-  shorthandCSS: true,
 ```
 
-We're setting `assets: false` because we don't want Maizzle to copy the global `src/images` folder to the `dist` folder. We'll handle any global images ourselves.
+We're setting `static: false` because we don't want Maizzle to copy the global `images` folder to the `dist` folder. We'll handle any global images ourselves.
 
 ## Get image paths from HTML
 
 We'll need a way of creating a list of images that are used in a template.
 
-Create `src/utils/getImagePaths.js` and paste in the following code:
+Create `utils/getImagePaths.js` and paste in the following code:
 
-```js [src/utils/getImagePaths.js]
-module.exports = htmlString => {
+```js [utils/getImagePaths.js]
+export default function htmlString() {
   const imagePaths = []
   const regexSrcAttribute = /src=["'](.*?)["']/gi
   const regexBackgroundAttribute = /background=["'](.*?)["']/gi
@@ -253,35 +253,33 @@ Let's use the `afterTransformers` event to push information about each template 
 Modify your `config.production.js` to look like this:
 
 ```js [config.production.js] {18-29}
-const getImagePathsFromHTML = require('./src/utils/getImagePaths')
+import getImagePathsFromHTML from './utils/getImagePaths.js'
 
 const queue = []
 
-module.exports = {
+export default {
   build: {
-    templates: {
-      assets: false,
-      destination: {
-        path: 'build_production',
-      },
+    static: false,
+    output: {
+      path: 'dist',
     },
   },
+  css: {
+    inline: true,
+    purge: true,
+    shorthand: true,
+  },
   prettify: true,
-  inlineCSS: true,
-  removeUnusedCSS: true,
-  shorthandCSS: true,
-  events: {
-    afterTransformers(html, config) {
-      // Get image paths from HTML
-      const imagePaths = getImagePathsFromHTML(html)
+  afterTransformers(html, config) {
+    // Get image paths from HTML
+    const imagePaths = getImagePathsFromHTML(html)
 
-      queue.push({
-        images: imagePaths,
-        ...config.build.current,
-      })
+    queue.push({
+      images: imagePaths,
+      ...config.build.current,
+    })
 
-      return html
-    },
+    return html
   },
 ```
 
@@ -293,91 +291,89 @@ We'll use the `afterBuild` event for this, which is triggered after all template
 
 Modify your `config.production.js` to look like this:
 
-```js [config.production.js] {1-4,34-77}
-const fs = require('fs')
-const path = require('path')
-const archiver = require('archiver')
-const baseConfig = require('./config')
-const getImagePathsFromHTML = require('./src/utils/getImagePaths')
+```js [config.production.js] {1-4,33-77}
+import fs from 'node:fs'
+import path from 'node:path'
+import archiver from 'archiver'
+import baseConfig from './config.js'
+import getImagePathsFromHTML from './utils/getImagePaths.js'
 
 const queue = []
 
-module.exports = {
+export default {
   build: {
-    templates: {
-      assets: false,
-      destination: {
-        path: 'build_production',
-      },
+    static: false,
+    output: {
+      path: 'dist',
     },
   },
+  css: {
+    inline: true,
+    purge: true,
+    shorthand: true,
+  },
   prettify: true,
-  inlineCSS: true,
-  removeUnusedCSS: true,
-  shorthandCSS: true,
-  events: {
-    afterTransformers(html, config) {
-      // Get image paths from HTML
-      const imagePaths = getImagePathsFromHTML(html)
+  afterTransformers(html, config) {
+    // Get image paths from HTML
+    const imagePaths = getImagePathsFromHTML(html)
 
-      queue.push({
-        images: imagePaths,
-        ...config.build.current,
-      })
+    queue.push({
+      images: imagePaths,
+      ...config.build.current,
+    })
 
-      return html
-    },
-    afterBuild() {
-      // Process each item in the queue
-      for (const {path: template, images} of queue) {
-        // Read template's directory
-        fs.readdir(template.dir, (err, files) => {
-          // Exit early if there's an error
-          if (err) throw err
+    return html
+  },
+  afterBuild() {
+    // Process each item in the queue
+    for (const {path: template, images} of queue) {
+      // Read template's directory
+      fs.readdir(template.dir, (err, files) => {
+        // Exit early if there's an error
+        if (err) throw err
 
-          // Create archive
-          const output = fs.createWriteStream(`${template.dir}/${template.name}.zip`)
-          const archive = archiver('zip', {
-            zlib: {
-              level: 9 // Sets the compression level
-            }
-          })
-
-          archive.on('error', function(err) {
-            throw err
-          })
-
-          // Pipe archive data to the file
-          archive.pipe(output)
-
-          // Add files from template's directory to archive
-          files.forEach(file => {
-            archive.file(`${template.dir}/${file}`, { name: file })
-          })
-
-          // Get a list of files found in `src/images` that have been used in the template
-          const assetsSource = baseConfig.build.templates.assets.source
-          const globalImages = fs.readdirSync(assetsSource)
-            .filter(file => images.includes(path.basename(file)))
-            .map(file => path.join(assetsSource, file))
-
-          // Add global images to archive
-          globalImages.forEach(image => {
-            archive.file(image, { name: path.basename(image) })
-          })
-
-          // Finalize the archive
-          archive.finalize()
+        // Create archive
+        const output = fs.createWriteStream(`${template.dir}/${template.name}.zip`)
+        const archive = archiver('zip', {
+          zlib: {
+            level: 9 // Sets the compression level
+          }
         })
-      }
-    },
+
+        archive.on('error', function(err) {
+          throw err
+        })
+
+        // Pipe archive data to the file
+        archive.pipe(output)
+
+        // Add files from template's directory to archive
+        files.forEach(file => {
+          archive.file(`${template.dir}/${file}`, { name: file })
+        })
+
+        // Get a list of files found in `images` that have been used in the template
+        const assetsSource = baseConfig.build.templates.assets.source
+        const globalImages = fs.readdirSync(assetsSource)
+          .filter(file => images.includes(path.basename(file)))
+          .map(file => path.join(assetsSource, file))
+
+        // Add global images to archive
+        globalImages.forEach(image => {
+          archive.file(image, { name: path.basename(image) })
+        })
+
+        // Finalize the archive
+        archive.finalize()
+      })
+    }
   },
 }
 ```
 
 ## Build the templates
 
-Running the `npm run build` command will now create a .zip archive for each template in the `build_production` directory.
+Running the `npm run build` command will now create a .zip archive for each template in the `dist` directory.
 
 The archive file will have the same name as the template, so you'll see something like this:
 

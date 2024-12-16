@@ -11,19 +11,19 @@ Shorthand syntax for CSS properties means less code, so fewer bytes to send over
 
 Something like this:
 
-```xml
+```html
 <p class="mx-2 my-4">Example</p>
 ```
 
 ... instead of becoming this:
 
-```xml
+```html
 <p style="margin-left: 2px; margin-right: 2px; margin-top: 4px; margin-bottom: 4px;">Example</p>
 ```
 
 ... is rewritten to this:
 
-```xml
+```html
 <p style="margin: 4px 2px;">Example</p>
 ```
 
@@ -34,16 +34,22 @@ By default, `shorthandCSS` is disabled.
 Enable it for all tags:
 
 ```js [config.js]
-module.exports = {
-  shorthandCSS: true,
+export default {
+  css: {
+    shorthand: true,
+  }
 }
 ```
 
 Enable it only for a selection of tags:
 
 ```js [config.js]
-module.exports = {
-  shorthandCSS: ['td', 'div'],
+export default {
+  css: {
+    shorthand: {
+      tags: ['td', 'div'],
+    }
+  }
 }
 ```
 
@@ -52,15 +58,17 @@ module.exports = {
 Set it to `false` or simply omit it:
 
 ```js [config.js]
-module.exports = {
-  shorthandCSS: false,
+export default {
+  css: {
+    shorthand: false,
+  }
 }
 ```
 
 ## API
 
 ```js [app.js]
-const {shorthandCSS} = require('@maizzle/framework')
+import { shorthandCSS } from '@maizzle/framework'
 
 const html = await shorthandCSS('html string')
 ```

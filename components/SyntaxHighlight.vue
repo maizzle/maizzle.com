@@ -5,7 +5,7 @@
 <script setup>
 import { getHighlighter, renderToHtml, toShikiTheme } from 'shiki-es'
 import stripIndent from 'strip-indent'
-import vsCodeTheme from '@/assets/shiki/themes/github-light.json'
+import vsCodeTheme from '@/assets/shiki/themes/tailwind.json'
 
 const props = defineProps({
   code: {

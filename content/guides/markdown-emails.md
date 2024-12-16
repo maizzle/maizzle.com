@@ -28,7 +28,7 @@ Once it finishes installing dependencies, open the project folder in your favori
 
 ### Structure
 
-We'll be using the `src/content` folder to store our Markdown files:
+We'll be using the `content` folder to store our Markdown files:
 
 ```
 src
@@ -38,9 +38,9 @@ src
     └── ...
 ```
 
-<Alert>You can remove the `src/templates` directory, we won't need it.</Alert>
+<Alert>You can remove the `emails` directory, we won't need it.</Alert>
 
-Next, create `src/content/newsletter-1.md` and add some markdown to it:
+Next, create `content/newsletter-1.md` and add some markdown to it:
 
 ```md [newsletter-1.md]
 # Hello world
@@ -50,12 +50,12 @@ This is the first newsletter.
 
 ### Layout
 
-Since we just want to write Markdown and not have to deal with any tables and such, we need to update `src/layouts/main.html` to contain the entire HTML boilerplate.
+Since we just want to write Markdown and not have to deal with any tables and such, we need to update `layouts/main.html` to contain the entire HTML boilerplate.
 
 Replace its contents with the following:
 
-```hbs [src/layouts/main.html]
-<!DOCTYPE {{{ page.doctype || 'html' }}}>
+```hbs [layouts/main.html]
+<!doctype {{{ page.doctype || 'html' }}}>
 <html lang="{{ page.language || 'en' }}" xmlns:v="urn:schemas-microsoft-com:vml">
 <head>
   <meta charset="{{ page.charset || 'utf-8' }}">
@@ -78,7 +78,8 @@ Replace its contents with the following:
     <title>{{{ page.title }}}</title>
   </if>
   <style>
-    {{{ page.css }}}
+    @tailwind utilities;
+    @tailwind components;
   </style>
   <stack name="head" />
 </head>
@@ -103,8 +104,8 @@ Replace its contents with the following:
         <td class="w-[600px] max-w-full bg-white rounded-xl">
           <table class="w-full">
             <tr>
-              <td class="px-8 sm:px-4 text-base leading-6 text-slate-700">
-                <content />
+              <td class="p-0 px-8 sm:px-4 text-base/6 text-slate-700">
+                <yield />
               </td>
             </tr>
           </table>
@@ -135,13 +136,10 @@ Since we're not using the default setup anymore, we need to tell Maizzle where t
 
 Update `build.templates` to use .md files from the `content` folder:
 
-```js [config.js] {4-5}
-module.exports = {
+```js [config.js] {3}
+export default {
   build: {
-    templates: {
-      source: 'src/content',
-      filetypes: ['md'],
-    },
+    content: ['content/**/*.md'],
   },
 }
 ```
@@ -155,18 +153,16 @@ Maizzle doesn't know what layout to use or that the content of our .md files is 
 We can use the [`beforeRender` event](/docs/events#beforerender) for this:
 
 ```js [config.js]
-const fm = require('front-matter')
+import fm from 'front-matter'
 
-module.exports = {
-  events: {
-    beforeRender(html) {
-      const { body } = fm(html)
+export default {
+  beforeRender(html) {
+    const { body } = fm(html)
 
-      return `
-        <x-main>
-          <md>${body}</md>
-        </x-main>`
-    }
+    return `
+      <x-main>
+        <md>${body}</md>
+      </x-main>`
   },
 }
 ```
@@ -181,9 +177,9 @@ Run `npm run build` again and you'll see that the files in the `build_production
 
 ## Styling
 
-Let's create a `src/css/markdown.css` file so we can add some global styles for our Markdown content:
+Let's create a `css/markdown.css` file so we can add some global styles for our Markdown content:
 
-```postcss [src/css/markdown.css]
+```css [css/markdown.css]
 h1 {
   @apply text-3xl leading-9;
 }
@@ -198,16 +194,14 @@ img {
 }
 ```
 
-Make sure to import this file in `src/css/tailwind.css`:
+Make sure to import this file in the `<style>` tag:
 
-```postcss [src/css/tailwind.css]
-@import "tailwindcss/components";
-
-/* Our markdown.css file */
-@import "markdown";
-
-@import "tailwindcss/utilities";
-@import "utilities";
+```html [layouts/main.html]
+<style>
+  @import "css/markdown.css";
+  @import 'tailwindcss/components';
+  @import 'tailwindcss/utilities';
+</style>
 ```
 
 Run `npm run build` again and you'll see that the styles are now applied:
@@ -225,12 +219,14 @@ To do this, we'll use the `markdown-it-attrs` plugin, which allows us to add att
 
 Update `config.js` to have Maizzle use the plugin:
 
-```js [config.js] {5} diff
-module.exports = {
+```js [config.js] {7} diff
+import mdAttrs from 'markdown-it-attrs'
+
+export default {
   markdown: {
     plugins: [
       {
-+        plugin: require('markdown-it-attrs'),
++        plugin: mdAttrs,
       }
     ]
   },
@@ -239,7 +235,7 @@ module.exports = {
 
 You can now add Tailwind CSS classes to your Markdown elements by adding them inside curly braces after the content:
 
-```md [src/content/newsletter-1.md]
+```md [content/newsletter-1.md]
 ---
 title: "Edition #1"
 ---
@@ -279,26 +275,25 @@ npm install shiki
 Next, define a custom `highlight` method for `markdown-it`. Add it in the `beforeCreate` event so that the highlighter is retrieved once, before templates are compiled:
 
 ```js [config.js]
-const shiki = require('shiki')
+import { createHighlighter } from 'shiki'
 
-module.exports = {
-  events: {
-    async beforeCreate(config) {
-      const highlighter = await shiki.getHighlighter({
-        theme: 'nord',
-      })
+export default {
+  async beforeCreate(config) {
+    const highlighter = await createHighlighter({
+      themes: ['nord'],
+      langs: ['html'],
+    })
 
-      config = Object.assign(config, {
-        markdown: {
-          markdownit: {
-            highlight: (code, lang) => {
-              lang = lang || 'html'
-              return highlighter.codeToHtml(code, { lang })
-            }
+    config = Object.assign(config, {
+      markdown: {
+        markdownit: {
+          highlight: (code, lang) => {
+            lang = lang || 'html'
+            return highlighter.codeToHtml(code, { lang, theme: 'nord' })
           }
         }
-      })
-    },
+      }
+    })
   },
 }
 ```
@@ -309,7 +304,7 @@ Now all your markdown code blocks will be highlighted with the Nord theme.
 
 You can use [expressions](/docs/templates#expressions) in Markdown files just as you would in any Maizzle template:
 
-```hbs [src/content/newsletter-1.md]
+```hbs [content/newsletter-1.md]
 ---
 title: "Edition #1"
 ---
@@ -325,14 +320,14 @@ You can also import Maizzle components in your Markdown files.
 
 For example, let's create an `<x-alert>` component:
 
-```xml [src/components/alert.html]
+```html [components/alert.html]
 <table class="w-full mb-8">
   <tr>
     <td
       attributes
       class="py-2 px-4 bg-blue-100 text-blue-600 rounded"
     >
-      <content />
+      <yield />
     </td>
   </tr>
 </table>
@@ -342,7 +337,7 @@ Notice the `attributes` attribute - this indicates that any attributes passed to
 
 We can use it like this:
 
-```hbs [src/content/newsletter-1.md]
+```hbs [content/newsletter-1.md]
 ---
 title: "Edition #1"
 ---
@@ -360,7 +355,7 @@ This is the first newsletter.
 
 To use Markdown inside a component, add an empty line before and after the content that you pass inside:
 
-```hbs [src/content/newsletter-1.md]
+```hbs [content/newsletter-1.md]
 ---
 title: "Edition #1"
 ---
@@ -374,16 +369,16 @@ title: "Edition #1"
 </x-alert>
 ```
 
-To prevent an issue with code indentation in `markdown-it` that would result in `<pre>` tags being added to the rendered HTML, simply don't indent the closing tags after `</content>`. A bit of a workaround, but it works:
+To prevent an issue with code indentation in `markdown-it` that would result in `<pre>` tags being added to the rendered HTML, simply don't indent the closing tags after `<yield />`. A bit of a workaround, but it works:
 
-```xml [src/components/alert.html]
+```html [components/alert.html]
 <table class="w-full mb-8">
   <tr>
     <td
       attributes
       class="py-2 px-4 bg-blue-100 text-blue-600 rounded"
     >
-      <content />
+      <yield />
 </td>
 </tr>
 </table>
@@ -392,16 +387,14 @@ To prevent an issue with code indentation in `markdown-it` that would result in 
 Alternatively, you may use the `prettify` transformer to remove the indentation:
 
 ```js [config.js]
-const {prettify} = require('@maizzle/framework')
+import { prettify } from '@maizzle/framework'
 
-module.exports = {
-  events: {
-    afterRender(html) {
-      return prettify(html, {
-        indent_size: 0,
-      })
-    }
-  },
+export default {
+  afterRender(html) {
+    return prettify(html, {
+      indent_size: 0,
+    })
+  }
 }
 ```
 
@@ -409,33 +402,31 @@ module.exports = {
 
 You may need to use different designs for your newsletters. We can use Front Matter to do this, by defining a custom layout name for each Markdown file to use.
 
-Go ahead and create `src/layouts/secondary.html` based on `main.html`.
+Go ahead and create `layouts/secondary.html` based on `main.html`.
 
 For the purpose of this tutorial, we'll just change the body background color to differentiate it from the `main.html` layout: replace both occurrences of `bg-slate-100` with `bg-indigo-200`.
 
 Next, update the `beforeRender` event in `config.js` to use the layout name from Front Matter:
 
 ```js [config.js]
-const fm = require('front-matter')
+import fm from 'front-matter'
 
-module.exports = {
-  events: {
-    beforeRender(html) {
-      const { attributes, body } = fm(html)
-      const layout = attributes.layout || 'main'
+export default {
+  beforeRender(html) {
+    const { attributes, body } = fm(html)
+    const layout = attributes.layout || 'main'
 
-      return `
-        <x-${layout}>
-          <md>${body}</md>
-        </x-${layout}>`
-    }
-  },
+    return `
+      <x-${layout}>
+        <md>${body}</md>
+      </x-${layout}>`
+  }
 }
 ```
 
 You can now specify a custom layout for each Markdown file, via Front Matter:
 
-```md [src/content/newsletter-1.md]
+```md [content/newsletter-1.md]
 ---
 layout: secondary
 ---
@@ -457,7 +448,7 @@ While this is fine in browsers and modern email clients because you can control 
 
 To fix this, we can use `markdown-it-attrs` to manually add our image width in Markdown:
 
-```md [src/content/newsletter-1.md]
+```md [content/newsletter-1.md]
 # Hello world
 
 Welcome to our first newsletter.
