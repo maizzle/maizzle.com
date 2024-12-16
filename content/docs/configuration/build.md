@@ -26,6 +26,30 @@ Define the source directories where Maizzle should look for Templates to compile
 
 This is an array of glob patterns, similar to how content sources are configured in Tailwind CSS. See [fast-glob](https://github.com/mrmlnc/fast-glob) for how to write glob patterns.
 
+The `content` key is unique to each config file - unlike other options in your config, it is not merged when using multiple Environments. This way, we avoid processing unwanted Templates when building for a specific Environment.
+
+To illustrate this, imagine this is your `config.js` file:
+
+```js [config.js]
+export default {
+  build: {
+    content: ['emails/**/*.html'],
+  }
+}
+```
+
+... and this is your `config.production.js` file:
+
+```js [config.production.js]
+export default {
+  build: {
+    content: ['emails/transactional/**/*.html'],
+  }
+}
+```
+
+When running `maizzle build production`, only the Templates from the `emails/transactional` folder will be compiled, no matter if the `emails` folder contains other Templates.
+
 ### File types
 
 Specify which file extensions should be considered when looking for Templates to compile. For example, to include both `.html` and `.blade.php` files:

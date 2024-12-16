@@ -56,6 +56,7 @@ Any new Environment configuration file that you create will be merged _on top_ o
 With the example above, when running the `maizzle build production` command, `config.production.js` will be merged on top of the base `config.js`: if the same key is present in both files, the value from `config.production.js` will be used.
 
 <Alert>When creating a new Environment config file you only need to specify the config values that will be different from those (or don't exist) in `config.js`.</Alert>
+<Alert type="warning">`build.content` keys are not merged, so that each Environment sources its own files to compile.</Alert>
 
 ## Environment builds
 
