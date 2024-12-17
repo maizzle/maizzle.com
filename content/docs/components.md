@@ -256,7 +256,7 @@ For example, let's create a `<x-footer>` Component that will pull in another Com
 
 ## Stacks
 
-You may push content to named stacks that can be rendered in other Components.
+You may push content to named stacks that can be rendered in other Components. This concept is similar to Blade's `stack` and `push` directives, also known as teleporting in frameworks like Vue.js.
 
 For example, imagine you're coding a Shopify email template and need to add some Liquid code at the very top of the HTML, before the `doctype`.
 
