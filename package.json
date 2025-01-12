@@ -20,12 +20,12 @@
     "sharp": "^0.33.4",
     "shiki-es": "^0.14.0",
     "strip-indent": "^4.0.0",
-    "tailwindcss": "^3.4.4"
+    "tailwindcss": "^3.4.17"
   },
   "dependencies": {
     "@docsearch/css": "^3.6.0",
     "@docsearch/js": "^3.6.0",
-    "@vueuse/components": "^10.11.0",
+    "@vueuse/components": "^12.3.0",
     "scroll-to-element": "^2.0.3",
     "typeit": "^8.8.3"
   }
