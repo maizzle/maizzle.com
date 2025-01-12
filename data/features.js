@@ -112,6 +112,6 @@ export default ([
   {
     title: '⚡4email',
     path: '/guides/amp-email',
-    description: 'Code interactive AMP emails, with realtime information and inline actions. User our AMP Starter or code your own.'
+    description: 'Code interactive AMP emails, with realtime information and inline actions. Use our AMP Starter or code your own.'
   }
 ])
