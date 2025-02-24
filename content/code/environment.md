@@ -10,7 +10,7 @@ export default {
     },
     summary: true,
     static: {
-      source: 'images',
+      source: ['images/**/*.*'],
       destination: 'images',
     }
   }
