@@ -130,7 +130,7 @@
               aria-haspopup="true"
               @click="mobileVersionDropdownOpen = !mobileVersionDropdownOpen"
             >
-              v5.0.0-beta
+              {{ latestRelease }}
               <svg class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
               </svg>
@@ -145,20 +145,14 @@
             tabindex="-1"
           >
             <div class="py-1" role="none">
-              <a href="https://next.maizzle.com/docs/installation" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
-                v5.0.0-beta
-              </a>
               <NuxtLink
                 to="/docs/installation"
                 class="block px-4 py-2 bg-slate-100" role="menuitem" tabindex="-1"
               >
-                v5.0.0-beta3
+                {{ latestRelease }}
               </NuxtLink>
-              <a href="https://maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
-                v4.8.8
-              </a>
-              <a href="https://v43x.maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
-                v4.3.1
+              <a href="https://v4.maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
+                v4.8.9
               </a>
               <a href="https://v3.maizzle.com/" class="block px-4 py-2 hover:bg-slate-100" role="menuitem" tabindex="-1">
                 v3.7.3
