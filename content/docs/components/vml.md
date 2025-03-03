@@ -122,6 +122,13 @@ Replicates the CSS `background-position` property.
 />
 ```
 
+TL;DR:
+
+- `origin="-0.5,-0.5" position="-0.5,-0.5"` equals `top left`
+- `origin="0.5,-0.5" position="0.5,-0.5"` equals `top right`
+- `origin="-0.5,0.5" position="-0.5,0.5"` equals `bottom left`
+- `origin="0.5,0.5" position="0.5,0.5"` equals `bottom right`
+
 Read more [here](https://www.hteumeuleu.com/2021/background-properties-in-vml/#background-position).
 
 ### position
