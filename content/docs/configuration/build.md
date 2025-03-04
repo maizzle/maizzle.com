@@ -113,7 +113,7 @@ export default {
 ## output
 
 Type: `Object`\
-Default: `{ path: 'build_[env]', extension: 'html' }`
+Default: `{ path: 'build_[env]', extension: 'html', from: ['emails'] }`
 
 Define the output path for compiled Templates, and what file extension they should use.
 
@@ -157,6 +157,41 @@ export default {
 The compiled Templates will be output as `build_laravel/*.blade.php`.
 
 By default, Maizzle will use the extension of the source file.
+
+### from
+
+Type: `String[]`\
+Default: `['emails']`
+
+Default directories to unwrap when outputting compiled Templates.
+
+For example, if you have a Template located at `emails/welcome.html` in your Maizzle project, by default the compiled file will be output as `build_[env]/welcome.html` - the `emails` part of the path is discarded.
+
+If you have multiple sources, you can specify additional directories to unwrap:
+
+```js [config.js]
+export default {
+  build: {
+    content: [
+      'emails/**/*.html',
+      'amp-templates/**/*.html'
+    ],
+    output: {
+      from: ['emails', 'amp-templates']
+    }
+  }
+}
+```
+
+<alert>You must specify all directories to unwrap when using `output.from` and multiple `build.content` source paths, as this option overwrites the default `[emails]` value.</alert>
+
+In this case, the compiled files will all be output at the root of the `build_[env]` directory.
+
+#### \`from\` caveat
+
+Templates in Maizzle are processed in the order their source paths are defined in `build.content`, which means files with identical names will be overwritten if they have the same output path as a result of their parent directory being unwrapped.
+
+In the `emails` and `amp-templates` example above, if both directories contain a `welcome.html` file, the content of the one in the `amp-templates` directory will overwrite that of the one in the `emails` directory.
 
 ## permalink
 
