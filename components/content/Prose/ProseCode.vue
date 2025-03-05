@@ -79,11 +79,11 @@ const props = defineProps({
   },
 })
 
-const hideCopy = computed(() => props.meta ? props.meta.split(' ').includes('no-copy') : false)
+const hideCopy = computed(() => props.meta && props.meta.split(' ').includes('no-copy'))
 
-const isExampleFrame = computed(() => props.meta ? props.meta.split(' ').includes('example') : false)
+const isExampleFrame = computed(() => props.meta && props.meta.split(' ').includes('example'))
 
-const noRoot = computed(() => props.meta ? props.meta.split(' ').includes('no-root') : false)
+const noRoot = computed(() => props.meta && props.meta.split(' ').includes('no-root'))
 
 const frameType = computed(() => {
   if (['sh', 'bash', 'shell'].includes(props.language)) return 'terminal'
@@ -91,7 +91,7 @@ const frameType = computed(() => {
   return 'none'
 })
 
-const shouldBlurUnhighlightedLines = computed(() => props.meta ? props.meta.split(' ').includes('blur') : false)
+const shouldBlurUnhighlightedLines = computed(() => props.meta && props.meta.split(' ').includes('blur'))
 
 const copied = ref(false)
 
