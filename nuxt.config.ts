@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     },
   },
   nitro: {
-    preset: 'netlify-static',
+    // preset: 'netlify-static',
     prerender: {
       crawlLinks: false,
       routes: [
