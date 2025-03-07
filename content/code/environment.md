@@ -6,13 +6,13 @@ export default {
     content: ['emails/**/*.html'],
     output: {
       path: 'build_production',
+      extension: 'blade.php',
     },
-  },
-  css: {
-    inline: true,
-    purge: true,
-    shorthand: true,
-  },
-  prettify: true,
+    summary: true,
+    static: {
+      source: ['images/**/*.*'],
+      destination: 'images',
+    }
+  }
 }
 ```
