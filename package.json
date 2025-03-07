@@ -8,25 +8,25 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxt/content": "^2.7.0",
-    "@tailwindcss/forms": "^0.5.10",
-    "@tailwindcss/typography": "^0.5.16",
-    "autoprefixer": "^10.4.20",
-    "nuxt": "^3.15.4",
-    "nuxt-og-image": "^3.0.0-rc.38",
-    "postcss": "^8.5.3",
-    "postcss-import": "^16.1.0",
-    "postcss-nesting": "^12.1.5",
-    "sharp": "^0.33.4",
-    "shiki-es": "^0.14.0",
-    "strip-indent": "^4.0.0",
-    "tailwindcss": "^3.4.17"
+    "@nuxt/content": "2.7.0",
+    "@tailwindcss/forms": "0.5.10",
+    "@tailwindcss/typography": "0.5.16",
+    "autoprefixer": "10.4.20",
+    "nuxt": "3.10.1",
+    "nuxt-og-image": "3.0.0-rc.38",
+    "postcss": "8.4.39",
+    "postcss-import": "16.1.0",
+    "postcss-nesting": "12.1.5",
+    "sharp": "0.33.4",
+    "shiki-es": "0.14.0",
+    "strip-indent": "4.0.0",
+    "tailwindcss": "3.4.17"
   },
   "dependencies": {
     "@docsearch/css": "3.8.2",
-    "@docsearch/js": "3.8.2",
+    "@docsearch/js": "3.6.0",
     "@vueuse/components": "12.3.0",
-    "scroll-to-element": "^2.0.3",
-    "typeit": "^8.8.3"
+    "scroll-to-element": "2.0.3",
+    "typeit": "8.8.3"
   }
 }
