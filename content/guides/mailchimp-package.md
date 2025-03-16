@@ -20,7 +20,7 @@ Mailchimp requires that the zip archive contains the HTML file and all its image
 
 For example:
 
-```
+```html
 template.zip
 ├── index.html
 ├── image1.jpg
@@ -30,9 +30,9 @@ template.zip
 
 With this in mind, we must also make sure that the images are referenced correctly in the HTML file. In order for an image to be uploaded to Mailchimp's servers, it must be referenced using a relative path:
 
-```html diff
-- <img src="https://some-cdn.com/image1.jpg">
-+ <img src="image1.jpg">
+```html {2}
+  <img src="https://some-cdn.com/image1.jpg"> <!-- [!code --] -->
+  <img src="image1.jpg"> <!-- [!code ++] -->
 ```
 
 ## Project setup
@@ -53,7 +53,7 @@ Once it finishes installing dependencies, open the project folder in your favori
 
 We'll be organizing our templates into folders inside `templates`:
 
-```
+```html
 src
 └── templates
     └── template-1
@@ -72,7 +72,7 @@ For this written guide, we'll be using a simplified template with a few images. 
 
 Create `emails/template-1/index.html` and paste in the following code:
 
-```hbs [emails/template-1/index.html]
+```html [emails/template-1/index.html]
 ---
 title: "Example template 1"
 ---
@@ -377,7 +377,7 @@ Running the `npm run build` command will now create a .zip archive for each temp
 
 The archive file will have the same name as the template, so you'll see something like this:
 
-```
+```html
 build_production
   └── template-1
       ├── index.html

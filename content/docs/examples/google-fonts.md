@@ -86,13 +86,13 @@ This way it doesn't get inlined and you can keep this CSS away from any email cl
 
 To do this, we first register a `screen` breakpoint:
 
-```js [tailwind.config.js] {6} diff
+```js [tailwind.config.js] {6}
 export default {
   theme: {
     screens: {
       sm: {max: '600px'},
       xs: {max: '425px'},
-+      screen: {raw: 'screen'},
+      screen: {raw: 'screen'}, // [!code ++]
     }
   }
 }
@@ -115,7 +115,7 @@ First, visit the URL that Google Fonts creates for you after you've selected you
 
 In our example, it's the following:
 
-```
+```html
 https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Open+Sans:wght@400;600&display=swap
 ```
 

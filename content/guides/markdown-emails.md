@@ -30,7 +30,7 @@ Once it finishes installing dependencies, open the project folder in your favori
 
 We'll be using the `content` folder to store our Markdown files:
 
-```
+```html
 src
 └── content
     └── newsletter-1.md
@@ -139,7 +139,7 @@ Update `build.templates` to use .md files from the `content` folder:
 ```js [config.js] {3}
 export default {
   build: {
-    content: ['content/**/*.md'],
+    content: ['content/**/*.md'], // [!code ++]
   },
 }
 ```
@@ -206,9 +206,9 @@ Make sure to import this file in the `<style>` tag:
 
 Run `npm run build` again and you'll see that the styles are now applied:
 
-```js [build_production/newsletter-1.html] no-copy diff
-- <h1>Hello world</h1>
-+ <h1 style="font-size: 30px; line-height: 36px;">Hello world</h1>
+```html [build_production/newsletter-1.html] {2} no-copy
+  <h1>Hello world</h1> <!-- [!code --]-->
+  <h1 style="font-size: 30px; line-height: 36px;">Hello world</h1> <!-- [!code ++]-->
 ```
 
 ### Tailwind CSS
@@ -219,14 +219,14 @@ To do this, we'll use the `markdown-it-attrs` plugin, which allows us to add att
 
 Update `config.js` to have Maizzle use the plugin:
 
-```js [config.js] {7} diff
+```js [config.js] {7}
 import mdAttrs from 'markdown-it-attrs'
 
 export default {
   markdown: {
     plugins: [
       {
-+        plugin: mdAttrs,
+        plugin: mdAttrs, // [!code ++]
       }
     ]
   },
@@ -247,9 +247,9 @@ Notice how classes include the leading dot, and are separated by spaces.
 
 Result:
 
-```js [build_production/newsletter-1.html] no-copy diff
-- <h1 style="font-size: 30px; line-height: 36px;">Hello world</h1>
-+ <h1 style="font-size: 30px; line-height: 36px; margin: 0 0 40px; color: #0f172a">Hello world</h1>
+```html [build_production/newsletter-1.html] {2} no-copy
+  <h1 style="font-size: 30px; line-height: 36px;">Hello world</h1> <!-- [!code --]-->
+  <h1 style="font-size: 30px; line-height: 36px; margin: 0 0 40px; color: #0f172a">Hello world</h1> <!-- [!code ++]-->
 ```
 
 ### @tailwindcss/typography

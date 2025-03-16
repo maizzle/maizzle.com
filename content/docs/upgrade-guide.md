@@ -39,10 +39,10 @@ Alternatively, you can just use the NPM scripts like `npm run dev` from `package
 
 The `@maizzle/framework` package is now a module, so you need to update your `package.json` file to reflect this change.
 
-```json [package.json] diff {3}
+```json [package.json] {3}
 {
   "private": true,
-+  "type": "module",
+  "type": "module",  // [!code ++]
   "scripts": {
     "dev": "maizzle serve",
     "build": "maizzle build production"
@@ -79,15 +79,15 @@ The `<content />` tag has been replaced with `<yield />`.
 
 Make sure to update it in your Layouts and Components:
 
-```html diff [layouts/main.html] {8}
+```html [layouts/main.html] {8}
 <!doctype html>
 <html lang="en">
 <head>
   <!-- ... -->
 </head>
 <body>
--  <content />
-+  <yield />
+  <content /> // [!code --]
+  <yield /> // [!code ++]
 </body>
 </html>
 ```
@@ -98,14 +98,14 @@ Make sure to update it in your Layouts and Components:
 
 Tailwind CSS can now be used as expected, with `@tailwind` directives in any `<style>` tag, instead of the old `<style>{{{ page.css }}}</style>`.
 
-```html diff [layouts/main.html] {6-7}
+```html [layouts/main.html] {6-7}
 <!doctype html>
 <html lang="en">
 <head>
   <style>
--    {{{ page.css }}}
-+    @tailwind components;
-+    @tailwind utilities;
+    {{{ page.css }}} /* [!code --] */
+    @​tailwind components; /* [!code ++] */
+    @​​tailwind utilities; /* [!code ++] */
   </style>
 </head>
 <body>
@@ -147,18 +147,18 @@ The Maizzle config has been reimagined, so naturally there are a few breaking ch
 The config file is now an ESM module, which means you can use `import` and cool stuff like top-level `await`.
 It also means you need to make this change:
 
-```js [config.js] no-copy diff {2}
-- module.exports = {
-+ export default {
+```js [config.js] {2} no-copy
+  module.exports = { // [!code --]
+  export default { // [!code ++]
 ```
 
 If you need to keep using `module.exports` you must use the `.cjs` extension:
 
-``` [ ] diff {3,4}
-- config.js
-- config.production.js
-+ config.cjs
-+ config.production.cjs
+```js [C:/dev/maizzle] {3,4} no-copy
+  config.js // [!code --]
+  config.production.js // [!code --]
+  config.cjs // [!code ++]
+  config.production.cjs // [!code ++]
 ```
 
 ### build
@@ -191,12 +191,12 @@ export default {
 
 The `components` key has been moved outside `build`, to the root of the config file:
 
-```js [config.js] diff {5}
+```js [config.js] {5}
 export default {
--  build: {
--    components: {}
--  }
-+  components: {}
+   build: { // [!code --]
+     components: {} // [!code --]
+   } // [!code --]
+   components: {} // [!code ++]
 }
 ```
 
@@ -204,12 +204,12 @@ export default {
 
 Events have been moved to the root of the config file:
 
-```diff [config.js] diff {3-5}
+```js [config.js] {3-5}
 export default {
--  events: {...}
-+  async beforeRender({html, matter, config}) {
-+    // ...
-+  },
+   events: {...} // [!code --]
+   async beforeRender({html, matter, config}) { // [!code ++]
+     // ... // [!code ++]
+   }, // [!code ++]
 }
 ```
 
@@ -217,14 +217,14 @@ export default {
 
 This key has been moved to `css.attributes.add`:
 
-```diff [config.js] diff {3-7}
+```js [config.js] {3-7}
 export default {
--  extraAttributes: {}
-+  css: {
-+    attributes: {
-+      add: {}
-+    }
-+  }
+   extraAttributes: {} // [!code --]
+   css: { // [!code ++]
+     attributes: { // [!code ++]
+       add: {} // [!code ++]
+     } // [!code ++]
+   } // [!code ++]
 }
 ```
 
@@ -236,12 +236,12 @@ The `layouts` key is no longer used, you can safely remove it.
 
 Configuration for CSS inlining has been moved under the `css.inline` key:
 
-```diff [config.js] diff {3-5}
+```js [config.js] {3-5}
 export default {
--  inlineCSS: {}
-+  css: {
-+    inline: true,
-+  }
+   inlineCSS: {} // [!code --]
+   css: { // [!code ++]
+     inline: true, // [!code ++]
+   } // [!code ++]
 }
 ```
 
@@ -251,14 +251,14 @@ See the [CSS inlining docs](./transformers/inline-css) for all the options avail
 
 Configuring the custom tag for Outlook conditionals is done through the same `outlook` key, but at the root of the config file instead of inside the `posthtml` key:
 
-```diff [config.js] diff {5-7}
+```js [config.js] {5-7}
 export default {
--  posthtml: {
--    outlook: {}
--  }
-+  outlook: {
-+    tag: 'mso',
-+  },
+   posthtml: { // [!code --]
+     outlook: {} // [!code --]
+   } // [!code --]
+   outlook: { // [!code ++]
+     tag: 'mso', // [!code ++]
+   }, // [!code ++]
 }
 ```
 
@@ -266,14 +266,14 @@ export default {
 
 The `fetch` key has been moved to the root of the config file:
 
-```diff [config.js] diff {5-7}
+```js [config.js] diff {5-7}
 export default {
--  posthtml: {
--    fetch: {}
--  }
-+  fetch: {
-+    tags: ['get'],
-+  },
+   posthtml: { // [!code --]
+     fetch: {} // [!code --]
+   } // [!code --]
+   fetch: { // [!code ++]
+     tags: ['get'], // [!code ++]
+   }, // [!code ++]
 }
 ```
 
@@ -283,12 +283,12 @@ See the [fetch docs](/docs/tags#fetch-options) for the available options.
 
 PostCSS may now be configured under the root `postcss` key:
 
-```diff [config.js] diff {5}
+```js [config.js] {5}
 export default {
--  build: {
--    postcss: {}
--  }
-+  postcss: {}
+   build: { // [!code --]
+     postcss: {} // [!code --]
+   } // [!code --]
+   postcss: {} // [!code ++]
 }
 ```
 
@@ -296,14 +296,14 @@ export default {
 
 This Transformer has been moved to `css.attributes.remove`:
 
-```diff [config.js] diff {3-7}
+```js [config.js] {3-7}
 export default {
--  removeAttributes: []
-+  css: {
-+    attributes: {
-+      remove: []
-+    }
-+  }
+   removeAttributes: [] // [!code --]
+   css: { // [!code ++]
+     attributes: { // [!code ++]
+       remove: []  // [!code ++]
+     } // [!code ++]
+   } // [!code ++]
 }
 ```
 
@@ -311,12 +311,12 @@ export default {
 
 Configuration for this Transformer has been moved to `css.purge`:
 
-```diff [config.js] diff {3-5}
+```js [config.js] {3-5}
 export default {
--  removeUnusedCSS: {}
-+  css: {
-+    purge: {}
-+  }
+   removeUnusedCSS: {} // [!code --]
+   css: { // [!code ++]
+     purge: {} // [!code ++]
+   } // [!code ++]
 }
 ```
 
@@ -324,12 +324,12 @@ export default {
 
 The shorthand CSS Transformer config has been moved to `css.shorthand`:
 
-```diff [config.js] diff {3-5}
+```js [config.js] {3-5}
 export default {
--  shorthandCSS: true
-+  css: {
-+    shorthand: true
-+  }
+   shorthandCSS: true // [!code --]
+   css: { // [!code ++]
+     shorthand: true // [!code ++]
+   } // [!code ++]
 }
 ```
 
@@ -337,12 +337,12 @@ export default {
 
 The `safeClassNames` option has been renamed and moved to `css.safe`:
 
-```diff [config.js] diff {3-5}
+```js [config.js] {3-5}
 export default {
--  safeClassNames: {}
-+  css: {
-+    safe: {}
-+  }
+   safeClassNames: {} // [!code --]
+   css: { // [!code ++]
+     safe: {} // [!code ++]
+   } // [!code ++]
 }
 ```
 
@@ -354,17 +354,17 @@ We call this Hot Markup Replacement&trade;.
 
 This [new dev server](./configuration/server) is much faster and provides a nicer experience, but you'll need to update your `config.js` if you want to configure it:
 
-```diff [config.js] diff {3-10}
+```js [config.js] {3-10}
 export default {
--  browsersync: {...},
-+  server: {
-+    port: 3000,
-+    hmr: true,
-+    scrollSync: false,
-+    watch: ['./images/**/*'],
-+    reportFileSize: false,
-+    spinner: 'circleHalves',
-+  },
+   browsersync: {...}, // [!code --]
+   server: { // [!code ++]
+     port: 3000, // [!code ++]
+     hmr: true, // [!code ++]
+     scrollSync: false, // [!code ++]
+     watch: ['./images/**/*'], // [!code ++]
+     reportFileSize: false, // [!code ++]
+     spinner: 'circleHalves', // [!code ++]
+   }, // [!code ++]
 }
 ```
 
@@ -372,12 +372,12 @@ export default {
 
 This Transformer config has been moved to `css.sixHex`:
 
-```diff [config.js] diff {3-5}
+```js [config.js] {3-5}
 export default {
--  sixHex: true
-+  css: {
-+    sixHex: true
-+  }
+   sixHex: true // [!code --]
+   css: { // [!code ++]
+     sixHex: true // [!code ++]
+   } // [!code ++]
 }
 ```
 
@@ -432,10 +432,10 @@ The `templates` key has been deprecated, see [`build`](#build) above for how to 
 
 This has been renamed to `useTransformers`:
 
-```diff [config.js] diff {3}
+```js [config.js] {3}
 export default {
--  applyTransformers: true
-+  useTransformers: true
+   applyTransformers: true // [!code --]
+   useTransformers: true // [!code ++]
 }
 ```
 

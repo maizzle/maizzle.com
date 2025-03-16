@@ -57,7 +57,7 @@ This will add the `text-center` class to the button's wrapper `<div>`, which wil
 
 You may style the Button as needed through props or with Tailwind CSS utilities.
 
-The button includes a <span class="inline-flex gap-1 px-2 translate-y-0.5 border border-solid rounded"><span class="w-3 h-3 mt-1.5 bg-indigo-700 rounded" title="#4338ca"></span><span class="text-sm/6">bg-indigo-700</span></span> background and <span class="inline-flex gap-1 px-2 translate-y-0.5 border border-solid rounded"><span class="w-3 h-3 mt-1.5 border border-solid rounded bg-slate-50" title="#f8fafc"></span><span class="text-sm/6">text-slate-50</span></span> text color by default, which you can change through props.
+The button includes a <span class="inline-flex gap-1 px-2 translate-y-0.5 border border-slate-200 border-solid rounded"><span class="w-3 h-3 mt-1.5 bg-indigo-700 rounded" title="#4338ca"></span><span class="text-sm/6">bg-indigo-700</span></span> background and <span class="inline-flex gap-1 px-2 translate-y-0.5 border border-slate-200 border-solid rounded"><span class="w-3 h-3 mt-1.5 border border-solid rounded bg-slate-50" title="#f8fafc"></span><span class="text-sm/6">text-slate-50</span></span> text color by default, which you can change through props.
 
 For example, let's make the button blue-themed:
 

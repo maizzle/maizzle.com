@@ -4,7 +4,7 @@
   overflow: hidden;
 }
 
-@screen lg {
+@variant lg {
   #carbonads {
     max-width: 130px;
   }

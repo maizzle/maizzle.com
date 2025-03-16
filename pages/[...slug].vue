@@ -7,7 +7,9 @@
         class="
           max-w-[75ch] 3xl:pl-8
           prose prose-slate
-          prose-headings:text-slate-800 prose-h1:font-bold prose-p:text-slate-600
+          prose-headings:text-slate-800 prose-h1:font-bold
+          prose-p:text-slate-600
+          prose-a:decoration-slate-200 prose-a:hover:decoration-slate-300 prose-a:underline-offset-[3px]
         "
       >
         <template #empty>
@@ -21,9 +23,10 @@
         <div class="flex flex-wrap sm:items-center sm:justify-between space-y-6 sm:space-y-0 text-sm text-slate-500">
           <div class="flex gap-2">
             <span>Copyright &copy; {{ year }} Maizzle SRL</span>
-            <nuxt-link to="/brand" class="border-l border-slate-200 pl-2 hover:text-slate-900">Brand policy</nuxt-link>
+            <NuxtLink to="/brand" class="border-l border-slate-200 pl-2 hover:text-slate-900">Brand policy</NuxtLink>
           </div>
           <a
+            v-if="!nonEditablePaths.includes($route.path)"
             :href="`https://github.com/maizzle/maizzle.com/edit/main/content${$route.path}.md`"
             class="flex gap-2 items-center hover:text-slate-900"
             target="_blank"
@@ -44,18 +47,26 @@
 
 <script setup>
 definePageMeta({
-  layout: 'documentation',
+  layout: 'docs',
 })
 
 const route = useRoute()
 
 // Page content
-const page = await queryContent(route.path).findOne()
-const toc = page.body.toc
+const { data: page } = await useAsyncData(route.path, () => {
+  return queryCollection('docs').path(route.path).first()
+})
+
+const toc = page.value.body.toc
+
+const nonEditablePaths = [
+  '/brand',
+  '/404',
+]
 
 defineOgImageComponent('OGImageDocs', {
-  title: page.title,
-  description: page.description,
+  title: page.value.title,
+  description: page.value.description,
 })
 
 const year = computed(() => {
@@ -63,24 +74,24 @@ const year = computed(() => {
 })
 
 useHead({
-  title: page.title,
+  title: page.value.title,
   meta: [
     {
       name: 'description',
-      content: page.description,
+      content: page.value.description,
     },
     // Open Graph
     {
       property: 'og:url',
-      content: `https://maizzle.com${page._path}`
+      content: `https://maizzle.com${route.path}`
     },
     {
       property: 'og:title',
-      content: page.title + ' | Maizzle',
+      content: page.value.title + ' | Maizzle',
     },
     {
       property: 'og:description',
-      content: page.description,
+      content: page.value.description,
     },
     {
       property: 'og:type',

@@ -41,9 +41,9 @@ However, some are opt-in and need to be explicitly enabled in your `config.js`:
 
 You may disable all Transformers by setting `useTransformers` to `false`:
 
-```js [config.js] {2} diff
+```js [config.js] {2}
 export default {
-+  useTransformers: false,
+  useTransformers: false, // [!code ++]
 }
 ```
 

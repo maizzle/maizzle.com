@@ -57,14 +57,14 @@ This adds a separate `<style>` tag in the compiled email HTML, right after the m
 
 If you prefer a single `<style>` tag in your email template, you can register the font in the Layout instead. Open `layouts/main.html` and update the `<style>` tag:
 
-```css [layouts/main.html] no-copy {2-7} diff
+```css [layouts/main.html] no-copy {2-7}
    <style>
-+     @font-face {
-+       font-family: 'Barosan';
-+       font-style: normal;
-+       font-weight: 400;
-+       src: local('Barosan Regular'), local('Barosan-Regular'), url(https://example.com/fonts/barosan.woff2) format('woff2');
-+     }
+     @font-face { /* [!code ++] */
+       font-family: 'Barosan'; /* [!code ++] */
+       font-style: normal; /* [!code ++] */
+       font-weight: 400; /* [!code ++] */
+       src: local('Barosan Regular'), local('Barosan-Regular'), url(https://example.com/fonts/barosan.woff2) format('woff2'); /* [!code ++] */
+     } /* [!code ++] */
 
      @tailwind components;
      @tailwind utilities;
@@ -81,12 +81,12 @@ Now that we're importing the font, we should register a Tailwind CSS utility for
 
 Open `tailwind.config.js`, scroll down to `fontFamily`, and add a new font:
 
-```js [tailwind.config.js] {5} diff
+```js [tailwind.config.js] {5}
 export default {
   theme: {
     extend: {
       fontFamily: {
-+        barosan: ['Barosan', '-apple-system', '"Segoe UI"', 'sans-serif'],
+        barosan: ['Barosan', '-apple-system', '"Segoe UI"', 'sans-serif'], /* [!code ++] */
       }
     },
   },
@@ -103,13 +103,13 @@ Add the `font-barosan` class on elements that you want to use your custom font.
 
 For example, you can add it on a heading:
 
-```xml
+```html
 <h2 class="font-barosan">An article title</h2>
 ```
 
 With [CSS inlining](/docs/transformers/inline-css) enabled, that would result in:
 
-```xml
+```html
 <h2 style="font-family: Barosan, -apple-system, 'Segoe UI', sans-serif;">An article title</h2>
 ```
 
@@ -119,7 +119,7 @@ Repeatedly writing that `font-barosan` class on all elements isn't just impracti
 
 `font-family` is inherited, which means you can just add the utility to the top element:
 
-```xml [emails/transactional.html]
+```html [emails/transactional.html]
 <x-main>
   <table class="font-barosan">
     <!-- your email HTML... -->
@@ -133,13 +133,13 @@ We can work around that by making use of Tailwind's `screen` variants and an Out
 
 First, let's register a new `@media` query - we will call it `screen`:
 
-```js [tailwind.config.js] {6} diff
+```js [tailwind.config.js] {6}
 export default {
   theme: {
     screens: {
       sm: {max: '600px'},
       xs: {max: '425px'},
-+      screen: {raw: 'screen'},
+      screen: {raw: 'screen'}, // [!code ++]
     }
   }
 }

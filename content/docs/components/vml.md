@@ -23,12 +23,12 @@ You can use it immediately inside a container that has a CSS background image:
 <table>
   <tr>
     <td style="background-image: url('https://picsum.photos/600/400')">
-      <x-v-fill
-        image="https://picsum.photos/600/400"
-        width="600px"
-      >
-        HTML to show on top of the image
-      </x-v-fill>
+      <x-v-fill // [!code ++]
+        image="https://picsum.photos/600/400" // [!code ++]
+        width="600px" // [!code ++]
+      > // [!code ++]
+        HTML to show on top of the image <!-- [!code ++] -->
+      </x-v-fill> // [!code ++]
     </td>
   </tr>
 </table>

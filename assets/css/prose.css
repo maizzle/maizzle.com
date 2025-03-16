@@ -1,3 +1,27 @@
+:root {
+  --shiki-light: #1e3a8a;
+}
+
+.shiki,
+.shiki span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+  font-style: var(--shiki-light-font-style);
+  font-weight: var(--shiki-light-font-weight);
+  text-decoration: var(--shiki-light-text-decoration);
+}
+
+@media (prefers-color-scheme: dark) {
+  .shiki,
+  .shiki span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
+}
+
 .prose h2 code,
 .prose h3 code,
 .prose h4 code {
@@ -41,12 +65,12 @@ abbr,
 }
 
 /* Diffs */
-.prose .shiki .line.ins,
-.prose .shiki .line.del {
+.prose .shiki .line.remove,
+.prose .shiki .line.add {
   @apply py-1;
 }
 
-.prose .shiki .line.ins:not(.highlight) {
+.prose .shiki .line.add:not(.highlight) {
   @apply bg-teal-50;
 
   span {
@@ -59,30 +83,38 @@ abbr,
   }
 }
 
-.prose .shiki .line.del:not(.highlight) {
+.prose .shiki .line.remove:not(.highlight) {
   @apply bg-rose-50/50;
 
   span {
-    @apply !text-rose-500;
+    @apply !text-rose-400/75;
   }
 
   &:before {
     content: '-';
-    @apply w-4 h-4 absolute block -ml-3 text-rose-500;
+    @apply w-4 h-4 absolute block -ml-3 text-rose-400/75;
   }
 }
 
-.prose .shiki .line.ins.highlight:after,
-.prose .shiki .line.del.highlight:after {
+.prose .shiki .line.add.highlight:after,
+.prose .shiki .line.remove.highlight:after {
   @apply absolute left-3 top-[3px] h-full text-indigo-500 font-semibold;
 }
 
-.prose .shiki .line.ins.highlight:after {
+.prose .shiki .line.add.highlight:after {
   content: '+';
 }
 
-.prose .shiki .line.del.highlight:before {
+.prose .shiki .line.remove.highlight:before {
   content: '-';
+}
+
+.shiki.has-focused .line:not(.focused) {
+  @apply blur-[2px] opacity-70 transition-all duration-300;
+}
+
+.shiki.has-focused:hover .line:not(.focused) {
+  @apply blur-none opacity-100;
 }
 
 /* Terminal code samples */
@@ -104,19 +136,23 @@ abbr,
 }
 
 .prose .shiki.blur-lines pre:has(.line.highlight):hover .line:not(.highlight) {
-  @apply blur-0;
+  @apply blur-none;
 }
 
 .prose .shiki .line {
   @apply block px-6;
 }
 
-.prose .shiki .line.highlight {
+.prose pre.shiki .line.highlight {
   @apply bg-slate-100/75 py-1 w-full relative;
 
   &:before {
     content: '';
     @apply absolute w-[3px] h-full bg-indigo-500 left-0 top-0;
+  }
+
+  span::first-letter {
+    @apply !opacity-0;
   }
 }
 
@@ -148,5 +184,5 @@ abbr,
 }
 
 .completed .ti-cursor {
-  @apply hidden !important;
+  @apply !hidden;
 }

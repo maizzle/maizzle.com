@@ -1,44 +1,50 @@
+import tailwindcss from '@tailwindcss/vite'
+import tailwindTheme from './assets/shiki/themes/tailwind.json'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  content: {
-    highlight: false,
-  },
+  compatibilityDate: '2024-11-01',
   css: ['~/assets/css/tailwind.css'],
-  experimental: {
-    payloadExtraction: false,
-  },
   modules: [
     './modules/routes-list',
-    './modules/docs-navigation',
     './modules/github-release',
-    './modules/shiki/shiki-custom',
     '@nuxt/content',
     'nuxt-og-image',
+    '@nuxt/fonts'
   ],
-  ogImage: {
-    defaults: {
-      extension: 'jpeg',
-    }
+  devtools: { enabled: true },
+  nitro: { preset: 'static', },
+  spaLoadingTemplate: false,
+  devServer: { port: 8080 },
+  site: {
+    url: 'https://maizzle.com',
   },
-  postcss: {
-    plugins: {
-      'tailwindcss/nesting': 'postcss-nesting',
-      tailwindcss: {},
-      autoprefixer: {},
-    },
+  components: {
+    dirs: [
+      {
+        path: '~/components/Pattern',
+        prefix: 'Pattern',
+        global: true,
+      },
+      {
+        path: '~/components/Site',
+        prefix: 'Site',
+        global: true,
+      },
+      '~/components',
+    ],
   },
-  nitro: {
-    preset: 'netlify-static',
-    prerender: {
-      crawlLinks: false,
-      routes: [
-        '/',
-        '/starters',
-        '/guides',
-      ],
-      ignore: [
-        '/code',
-      ],
+  content: {
+    build: {
+      markdown: {
+        highlight: {
+          theme: {
+            light: tailwindTheme,
+            dark: tailwindTheme,
+          },
+          langs: ['json', 'js', 'html', 'css', 'shell', 'mdx', 'md', 'yaml', 'hbs'],
+        },
+      },
     },
   },
   runtimeConfig: {
@@ -50,17 +56,9 @@ export default defineNuxtConfig({
       }
     },
   },
-  site: {
-    url: 'https://maizzle.com',
-  },
-  spaLoadingTemplate: false,
-  typescript: {
-    shim: false,
-  },
-  devtools: {
-    enabled: true,
-  },
-  devServer: {
-    port: 8080,
+  vite: {
+    plugins: [
+      tailwindcss(),
+    ],
   },
 })

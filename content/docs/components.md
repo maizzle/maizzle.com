@@ -378,8 +378,8 @@ So if you're trying to pass a `src` prop to a Component, you should use a differ
 ```
 
 ```html diff [emails/example.html] {2}
-- <x-alert src="image.jpg" />
-+ <x-alert img-src="image.jpg" />
+  <x-alert src="image.jpg" /> // [!code --]
+  <x-alert img-src="image.jpg" /> // [!code ++]
 ```
 
 Alternatively, you may change the prop attribute name to something other than `src`:

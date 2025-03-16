@@ -5,7 +5,7 @@ description: "How Maizzle handles asset files when building your HTML emails."
 
 # Asset Files
 
-Any files that you add to your [Template sources](/docs/configuration/templates) will be copied over to the root of the build destination directory, so you can organize your email templates as needed.
+Any files that you add to your [content sources](/docs/configuration/build#content) will be copied over to the root of the build destination directory, so you can organize your email templates as needed.
 
 ## Global assets
 
@@ -22,7 +22,7 @@ export default {
 }
 ```
 
-Everything inside `static.source` will be copied to the `static.destination` directory, which is relative to [`build.output.path`](/docs/configuration/templates#path).
+Everything inside `static.source` will be copied to the `static.destination` directory, which is relative to [`build.output.path`](/docs/configuration/build#path).
 
 ## Multiple sources
 

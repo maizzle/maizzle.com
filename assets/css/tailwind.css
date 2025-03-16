@@ -1,20 +1,19 @@
-@import "fonts";
-@import "tailwindcss/base";
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-@import "tailwindcss/components";
+@import "assets/css/prose.css";
+@import "assets/css/docsearch.css";
+@import "assets/css/carbon-ads.css";
 
-@import "prose";
-@import "docsearch";
-@import "carbon-ads";
+@import "assets/css/navigation.css";
+@import "assets/css/form.css";
 
-@import "header";
-@import "navigation";
-@import "form";
+@import "assets/css/lazyload.css";
+@import "assets/css/preloader.css";
 
-@import "lazyload";
-@import "preloader";
-
-@import "tailwindcss/utilities";
+@utility font-inter {
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+}
 
 #__nuxt {
   @apply h-full;

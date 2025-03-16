@@ -21,7 +21,7 @@ title: Example
 
 Running `maizzle build production` would render this HTML:
 
-```xml
+```html
 The title is: Example
 
 You ran the `maizzle build production` command.
@@ -38,7 +38,7 @@ You may use basic JavaScript expressions within curly braces:
 
 Running `maizzle build`, we would get:
 
-```
+```html
 doctype is not set
 this email isn't production ready!
 ```
@@ -88,13 +88,15 @@ The [Blade](https://laravel.com/docs/blade)-inspired `@{{ }}` syntax is useful f
 </x-main>
 ```
 
+<Alert type="info">Undefined variables don't need to be ignored, they will just be output as you wrote them. You might want to use inline ignoring if your expression contains quotes `'`, i.e. `{{ foo: 'Bar' }}`, to prevent Maizzle from escaping them.</Alert>
+
 ### Ignore in Front Matter
 
-You may also use `@{{ }}` to prevent expressions in Front Matter from being evaluated.
+You may also use `@{{ }}` to prevent expressions in Front Matter.
 
 ```hbs [emails/example.html]
 ---
-title: "Weekly newsletter no. @{{ edition_count }}"
+title: "Weekly newsletter no. @{{ user: 'Arthur Morgan'  }}"
 ---
 <x-main>
   {{ page.title }}
@@ -104,12 +106,30 @@ title: "Weekly newsletter no. @{{ edition_count }}"
 Result:
 
 ```hbs [build_production/example.html]
-Weekly newsletter no. {{ edition_count }}
+Weekly newsletter no. {{ user: 'Arthur Morgan' }}
+```
+
+Again, this is just to avoid Maizzle from evaluating the expression - you don't need the `@` if your expression doesn't contain any quotes:
+
+```hbs [emails/example.html]
+---
+title: "Weekly newsletter no. {{ user.name }}"
+---
+
+<x-main>
+  {{ page.title }}
+</x-main>
+```
+
+Result:
+
+```hbs [build_production/example.html]
+Weekly newsletter no. {{ user.name }}
 ```
 
 ### Ignore with &lt;raw&gt;
 
-This is useful if you want to ignore multiple expressions in one go:
+Use `<raw>` to ignore expressions or any PostHTML tags in a block of HTML:
 
 ```hbs [emails/example.html]
 <raw>

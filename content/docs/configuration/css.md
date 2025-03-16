@@ -214,13 +214,13 @@ The Tailwind preset in Maizzle sets `important: true` - this way, things like re
 
 You may disable this behavior by setting the `important` key to `false`:
 
-```js [tailwind.config.js] diff {6}
+```js [tailwind.config.js] {6}
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   presets: [
     require('tailwindcss-preset-email'),
   ],
-+  important: false,
+  important: false, // [!code ++]
 }
 ```
 
@@ -258,7 +258,7 @@ module.exports = {
     require('tailwindcss-preset-email'),
   ],
   screens: {
-+    md: {min: '768px', max: '1023px'},
+    md: {min: '768px', max: '1023px'}, // [!code ++]
     sm: {max: '600px'},
     xs: {max: '425px'},
   },
@@ -406,7 +406,7 @@ lineHeight: theme => ({
 
 So you can use `leading` utilities to easily create vertical spacing, like this:
 
-```xml [emails/example.html]
+```html [emails/example.html]
 <div class="leading-16">&zwj;</div>
 ```
 
@@ -456,23 +456,23 @@ npm install tailwindcss-email-variants
 
 With `import`:
 
-```js [tailwind.config.js] {1, 4-6} diff
-+ import emailVariants from 'tailwindcss-email-variants'
+```js [tailwind.config.js] {1, 4-6}
+ import emailVariants from 'tailwindcss-email-variants' // [!code ++]
 
-export default {
-+  plugins: [
-+    emailVariants,
-+  ],
-}
+ export default {
+    plugins: [ // [!code ++]
+      emailVariants, // [!code ++]
+    ], // [!code ++]
+ }
 ```
 
 With `require`:
 
-```js [tailwind.config.js] {2-4} diff
+```js [tailwind.config.js] {2-4}
 module.exports = {
-+  plugins: [
-+    require('tailwindcss-email-variants'),
-+  ],
+   plugins: [ // [!code ++]
+     require('tailwindcss-email-variants'), // [!code ++]
+   ], // [!code ++]
 }
 ```
 
@@ -493,9 +493,9 @@ module.exports = {
 
 If you want to use one of these plugins, simply set it to `true` in `corePlugins` at the bottom of your `tailwind.config.js`:
 
-```diff [tailwind.config.js] diff {3}
+```js [tailwind.config.js] {3}
 corePlugins: {
-- backgroundOpacity: false,
-+ backgroundOpacity: true,
+  backgroundOpacity: false, // [!code --]
+  backgroundOpacity: true, // [!code ++]
 }
 ```

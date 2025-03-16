@@ -19,7 +19,7 @@
             <blockquote class="p-12 text-xl font-semibold leading-8 tracking-tight text-gray-900">
               <p>“Maizzle is amazing! I use it for building all our emails, and being able to combine Tailwind with Maizzle's component system feels so modern and powerful. I can't imagine building email templates any other way.”</p>
             </blockquote>
-            <figcaption class="flex items-center gap-x-4 border-t border-gray-900/10 px-6 py-4">
+            <div class="flex items-center gap-x-4 border-t border-gray-900/10 px-6 py-4">
               <Image
                 url="/images/avatars/eric-barnes.jpg"
                 alt="Eric L. Barnes"
@@ -38,7 +38,7 @@
                 Laravel News
                 </p>
               </div>
-            </figcaption>
+            </div>
           </a>
         </figure>
         <div class="space-y-8 xl:contents xl:space-y-0">
@@ -48,13 +48,13 @@
               <blockquote class="text-gray-900">
                 <p>“Maizzle is amazing! I use it for building all our emails, and being able to combine Tailwind with Maizzle's component system feels so modern and powerful. I can't imagine building email templates any other way.”</p>
               </blockquote>
-              <figcaption class="mt-6 flex items-center gap-x-4">
+              <div class="mt-6 flex items-center gap-x-4">
                 <svg class="w-8 h-8" fill="none" height="132" viewBox="0 0 134 132" width="134" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><linearGradient id="a"><stop offset="0" stop-color="#fff"></stop><stop offset=".1217" stop-color="#fffbfb"></stop><stop offset=".241" stop-color="#fff0ef"></stop><stop offset=".3594" stop-color="#ffdedc"></stop><stop offset=".4773" stop-color="#ffc3c0"></stop><stop offset=".5948" stop-color="#ffa29c"></stop><stop offset=".7121" stop-color="#ff7970"></stop><stop offset=".8272" stop-color="#ff493e"></stop><stop offset=".8616" stop-color="#ff392d"></stop><stop offset="1" stop-color="#ff2d20"></stop></linearGradient><linearGradient id="b" gradientUnits="userSpaceOnUse" x1="27.8771" x2="86.7363" xlink:href="#a" y1="65.8138" y2="65.8138"></linearGradient><linearGradient id="c" gradientUnits="userSpaceOnUse" x1="54.7828" x2="54.7828" xlink:href="#a" y1="57.2727" y2="86.9087"></linearGradient><path d="m129.001 0h-124.22756c-2.20914 0-4.000002 1.79086-4.000002 4v123.628c0 2.209 1.790872 4 4.000012 4h124.22755c2.209 0 4-1.791 4-4v-123.628c0-2.20914-1.791-4-4-4z" fill="#ff2d20"></path><path d="m81.5414 89.0681h-42.8088v-56.1614h-10.8537v65.8141h9.0356 1.8181 47.9877z" fill="url(#b)"></path><path d="m105.894 32.9067h-10.3027v55.229l-30.0267-55.229h-15.8673v48.3734h10.1374v-37.7883l30.0268 55.229h16.0325z" fill="#fff"></path><path d="m59.8347 57.2583h-10.1374v29.6163h10.1374z" fill="url(#c)"></path></svg>
                 <div class="leading-normal">
                   <div class="font-semibold">Eric L. Barnes</div>
                   <div class="text-gray-600">Laravel News</div>
                 </div>
-              </figcaption>
+              </div>
             </a>
           </figure>
           <div class="space-y-8 gap-y-8 xl:row-span-2">
@@ -63,7 +63,7 @@
                 <blockquote class="text-gray-900">
                   <p>“I can finally build emails in a modern way with Maizzle. The power of Tailwind combined with Maizzle components finally enables me to create a re-usable design system for mails.”</p>
                 </blockquote>
-                <figcaption class="mt-6">
+                <div class="mt-6">
                   <a href="https://twitter.com/tobias_petry" target="_blank" class="flex items-center gap-x-4">
                     <Image
                       url="/images/avatars/tobias-petry.jpg"
@@ -77,7 +77,7 @@
                       <div class="text-gray-600">@tobias_petry</div>
                     </div>
                   </a>
-                </figcaption>
+                </div>
               </a>
             </figure>
 
@@ -89,7 +89,7 @@
                 <blockquote class="text-gray-900">
                   <p>“Maizzle allows us to produce better, more consistent emails, in less time and without any of the typical nasty black-box 'magic' that often plagues other frameworks.”</p>
                 </blockquote>
-                <figcaption class="mt-6 flex items-center gap-x-4">
+                <div class="mt-6 flex items-center gap-x-4">
                   <svg viewBox="0 0 72 72" width="32" height="32" xmlns="http://www.w3.org/2000/svg">
                     <path fill="#ff0089" d="M0 0h72v72H0z"></path>
                     <path fill="#fff" d="M21.8 17.8h28.4v7.3H30v7.7h17.8v7.3H30v14.1h-8.2z"></path>
@@ -98,7 +98,7 @@
                     <div class="font-semibold">Michael Warning</div>
                     <div class="text-gray-600">Found</div>
                   </div>
-                </figcaption>
+                </div>
               </a>
             </figure>
 
@@ -112,7 +112,7 @@
                 <blockquote class="text-gray-900">
                   <p>“Maizzle is a 💯 option for building properly-rendering email code using modern web technologies like Tailwind CSS, static site generators, and JavaScript.”</p>
                 </blockquote>
-                <figcaption class="mt-6 flex items-center gap-x-4">
+                <div class="mt-6 flex items-center gap-x-4">
                   <svg class="simple-logo" width="29" height="22" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 22" fill="none" data-title="Dialpad">
                     <path d="M21.1355 3.81281C19.4319 3.81113 17.7852 4.43774 16.4989 5.57712C15.2126 6.7165 14.3735 8.29182 14.1363 10.0126V0.108626C14.1364 0.0869409 14.1301 0.0657361 14.1182 0.0477565C14.1063 0.029777 14.0894 0.0158506 14.0697 0.00778021C14.05 -0.000290209 14.0283 -0.00213304 14.0075 0.00249027C13.9868 0.00711357 13.9678 0.0179901 13.9532 0.033712L9.81917 4.37782C8.94818 4.00357 8.01241 3.81144 7.06729 3.81281C3.16599 3.81281 0 7.0305 0 11C0 14.9696 3.16422 18.1873 7.06817 18.1873C8.77163 18.189 10.4183 17.5625 11.7045 16.4233C12.9908 15.2841 13.83 13.709 14.0673 11.9884V21.8914C14.0673 21.9889 14.1832 22.0359 14.2496 21.9664L18.3845 17.6223C19.2552 17.9964 20.1907 18.1885 21.1355 18.1873C25.0386 18.1873 28.2028 14.9696 28.2028 11C28.2028 7.0305 25.0386 3.81281 21.1355 3.81281Z" fill="#7C52FF"></path>
                   </svg>
@@ -120,7 +120,7 @@
                     <div class="font-semibold">Ted Goas</div>
                     <div class="text-gray-600">Dialpad</div>
                   </div>
-                </figcaption>
+                </div>
               </a>
             </figure>
 
@@ -132,7 +132,7 @@
                 <blockquote class="text-gray-900">
                   <p>“Maizzle lets me structure my code the way I want to while helping me automate things like links tracking or styles inlining. I love being able to easily generate a version for local development and one properly packed to deliver to clients.”</p>
                 </blockquote>
-                <figcaption class="mt-6 flex items-center gap-x-4">
+                <div class="mt-6 flex items-center gap-x-4">
                   <svg viewBox="0 0 28 32" width="28" height="32" xmlns="http://www.w3.org/2000/svg">
                     <path fill="#9bc947" d="M14 31.8c0-7.5-4.8-6.5-9.7-10.7C-1.1 16.5-1 6.7 4.3 3S18.5-.8 23.8 3s5.4 13.6 0 18.2c-4.9 4.1-9.7 3.2-9.7 10.7" />
                     <path d="M21.7 4.7C17.4 1.5 10.4 1.5 6 4.7c-2.2 1.6-3.3 4.5-3.3 7.5-.1 2.9 1.1 5.8 3.3 7.5 4.3 3.2 11.3 3.2 15.7 0 2.2-1.6 3.3-4.5 3.3-7.5.1-2.9-1-5.8-3.3-7.5z" fill="#fff" />
@@ -144,7 +144,7 @@
                     <div class="font-semibold">Rémi Parmentier</div>
                     <div class="text-gray-600">Tilt Studio</div>
                   </div>
-                </figcaption>
+                </div>
               </a>
             </figure>
 
