@@ -1,6 +1,6 @@
 import { defineNuxtModule } from '@nuxt/kit'
-import fs from 'fs/promises'
-import path from 'path'
+import fs from 'node:fs/promises'
+import path from 'node:path'
 
 async function listFilesInDirectory(directory, prefix = '') {
   const entries = await fs.readdir(directory, { withFileTypes: true })

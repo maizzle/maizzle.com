@@ -20,7 +20,7 @@ Maizzle knows to parse this block's variables and makes them available to all ot
 
 Templates can define new variables and even override existing ones from your config, through the optional YAML-style Front Matter block:
 
-```hbs [emails/example.html]
+```html [emails/example.html]
 ---
 title: "Please confirm your email address"
 ---
@@ -30,7 +30,7 @@ Front Matter variables are accessible through the `page` object.
 
 To output them in a Template, use the `{{ }}` [expression syntax](/docs/expressions):
 
-```hbs [emails/example.html]
+```html [emails/example.html]
 ---
 title: "Please confirm your email address"
 ---
@@ -44,7 +44,7 @@ title: "Please confirm your email address"
 
 Expressions in Front Matter can be ignored with a `@` symbol when they're used in the Template they're defined in:
 
-```hbs [emails/example.html]
+```html [emails/example.html]
 ---
 greeting: "Hello @{{ user.name }}, please confirm your email address"
 ---
@@ -54,7 +54,7 @@ greeting: "Hello @{{ user.name }}, please confirm your email address"
 
 That will render as:
 
-```hbs [build_production/example.html]
+```html [build_production/example.html]
 <h1>Hello {{ user.name }}, please confirm your email address</h1>
 ```
 

@@ -252,14 +252,14 @@ You'd then use `<slot@footer-logo />` and `<fill@footer-logo>`:
 Type: `String`\
 Default: `'push'`
 
-Name for the [`push` tag](/docs/components#stacks).
+Name for the [\<push\> tag](/docs/components#stacks).
 
 ## stack
 
 Type: `String`\
 Default: `'stack'`
 
-Name for the [`stack` tag](/docs/components#stacks).
+Name for the [\<stack\> tag](/docs/components#stacks).
 
 ## propsScriptAttribute
 
@@ -426,16 +426,15 @@ For example, say you have an attribute called `tracking-id` that you only use on
 
 But you can add it to the 'valid' attributes list for `<div>` elements like this:
 
-```js [config.js] {5-8}
+```js [config.js] {3-8}
 export default {
   components: {
-    elementAttributes: {
-      DIV: (defaultAttributes) => {
-        defaultAttributes.push('tracking-id')
-
-        return defaultAttributes
-      },
-    },
+    elementAttributes: { // [!code ++]
+      DIV: (defaultAttributes) => { // [!code ++]
+        defaultAttributes.push('tracking-id') // [!code ++]
+        return defaultAttributes // [!code ++]
+      }, // [!code ++]
+    }, // [!code ++]
   },
 }
 ```

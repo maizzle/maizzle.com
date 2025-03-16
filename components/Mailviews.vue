@@ -24,7 +24,7 @@
           >100s of responsive HTML email components and templates, from the creators of Maizzle.</p>
           <form
             v-if="!subscribed"
-            @submit.prevent="subscribe"
+            @submit.prevent="handleFormSubmit"
           >
             <input
               v-if="!subscribed"
@@ -192,25 +192,30 @@ const submitDisabled = computed(() => {
   return loading.value ? true : false
 })
 
-const subscribe = async () => {
+async function handleFormSubmit() {
   loading.value = true
   hasError.value = false
 
-  const { data, error } = await useFetch('/.netlify/functions/subscribe', {
-    method: 'POST',
-    body: {
-      email: email.value,
-      consent: consent.value
-    }
-  })
+  try {
+    let formData = new URLSearchParams()
 
-  if (!error.value) {
+    formData.append('email', email.value)
+
+    await $fetch('/api/subscribe', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: formData,
+    })
+
     loading.value = false
     subscribed.value = true
-  } else {
-    hasError.value = true
-    loading.value = false
+  } catch {
     errorMessage.value = 'Something went wrong, please try again later.'
+  } finally {
+    loading.value = false
   }
 }
 </script>

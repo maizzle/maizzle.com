@@ -4,11 +4,11 @@
       <div class="divide-y divide-slate-100">
         <div
           v-for="starter in starters"
-          :key="starter._id"
+          :key="starter.id"
           class="grid grid-cols-12 gap-4 sm:gap-8 py-8 first:pt-0"
         >
           <NuxtLink
-            :to="starter._path"
+            :to="starter.path"
             class="col-span-5 sm:col-span-3"
           >
             <Image
@@ -23,16 +23,24 @@
             class="col-span-7 sm:col-span-9 grid py-4"
           >
             <NuxtLink
-              :to="starter._path"
+              :to="starter.path"
               class="text-2xl font-bold self-start"
             >{{ starter.title }}</NuxtLink>
             <p class="text-slate-600">
               {{ starter.description }}
             </p>
             <NuxtLink
-              :to="starter._path"
+              :to="starter.path"
               class="self-start text-sm text-slate-600 hover:text-indigo-500"
             >View Starter &rarr;</NuxtLink>
+          </div>
+        </div>
+      </div>
+      <div class="max-w-[75ch] 3xl:pl-4 border-t border-slate-200 pt-8 mt-8">
+        <div class="flex flex-wrap sm:items-center sm:justify-between space-y-6 sm:space-y-0 text-sm text-slate-500">
+          <div class="flex gap-2">
+            <span>Copyright &copy; {{ year }} Maizzle SRL</span>
+            <NuxtLink to="/brand" class="border-l border-slate-200 pl-2 hover:text-slate-900">Brand policy</NuxtLink>
           </div>
         </div>
       </div>
@@ -42,7 +50,7 @@
 
 <script setup>
 definePageMeta({
-  layout: 'documentation',
+  layout: 'docs',
 })
 
 defineOgImageComponent('OGImageDocs', {
@@ -52,17 +60,11 @@ defineOgImageComponent('OGImageDocs', {
 
 const route = useRoute()
 
-const starters = await queryContent('starters')
-  .only([
-    '_id',
-    '_path',
-    'title',
-    'description',
-    'image',
-    'date',
-  ])
-  .sort([{ date: -1 }])
-  .find()
+const { data: starters } = await useAsyncData('starters-index-collection', () => {
+  return queryCollection('starters')
+    .order('date', 'DESC')
+    .all()
+})
 
 useHead({
   title: 'Starters',

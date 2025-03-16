@@ -11,14 +11,14 @@
 </template>
 
 <script setup>
-  defineProps({
-    asLink: {
-      type: String,
-      default: undefined,
-    },
-  })
+defineProps({
+  asLink: {
+    type: String,
+    default: undefined,
+  },
+})
 
-  const {public: runtimeConfig} = useRuntimeConfig()
+const {public: runtimeConfig} = useRuntimeConfig()
 
-  const release = runtimeConfig.latestRelease
+const release = runtimeConfig.latestRelease
 </script>

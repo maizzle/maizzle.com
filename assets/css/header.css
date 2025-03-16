@@ -1,4 +1,0 @@
-.header-default,
-.header-background {
-  @apply bg-white/95 backdrop-blur-sm;
-}

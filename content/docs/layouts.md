@@ -19,7 +19,7 @@ Layouts are typically stored in the `layouts` directory.
 
 <Alert>Need to store them elsewhere? Make sure to [update the config](/docs/configuration/components#folders).</Alert>
 
-Layouts must include a `<yield />` tag, which is where the Template's HTML will be rendered.
+Layouts must include a `<yield />` tag, which is used to define where the Template's HTML will be rendered.
 
 Here's a very basic `layout.html`:
 
@@ -33,7 +33,7 @@ Here's a very basic `layout.html`:
   </style>
 </head>
 <body>
-  <yield />
+  <yield /> // [!code ++]
 </body>
 ```
 
@@ -68,10 +68,10 @@ When using a `<style>` tag, you can include Tailwind's `utilities` and `componen
 <!doctype html>
 <html>
 <head>
-+   <style>
-+     @tailwind components;
-+     @tailwind utilities;
-+   </style>
+  <style> /* [!code ++] */
+    @​tailwind components; /* [!code ++] */
+    @​tailwind utilities; /* [!code ++] */
+  </style> // [!code ++]
 </head>
 <body>
   <yield />
@@ -84,11 +84,11 @@ When using a `<style>` tag, you can include Tailwind's `utilities` and `componen
 
 Maizzle also supports `<link rel="stylesheet">` tags - it will try to read the file from the `href` attribute and process it with PostCSS (including Tailwind CSS). Note that this currently only works with local files.
 
-```html [layouts/main.html] diff {4}
+```html [layouts/main.html] {4}
 <!doctype html>
 <html>
 <head>
-+   <link rel="stylesheet" href="css/tailwind.css" inline>
+  <link rel="stylesheet" href="css/tailwind.css" inline> // [!code ++]
 </head>
 <body>
   <yield />

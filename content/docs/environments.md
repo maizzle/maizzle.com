@@ -128,7 +128,7 @@ The current Environment name is globally available under the `page.env` variable
 
 You can output content in your emails based on the Environment that you're building for:
 
-```xml [emails/example.html]
+```hbs [emails/example.html]
 <if condition="page.env === 'production'">
   This will show only when running `maizzle build production`
 </if>
@@ -152,9 +152,9 @@ export default {
 
 These local variables can be accessed without `page`:
 
-```diff [emails/example.html] diff {2}
-- Company name is {{ page.company.name }}
-+ Company name is {{ company.name }}
+```html [emails/example.html] {2}
+  Company name is {{ page.company.name }} <!-- [!code --] -->
+  Company name is {{ company.name }} <!-- [!code ++] -->
 ```
 
 <Alert type="warning">Maizzle does not allow overwriting the `page` object through `locals`.</Alert>
@@ -181,7 +181,7 @@ Sometimes you may need to define different values for attributes based on the En
 
 While you could use long, verbose ternaries in expressions to do so:
 
-```xml [emails/example.html]
+```hbs [emails/example.html]
 <x-main>
   <a href="{{ page.env === 'production' ? 'https://example.com' : 'https://dev.example.com' }}">Link</a>
 </x-main>
@@ -189,7 +189,7 @@ While you could use long, verbose ternaries in expressions to do so:
 
 ... Maizzle also supports Environment-based attributes:
 
-```xml [emails/example.html]
+```hbs [emails/example.html]
 <x-main>
   <a
     href="https://dev.example.com"

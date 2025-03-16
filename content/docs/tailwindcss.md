@@ -34,8 +34,8 @@ To use Tailwind CSS in your HTML emails, simply add the `@tailwind` directives t
 <html>
   <head>
     <style>
-      @tailwind components;
-      @tailwind utilities;
+      @​tailwind components; /* [!code ++] */
+      @​tailwind utilities; /* [!code ++] */
     </style>
   </head>
   <body>
@@ -69,7 +69,7 @@ Prefer `<link>` tags? Maizzle supports that too:
 <!doctype html>
 <html>
   <head>
-    <link rel="stylesheet" href="css/tailwind.css" inline>
+    <link rel="stylesheet" href="css/tailwind.css" inline> <!-- [!code ++] -->
   </head>
   <body>
     <yield />
@@ -97,6 +97,7 @@ Instead of writing something like this:
       <h1 style="margin: 0; font-size: 36px; font-family: -apple-system, 'Segoe UI', sans-serif; color: #000000;">
         Some title
       </h1>
+
       <p style="margin: 0; font-size: 16px; line-height: 24px; color: #374151;">
         Content here...
       </p>
@@ -114,6 +115,7 @@ You can write:
       <h1 class="m-0 text-4xl font-sans text-black">
         Some title
       </h1>
+
       <p class="m-0 text-base/6 text-gray-700">
         Content here...
       </p>
@@ -134,7 +136,7 @@ As an alternative to creating a Component, you may extract utility classes to a 
 
 Here's a quick example:
 
-```postcss [css/components.css]
+```css [css/components.css]
 @layer components {
   .button-danger {
     @apply py-3 px-6 text-white bg-red-500;
@@ -157,7 +159,7 @@ For example, let's import that `css/components.css` file we just created:
 <html>
   <head>
     <style>
-      @import "css/components.css";
+      @import "css/components.css"; /* [!code ++] */
       @tailwind components;
       @tailwind utilities;
     </style>
@@ -195,9 +197,9 @@ Let's use `@apply` to compose a `col` class by  extracting two padding utilities
 <html>
   <head>
     <style>
-      .col {
-        @apply py-2 px-1;
-      }
+      .col { /* [!code ++] */
+        @apply py-2 px-1; /* [!code ++] */
+      } /* [!code ++] */
 
       @tailwind components;
       @tailwind utilities;
@@ -244,7 +246,7 @@ To get shorthand-form CSS borders, you need to specify all these:
 
 With Tailwind's `@apply`, that means you can do something like this:
 
-```postcss
+```css
 .my-border {
   @apply border border-solid border-blue-500;
 }
@@ -335,7 +337,7 @@ First, add a `<stack name="head" />` inside your Layout's `<head>` tag:
     @tailwind components;
     @tailwind utilities;
   </style>
-+  <stack name="head" />
+  <stack name="head" /> // [!code ++]
 </head>
 <body>
   <yield />

@@ -13,8 +13,8 @@
         <div class="mt-10 space-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16">
           <article
             v-for="guide in guides"
-            :key="guide._id"
-            class="flex max-w-xl flex-col items-start justify-between"
+            :key="guide.id"
+            class="flex flex-col items-start justify-between"
           >
             <div class="flex items-center gap-x-4 text-xs">
               <time :datetime="guide.date" class="text-gray-500">
@@ -22,17 +22,26 @@
               </time>
             </div>
             <div class="group relative">
-              <h2 class="mt-3 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
-                <NuxtLink :to="guide._path">
+              <h2 class="mt-2 text-2xl font-semibold text-gray-900 group-hover:text-gray-600">
+                <NuxtLink :to="guide.path">
                   <span class="absolute inset-0"></span>
                   {{ guide.title }}
                 </NuxtLink>
               </h2>
-              <p class="mt-5 line-clamp-3 text-sm leading-6 text-gray-600">
+              <p class="mt-5 line-clamp-3 text-base text-gray-600">
                 {{ guide.description }}
               </p>
             </div>
           </article>
+        </div>
+
+        <div class="max-w-[75ch] 3xl:pl-4 border-t border-slate-200 pt-12 mt-12">
+          <div class="flex flex-wrap sm:items-center sm:justify-between space-y-6 sm:space-y-0 text-sm text-slate-500">
+            <div class="flex gap-2">
+              <span>Copyright &copy; {{ year }} Maizzle SRL</span>
+              <NuxtLink to="/brand" class="border-l border-slate-200 pl-2 hover:text-slate-900">Brand policy</NuxtLink>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -47,17 +56,11 @@ defineOgImageComponent('OGImageDocs', {
   description: 'Learn how to create HTML emails with Tailwind CSS in Maizzle.',
 })
 
-const guides = await queryContent('guides')
-  .only([
-    '_id',
-    '_path',
-    'title',
-    'description',
-    'image',
-    'date',
-  ])
-  .sort([{ date: -1 }])
-  .find()
+const { data: guides } = await useAsyncData('guides-index-collection', () => {
+  return queryCollection('guides')
+    .order('date', 'DESC')
+    .all()
+})
 
 useHead({
   title: 'Guides | Maizzle',

@@ -1,6 +1,6 @@
 <template>
   <div class="relative z-10 home-code-sample">
-    <div class="flex justify-between items-center px-6 border rounded-t-md bg-white relative z-10">
+    <div class="flex justify-between items-center px-6 border border-slate-200 rounded-t-md bg-white relative z-10">
       <span class="h-10 flex items-center border-b border-indigo-600 -mb-px text-xs">
         {{ title }}
       </span>
@@ -22,7 +22,7 @@
       </svg>
     </div>
 
-    <div class="relative z-20 rounded-b-md backdrop-blur-[3px] bg-white">
+    <div class="relative z-20 border border-t-0 border-slate-200 rounded-b-md backdrop-blur-[3px] bg-white">
       <slot />
     </div>
 

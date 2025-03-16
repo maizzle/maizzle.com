@@ -7,9 +7,8 @@ export default defineNuxtModule({
       const {tag_name} = await ofetch('https://api.github.com/repos/maizzle/framework/releases/latest')
       nuxt.options.runtimeConfig.public.latestRelease = tag_name
     } catch (error) {
-      nuxt.options.runtimeConfig.public.latestRelease = 4
+      nuxt.options.runtimeConfig.public.latestRelease = 'v5.0.6'
 
     }
-
   }
 })

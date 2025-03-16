@@ -47,14 +47,14 @@ npm i posthtml-prism
 
 Next, add it to the plugins list in your `config.js`:
 
-```js [config.js] {3-7} diff
+```js [config.js] {3-7}
 module.exports = {
   build: {
-+    posthtml: {
-+      plugins: [
-+        require('posthtml-prism')()
-+      ]
-+    }
+    posthtml: { // [!code ++]
+      plugins: [ // [!code ++]
+        require('posthtml-prism')() // [!code ++]
+      ] // [!code ++]
+    } // [!code ++]
   }
 }
 ```
@@ -87,7 +87,7 @@ Run `npm run dev` to start the development server, open `http://localhost:3000/`
 
 You'll see something like this:
 
-```
+```html
 function foo(bar) {
   var a = 42,
       b = 'Prism';

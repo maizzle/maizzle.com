@@ -167,7 +167,7 @@ export default {
 
 ### afterBuild
 
-Runs after all Templates have been compiled and output to disk. The `files` parameter will contain the paths to all the files inside the [`destination.path`](/docs/configuration/templates#path) directory.
+Runs after all Templates have been compiled and output to disk. The `files` parameter will contain the paths to all the files inside the [`build.output.path`](/docs/configuration/build#path) directory.
 
 ```js [config.js]
 export default {

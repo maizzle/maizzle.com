@@ -27,9 +27,9 @@
 
         <!-- Cta -->
         <div class="w-full mb-20 md:mb-32 mx-auto flex flex-col md:flex-row items-center justify-center gap-5">
-          <DocSearch class="hidden" />
+          <AlgoliaDocSearch class="hidden" />
           <button
-            class="w-72 pl-4 pr-2 py-2 flex items-center justify-between border rounded-xl border-slate-300 hover:border-slate-400/75 bg-white text-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+            class="w-72 pl-4 pr-2 py-2 flex items-center justify-between border rounded-xl border-slate-300 hover:border-slate-400/75 bg-white text-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white cursor-pointer"
             @click="openDocsearch"
           >
             <span class="flex items-center gap-2">
@@ -112,7 +112,7 @@
                 title="tailwind.config.js"
                 bg-frame-class="top-4 sm:top-8 right-4 sm:right-8 backdrop-blur-[2px]"
               >
-                <ContentDoc path="code/config" :head="false" />
+                <ContentRenderer v-if="codeConfig" :value="codeConfig" :prose="false" />
               </HomeCodeFrame>
             </div>
           </div>
@@ -137,7 +137,7 @@
           </p>
           <h4 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">Powerful modifiers</h4>
           <p class="mb-8 text-base text-slate-500">
-            Use modifiers like <code class="bg-slate-50 px-1.5 py-0.5 border rounded-md text-sm">hover:bg-blue-500</code> or <code class="bg-slate-50 px-1.5 py-0.5 border rounded-md text-sm">sm:w-full</code> to easily
+            Use modifiers like <code class="bg-slate-50 px-1.5 py-0.5 border border-slate-200 rounded-md text-sm">hover:bg-blue-500</code> or <code class="bg-slate-50 px-1.5 py-0.5 border border-slate-200 rounded-md text-sm">sm:w-full</code> to easily
             add hover effects or style responsive emails - no more context switching.
           </p>
           <h4 class="mb-6 text-lg md:text-xl font-semibold text-slate-800">Make it your own</h4>
@@ -163,7 +163,7 @@
               bg-frame-class="top-4 sm:top-8 right-4 sm:right-8 bg-white/30 backdrop-blur-[2px]"
               no-copy
             >
-            <ContentDoc path="code/template" :head="false" />
+              <ContentRenderer v-if="codeTemplate" :value="codeTemplate" :prose="false" />
             </HomeCodeFrame>
           </div>
         </div>
@@ -204,7 +204,7 @@
                 bg-frame-class="top-4 sm:top-8 right-4 sm:right-8 bg-white/30 backdrop-blur-[1px]"
                 no-copy
               >
-                <ContentDoc path="code/environment" :head="false" />
+                <ContentRenderer v-if="codeEnvironment" :value="codeEnvironment" :prose="false" />
               </HomeCodeFrame>
             </div>
           </div>
@@ -271,7 +271,7 @@
             :class="{ 'h-[650px]': !showAllFeatures }"
           >
             <NuxtLink
-              v-for="feature in features"
+              v-for="feature in features[0].items"
               :key="feature.path"
               :to="feature.path"
               class="group relative rounded-2xl ring-1 ring-slate-900/5 bg-white hover:ring-indigo-500 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
@@ -294,7 +294,7 @@
         >
           <button
             type="button"
-            class="py-2.5 mb-16 mx-auto inline-flex text-base bg-indigo-600 hover:bg-indigo-700 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white duration-300"
+            class="py-2.5 mb-16 mx-auto inline-flex text-base bg-indigo-600 hover:bg-indigo-700 text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white duration-300 cursor-pointer"
             :class="{ 'px-2.5 rounded-full duration-300 hover:rotate-180': showAllFeatures, 'px-6 rounded-xl transition-colors': !showAllFeatures }"
             @click="showFeatures"
           >
@@ -339,7 +339,7 @@
           >
             <NuxtLink
               class="relative text-slate-700 hover:text-indigo-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white transition-colors"
-              :to="guide._path"
+              :to="guide.path"
             >
               <div class="h-full px-6 py-6 rounded-2xl ring-1 ring-slate-900/5 bg-white hover:ring-indigo-500 transition-all flex flex-col md:flex-row md:flex-wrap flex-1 content-between relative z-1">
                 <div>
@@ -409,7 +409,7 @@
                 :class="{ 'row-span-2 items-center': index === 0 }"
               >
                 <a
-                  :href="template.url"
+                  :href="template.meta.url"
                   class="grid-item relative focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
                 >
                   <div class="frame w-full h-full p-[1px] rounded-[9px] absolute z-0 bg-white transition-all duration-300">
@@ -419,12 +419,12 @@
                     class="rounded-2xl ring-1 ring-slate-900/5 bg-slate-100"
                     :width="384"
                     :height="287"
-                    :url="template.image"
+                    :url="template.meta.image"
                     :alt="template.title"
                   />
                   <div class="py-4 flex items-end gap-2 rounded-lg relative z-10">
-                    <h4 class="font-bold text-xl text-slate-700">{{ template.name }}</h4>
-                    <p class="text-base text-slate-500">{{ template.purpose }}</p>
+                    <h4 class="font-bold text-xl text-slate-700">{{ template.meta.name }}</h4>
+                    <p class="text-base text-slate-500">{{ template.meta.purpose }}</p>
                   </div>
                 </a>
               </div>
@@ -439,46 +439,41 @@
 </template>
 
 <script setup>
-import features from '@/data/features'
-
 definePageMeta({
-  layout: 'homepage'
-})
-
-useContentHead({
-  head: {
-    titleTemplate: () => 'Maizzle - Quickly build HTML emails with Tailwind CSS',
-  }
+  layout: 'home'
 })
 
 defineOgImageComponent('OGImageHome')
 
-const templates = await queryContent('templates')
-  .only([
-    '_id',
-    '_path',
-    'date',
-    'title',
-    'name',
-    'image',
-    'url',
-    'purpose',
-  ])
-  .sort({ order: 1 })
-  .limit(3)
-  .find()
+const { data: features } = await useAsyncData('features-collection', () => {
+  return queryCollection('features').all()
+})
 
-const guides = await queryContent('guides')
-  .only([
-    '_id',
-    '_path',
-    'title',
-    'description',
-    'date',
-  ])
-  .sort({ date: -1 })
-  .limit(6)
-  .find()
+const { data: templates } = await useAsyncData('templates-collection', () => {
+  return queryCollection('templates')
+    .order('order', 'ASC')
+    .limit(3)
+    .all()
+})
+
+const { data: guides } = await useAsyncData('guides-collection', () => {
+  return queryCollection('guides')
+    .order('date', 'DESC')
+    .limit(6)
+    .all()
+})
+
+const { data: codeConfig } = await useAsyncData('code-config', () => {
+  return queryCollection('code').path('/code/config').first()
+})
+
+const { data: codeEnvironment } = await useAsyncData('code-environment', () => {
+  return queryCollection('code').path('/code/environment').first()
+})
+
+const { data: codeTemplate } = await useAsyncData('code-template', () => {
+  return queryCollection('code').path('/code/template').first()
+})
 
 const showAllFeatures = ref(false)
 const windowPosition = ref(0)

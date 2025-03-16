@@ -105,7 +105,7 @@ package.json
 
 ## Permalink
 
-If you're using the [`permalink`](/docs/configuration/templates#permalink) Front Matter key in your Template, Maizzle will output the `.txt` file at that location:
+If you're using the [`permalink`](/docs/configuration/build#permalink) Front Matter key in your Template, Maizzle will output the `.txt` file at that location:
 
 ```hbs [emails/example.html]
 ---

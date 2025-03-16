@@ -46,10 +46,10 @@ Let's configure and use `tailwindcss-gradients` with Tailwind CSS.
 
 We need to tell Tailwind CSS to use the plugin. Edit `tailwind.config.js` and `require()` the plugin inside the `plugins: []` array:
 
-```js [tailwind.config.js] {3} diff
+```js [tailwind.config.js] {3}
 module.exports = {
   plugins: [
-+    require('tailwindcss-gradients'),
+    require('tailwindcss-gradients'), // [!code ++]
   ]
 }
 ```
@@ -58,10 +58,10 @@ Next, we need to define what kind of gradients we want to generate, based on whi
 
 For example, let's register linear gradients based on the existing color palette:
 
-```js [tailwind.config.js] {3} diff
+```js [tailwind.config.js] {3}
 module.exports = {
   theme: {
-+    linearGradientColors: theme => theme('colors'),
+    linearGradientColors: theme => theme('colors'), // [!code ++]
   }
 }
 ```
@@ -92,18 +92,18 @@ Outlook for Windows doesn't support CSS gradients, but we can use <abbr title="V
 
 You need to add it right after the element with the CSS gradient class:
 
-```html [emails/example.html] {5-11} diff
+```html [emails/example.html] {5-11}
 <x-main>
   <table class="w-full">
     <tr>
       <td class="bg-blue-500 bg-gradient-b-black-transparent">
-+        <!--[if gte mso 9]>
-+        <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:600px;">
-+        <v:fill type="gradient" color="#0072FF" color2="#00C6FF" angle="90" />
-+        <v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0">
-+        <div><![endif]-->
-+        [your overlayed HTML here]
-+        <!--[if gte mso 9]></div></v:textbox></v:rect><![endif]-->
+        <!--[if gte mso 9]>
+        <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width:600px;">
+        <v:fill type="gradient" color="#0072FF" color2="#00C6FF" angle="90" />
+        <v:textbox style="mso-fit-shape-to-text:true" inset="0,0,0,0">
+        <div><![endif]-->
+        [your overlayed HTML here]
+        <!--[if gte mso 9]></div></v:textbox></v:rect><![endif]-->
       </td>
     </tr>
   </table>
@@ -153,13 +153,13 @@ Most email clients that support CSS gradients also support `@media` queries.
 
 We can register a `screen` breakpoint to prevent Juice from inlining our gradient:
 
-```js [tailwind.config.js] {6} diff
+```js [tailwind.config.js] {6}
 module.exports = {
   theme: {
     screens: {
       sm: {max: '600px'},
       xs: {max: '425px'},
-+      screen: {raw: 'screen'},
+      screen: {raw: 'screen'}, // [!code ++]
     }
   }
 }

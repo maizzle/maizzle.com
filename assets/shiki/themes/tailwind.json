@@ -1,5 +1,5 @@
 {
-    "name": "Tailwind CSS Dark (Enhanced)",
+    "name": "tailwind-css",
     "colors": {
         "foreground": "#075985",
         "descriptionForeground": "#e5e7eb",
@@ -133,7 +133,7 @@
         "editorOverviewRuler.modifiedForeground": "#2563eb",
         "editor.background": "#ffffff",
         "editorPane.background": "#111827",
-        "editor.foreground": "#075985",
+        "editor.foreground": "#1d4ed8",
         "editorLineNumber.foreground": "#6b7280",
         "editorLineNumber.activeForeground": "#f3f4f6",
         "editorCursor.foreground": "#075985",
@@ -245,7 +245,7 @@
                 "variable.other.constant"
             ],
             "settings": {
-                "foreground": "#1E40AF"
+                "foreground": "#1d4ed8"
             }
         },
         {
@@ -339,7 +339,7 @@
                 "punctuation.definition.string"
             ],
             "settings": {
-                "foreground": "#1e40af"
+                "foreground": "#1d4ed8"
             }
         },
         {
@@ -389,12 +389,23 @@
             }
         },
         {
+            "name": "[HTML] - Tag self close / end",
+            "scope": [
+                "text.html punctuation.definition.tag.end.html",
+                "text.html meta.tag.inline.br.void.html",
+                "text.html text.html.derivative"
+            ],
+            "settings": {
+                "foreground": "#CBD5E1"
+            }
+        },
+        {
             "name": "[HTML] - Attribute Values",
             "scope": [
                 "text.html string.quoted"
             ],
             "settings": {
-                "foreground": "#1E40AF"
+                "foreground": "#1d4ed8"
             }
         },
         {
@@ -413,7 +424,18 @@
                 "text.html keyword.operator"
             ],
             "settings": {
-                "foreground": "#0ea5e9"
+                "foreground": "#cbd5e1"
+            }
+        },
+        {
+            "name": "[HTML] - &copy etc",
+            "scope": [
+                "text.html constant.character.entity.named.copy.html",
+                "punctuation.definition.entity.html",
+                "text.html.derivative"
+            ],
+            "settings": {
+                "foreground": "#EC4899"
             }
         },
         {
@@ -423,7 +445,7 @@
                 "text.html meta.tag.sgml punctuation"
             ],
             "settings": {
-                "foreground": "#5f7692"
+                "foreground": "#94a3b8"
             }
         },
         {
@@ -527,7 +549,7 @@
                 "source.css keyword.other.unit"
             ],
             "settings": {
-                "foreground": "#1E40AF"
+                "foreground": "#1d4ed8"
             }
         },
         {
@@ -645,7 +667,7 @@
                 "source.json meta.structure.dictionary.json support.type.property-name"
             ],
             "settings": {
-                "foreground": "#1e40af"
+                "foreground": "#1d4ed8"
             }
         },
         {

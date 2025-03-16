@@ -8,11 +8,11 @@
 
   .DocSearch-Modal {
     @apply md:max-w-[65ch] 2xl:max-w-[68.5ch];
-    @apply bg-white shadow-2xl shadow-indigo-600/10 border;
+    @apply bg-white shadow-2xl shadow-indigo-600/10 border border-slate-200;
   }
 
   .DocSearch-SearchBar {
-    @apply py-1 px-2 border-b;
+    @apply py-1 px-2 border-b border-slate-200;
   }
 
   .DocSearch-Form {
@@ -48,7 +48,7 @@
 
   .DocSearch-Hit a,
   .DocSearch-Hit[aria-selected=true] a {
-    @apply bg-white border shadow-none;
+    @apply bg-white border border-slate-200 shadow-none;
   }
 
   .DocSearch-Hit[aria-selected=true] a {
@@ -65,16 +65,16 @@
   .DocSearch-Hit[aria-selected=true] .DocSearch-Hit-icon,
   .DocSearch-Hit[aria-selected=true] .DocSearch-Hit-path,
   .DocSearch-Hit[aria-selected=true] .DocSearch-Hit-action {
-    @apply text-slate-600 !important;
+    @apply !text-slate-600;
   }
 
   .DocSearch-Hit mark,
   .DocSearch-Hit[aria-selected=true] mark {
-    @apply text-indigo-600 underline !important;
+    @apply !text-indigo-600 !underline;
   }
 
   .DocSearch-Footer {
-    @apply shadow-none border-t;
+    @apply shadow-none border-t border-slate-200;
   }
 
   .DocSearch-Commands {
@@ -111,7 +111,7 @@
   @apply w-4 h-4 !text-slate-400;
 }
 
-/* There's no option to set buton text :( */
+/* There's no option to set button text :( */
 .DocSearch-Button-Placeholder {
   @apply text-transparent;
 }

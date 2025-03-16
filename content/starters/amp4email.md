@@ -1,7 +1,7 @@
 ---
 title: "AMP4Email"
 repository: https://github.com/maizzle/starter-amp4email.git
-description: "Original, free ⚡4email templates."
+description: "Original, free AMP4EMAIL templates."
 image: https://res.cloudinary.com/maizzle/image/upload/q_auto:best/starters/amp4email.jpg
 htmlPreview: https://raw.githubusercontent.com/maizzle/starter-amp4email/master/build_production/carousel.html
 date: 2020-02-20

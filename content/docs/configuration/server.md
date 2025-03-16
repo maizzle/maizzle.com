@@ -117,15 +117,15 @@ export default {
 
 Less than 50KB:
 
-<div class="font-mono">✔ Done in 41 ms [emails/example.html] · 6.74 KB</div>
+<div class="inline-block px-3 py-1 rounded font-mono bg-gradient-to-t from-slate-50 to-white border border-slate-100">✔ Done in 41 ms [emails/example.html] · 6.74 KB</div>
 
 Between 50KB and 102KB:
 
-<div class="font-mono">✔ Done in 41 ms [emails/example.html] · <span class="text-amber-500">78.1 KB</span></div>
+<div class="inline-block px-3 py-1 rounded font-mono bg-gradient-to-t from-slate-50 to-white border border-slate-100">✔ Done in 41 ms [emails/example.html] · <span class="text-amber-500">78.1 KB</span></div>
 
 More than 102KB:
 
-<div class="font-mono">✔ Done in 41 ms [emails/example.html] · <span class="text-red-500">112.3 KB</span></div>
+<div class="inline-block px-3 py-1 rounded font-mono bg-gradient-to-t from-slate-50 to-white border border-slate-100">✔ Done in 41 ms [emails/example.html] · <span class="text-red-500">112.3 KB</span></div>
 
 ### spinner
 

@@ -1,4 +1,4 @@
-```xml
+```html
 <x-main>
   <table class="mx-auto font-inter">
     <tr>

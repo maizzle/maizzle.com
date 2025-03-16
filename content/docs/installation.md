@@ -113,10 +113,10 @@ Maizzle is listed as a dependency in your project's `package.json` file:
 
 To use a specific version, first change the value to the desired release number:
 
-```json [package.json] diff no-copy
+```json [package.json] {3} no-copy
 "dependencies": {
--  "@maizzle/framework": "latest",
-+  "@maizzle/framework": "5.0.0-beta.38",
+   "@maizzle/framework": "latest", // [!code --]
+   "@maizzle/framework": "5.0.6", // [!code ++]
 }
 ```
 
