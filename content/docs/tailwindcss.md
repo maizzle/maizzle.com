@@ -132,9 +132,7 @@ If you're repeating the same utility classes over and over again, you can extrac
 
 ### Custom classes
 
-As an alternative to creating a Component, you may extract utility classes to a custom class using Tailwind's `@apply` directive.
-
-Here's a quick example:
+You may also extract utility classes to a custom CSS class, by using Tailwind's `@apply` directive:
 
 ```css [css/components.css]
 @layer components {
@@ -144,9 +142,9 @@ Here's a quick example:
 }
 ```
 
-Unlike custom utility classes that you may add to `tailwind.config.js`, you would add that in a CSS file that is imported in your main `<style>` tag or through a `<link>` tag.
+Add that in a `<style>` tag or in a CSS file that you reference through a `<link>` tag.
 
-And that brings us to...
+The `@layer components` directive ensures that the `.button-danger` class is added to the `components` layer in Tailwind, which allows us to override it with a utility class if needed.
 
 ## CSS Files
 
