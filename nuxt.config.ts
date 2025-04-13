@@ -13,7 +13,12 @@ export default defineNuxtConfig({
     '@nuxt/fonts'
   ],
   devtools: { enabled: true },
-  nitro: { preset: 'static', },
+  nitro: {
+    preset: 'static',
+    prerender: {
+      autoSubfolderIndex: false,
+    },
+  },
   spaLoadingTemplate: false,
   devServer: { port: 8080 },
   site: {

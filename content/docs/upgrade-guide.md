@@ -245,7 +245,7 @@ export default {
 }
 ```
 
-See the [CSS inlining docs](./transformers/inline-css) for all the options available.
+See the [CSS inlining docs](/docs/transformers/inline-css) for all the options available.
 
 ### outlook
 
@@ -352,7 +352,7 @@ Browsersync has been replaced with a custom dev server, powered by Express.js an
 
 We call this Hot Markup Replacement&trade;.
 
-This [new dev server](./configuration/server) is much faster and provides a nicer experience, but you'll need to update your `config.js` if you want to configure it:
+This [new dev server](/docs/configuration/server) is much faster and provides a nicer experience, but you'll need to update your `config.js` if you want to configure it:
 
 ```js [config.js] {3-10}
 export default {
