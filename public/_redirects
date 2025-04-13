@@ -1,4 +1,3 @@
-/docs/*/    /docs/:splat                                    301!
 /docs       /docs/introduction                              302
 /discord    https://discord.gg/fpRBNV4YrT                   302
 /issues     https://github.com/maizzle/framework/issues     302
