@@ -15,7 +15,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   nitro: {
     preset: 'static',
-    trailingSlash: false,
+    prerender: {
+      autoSubfolderIndex: false,
+    },
   },
   spaLoadingTemplate: false,
   devServer: { port: 8080 },

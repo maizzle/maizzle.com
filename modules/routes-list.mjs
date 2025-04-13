@@ -23,7 +23,7 @@ async function listFilesInDirectory(directory, prefix = '') {
         return path.join('/', prefix, '/')
       }
 
-      let finalPath = path.join('/', prefix, nameWithoutNumberPrefix, '/')
+      let finalPath = path.join('/', prefix, nameWithoutNumberPrefix)
 
       // Replace backslashes with forward slashes on Windows, so we can build locally.
       // Seems that Nitro doesn't handle them for now...
@@ -38,9 +38,6 @@ async function listFilesInDirectory(directory, prefix = '') {
   // Flatten the array and return it
   return Array.prototype.concat(...files)
 }
-
-const f = await listFilesInDirectory('./content')
-console.log(f)
 
 export default defineNuxtModule({
   async setup(_moduleOptions, nuxt) {
