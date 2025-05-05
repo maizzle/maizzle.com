@@ -15,7 +15,7 @@
     "@nuxt/content": "3.3.0",
     "@nuxt/fonts": "0.11.0",
     "@tailwindcss/vite": "^4.1.5",
-    "@vueuse/components": "13.0.0",
+    "@vueuse/components": "13.1.0",
     "nuxt": "3.16.0",
     "nuxt-og-image": "5.1.1",
     "scroll-to-element": "^2.0.3",
