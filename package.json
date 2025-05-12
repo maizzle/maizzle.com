@@ -19,7 +19,7 @@
     "nuxt": "3.16.0",
     "nuxt-og-image": "5.1.1",
     "scroll-to-element": "^2.0.3",
-    "tailwindcss": "^4.0.17",
+    "tailwindcss": "^4.1.6",
     "vue": "3.5.13",
     "vue-router": "4.5.0"
   },
