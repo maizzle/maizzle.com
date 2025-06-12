@@ -58,8 +58,8 @@ export default defineNuxtConfig({
     title: 'Maizzle - Quickly build HTML emails with Tailwind CSS',
     description: 'Maizzle is a framework that helps you quickly build HTML emails with Tailwind CSS and advanced, email-specific post-processing.',
     full: {
-      title: 'Maizzle - Quickly build HTML emails with Tailwind CSS',
-      description: 'Maizzle is a framework that helps you quickly build HTML emails with Tailwind CSS and advanced, email-specific post-processing.',
+      title: 'Full Maizzle documentation',
+      description: 'The complete Maizzle email framework documentation, including guides and tutorials.',
     },
     sections: [
       {
