@@ -145,7 +145,7 @@ Again, this is just to avoid Maizzle from evaluating the expression - you don't 
 
 ```hbs [emails/example.html]
 ---
-title: "Weekly newsletter no. {{ user.name }}"
+title: "Weekly newsletter no. {{ editions.count }}"
 ---
 
 <x-main>
@@ -156,7 +156,7 @@ title: "Weekly newsletter no. {{ user.name }}"
 Result:
 
 ```hbs [build_production/example.html]
-Weekly newsletter no. {{ user.name }}
+Weekly newsletter no. {{ editions.count }}
 ```
 
 ### Ignore with &lt;raw&gt;
