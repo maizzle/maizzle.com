@@ -75,28 +75,60 @@ markup: '<strong>Bold</strong>'
 
 Other templating engines and many <abbr title="Email Service Provider">ESP</abbr>s also use the `{{ }}` syntax.
 
-If you want to prevent expression compilation and actually render the curly braces so you can evaluate them at a later stage, you have several options:
+If you want to prevent expression compilation and actually render the curly braces so you can evaluate them at a later stage, you have several options.
 
-### Ignore inline
+### Undefined variables
 
-The [Blade](https://laravel.com/docs/blade)-inspired `@{{ }}` syntax is useful for one-offs, where you need to ignore a single expression. The compiled email will render `{{ }}` without the `@`.
+First, it's important to note that any undefined variable will simply be output as-is, so you don't need to do anything special if you want to ignore an expression containing a variable that doesn't exist in your Environment config or Front Matter:
 
 ```hbs [emails/example.html]
 <x-main>
-  @{{ page.markup }}
-  <!-- Result: {{ page.markup }} -->
+  {{ undefinedVariable }}
 </x-main>
 ```
 
-<Alert type="info">Undefined variables don't need to be ignored, they will just be output as you wrote them. You might want to use inline ignoring if your expression contains quotes `'`, i.e. `{{ foo: 'Bar' }}`, to prevent Maizzle from escaping them.</Alert>
+Result:
 
-### Ignore in Front Matter
+```hbs [build_production/example.html]
+{{ undefinedVariable }}
+```
 
-You may also use `@{{ }}` to prevent expressions in Front Matter.
+### Ignore inline
+
+The [Blade](https://laravel.com/docs/blade)-inspired `@{{ }}` syntax is useful for one-offs, where you need to ignore a single expression which contains variables that you also have defined in your Maizzle project. The compiled email will render `{{ }}` without the `@`.
+
+For example, if you actually want to render `{{ page.title }}` instead of evaluating it:
 
 ```hbs [emails/example.html]
 ---
-title: "Weekly newsletter no. @{{ user: 'Arthur Morgan'  }}"
+title: 'Weekly newsletter'
+---
+
+<x-main>
+  @{{ page.title }}
+  <!-- Result: {{ page.title }} -->
+</x-main>
+```
+
+This can also be used to avoid encoding entities inside the expression:
+
+```hbs [emails/example.html]
+<x-main>
+  {{ $foo->bar }}
+  <!-- Result: {{ $foo-&gt;bar }} -->
+
+  @{{ $foo->bar }}
+  <!-- Result: {{ $foo->bar }} -->
+</x-main>
+```
+
+### Ignore in Front Matter
+
+You may also use `@{{ }}` to ignore expressions in Front Matter.
+
+```hbs [emails/example.html]
+---
+title: "Weekly newsletter no. @{{ 1 + 1 }}"
 ---
 <x-main>
   {{ page.title }}
@@ -106,10 +138,10 @@ title: "Weekly newsletter no. @{{ user: 'Arthur Morgan'  }}"
 Result:
 
 ```hbs [build_production/example.html]
-Weekly newsletter no. {{ user: 'Arthur Morgan' }}
+Weekly newsletter no. {{ 1 + 1 }}
 ```
 
-Again, this is just to avoid Maizzle from evaluating the expression - you don't need the `@` if your expression doesn't contain any quotes:
+Again, this is just to avoid Maizzle from evaluating the expression - you don't need the `@` if your expression contains a variable that doesn't exist in your Environment config or Front Matter:
 
 ```hbs [emails/example.html]
 ---
@@ -134,6 +166,7 @@ Use `<raw>` to ignore expressions or any PostHTML tags in a block of HTML:
 ```hbs [emails/example.html]
 <raw>
   <p>The quick brown {{ 1 + 2 }} jumps over the lazy {{ 3 + 4 }}.</p>
+  <each loop="i in [1,2]">Test</each>
 </raw>
 ```
 
@@ -141,20 +174,21 @@ Use `<raw>` to ignore expressions or any PostHTML tags in a block of HTML:
 
 ```hbs [build_production/example.html]
 <p>The quick brown {{ 1 + 2 }} jumps over the lazy {{ 3 + 4 }}.</p>
+<each loop="i in [1,2]">Test</each>
 ```
+
+<Alert type="warning">Maizzle components, like `<x-button>`, are not ignored inside `<raw>` and will be compiled as usual.</Alert>
 
 ### Change delimiters
 
 You can change the delimiters to something else, like `[[ ]]`:
 
 ```js [config.js]
-module.exports = {
-  build: {
-    posthtml: {
-      expressions: {
-        delimiters: ['[[', ']]'],
-        unescapeDelimiters: ['[[[', ']]]']
-      }
+export default {
+  posthtml: {
+    expressions: {
+      delimiters: ['[[', ']]'],
+      unescapeDelimiters: ['[[[', ']]]']
     }
   }
 }
@@ -170,20 +204,4 @@ Then you can safely use `{{ }}` and its contents will not be evaluated:
   <!-- But this won't be -->
   Hi, {{ user.name }}.
 </x-main>
-```
-
-### Undefined variables
-
-Any variable that is not defined will be output as-is:
-
-```hbs [emails/example.html]
-<x-main>
-  {{ undefinedVariable }}
-</x-main>
-```
-
-Result:
-
-```hbs [build_production/example.html]
-{{ undefinedVariable }}
 ```
