@@ -194,14 +194,18 @@ export default {
 }
 ```
 
-Then you can safely use `{{ }}` and its contents will not be evaluated:
+Then you can safely use `{{ }}` and it will not be evaluated:
 
 ```hbs [emails/example.html]
-<x-main>
-  <!-- This will be evaluated -->
-  [[ page.title ]]
+---
+title: "Weekly newsletter"
+---
 
-  <!-- But this won't be -->
-  Hi, {{ user.name }}.
+<x-main>
+  [[ page.title ]]
+  <!-- Result: Weekly newsletter -->
+
+  {{ page.title }}
+  <!-- Result: {{ page.title }} -->
 </x-main>
 ```
