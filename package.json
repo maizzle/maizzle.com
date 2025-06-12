@@ -13,7 +13,7 @@
     "@docsearch/css": "3.8.2",
     "@docsearch/js": "3.8.2",
     "@nuxt/content": "3.3.0",
-    "@nuxt/fonts": "0.11.0",
+    "@nuxt/fonts": "0.11.4",
     "@tailwindcss/vite": "^4.1.10",
     "@vueuse/components": "13.3.0",
     "nuxt": "3.16.0",
