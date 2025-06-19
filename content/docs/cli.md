@@ -23,8 +23,10 @@ git --version
 Install the CLI tool globally, so the `maizzle` executable gets added to your `$PATH` :
 
 ```sh
-npm install -g @maizzle/cli
+npm install -g @maizzle/cli@1.5.9
 ```
+
+Note that we install the last v1.x version for use with Maizzle 4.x, as CLI v2.x will not work with it.
 
 ## Creating a project
 
