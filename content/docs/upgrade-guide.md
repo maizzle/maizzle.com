@@ -27,11 +27,15 @@ node --version
 
 ## Update @maizzle/cli
 
-If you use `@maizzle/cli` installed globally, you must upgrade it to v2.x in order to use it in Maizzle 5 projects:
+<strong class="text-indigo-500">BREAKING CHANGE</strong>
+
+Users with `@maizzle/cli` installed globally need to upgrade it to v2.x in order to continue using it in Maizzle 5 projects:
 
 ```sh
 npm install -g @maizzle/cli
 ```
+
+<Alert type="warning">CLI 2.x only works with Maizzle 5 projects, it's not backwards compatible.</Alert>
 
 Alternatively, you can just use the NPM scripts like `npm run dev` from `package.json`.
 
