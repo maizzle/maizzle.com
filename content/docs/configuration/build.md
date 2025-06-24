@@ -260,7 +260,20 @@ export default {
 }
 ```
 
-You can use it to store _any_ files you might need, not just images.
+If you have multiple static asset directories, define them as an array of objects:
+
+```js [config.js]
+export default {
+  build: {
+    static: [
+      { source: 'images/**/*', destination: 'images' },
+      { source: 'fonts/**/*', destination: 'fonts' }
+    ]
+  }
+}
+```
+
+As you can see, the `build.static` configuration can be used to copy _any_ files to the build directory, not just images.
 
 ## spinner
 
