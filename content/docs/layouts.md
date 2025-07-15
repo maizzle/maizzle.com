@@ -62,7 +62,7 @@ In order for Tailwind CSS to work, you need to include it in a `<style>` or `<li
 
 ### style tag
 
-When using a `<style>` tag, you can include Tailwind's `utilities` and `components` by using the `@tailwind` directive:
+Add the `@tailwind` directives in a `<style>` tag inside the `<head>` of your Layout:
 
 ```html [layouts/main.html] diff {4-7}
 <!doctype html>
@@ -78,7 +78,7 @@ When using a `<style>` tag, you can include Tailwind's `utilities` and `componen
 </body>
 ```
 
-<Alert>We don't recommend using `@tailwind base` because it contains CSS resets that won't work or are not needed in HTML emails. Also, some resets use the `*` selector, which can cause issues when CSS is inlined.</Alert>
+<Alert>We don't recommend using `@tailwind base` because it contains CSS resets that won't work or are not needed in HTML emails. Also, some resets in there use the `*` selector, which can cause issues when CSS is inlined.</Alert>
 
 ### link tag
 
