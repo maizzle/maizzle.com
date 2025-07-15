@@ -5,7 +5,7 @@
         :value="page"
         tag="article"
         class="
-          max-w-[75ch] 3xl:pl-8
+          max-w-[80ch] mx-auto
           prose prose-slate
           prose-headings:text-slate-800 prose-h1:font-bold
           prose-p:text-slate-600

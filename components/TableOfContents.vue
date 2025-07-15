@@ -42,7 +42,7 @@
           </ul>
         </li>
       </ul>
-      <div class="lg:mt-8 px-4 max-w-xs">
+      <div class="lg:mt-8 px-4 lg:px-0 max-w-xs">
         <ClientOnly>
           <Component
             is="script"

@@ -56,15 +56,23 @@
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-12 col-span-8 lg:col-span-9 2xl:col-span-8 h-full border-b border-slate-100 backdrop-blur bg-white/90">
-        <div class="grid col-span-12 xl:col-span-9 2xl:col-span-7 3xl:col-span-6 xl:py-4 px-8 3xl:pl-16 items-center">
-          <div class="hidden sm:block max-w-[75ch] whitespace-nowrap overflow-auto">
-            <NuxtLink
-              to="/docs/upgrade-guide"
-              class="hidden sm:inline-block px-3 py-1 rounded-full text-sm text-indigo-500 hover:text-indigo-600 border border-indigo-300 group"
-            >
-              Maizzle 5: 10x faster local dev, streamlined Tailwind CSS, modern CSS support, and more!
-            </NuxtLink>
+      <div class="grid grid-cols-12 col-span-8 lg:col-span-9 2xl:col-span-8 h-full border-b border-slate-100 bg-white">
+        <div class="grid col-span-12 xl:col-span-9 2xl:col-span-7 3xl:col-span-6 px-8 xl:py-4 items-center">
+          <div class="hidden sm:block max-w-[80ch] w-full mx-auto whitespace-nowrap overflow-auto">
+            <div class="flex gap-2 items-center text-slate-500">
+              <p>
+                <span class="font-medium">Mailviews</span>: beautiful, expertly coded HTML emails.
+              </p>
+              <a
+                href="https://mailviews.com"
+                target="_blank"
+                class="hidden sm:flex gap-1 items-center text-indigo-500 hover:text-indigo-600 group"
+              >
+                <span>Get notified</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M200,64V168a8,8,0,0,1-16,0V83.31L69.66,197.66a8,8,0,0,1-11.32-11.32L172.69,72H88a8,8,0,0,1,0-16H192A8,8,0,0,1,200,64Z"></path></svg>
+                <!-- <svg class="transition-transform group-hover:-rotate-45" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 256 256"><path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path></svg> -->
+              </a>
+            </div>
           </div>
         </div>
         <div class="hidden xl:grid col-span-3 2xl:col-span-5 items-end h-full">
