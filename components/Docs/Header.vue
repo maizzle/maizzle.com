@@ -324,8 +324,11 @@
     />
     <!-- Mobile menu: Backdrop -->
     <div
-      class="fixed lg:hidden inset-0 bg-white/80 opacity-0 transition-opacity pointer-events-none"
-      :class="{ 'opacity-100 z-50 pointer-events-auto': showMobileMenu }"
+      class="fixed lg:hidden inset-0 bg-white/80 opacity-0 transition-opacity"
+      :class="{
+        'opacity-100 z-50 pointer-events-auto': showMobileMenu,
+        'pointer-events-none': !showMobileMenu
+        }"
       @click="closeMobileMenu"
     />
 
