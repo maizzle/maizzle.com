@@ -21,8 +21,6 @@ You may not use our brand for t-shirts, stickers, or other merchandise without e
 
 You may use the following assets when referring to Maizzle, for example in articles or video tutorials. They should not be used in any way that could cause confusion for users or imply any affiliation with maizzle.com.
 
-### Mark
-
 <div>
   <a href="/assets/brand/mark.svg" target="_blank">
     <img src="/assets/brand/mark.svg" alt="Maizzle mark" width="130">
@@ -32,6 +30,8 @@ You may use the following assets when referring to Maizzle, for example in artic
     Download mark
   </a>
 </div>
+
+---
 
 <div>
   <a href="/assets/brand/mark-gradient.svg" target="_blank">
@@ -43,7 +43,7 @@ You may use the following assets when referring to Maizzle, for example in artic
   </a>
 </div>
 
-### Logotype
+---
 
 <div>
   <a href="/assets/brand/logo.svg" target="_blank">
