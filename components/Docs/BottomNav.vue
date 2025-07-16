@@ -1,7 +1,7 @@
 <template>
   <nav
     v-if="$route.path.startsWith('/docs') && (prev || next)"
-    class="max-w-[75ch] 3xl:pl-4 pt-8 space-y-10"
+    class="max-w-[80ch] mx-auto 3xl:pl-4 pt-8 space-y-10"
   >
     <div class="flex justify-between">
       <div>
