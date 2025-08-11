@@ -6,7 +6,7 @@
           <AlgoliaDocSearch class="hidden" />
 
           <button
-            class="flex items-center justify-between w-48 px-4 h-9 border border-slate-200 hover:border-slate-300 rounded-md bg-white cursor-pointer text-xs"
+            class="flex items-center justify-between w-48 px-4 h-9 border border-slate-200 hover:border-slate-300 rounded-md bg-white text-xs"
             tabindex="0"
             @click="openDocsearch"
           >
