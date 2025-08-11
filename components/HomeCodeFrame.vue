@@ -1,6 +1,6 @@
 <template>
   <div class="relative z-10 home-code-sample">
-    <div class="flex justify-between items-center px-6 border border-slate-200 rounded-t-md bg-white relative z-10">
+    <div class="flex justify-between items-center px-6 border border-slate-200 rounded-t-2xl bg-white relative z-10">
       <span class="h-10 flex items-center border-b border-indigo-600 -mb-px text-xs">
         {{ title }}
       </span>
@@ -22,12 +22,12 @@
       </svg>
     </div>
 
-    <div class="relative z-20 border border-t-0 border-slate-200 rounded-b-md backdrop-blur-[3px] bg-white">
+    <div class="relative z-20 border border-t-0 border-slate-200 rounded-b-2xl backdrop-blur-[3px] bg-white">
       <slot />
     </div>
 
     <div
-      class="w-full h-full rounded-lg absolute z-0 border border-slate-200"
+      class="w-full h-full rounded-2xl absolute z-0 border border-slate-200"
       :class="bgFrameClass"
     />
   </div>
