@@ -51,13 +51,12 @@
                   </NuxtLink>
                 </li>
                 <li class="mb-3">
-                  <a
-                    href="https://withcabin.com/privacy/maizzle.com"
-                    rel="noopener noreferrer nofollow"
+                  <NuxtLink
+                    to="/privacy"
                     class="text-slate-500 hover:text-slate-800 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white"
                   >
                     Privacy
-                  </a>
+                  </NuxtLink>
                 </li>
               </ul>
             </nav>
@@ -96,7 +95,7 @@
         </div>
         <div class="md:flex flex-col md:flex-row items-center justify-start md:justify-between">
           <p class="mb-6 md:mb-0 text-sm text-slate-400">
-            &copy; {{ year }} Maizzle SRL. All rights reserved.
+            &copy; {{ year }} Maizzle OÜ. All rights reserved.
             Made with <span class="text-rose-400">❤</span> for email, open sourced under the MIT license.</p>
           <div class="flex items-center gap-5">
             <a
