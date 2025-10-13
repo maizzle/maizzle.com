@@ -463,3 +463,13 @@ In this example, running `maizzle build production` will output:
 ```xml
 This will only show in production.
 ```
+
+You may also output content in all environments _except_ a specific one:
+
+```html [emails/example.html]
+<not-env:production>
+  Won't render in `production`.
+</not-env:production>
+```
+
+With the example above, running `maizzle build production` will remove that block from the output, but it will be shown when you run `maizzle build` or `maizzle serve`.
