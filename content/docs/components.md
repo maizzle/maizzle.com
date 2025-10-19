@@ -254,6 +254,42 @@ For example, let's create a `<x-footer>` Component that will pull in another Com
 </div>
 ```
 
+### Discard default content
+
+Sometimes you may need to discard the content of a slot that has default content. You can do this by using an empty `<fill>` tag.
+
+Consider the following component:
+
+```html [components/banner.html]
+<div>
+  <slot:title>
+    <h2>
+      Default title
+    </h2>
+  </slot:title>
+
+  <yield />
+</div>
+```
+
+If you need to use this component in a context where the title doesn't make sense, an empty `<fill>` tag will will simply set the content to nothing:
+
+```html [emails/example.html] {2}
+<x-banner>
+  <fill:title />
+
+  <p>This is the content</p>
+</x-banner>
+```
+
+This will effectively render an empty `slot:title`, resulting in:
+
+```html [build_production/example.html]
+<div>
+  <p>This is the content</p>
+</div>
+```
+
 ## Stacks
 
 You may push content to named stacks that can be rendered in other Components. This concept is similar to Blade's `stack` and `push` directives, also known as teleporting in frameworks like Vue.js.
