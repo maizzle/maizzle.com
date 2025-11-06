@@ -120,7 +120,7 @@ Wrap content in <abbr title="Microsoft Office">MSO</abbr> conditional comments t
 That will output:
 
 ```html
-<!--[if mso|ie]>
+<!--[if mso]>
   <div>Show this in all Outlook versions</div>
 <![endif]-->
 ```
@@ -473,3 +473,4 @@ You may also output content in all environments _except_ a specific one:
 ```
 
 With the example above, running `maizzle build production` will remove that block from the output, but it will be shown when you run `maizzle build` or `maizzle serve`.
+
