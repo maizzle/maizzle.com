@@ -21,7 +21,7 @@
     "nuxt-og-image": "5.1.9",
     "scroll-to-element": "^2.0.3",
     "tailwindcss": "^4.1.12",
-    "vue": "3.5.19",
+    "vue": "3.5.24",
     "vue-router": "4.5.1"
   },
   "devDependencies": {
