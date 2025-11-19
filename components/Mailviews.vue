@@ -24,20 +24,38 @@
       </div>
       <div class="h-80 col-span-1 lg:col-span-2 hidden md:grid justify-end">
         <div class="grid grid-cols-3 gap-4 items-center -mt-24">
-          <div class="grid gap-4 *:rounded *:shadow-xl">
-            <img src="/images/mailviews/mailviews-card-1.jpg" alt="" loading="lazy" width="218">
-            <img src="/images/mailviews/mailviews-card-2.jpg" alt="" loading="lazy" width="218">
-            <img src="/images/mailviews/mailviews-card-3.jpg" alt="" loading="lazy" width="218">
+          <div class="grid gap-4">
+            <a href="https://mailviews.com/components/marketing/cta#cta-with-background-image" target="_blank" class="*:rounded shadow-xl hover:scale-96 transition-all">
+              <img src="/images/mailviews/mailviews-card-1.jpg" alt="" loading="lazy" width="218">
+            </a>
+            <a href="https://mailviews.com/components/marketing/logos#basic-logo-cloud" target="_blank" class="*:rounded shadow-xl hover:scale-96 transition-all">
+              <img src="/images/mailviews/mailviews-card-2.jpg" alt="" loading="lazy" width="218">
+            </a>
+            <a href="https://mailviews.com/components/marketing/cta#cta-with-image-strip" target="_blank" class="*:rounded shadow-xl hover:scale-96 transition-all">
+              <img src="/images/mailviews/mailviews-card-3.jpg" alt="" loading="lazy" width="218">
+            </a>
           </div>
           <div class="grid gap-4 *:rounded *:shadow-lg">
-            <img src="/images/mailviews/mailviews-card-4.jpg" alt="" loading="lazy" width="218">
-            <img src="/images/mailviews/mailviews-card-5.jpg" alt="" loading="lazy" width="218">
-            <img src="/images/mailviews/mailviews-card-6.jpg" alt="" loading="lazy" width="218">
+            <a href="https://mailviews.com/components/ui-elements/buttons" target="_blank" class="*:rounded shadow-xl hover:scale-96 transition-all">
+              <img src="/images/mailviews/mailviews-card-4.jpg" alt="" loading="lazy" width="218">
+            </a>
+            <a href="https://mailviews.com/components/marketing/coupons#coupons-with-content-overlayed" target="_blank" class="*:rounded shadow-xl hover:scale-96 transition-all">
+              <img src="/images/mailviews/mailviews-card-5.jpg" alt="" loading="lazy" width="218">
+            </a>
+            <a href="https://mailviews.com/components/marketing/heroes#hero-with-overlapped-image" target="_blank" class="*:rounded shadow-xl hover:scale-96 transition-all">
+              <img src="/images/mailviews/mailviews-card-6.jpg" alt="" loading="lazy" width="218">
+            </a>
           </div>
           <div class="grid gap-4 *:rounded *:shadow-lg">
-            <img src="/images/mailviews/mailviews-card-7.jpg" alt="" loading="lazy" width="218">
-            <img src="/images/mailviews/mailviews-card-8.jpg" alt="" loading="lazy" width="218">
-            <img src="/images/mailviews/mailviews-card-9.jpg" alt="" loading="lazy" width="218">
+            <a href="https://mailviews.com/components/marketing/heroes#hero-block-overlay" target="_blank" class="*:rounded shadow-xl hover:scale-96 transition-all">
+              <img src="/images/mailviews/mailviews-card-7.jpg" alt="" loading="lazy" width="218">
+            </a>
+            <a href="https://mailviews.com/components/ui-elements/avatars#grouped-overlapped-avatars-with-plus-count" target="_blank" class="*:rounded shadow-xl hover:scale-96 transition-all">
+              <img src="/images/mailviews/mailviews-card-8.jpg" alt="" loading="lazy" width="218">
+            </a>
+            <a href="https://mailviews.com/components/marketing/heroes#hero-with-overlay-gradient" target="_blank" class="*:rounded shadow-xl hover:scale-96 transition-all">
+              <img src="/images/mailviews/mailviews-card-9.jpg" alt="" loading="lazy" width="218">
+            </a>
           </div>
         </div>
       </div>
