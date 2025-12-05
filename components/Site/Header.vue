@@ -137,7 +137,6 @@
 <script setup>
 import { vOnClickOutside } from '@vueuse/components'
 
-const headerTransparent = ref(false)
 const showMenu = ref(false)
 
 const toggleMenu = () => {
