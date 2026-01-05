@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@docsearch/css": "3.8.2",
-    "@docsearch/js": "3.8.2",
+    "@docsearch/js": "4.4.0",
     "@nuxt/content": "3.3.0",
     "@nuxt/fonts": "0.11.0",
     "@tailwindcss/vite": "^4.1.18",
