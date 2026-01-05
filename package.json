@@ -22,7 +22,7 @@
     "scroll-to-element": "^2.0.3",
     "tailwindcss": "^4.1.12",
     "vue": "3.5.19",
-    "vue-router": "4.5.1"
+    "vue-router": "4.6.4"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.16"
