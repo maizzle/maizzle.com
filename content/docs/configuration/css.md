@@ -14,24 +14,27 @@ CSS handling in Maizzle can be configured under the `css` key in your `config.js
 ```js [config.js]
 export default {
   css: {
-    inline: true,
-    purge: true,
-    resolveCalc: true,
-    resolveProps: true,
-    safe: true,
-    shorthand: true,
-    sixHex: true,
-    tailwind: {},
+    // ...
   },
 }
 ```
 
 ### inline
 
-Type: `Boolean`\
+Type: `Boolean|Object`\
 Default: `undefined`
 
 Configure how CSS is inlined in your HTML emails.
+
+Setting this to `true` enables CSS inlining with the default options, or you can pass an object to configure the behavior of the CSS inliner (Juice).
+
+```js [config.js]
+export default {
+  css: {
+    inline: true,
+  },
+}
+```
 
 For details, see the [CSS inlining documentation](/docs/transformers/inline-css).
 
@@ -43,6 +46,37 @@ Default: `undefined`
 Configure email-safe unused CSS purging.
 
 For details, see the [CSS Purge Transformer docs](/docs/transformers/purge-css).
+
+### media
+
+Type: `Boolean|Object`\
+Default: `undefined`
+
+Control how media queries are handled in your CSS.
+
+Setting this to `true` or any non-falsy value enables media query merging:
+
+```js [config.js]
+export default {
+  css: {
+    media: {
+      merge: true,
+    },
+  },
+}
+```
+
+You can also use it to control media query sorting:
+
+```js [config.js]
+export default {
+  css: {
+    media: {
+      sort: 'mobile-first', // default; or use 'desktop-first'
+    },
+  },
+}
+```
 
 ### resolveCalc
 
