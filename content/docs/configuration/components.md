@@ -379,10 +379,39 @@ Maizzle passes your config variables and the contents of your `build.expressions
 
 ## plugins
 
-Type: `Array`\
+Type: `Array|Object`\
 Default: `[]`
 
-Array of PostHTML plugins to apply to each parsed component.
+Array or object of PostHTML plugins to apply to each parsed component.
+
+When used as an array, plugins will be applied to each component _after_ expressions are parsed inside of it:
+
+```js [config.js]
+export default {
+  components: {
+    plugins: [
+      require('posthtml-example-plugin')(),
+    ],
+  },
+}
+```
+
+You may use the `before` and `after` keys to apply plugins before or after expressions are parsed:
+
+```js [config.js]
+export default {
+  components: {
+    plugins: {
+      before: [
+        require('posthtml-example-plugin')(),
+      ],
+      after: [
+        require('posthtml-another-plugin')(),
+      ],
+    },
+  },
+}
+```
 
 ## attrsParserRules
 
