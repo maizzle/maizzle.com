@@ -19,7 +19,7 @@
     "better-sqlite3": "^12.6.2",
     "nuxt": "3.21.1",
     "nuxt-llms": "^0.2.0",
-    "nuxt-og-image": "^5.1.13",
+    "nuxt-og-image": "^6.0.1",
     "scroll-to-element": "^2.0.3",
     "tailwindcss": "^4.1.12",
     "vue": "^3.5.28",
