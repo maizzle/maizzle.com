@@ -16,7 +16,7 @@
     "@nuxt/fonts": "^0.13.0",
     "@tailwindcss/vite": "^4.1.18",
     "@vueuse/components": "^14.2.1",
-    "better-sqlite3": "^12.6.2",
+    "better-sqlite3": "^12.8.0",
     "nuxt": "3.21.1",
     "nuxt-llms": "^0.2.0",
     "nuxt-og-image": "^5.1.13",
