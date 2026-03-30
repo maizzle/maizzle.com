@@ -78,7 +78,9 @@ export default defineNuxtConfig({
     ],
   },
   routeRules: {
-    '/': { prerender: true }
+    '/': { prerender: true },
+    '/data/features': { prerender: false },
+    '/data/navigation': { prerender: false },
   },
   runtimeConfig: {
     public: {
