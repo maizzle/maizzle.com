@@ -14,12 +14,12 @@ export default defineNuxtConfig({
     '@nuxt/fonts'
   ],
   devtools: { enabled: true },
-  // nitro: {
-  //   preset: 'static',
-  //   prerender: {
-  //     autoSubfolderIndex: false,
-  //   },
-  // },
+  nitro: {
+    preset: 'static',
+    prerender: {
+      autoSubfolderIndex: false,
+    },
+  },
   spaLoadingTemplate: false,
   devServer: { port: 8080 },
   site: {
@@ -78,7 +78,7 @@ export default defineNuxtConfig({
     ],
   },
   routeRules: {
-    '/': { prerender: true },
+  //   '/': { prerender: true },
     '/data/features': { prerender: false },
     '/data/navigation': { prerender: false },
   },
