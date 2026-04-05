@@ -13,6 +13,14 @@ export default defineNuxtConfig({
     'nuxt-og-image',
     '@nuxt/fonts'
   ],
+  fonts: {
+    families: [
+      {
+        name: 'Inter',
+        weights: [400, 500, 600, 700],
+      },
+    ],
+  },
   devtools: { enabled: true },
   nitro: {
     preset: 'static',
