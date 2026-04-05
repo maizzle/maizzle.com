@@ -26,6 +26,14 @@
           </svg>
         </a> -->
 
+        <a
+          href="https://github.com/maizzle/framework/releases/tag/v6.0.0-rc.0"
+          target="_blank"
+          class="px-4 py-1.5 rounded-full bg-gray-950 text-white text-sm font-medium hover:bg-indigo-600 transition-colors max-w-max mx-auto mb-8 block"
+        >
+          Maizzle 6 is coming &rarr;
+        </a>
+
         <h1 class="mb-9 mx-auto text-4xl lg:text-5xl text-center font-bold text-slate-800">
           Quickly <span class="text-indigo-600">build HTML emails</span>
           <br>with Tailwind CSS
