@@ -48,13 +48,12 @@ useHead({
   link: [
     {
       rel: 'icon',
-      type: 'image/png',
-      sizes: '32x32',
-      href: '/favicon/favicon.png',
+      type: 'image/svg+xml',
+      href: '/favicon.svg',
     },
     {
       rel: 'apple-touch-icon',
-      href: '/favicon/apple-touch-icon.png',
+      href: '/apple-touch-icon.png',
     },
     {
       rel: 'preconnect',
