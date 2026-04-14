@@ -21,36 +21,28 @@ You may not use our brand for t-shirts, stickers, or other merchandise without e
 
 You may use the following assets when referring to Maizzle, for example in articles or video tutorials. They should not be used in any way that could cause confusion for users or imply any affiliation with maizzle.com.
 
-<div>
-  <a href="/assets/brand/mark.svg" target="_blank">
-    <img src="/assets/brand/mark.svg" alt="Maizzle mark" width="130">
-  </a>
-
-  <a href="/assets/brand/mark.svg" target="_blank">
-    Download mark
+<div class="not-prose flex flex-col items-center gap-6">
+  <a href="/assets/brand/logo.svg" target="_blank" class="flex flex-col items-center gap-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 px-16 py-12 no-underline hover:border-slate-300 dark:hover:border-slate-600 transition-colors">
+    <img src="/assets/brand/logo.svg" alt="Maizzle logo" width="400" class="mb-2">
+    <span class="text-sm font-medium text-slate-600 dark:text-slate-400">Download logotype</span>
   </a>
 </div>
 
 ---
 
-<div>
-  <a href="/assets/brand/mark-gradient.svg" target="_blank">
-    <img src="/assets/brand/mark-gradient.svg" alt="Maizzle mark with gradient" width="130">
+<div class="not-prose grid grid-cols-1 lg:grid-cols-3 gap-6">
+  <a href="/assets/brand/mark.svg" target="_blank" class="flex flex-col items-center gap-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 px-8 py-12 no-underline hover:border-slate-300 dark:hover:border-slate-600 transition-colors">
+    <img src="/assets/brand/mark.svg" alt="Maizzle mark" width="100" class="mb-2">
+    <span class="text-sm font-medium text-slate-600 dark:text-slate-400">Download mark</span>
   </a>
 
-  <a href="/assets/brand/mark-gradient.svg" target="_blank">
-    Download mark with gradient
-  </a>
-</div>
-
----
-
-<div>
-  <a href="/assets/brand/logo.svg" target="_blank">
-    <img src="/assets/brand/logo.svg" alt="Maizzle logo" width="400">
+  <a href="/assets/brand/mark-solid.svg" target="_blank" class="flex flex-col items-center gap-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 px-8 py-12 no-underline hover:border-slate-300 dark:hover:border-slate-600 transition-colors">
+    <img src="/assets/brand/mark-solid.svg" alt="Maizzle mark with solid fill" width="100" class="mb-2">
+    <span class="text-sm font-medium text-slate-600 dark:text-slate-400">Download solid mark</span>
   </a>
 
-  <a href="/assets/brand/logo.svg" target="_blank">
-    Download logotype
+  <a href="/assets/brand/mark-gradient.svg" target="_blank" class="flex flex-col items-center gap-4 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 px-8 py-12 no-underline hover:border-slate-300 dark:hover:border-slate-600 transition-colors">
+    <img src="/assets/brand/mark-gradient.svg" alt="Maizzle mark with gradient" width="100" class="mb-2">
+    <span class="text-sm font-medium text-slate-600 dark:text-slate-400">Download gradient mark</span>
   </a>
 </div>
