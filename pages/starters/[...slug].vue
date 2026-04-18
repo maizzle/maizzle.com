@@ -84,6 +84,11 @@ useHead({
       rel: 'canonical',
       href: `https://maizzle.com${route.path}`,
     },
+    {
+      rel: 'alternate',
+      type: 'text/markdown',
+      href: `https://maizzle.com/raw${route.path}.md`,
+    },
   ],
 })
 </script>
