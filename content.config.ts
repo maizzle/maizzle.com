@@ -1,16 +1,21 @@
 import { defineCollection, defineContentConfig, z } from '@nuxt/content'
+import { defineSitemapSchema } from '@nuxtjs/sitemap/content'
 
 export default defineContentConfig({
   collections: {
     docs: defineCollection({
       source: '**',
-      type: 'page'
+      type: 'page',
+      schema: z.object({
+        sitemap: defineSitemapSchema({ name: 'docs' }),
+      })
     }),
     templates: defineCollection({
       source: 'templates/**',
       type: 'page',
       schema: z.object({
-        order: z.number()
+        order: z.number(),
+        sitemap: defineSitemapSchema({ name: 'templates' }),
       })
     }),
     starters: defineCollection({
@@ -18,14 +23,16 @@ export default defineContentConfig({
       type: 'page',
       schema: z.object({
         date: z.date(),
-        image: z.string()
+        image: z.string(),
+        sitemap: defineSitemapSchema({ name: 'starters' }),
       })
     }),
     guides: defineCollection({
       source: 'guides/**/*.md',
       type: 'page',
       schema: z.object({
-        date: z.date()
+        date: z.date(),
+        sitemap: defineSitemapSchema({ name: 'guides' }),
       })
     }),
     // Code samples on homepage

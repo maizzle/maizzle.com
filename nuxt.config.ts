@@ -8,6 +8,7 @@ export default defineNuxtConfig({
   modules: [
     './modules/routes-list',
     './modules/github-release',
+    '@nuxtjs/sitemap',
     '@nuxt/content',
     'nuxt-llms',
     'nuxt-og-image',
@@ -32,6 +33,7 @@ export default defineNuxtConfig({
   devServer: { port: 8080 },
   site: {
     url: 'https://maizzle.com',
+    name: 'Maizzle',
   },
   components: {
     dirs: [

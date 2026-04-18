@@ -137,8 +137,11 @@
 </template>
 
 <script setup>
-const { data: navigation } = await useAsyncData('docs-side-nav', () => {
-  return queryCollection('navigation').first()
+const { navigation } = defineProps({
+  navigation: {
+    type: Object,
+    required: true,
+  },
 })
 
 const openDocsearch = () => {
