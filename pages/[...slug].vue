@@ -1,6 +1,18 @@
 <template>
   <div class="grid grid-cols-1 lg:grid-cols-12 col-span-12 lg:col-span-9 2xl:col-span-8 max-w-[65ch] lg:max-w-full mx-auto lg:m-0">
     <div class="col-span-9 2xl:col-span-7 3xl:col-span-6 px-4 sm:px-8 pb-12 mt-4 xl:mt-8 space-y-8">
+      <div v-if="page" class="max-w-[80ch] mx-auto flex items-center justify-between gap-4">
+        <h1 class="text-2xl sm:text-3xl font-bold text-slate-800">{{ page.title }}</h1>
+        <a
+          :href="`https://maizzle.com/raw${route.path}.md`"
+          target="_blank"
+          class="shrink-0 inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium text-slate-500 hover:text-slate-900 border border-slate-200 hover:border-slate-300 rounded-md transition-colors"
+          title="View as Markdown"
+        >
+          <svg class="size-3.5" viewBox="0 0 16 16" fill="currentColor"><path d="M14.85 3c.63 0 1.15.52 1.14 1.15v7.7c0 .63-.51 1.15-1.15 1.15H1.15C.52 13 0 12.48 0 11.84V4.15C0 3.52.52 3 1.15 3ZM9 11V5H7.5v3.63L6 7.13 4.5 8.63V5H3v6h1.5l1.5-1.5L7.5 11Zm4-3-2.25 2.75h1.5V5h1.5v5.75h1.5Z"/></svg>
+          Markdown
+        </a>
+      </div>
       <ContentRenderer
         v-if="page"
         :value="page"
