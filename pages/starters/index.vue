@@ -39,7 +39,7 @@
       <div class="max-w-[75ch] 3xl:pl-4 border-t border-slate-200 pt-8 mt-8">
         <div class="flex flex-wrap sm:items-center sm:justify-between space-y-6 sm:space-y-0 text-sm text-slate-500">
           <div class="flex gap-2">
-            <span>Copyright &copy; {{ year }} Maizzle SRL</span>
+            <span>Copyright &copy; {{ year }} Maizzle OÜ</span>
             <NuxtLink to="/brand" class="border-l border-slate-200 pl-2 hover:text-slate-900">Brand policy</NuxtLink>
           </div>
         </div>

@@ -20,7 +20,7 @@
         class="
           max-w-[80ch] mx-auto
           prose prose-slate
-          prose-headings:text-slate-800 prose-h1:font-bold
+          prose-headings:text-slate-800 prose-h1:font-bold prose-h1:hidden
           prose-p:text-slate-600
           prose-a:decoration-slate-200 prose-a:hover:decoration-slate-300 prose-a:underline-offset-[3px]
         "
