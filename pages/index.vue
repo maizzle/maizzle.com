@@ -27,7 +27,7 @@
         </a> -->
 
         <a
-          href="https://github.com/maizzle/framework/releases/tag/v6.0.0-rc.0"
+          href="https://github.com/maizzle/framework/pull/1708"
           target="_blank"
           class="px-4 py-1.5 rounded-full bg-gray-950 text-white text-sm font-medium hover:bg-indigo-600 transition-colors max-w-max mx-auto mb-8 block"
         >
