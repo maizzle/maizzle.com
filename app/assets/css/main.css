@@ -1,0 +1,609 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+@source "../../../content/**/*.md";
+
+@import "tw-animate-css";
+
+@import "shadcn-vue/tailwind.css";
+
+@import "@docsearch/css/dist/_variables.css";
+@import "@docsearch/css/dist/modal.css";
+
+@custom-variant dark (&:is(.dark *));
+@plugin "@tailwindcss/typography";
+
+@theme inline {
+    --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-heading: var(--font-sans);
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --radius-sm: calc(var(--radius) - 4px);
+    --radius-md: calc(var(--radius) - 2px);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) + 4px);
+    --animate-marquee: marquee 40s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+:root {
+    color-scheme: light;
+    --background: #ffffff;
+    --foreground: var(--color-gray-900);
+    --card: #ffffff;
+    --card-foreground: var(--color-gray-900);
+    --popover: #ffffff;
+    --popover-foreground: var(--color-gray-900);
+    --primary: var(--color-gray-900);
+    --primary-foreground: var(--color-gray-50);
+    --secondary: var(--color-gray-100);
+    --secondary-foreground: var(--color-gray-900);
+    --muted: var(--color-gray-100);
+    --muted-foreground: var(--color-gray-500);
+    --accent: var(--color-gray-100);
+    --accent-foreground: var(--color-gray-900);
+    --destructive: oklch(0.577 0.245 27.325);
+    --border: var(--color-gray-200);
+    --input: var(--color-gray-200);
+    --ring: var(--color-gray-400);
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --radius: 0.625rem;
+    --sidebar: #fafafa;
+    --sidebar-foreground: #09090b;
+    --sidebar-primary: #18181b;
+    --sidebar-primary-foreground: #fafafa;
+    --sidebar-accent: #f4f4f5;
+    --sidebar-accent-foreground: #18181b;
+    --sidebar-border: #e4e4e7;
+    --sidebar-ring: #a1a1aa;
+}
+
+.dark {
+    color-scheme: dark;
+    --background: var(--color-gray-950);
+    --foreground: var(--color-gray-100);
+    --card: var(--color-gray-900);
+    --card-foreground: var(--color-gray-100);
+    --popover: var(--color-gray-900);
+    --popover-foreground: var(--color-gray-100);
+    --primary: var(--color-gray-100);
+    --primary-foreground: var(--color-gray-900);
+    --secondary: var(--color-gray-800);
+    --secondary-foreground: var(--color-gray-100);
+    --muted: var(--color-gray-800);
+    --muted-foreground: var(--color-gray-400);
+    --accent: var(--color-gray-800);
+    --accent-foreground: var(--color-gray-100);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: var(--color-gray-800);
+    --input: var(--color-gray-800);
+    --ring: var(--color-gray-500);
+    --chart-1: oklch(0.87 0 0);
+    --chart-2: oklch(0.556 0 0);
+    --chart-3: oklch(0.439 0 0);
+    --chart-4: oklch(0.371 0 0);
+    --chart-5: oklch(0.269 0 0);
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.488 0.243 264.376);
+    --sidebar-primary-foreground: #fafafa;
+    --sidebar-accent: #27272a;
+    --sidebar-accent-foreground: #fafafa;
+    --sidebar-border: rgba(255, 255, 255, 0.1);
+    --sidebar-ring: #71717a;
+}
+
+pre.shiki {
+  padding-inline: 0;
+  font-size: 0.875rem;
+  line-height: 2;
+  scrollbar-color: color-mix(in oklab, var(--color-white) 12%, transparent) transparent;
+}
+
+.prose :where(code):not(:where(pre code, [class~="not-prose"] *)) {
+  background-color: var(--muted);
+  color: var(--foreground);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+  font-weight: 500;
+}
+
+.prose :where(code):not(:where(pre code, [class~="not-prose"] *))::before,
+.prose :where(code):not(:where(pre code, [class~="not-prose"] *))::after {
+  content: none;
+}
+
+pre code .line {
+  padding-inline: 1rem;
+}
+
+pre code .line.diff.add,
+pre code .line.diff.remove,
+pre code .line.highlight,
+pre code .line.highlighted,
+pre code .line.focused {
+  display: block;
+}
+
+pre code .line.highlight,
+pre code .line.highlighted,
+pre code .line.focused {
+  @apply bg-white/7 dark:bg-white/4;
+  box-shadow: inset 3px 0 0 0 var(--color-cyan-500);
+}
+
+pre code:has(.focused) .line:not(.focused) {
+  opacity: 0.4;
+  filter: blur(0.5px);
+  transition: opacity 0.2s, filter 0.2s;
+}
+
+pre code .highlighted-word {
+  border: 1px solid var(--color-gray-500);
+  background: var(--color-gray-800) !important;
+  color: var(--color-white) !important;
+  padding: 0.1875rem 0.25rem 0.0625rem;
+  border-radius: 0.1875rem;
+}
+
+pre code .highlighted-word + .highlighted-word {
+  border-left: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding-left: 0;
+}
+
+pre code .highlighted-word:has(+ .highlighted-word) {
+  border-right: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  padding-right: 0;
+}
+
+pre code:has(.focused):hover .line:not(.focused) {
+  opacity: 1;
+  filter: none;
+}
+
+pre code .line.diff.add,
+pre code .line.diff.remove {
+  background-color: var(--color-gray-800);
+}
+
+pre code .line.diff.add {
+  box-shadow: inset 3px 0 0 0 var(--color-teal-400);
+}
+
+pre code .line.diff.remove {
+  box-shadow: inset 3px 0 0 0 var(--color-red-500);
+  opacity: 0.7;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+    }
+  html {
+    scrollbar-gutter: stable;
+    scrollbar-color: var(--color-gray-300) transparent;
+    }
+  html.dark {
+    scrollbar-color: var(--color-gray-600) transparent;
+    }
+  body {
+    @apply bg-background text-foreground;
+    @apply font-sans;
+    }
+  body.DocSearch--active {
+    margin-inline-end: 0 !important;
+    }
+  :where(h1, h2, h3, h4, h5, h6)[id] {
+    scroll-margin-top: 5rem;
+  }
+}
+
+/* Algolia DocSearch — ported from maizzle.com */
+
+:root {
+  --docsearch-highlight-color: var(--color-indigo-600);
+  --docsearch-primary-color: var(--color-indigo-600);
+}
+
+#docsearch {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.DocSearch.DocSearch-Container {
+  @apply fixed bg-white/80;
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+  isolation: isolate;
+}
+
+.DocSearch-Container .DocSearch-Dropdown {
+  height: auto !important;
+  max-height: 60vh !important;
+}
+
+.DocSearch-Container .DocSearch-Hits:last-of-type {
+  margin-block-end: 8px !important;
+}
+
+.DocSearch-Container .DocSearch-HitsFooter {
+  display: none !important;
+}
+
+.dark .DocSearch.DocSearch-Container {
+  @apply bg-gray-950/80;
+}
+
+.DocSearch-Container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('/stripes.svg');
+  background-repeat: repeat;
+  background-attachment: fixed;
+  opacity: 0.02;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.dark .DocSearch-Container::before {
+  opacity: 0.03;
+}
+
+.DocSearch {
+  .DocSearch-Modal {
+    @apply md:max-w-[65ch] 2xl:max-w-[68.5ch];
+    @apply bg-white shadow-2xl shadow-indigo-600/10 border border-gray-200;
+    @apply md:mt-[12vh];
+    position: relative;
+    z-index: 1;
+  }
+
+  .DocSearch-SearchBar {
+    @apply py-1 px-2;
+    border: 0;
+  }
+
+  .DocSearch-SearchBar:has(.DocSearch-Input:not(:placeholder-shown)) {
+    @apply border-b border-gray-200;
+  }
+
+  .DocSearch-Modal:has(.DocSearch-Input:not(:placeholder-shown)) .DocSearch-Footer {
+    border-top: 0;
+  }
+
+  .DocSearch-Form {
+    @apply shadow-none h-11 w-full;
+    @apply bg-white;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .DocSearch-Input {
+    @apply text-base sm:text-sm pl-4 sm:pl-2;
+    @apply text-gray-900 placeholder:text-gray-400;
+  }
+
+  .DocSearch-LoadingIndicator svg,
+  .DocSearch-MagnifierLabel svg {
+    @apply w-4 h-4 text-gray-400;
+  }
+
+  .DocSearch-Divider {
+    display: none !important;
+  }
+
+  .DocSearch-Close {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .DocSearch-Close {
+      @apply text-indigo-600 hover:text-indigo-700 inline-flex items-center justify-center text-sm font-medium px-2;
+      display: inline-flex;
+      width: auto;
+      min-width: 0;
+      border-radius: 0;
+    }
+
+    .DocSearch-Close svg {
+      display: none;
+    }
+
+    .DocSearch-Close::after {
+      content: 'Close';
+    }
+  }
+
+  .DocSearch-Actions {
+    width: auto;
+    padding: 0;
+  }
+
+  .DocSearch-Clear,
+  .DocSearch-Reset {
+    @apply text-gray-400;
+  }
+
+  .DocSearch-Clear:hover,
+  .DocSearch-Reset:hover {
+    @apply text-gray-600;
+  }
+
+  .DocSearch-Clear {
+    width: 24px;
+    height: 24px;
+    font-size: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-inline: 0;
+  }
+
+  .DocSearch-Form {
+    padding-inline-end: 10px;
+  }
+
+  .DocSearch-Clear::before {
+    content: '';
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-color: currentColor;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E") no-repeat center / contain;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cline x1='18' y1='6' x2='6' y2='18'/%3E%3Cline x1='6' y1='6' x2='18' y2='18'/%3E%3C/svg%3E") no-repeat center / contain;
+  }
+
+  .DocSearch-Logo svg,
+  .DocSearch-Logo svg * {
+    @apply text-gray-400;
+    fill: currentColor !important;
+  }
+
+  .DocSearch-Logo {
+    @apply text-gray-300;
+  }
+
+  .DocSearch-Cancel {
+    @apply text-gray-500 hover:text-gray-700;
+  }
+
+  .DocSearch-Dropdown ul {
+    @apply space-y-1;
+  }
+
+  .DocSearch-Hit-source {
+    @apply text-gray-800 bg-white pb-2;
+  }
+
+  .DocSearch-Hit a,
+  .DocSearch-Hit[aria-selected=true] a {
+    @apply bg-white border border-gray-200 shadow-none;
+  }
+
+  .DocSearch-Hit[aria-selected=true] a {
+    border: 1px solid transparent;
+    background:
+      linear-gradient(#fff, #fff) padding-box,
+      linear-gradient(135deg, #9c96ff, #4f46e5) border-box;
+  }
+
+  .DocSearch-Hit .DocSearch-Hit-path,
+  .DocSearch-Hit .DocSearch-Hit-icon {
+    @apply text-gray-400;
+  }
+
+  .DocSearch-Hit .DocSearch-Hit-title,
+  .DocSearch-Hit[aria-selected=true] .DocSearch-Hit-title,
+  .DocSearch-Hit[aria-selected=true] .DocSearch-Hit-icon,
+  .DocSearch-Hit[aria-selected=true] .DocSearch-Hit-path,
+  .DocSearch-Hit[aria-selected=true] .DocSearch-Hit-action {
+    @apply !text-gray-600;
+  }
+
+  .DocSearch-Hit mark,
+  .DocSearch-Hit[aria-selected=true] mark {
+    @apply !text-indigo-600 !underline;
+  }
+
+  .DocSearch-Footer {
+    @apply shadow-none border-t border-gray-200 bg-white text-sm;
+  }
+
+  .DocSearch-Logo a {
+    @apply flex items-center font-semibold;
+  }
+
+  .DocSearch-Commands {
+    @apply hidden;
+  }
+
+  .DocSearch-Hit-action-button {
+    @apply p-1;
+
+    &:hover {
+      @apply bg-gray-100;
+    }
+
+    svg {
+      @apply text-gray-500;
+    }
+  }
+
+  .DocSearch-Label,
+  .DocSearch-Help,
+  .DocSearch-Title,
+  .DocSearch-StartScreenTitle {
+    @apply text-gray-500;
+  }
+
+  .DocSearch-StartScreen {
+    @apply text-center text-sm;
+  }
+
+  .DocSearch-NoResults {
+    @apply gap-2 text-sm;
+  }
+
+  .DocSearch-NoResults .DocSearch-Screen-Icon,
+  .DocSearch-NoResults .DocSearch-Screen-Icon svg {
+    @apply size-10;
+  }
+
+  .DocSearch-Title {
+    @apply text-sm leading-normal;
+  }
+}
+
+/* dark mode overrides */
+.dark .DocSearch {
+  .DocSearch-Modal {
+    @apply bg-gray-900 border-gray-800 shadow-black/40;
+  }
+
+  .DocSearch-SearchBar,
+  .DocSearch-Footer {
+    @apply border-gray-800;
+  }
+
+  .DocSearch-SearchBar:has(.DocSearch-Input:not(:placeholder-shown)) {
+    @apply border-b border-gray-800;
+  }
+
+  .DocSearch-Form,
+  .DocSearch-Footer,
+  .DocSearch-Hit-source,
+  .DocSearch-Hit a,
+  .DocSearch-Hit[aria-selected=true] a {
+    @apply bg-gray-900 border-gray-800;
+  }
+
+  .DocSearch-Hit[aria-selected=true] a {
+    border: 1px solid transparent;
+    background:
+      linear-gradient(var(--color-gray-900), var(--color-gray-900)) padding-box,
+      linear-gradient(135deg, #9c96ff, #4f46e5) border-box;
+  }
+
+  .DocSearch-Input {
+    @apply text-gray-100 placeholder:text-gray-500;
+  }
+
+  .DocSearch-Hit-source {
+    @apply text-gray-200;
+  }
+
+  .DocSearch-Hit .DocSearch-Hit-path,
+  .DocSearch-Hit .DocSearch-Hit-icon {
+    @apply text-gray-500;
+  }
+
+  .DocSearch-Hit .DocSearch-Hit-title,
+  .DocSearch-Hit[aria-selected=true] .DocSearch-Hit-title,
+  .DocSearch-Hit[aria-selected=true] .DocSearch-Hit-icon,
+  .DocSearch-Hit[aria-selected=true] .DocSearch-Hit-path,
+  .DocSearch-Hit[aria-selected=true] .DocSearch-Hit-action {
+    @apply !text-gray-300;
+  }
+
+  .DocSearch-Hit-action-button:hover {
+    @apply bg-gray-800;
+  }
+
+  .DocSearch-Hit-action-button svg {
+    @apply text-gray-400;
+  }
+
+  .DocSearch-Cancel {
+    @apply text-gray-400 hover:text-gray-200;
+  }
+
+  .DocSearch-Close {
+    @apply text-indigo-400 hover:text-indigo-300;
+  }
+
+  .DocSearch-Hit mark,
+  .DocSearch-Hit[aria-selected=true] mark {
+    background: linear-gradient(135deg, #9c96ff, #4f46e5);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent !important;
+  }
+
+  .DocSearch-Label,
+  .DocSearch-Help,
+  .DocSearch-Title,
+  .DocSearch-StartScreenTitle {
+    @apply text-gray-400;
+  }
+
+  .DocSearch-Logo {
+    @apply text-gray-600;
+  }
+
+  .DocSearch-Logo svg,
+  .DocSearch-Logo svg * {
+    @apply text-gray-500;
+  }
+
+  .DocSearch-LoadingIndicator svg,
+  .DocSearch-MagnifierLabel svg {
+    @apply text-gray-500;
+  }
+
+  .DocSearch-Clear,
+  .DocSearch-Reset {
+    @apply text-gray-500 hover:text-gray-300;
+  }
+}

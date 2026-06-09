@@ -1,369 +1,195 @@
 ---
-title: "CLI Tool"
-description: "Using the Maizzle CLI tool to scaffold projects and build emails."
+title: CLI
+description: Using the Maizzle CLI tool to scaffold projects and build emails.
+section: Getting Started
+order: 9
 ---
 
-# Maizzle CLI
+# CLI
 
-You can use the Maizzle CLI to:
+The Maizzle CLI provides commands for creating projects, starting the dev server, building templates, and scaffolding files.
 
-- create new projects
-- generate config files
-- build your HTML emails
-- scaffold Templates or Layouts
+## new
 
-## Installation
+Use `npx maizzle new` to create a new Maizzle project.
 
-Install the CLI tool globally, so that the `maizzle` executable gets added to your `$PATH` :
+Run it with no arguments to launch an interactive wizard that walks you through choosing a directory, picking a starter, and installing dependencies:
 
-```sh
-npm install -g @maizzle/cli
+::maizzle-new
+::
+
+### Arguments
+
+You may skip the wizard by passing arguments directly:
+
+```bash
+npx maizzle new [starter] [directory]
 ```
 
-## Creating a project
+| Argument | Description |
+|----------|-------------|
+| `[starter]` | A `user/repo` GitHub path or full Git URL. Defaults to `maizzle/maizzle`. |
+| `[directory]` | Target directory. Defaults to the starter's repo name. |
 
-Scaffold a Maizzle project by opening a Terminal and running:
+### Options
 
-```sh
-maizzle new
+| Option | Description |
+|--------|-------------|
+| `-i, --install` | Install dependencies after cloning the repo |
+| `--pm <manager>` | Package manager to use (npm, pnpm, yarn, bun) |
+
+### Examples
+
+Use the default starter to create a `my-emails` directory and install dependencies:
+
+```bash
+npx maizzle new maizzle/maizzle my-emails --install
 ```
 
-This will bring up an interactive prompt that will guide you through the process.
+Use a custom GitHub repo as a starter, without installing dependencies:
 
-## Development
-
-The CLI tool provides commands for developing HTML emails with Maizzle.
-
-### serve
-
-```sh
-maizzle serve [env]
+```bash
+npx maizzle new user/repo my-emails
 ```
 
-| Argument | Required | Default | Description
-| --- | --- | --- | --- |
-| `[env]` | no |  `local` | An [Environment](/docs/environments) name to use
+## serve
 
-| Option | Short | Description
-| --- | --- | --- |
-| `--bin` | `-b` | Path to the Maizzle executable
-| `--config` | `-c` | Path to a config file to use
-| `--port` | `-p` | Port number to run the server on
+Start the dev server with live preview and HMR.
 
-Use the `maizzle serve` command to start a local development server, which you can access in your browser at http://localhost:3000.
-
-`[env]` is optional, you can simply run `maizzle serve` and a server will be started using the settings from your project's `config.js`.
-
-You can edit a Template or Component in your code editor, save it, and the changes will instantly be reflected in the browser.
-
-#### serve \[env\]
-
-You may specify which Environment config file to use by passing an `[env]` argument:
-
-```sh
-maizzle serve production
+```bash
+npx maizzle serve
 ```
 
-In this example, a local development server will be started using the settings from your project's `config.production.js`.
-You can use this to start a dev server that uses settings from a different Environment config file.
+::callout{type="info"}
+You may also use `maizzle dev`, it is an alias for `maizzle serve`.
+::
 
-#### --bin
+### Options
 
-If needed, you may specify the path to Maizzle's executable by passing the `--bin` flag:
+| Option | Description |
+|--------|-------------|
+| `-c, --config <path>` | Path to config file |
+| `-p, --port <number>` | Dev server port |
+| `--host` | Expose on network |
 
-```sh
-maizzle serve --bin /path/to/@maizzle/framework/src
+### Examples
+
+Start the dev server on port 4000:
+
+```bash
+npx maizzle serve --port 4000
 ```
 
-#### --config
+Start the dev server and expose it on the local network:
 
-You may specify the path to a config file by passing the `--config` flag:
-
-This config file path takes precedence over the `[env]` argument, so for example the `dev.config.js` file will be used even if `production` is passed:
-
-```sh
-maizzle serve production --config /path/to/dev.config.js
+```bash
+npx maizzle serve --host
 ```
 
-#### --port
+::callout{type="info"}
+Using `--host` will print a QR code in the terminal that you can scan with your phone.
+::
 
-You may pass the `--port` flag to specify a port number to run the server on:
+## build
 
-```sh
-maizzle serve --port 8080
+Build email templates to HTML files.
+
+```bash
+npx maizzle build
 ```
 
-By default, `maizzle serve` will start on port `3000`.
+### Options
 
-### build
+| Option | Description |
+|--------|-------------|
+| `-c, --config <path>` | Path to config file |
+| `-o, --output <path>` | Output directory |
+| `--dir <path>` | Source directory for email templates |
+| `--ext <extension>` | Output file extension |
+| `--pretty` | Pretty-print HTML output |
+| `--minify` | Minify HTML output |
+| `--plaintext` | Generate plaintext versions alongside HTML |
 
-```sh
-maizzle build [env]
+::callout{type="info"}
+When `--config` is set, the override flags (`-o`, `--dir`, `--ext`, `--pretty`, `--minify`, `--plaintext`) are ignored — your config file is used as-is.
+::
+
+### Examples
+
+Output to a custom directory:
+
+```bash
+npx maizzle build --output production/emails
 ```
 
-The `build` command is used to compile your Templates and output them to the destination directory. If `[env]` is specified, Maizzle will try to compute an Environment config by merging `config.[env].js` on top of the default `config.js`.
+Pretty-print and generate plaintext versions:
 
-| Argument | Required | Default | Description
-| --- | --- | --- | --- |
-| `[env]` | no |  `local` | An Environment name to use
-
-| Option | Short | Description
-| --- | --- | --- |
-| `--bin` | `-b` | Path to the Maizzle executable
-| `--config` | `-c` | Path to a config file to use
-| `--summary` | `-s` | Show a summary of the build process
-
-<Alert>If no `[env]` is specified, Maizzle will use `config.js` from the current working directory.</Alert>
-
-#### --bin
-
-If needed, you may specify the path to Maizzle's executable by passing the `--bin` flag:
-
-```sh
-maizzle build --bin /path/to/@maizzle/framework/src
+```bash
+npx maizzle build --pretty --plaintext
 ```
 
-#### --config
+Custom source directory and output extension:
 
-You may specify the path to a config file by passing the `--config` flag:
-
-```sh
-maizzle build --config /path/to/custom-config.js
+```bash
+npx maizzle build --dir templates --ext blade.php
 ```
 
-The Environment config will be computed based exclusively on the contents of the specified file, there will be no merging with `config.js`.
+Use a specific config file:
 
-Also, specifying a config file path takes precedence over the `[env]` argument.
-
-In this example, `custom-config.js` will be used even if `production` is passed:
-
-```sh
-maizzle build production --config /path/to/custom-config.js
+```bash
+npx maizzle build --config maizzle.production.ts
 ```
 
-#### --summary
+## prepare
 
-You may pass the `--summary` flag to show a summary of the build process:
+Generate IDE type definitions in the `.maizzle/` directory. Run this when you add new components or composables and want auto-import types to update without starting the dev server.
 
-```sh no-root no-copy
-$ maizzle build production --summary
+```bash
+npx maizzle prepare
 ```
 
-This will output a list of all the Templates that were built, their compiled file size, and how long it took to build each one:
+::callout{type="info"}
+The official starter runs this automatically after installing dependencies.
+::
 
-```md
-┌────────────────────────┬───────────┬────────────┐
-│ File name              │ File size │ Build time │
-├────────────────────────┼───────────┼────────────┤
-│ confirmation.html      │ 5.07 KB   │ 432 ms     │
-├────────────────────────┼───────────┼────────────┤
-│ email-change.html      │ 5.07 KB   │ 79 ms      │
-├────────────────────────┼───────────┼────────────┤
-│ invitation.html        │ 5.08 KB   │ 81 ms      │
-├────────────────────────┼───────────┼────────────┤
-│ password-recovery.html │ 4.99 KB   │ 65 ms      │
-└────────────────────────┴───────────┴────────────┘
+### Options
 
-✔ Built 4 templates in 698 ms
+| Option | Description |
+|--------|-------------|
+| `-c, --config <path>` | Path to config file |
+
+## make:template
+
+Scaffold a new email template file.
+
+```bash
+npx maizzle make:template [filepath]
 ```
 
-## Scaffolding
+Creates a `.vue` file with a basic email template structure. If no filepath is provided, you'll be prompted for one.
 
-CLI commands for creating new projects and scaffolding Templates or config files.
+## make:layout
 
-### make:config
+Scaffold a new layout file using our official `<Layout>` component.
 
-```sh
-maizzle make:config
+```bash
+npx maizzle make:layout [filepath]
 ```
 
-This command will start an interactive prompt that will guide you through the process of creating a new Maizzle config file.
+## make:component
 
-You may skip the prompt by passing a name for the config file:
+Scaffold a new component file.
 
-```sh
-maizzle make:config [env]
+```bash
+npx maizzle make:component [filepath]
 ```
 
-| Option | Shorthand | Description
-| --- | --- | --- |
-| `[env]` | n/a | Environment name to use for the config file name.
-| `--full` | `-f` |  Scaffold a full config.
+## make:config
 
-The `[env]` option is an Environment name, like `preview`.
+Scaffold a new config file.
 
-For example, let's scaffold `config.preview.js`:
-
-```sh
-maizzle make:config preview
+```bash
+npx maizzle make:config [name]
 ```
 
-By default, a minimal config will be output:
-
-```js [config.preview.js]
-/** @type {import('@maizzle/framework').Config} */
-export default {
-  build: {
-    content: ['emails/**/*.html'],
-    output: {
-      path: 'build_preview',
-    },
-  },
-}
-```
-
-If you want a full config, use the `--full` option:
-
-```sh
-maizzle make:config preview --full
-```
-
-### make:layout
-
-```sh
-maizzle make:layout
-```
-
-Scaffolds a new Layout.
-
-Running it with no arguments will present an interactive prompt.
-
-The same Layout structure from the Starter will be output.
-
-You may skip the prompt by passing in arguments:
-
-| Argument | Description
-| --- | --- |
-| `filepath` | Full path of the file to create, including file name
-
-```sh
-maizzle make:layout layouts/layout.html
-```
-
-<Alert type="warning">If the file already exists, an error will be thrown. The file will _not_ be overwritten.</Alert>
-
-Paths may be relative to the project root:
-
-```sh
-maizzle make:layout ../global-emails/layouts/layout.html
-```
-
-### make:template
-
-```sh
-maizzle make:template
-```
-
-Scaffolds a new Template.
-
-Running it with no arguments will present an interactive prompt.
-
-A minimal Template structure will be output:
-
-```hbs [emails/my-template.html]
----
-preheader: "Sample preheader text"
----
-
-<x-main>
-  <!-- your HTML... -->
-</x-main>
-```
-
-You may skip the prompt by passing in arguments:
-
-| Argument | Description
-| --- | --- |
-| `filepath` | Full path of the file to create, including file name
-
-```sh
-maizzle make:template emails/my-template.html
-```
-
-<Alert type="warning">If the file already exists, an error will be thrown. The file will _not_ be overwritten.</Alert>
-
-Paths may be relative to the project root:
-
-```sh
-maizzle make:template ../global-emails/my-template.html
-```
-
-### make:component
-
-```sh
-maizzle make:component
-```
-
-Scaffolds a new Component.
-
-Running it with no arguments will present an interactive prompt.
-
-You may skip the prompt by passing in arguments:
-
-| Argument | Description
-| --- | --- |
-| `filepath` | Full path of the file to create, including file name
-
-```sh
-maizzle make:component components/my-component.html
-```
-
-A minimal Component structure will be output:
-
-```hbs [components/my-component.html]
-<script props>
-  module.exports = {
-    greeting: props.greeting || 'Hello, World!',
-  }
-</script>
-
-{{ greeting }}
-
-<yield />
-```
-
-<Alert type="warning">If the file already exists, an error will be thrown. The file will _not_ be overwritten.</Alert>
-
-Paths may be relative to the project root:
-
-```sh
-maizzle make:component ../global-emails/components/my-component.html
-```
-
-### make:tailwind
-
-```sh
-maizzle make:tailwind [filepath]
-```
-
-Scaffolds a new Tailwind CSS config based on the one in the [Starter](https://github.com/maizzle/maizzle/blob/master/tailwind.config.js).
-
-Running it with no arguments will present an interactive prompt.
-
-A minimal Tailwind CSS config will be output:
-
-```js [tailwind.config.js]
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  presets: [
-    require('tailwindcss-preset-email'),
-  ],
-  content: [
-    './components/**/*.html',
-    './emails/**/*.html',
-    './layouts/**/*.html',
-  ],
-}
-```
-
-You can skip the prompt by passing in arguments:
-
-| Argument | Description
-| --- | --- |
-| `filepath` | Full path of the file to create, including file name
-
-```sh
-maizzle make:tailwind config/tailwind.config.js
-```
-
-<Alert type="warning">If the file already exists, an error will be thrown. The file will _not_ be overwritten.</Alert>
+Pass a name to create an environment-specific config — `npx maizzle make:config production` writes `production.config.ts`. When no name is given, you'll be prompted for one.

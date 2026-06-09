@@ -1,77 +1,117 @@
 ---
-title: "Introduction"
-description: "Getting started with the Maizzle Email Framework."
+title: What is Maizzle?
+description: Getting started with the Maizzle Email Framework.
+section: Getting Started
+order: 1
 ---
 
-# What is Maizzle?
+# Introduction
 
-Maizzle is a framework for HTML email development.
+Maizzle is a modern framework for building HTML emails with Vue and Tailwind CSS. 
 
-It's powered by [Tailwind CSS](https://tailwindcss.com/) and comes with features such as components, expressions, and various automations that make coding HTML emails easier.
+It provides a component-based workflow, modern dev server, production-ready email build pipeline, tools and many optimizations that help you focus on what you want to build instead of fighting email client quirks.
 
-Maizzle doesn't rely on custom tags that expand into predefined, `<table>`-based HTML markup. We do provide some abstractions for things like components or templating tags, but you don't _have_ to use them if you don't want to.
+## Why Maizzle?
 
-This means that you're in complete control over your email code: no need to worry about things like component markup being locked into the framework core or not having full control over styling or accessibility.
+Building HTML emails is notoriously difficult. Email clients render HTML inconsistently, CSS support is limited, and coding layouts that look good and render well quickly becomes a game of whack-a-mole with nested tables and a soup of inline styles with conditional comments for The Old Outlooks.
 
-## Tailwind CSS
+Maizzle bridges the gap between frontend development and the unique requirements of HTML emails through a modern dev stack:
 
-Maizzle uses the Tailwind CSS framework, enabling you to quickly style HTML emails.
+- **Vue components**: render-tested, composable components
+- **Tailwind CSS**: style emails with utility classes
+- **Transformers**: CSS inlining, unused CSS purging etc.
+- **Vite plugin**: use it in your Vite-powered project
 
-Using utility classes to style emails makes you more productive by eliminating the tiring context switching that is common in a traditional email coding approach, where you keep moving back and forward between your responsive CSS and your HTML markup.
+## How it works
 
-And since you no longer need to come up with names for your CSS classes, you can focus on coding your emails at warp speed.
+You write Vue Single-File Components (SFCs) as your email templates, using our built-in components or your own HTML, and style them with Tailwind CSS or inline styles.
 
-We use [`tailwindcss-preset-email`](https://github.com/maizzle/tailwindcss-preset-email), a custom preset that configures Tailwind CSS for better email client support: `rem` values are replaced with `px`, HEX values are preferred over CSS vars, there are custom screens and an extended spacing scale etc.
+::code-tabs
+  :::code-tab{label="Components"}
+  ```vue [emails/welcome.vue]
+  <template>
+    <Html>
+      <Head />
+      <Tailwind>
+        <Body class="font-sans bg-slate-100">
+          <Container class="max-w-xl">
+            <h1 class="m-0 mb-6 text-lg">
+              Hello, welcome aboard!
+            </h1>
+            <Button href="https://example.com">
+              Get Started
+            </Button>
+          </Container>
+        </Body>
+      </Tailwind>
+    </Html>
+  </template>
+  ```
+  :::
+  :::code-tab{label="Custom HTML"}
+  ```vue [emails/welcome.vue]
+  <template>
+    <html>
+      <head>
+        <style>
+          @import "@maizzle/tailwindcss";
+        </style>
+      </head>
+      <body class="m-0 p-0 w-full">
+        <table class="w-full font-sans bg-slate-100">
+          <tr>
+            <td class="w-xl sm:w-full">
+              <h1 class="m-0 mb-6 text-lg">
+                Hello, welcome aboard!
+              </h1>
 
-When you build the production-ready emails, Maizzle can automatically take care of CSS inlining, as well as many other HTML and CSS optimizations.
+              <div>
+                <a href="https://example.com" class="inline-block py-4 px-6 text-base no-underline rounded text-white bg-indigo-500">
+                  <!--[if mso]><i style="mso-font-width: 150%; mso-text-raise: 31px;" hidden>&emsp;</i><![endif]-->
+                  <span class="mso-text-raise-4">Get Started</span>
+                  <!--[if mso]><i style="mso-font-width: 150%;" hidden>&emsp;&#8203;​</i><![endif]-->
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </body>
+    </html>
+  </template>
+  ```
+  :::
+::
 
-## Build System
+When you build for production, Maizzle renders the Vue components to HTML and runs a series of transformers that optimize the output for email clients. 
 
-The build system in Maizzle is based on what we call [Environments](/docs/environments).
+The result is production-ready HTML with inlined CSS, email-safe class names, and proper Outlook fallbacks that you can upload to your <abbr title="Email Service Provider">ESP</abbr> or send with an email sending service.
 
-These allow you to define distinct build scenarios for your email workflow.
+## Key features
 
-Each environment is customized through a JavaScript config file, so you can even `import()` packages or programmatically set options.
+### Components
 
-[PostHTML](https://posthtml.org/) plugins are used for the templating logic, and you can use components, loops, if statements - even fetch remote content. Markdown with <abbr title="GitHub Flavored Markdown">GFM</abbr> is supported, too.
+30+ email components handle the hard parts for you — responsive layouts, buttons that work in Outlook, images with dark mode support, syntax-highlighted code blocks, and more. All render-tested to ensure they look good and work well across popular email clients.
 
-## BYOHTML
+### Tailwind CSS
 
-Maizzle doesn't include markup abstractions that expand to `<table>`-based structures, such as `<row>` or `<column>` seen in other frameworks &ndash; you code your emails the way you want to, with HTML you already know.
+Tailwind CSS is a first-class citizen in Maizzle: it works out of the box through a custom compilation pipeline and email-optimized configuration that adjusts spacing, sizing, and other utilities for maximum email client compatibility.
 
-Knowing that some email clients still require the use of tables in order to ensure proper layout rendering, this might sound terrifying to some.
+### Transformers
 
-However, through progressive enhancement, you can actually use modern HTML and CSS in many email clients while providing a fallback for the more archaic ones.
+After being rendered, your HTML goes through a configurable pipeline of transformers that handle CSS inlining, unused CSS removal, minification, and many other email optimizations.
 
-You're free to code your emails however you like 💪
+### Dev server
 
-_Bring Your Own HTML_ <sup>&trade;</sup>
+A modern dev server with live preview/HMR, device resizing, compatibility checks with jump-to-editor, dark mode emulation, quick search and even test email sending.
 
-## Responsive
+### Vite plugin
 
-Because of the lack of standards and the wildly varying [CSS support in email clients](https://www.caniemail.com/), there are many techniques that email developers use to code responsive emails.
+Already have a Vite project? Use Maizzle as a Vite plugin and start building emails in any Vite-powered framework, like Laravel, Nuxt, SvelteKit or Astro.
 
-Maizzle doesn't have an opinion on how you should code your emails: from _spongy_ to _fluid_ and _responsive_ to _hybrid_, everything is supported, so you're free to use whatever technique you like (or need).
+### CLI tool
 
-Tailwind CSS screens in Maizzle are configured for a _desktop-first responsive_ approach by default, which is the opposite of what you might be used to in web development. We currently do this because of Outlook/Office 365 on Windows and a few other email clients that don't support media queries.
+Easily scaffold new projects, generate components or configuration, develop locally and run production builds straight from the terminal.
 
-Utility classes will target desktop viewports by default, and the [responsive variants](https://tailwindcss.com/docs/responsive-design) will override them for small screen sizes:
+### API
 
-```js [tailwind.config.js] no-copy
-module.exports = {
-  screens: {
-    sm: {max: '600px'},
-    xs: {max: '425px'},
-  },
-}
-```
-
-## Configure It Out!
-
-Maizzle is configured in JavaScript.
-
-Besides things like "_should inlining be enabled?_" or "_do we need to minify the HTML?_", you can even pass options to the Markdown renderer or choose where on your machine the compiled HTML file should be saved.
-
-You can do even more advanced things, like pulling data from an API to use in a template, or `import()` some NPM package to further transform your emails.
-
-Each config file represents a distinct [build Environment](/docs/environments) that can be triggered with its own `maizzle build [environment]` command, so you can create as many build scenarios as you need, each with their own settings!
+Use functions like `render()` to compile a template string, or `build()` to build a batch of templates and output them to disk.

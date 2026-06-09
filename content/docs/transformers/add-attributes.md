@@ -1,133 +1,82 @@
 ---
-title: "Add attributes"
-description: "Automatically add attributes to your HTML emails. Write less code and easily improve accessibility."
+title: Add Attributes
+description: Automatically add HTML attributes to elements.
+section: Transformers
+order: 2
 ---
 
-# Add attributes
+# Add Attributes
 
-Maizzle can automatically add attributes to HTML elements in your email templates.
-
-This can be useful for:
-
-- adding default attributes based on build Environment or Template
-- not having to write required attributes all the time
-- automating email accessibility
-
-The `attributes.add` key in your config defines which elements in your emails should receive which attributes with what values.
+Adds HTML attributes to elements matched by tag name, class, ID, or attribute selector.
 
 ## Usage
 
-Here is how you would add a `role="article"` attribute to a `<div>`:
+The transformer runs by default with these built-in defaults:
 
-```js [config.js]
-export default {
-  attributes: {
-    add: {
-      div: {
-        role: 'article',
+- `<table>` gets `cellpadding="0"`, `cellspacing="0"`, and `role="none"`
+- `<img>` gets `alt=""`
+
+Any config you provide is merged on top of these defaults.
+
+```ts [maizzle.config.ts]
+export default defineConfig({
+  html: {
+    attributes: {
+      add: {
+        table: { cellpadding: 0, cellspacing: 0, role: 'none' },
+        img: { alt: '' },
       },
     },
-  }
-}
-```
-
-## Default attributes
-
-By default, Maizzle makes any `<table>` accessible, resets its spacing, and ensures that an empty `alt=""` attribute is added to images that don't have it.
-
-This is the default configuration:
-
-```js
-let attributes = {
-  table: {
-    cellpadding: 0,
-    cellspacing: 0,
-    role: 'none',
   },
-  img: {
-    alt: '',
-  }
-}
+})
 ```
 
-<Alert>Attributes will be added only if they're not already present on the element.</Alert>
+## Customization
+
+### Selectors
+
+You may target elements using tag names, classes, IDs, attribute selectors, or comma-separated combinations:
+
+```ts [maizzle.config.ts]
+export default defineConfig({
+  html: {
+    attributes: {
+      add: {
+        table: { cellpadding: 0, cellspacing: 0, role: 'none' },
+        img: { alt: '' },
+        '.cta': { role: 'button' },
+        '#header': { 'aria-label': 'Header' },
+        '[role]': { tabindex: 0 },
+        '[role=alert]': { 'aria-live': 'assertive' },
+        'div, p': { role: 'presentation' },
+      },
+    },
+  },
+})
+```
+
+### Merge behavior
+
+For the `class` attribute, new classes are merged with any existing ones on the element. For all other attributes, the value is only added if the attribute is not already present on the element.
 
 ### Disabling
 
-You may turn this off by setting `extraAttributes` to `false` in your config:
+You may disable the transformer entirely:
 
-```js [config.js]
-export default {
-  attributes: {
-    add: false,
-  }
-}
-```
-
-## Selectors
-
-Tag, class, id, and attribute selectors are supported:
-
-```js [config.js]
-export default {
-  extraAttributes: {
-    div: {
-      id: 'new',
+```ts [maizzle.config.ts]
+export default defineConfig({
+  html: {
+    attributes: {
+      add: false,
     },
-    '.test': {
-      editable: true,
-    },
-    '#test': {
-      'data-foo': 'bar',
-    },
-    '[role]': {
-      'aria-roledescription': 'slide',
-    },
-  }
-}
-```
-
-## Multiple selectors
-
-Add multiple attributes to multiple elements in one go:
-
-```js [config.js]
-export default {
-  attributes: {
-    add: {
-      'div, p': {
-        class: 'test',
-      },
-      'div[role=alert], section.alert': {
-        class: 'alert',
-      },
-    },
-  }
-}
-```
-
-## Tailwind CSS
-
-Any Tailwind CSS classes that you add with this Transformer need to be added to your `content` key, otherwise they will not be generated.
-
-To do this, simply add the path to your `config.js` file to the `content` array:
-
-```js [tailwind.config.js]
-export default {
-  content: ['./config.js'],
-}
+  },
+})
 ```
 
 ## API
 
-```js [app.js]
+```ts
 import { addAttributes } from '@maizzle/framework'
 
-const options = {
-  div: {
-    role: 'article'
-  }
-}
-
-const html = await addAttributes('<div></div>', options)
+const out = addAttributes('<table></table>', { add: { table: { role: 'none' } } })
 ```

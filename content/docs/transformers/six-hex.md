@@ -1,30 +1,57 @@
 ---
-title: "Six-digit HEX"
-description: "Using six-digit hexadecimal for improved email client compatibility."
+title: Six-digit HEX
+description: Convert 3-digit HEX colors to 6-digit in HTML attributes.
+section: Transformers
+order: 7
 ---
 
 # Six-digit HEX
 
-Some email clients do not support 3-digit HEX colors like `#fff` in `bgcolor` or `<font color="">`. This Transformer ensures that all your HEX colors inside `bgcolor` and `color` attributes are defined with six digits.
+Some email clients don't support 3-digit shorthand HEX colors like `#fff`. This transformer converts them to their 6-digit equivalents.
 
-For better email client compatibility, it is enabled by default.
+## Usage
 
-## Disabling
+The transformer is enabled by default, so you don't need to configure anything. It only processes `bgcolor` and `color` HTML attributes, so your text content is unchanged.
 
-You may disable it by setting it to `false`:
+Turns this:
 
-```js [config.js]
-export default {
+```html
+<td bgcolor="#fff" color="#000">
+  The #fff and #000 colors are converted to #ffffff and #000000.
+</td>
+```
+
+Into this:
+
+```html
+<td bgcolor="#ffffff" color="#000000">
+  The #fff and #000 colors are converted to #ffffff and #000000.
+</td>
+```
+
+## Customization
+
+### Disabling
+
+You may disable the transformer if you don't need it:
+
+```ts [maizzle.config.ts]
+export default defineConfig({
   css: {
     sixHex: false,
-  }
-}
+  },
+})
 ```
 
 ## API
 
-```js [app.js]
-import { sixHEX } from '@maizzle/framework'
+Use `sixHex` programmatically to expand 3-digit hex codes in `bgcolor` and `color` attributes on any HTML string.
 
-const html = await ensureSixHEX('<td bgcolor="#fff"><font color=""#000>test</font></td>')
+```ts
+import { sixHex } from '@maizzle/framework'
+
+const out = sixHex('<font color="#000">x</font>')
+// <font color="#000000">x</font>
 ```
+
+Takes an HTML string. Returns the transformed HTML string. No options.

@@ -1,322 +1,221 @@
 ---
-title: "Inline CSS"
-description: "Inline CSS in your HTML emails for better email client compatibility."
+title: Inline CSS
+description: Automatically inline CSS from style tags into HTML element style attributes.
+section: Transformers
+order: 3
 ---
 
 # Inline CSS
 
-Automatically inline CSS from `<style>` tags in your HTML emails.
-
-CSS inlining is still important in HTML email, mainly because of Outlook on Windows, which doesn't support multiple classes on elements.
-
-It can also help preserve a decent layout in email clients that do not support embedded CSS (in `<style>` tags), or when an email is forwarded.
-
-The utility-first approach in Tailwind CSS works great with CSS inlining: utility classes are not 'global', so you won't end up with a `font-family` inlined on every element (unless you really, really want to).
+CSS inlining is still important in HTML email, mainly because of Gmail and Outlook on Windows which have limited support for `<style>` tags.
 
 ## Usage
 
-To enable CSS inlining, simply set `css.inline` to `true` in your config:
+Enabled by default. To disable, set it to `false`:
 
-```js [config.js]
-export default {
+```ts [maizzle.config.ts]
+export default defineConfig({
   css: {
-    inline: true,
-  }
-}
+    inline: false,
+  },
+})
 ```
 
-<Alert>You will want to keep CSS inlining off when developing ⚡[AMP4EMAIL templates](/guides/amp-email)</Alert>
+Given this input:
+
+```html
+<p class="text-blue-500">Hello</p>
+```
+
+Result:
+
+```html
+<p class="text-blue-500" style="color: #3b82f6;">Hello</p>
+```
+
+## Skip inlining
+
+Style tags with an `embed` attribute are ignored by the inliner:
+
+```html
+<style embed>
+  .keep-me { width: 100%; }
+</style>
+```
 
 ## Customization
 
-If you need control over how your CSS is inlined, you may pass a configuration object to `inlineCSS`. Doing this in your Environment `config.js` will enable CSS inlining for all Templates when building for that Environment.
+Pass an object instead of `true` to configure [Juice](https://github.com/Automattic/juice) options:
 
-### styleToAttribute
-
-Type: `Object`\
-Default: `{}`
-
-Defines which CSS properties should be duplicated as what HTML attributes.
-
-For example, this property-attribute assignment:
-
-```js [config.js]
-export default {
+```ts [maizzle.config.ts]
+export default defineConfig({
   css: {
     inline: {
-      styleToAttribute: {
-        'background-color': 'bgcolor',
-      }
-    }
-  }
-}
-```
-
-... will transform this:
-
-```html
-<table class="bg-slate-300">
-  <tr>
-    <td>...</td>
-  </tr>
-</table>
-```
-
-... into this:
-
-```html
-<table bgcolor="#cbd5e1" style="background-color: #cbd5e1">
-  <tr>
-    <td>...</td>
-  </tr>
-</table>
-```
-
-The available mappings are:
-
-CSS Property | HTML Attribute
---- | ---
-`background-color` | `bgcolor`
-`background-image` | `background`
-`text-align` | `align`
-`vertical-align` | `valign`
-
-### attributeToStyle
-
-Type: `Boolean|String[]`\
-Default: `undefined`
-
-Duplicates specified HTML attributes as inline CSS.
-
-See the documentation [here](/docs/transformers/attribute-to-style).
-
-### applyWidthAttributes
-
-Type: `Boolean`\
-Default: `true`
-
-Whether to use any CSS pixel widths to create `width` attributes on elements set in `css.inline.widthElements`.
-
-Set it to `false` to prevent any `width` attributes from being added based on inline CSS width:
-
-```js [config.js]
-export default {
-  css: {
-    inline: {
-      applyWidthAttributes: false,
-    }
-  }
-}
-```
-
-### widthElements
-
-Type: `String[]`\
-Default: `['img', 'video']`
-
-Array of HTML elements that can receive `width` attributes based on inline CSS width.
-
-```js [config.js]
-export default {
-  css: {
-    inline: {
-      widthElements: ['table', 'td', 'th'],
-    }
-  }
-}
-```
-
-### applyHeightAttributes
-
-Type: `Boolean`\
-Default: `true`
-
-Whether to use any CSS pixel heights to create `height` attributes on elements set in `css.inline.heightElements`.
-
-Set it to `false` to prevent any `height` attributes from being added based on inline CSS height:
-
-```js [config.js]
-export default {
-  css: {
-    inline: {
-      applyHeightAttributes: false,
-    }
-  }
-}
-```
-
-### heightElements
-
-Type: `String[]`\
-Default: `['img', 'video']`
-
-Array of HTML elements that can receive `height` attributes based on inline CSS height.
-
-```js [config.js]
-export default {
-  css: {
-    inline: {
-      heightElements: ['table', 'td', 'th'],
-    }
-  }
-}
-```
-
-### excludedProperties
-
-Type: `String[]`\
-Default: `[]`
-
-Array of CSS property names that should be excluded from the CSS inlining process.
-
-Names are considered unique, so you will need to specify each one you'd like to exclude.
-
-For example:
-
-```js [config.js]
-export default {
-  css: {
-    inline: {
-      excludedProperties: ['padding', 'padding-left'],
-    }
-  }
-}
-```
-
-<Alert>`--tw-shadow` is automatically excluded from the properties that can be inlined.</Alert>
-
-### codeBlocks
-
-Type: `Object`\
-Default: `{ EJS: {}, HBS: {} }`
-
-An object where each value has a start and end to specify fenced code blocks that should be ignored during CSS inlining.
-
-By default, <abbr title="Embedded JavaScript Templates">EJS</abbr> and <abbr title="Handlebars">HBS</abbr> code blocks are ignored:
-
-```js
-{
-  EJS: { start: '<%', end: '%>' },
-  HBS: { start: '{{', end: '}}' },
-}
-```
-
-### removeInlinedSelectors
-
-Type: `Boolean`\
-Default: `true`
-
-When `css.inline` is enabled, classes will be removed from the `class` attribute of a tag after they have been successfully inlined.
-
-Set this option to `false` to preserve the classes in the `class` attribute.
-
-```js [config.production.js]
-export default {
-  css: {
-    inline: {
-      removeInlinedSelectors: false,
-    }
-  }
-}
+      preferUnitlessValues: true,
+      removeStyleTags: true,
+    },
+  },
+})
 ```
 
 ### preferUnitlessValues
 
-Type: `Boolean`\
+Type: `boolean`\
 Default: `true`
 
-When inlining CSS, `0` values will be inlined without units.
+Converts `0px`, `0em`, and similar zero values to `0`.
 
-For example, `margin: 0px` will be inlined as `margin: 0`.
+### removeInlinedSelectors
 
-Set this to `false` to keep units on `0` values.
+Type: `boolean`\
+Default: `true`
 
-```js [config.js]
-export default {
-  css: {
-    inline: {
-      preferUnitlessValues: false,
-    }
-  }
-}
-```
+Remove selectors from `<style>` tags after they have been inlined.
 
-### useAttributeSizes
+### applyWidthAttributes
 
-Type: `Boolean`\
-Default: `undefined`
+Type: `boolean`\
+Default: `true`
 
-Prefer HTML `width` and `height` attributes over inline CSS.
+Apply `width` CSS values as HTML `width` attributes on elements.
 
-Useful for retina images in Outlook on Windows, which doesn't respect CSS sizes and will render the image in its natural size.
+### applyHeightAttributes
 
-Set this to `true` to use HTML attributes for sizes instead of inline CSS:
+Type: `boolean`\
+Default: `true`
 
-```js [config.js]
-export default {
-  css: {
-    inline: {
-      useAttributeSizes: true,
-    }
-  }
-}
-```
+Apply `height` CSS values as HTML `height` attributes on elements.
 
-<alert>`useAttributeSizes` will apply to all elements defined in [`widthElements`](/docs/transformers/inline-css#widthelements) and [`heightElements`](/docs/transformers/inline-css#heightelements)</alert>
+### inlineDuplicateProperties
+
+Type: `boolean`\
+Default: `true`
+
+When a property is defined multiple times, inline all occurrences instead of only the last one.
 
 ### safelist
 
-Type: `String[]`
+Type: `string[]`\
+Default: `undefined`
 
-An array of strings representing CSS selectors that should not be removed after inlining.
+CSS selectors to preserve in `<style>` even after inlining.
 
-These can be substring matches, so you can use `text-red` to preserve `.text-red`, `.text-red-500`, etc.
-
-```js [config.js]
-export default {
+```ts [maizzle.config.ts]
+export default defineConfig({
   css: {
     inline: {
-      safelist: ['text-red', '.bg-blue-500'],
-    }
-  }
-}
+      safelist: ['.some-class'],
+    },
+  },
+})
 ```
 
-## Prevent inlining
+### styleToAttribute
 
-You may add an attribute on a `<style>` tag to prevent Juice from inlining the CSS inside it. Useful for writing email client CSS hacks, or for preserving CSS comments when using the [`removeCSSComments: false`](/docs/transformers/purge-css#removecsscomments) Cleanup option.
+Type: `Record<string, string>`\
+Default: `undefined`
 
-```html
-<style data-embed>
-  /* This CSS will not be inlined */
-  .text-red { color: red; }
-</style>
+Duplicate CSS properties to HTML attributes. For example, to copy `background-color` to a `bgcolor` attribute:
+
+```ts [maizzle.config.ts]
+export default defineConfig({
+  css: {
+    inline: {
+      styleToAttribute: {
+        'background-color': 'bgcolor',
+      },
+    },
+  },
+})
 ```
 
-Maizzle supports the following attributes for this purpose:
+### widthElements
 
--  `data-embed`
--  `no-inline`
--  `embed`
+Type: `string[]`\
+Default: `['img', 'video']`
 
-<Alert>CSS selectors that don't appear in your markup will still need to be [whitelisted for purging](/docs/transformers/purge-css#whitelist).</Alert>
+Elements that can receive a `width` HTML attribute from their CSS `width` value.
+
+### heightElements
+
+Type: `string[]`\
+Default: `['img', 'video']`
+
+Elements that can receive a `height` HTML attribute from their CSS `height` value.
+
+### excludedProperties
+
+Type: `string[]`\
+Default: `undefined`
+
+CSS properties to skip when inlining.
+
+```ts [maizzle.config.ts]
+export default defineConfig({
+  css: {
+    inline: {
+      excludedProperties: ['cursor', 'animation'],
+    },
+  },
+})
+```
+
+### codeBlocks
+
+Type: `object`\
+Default: `undefined`
+
+Template language delimiters to preserve during inlining, so they aren't mangled by the HTML parser:
+
+```ts [maizzle.config.ts]
+export default defineConfig({
+  css: {
+    inline: {
+      codeBlocks: {
+        EJS: { start: '<%', end: '%>' },
+      },
+    },
+  },
+})
+```
+
+### customCSS
+
+Type: `string`\
+Default: `undefined`
+
+An extra CSS string to inline alongside the existing `<style>` tags:
+
+```ts [maizzle.config.ts]
+export default defineConfig({
+  css: {
+    inline: {
+      customCSS: 'p { font-size: 16px; }',
+    },
+  },
+})
+```
 
 ## API
 
-You can use the `inlineCSS` function to inline CSS in a string of HTML.
+Use `inlineCss` to programmatically inline CSS:
 
-Your HTML string will need to have at least one `<style>` tag in the `<head>`.
-Alternatively, you may pass your own CSS to inline through the `customCSS` option.
+```ts
+import { inlineCss } from '@maizzle/framework'
 
-Additionally, you may configure the [Juice](https://www.npmjs.com/package/juice) library by passing options in the same object.
+const html = `
+  <style>
+    .red { color: red; }
+    .btn { background: blue; padding: 10px; }
+  </style>
+  <p class="red">Hello</p>
+  <a class="btn">Click</a>
+`
 
-```js [app.js]
-import { inlineCSS } from '@maizzle/framework'
-
-const config = {
-  customCSS: 'body { background-color: #f8f9fa; }',
-  excludedProperties: ['padding', 'padding-left'] // Juice option
-}
-
-const html = await inlineCSS('html string', config)
+const out = inlineCss(html, {
+  removeStyleTags: true,
+  preferUnitlessValues: true,
+})
 ```
+
+The first argument is an HTML string. The second is an optional `InlineCssOptions` object containing every option documented above plus any [Juice option](https://github.com/Automattic/juice#options) is accepted at the top level. Returns the transformed HTML string.

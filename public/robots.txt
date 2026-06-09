@@ -1,5 +1,2 @@
 User-Agent: *
-Allow: /
-
-Host: https://maizzle.com
-Sitemap: https://maizzle.com/sitemap.xml
+Disallow:

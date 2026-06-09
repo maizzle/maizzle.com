@@ -1,123 +1,97 @@
 ---
-title: "Attribute to style"
-description: "Convert HTML attributes to inline CSS in your HTML emails."
+title: Attribute to Style
+description: Convert HTML attributes like width, height, and bgcolor to inline CSS styles.
+section: Transformers
+order: 8
 ---
 
-# Attribute to style
+# Attribute to Style
 
-Duplicate HTML attributes to inline CSS.
+Converts HTML attributes like `width`, `height` or `bgcolor` to their inline CSS counterparts.
 
 ## Usage
 
-This Transformer is part of the CSS inlining process, you may enable it in your `config.js` under the `css.inline` key:
+The transformer is disabled by default, enable it in your config:
 
-```js [config.js]
-export default {
+```ts [maizzle.config.ts]
+export default defineConfig({
   css: {
     inline: {
       attributeToStyle: true,
-    }
-  }
-}
+    },
+  },
+})
 ```
 
-Given this HTML:
+When set to `true`, it processes all default attributes: `width`, `height`, `bgcolor`, `background`, `align`, and `valign`.
 
-```html
-<table width="100%">
-  <tr>
-    <td>
-      <p>The quick brown fox jumped over the lazy dog.</p>
-    </td>
-  </tr>
-</table>
-```
+For example:
 
-It will transform it to:
+::code-tabs
+  :::code-tab{label="Input"}
+  ```html
+  <td width="600" bgcolor="#ffffff">
+  ```
+  :::
+  :::code-tab{label="Output"}
+  ```html
+  <td width="600" bgcolor="#ffffff" style="width: 600px; background-color: #ffffff">
+  ```
+  :::
+::
 
-```html
-<table width="100%" style="width: 100%">
-  <tr>
-    <td>
-      <p>The quick brown fox jumped over the lazy dog.</p>
-    </td>
-  </tr>
-</table>
-```
+New styles are appended to any existing `style` attribute on the element.
 
 ## Customization
 
-You may enable it only for some attributes:
+### attributeToStyle
 
-```js [config.js]
-export default {
+Type: `boolean | string[]`\
+Default: `false`
+
+You may pass an array of attribute names to process only specific attributes:
+
+```ts [maizzle.config.ts]
+export default defineConfig({
   css: {
     inline: {
-      attributeToStyle: ['width', 'bgcolor', 'background'],
-    }
-  }
-}
+      attributeToStyle: ['width', 'bgcolor'],
+    },
+  },
+})
 ```
 
-... or for all supported attributes:
+### Conversion reference
 
-```js [config.js]
-export default {
-  css: {
-    inline: {
-      attributeToStyle: ['width', 'height', 'bgcolor', 'background', 'align', 'valign'],
-    }
-  }
-}
-```
+Here's how each attribute is converted to CSS:
 
-## Supported attributes
+| Attribute | CSS Output |
+|-----------|-----------|
+| `width="600"` | `width: 600px` |
+| `height="400"` | `height: 400px` |
+| `bgcolor="#fff"` | `background-color: #fff` |
+| `background="img.jpg"` | `background-image: url('img.jpg')` |
+| `align="center"` (on `<table>`) | `margin-left: auto; margin-right: auto` |
+| `align="left"` (on `<table>`) | `float: left` |
+| `align="center"` (on other elements) | `text-align: center` |
+| `valign="top"` | `vertical-align: top` |
 
-The following attributes can be duplicated as inline CSS.
-
-### width
-
-Inlined as: `width: ${value}${unit}`
-
-Notes: supports only `px` and `%` values (defaults to `px`)
-
-### height
-
-Inlined as: height: ${value}${unit}
-
-Notes: supports only `px` and `%` values (defaults to `px`)
-
-### bgcolor
-
-Inlined as: `background-color: ${value}`
-
-### background
-
-Inlined as: `background-image: url('${value}')`
-
-### align
-
-1. On `<table>` elements
-
-    - `left` or `right` values inlined as `float: ${value}`
-    - `center` value inlined as `margin-left: auto; margin-right: auto`
-
-1. On any other elements, it is inlined as `text-align: ${value}`
-
-### valign
-
-Inlined as `vertical-align: ${value}`
-
-## Overriding
-
-This Transformer runs right before CSS inlining, so you can still override it through Tailwind CSS utility classes.
+::callout{type=info}
+Width and height support both `px` and `%` values. If no unit is specified, `px` is used.
+::
 
 ## API
 
-The second argument must be an array of attribute names to handle:
+Use `attributeToStyle` programmatically to copy HTML presentational attributes to inline `style` declarations on any HTML string outside the build pipeline:
 
-```js [app.js]
+```ts
 import { attributeToStyle } from '@maizzle/framework'
 
-const html = await attributeToStyle('html string', ['width'])
+// Process every supported attribute (default)
+const all = attributeToStyle('<table align="center"><tr><td bgcolor="#f00">x</td></tr></table>')
+
+// Restrict to specific attribute names
+const limited = attributeToStyle(html, ['width', 'height'])
 ```
+
+The first argument is an HTML string. The second is a `boolean | string[]`: omit (or pass `true`) to convert every supported attribute, pass an array to restrict to specific names, or `false` to bail. Returns the transformed HTML string.

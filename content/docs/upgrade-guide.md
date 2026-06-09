@@ -1,454 +1,670 @@
 ---
-title: "Upgrade Guide"
-description: "How to upgrade your Maizzle project to the latest major framework release."
+title: Upgrade Guide
+description: How to upgrade your Maizzle projects from v5 to v6.
+section: Getting Started
+order: 5
 ---
 
 # Upgrade Guide
 
-Upgrading your Maizzle projects from v4.x to v5.
+Upgrading your Maizzle projects from v5.x to v6.
 
-Maizzle 5 is a major framework rewrite that comes with awesome new features and improvements, but also includes a few breaking changes.
+Maizzle 6 is a complete rewrite. It is powered by [Vite](https://vite.dev), uses Vue for templating and Tailwind CSS 4 for styling HTML emails.
 
-Migrating an existing project to Maizzle 5 takes less than 10 minutes in most cases.
+Because of this, we recommend starting fresh with the v6 starter and porting templates over rather than upgrading in place. Skim this guide first so you know what changed, then start a new project with `npx maizzle new` and copy your templates and config over.
 
-## Node.js
+## Install
 
-<strong class="text-indigo-500">BREAKING CHANGE</strong>
+Start a new project with the official starter:
 
-Maizzle 5 requires Node.js v18.20 or higher.
-
-Check your current Node.js version:
-
-```sh
-node --version
+```bash
+npx maizzle new
 ```
 
-<Alert>Maizzle is tested on Node.js 18, 20, and 22.</Alert>
+Or install into an existing project:
 
-## Update @maizzle/cli
-
-<strong class="text-indigo-500">BREAKING CHANGE</strong>
-
-Users with `@maizzle/cli` installed globally need to upgrade it to v2.x in order to continue using it in Maizzle 5 projects:
-
-```sh
-npm install -g @maizzle/cli
+```bash
+npm install @maizzle/framework
 ```
 
-<Alert type="warning">CLI 2.x only works with Maizzle 5 projects, it's not backwards compatible.</Alert>
+::callout{type="info"}
+Maizzle 6 works as a standalone project, in a monorepo, or as a Vite plugin inside an existing Vite-powered framework (Laravel, Nuxt, SvelteKit, Astro etc.). See the [framework guides](/docs/installation/frameworks).
+::
 
-Alternatively, you can just use the NPM scripts like `npm run dev` from `package.json`.
+## Templates
 
-## Update package.json
+Templates are now Vue SFCs (`.vue` files) instead of HTML files with PostHTML expressions. This means you can use Vue's full templating syntax, including components, directives, and JavaScript expressions. The frontmatter config is replaced by `defineConfig()` inside `<script setup>`.
 
-The `@maizzle/framework` package is now a module, so you need to update your `package.json` file to reflect this change.
+### File extension
 
-```json [package.json] {3}
-{
-  "private": true,
-  "type": "module",  // [!code ++]
-  "scripts": {
-    "dev": "maizzle serve",
-    "build": "maizzle build production"
-  },
-  "dependencies": {
-    "@maizzle/framework": "latest",
-    "tailwindcss-preset-email": "latest"
+```diff
+- emails/welcome.html
++ emails/welcome.vue
+```
+
+### Structure
+
+Here's a side-by-side of how you'd code the same email in v5 vs. v6:
+
+::code-tabs
+  :::code-tab{label="Maizzle 5"}
+  ```html [emails/welcome.html]
+  ---
+  title: World
+  ---
+
+  <x-main>
+    <table align="center" class="m-0 mx-auto">
+      <tr>
+        <td class="w-[552px] max-w-full">
+          <h1 class="text-2xl">Hello, {{ name }}!</h1>
+          <x-button
+            href="https://maizzle.com"
+            class="bg-slate-950 hover:bg-slate-800"
+          >
+            Get Started
+          </x-button>
+        </td>
+      </tr>
+    </table>
+  </x-main>
+  ```
+  :::
+  :::code-tab{label="Maizzle 6"}
+  ```vue [emails/welcome.vue]
+  <script setup>
+    const name = 'World'
+  </script>
+
+  <template>
+    <Layout>
+      <Container class="max-w-xl">
+        <Heading class="text-2xl">Hello, {{ name }}!</Heading>
+        <Button
+          href="https://example.com"
+          class="bg-slate-950 hover:bg-slate-800"
+        >Get Started</Button>
+      </Container>
+    </Layout>
+  </template>
+  ```
+  :::
+::
+
+Notice:
+- No frontmatter — config goes inside `<script setup>` via `defineConfig()`
+- Built-in Vue components available (`<Layout>`, `<Container>`, `<Heading>`, `<Button>`)
+- Vue's `{{ }}` interpolation replaces PostHTML expressions
+
+### Expressions
+
+PostHTML expressions are gone. Use Vue's template syntax:
+
+| PostHTML<br><span style="font-weight:normal;">Maizzle 5</span> | Vue<br><span style="font-weight:normal">Maizzle 6</span> |
+| --- | --- |
+| `{{ page.name }}` | `{{ name }}` |
+| `{{{ unsafe }}}` | `<span v-html="unsafe" />` |
+| `@{{ keep }}` | `<span v-pre>{{ keep }}</span>` <br>or `<Raw>{{ keep }}</Raw>` |
+| `<if condition="x">` | `<div v-if="x">` |
+| `<elseif condition="y">` | `<div v-else-if="y">` |
+| `<else>` | `<div v-else>` |
+| `<each loop="item in items">` | `<div v-for="item in items" :key="item.id">` |
+| `<switch>`/`<case>` | use `v-if`/`v-else-if` chains |
+| `<scope with="...">` | use a child component or destructure in `<script setup>` |
+
+### Layouts
+
+The `<x-main>` pattern is replaced by Vue's component composition. Use the built-in [`<Layout>`](/docs/components/layout) component, or wrap your own:
+
+```vue [emails/welcome.vue]
+<template>
+  <Layout>
+    <Container>
+      <Text>Your content here.</Text>
+    </Container>
+  </Layout>
+</template>
+```
+
+### yield → slot
+
+`<yield />` is replaced by Vue's `<slot />`:
+
+```vue [components/MyLayout.vue]
+<template>
+  <Layout>
+    <yield /> // [!code --]
+    <slot />  // [!code ++]
+  </Layout>
+</template>
+```
+
+### Markdown templates
+
+`.md` files are now first-class entry templates with frontmatter, `<script setup>`, and a default layout wrapped around the content.
+
+```md [emails/update.md]
+---
+title: Product Update
+---
+
+<script setup>
+  usePreheader('We shipped some new features')
+</script>
+
+# Hello
+
+Some **markdown** content with a Vue component:
+
+<Button href="https://example.com">Read more</Button>
+```
+
+See [Markdown templates](/docs/development/templates#markdown-templates) for the full feature set.
+
+## Tailwind CSS 4
+
+We have finally added support for Tailwind CSS 4 🥳
+
+### Bundled config
+
+We now ship [`@maizzle/tailwindcss`](/docs/tailwindcss), our email-friendly Tailwind CSS 4 configuration. 
+
+Delete `tailwind.config.js`, you now configure Tailwind CSS 4 inside `<style>` tags:
+
+```xml [emails/welcome.vue]
+<template>
+  <Layout>
+    <Head>
+      <style>
+        @import "@maizzle/tailwindcss";
+
+        @theme {
+          --color-brand: #4f46e5;
+          --font-display: "Inter", sans-serif;
+        }
+      </style>
+    </Head>
+    <Body>
+      <Text class="text-brand font-display">Hello!</Text>
+    </Body>
+  </Layout>
+</template>
+```
+
+See our [Tailwind CSS docs](/docs/tailwindcss) for more details and examples.
+
+### Email preset replaced
+
+| Maizzle 5 | Maizzle 6 |
+| --- | --- |
+| [`tailwindcss-preset-email`](https://www.npmjs.com/package/tailwindcss-preset-email) | [`@maizzle/tailwindcss`](https://www.npmjs.com/package/@maizzle/tailwindcss) |
+
+## Components
+
+### New syntax
+
+PostHTML components become Vue components.
+
+Here's a side-by-side comparison of how you'd define the same component in v5 vs. v6:
+
+::code-tabs
+  :::code-tab{label="v5/components/card.html"}
+  ```html [components/card.html]
+  <table align="center" class="mx-auto bg-indigo-100">
+    <tr>
+      <td class="p-6">
+        <yield />
+      </td>
+    </tr>
+  </table>
+  ```
+  :::
+  :::code-tab{label="v6/components/Card.vue"}
+  ```vue [components/Card.vue]
+  <template>
+    <table align="center" class="mx-auto bg-indigo-100">
+      <tr>
+        <td class="p-6">
+          <slot />
+        </td>
+      </tr>
+    </table>
+  </template>
+  ```
+  :::
+::
+
+Usage comparison:
+
+::code-tabs
+  :::code-tab{label="v5/emails/welcome.html"}
+  ```html [emails/promo.html]
+  <x-card>Limited time offer!</x-card>
+  ```
+  :::
+  :::code-tab{label="v6/emails/welcome.vue"}
+  ```vue [emails/promo.vue]
+  <Card>Limited time offer!</Card>
+  ```
+  :::
+::
+
+### Tailwind-first sizing
+
+Most components are now styled and sized with Tailwind. For example, here are the new [`<Hr>`](/docs/components/hr) divider and the vertical [`<Spacer>`](/docs/components/spacer):
+
+::code-tabs
+  :::code-tab{label="x-divider (v5)"}
+  ```html
+  <x-divider height="2px" space-y="32px" color="#e2e8f0" />
+  ```
+  :::
+  :::code-tab{label="Hr (v6)"}
+  ```vue
+  <Hr class="h-0.5 my-8 bg-slate-200" />
+  ```
+  :::
+::
+
+::code-tabs
+  :::code-tab{label="x-spacer (v5)"}
+  ```html
+  <x-spacer height="32px" />
+  ```
+  :::
+  :::code-tab{label="Spacer (v6)"}
+  ```vue
+  <Spacer class="h-8" />
+  ```
+  :::
+::
+
+::callout{type="info"}
+For Outlook fine-tuning, you can use the `mso-line-height-alt-*` utility.
+::
+
+## Configuration
+
+`config.js` becomes `maizzle.config.ts`, and it uses the composition API with `defineConfig()` for type safety and better editor support.
+
+::code-tabs
+  :::code-tab{label="~/code/project"}
+  ```ts
+  - config.js // [!code --]
+  - config.production.js // [!code --]
+  + maizzle.config.ts // [!code ++]
+  ```
+  :::
+  :::code-tab{label="maizzle.config.ts"}
+  ```ts [maizzle.config.ts]
+  import { defineConfig } from '@maizzle/framework'
+
+  export default defineConfig({
+    css: {
+      minify: true,
+    },
+  })
+  ```
+  :::
+::
+
+::callout{type="info"}
+You don't _need_ a `maizzle.config.ts` in your project, Maizzle 6 now has sensible defaults so you can get started without any config file at all.
+::
+
+### `build` key flattened
+
+The whole `build: { ... }` wrapper is gone. Move its children to the root:
+
+::code-tabs
+  :::code-tab{label="Maizzle 5"}
+  ```ts [maizzle.config.ts]
+  export default {
+    build: {
+      content: ['emails/**/*.html'],
+      output: { path: 'build_production' },
+    },
   }
-}
-```
-
-## Upgrade dependencies
-
-It's probably best that you do a clean install:
-
-- remove `node_modules` directory
-- remove `package-lock.json` and/or `yarn.lock`
-
-<Alert>If using yarn, note that it might have cached your dependencies.</Alert>
-
-Install the `latest` version of Maizzle:
-
-```sh
-npm install @maizzle/framework@latest
-```
-
-## Update your HTML
-
-### yield
-
-<strong class="text-indigo-500">BREAKING CHANGE</strong>
-
-The `<content />` tag has been replaced with `<yield />`.
-
-Make sure to update it in your Layouts and Components:
-
-```html [layouts/main.html] {8}
-<!doctype html>
-<html lang="en">
-<head>
-  <!-- ... -->
-</head>
-<body>
-  <content /> // [!code --]
-  <yield /> // [!code ++]
-</body>
-</html>
-```
-
-### style
-
-<strong class="text-indigo-500">BREAKING CHANGE</strong>
-
-Tailwind CSS can now be used as expected, with `@tailwind` directives in any `<style>` tag, instead of the old `<style>{{{ page.css }}}</style>`.
-
-```html [layouts/main.html] {6-7}
-<!doctype html>
-<html lang="en">
-<head>
-  <style>
-    {{{ page.css }}} /* [!code --] */
-    @​tailwind components; /* [!code ++] */
-    @​​tailwind utilities; /* [!code ++] */
-  </style>
-</head>
-<body>
-  <yield />
-</body>
-</html>
-```
-
-## Update tailwind.config.js
-
-We created [`tailwindcss-preset-email`](https://github.com/maizzle/tailwindcss-preset-email) to make it easier to use Tailwind CSS for styling HTML emails - it outputs more email-friendly CSS and includes some useful plugins.
-
-Using it will now greatly simplify your `tailwind.config.js` file, this is all you need:
-
-```js [tailwind.config.js]
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  presets: [
-    require('tailwindcss-preset-email'),
-  ],
-  content: [
-    './components/**/*.html',
-    './emails/**/*.html',
-    './layouts/**/*.html',
-  ],
-}
-```
-
-You now also need to define content sources in your `tailwind.config.js` - Maizzle will _not_ automatically scan any paths for files containing Tailwind classes to generate.
-
-## Update config.js
-
-The Maizzle config has been reimagined, so naturally there are a few breaking changes.
-
-### ESM export
-
-<strong class="text-indigo-500">BREAKING CHANGE</strong>
-
-The config file is now an ESM module, which means you can use `import` and cool stuff like top-level `await`.
-It also means you need to make this change:
-
-```js [config.js] {2} no-copy
-  module.exports = { // [!code --]
-  export default { // [!code ++]
-```
-
-If you need to keep using `module.exports` you must use the `.cjs` extension:
-
-```js [C:/dev/maizzle] {3,4} no-copy
-  config.js // [!code --]
-  config.production.js // [!code --]
-  config.cjs // [!code ++]
-  config.production.cjs // [!code ++]
-```
-
-### build
-
-<strong class="text-indigo-500">BREAKING CHANGE</strong>
-
-The `build` key, which is where you define what emails to build and where to output them, has changed considerably.
-
-This is how the `build` key looks in Maizzle 5:
-
-```js [config.js]
-export default {
-  build: {
-    content: ['emails/**/*.html'],
-    static: {
-      source: ['images/**/*.*'],
-      destination: 'images',
-    },
-    output: {
-      path: 'build_production',
-      extension: 'html',
-    },
-    summary: true,
-    spinner: 'circleHalves',
-  },
-}
-```
-
-### components
-
-The `components` key has been moved outside `build`, to the root of the config file:
-
-```js [config.js] {5}
-export default {
-   build: { // [!code --]
-     components: {} // [!code --]
-   } // [!code --]
-   components: {} // [!code ++]
-}
-```
-
-### events
-
-Events have been moved to the root of the config file:
-
-```js [config.js] {3-5}
-export default {
-   events: {...} // [!code --]
-   async beforeRender({html, matter, config}) { // [!code ++]
-     // ... // [!code ++]
-   }, // [!code ++]
-}
-```
-
-### extraAttributes
-
-This key has been moved to `css.attributes.add`:
-
-```js [config.js] {3-7}
-export default {
-   extraAttributes: {} // [!code --]
-   css: { // [!code ++]
-     attributes: { // [!code ++]
-       add: {} // [!code ++]
-     } // [!code ++]
-   } // [!code ++]
-}
-```
-
-### layouts
-
-The `layouts` key is no longer used, you can safely remove it.
-
-### inlineCSS
-
-Configuration for CSS inlining has been moved under the `css.inline` key:
-
-```js [config.js] {3-5}
-export default {
-   inlineCSS: {} // [!code --]
-   css: { // [!code ++]
-     inline: true, // [!code ++]
-   } // [!code ++]
-}
-```
-
-See the [CSS inlining docs](/docs/transformers/inline-css) for all the options available.
-
-### outlook
-
-Configuring the custom tag for Outlook conditionals is done through the same `outlook` key, but at the root of the config file instead of inside the `posthtml` key:
-
-```js [config.js] {5-7}
-export default {
-   posthtml: { // [!code --]
-     outlook: {} // [!code --]
-   } // [!code --]
-   outlook: { // [!code ++]
-     tag: 'mso', // [!code ++]
-   }, // [!code ++]
-}
-```
-
-### fetch
-
-The `fetch` key has been moved to the root of the config file:
-
-```js [config.js] diff {5-7}
-export default {
-   posthtml: { // [!code --]
-     fetch: {} // [!code --]
-   } // [!code --]
-   fetch: { // [!code ++]
-     tags: ['get'], // [!code ++]
-   }, // [!code ++]
-}
-```
-
-See the [fetch docs](/docs/tags#fetch-options) for the available options.
-
-### postcss
-
-PostCSS may now be configured under the root `postcss` key:
-
-```js [config.js] {5}
-export default {
-   build: { // [!code --]
-     postcss: {} // [!code --]
-   } // [!code --]
-   postcss: {} // [!code ++]
-}
-```
-
-### removeAttributes
-
-This Transformer has been moved to `css.attributes.remove`:
-
-```js [config.js] {3-7}
-export default {
-   removeAttributes: [] // [!code --]
-   css: { // [!code ++]
-     attributes: { // [!code ++]
-       remove: []  // [!code ++]
-     } // [!code ++]
-   } // [!code ++]
-}
-```
-
-### removeUnusedCSS
-
-Configuration for this Transformer has been moved to `css.purge`:
-
-```js [config.js] {3-5}
-export default {
-   removeUnusedCSS: {} // [!code --]
-   css: { // [!code ++]
-     purge: {} // [!code ++]
-   } // [!code ++]
-}
-```
-
-### shorthandCSS
-
-The shorthand CSS Transformer config has been moved to `css.shorthand`:
-
-```js [config.js] {3-5}
-export default {
-   shorthandCSS: true // [!code --]
-   css: { // [!code ++]
-     shorthand: true // [!code ++]
-   } // [!code ++]
-}
-```
-
-### safeClassNames
-
-The `safeClassNames` option has been renamed and moved to `css.safe`:
-
-```js [config.js] {3-5}
-export default {
-   safeClassNames: {} // [!code --]
-   css: { // [!code ++]
-     safe: {} // [!code ++]
-   } // [!code ++]
-}
-```
-
-### server
-
-Browsersync has been replaced with a custom dev server, powered by Express.js and WebSockets with `morphdom` for an HMR-like local development experience.
-
-We call this Hot Markup Replacement&trade;.
-
-This [new dev server](/docs/configuration/server) is much faster and provides a nicer experience, but you'll need to update your `config.js` if you want to configure it:
-
-```js [config.js] {3-10}
-export default {
-   browsersync: {...}, // [!code --]
-   server: { // [!code ++]
-     port: 3000, // [!code ++]
-     hmr: true, // [!code ++]
-     scrollSync: false, // [!code ++]
-     watch: ['./images/**/*'], // [!code ++]
-     reportFileSize: false, // [!code ++]
-     spinner: 'circleHalves', // [!code ++]
-   }, // [!code ++]
-}
-```
-
-### sixHex
-
-This Transformer config has been moved to `css.sixHex`:
-
-```js [config.js] {3-5}
-export default {
-   sixHex: true // [!code --]
-   css: { // [!code ++]
-     sixHex: true // [!code ++]
-   } // [!code ++]
-}
-```
-
-### tailwind
-
-The `tailwind` key in `config.js` has been deprecated, you can safely remove it.
-
-You may now simply use `@config` in your `<style>` tags or files included with `<link>`, to specify a custom Tailwind CSS config file to use:
-
-```html [layouts/main.html]
-<style>
-  @config 'tailwind.custom.js';
-  @tailwind components;
-  @tailwind utilities;
-</style>
-```
-
-If you prefer using CSS files:
-
-```css [css/tailwind.css]
-@config 'tailwind.custom.js';
-@tailwind components;
-@tailwind utilities;
-```
-
-... you may import that through a `<link>` tag or with an `@import` statement:
-
-```html
-<link rel="stylesheet" href="css/tailwind.css">
-
-<!-- or -->
-<style>
-  @import 'css/tailwind.css';
-</style>
-```
-
-You can still define a Tailwind config object if you need to, under `css.tailwind`:
-
-```js [config.js]
-export default {
+  ```
+  :::
+  :::code-tab{label="Maizzle 6"}
+  ```ts [maizzle.config.ts]
+  export default defineConfig({
+    content: ['emails/**/*.{vue,md}'],
+    output: { path: 'dist' },
+  })
+  ```
+  :::
+::
+
+### CSS defaults flipped
+
+`css.inline`, `css.purge`, `css.shorthand`, and `html.format` (former `prettify`) are now **on by default**. If your v5 project depended on them being off, disable them explicitly:
+
+```ts [maizzle.config.ts]
+export default defineConfig({
   css: {
-    tailwind: {}, // custom Tailwind CSS config object
+    inline: false,
+    purge: false,
+    shorthand: false,
+  },
+  html: {
+    format: false,
+  },
+})
+```
+
+### Remove PostHTML config
+
+PostHTML is no longer used, so you can remove any related config keys like `posthtml.*`, `expressions.*`, and `components.*` from your config.
+
+```ts [maizzle.config.ts]
+export default defineConfig({
+  posthtml: { ... },     // [!code --]
+  expressions: { ... },      // [!code --]
+  components: { 
+    source: ['custom-components'],  // [!code ++]
+    folders: ['custom-components'], // [!code --]
+    // everything else removed // [!code --]
   },
 }
 ```
 
-### templates
+### Fetch tag removed
 
-The `templates` key has been deprecated, see [`build`](#build) above for how to define Template and other assets sources.
+The PostHTML `<fetch>` tag has been removed, use `fetch()` (or any HTTP client) inside `<script setup>` and bind the result:
 
-### applyTransformers
+```vue [emails/news.vue]
+<script setup>
+  const items = await fetch('https://api.example.com/news').then(r => r.json())
+</script>
 
-This has been renamed to `useTransformers`:
+<template>
+  <Layout>
+    <Container>
+      <Text v-for="item in items" :key="item.id">{{ item.title }}</Text>
+    </Container>
+  </Layout>
+</template>
+```
 
-```js [config.js] {3}
-export default {
-   applyTransformers: true // [!code --]
-   useTransformers: true // [!code ++]
+### Outlook config
+
+The `outlook` config key has been removed. Use the built-in [`<Outlook>`](/docs/components/outlook) component instead:
+
+```vue [emails/example.vue]
+<template>
+  <Outlook>
+    <Text>Visible only in Outlook.</Text>
+  </Outlook>
+</template>
+```
+
+### Other renamed keys
+
+Some other config keys have been renamed for clarity. Here's a quick reference:
+
+| Maizzle 5.x | Maizzle 6 |
+| --- | --- |
+| `attributes.add` | [`html.attributes.add`](/docs/transformers/add-attributes) |
+| `attributes.remove` | [`html.attributes.remove`](/docs/transformers/remove-attributes) |
+| `prettify` | [`html.format`](/docs/transformers/format) |
+| `minify` | [`html.minify`](/docs/transformers/minify) |
+
+### Plaintext config
+
+The `plaintext` config shape changed in v6. The string shorthand and the nested `output` key are gone — destination, extension, and strip-HTML options are now flat keys on a single object.
+
+String shorthand → `destination`:
+
+::code-tabs
+  :::code-tab{label="v5"}
+  ```js [config.js]
+  export default {
+    plaintext: 'dist/brand/plaintext',
+  }
+  ```
+  :::
+  :::code-tab{label="v6"}
+  ```ts [maizzle.config.ts]
+  export default defineConfig({
+    plaintext: {
+      destination: 'dist/brand/plaintext',
+    },
+  })
+  ```
+  :::
+::
+
+`output.path` and `output.extension` → flat `destination` and `extension`:
+
+::code-tabs
+  :::code-tab{label="v5"}
+  ```js [config.js]
+  export default {
+    plaintext: {
+      output: {
+        path: 'dist/brand/plaintext',
+        extension: 'rtxt',
+      },
+    },
+  }
+  ```
+  :::
+  :::code-tab{label="v6"}
+  ```ts [maizzle.config.ts]
+  export default defineConfig({
+    plaintext: {
+      destination: 'dist/brand/plaintext',
+      extension: 'rtxt',
+    },
+  })
+  ```
+  :::
+::
+
+Strip-HTML options now live under a dedicated `options` key:
+
+```ts [maizzle.config.ts]
+export default defineConfig({
+  plaintext: {
+    options: { ignoreTags: ['br'] },
+  },
+})
+```
+
+To enable plaintext for a single template, use the [`usePlaintext()`](/docs/api/composables#useplaintext) composable instead of frontmatter:
+
+::code-tabs
+  :::code-tab{label="v5"}
+  ```hbs [emails/welcome.html]
+  ---
+  plaintext: true
+  ---
+
+  <x-main>
+    <!-- ... -->
+  </x-main>
+  ```
+  :::
+  :::code-tab{label="v6"}
+  ```vue [emails/welcome.vue]
+  <script setup>
+    usePlaintext()
+  </script>
+
+  <template>
+    <Layout>
+      <!-- ... -->
+    </Layout>
+  </template>
+  ```
+  :::
+::
+
+See the [Plaintext docs](/docs/development/plaintext) for the full guide.
+
+### `permalink` → `useOutputPath()`
+
+The `permalink` frontmatter key, which sent a template to a custom output path, is now the [`useOutputPath()`](/docs/api/composables#useoutputpath) composable:
+
+::code-tabs
+  :::code-tab{label="v5"}
+  ```xml [emails/black-friday.html]
+  ---
+  permalink: out/promos/black-friday.html
+  ---
+
+  <x-main>
+    <!-- ... -->
+  </x-main>
+  ```
+  :::
+  :::code-tab{label="v6"}
+  ```vue [emails/black-friday.vue]
+  <script setup>
+    useOutputPath('out/promos/black-friday.html')
+  </script>
+
+  <template>
+    <Layout>
+      <!-- ... -->
+    </Layout>
+  </template>
+  ```
+  :::
+::
+
+The path is still relative to your project root and behaves the same as in v5.
+
+### Per-template config
+
+In v5, you'd set per-template config via frontmatter. In v6, call `defineConfig()` inside `<script setup>`:
+
+```vue [emails/plain.vue]
+<script setup>
+  defineConfig({
+    css: { inline: false },
+  })
+</script>
+```
+
+Or use the dedicated composables for common cases: 
+
+- [`useTransformers()`](/docs/api/composables#usetransformers) 
+- [`useBaseUrl()`](/docs/api/composables#usebaseurl)
+- [`useUrlQuery()`](/docs/api/composables#useurlquery)
+- [`useDoctype()`](/docs/api/composables#usedoctype)
+- [`useOutputPath()`](/docs/api/composables#useoutputpath)
+- [`usePlaintext()`](/docs/api/composables#useplaintext)
+- [`usePreheader()`](/docs/api/composables#usepreheader)
+
+## Events
+
+Events still register at the root of the config, but the signatures have changed.
+
+### `afterTransformers` renamed to `afterTransform`
+
+::code-tabs
+  :::code-tab{label="Maizzle 5"}
+  ```ts
+  afterTransformers({ html, matter, config }) {
+    return html.replace('</body>', '<img src="..." />\n</body>')
+  }
+  ```
+  :::
+  :::code-tab{label="Maizzle 6"}
+  ```ts
+  afterTransform({ html, template, config }) {
+    return html.replace('</body>', '<img src="..." />\n</body>')
+  }
+  ```
+  :::
+::
+
+### `matter` is gone
+
+v5 handlers received `matter` (the frontmatter object). v6 has no frontmatter — config lives inside `<script setup>` via `defineConfig()`, and template-level config is on the resolved `config` argument that handlers already receive.
+
+### `beforeRender` now operates on the SFC source
+
+In v5, `beforeRender({ html, ... })` received the pre-rendered HTML and you returned a modified HTML string. In v6, the renderer is Vue SSR, so `beforeRender({ template, config })` receives the raw `.vue` SFC source instead — return a string to replace `template.source` before it's handed to the renderer.
+
+::code-tabs
+  :::code-tab{label="Maizzle 5"}
+  ```ts
+  beforeRender({ html }) {
+    return html.replace('FOO', 'BAR')
+  }
+  ```
+  :::
+  :::code-tab{label="Maizzle 6"}
+  ```ts
+  beforeRender({ template }) {
+    return template.source.replace('FOO', 'BAR')
+  }
+  ```
+  :::
+::
+
+### `template` argument
+
+`afterRender` and `afterTransform` now also receive a `template` argument — same shape as the one passed to `beforeRender`:
+
+```ts
+interface TemplateInfo {
+  source: string         // raw Vue SFC source
+  path: ParsedPath       // result of path.parse(absolutePath)
 }
 ```
 
-## Optional
+### `config.build.current` is gone
 
-These updates are optional but highly recommended.
+v5 exposed the currently-building template path on `config.build.current.path` (also a [`path.parse()`](https://nodejs.org/api/path.html#pathparsepath) result, mutated onto the shared config). v6 drops that and surfaces the same info two ways:
 
-### Update components
+- In event handlers, via `template.path` (e.g. `template.path.name === 'newsletter'`).
+- Anywhere inside an SFC, via the new [`useCurrentTemplate()`](/docs/api/composables#usecurrenttemplate) composable.
 
-The Maizzle 5 Starter uses updated components for dividers, spacers, or buttons.
+::code-tabs
+  :::code-tab{label="Maizzle 5"}
+  ```ts
+  beforeRender({ config }) {
+    if (config.build.current.path.name === 'newsletter') {
+      // ...
+    }
+  }
+  ```
+  :::
+  :::code-tab{label="Maizzle 6"}
+  ```ts
+  beforeRender({ template }) {
+    if (template.path.name === 'newsletter') {
+      // ...
+    }
+  }
+  ```
+  :::
+::
 
-We recommend you update your components to the latest versions, which you can find in the [Starter project](https://github.com/maizzle/maizzle) on GitHub.
+See [Events](/docs/development/events) for the full list and signatures.
+
+## CLI commands
+
+| v5 | v6 |
+| --- | --- |
+| `maizzle build` | `maizzle build` (or programmatic [`build()`](/docs/api/utilities#build)) |
+| `maizzle build production` | `maizzle build -c production.config.ts` |
+| `maizzle serve` | `maizzle serve` or `maizzle dev` |
+| `maizzle make:template name` | `maizzle make:template [filepath]` |
+
+## Optional but recommended
+
+### Use built-in components
+
+Maizzle 6 ships polished, render-tested email building blocks: [`<Button>`](/docs/components/button), [`<Container>`](/docs/components/container), [`<Heading>`](/docs/components/heading), [`<Hr>`](/docs/components/hr), [`<Img>`](/docs/components/img), [`<Spacer>`](/docs/components/spacer), [`<Text>`](/docs/components/text), and more. 
+
+Replace your hand-coded tables with these where you can — they're heavily tested (we've been using them in production for years), they handle Outlook quirks for you, and LLMs can understand them better when asked to generate emails.
+
+### Vite plugin
+
+If your project already uses Vite (Laravel, Nuxt, SvelteKit, Astro etc.), you can run Maizzle as a plugin alongside your app instead of as a standalone project. See [Framework Guides](/docs/installation/frameworks).

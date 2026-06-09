@@ -1,74 +1,82 @@
 ---
-title: "Shorthand CSS"
-description: "Group CSS properties of the same type into shorthand inline CSS."
+title: Shorthand CSS
+description: Rewrite longhand CSS to shorthand in inline styles.
+section: Transformers
+order: 6
 ---
 
 # Shorthand CSS
 
-Rewrite longhand CSS inside `style` attributes with shorthand syntax. Only works with `margin`, `padding` and `border`, and only when all sides are specified.
+Rewrite longhand CSS inside style attributes with shorthand syntax. Only works with `margin`, `padding` and `border`, and only when all sides are specified.
 
 Shorthand syntax for CSS properties means less code, so fewer bytes to send over the wire. Today, most email clients support shorthand CSS.
 
+## Usage
+
+Enabled by default. To disable, set `css.shorthand` to `false`:
+
+```ts [maizzle.config.ts]
+export default defineConfig({
+  css: {
+    shorthand: false,
+  },
+})
+```
 Something like this:
 
 ```html
 <p class="mx-2 my-4">Example</p>
 ```
 
-... instead of becoming this:
+...instead of becoming this:
 
 ```html
-<p style="margin-left: 2px; margin-right: 2px; margin-top: 4px; margin-bottom: 4px;">Example</p>
+<p style="margin-left: 4px; margin-right: 4px; margin-top: 16px; margin-bottom: 16px">
+  ...
+</p>
 ```
 
-... is rewritten to this:
+...is rewritten to this:
 
 ```html
-<p style="margin: 4px 2px;">Example</p>
+<p style="margin: 16px 4px">
+  ...
+</p>
 ```
 
-By default, `shorthandCSS` is disabled.
+## Customization
 
-## Usage
+### tags
 
-Enable it for all tags:
+Type: `string[]`\
+Default: `undefined`
 
-```js [config.js]
-export default {
-  css: {
-    shorthand: true,
-  }
-}
-```
+Limit shorthand conversion to specific HTML tags by passing an object with a `tags` array:
 
-Enable it only for a selection of tags:
-
-```js [config.js]
-export default {
+```ts [maizzle.config.ts]
+export default defineConfig({
   css: {
     shorthand: {
       tags: ['td', 'div'],
-    }
-  }
-}
-```
-
-## Disabling
-
-Set it to `false` or simply omit it:
-
-```js [config.js]
-export default {
-  css: {
-    shorthand: false,
-  }
-}
+    },
+  },
+})
 ```
 
 ## API
 
-```js [app.js]
-import { shorthandCSS } from '@maizzle/framework'
+Use `shorthandCss` to merge longhand CSS into shorthand on any HTML string.
 
-const html = await shorthandCSS('html string')
+```ts
+import { shorthandCss } from '@maizzle/framework'
+
+const html = `
+  <p style="margin-top: 4px; margin-right: 2px; margin-bottom: 4px; margin-left: 2px;">x</p>
+`
+
+const out = shorthandCss(html, {
+  tags: ['p'],
+})
 ```
+
+The first argument is an HTML string. The second is an optional `ShorthandCssOptions` object — `tags` restricts the transform to specific HTML elements (omit to apply to every element with a `style` attribute). Returns the transformed HTML string.

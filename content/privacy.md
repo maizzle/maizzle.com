@@ -1,14 +1,14 @@
 ---
 title: Privacy Policy
 description: This page explains how we collect, use, and protect your information, as well as what your rights are and how you can exercise them.
-last_updated: 11 September 2025
+sidebar: false
 ---
 
 # Privacy Policy
 
-<blockquote class="text-slate-600">Last updated: September 26, 2025</blockquote>
+<blockquote class="text-muted-foreground">Last updated: May 19, 2026</blockquote>
 
-This policy explains how **Maizzle** ("we", "us", or "our") gathers and uses the information you ("you" or "your") share when you use the Maizzle website or purchase any of our products (the "Website"). It also explains your choices and how you can update your info. This policy doesn’t apply to other sites or services we don’t control.
+This policy explains how **Maizzle** ("we", "us", or "our") gathers and uses the information you ("you" or "your") share when you use the Maizzle website or purchase any of our products (the "Website"). It also explains your choices and how you can update your info. This policy doesn't apply to other sites or services we don't control.
 
 The administrator of the Website **maizzle.com** (the "Website") and the data Controller is the company:
 
@@ -21,10 +21,6 @@ Harju maakond, Estonia
 We do not collect any personal information from visitors to our Website.
 
 We do not collect IP addresses, and we do not use unique identifiers or browser fingerprinting.
-
-## Newsletters
-
-We offer email newsletters that you can choose to subscribe to. If you wish to stop receiving these newsletters, you may unsubscribe using the link provided in those emails.
 
 ## Data transfer and storage
 

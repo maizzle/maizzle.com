@@ -1,224 +1,460 @@
 ---
-title: "VML Components"
-description: "Components for coding background images for Outlook on Windows."
+title: Vml
+description: General-purpose VML primitive for Outlook — render rectangles, rounded rectangles, ovals, lines, gradients, and background images.
+section: Components
+order: 24
 ---
 
-# VML Components
+# Vml
 
-VML stands for Vector Markup Language, it is a legacy markup language that was used in Outlook for Windows.
+Renders a VML shape for Word-based Outlook versions. Unlike [`<OutlookBg>`](/docs/components/outlookbg) which is focused on background images, `<Vml>` is the general-purpose VML primitive — pick a shape (`rect`, `roundrect`, `oval`, `line`), apply a fill (solid color, image, gradient), and Outlook will render it inside an MSO conditional comment.
 
-The Maizzle Starter includes a VML component that you can use to add support for background images in Outlook for Windows.
+Use it for shapes, rounded outlines, dividers, and gradients. For plain background images, [`<OutlookBg>`](/docs/components/outlookbg) is the shorter alternative.
 
-## v-fill
+## Usage
 
-The Fill component is defined in `components/v-fill.html`.
+### Background image
 
-Use it when you need to add a background image that you don't know the height of.
+`<Vml>` can do everything `<OutlookBg>` does. The only difference is that `type` has no default — set it explicitly:
 
-<Alert type="warning">`v:fill` does not work in Windows 10 Mail.</Alert>
-
-You can use it immediately inside a container that has a CSS background image:
-
-```html {4-9}
-<table>
-  <tr>
-    <td style="background-image: url('https://picsum.photos/600/400')">
-      <x-v-fill // [!code ++]
-        image="https://picsum.photos/600/400" // [!code ++]
-        width="600px" // [!code ++]
-      > // [!code ++]
-        HTML to show on top of the image <!-- [!code ++] -->
-      </x-v-fill> // [!code ++]
-    </td>
-  </tr>
-</table>
+```vue [emails/example.vue]
+<template>
+  <Layout>
+    <Container class="max-w-xl">
+      <Vml type="frame" src="hero.jpg" width="600" height="400">
+        <div class="bg-[url('hero.jpg')] bg-cover">
+          <Text class="text-white text-2xl p-8">
+            Content over a background image.
+          </Text>
+        </div>
+      </Vml>
+    </Container>
+  </Layout>
+</template>
 ```
 
-That will compile to:
+Pair the VML with a CSS background on the same element — VML handles Outlook, CSS handles everything else.
 
-```html {4-9}
-<table cellpadding="0" cellspacing="0" role="none">
-  <tr>
-    <td style="background-image: url('https://picsum.photos/600/400')">
-      <!--[if mso]>
-      <v:rect stroke="f" fillcolor="none" style="width: 600px" xmlns:v="urn:schemas-microsoft-com:vml">
-      <v:fill type="frame" src="https://picsum.photos/600/400" />
-      <v:textbox inset="0,0,0,0" style="mso-fit-shape-to-text: true"><div><![endif]-->
-        HTML to show on top of the image
-      <!--[if mso]></div></v:textbox></v:rect><![endif]-->
-    </td>
-  </tr>
-</table>
+### Rounded rectangle
+
+```vue
+<template>
+  <Vml shape="roundrect" arcsize="0.1" width="300" height="120" fillcolor="#3b82f6">
+    <Text class="text-white text-center p-8">Rounded card</Text>
+  </Vml>
+</template>
 ```
+
+### Linear gradient
+
+```vue
+<template>
+  <Vml type="gradient" color="#3b82f6" color2="#9333ea" angle="90" width="600" height="200">
+    <Text class="text-white text-2xl p-8">Gradient header</Text>
+  </Vml>
+</template>
+```
+
+### Radial gradient
+
+```vue
+<template>
+  <Vml
+    type="gradientradial"
+    color="#fef3c7"
+    color2="#f59e0b"
+    focus="100"
+    focusposition="0.5,0.5"
+    focussize="0,0"
+    width="600"
+    height="300"
+  >
+    <Text class="p-8">Radial fill</Text>
+  </Vml>
+</template>
+```
+
+### Oval
+
+```vue
+<template>
+  <Vml shape="oval" width="80" height="80" fillcolor="#f97316" />
+</template>
+```
+
+### Line divider
+
+```vue
+<template>
+  <Vml shape="line" from="0,0" to="600,0" strokecolor="#e5e7eb" />
+</template>
+```
+
+For `shape="line"`, `width`/`height` are ignored — use `from` and `to` instead, and `stroke` defaults to `true` while `fill` defaults to `false`.
 
 ## Props
 
-The `x-v-fill` component supports the following props:
+### shape
 
-### image
+Type: `'rect' | 'roundrect' | 'oval' | 'line'`\
+Default: `'rect'`
 
-Default: `https://via.placeholder.com/600x400`
+The underlying VML element to render.
 
-The URL of the image that will be used as a background image in Outlook for Windows.
+```vue
+<template>
+  <Vml shape="roundrect">
+    <!-- ... -->
+  </Vml>
+</template>
+```
+
+### arcsize
+
+Type: `string | number`\
+Default: `undefined`
+
+Corner radius for `shape="roundrect"`, as a fraction of the shorter side (0–1). Ignored for other shapes.
+
+```vue
+<template>
+  <Vml shape="roundrect" arcsize="0.1">
+    <!-- ... -->
+  </Vml>
+</template>
+```
+
+### from
+
+Type: `string`\
+Default: `undefined`
+
+Start coordinate for `shape="line"` as `"x,y"`. Required for lines.
+
+```vue
+<template>
+  <Vml shape="line" from="0,0" to="600,0" />
+</template>
+```
+
+### to
+
+Type: `string`\
+Default: `undefined`
+
+End coordinate for `shape="line"` as `"x,y"`. Required for lines.
 
 ### width
 
-Default: `600px`
+Type: `string | number`\
+Default: `'600px'`
 
-The width of the image, preferably in pixels. This sets CSS `width` on the root `<v:rect>` VML element of the component, so you'll need to include the unit, i.e. `600px` instead of `600`.
+Width of the shape. Ignored when `shape="line"`.
 
-### inset
+```vue
+<template>
+  <Vml width="500">
+    <!-- ... -->
+  </Vml>
+</template>
+```
 
-Default: `0,0,0,0`
+### height
 
-Replicates the CSS `padding` property.
+Type: `string | number`\
+Default: `null`
 
-The order of the values is `left, top, right, bottom`.
+Height of the shape. When unset, the shape auto-sizes to fit its content. Ignored when `shape="line"`.
 
-This is applied to a `<v:textbox>` element that wraps the content of the component - basically, the content that you want overlayed on top of the background image.
-
-```html
-<x-v-fill
-  image="https://picsum.photos/600/400"
-  width="600px"
-  inset="10px,20px,10px,20px"
-/>
+```vue
+<template>
+  <Vml height="300">
+    <!-- ... -->
+  </Vml>
+</template>
 ```
 
 ### type
 
-Default: `frame`
-
-The type of fill to use. You can use `frame` or `tile`.
-
-### sizes
-
+Type: `'solid' | 'gradient' | 'gradientradial' | 'tile' | 'pattern' | 'frame'`\
 Default: `undefined`
 
-Define the exact dimensions of the `<v:fill>` element.
+VML fill type, emitted on the `<v:fill>` child element.
 
-Both values need to be set and they can be separated by either a comma or a space:
+- `frame` — scale image to fill the shape (use for background images)
+- `tile` — repeat image to fill
+- `pattern` — tile at the image's original size
+- `solid` — solid color fill
+- `gradient` — linear gradient
+- `gradientradial` — radial gradient
 
-```html
-<x-v-fill
-  image="https://picsum.photos/600/400"
-  width="600px"
-  sizes="300px,200px"
-/>
+```vue
+<template>
+  <Vml type="frame" src="hero.jpg">
+    <!-- ... -->
+  </Vml>
+</template>
 ```
 
-### origin
+### src
 
+Type: `string`\
 Default: `undefined`
 
-Replicates the CSS `background-position` property.
+URL of a fill image. When set, a `<v:fill>` child is emitted with this `src`. Combine with `type="frame"` (or `tile`/`pattern`).
 
-```html
-<x-v-fill
-  image="https://picsum.photos/600/400"
-  width="600px"
-  origin="0.5,0.5"
-  position="0.5,0.5"
-/>
-```
-
-TL;DR:
-
-- `origin="-0.5,-0.5" position="-0.5,-0.5"` equals `top left`
-- `origin="0.5,-0.5" position="0.5,-0.5"` equals `top right`
-- `origin="-0.5,0.5" position="-0.5,0.5"` equals `bottom left`
-- `origin="0.5,0.5" position="0.5,0.5"` equals `bottom right`
-
-Read more [here](https://www.hteumeuleu.com/2021/background-properties-in-vml/#background-position).
-
-### position
-
-Default: `undefined`
-
-See the docs for `origin` above.
-
-### aspect
-
-Default: `undefined`
-
-Replicates the CSS `background-size` property.
-
-Possible values:
-
-- `atleast` (background-size: cover)
-- `atmost` (background-size: contain)
-
-Example:
-
-```html
-<x-v-fill
-  image="https://picsum.photos/600/400"
-  width="600px"
-  aspect="atleast"
-/>
+```vue
+<template>
+  <Vml type="frame" src="https://example.com/hero.jpg">
+    <!-- ... -->
+  </Vml>
+</template>
 ```
 
 ### color
 
+Type: `string`\
 Default: `undefined`
 
-Replicates the CSS `background-color` property.
+Primary fill color on the `<v:fill>` element. Used as the start color for gradient fills.
 
-Example:
-
-```html
-<x-v-fill
-  image="https://picsum.photos/600/400"
-  width="600px"
-  color="#f8fafc"
-/>
+```vue
+<template>
+  <Vml type="gradient" color="#3b82f6" color2="#9333ea">
+    <!-- ... -->
+  </Vml>
+</template>
 ```
 
-### fillcolor
+### color2
 
-Default: `none`
+Type: `string`\
+Default: `undefined`
 
-Whether to fill the shape with a color.
+End color for gradient fills.
 
-Example:
+```vue
+<template>
+  <Vml type="gradient" color="#3b82f6" color2="#9333ea">
+    <!-- ... -->
+  </Vml>
+</template>
+```
 
-```html
-<x-v-fill
-  image="https://picsum.photos/600/400"
-  width="600px"
-  fillcolor="#f8fafc"
-/>
+### angle
+
+Type: `string | number`\
+Default: `undefined`
+
+Gradient direction in degrees (0–360).
+
+```vue
+<template>
+  <Vml type="gradient" angle="90" color="#3b82f6" color2="#9333ea">
+    <!-- ... -->
+  </Vml>
+</template>
+```
+
+### focus
+
+Type: `string | number`\
+Default: `undefined`
+
+Gradient midpoint, as a percentage of the distance from the start color (0–100).
+
+```vue
+<template>
+  <Vml type="gradient" focus="50" color="#3b82f6" color2="#9333ea">
+    <!-- ... -->
+  </Vml>
+</template>
+```
+
+### focussize
+
+Type: `string`\
+Default: `undefined`
+
+Radial gradient focus size as `"x,y"` fractions.
+
+```vue
+<template>
+  <Vml type="gradientradial" focussize="0,0">
+    <!-- ... -->
+  </Vml>
+</template>
+```
+
+### focusposition
+
+Type: `string`\
+Default: `undefined`
+
+Radial gradient focus position as `"x,y"` fractions.
+
+```vue
+<template>
+  <Vml type="gradientradial" focusposition="0.5,0.5">
+    <!-- ... -->
+  </Vml>
+</template>
+```
+
+### sizes
+
+Type: `string`\
+Default: `undefined`
+
+Comma-separated fill image dimensions.
+
+```vue
+<template>
+  <Vml sizes="300px,200px">
+    <!-- ... -->
+  </Vml>
+</template>
+```
+
+### origin
+
+Type: `string`\
+Default: `undefined`
+
+Fill origin offset as fractional values. Replicates the CSS `background-position` property. Overridden by `backgroundPosition` if both are set.
+
+```vue
+<template>
+  <Vml origin="0,0">
+    <!-- ... -->
+  </Vml>
+</template>
+```
+
+### position
+
+Type: `string`\
+Default: `undefined`
+
+Fill position offset as fractional values. Overridden by `backgroundPosition` if both are set.
+
+```vue
+<template>
+  <Vml position="0.5,0.5">
+    <!-- ... -->
+  </Vml>
+</template>
+```
+
+### backgroundPosition
+
+Type: `string`\
+Default: `undefined`
+
+Convenience prop that maps named positions to VML `origin` and `position` values. Format is `vertical,horizontal`.
+
+Supported values:
+
+- `top,left` / `top,center` / `top,right`
+- `center,left` / `center,center` / `center,right`
+- `bottom,left` / `bottom,center` / `bottom,right`
+
+Explicit `origin` or `position` props override the values set by `backgroundPosition`.
+
+```vue
+<template>
+  <Vml background-position="center,center">
+    <!-- ... -->
+  </Vml>
+</template>
+```
+
+### aspect
+
+Type: `'atleast' | 'atmost'`\
+Default: `undefined`
+
+Aspect ratio constraint for the fill image. Replicates the CSS `background-size` property.
+
+```vue
+<template>
+  <Vml aspect="atleast">
+    <!-- ... -->
+  </Vml>
+</template>
+```
+
+### inset
+
+Type: `string`\
+Default: `'0,0,0,0'`
+
+`top,right,bottom,left` textbox padding. Replicates the CSS `padding` property.
+
+```vue
+<template>
+  <Vml inset="10px,20px,10px,20px">
+    <!-- ... -->
+  </Vml>
+</template>
 ```
 
 ### stroke
 
-Default: `f`
+Type: `boolean | string`\
+Default: `false` (`true` when `shape="line"`)
 
-Adds a border to the shape.
+Whether the shape has a visible border.
 
-Example:
-
-```html
-<x-v-fill
-  image="https://picsum.photos/600/400"
-  width="600px"
-  stroke="t"
-/>
+```vue
+<template>
+  <Vml :stroke="true">
+    <!-- ... -->
+  </Vml>
+</template>
 ```
 
 ### strokecolor
 
+Type: `string`\
 Default: `undefined`
 
-The color of the border.
+Border color. Setting this automatically enables `stroke`.
 
-Example:
+```vue
+<template>
+  <Vml strokecolor="#000000">
+    <!-- ... -->
+  </Vml>
+</template>
+```
 
-```html
-<x-v-fill
-  image="https://picsum.photos/600/400"
-  width="600px"
-  stroke="t"
-  strokecolor="#f8fafc"
-/>
+### fill
+
+Type: `boolean | string`\
+Default: `true` (`false` when `shape="line"`)
+
+Whether the shape has a fill.
+
+```vue
+<template>
+  <Vml :fill="false">
+    <!-- ... -->
+  </Vml>
+</template>
+```
+
+### fillcolor
+
+Type: `string`\
+Default: `undefined`
+
+Fallback fill color on the shape element. Rendered when no `<v:fill>` child is emitted or the fill image cannot be loaded.
+
+```vue
+<template>
+  <Vml fillcolor="#3b82f6">
+    <!-- ... -->
+  </Vml>
+</template>
 ```

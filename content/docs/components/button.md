@@ -1,137 +1,220 @@
 ---
-title: "Button Component"
-description: "A component for creating styled link buttons to your HTML emails."
+title: Button
+description: A styled call-to-action link with variants, alignment, icon support, and Outlook compatibility.
+section: Components
+order: 13
 ---
 
-# Button Component
+# Button
 
-The Button component makes it easy to add a styled link button to your HTML emails.
+Renders a styled call-to-action link with props for variants, alignment, icons, and Outlook padding adjustments that make it fully clickable without using VML. 
 
 ## Usage
 
-The Button component is defined in `components/button.html`.
+::code-tabs
+  :::code-tab{label="emails/example.vue"}
+  ```vue
+  <template>
+    <Button href="https://example.com">Get Started</Button>
+  </template>
+  ```
+  :::
+  :::code-tab{label="dist/example.html"}
+  ```html
+  <div>
+    <a href="https://example.com" style="display: inline-block; text-decoration: none; padding: 16px 24px; font-size: 16px; line-height: 1; border-radius: 4px; color: #fffffe; background-color: #4338ca;">
+      <!--[if mso]><i style="mso-font-width: 150%; mso-text-raise: 31px;" hidden>&emsp;</i><![endif]-->
+      <span style="mso-text-raise: 16px;">Get Started</span>
+      <!--[if mso]><i style="mso-font-width: 150%;" hidden>&emsp;&#8203;</i><![endif]-->
+    </a>
+  </div>
+  ```
+  :::
+::
 
-This enables the `<x-button>` tag, which you can use like this:
+This renders a solid button with a filled indigo background and white text, with padding that works in Outlook thanks to the spacer `<i>` elements.
 
-```html [emails/example.html]
-<x-button href="https://example.com">
-  Book now
-</x-button>
+### Variants
+
+The `variant` prop controls the button's visual style:
+
+```vue [emails/example.vue]
+<template>
+  <!-- Solid: filled background, white text (default) -->
+  <Button href="https://example.com">Solid Button</Button>
+
+  <!-- Outline: transparent background, colored border -->
+   // [!code word:variant="outline"]
+  <Button href="https://example.com" variant="outline">Outline Button</Button>
+
+  <!-- Ghost: transparent background, no border -->
+  // [!code word:variant="ghost"]
+  <Button href="https://example.com" variant="ghost">Ghost Button</Button>
+
+  <!-- Link: plain anchor, no button styling -->
+  // [!code word:variant="link"]
+  <Button href="https://example.com" variant="link">Link Button</Button>
+</template>
 ```
 
-You can use it anywhere you'd use a `<div>`.
+### Alignment
 
-## Customization
+Center or align the button using the `align` prop:
 
-You can align the Button to the left, center or right, change its CSS styling, and adjust padding for Outlook on Windows.
-
-### Href
-
-Default: `undefined`
-
-If you want the Button to link somewhere, you need to pass it the `href` prop:
-
-```html [emails/example.html]
-<x-button href="https://example.com">
-  Book now
-</x-button>
+```vue [emails/example.vue]
+<template>
+  // [!code word:align="center"]
+  <Button href="https://example.com" align="center">
+    Centered Button
+  </Button>
+  
+  // [!code word:align="right"]
+  <Button href="https://example.com" align="right">
+    Right-aligned Button
+  </Button>
+</template>
 ```
 
-<Alert>The Button still renders if you don't pass `href`, but it will not include the `href` attribute on the `<a>` tag and might look broken in some email clients because of this.</Alert>
+### Colors
 
-### Align
+Each variant ships with default styles that can be customized with Tailwind or inline CSS.
 
-Default: `undefined`
+```vue [emails/example.vue] {5,14}
+<template>
+  <!-- Solid: blue bg, white text -->
+  <Button 
+    href="https://example.com" 
+    class="bg-blue-600 text-white"
+  >
+    Blue Button
+  </Button>
 
-You can align the Button to the left, center or right, through the `align` prop:
-
-```html [emails/example.html]
-<x-button align="center">
-  Book now
-</x-button>
+  <!-- Outline: green border + green text -->
+  <Button
+    href="https://example.com"
+    variant="outline"
+    style="border-color: #16a34a; color: #16a34a;"
+  >
+    Green Outline
+  </Button>
+</template>
 ```
 
-This will add the `text-center` class to the button's wrapper `<div>`, which will align the `<a>` inside it to the center.
+### Icons
 
-### Styling
+Add an icon to the button with the `icon` prop:
 
-You may style the Button as needed through props or with Tailwind CSS utilities.
+```vue [emails/example.vue] {4,11}
+<template>
+  <Button
+    href="https://example.com"
+    icon="https://example.com/arrow.png"
+  >Continue</Button>
 
-The button includes a <span class="inline-flex gap-1 px-2 translate-y-0.5 border border-slate-200 border-solid rounded"><span class="w-3 h-3 mt-1.5 bg-indigo-700 rounded" title="#4338ca"></span><span class="text-sm/6">bg-indigo-700</span></span> background and <span class="inline-flex gap-1 px-2 translate-y-0.5 border border-slate-200 border-solid rounded"><span class="w-3 h-3 mt-1.5 border border-solid rounded bg-slate-50" title="#f8fafc"></span><span class="text-sm/6">text-slate-50</span></span> text color by default, which you can change through props.
-
-For example, let's make the button blue-themed:
-
-```html [emails/example.html]
-<x-button
-  href="https://example.com"
-  color="#fffffe"
-  bg-color="#1e65e1"
->
-  Book now
-</x-button>
+  <!-- Icon on the left -->
+  <Button
+    href="https://example.com"
+    icon="https://example.com/arrow.png"
+    icon-position="left"
+  >Go Back</Button>
+</template>
 ```
 
-You can also use Tailwind CSS utilities to set the text and background colors:
+## Props
 
-```html [emails/example.html]
-<x-button
-  href="https://example.com"
-  class="bg-blue-500 text-white"
->
-  Book now
-</x-button>
+### href
+
+Type: `String`\
+Default: _required_
+
+The URL the button links to. Required.
+
+### variant
+
+Type: `solid | outline | ghost | link`\
+Default: `solid`
+
+The visual style of the button.
+
+- **solid** — filled indigo background with white text
+- **outline** — transparent background with an indigo border and indigo text
+- **ghost** — transparent background, indigo text, light indigo hover background
+- **link** — plain anchor with indigo text and no button chrome
+
+::callout{type="info"}
+Override any of the default colors by passing your own Tailwind classes.
+::
+
+### align
+
+Type: `left | center | right | null`\
+Default: `null`
+
+Horizontal alignment of the button. The button is wrapped in a `<div>` which handles the alignment and ensures it renders on its own line, as a block-level element.
+
+### msoPt
+
+Type: `String`\
+Default: `'16px'`
+
+Sets `mso-text-raise` to force some top padding in Outlook (classic), which does not support CSS padding on inline elements like `<a>`.
+
+### msoPb
+
+Type: `String`\
+Default: `'31px'`
+
+Similarly, adds `mso-text-raise` to create bottom padding in Outlook.
+
+### msoPx
+
+Type: `String | Number`\
+Default: `150`
+
+Horizontal padding in old Outlook, applied as `mso-font-width` on the outer spacer `<i>` elements. Accepts a number, a numeric string, or a string with `%`. Bare numbers are treated as percentages. Effective range up to 500%.
+
+```vue
+<Button href="#" :mso-px="200">Wider in Outlook</Button>
 ```
 
-Of course, you may also change the colors directly in `components/button.html`.
+### icon
 
-### MSO Padding
+Type: `String`\
+Default: `null`
 
-Top and bottom padding for Outlook on Windows is controlled through `letter-spacing` and `mso-text-raise`, a proprietary Outlook CSS property.
+URL or path to an icon image displayed inside the button.
 
-This technique is based on the Link Button from [goodemailcode.com](https://www.goodemailcode.com/email-code/link-button).
+### iconWidth
 
-#### MSO top padding
+Type: `String | Number`\
+Default: `12`
 
-Default: `16px`
+Width of the icon image in pixels.
 
-Adjust the top padding for Outlook on Windows with the `mso-pt` prop:
+### iconPosition
 
-```html [emails/example.html]
-<x-button mso-pt="12px">
-  Book now
-</x-button>
-```
+Type: `'left' | 'right'`\
+Default: `'right'`
 
-#### MSO bottom padding
+Placement of the icon relative to the button text.
 
-Default: `31px`
+### iconClass
 
-Adjust the bottom padding for Outlook on Windows with the `mso-pb` prop:
+Type: `String`\
+Default: `''`
 
-```html [emails/example.html]
-<x-button mso-pb="24px">
-  Book now
-</x-button>
-```
+CSS classes to apply to the icon `<img>` element.
 
-### Other attributes
+### iconAlt
 
-You may pass any other HTML attributes to the component, such as `data-*` or `id` - they will all be added to the `<a>` tag.
+Type: `String`\
+Default: `''`
 
-Note that non-standard attributes will be ignored by default - you'll need to define them as props in the component if you need them preserved. Alternatively, you can [safelist](/docs/configuration/components#safelistattributes) them in your `build.components` config.
+Alt text for the icon image.
 
-## Responsive
+### outlookFallback
 
-To override Button styling on small viewports, use Tailwind CSS utilities.
+Type: `Boolean`\
+Default: `true`
 
-For example, let's make the button full-width on small viewports:
-
-```html [emails/example.html]
-<x-button class="sm:block">
-  Book now
-</x-button>
-```
-
-## Alternatives
-
-There are other ways to create buttons in your HTML emails, such as by using a `<table>`. Check out our [Button examples](/docs/examples/buttons) for more ideas.
+Toggle modern button mode: Outlook support is discarded when `false`.

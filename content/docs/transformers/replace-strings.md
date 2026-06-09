@@ -1,31 +1,49 @@
 ---
-title: "Replace strings"
-description: "Programmatically replace strings in your HTML email content."
+title: Replace Strings
+description: Find and replace strings in the final HTML output.
+section: Transformers
+order: 15
 ---
 
-# Replace strings
+# Replace Strings
 
-Maizzle can batch-replace strings in your HTML email template, and you can even use regular expressions!
+Replace strings in your compiled HTML using key-value pairs.
 
 ## Usage
 
-Use the `replaceStrings` option to define key-value pairs of regular expressions and strings to replace them with:
+Configure `replaceStrings` with an object where keys are regular expression patterns and values are the replacement strings. Keys are treated as regex patterns with case-insensitive, global matching.
 
-```js [config.js]
-export default {
+```ts [maizzle.config.ts]
+export default defineConfig({
   replaceStrings: {
-    'find and replace this exact string': 'with this one',
-    '\\s?data-src=""': '', // remove empty data-src="" attributes
-  }
-}
+    '{{ year }}': new Date().getFullYear().toString(),
+    '{{ company }}': 'Acme Inc.',
+  },
+})
 ```
 
-<Alert type="warning">Character classes need to be escaped when defining a regular expression for `replaceStrings`. As you can see above, `\s` becomes `\\s`.</Alert>
+Given this in your template:
+
+```vue
+<template>
+  <p v-pre>© {{ year }} {{ company }}</p>
+</template>
+```
+
+**Result:**
+
+```html
+<p>© 2026 Acme Inc.</p>
+```
+
+The transformer runs on the serialized HTML string, so it can match anything: tags, attributes, or text content.
+
+Character classes must be escaped in keys — for example, use `\\s` to match `\s`.
 
 ## API
 
-```js [app.js]
+```ts
 import { replaceStrings } from '@maizzle/framework'
 
-const html = await replaceStrings('initial text', {initial: 'updated'})
+const out = replaceStrings(html, { replaceStrings: { foo: 'bar' } })
 ```

@@ -1,0 +1,12 @@
+<svg width="270" height="155" viewBox="0 0 270 155" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Icon scaled to 60%, centred -->
+  <g transform="translate(54, 6) scale(0.6)">
+    <path d="M270 0L232 43.3013L157 127H270V0Z" fill="#373737"/>
+    <path d="M270 0L232 43.3013L157 127H168L270 0Z" fill="#313131"/>
+    <path d="M0 0L38 43.3013L113 127H0V0Z" fill="#ababab"/>
+    <path d="M109 0L147 43.3013L222 127H109V0Z" fill="#717171"/>
+  </g>
+  <text x="135" y="140" font-family="Arial, Helvetica, sans-serif" font-size="36" text-anchor="middle">
+    <tspan font-weight="700" fill="#333333">Node</tspan><tspan font-weight="400" fill="#888888">mailer</tspan>
+  </text>
+</svg>

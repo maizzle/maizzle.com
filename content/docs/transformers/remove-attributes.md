@@ -1,109 +1,105 @@
 ---
-title: "Remove attributes"
-description: "Automatically remove attributes when building your HTML email."
+title: Remove Attributes
+description: Remove HTML attributes from elements based on name and value.
+section: Transformers
+order: 10
 ---
 
-# Remove attributes
+# Remove Attributes
 
-Maizzle can automatically remove attributes from your HTML.
-
-By default, it removes empty `style` and `class` attributes that are sometimes left over after the CSS inlining process.
+Removes specified attributes from your HTML.
 
 ## Usage
 
-You may configure which attributes to remove through the `removeAttributes` array.
+By default, empty `style` and `class` attributes are always removed. You may specify additional attributes to remove through the `html.attributes.remove` option:
 
-### Empty values
-
-To remove attributes that have no value, specify the attribute name as a string:
-
-```js [config.js]
-export default {
-  attributes: {
-    remove: ['data-src'],
-  }
-}
+```ts [maizzle.config.ts]
+export default defineConfig({
+  html: {
+    attributes: {
+      remove: [
+        'data-test',
+        { name: 'class', value: /^js-/ },
+      ],
+    },
+  },
+})
 ```
 
-Input:
+## Customization
 
-```html [emails/example.html]
-<img src="example.jpg" data-src alt="">
+There are three ways to specify which attributes to remove.
+
+### String
+
+Passing a string removes the attribute when its value is empty.
+
+```ts [maizzle.config.ts]
+export default defineConfig({
+  html: {
+    attributes: {
+      remove: ['data-src'],
+    },
+  },
+})
 ```
 
-Output:
+This removes `data-src=""` but leaves `data-src="value"` untouched.
 
-```html
-<img src="example.jpg" alt="">
+### Object with exact value
+
+You may remove an attribute only when it matches a specific value:
+
+```ts [maizzle.config.ts]
+export default defineConfig({
+  html: {
+    attributes: {
+      remove: [
+        { name: 'id', value: 'test' },
+      ],
+    },
+  },
+})
 ```
 
-<Alert>Maizzle automatically removes empty `style` and `class` attributes, no need to add them yourself.</Alert>
+This removes `id="test"` but leaves `id="other"` untouched.
 
-### By name and value
+### Object with RegExp
 
-If you know the exact name and value, you may pass them to the array as an object:
+You may use a regular expression to match attribute values:
 
-```js [config.js]
-export default {
-  attributes: {
-    remove: [
-      {name: 'id', value: 'test'},
-    ],
-  }
-}
+```ts [maizzle.config.ts]
+export default defineConfig({
+  html: {
+    attributes: {
+      remove: [
+        { name: 'data-id', value: /\d/ },
+      ],
+    },
+  },
+})
 ```
 
-Input:
-
-```html
-<div style="color: #000" id="test">Test</div>
-```
-
-Output:
-
-```html
-<div style="color: #000">Test</div>
-```
-
-### With a RegExp
-
-You may also use a regular expression for the `value`.
-
-All attributes with a value matching the regex will be removed:
-
-```js [config.js]
-export default {
-  attributes: {
-    remove: [
-      {name: 'data-id', value: /\d/},
-    ],
-  }
-}
-```
-
-Input:
-
-```html
-<div data-id="test"></div>
-<div data-id="99"></div>
-```
-
-Output:
-
-```html
-<div data-id="test"></div>
-<div></div>
-```
+This removes `data-id` when its value contains a digit, such as `data-id="item-3"`.
 
 ## API
 
-```js [app.js]
+Use `removeAttributes` programmatically to strip attributes from an HTML string.
+
+```ts
 import { removeAttributes } from '@maizzle/framework'
 
-const options = [
-  'id',
-  {name: 'role', value: 'article'},
-]
-
-const html = await removeAttributes(`<div id="" style="" role="article"></div>`, options)
+const out = removeAttributes('<p style="" data-x="">x</p>', [
+  'data-x',
+  { name: 'role', value: 'none' },
+  { name: 'data-id', value: /\d/ },
+])
 ```
+
+The first argument is your HTML string. 
+
+The second is an optional `RemoveAttributeOption[]` — bare strings remove the attribute when its value is empty, objects with `value: 'literal'` match exactly, and objects with `value: /regex/` match a pattern. 
+
+Empty `style` and `class` attributes are always stripped, regardless of what you pass. 
+
+Returns the transformed HTML string.

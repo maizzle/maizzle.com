@@ -1,7 +1,7 @@
 {
-  "name": "nuxt-app",
-  "private": true,
+  "name": "maizzle-docs",
   "type": "module",
+  "private": true,
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
@@ -10,23 +10,39 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@docsearch/css": "3.8.2",
-    "@docsearch/js": "3.8.2",
-    "@nuxt/content": "^3.11.2",
-    "@nuxt/fonts": "^0.13.0",
+    "@docsearch/css": "^4.6.2",
+    "@docsearch/js": "^4.6.2",
+    "@nuxt/content": "^3.13.0",
+    "@nuxt/fonts": "^0.14.0",
+    "@nuxt/image": "^2.0.0",
     "@nuxtjs/sitemap": "^8.0.13",
-    "@tailwindcss/vite": "^4.1.18",
-    "@vueuse/components": "^14.2.1",
-    "better-sqlite3": "^12.6.2",
-    "nuxt": "3.21.1",
-    "nuxt-llms": "^0.2.0",
-    "nuxt-og-image": "^5.1.13",
-    "scroll-to-element": "^2.0.3",
-    "tailwindcss": "^4.1.12",
-    "vue": "^3.5.28",
-    "vue-router": "^4.6.4"
+    "@resvg/resvg-js": "^2.6.2",
+    "@resvg/resvg-wasm": "^2.6.2",
+    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/vite": "^4.2.4",
+    "@vueuse/core": "^14.3.0",
+    "better-sqlite3": "^12.9.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "embla-carousel-auto-scroll": "^8.6.0",
+    "embla-carousel-vue": "^8.6.0",
+    "gsap": "^3.15.0",
+    "lucide-vue-next": "^1.0.0",
+    "nuxt": "^4.4.2",
+    "nuxt-og-image": "^6.4.7",
+    "reka-ui": "^2.9.9",
+    "satori": "^0.26.0",
+    "shadcn-nuxt": "^2.6.2",
+    "shadcn-vue": "^2.6.2",
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss": "^4.2.4",
+    "tw-animate-css": "^1.4.0",
+    "typeit": "^8.8.7",
+    "vue": "^3.5.33",
+    "vue-router": "^5.0.6"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.16"
+    "@shikijs/transformers": "^4.0.2",
+    "remark-heading-id": "^1.0.1"
   }
 }

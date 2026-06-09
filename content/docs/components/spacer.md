@@ -1,96 +1,110 @@
 ---
-title: "Spacer Component"
-description: "A component for creating consistent vertical spacing in HTML emails."
+title: Spacer
+description: Add vertical or horizontal spacing between elements in Maizzle email templates.
+section: Components
+order: 15
 ---
 
-# Spacer Component
+# Spacer
 
-The Spacer component in Maizzle makes it super simple to add consistent, accessible vertical spacing to your HTML emails.
+Adds vertical or horizontal space between elements.
 
 ## Usage
 
-The Spacer component is defined in `components/spacer.html`.
+::code-tabs
+  :::code-tab{label="emails/example.vue"}
+  ```vue
+  <template>
+    <Layout>
+      <Container>
+        <Text>Above the spacer.</Text>
+        <Spacer class="h-6" /> // [!code ++]
+        <Text>Below the spacer.</Text>
+      </Container>
+    </Layout>
+  </template>
+  ```
+  :::
+  :::code-tab{label="dist/example.html"}
+  ```html {2}
+  <p style="margin: 16px 0; font-size: 16px; line-height: 24px;">Above the spacer.</p>
+  <div role="separator" style="line-height: 24px">&zwj;</div>
+  <p style="margin: 16px 0; font-size: 16px; line-height: 24px;">Below the spacer.</p>
+  ```
+  :::
+::
 
-This enables the `<x-spacer>` syntax, which you can use like this:
+## Vertical (default)
 
-```html {5}
-<x-main>
-  <table>
-    <tr>
-      <td>
-        <x-spacer height="32px" />
-      </td>
-    </tr>
-  </table>
-</x-main>
+Renders a `<div role="separator">` containing a zero-width joiner.
+
+### Sizing
+
+Use the `h-*` or `leading-*` utilities to set the height of the spacer.
+
+```vue
+<Spacer class="h-8" />
+<Spacer class="leading-10" />
 ```
 
-You can use it anywhere you'd use a `<div>`.
+If you pass both, the explicit `leading-*` wins and the `h-*` is dropped:
 
-If you need to add space between `<tr>`, see the [Row Spacer example](/docs/examples/spacers#row) instead.
+```vue
+<!-- Will be 20px tall (leading-5) -->
+// [!code word:leading-5]
+<Spacer class="h-10 leading-5" />
+```
+
+### Outlook fine-tuning
+
+Use the `mso-line-height-alt-*` utilities for Outlook-only overrides. For example, this spacer will be 40px tall in modern clients, but 32px in Outlook:
+
+```vue
+// [!code word:mso-line-height-alt-8]
+<Spacer class="h-10 mso-line-height-alt-8" />
+```
+
+## Horizontal
+
+Renders an `<i>` with em-space characters and `mso-font-width` for Outlook sizing.
+
+`width` is set via the `width` prop, which defaults to `16` (16px).
+
+```vue
+<Spacer type="horizontal" :width="24" />
+```
+
+::callout{type="info"}
+Horizontal spacers use the `mso-font-width` property for Outlook, which uses percentages and has a maximum effective value of `500%`. After a certain point, increasing the `width` prop won't have any effect in Outlook.
+::
 
 ## Props
 
-You can pass props to the component via HTML attributes, to control its height.
+### type
 
-### height
+Type: `'vertical' | 'horizontal'`\
+Default: `'vertical'`
 
-Default: `undefined`
+Sets the spacer direction.
 
-This will define the height of the Spacer.
+### width
 
-You may use any CSS unit that you prefer, it doesn't have to be `px`.
+Type: `string | number`\
+Default: `16`
 
-```html [emails/example.html]
-<x-spacer height="1em" />
+Width in pixels for horizontal spacers.
+
+```vue
+<Spacer type="horizontal" width="24" />
 ```
 
-That will render the following HTML:
+### outlookFallback
 
-```html [emails/example.html]
-<div style="line-height: 1em;" role="separator">&zwj;</div>
-```
+Type: `boolean`\
+Default: `true`
 
-If `height` is omitted, the Spacer will render as `<div role="separator">&zwj;</div>`, which will render as an empty space that is as high as its parent element's `line-height`.
+Toggle Outlook (MSO) fallback markup. Set to `false` to skip `mso-font-width` on horizontal spacers.
 
-### mso-height
-
-Default: `undefined`
-
-Override the height of the Spacer in Outlook for Windows.
-
-```html [emails/example.html]
-<x-spacer height="32px" mso-height="30px" />
-```
-
-This uses the `mso-line-height-alt` MSO CSS property to set a custom Spacer height in Outlook for Windows.
-
-Note: for the Spacer to work as expected in Outlook on Windows, it should also be styled with `mso-line-height-rule: exactly`. In Maizzle this is set globally in the `main.html` layout, so you don't need to worry about it.
-
-However, if you can't use that layout for some reason or are worried that the Outlook-specific CSS in the `<head>` might be stripped in some situations, simply add it in a style attribute on the tag:
-
-```html [emails/example.html]
-<x-spacer style="mso-line-height-rule: exactly;" />
-```
-
-Alternatively, you may also use the `mso-line-height-rule-exactly` class that is available from the `tailwindcss-mso` plugin (included in the Starter):
-
-```html [emails/example.html]
-<x-spacer class="mso-line-height-rule-exactly" />
-```
-
-Of course, you can also modify `components/spacer.html` and add the `mso-line-height-rule: exactly` CSS rule to the `<div>` element.
-
-### Other attributes
-
-You may pass any other HTML attributes to the component, such as `class` or `id`.
-
-Note that non-standard attributes will be ignored by default - you'll need to define them as props in the component if you need them preserved. Alternatively, you can safelist them in your `build.components` config.
-
-## Responsive
-
-To override the height of the Spacer on mobile, use the `leading` utilities in Tailwind CSS:
-
-```html [emails/example.html]
-<x-spacer height="32px" class="sm:leading-4" />
+```vue
+<Spacer :outlook-fallback="false" type="horizontal" width="24" />
 ```
