@@ -40,7 +40,7 @@ Create an `emails` directory inside `resources/js` for your email templates:
 
 Register the Maizzle Vite plugin in your `vite.config.ts`:
 
-```ts {5,15-23}
+```ts {5,15-24}
 import laravel from 'laravel-vite-plugin'
 import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
