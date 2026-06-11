@@ -56,7 +56,7 @@ export default defineConfig({
     tailwindcss(),
     vue(),
     maizzle({
-      root: 'resources/js/emails',
+      root: 'resources/js',
       output: {
         path: 'resources/views/emails',
         extension: 'blade.php',
