@@ -173,7 +173,7 @@ Delete `tailwind.config.js`, you now configure Tailwind CSS 4 inside `<style>` t
 
 ```xml [emails/welcome.vue]
 <template>
-  <Layout>
+  <Html>
     <Head>
       <style>
         @import "@maizzle/tailwindcss";
@@ -185,9 +185,11 @@ Delete `tailwind.config.js`, you now configure Tailwind CSS 4 inside `<style>` t
       </style>
     </Head>
     <Body>
-      <Text class="text-brand font-display">Hello!</Text>
+      <Tailwind>
+        <Text class="text-brand font-display">Hello!</Text>
+      </Tailwind>
     </Body>
-  </Layout>
+  </Html>
 </template>
 ```
 
@@ -588,7 +590,7 @@ Events still register at the root of the config, but the signatures have changed
   :::code-tab{label="Maizzle 6"}
   ```ts
   import { defineConfig } from '@maizzle/framework'
-  
+
   afterTransform({ html, template, config }) {
     return html.replace('</body>', '<img src="..." />\n</body>')
   }
