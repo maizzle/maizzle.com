@@ -329,6 +329,8 @@ The whole `build: { ... }` wrapper is gone. Move its children to the root:
   :::
   :::code-tab{label="Maizzle 6"}
   ```ts [maizzle.config.ts]
+  import { defineConfig } from '@maizzle/framework'
+
   export default defineConfig({
     content: ['emails/**/*.{vue,md}'],
     output: { path: 'dist' },
@@ -342,6 +344,8 @@ The whole `build: { ... }` wrapper is gone. Move its children to the root:
 `css.inline`, `css.purge`, `css.shorthand`, and `html.format` (former `prettify`) are now **on by default**. If your v5 project depended on them being off, disable them explicitly:
 
 ```ts [maizzle.config.ts]
+import { defineConfig } from '@maizzle/framework'
+
 export default defineConfig({
   css: {
     inline: false,
@@ -359,6 +363,8 @@ export default defineConfig({
 PostHTML is no longer used, so you can remove any related config keys like `posthtml.*`, `expressions.*`, and `components.*` from your config.
 
 ```ts [maizzle.config.ts]
+import { defineConfig } from '@maizzle/framework'
+
 export default defineConfig({
   posthtml: { ... },     // [!code --]
   expressions: { ... },      // [!code --]
@@ -427,6 +433,8 @@ String shorthand → `destination`:
   :::
   :::code-tab{label="v6"}
   ```ts [maizzle.config.ts]
+  import { defineConfig } from '@maizzle/framework'
+
   export default defineConfig({
     plaintext: {
       destination: 'dist/brand/plaintext',
@@ -453,6 +461,8 @@ String shorthand → `destination`:
   :::
   :::code-tab{label="v6"}
   ```ts [maizzle.config.ts]
+  import { defineConfig } from '@maizzle/framework'
+
   export default defineConfig({
     plaintext: {
       destination: 'dist/brand/plaintext',
@@ -466,6 +476,8 @@ String shorthand → `destination`:
 Strip-HTML options now live under a dedicated `options` key:
 
 ```ts [maizzle.config.ts]
+import { defineConfig } from '@maizzle/framework'
+
 export default defineConfig({
   plaintext: {
     options: { ignoreTags: ['br'] },
@@ -575,6 +587,8 @@ Events still register at the root of the config, but the signatures have changed
   :::
   :::code-tab{label="Maizzle 6"}
   ```ts
+  import { defineConfig } from '@maizzle/framework'
+  
   afterTransform({ html, template, config }) {
     return html.replace('</body>', '<img src="..." />\n</body>')
   }
