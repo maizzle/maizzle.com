@@ -458,9 +458,9 @@ Tailwind CSS 4 is configured in CSS, there's no `tailwind.config.js` anymore. Yo
 
 Use `@theme` to add or override design tokens (colors, fonts, spacing, breakpoints, …):
 
-```xml [emails/example.vue]
+```xml [emails/example.vue] {7-11}
 <template>
-  <Layout>
+  <Html>
     <Head>
       <style>
         @import "@maizzle/tailwindcss";
@@ -472,14 +472,24 @@ Use `@theme` to add or override design tokens (colors, fonts, spacing, breakpoin
         }
       </style>
     </Head>
-    <Container class="bg-brand-dark">
-      <Text class="text-brand font-display">Hello!</Text>
-    </Container>
-  </Layout>
+    <Body>
+      <Tailwind>
+        <Container class="bg-brand-dark">
+          <Text class="text-brand font-display">Hello!</Text>
+        </Container>
+      </Tailwind>
+    </Body>
+  </Html>
 </template>
 ```
 
 Anything declared under `@theme` becomes a utility (`text-brand`, `bg-brand-dark`, `font-display`…) and is available in your templates and components.
+
+#### Theme tokens and `<Layout>`
+
+`@theme` tokens must live in the same `<style>` block that imports Tailwind CSS. The `<Layout>` component has its own `<head>` that does this in in isolation, so you can't add tokens to it without effectively duplicating the entire `<style>` block. 
+
+Instead, use a `<Html>`/`<Head>`/`<Body>`/`<Tailwind>` structure like above, or create your own Layout component if you want to define custom tokens in a template.
 
 ### Override defaults
 
