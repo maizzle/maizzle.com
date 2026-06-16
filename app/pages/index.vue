@@ -10,7 +10,7 @@ useHead({
   ],
 })
 
-defineOgImageComponent('Home')
+defineOgImage('Home')
 </script>
 
 <template>
