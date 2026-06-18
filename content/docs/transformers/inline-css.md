@@ -89,7 +89,7 @@ Apply `height` CSS values as HTML `height` attributes on elements.
 ### inlineDuplicateProperties
 
 Type: `boolean`\
-Default: `true`
+Default: `false`
 
 When a property is defined multiple times, inline all occurrences instead of only the last one.
 
