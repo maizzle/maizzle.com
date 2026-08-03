@@ -459,6 +459,10 @@ You can author AMP4Email templates in Maizzle without extra setup.
 If you want a Vue wrapper around an AMP tag, register it under a PascalCase name (e.g. `components/AmpCarousel.vue` → `<AmpCarousel>`). The kebab form `<amp-carousel>` always stays native, so the two never collide.
 ::
 
+::callout{type="info"}
+Writing other non-HTML tags by hand — like VML (`v:*`) or Office (`o:*`) markup inside MSO conditional comments — will trigger a `Failed to resolve component` warning. Register them as native custom elements via [`vue.customElements`](/docs/development/configuration#customelements) to silence it while keeping their Tailwind classes scanned.
+::
+
 #### AMP4Email and Tailwind CSS {#amp-tailwind}
 
 Use `@reference "@maizzle/tailwindcss"` instead of `@import` if you need Tailwind utilities or theme variables inside `<style amp-custom>`.
