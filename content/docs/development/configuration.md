@@ -1256,6 +1256,38 @@ export default defineConfig({
 
 Then in templates: `{{ $format(new Date()) }}`
 
+### customElements
+
+Type: `string | RegExp | (string | RegExp)[] | ((tag: string) => boolean)`\
+Default: `undefined`
+
+Tags to treat as native custom elements. The template compiler skips component resolution for a matching tag, so it renders verbatim — no `Failed to resolve component` warning — while its Tailwind classes are still scanned.
+
+Use this for non-HTML markup you write by hand, such as VML (`v:*`) and Office (`o:*`) tags inside MSO conditional comments:
+
+```ts [maizzle.config.ts]
+export default defineConfig({
+  vue: {
+    customElements: [/^v:/, /^o:/],
+  },
+})
+```
+
+Match by exact tag name, a `RegExp`, an array of either, or a predicate:
+
+```ts [maizzle.config.ts]
+export default defineConfig({
+  vue: {
+    // exact names
+    customElements: ['v:group', 'v:oval'],
+    // or a predicate
+    // customElements: (tag) => tag.startsWith('v:'),
+  },
+})
+```
+
+`amp-*` tags are always treated as custom elements, regardless of this option.
+
 ## Events
 
 Maizzle fires events at key points during the build process. You can register handlers directly in your config to modify templates, HTML output, or perform side effects. See the [Events page](/docs/development/events) for the full reference, including SFC-side registration via [`useEvent()`](/docs/api/composables#useevent).
