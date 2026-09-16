@@ -199,20 +199,15 @@ Maizzle exports `twMerge`, a [tailwind-merge](https://github.com/dcastil/tailwin
 
 ```vue [components/Alert.vue]
 <script setup>
-  import { computed, useAttrs } from 'vue'
   import { twMerge } from '@maizzle/framework'
 
   defineOptions({ inheritAttrs: false })
 
-  const attrs = useAttrs()
-  const mergedClass = computed(() => twMerge(
-    'p-4 border-l-4 border-yellow-500 bg-yellow-100 text-yellow-700',
-    attrs.class,
-  ))
+  const baseClass = 'p-4 border-l-4 border-yellow-500 bg-yellow-100 text-yellow-700'
 </script>
 
 <template>
-  <div v-bind="{ ...$attrs, class: mergedClass }">
+  <div v-bind="{ ...$attrs, class: twMerge(baseClass, $attrs.class) }">
     <slot />
   </div>
 </template>
