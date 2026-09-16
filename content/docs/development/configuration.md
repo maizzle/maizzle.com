@@ -356,6 +356,7 @@ export default defineConfig({
     removeDeclarations: undefined,
     base: undefined,
     exclude: undefined,
+    scopedSources: true,
   },
 })
 ```
@@ -498,6 +499,29 @@ Glob patterns or paths excluded from Tailwind's `@source` scanner. Tailwind won'
 export default defineConfig({
   css: {
     exclude: ['emails/amp/**'],
+  },
+})
+```
+
+::callout{type="info"}
+`exclude` only applies when [`scopedSources`](#scopedsources) is disabled, since scoped scanning already limits Tailwind to each template's own files.
+::
+
+### scopedSources
+
+Type: `boolean`\
+Default: `true`
+
+Scope Tailwind's `@source` scanner to each template's import closure (the template file plus every component and module it actually imports) instead of scanning the entire project for every template.
+
+This makes builds significantly faster on large projects, and prevents classes from unrelated templates leaking into a template's CSS.
+
+Set it to `false` to restore whole-project scanning, for example when you keep class names in files that Maizzle can't trace through imports:
+
+```ts [maizzle.config.ts]
+export default defineConfig({
+  css: {
+    scopedSources: false,
   },
 })
 ```
