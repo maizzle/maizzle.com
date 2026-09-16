@@ -183,6 +183,49 @@ Named slots work too:
   :::
 ::
 
+### Merging classes
+
+When you pass a `class` to a component, Vue appends it to whatever class the component's root element already has. Both `p-4` and `p-8` end up in the HTML, and the one that wins is decided by the order of the rules in the generated CSS, not by you:
+
+```vue [emails/welcome.vue]
+<template>
+  <Alert class="p-8">
+    <!-- renders class="p-4 border-l-4 ... p-8" -->
+  </Alert>
+</template>
+```
+
+Maizzle exports `twMerge`, a [tailwind-merge](https://github.com/dcastil/tailwind-merge) instance that also knows about the custom utilities in `@maizzle/tailwindcss` (`mso-*`, `text-underline-*`, `prose-*`). Use it to resolve conflicts so the class passed by the user always wins:
+
+```vue [components/Alert.vue]
+<script setup>
+  import { computed, useAttrs } from 'vue'
+  import { twMerge } from '@maizzle/framework'
+
+  defineOptions({ inheritAttrs: false })
+
+  const attrs = useAttrs()
+  const mergedClass = computed(() => twMerge(
+    'p-4 border-l-4 border-yellow-500 bg-yellow-100 text-yellow-700',
+    attrs.class,
+  ))
+</script>
+
+<template>
+  <div v-bind="{ ...$attrs, class: mergedClass }">
+    <slot />
+  </div>
+</template>
+```
+
+Now `<Alert class="p-8">` renders `class="border-l-4 border-yellow-500 bg-yellow-100 text-yellow-700 p-8"`.
+
+`inheritAttrs: false` stops Vue from applying `$attrs` automatically, so you can bind them yourself with the merged class in place of the original one.
+
+::callout{type="info"}
+You only need this when your component's root is a plain HTML element. If the root is a built-in component like `<Section>` or `<Text>`, it already merges the classes it receives, so a `class` passed to your component flows through and wins on its own.
+::
+
 ### Markdown
 
 Components can also be authored as `.md` files. Drop one into your `components` directory and Maizzle auto-registers it under its PascalCased filename, just like a `.vue` component:
