@@ -23,14 +23,12 @@ npm install @maizzle/framework
 
 Create an `emails` directory inside `resources/js` for your email templates:
 
-``` [your-laravel-app] {4-7}
+``` [your-laravel-app] {4-5}
 ├── app/
 ├── resources/
 │   ├── js/
 │   │   ├── emails/
-│   │   │   ├── welcome.vue
-│   │   │   └── images/
-│   │   │       └── logo.png
+│   │   │   └── welcome.vue
 ├── vite.config.ts
 ├── tsconfig.json
 └── package.json
@@ -40,7 +38,7 @@ Create an `emails` directory inside `resources/js` for your email templates:
 
 Register the Maizzle Vite plugin in your `vite.config.ts`:
 
-```ts {5,15-24}
+```ts {5,15-21}
 import laravel from 'laravel-vite-plugin'
 import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
@@ -61,15 +59,14 @@ export default defineConfig({
         path: 'resources/views/emails',
         extension: 'blade.php',
       },
-      static: {
-        source: ['resources/js/emails/images'],
-      },
     }),
   ],
 })
 ```
 
 Set `output.extension` to `blade.php` so Laravel can use compiled email templates as views.
+
+Don't use the `static` option here: it copies files into `output.path`, which is not web-accessible in a Laravel app. Keep images in Laravel's `public` directory instead and reference them with absolute URLs, for example by setting [`url.base`](/docs/development/configuration#url).
 
 See [Configuration](/docs/development/configuration) for all available options.
 
