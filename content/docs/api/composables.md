@@ -534,6 +534,39 @@ The composable injects a hidden `<div>` at the start of `<body>`, containing:
 
 This composable is the script-based alternative to the [`<Preheader>`](/docs/components/preheader) component. Use whichever approach fits your template — both produce the same output.
 
+## definePreviewProps()
+
+Define sample props that are only used when previewing the template in the [dev server](/docs/development/local).
+
+```vue [emails/welcome.vue]
+<script setup lang="ts">
+  type Props = {
+    name: string
+  }
+
+  defineProps<Props>()
+
+  definePreviewProps<Props>({ name: 'Jane Doe' })
+</script>
+
+<template>
+  <Html>
+    <Head />
+    <Body>
+      <Container>
+        <Text>Hi {{ name }}!</Text>
+      </Container>
+    </Body>
+  </Html>
+</template>
+```
+
+It's a compiler macro: the call is removed at compile time, and the sample props are merged under any real props only in the dev server. They are never used by `build` or `render()`.
+
+It can be called once per template, and its argument can't reference variables declared in `<script setup>` (imports are fine).
+
+See [Preview props](/docs/development/templates#preview-props) for more details.
+
 ## useHead()
 
 Manage `<head>` tags programmatically in your email templates.

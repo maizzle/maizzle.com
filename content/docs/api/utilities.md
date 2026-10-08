@@ -62,6 +62,20 @@ const { html } = await render('emails/welcome.vue', {
 })
 ```
 
+#### props
+
+Type: `Record<string, any>`
+
+Props to pass to the template, matching what it declares with `defineProps()`. They are not merged into `useConfig()`.
+
+```ts [build.js]
+const { html } = await render('emails/welcome.vue', {
+  props: { name: 'Jane Doe', plan: 'Pro' },
+})
+```
+
+See [Props](/docs/development/templates#props) for details, including how to preview templates with required props in the dev server.
+
 ### Return value
 
 A `Promise` that resolves to:

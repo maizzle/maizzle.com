@@ -121,6 +121,10 @@ Use `↑` / `↓` to navigate, `Enter` to select, `Esc` to close.
 
 Changes are picked up automatically. When you save a `.vue` or `.md` template file, or update the `maizzle.config.ts`, the preview reflects changes instantly through HMR.
 
+## Sample data
+
+Templates that require props won't get any in the dev server. Use [`definePreviewProps()`](/docs/development/templates#preview-props) to give them sample data that is only used for previews.
+
 ## Sending test emails
 
 The **Test** tab in the [bottom panel](#test) of the dev server UI allows you to send test emails.
