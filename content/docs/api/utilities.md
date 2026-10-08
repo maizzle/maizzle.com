@@ -48,6 +48,16 @@ const { html } = await render(`
 `)
 ```
 
+An SFC string has no file location, so relative `@import`s in its `<style>` tags (like `@import "./brand.css"`) are resolved from [`root`](/docs/development/configuration#root), which defaults to the current working directory.
+
+If your app runs from a different directory than your email project, like a Nuxt or Nitro production build started from `/app`, set `root` to tell Maizzle where to look:
+
+```ts [server/utils/email.ts]
+const { html } = await render(source, {
+  root: '/app/emails',
+})
+```
+
 ### Options
 
 #### config

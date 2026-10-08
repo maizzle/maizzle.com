@@ -119,6 +119,7 @@ You typically don't need to set `root` for a standard Maizzle project where you 
 - **Embedding Maizzle in a larger app** — emails live in a subfolder of a non-Maizzle project (e.g. `resources/js/emails` in a Laravel app, `src/emails` in a Vite SPA). Setting `root` lets Maizzle resolve template globs and Tailwind `@source` paths correctly without changing the working directory.
 - **Monorepos and workspaces** — running Maizzle from the repo root while templates sit in `apps/marketing/emails/` or similar.
 - **Custom directory layouts** — anything where the email folder isn't the place you want to invoke Maizzle from.
+- **Rendering SFC strings on a server** — when you pass a template string to [`render()`](/docs/api/utilities#render), CSS `@import`s in its `<style>` tags are resolved from `root`, so set it if your server's working directory isn't your project.
 
 ## content
 
