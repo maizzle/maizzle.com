@@ -91,6 +91,96 @@ Add a `<script setup>` block to use logic or per-template configuration:
 
 You have full access to Vue's Composition API: `ref`, `computed`, `v-for`, `v-if`, conditional rendering — it all works and you don't need to import them manually.
 
+## Props
+
+Declare the data a template needs with `defineProps()`:
+
+```vue [emails/welcome.vue]
+<script setup lang="ts">
+  defineProps<{
+    name: string
+    plan: string
+  }>()
+</script>
+
+<template>
+  <Html>
+    <Head />
+    <Body>
+      <Container>
+        <Text>Hi {{ name }}, you're on the {{ plan }} plan.</Text>
+      </Container>
+    </Body>
+  </Html>
+</template>
+```
+
+Then pass the values with the `props` option when rendering programmatically:
+
+```ts [send.ts]
+import { render } from '@maizzle/framework'
+
+const { html } = await render('emails/welcome.vue', {
+  props: { name: 'Jane Doe', plan: 'Pro' },
+})
+```
+
+::callout{type="info"}
+Props that aren't declared with `defineProps()` fall through as HTML attributes on the template's root element, so make sure to declare every prop you pass.
+::
+
+### Preview props {#preview-props}
+
+Nothing passes props to your templates in the [dev server](/docs/development/local), so required props will be `undefined` there.
+
+Use `definePreviewProps()` to give a template sample data that is only used in the dev server:
+
+```vue [emails/welcome.vue]
+<script setup lang="ts">
+  type Props = {
+    name: string
+    plan: string
+  }
+
+  defineProps<Props>()
+
+  definePreviewProps<Props>({
+    name: 'Jane Doe',
+    plan: 'Pro',
+  })
+</script>
+```
+
+The argument is typed as `Partial<Props>`, so you only need to provide what the preview needs.
+
+Unlike defaults from `withDefaults()`, preview props are never used in `build` or `render()`, so a prop you forget to pass in production won't silently render sample data.
+
+`definePreviewProps()` is a compiler macro, much like `defineProps()`, and it comes with similar rules:
+
+- it can only be called once per template
+- it can't reference variables declared in `<script setup>`; use inline values or imports instead
+
+```vue [emails/welcome.vue]
+<script setup lang="ts">
+  import { sampleUser } from '../fixtures/users'
+
+  const plan = 'Pro'
+
+  definePreviewProps({
+    name: sampleUser.name, // ✅ imports are fine
+    plan, // ❌ `plan` is declared in this template
+  })
+</script>
+```
+
+Imports that are only used in `definePreviewProps()` are only loaded in the dev server, so sample data files and any dev-only dependencies they use never load in `build` or `render()`.
+
+Breaking these rules throws an error in the dev server, but it never fails a build or a production `render()`.
+
+::callout{type="info"}
+`definePreviewProps()` is only supported in `.vue` templates, not in [Markdown templates](#markdown).
+::
+
 ## Configuration
 
 Use `defineConfig()` to override the global config for a specific template:
