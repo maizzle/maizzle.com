@@ -39,6 +39,42 @@ Only relative URLs are rewritten, absolute URLs are left untouched.
 
 By default, all standard tags are processed: `a`, `img`, `video`, `source`, `link`, `script`, and others. URLs in `<style>` tags (`url()` values), inline style attributes, VML elements (`v:image`, `v:fill`), and MSO conditional comments are also handled. The `srcset` attribute is also processed, with each URL in the set being rewritten.
 
+## Skipping elements
+
+Add the `no-base-url` attribute to an element to leave its URLs as they are:
+
+```html
+<img src="hero.jpg">
+<img src="logo.png" no-base-url>
+```
+
+**Result:**
+
+```html
+<img src="https://cdn.example.com/emails/hero.jpg">
+<img src="logo.png">
+```
+
+It works on components too, like `<Img src="logo.png" no-base-url />`, and it's removed from the final HTML.
+
+The attribute only applies to the element it's on, child elements are still rewritten. It skips all of the element's URLs, including `srcset`, custom [`attributes`](#attributes) and any `url()` in its inline `style`. On a `<style>` tag, it skips the whole block.
+
+It also works on VML elements and on tags inside MSO conditional comments, as well as with [`useBaseUrl()`](/docs/api/composables#usebaseurl) and the [`<WithUrl>`](/docs/components/withurl) component.
+
+::callout{type="info"}
+Your editor will autocomplete `no-base-url`. Its type is generated in `.maizzle/attributes.d.ts` when you run `maizzle prepare` or `maizzle serve`.
+::
+
+### Template language URLs
+
+URLs that start with a template language tag, like `{{`, `{%` or `<%`, are never rewritten. This means you can output URLs with Twig, Liquid, Blade or ERB without having to add `no-base-url`:
+
+```html
+<img src="{{ image.getUrl({ width: 1200 }) }}">
+```
+
+Paths that only contain a tag somewhere in the middle, like `img/{{ name }}.png`, are still relative paths, so the base URL is prepended to them.
+
 ## Customization
 
 Pass an object for fine-grained control over which tags and attributes are processed.

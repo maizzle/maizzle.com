@@ -80,6 +80,19 @@ The component recursively processes all descendant elements, including nested co
 
 Absolute URLs are left unchanged when using `base` — only relative URLs are rewritten. When using `parameters`, query strings are appended to all URLs regardless.
 
+To keep `base` from rewriting a specific element, add the [`no-base-url`](/docs/transformers/base-url#skipping-elements) attribute to it. `parameters` are still appended to its URLs:
+
+```vue [emails/example.vue]
+<template>
+  <WithUrl base="https://cdn.example.com/images" parameters="v=2">
+    <Img src="hero.jpg" alt="Hero" width="600" />
+    <Img src="logo.png" alt="Logo" width="120" no-base-url />
+  </WithUrl>
+</template>
+```
+
+URLs that start with a template language tag, like `{{ image.url }}`, are also left alone by `base`.
+
 Slash normalization is handled automatically, so `base="https://example.com/"` and `base="https://example.com"` both work correctly.
 
 Values in `srcset` attributes are also processed, each URL in the set is rewritten individually.

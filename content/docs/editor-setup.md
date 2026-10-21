@@ -31,11 +31,12 @@ After installing dependencies or when you run `maizzle serve`, type declarations
 
 ```
 .maizzle/
+├── attributes.d.ts    ← Maizzle-specific HTML attributes like no-base-url
 ├── auto-imports.d.ts  ← composables like defineConfig, useHead etc.
 └── components.d.ts    ← built-in components like Button, Container etc.
 ```
 
-These provide autocomplete and type checking for all auto-imported components and composables. Make sure your `tsconfig.json` includes them:
+These provide autocomplete and type checking for all auto-imported components and composables, and for Maizzle's own HTML attributes. Make sure your `tsconfig.json` includes them:
 
 ```json [tsconfig.json]
 {
