@@ -75,6 +75,23 @@ Center or align the button using the `align` prop:
 </template>
 ```
 
+The `align` prop can't be changed per breakpoint, because classes you pass to the component go on the `<a>`, not on the wrapper `<div>`. To align the button differently on mobile, omit `align` and set the alignment on a parent element instead:
+
+```vue [emails/example.vue]
+<template>
+  // [!code word:text-center sm\:text-left]
+  <div class="text-center sm:text-left">
+    <Button href="https://example.com">
+      Left-aligned on mobile
+    </Button>
+  </div>
+</template>
+```
+
+::callout{type="info"}
+This uses `@media` queries, so clients like [GANGA](/docs/glossary#ganga) that lack support will show the button centered.
+::
+
 ### Colors
 
 Each variant ships with default styles that can be customized with Tailwind or inline CSS.
