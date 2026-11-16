@@ -38,6 +38,28 @@ Emit content verbatim, without letting Vue parse it. Use this for ESP, Handlebar
 
 The `{{ ... }}` delimiters pass through untouched, ready for your ESP to personalize.
 
+## Content is output as-is
+
+Everything inside `<Raw>` is output exactly as you wrote it. Vue components inside it aren't rendered, and transformers don't touch it either: no CSS inlining, no purging, no URL rewriting, etc.
+
+::callout{type="warning"}
+CSS for classes that you only use inside `<Raw>` will be purged.
+::
+
+So wrap just the expression, not the markup around it:
+
+```vue
+<!-- Don't: <Text> is output as a literal tag, m-0 is never inlined -->
+<Raw>
+  <Text class="m-0">{{ company.address }}</Text>
+</Raw>
+
+<!-- Do -->
+<Text class="m-0">
+  <Raw>{{ company.address }}</Raw>
+</Text>
+```
+
 ## Props
 
 ### content
